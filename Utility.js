@@ -59,7 +59,7 @@ function getRandomInt(min, max) {
 
 function loadScript(lnk) {
 	var e = document.createElement("script");
-	e.src = lnk;
+	e.src = "https://cdn.jsdelivr.net/gh/CMD-God/prettycards@"+ PrettyCardsVer +"/PageSpecific/" + lnk + ".js";
 	document.body.appendChild(e);
 }
 

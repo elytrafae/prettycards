@@ -14,13 +14,23 @@
 
 //https://media.discordapp.net/attachments/147063257436258305/637627137276510208/y47orgr08su31.png <------ FACTS!
 
+var PrettyCardsVer = "df184b2";
+var PrettyCardsReqLibs = {"Utility", "TextLibrary"};
+var PrettyCardsScriptsLoaded = 0;
+
+function openUtilities() {
+	for (int i=0; i < PrettyCardsReqLibs.length; i++) {
+		loadScript(PrettyCardsReqLibs[i]);
+	}
+}
+
 function openPageSpecific() {
 	var length = location.pathname.length, temp;
 	if ((temp = location.pathname.indexOf(".")) === -1 && (temp = location.pathname.indexOf("/")) === -1) {
 		temp = null;
 	}
 	//loadScript("https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/" + location.pathname.substring(1, temp || length) + ".js");
-	loadScript("https://cdn.jsdelivr.net/gh/CMD-God/prettycards/PageSpecific/" + location.pathname.substring(1, temp || length) + ".js");
+	loadScript(location.pathname.substring(1, temp || length));
 	
 }
 
