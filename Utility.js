@@ -12,6 +12,12 @@ function GM_addStyle(css) {
   sheet.insertRule(css, (sheet.rules || sheet.cssRules || []).length);
 }
 
+function GM_addStyle(css) {
+	var e = document.createElement("style");
+	e.innerHTML = css;
+	document.head.appendChild(e);
+}
+
 // Function detecting on which page are we (Please Don't be mad at me, FiledMaster . . . )
 function onPage(name, fn) {
   var length = location.pathname.length, temp;
