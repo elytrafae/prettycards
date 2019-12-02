@@ -20,7 +20,7 @@ function openPageSpecific() {
 		temp = null;
 	}
 	//loadScript("https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/" + location.pathname.substring(1, temp || length) + ".js");
-	loadScript("https://cdn.jsdelivr.net/gh/CMD-God/prettycards/master/PageSpecific/" + location.pathname.substring(1, temp || length) + ".js");
+	loadScript("https://cdn.jsdelivr.net/gh/CMD-God/prettycards/PageSpecific/" + location.pathname.substring(1, temp || length) + ".js");
 	
 }
 
