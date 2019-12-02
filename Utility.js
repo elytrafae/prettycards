@@ -13,6 +13,7 @@ function GM_addStyle(css) {
 }
 
 function GM_addStyle(css) {
+	console.log("GM_addStyle", css)
 	var e = document.createElement("style");
 	e.innerHTML = css;
 	document.head.appendChild(e);
