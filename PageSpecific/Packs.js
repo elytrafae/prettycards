@@ -285,7 +285,6 @@ function cardOpenUpdate() {
 ////////////////////////
 
 var bg, pack_cont, pack, pack_count, pack_shard1, pack_shard2, all_cards_cont;
-add_Packs_CSS();
 
 /// For testing
 var test_button = document.createElement("button");
@@ -414,6 +413,10 @@ bg.appendChild(pack_shard2);
 all_cards_cont = document.createElement("div");
 bg.appendChild(all_cards_cont);
 
-updateFunctions.push(cardOpenUpdate);
+window._PrettyCardsStart = function() {
+	updateFunctions.push(cardOpenUpdate);
+	add_Packs_CSS();
+}
+
 
 //console.log("Packs Page Done!");

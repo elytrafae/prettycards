@@ -100,3 +100,6 @@ window.artifactsInfo = function(box) {
     }
 }
 //////////////////////////////////////////////////////////////////////
+
+var temp_func = window._PrettyCardsStart || function() {};
+temp_func();
