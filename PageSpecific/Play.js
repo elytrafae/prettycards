@@ -17,7 +17,7 @@ var gameModeBTNs = document.querySelectorAll("#gameModes .btn");
 
 
 // New Casual Mode Thingy
-var casualArts = document.getElementsByClassName("standardClasseArtifacts");
+var casualArts = document.getElementsByClassName("standardSoulArtifacts");
 //console.log(casualArts);
 
 var casual = document.createElement("table");
@@ -64,7 +64,7 @@ c3.appendChild(gameModeBTNs[0]);
 newCont.appendChild(casual);
 
 // New Ranked Mode Thingy
-var rankedArts = document.getElementsByClassName("rankedClasseArtifacts");
+var rankedArts = document.getElementsByClassName("rankedSoulArtifacts");
 
 var ranked = document.createElement("table");
 ranked.style = "width: 100%; height: 10em; background-color:black; border: 2px solid white; margin-bottom: 1em;";
