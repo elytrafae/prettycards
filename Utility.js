@@ -51,18 +51,9 @@ function getRandomInt(min, max) {
 // Ok, these ones are mine!
 
 function loadScript(lnk) {
-	let xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (this.readyState === 4 && this.status === 200) {
-			console.log(this.responseText);
-			var e = document.createElement("script");
-			e.innerHTML = this.responseText;
-			document.body.appendChild(e);
-		}
-	}
-	xhr.open("GET", "https://cors-escape.herokuapp.com/" + lnk);
-	xhr.setRequestHeader("Accept", 'application/json');
-	xhr.send();
+	var e = document.createElement("script");
+	e.src = lnk;
+	document.body.appendChild(e);
 }
 
 
