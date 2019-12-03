@@ -8,16 +8,30 @@
 // @match        https://*.undercards.net/*
 // @exclude      https://*.undercards.net/*/*
 // @grant        none
-// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Utility.js
-// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/TextLibrary.js
+// require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Utility.js
+// require      https://raw.githubusercontent.com/CMD-God/prettycards/master/TextLibrary.js
 // ==/UserScript==
 
 //https://media.discordapp.net/attachments/147063257436258305/637627137276510208/y47orgr08su31.png <------ FACTS!
 
-var PrettyCardsVer = "df184b2";
-var PrettyCardsReqLibs = {"Utility", "TextLibrary"};
+var PrettyCardsVer = "85d8334";
+var PrettyCardsReqLibs = ["Utility", "TextLibrary"];
 var PrettyCardsScriptsLoaded = 0;
 
+
+function openUtilities() {
+    console.log("PrettyCardsReqLibs: ", PrettyCardsReqLibs);
+	for (var i=0; i < PrettyCardsReqLibs.length; i++) {
+		loadScript(PrettyCardsReqLibs[i],
+			function() {
+				PrettyCardsScriptsLoaded++;
+				if (PrettyCardsScriptsLoaded = PrettyCardsReqLibs.length-1) {
+					openPageSpecific();
+				}
+			}
+		);
+	}
+}
 
 function loadScript(lnk, callback) {
 	var e = document.createElement("script");
@@ -27,24 +41,13 @@ function loadScript(lnk, callback) {
 }
 
 function GetLatestReleaseInfo() {
+    /*
 	$.getJSON("https://api.github.com/repos/CMD-God/prettycards/releases/latest").done(function (json) {
 		console.log("Json: ", json);
 		var release = json[0];
-		openUtilities()
-	});    
-}  
-
-function openUtilities() {
-	for (int i=0; i < PrettyCardsReqLibs.length; i++) {
-		loadScript(PrettyCardsReqLibs[i], 
-			function() {
-				PrettyCardsScriptsLoaded++;
-				if (PrettyCardsScriptsLoaded = PrettyCardsReqLibs.length-1) {
-					openPageSpecific();
-				}
-			}
-		);
-	}
+		openUtilities();
+	});*/
+    openUtilities();
 }
 
 function openPageSpecific() {
