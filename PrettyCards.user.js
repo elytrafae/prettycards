@@ -18,9 +18,32 @@ var PrettyCardsVer = "df184b2";
 var PrettyCardsReqLibs = {"Utility", "TextLibrary"};
 var PrettyCardsScriptsLoaded = 0;
 
+
+function loadScript(lnk, callback) {
+	var e = document.createElement("script");
+	e.src = "https://cdn.jsdelivr.net/gh/CMD-God/prettycards@"+ PrettyCardsVer +"/PageSpecific/" + lnk + ".js";
+	e.onload = callback || function() {};
+	document.body.appendChild(e);
+}
+
+function GetLatestReleaseInfo() {
+	$.getJSON("https://api.github.com/repos/CMD-God/prettycards/tags").done(function (json) {
+		console.log("Json: ", json);
+		var release = json[0];
+		openUtilities()
+	});    
+}  
+
 function openUtilities() {
 	for (int i=0; i < PrettyCardsReqLibs.length; i++) {
-		loadScript(PrettyCardsReqLibs[i]);
+		loadScript(PrettyCardsReqLibs[i], 
+			function() {
+				PrettyCardsScriptsLoaded++;
+				if (PrettyCardsScriptsLoaded = PrettyCardsReqLibs.length-1) {
+					openPageSpecific();
+				}
+			}
+		);
 	}
 }
 
@@ -34,7 +57,7 @@ function openPageSpecific() {
 	
 }
 
-openPageSpecific();
+GetLatestReleaseInfo();
 
 (function() {
     'use strict';
