@@ -19,6 +19,17 @@ function GM_addStyle(css) {
 	document.head.appendChild(e);
 }
 
+function GetLatestReleaseInfo() {
+   $.getJSON("https://api.github.com/repos/CMD-God/prettycards/tags").done(function (json) {
+	   console.log(json);
+        var release = json[0];
+        var downloadURL = release.zipball_url;
+        $("#mongodb-download").attr("href", downloadURL);  
+   });    
+}  
+
+GetLatestReleaseInfo();
+
 // Function detecting on which page are we (Please Don't be mad at me, FiledMaster . . . )
 function onPage(name, fn) {
   var length = location.pathname.length, temp;
