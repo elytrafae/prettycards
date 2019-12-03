@@ -27,7 +27,7 @@ function loadScript(lnk, callback) {
 }
 
 function GetLatestReleaseInfo() {
-	$.getJSON("https://api.github.com/repos/CMD-God/prettycards/tags").done(function (json) {
+	$.getJSON("https://api.github.com/repos/CMD-God/prettycards/releases/latest").done(function (json) {
 		console.log("Json: ", json);
 		var release = json[0];
 		openUtilities()
