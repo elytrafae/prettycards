@@ -1,5 +1,4 @@
 // How to open ALL packs (and make fancy animations)
-
 var count = 0;
 window.openPacks = function(type, _count) {
     var pack_cout = Number(document.getElementById("nb" + type + "Packs").innerHTML)
@@ -287,141 +286,137 @@ function cardOpenUpdate() {
 
 var bg, pack_cont, pack, pack_count, pack_shard1, pack_shard2, all_cards_cont;
 
-onPage("Packs", function() {
-    add_Packs_CSS();
+/// For testing
+var test_button = document.createElement("button");
+test_button.innerHTML = "Test Opening Animation";
+test_button.onclick = function() {showCards(JSON.parse(this.test_JSON))};
+document.body.appendChild(test_button);
+var test_JSON = '{"pack_type":"","packs":1,"normal_cards":4,"shiny_cards":0,"list":[{"normal":10,"shiny":5,"card_data":{"attack":2,"hp":3,"maxHp":3,"originalAttack":2,"originalHp":3,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":400,"fixedId":400,"typeCard":0,"name":"Cogwheel","image":"Cogwheel","cost":2,"rarity":"COMMON","originalCost":2,"shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Cogwheel"},{"normal":1,"shiny":3,"card_data":{"attack":1,"hp":6,"maxHp":6,"originalAttack":1,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":238,"fixedId":238,"typeCard":0,"name":"Script Bomb","image":"Script_Bomb","cost":3,"rarity":"DETERMINATION","originalCost":3,"shiny":false,"quantity":1,"extension":"BASE","tribe":"BOMB","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Script Bomb"},{"normal":1,"shiny":0,"card_data":{"attack":5,"hp":6,"maxHp":6,"originalAttack":5,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":120,"fixedId":120,"typeCard":0,"name":"G Follower 3","image":"G_Follower_3","cost":8,"rarity":"LEGENDARY","originalCost":8,"shiny":false,"quantity":1,"extension":"BASE","tribe":"G_FOLLOWER","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"G Follower 3"},{"normal":1,"shiny":0,"card_data":{"attack":1,"hp":3,"maxHp":3,"originalAttack":1,"originalHp":3,"dodge":0,"thorns":1,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":435,"fixedId":435,"typeCard":0,"name":"Ficus Licker","image":"Ficus_Licker","cost":2,"rarity":"COMMON","originalCost":2,"target":"ALLY_MONSTER","shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Ficus Licker"} ,{"normal":1,"shiny":0,"card_data":{"attack":2,"hp":3,"maxHp":3,"originalAttack":2,"originalHp":3,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":400,"fixedId":400,"typeCard":0,"name":"Cogwheel","image":"Cogwheel","cost":2,"rarity":"COMMON","originalCost":2,"shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Cogwheel"},{"normal":1,"shiny":0,"card_data":{"attack":1,"hp":6,"maxHp":6,"originalAttack":1,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":238,"fixedId":238,"typeCard":0,"name":"Script Bomb","image":"Script_Bomb","cost":3,"rarity":"COMMON","originalCost":3,"shiny":false,"quantity":1,"extension":"BASE","tribe":"BOMB","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Script Bomb"},{"normal":1,"shiny":0,"card_data":{"attack":5,"hp":6,"maxHp":6,"originalAttack":5,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":120,"fixedId":120,"typeCard":0,"name":"G Follower 3","image":"G_Follower_3","cost":8,"rarity":"COMMON","originalCost":8,"shiny":false,"quantity":1,"extension":"BASE","tribe":"G_FOLLOWER","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"G Follower 3"},{"normal":1,"shiny":0,"card_data":{"attack":1,"hp":3,"maxHp":3,"originalAttack":1,"originalHp":3,"dodge":0,"thorns":1,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":435,"fixedId":435,"typeCard":0,"name":"Ficus Licker","image":"Ficus_Licker","cost":2,"rarity":"COMMON","originalCost":2,"target":"ALLY_MONSTER","shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Ficus Licker"}]}';
+test_button.test_JSON = test_JSON;
+///////////////
 
-    /// For testing
-    var test_button = document.createElement("button");
-    test_button.innerHTML = "Test Opening Animation";
-    test_button.onclick = function() {showCards(JSON.parse(this.test_JSON))};
-    document.body.appendChild(test_button);
-    var test_JSON = '{"pack_type":"","packs":1,"normal_cards":4,"shiny_cards":0,"list":[{"normal":10,"shiny":5,"card_data":{"attack":2,"hp":3,"maxHp":3,"originalAttack":2,"originalHp":3,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":400,"fixedId":400,"typeCard":0,"name":"Cogwheel","image":"Cogwheel","cost":2,"rarity":"COMMON","originalCost":2,"shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Cogwheel"},{"normal":1,"shiny":3,"card_data":{"attack":1,"hp":6,"maxHp":6,"originalAttack":1,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":238,"fixedId":238,"typeCard":0,"name":"Script Bomb","image":"Script_Bomb","cost":3,"rarity":"DETERMINATION","originalCost":3,"shiny":false,"quantity":1,"extension":"BASE","tribe":"BOMB","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Script Bomb"},{"normal":1,"shiny":0,"card_data":{"attack":5,"hp":6,"maxHp":6,"originalAttack":5,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":120,"fixedId":120,"typeCard":0,"name":"G Follower 3","image":"G_Follower_3","cost":8,"rarity":"LEGENDARY","originalCost":8,"shiny":false,"quantity":1,"extension":"BASE","tribe":"G_FOLLOWER","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"G Follower 3"},{"normal":1,"shiny":0,"card_data":{"attack":1,"hp":3,"maxHp":3,"originalAttack":1,"originalHp":3,"dodge":0,"thorns":1,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":435,"fixedId":435,"typeCard":0,"name":"Ficus Licker","image":"Ficus_Licker","cost":2,"rarity":"COMMON","originalCost":2,"target":"ALLY_MONSTER","shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Ficus Licker"} ,{"normal":1,"shiny":0,"card_data":{"attack":2,"hp":3,"maxHp":3,"originalAttack":2,"originalHp":3,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":400,"fixedId":400,"typeCard":0,"name":"Cogwheel","image":"Cogwheel","cost":2,"rarity":"COMMON","originalCost":2,"shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Cogwheel"},{"normal":1,"shiny":0,"card_data":{"attack":1,"hp":6,"maxHp":6,"originalAttack":1,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":238,"fixedId":238,"typeCard":0,"name":"Script Bomb","image":"Script_Bomb","cost":3,"rarity":"COMMON","originalCost":3,"shiny":false,"quantity":1,"extension":"BASE","tribe":"BOMB","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Script Bomb"},{"normal":1,"shiny":0,"card_data":{"attack":5,"hp":6,"maxHp":6,"originalAttack":5,"originalHp":6,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":120,"fixedId":120,"typeCard":0,"name":"G Follower 3","image":"G_Follower_3","cost":8,"rarity":"COMMON","originalCost":8,"shiny":false,"quantity":1,"extension":"BASE","tribe":"G_FOLLOWER","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"G Follower 3"},{"normal":1,"shiny":0,"card_data":{"attack":1,"hp":3,"maxHp":3,"originalAttack":1,"originalHp":3,"dodge":0,"thorns":1,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":435,"fixedId":435,"typeCard":0,"name":"Ficus Licker","image":"Ficus_Licker","cost":2,"rarity":"COMMON","originalCost":2,"target":"ALLY_MONSTER","shiny":false,"quantity":1,"extension":"BASE","selectCards":[],"ownerId":0,"imageExtension":"png"},"name":"Ficus Licker"}]}';
-    test_button.test_JSON = test_JSON;
-    ///////////////
+var list = document.querySelectorAll(".mainContent br");
+for (var i=0; i < list.length; i++) {
+	list[i].remove();
+}
+list = null;
 
-    var list = document.querySelectorAll(".mainContent br");
-    for (var i=0; i < list.length; i++) {
-        list[i].remove();
-    }
-    list = null;
+var mainCont = document.getElementsByClassName("mainContent")[0];
+var rows = document.querySelectorAll(".mainContent p");
+//console.log(rows);
 
-    var mainCont = document.getElementsByClassName("mainContent")[0];
-    var rows = document.querySelectorAll(".mainContent p");
-    //console.log(rows);
+var buyIcons = document.querySelectorAll(".mainContent p .height-48.interact");
+//console.log(buyIcons);
 
-    var buyIcons = document.querySelectorAll(".mainContent p .height-48.interact");
-    //console.log(buyIcons);
+var contAll = document.createElement("table");
+contAll.id = "packsCont";
+var row1 = document.createElement("tr");
+var row2 = document.createElement("tr");
+var row3 = document.createElement("tr");
 
-    var contAll = document.createElement("table");
-    contAll.id = "packsCont";
-    var row1 = document.createElement("tr");
-    var row2 = document.createElement("tr");
-    var row3 = document.createElement("tr");
+var ut_pack = document.createElement("td");
+ut_pack.setAttribute("colspan", 2);
+var ut_pack_table = document.createElement("table");
+ut_pack.appendChild(ut_pack_table);
+ut_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/pack.png" class="pack_image"></td><td><p style="font-size: 1.8em;">Undertale Pack</p><p style="font-size: 0.9em;">Contains 4 random Undertale Cards.</p><p style="font-size: 0.9em;">You have: <span id="nbPacks">' + document.getElementById("nbPacks").innerHTML + '</span></p></td></tr>' +
+	'<tr class="button_row"><td><button class="btn btn-success" onclick="addPack(\'addPack\')";>Buy (100 <img src="images/icons/gold.png" class="height-16">)</button></td><td><button class="btn btn-success" onclick="addPack(\'addPackUcp\')";>Buy (<span class="ucp">10</span> UCP)</button></td></tr>'+
+	'<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'\', true)">Open ALL!</button></td></tr>';
 
-    var ut_pack = document.createElement("td");
-    ut_pack.setAttribute("colspan", 2);
-    var ut_pack_table = document.createElement("table");
-    ut_pack.appendChild(ut_pack_table);
-    ut_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/pack.png" class="pack_image"></td><td><p style="font-size: 1.8em;">Undertale Pack</p><p style="font-size: 0.9em;">Contains 4 random Undertale Cards.</p><p style="font-size: 0.9em;">You have: <span id="nbPacks">' + document.getElementById("nbPacks").innerHTML + '</span></p></td></tr>' +
-        '<tr class="button_row"><td><button class="btn btn-success" onclick="addPack(\'addPack\')";>Buy (100 <img src="images/icons/gold.png" class="height-16">)</button></td><td><button class="btn btn-success" onclick="addPack(\'addPackUcp\')";>Buy (<span class="ucp">10</span> UCP)</button></td></tr>'+
-        '<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'\', true)">Open ALL!</button></td></tr>';
+row1.appendChild(ut_pack);
 
-    row1.appendChild(ut_pack);
+var dr_pack = document.createElement("td");
+dr_pack.setAttribute("colspan", 2);
+var dr_pack_table = document.createElement("table");
+dr_pack.appendChild(dr_pack_table);
+dr_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/drPack.png" class="pack_image"></td><td><p style="font-size: 1.8em;">Deltarune Pack</p><p style="font-size: 0.9em;">Contains 4 random Deltarune Cards.</p><p style="font-size: 0.9em;">You have: <span id="nbDRPacks">' + document.getElementById("nbDRPacks").innerHTML + '</span></p></td></tr>' +
+	'<tr class="button_row"><td><button class="btn btn-success" onclick="addPack(\'addDRPack\')";>Buy (150 <img src="images/icons/gold.png" class="height-16">)</button></td><td><button class="btn btn-success" onclick="addPack(\'addDRPackUcp\')";>Buy (<span class="ucp">10</span> UCP)</button></td></tr>'+
+	'<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'DR\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'DR\', true)">Open ALL!</button></td></tr>';
 
-    var dr_pack = document.createElement("td");
-    dr_pack.setAttribute("colspan", 2);
-    var dr_pack_table = document.createElement("table");
-    dr_pack.appendChild(dr_pack_table);
-    dr_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/drPack.png" class="pack_image"></td><td><p style="font-size: 1.8em;">Deltarune Pack</p><p style="font-size: 0.9em;">Contains 4 random Deltarune Cards.</p><p style="font-size: 0.9em;">You have: <span id="nbDRPacks">' + document.getElementById("nbDRPacks").innerHTML + '</span></p></td></tr>' +
-        '<tr class="button_row"><td><button class="btn btn-success" onclick="addPack(\'addDRPack\')";>Buy (150 <img src="images/icons/gold.png" class="height-16">)</button></td><td><button class="btn btn-success" onclick="addPack(\'addDRPackUcp\')";>Buy (<span class="ucp">10</span> UCP)</button></td></tr>'+
-        '<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'DR\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'DR\', true)">Open ALL!</button></td></tr>';
+row1.appendChild(dr_pack);
 
-    row1.appendChild(dr_pack);
+var shiny_pack = document.createElement("td");
+shiny_pack.setAttribute("colspan", 2);
+var shiny_pack_table = document.createElement("table");
+shiny_pack.appendChild(shiny_pack_table);
+shiny_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/shinyPack.gif" class="pack_image"></td><td><p style="font-size: 1.8em;">Shiny Pack</p><p style="font-size: 0.9em;">Contains 4 random Shiny Cards.</p><p style="font-size: 0.9em;">You have: <span id="nbShinyPacks">' + document.getElementById("nbShinyPacks").innerHTML + '</span></p></td></tr>' +
+	'<tr class="button_row"><td colspan=2>Shiny Packs Can\'t be purchased!</td></tr>'+
+	'<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'Shiny\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'Shiny\', true)">Open ALL!</button></td></tr>';
 
-    var shiny_pack = document.createElement("td");
-    shiny_pack.setAttribute("colspan", 2);
-    var shiny_pack_table = document.createElement("table");
-    shiny_pack.appendChild(shiny_pack_table);
-    shiny_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/shinyPack.gif" class="pack_image"></td><td><p style="font-size: 1.8em;">Shiny Pack</p><p style="font-size: 0.9em;">Contains 4 random Shiny Cards.</p><p style="font-size: 0.9em;">You have: <span id="nbShinyPacks">' + document.getElementById("nbShinyPacks").innerHTML + '</span></p></td></tr>' +
-        '<tr class="button_row"><td colspan=2>Shiny Packs Can\'t be purchased!</td></tr>'+
-        '<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'Shiny\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'Shiny\', true)">Open ALL!</button></td></tr>';
+row2.appendChild(shiny_pack);
 
-    row2.appendChild(shiny_pack);
+var super_pack = document.createElement("td");
+super_pack.setAttribute("colspan", 2);
+var super_pack_table = document.createElement("table");
+super_pack.appendChild(super_pack_table);
+super_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/superPack.gif" class="pack_image"></td><td><p style="font-size: 1.8em;">Super Pack</p><p style="font-size: 0.9em;">'+
+	'Contains a random <img src="images/rarity/BASE_COMMON.png" title="COMMON">/<img src="images/rarity/DELTARUNE_COMMON.png" title="COMMON">, <img src="images/rarity/BASE_RARE.png" title="RARE">/<img src="images/rarity/DELTARUNE_RARE.png" title="RARE">, <img src="images/rarity/BASE_EPIC.png" title="EPIC">/<img src="images/rarity/DELTARUNE_EPIC.png" title="EPIC"> and <img src="images/rarity/BASE_LEGENDARY.png" title="LEGENDARY">/<img src="images/rarity/DELTARUNE_LEGENDARY.png" title="LEGENDARY"> card.</p>'+
+	'<p style="font-size: 0.9em;">You have: <span id="nbSuperPacks">' + document.getElementById("nbSuperPacks").innerHTML + '</span></p></td></tr>' +
+	'<tr class="button_row"><td colspan=2>Super Packs Can\'t be purchased!</td></tr>'+
+	'<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'Super\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'Super\', true)">Open ALL!</button></td></tr>';
 
-    var super_pack = document.createElement("td");
-    super_pack.setAttribute("colspan", 2);
-    var super_pack_table = document.createElement("table");
-    super_pack.appendChild(super_pack_table);
-    super_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/superPack.gif" class="pack_image"></td><td><p style="font-size: 1.8em;">Super Pack</p><p style="font-size: 0.9em;">'+
-        'Contains a random <img src="images/rarity/BASE_COMMON.png" title="COMMON">/<img src="images/rarity/DELTARUNE_COMMON.png" title="COMMON">, <img src="images/rarity/BASE_RARE.png" title="RARE">/<img src="images/rarity/DELTARUNE_RARE.png" title="RARE">, <img src="images/rarity/BASE_EPIC.png" title="EPIC">/<img src="images/rarity/DELTARUNE_EPIC.png" title="EPIC"> and <img src="images/rarity/BASE_LEGENDARY.png" title="LEGENDARY">/<img src="images/rarity/DELTARUNE_LEGENDARY.png" title="LEGENDARY"> card.</p>'+
-        '<p style="font-size: 0.9em;">You have: <span id="nbSuperPacks">' + document.getElementById("nbSuperPacks").innerHTML + '</span></p></td></tr>' +
-        '<tr class="button_row"><td colspan=2>Super Packs Can\'t be purchased!</td></tr>'+
-        '<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'Super\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'Super\', true)">Open ALL!</button></td></tr>';
+row2.appendChild(super_pack);
 
-    row2.appendChild(super_pack);
+var I_M_JUST_A_WASTE_OF_SPACE = document.createElement("td");
+I_M_JUST_A_WASTE_OF_SPACE.style.opacity = 0;
 
-    var I_M_JUST_A_WASTE_OF_SPACE = document.createElement("td");
-    I_M_JUST_A_WASTE_OF_SPACE.style.opacity = 0;
+row3.appendChild(I_M_JUST_A_WASTE_OF_SPACE);
 
-    row3.appendChild(I_M_JUST_A_WASTE_OF_SPACE);
+var final_pack = document.createElement("td");
+final_pack.setAttribute("colspan", 2);
+var final_pack_table = document.createElement("table");
+final_pack.appendChild(final_pack_table);
+final_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/finalPack.gif" class="pack_image"></td><td><p style="font-size: 1.8em;">Final Pack</p><p style="font-size: 0.9em;">'+
+	'Contains a random <img src="images/rarity/BASE_RARE.png" title="RARE">/<img src="images/rarity/DELTARUNE_RARE.png" title="RARE">, <img src="images/rarity/BASE_EPIC.png" title="EPIC">/<img src="images/rarity/DELTARUNE_EPIC.png" title="EPIC">, <img src="images/rarity/BASE_LEGENDARY.png" title="LEGENDARY">/<img src="images/rarity/DELTARUNE_LEGENDARY.png" title="LEGENDARY"> and <img src="images/rarity/BASE_DETERMINATION.png" title="DETERMINATION">/<img src="images/rarity/DELTARUNE_DETERMINATION.png" title="DETERMINATION"> card.</p>'+
+	'<p style="font-size: 0.9em;">You have: <span id="nbFinalPacks">' + document.getElementById("nbFinalPacks").innerHTML + '</span></p></td></tr>' +
+	'<tr class="button_row"><td colspan=2>Final Packs Can\'t be purchased!</td></tr>'+
+	'<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'Final\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'Final\', true)">Open ALL!</button></td></tr>';
 
-    var final_pack = document.createElement("td");
-    final_pack.setAttribute("colspan", 2);
-    var final_pack_table = document.createElement("table");
-    final_pack.appendChild(final_pack_table);
-    final_pack_table.innerHTML = '<tr><td><img id="btnOpen" src="images/icons/finalPack.gif" class="pack_image"></td><td><p style="font-size: 1.8em;">Final Pack</p><p style="font-size: 0.9em;">'+
-        'Contains a random <img src="images/rarity/BASE_RARE.png" title="RARE">/<img src="images/rarity/DELTARUNE_RARE.png" title="RARE">, <img src="images/rarity/BASE_EPIC.png" title="EPIC">/<img src="images/rarity/DELTARUNE_EPIC.png" title="EPIC">, <img src="images/rarity/BASE_LEGENDARY.png" title="LEGENDARY">/<img src="images/rarity/DELTARUNE_LEGENDARY.png" title="LEGENDARY"> and <img src="images/rarity/BASE_DETERMINATION.png" title="DETERMINATION">/<img src="images/rarity/DELTARUNE_DETERMINATION.png" title="DETERMINATION"> card.</p>'+
-        '<p style="font-size: 0.9em;">You have: <span id="nbFinalPacks">' + document.getElementById("nbFinalPacks").innerHTML + '</span></p></td></tr>' +
-        '<tr class="button_row"><td colspan=2>Final Packs Can\'t be purchased!</td></tr>'+
-        '<tr class="button_row"><td><button class="btn btn-primary" onclick="openPacks(\'Final\', 1)">Open one</button></td><td><button class="btn btn-primary" onclick="openPacks(\'Final\', true)">Open ALL!</button></td></tr>';
+row3.appendChild(final_pack);
 
-    row3.appendChild(final_pack);
+contAll.appendChild(row1);
+contAll.appendChild(row2);
+contAll.appendChild(row3);
+mainCont.appendChild(contAll);
 
-    contAll.appendChild(row1);
-    contAll.appendChild(row2);
-    contAll.appendChild(row3);
-    mainCont.appendChild(contAll);
+//console.log("rows", rows)
+rows[rows.length-1].remove();
+rows[rows.length-2].remove();
 
-    //console.log("rows", rows)
-    rows[rows.length-1].remove();
-    rows[rows.length-2].remove();
+bg = document.createElement("div");
+bg.id = "openCardsCont";
+bg.onclick = function() {click++};
+document.body.appendChild(bg);
 
-    bg = document.createElement("div");
-    bg.id = "openCardsCont";
-    bg.onclick = function() {click++};
-    document.body.appendChild(bg);
+pack_cont = document.createElement("div");
+pack_cont.id = "packCont";
+bg.appendChild(pack_cont);
 
-    pack_cont = document.createElement("div");
-    pack_cont.id = "packCont";
-    bg.appendChild(pack_cont);
+pack = document.createElement("img");
+pack.src = "images/icons/pack.png";
+pack_cont.appendChild(pack);
 
-    pack = document.createElement("img");
-    pack.src = "images/icons/pack.png";
-    pack_cont.appendChild(pack);
+pack_count = document.createElement("p");
+pack_cont.appendChild(pack_count);
 
-    pack_count = document.createElement("p");
-    pack_cont.appendChild(pack_count);
+pack_shard1 = document.createElement("div");
+pack_shard1.className = "pack_shard";
+pack_shard1.style = "background-position:center top; transform: translate(-50%, -100%);";
+pack_shard1.style["background-image"] = "url('" + "images/icons/pack.png" + "')";
+bg.appendChild(pack_shard1);
 
-    pack_shard1 = document.createElement("div");
-    pack_shard1.className = "pack_shard";
-    pack_shard1.style = "background-position:center top; transform: translate(-50%, -100%);";
-    pack_shard1.style["background-image"] = "url('" + "images/icons/pack.png" + "')";
-    bg.appendChild(pack_shard1);
+pack_shard2 = document.createElement("div");
+pack_shard2.className = "pack_shard";
+pack_shard2.style = "background-position:center bottom; transform: translate(-50%, 0%);";
+pack_shard2.style["background-image"] = "url('" + "images/icons/pack.png" + "')";
+bg.appendChild(pack_shard2);
 
-    pack_shard2 = document.createElement("div");
-    pack_shard2.className = "pack_shard";
-    pack_shard2.style = "background-position:center bottom; transform: translate(-50%, 0%);";
-    pack_shard2.style["background-image"] = "url('" + "images/icons/pack.png" + "')";
-    bg.appendChild(pack_shard2);
+all_cards_cont = document.createElement("div");
+bg.appendChild(all_cards_cont);
 
-    all_cards_cont = document.createElement("div");
-    bg.appendChild(all_cards_cont);
-
-    updateFunctions.push(cardOpenUpdate);
-
-    //console.log("Packs Page Done!");
-});
-
+window._PrettyCardsStart = function() {
+	updateFunctions.push(cardOpenUpdate);
+	add_Packs_CSS();
+}
 
 
 //console.log("Packs Page Done!");

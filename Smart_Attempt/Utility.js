@@ -12,6 +12,22 @@ function GM_addStyle(css) {
   sheet.insertRule(css, (sheet.rules || sheet.cssRules || []).length);
 }
 
+function GM_addStyle(css) {
+	console.log("GM_addStyle", css)
+	var e = document.createElement("style");
+	e.innerHTML = css;
+	document.head.appendChild(e);
+}
+
+function GetLatestReleaseInfo() {
+   $.getJSON("https://api.github.com/repos/CMD-God/prettycards/tags").done(function (json) {
+	   console.log(json);
+        var release = json[0];
+        var downloadURL = release.zipball_url;
+        $("#mongodb-download").attr("href", downloadURL);  
+   });    
+}  
+
 GetLatestReleaseInfo();
 
 // Function detecting on which page are we (Please Don't be mad at me, FiledMaster . . . )
