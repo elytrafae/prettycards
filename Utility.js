@@ -12,8 +12,6 @@ function GM_addStyle(css) {
   sheet.insertRule(css, (sheet.rules || sheet.cssRules || []).length);
 }
 
-GetLatestReleaseInfo();
-
 // Function detecting on which page are we (Please Don't be mad at me, FiledMaster . . . )
 function onPage(name, fn) {
   var length = location.pathname.length, temp;
