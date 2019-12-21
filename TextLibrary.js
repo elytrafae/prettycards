@@ -1,9 +1,10 @@
 
 var TextLibrary = {};
 
-TextLibrary.Create = function() {
+TextLibrary.CreateText = function() {
 	this.wait = 200;
 	this.timeout = setTimeout(TextLibrary._typeText, this.wait);
+	console.log(this);
 }
 
 TextLibrary._typeText = function() {
