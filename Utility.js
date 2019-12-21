@@ -20,6 +20,7 @@ function onPage(name, fn) {
   }
   var r = location.pathname.substring(1, temp || length) === name;
   if (typeof fn === "function" && r) {
+	console.log("PrettyCards Page: " + name);
     fn();
   }
   return r;

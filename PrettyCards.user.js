@@ -12,6 +12,7 @@
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/TextLibrary.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Play.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Packs.js
+// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Artifacts.js
 // ==/UserScript==
 
 //https://media.discordapp.net/attachments/147063257436258305/637627137276510208/y47orgr08su31.png <------ FACTS!
