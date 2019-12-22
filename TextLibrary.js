@@ -49,6 +49,8 @@ TextLibrary.CreateText.prototype._typeText = function(makeTimeout) {
 	//console.log("TypeText: ", this);
     if (this.txt[this.currLine].charAt(this.currLetter) != "[") {
         this.current_span.innerHTML += this.txt[this.currLine].charAt(this.currLetter);
+    } else {
+        this._handleTextCommand();
     }
     this.currLetter++;
 
@@ -57,6 +59,14 @@ TextLibrary.CreateText.prototype._typeText = function(makeTimeout) {
         this._createTimeout();
     }
 };
+
+TextLibrary.CreateText.prototype._handleTextCommand = function() {
+    var c = this.txt[this.currLine].indexOf("]");
+    var scr = this.txt[this.currLine].slice(this.currLetter+1, c);
+    console.log(scr);
+
+    this.currLetter = c;
+}
 
 TextLibrary.CreateText.prototype._handleClick = function() {
     if (this.CheckLineGo()) {
