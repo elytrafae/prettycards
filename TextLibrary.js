@@ -63,6 +63,14 @@ TextLibrary.CreateText.prototype._typeText = function(makeTimeout) {
 TextLibrary.CreateText.prototype._handleTextCommand = function() {
     var c = this.txt[this.currLine].indexOf("]");
     var scr = this.txt[this.currLine].slice(this.currLetter+1, c);
+	var dd = scr.indexOf(":");
+	if (dd === -1) {
+		
+	} else {
+		var cmd = scr.slice(0, dd-1);
+		var arg = scr.slice(dd+1, scr.length-1);
+		console.log("CMD: ", cmd, " ARG: ", arg);
+	}
     console.log(scr);
 
     this.currLetter = c;
