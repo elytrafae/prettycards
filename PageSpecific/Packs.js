@@ -260,8 +260,8 @@ function cardOpenUpdate() {
                 };
             };
 			var c = element_list[click];
-			if ((!ProcessJingle(c)) && (c.rarity == "LEGENDARY" || c.rarity == "DETERMINATION")) {
-				c.card_Jingle = PlaySFX("https://undercards.net/musics/cards/" + c.card_data.name + ".ogg");
+			ProcessJingle(element_list[click].card_data)
+				
 			};
         }
         if (click > 0) {

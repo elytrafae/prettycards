@@ -11,7 +11,7 @@ var israndom = true; //Sould the Jingle be selected randomly or based on how man
 var nums = {}; //This counts how many times a given Card's Jingle has been played!
 
 function ProcessJingle(card) {
-	var name = card.card_data.name;
+	var name = card.name;
 	console.log("Card Name", name);
 	/*if (typeof(nums[name]) != "number") {
 		for (let key in numberOfSongsCardsHave) {
@@ -27,8 +27,14 @@ function ProcessJingle(card) {
 	if ((numberOfSongsCardsHave[name]) && numberOfSongsCardsHave[name] > 0) {
 		nums[name] = (nums[name] || 0) + 1;
 	} else {
-		console.log("ProcessJingle returned!");
-		return false;
+		if (card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION") {
+			c.card_Jingle = PlaySFX("https://undercards.net/musics/cards/" + c.card_data.name + ".ogg");
+			console.log("ProcessJingle fallback!");
+			return true;
+		} else {
+			console.log("ProcessJingle returned!");
+			return false;
+		}
 	}
 	console.log(name, nums[name]);
 	var song_nr = (israndom ? getRandomInt(1, numberOfSongsCardsHave[name]) : ((nums[name]-1) % numberOfSongsCardsHave[name])+1)
