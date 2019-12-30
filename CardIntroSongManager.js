@@ -1,6 +1,7 @@
 
 var numberOfSongsCardsHave = { //Howe many Jingles does a Card have in my Git Folder?
-	Chara : 3
+	Chara : 3,
+	Asgore : 3
 };
 
 var israndom = false; //Sould the Jingle be selected randomly or based on how many times was the card played?
