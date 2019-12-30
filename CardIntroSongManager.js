@@ -2,7 +2,8 @@
 var numberOfSongsCardsHave = { //How many Jingles does a Card have in my Git Folder?
 	Chara : 3,
 	Asgore : 3,
-	Sans : 5
+	Sans : 5,
+	"The Heroine" : 5
 };
 
 var israndom = true; //Sould the Jingle be selected randomly or based on how many times was the card played?
@@ -29,7 +30,7 @@ function ProcessJingle(card) {
 		return;
 	}
 	console.log(name, nums[name]);
-	var song_nr = (israndom ? getRandomInt(1, numberOfSongsCardsHave[name]) : (nums[name] % numberOfSongsCardsHave[name]) + 1)
+	var song_nr = (israndom ? getRandomInt(1, numberOfSongsCardsHave[name]) : ((nums[name]-1) % numberOfSongsCardsHave[name])+1)
 	PlaySFX("https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/cards/" + name + "/intro_" + song_nr + ".ogg");
 }
 
