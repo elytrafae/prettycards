@@ -28,7 +28,7 @@ function ProcessJingle(card) {
 		nums[name] = (nums[name] || 0) + 1;
 	} else {
 		if (card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION") {
-			c.card_Jingle = PlaySFX("https://undercards.net/musics/cards/" + c.card_data.name + ".ogg");
+			PlaySFX("https://undercards.net/musics/cards/" + name + ".ogg");
 			console.log("ProcessJingle fallback!");
 			return true;
 		} else {

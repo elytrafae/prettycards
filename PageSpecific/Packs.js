@@ -261,8 +261,6 @@ function cardOpenUpdate() {
             };
 			var c = element_list[click];
 			ProcessJingle(element_list[click].card_data)
-				
-			};
         }
         if (click > 0) {
             //console.log("click: ", click);
