@@ -258,6 +258,7 @@ function cardOpenUpdate() {
                     card.appendChild(legy_cover);
                 };
             };
+			ProcessJingle(element_list[click]);
         }
         if (click > 0) {
             //console.log("click: ", click);

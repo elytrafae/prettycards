@@ -8,13 +8,17 @@ var nums = {}; //This counts how many times a given Card's Jingle has been playe
 
 function ProcessJingle(card) {
 	var name = card.name;
-	for (let key in numberOfSongsCardsHave) {
-		if (key == name) {
-			nums[name] = (nums[name] || 0) + 1;
-			break;
+	if (typeof(nums[name]) != "number") {
+		for (let key in numberOfSongsCardsHave) {
+			if (key == name) {
+				nums[name] = (nums[name] || 0) + 1;
+				break;
+			}
 		}
+		if (typeof(nums[name]) != "number") {console.log("ProcessJingle returned!");return;}
+	} else {
+		nums[name]++;
 	}
-	if (typeof(nums[name]) != "number") {return;}
 	console.log(name, nums[name]);
 	
 }
