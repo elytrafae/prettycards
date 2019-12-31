@@ -97,7 +97,7 @@ function AddTooltip(ele, html, side) { //side: 1-up, 2-right, 3-down, 4-left
 	var tip = document.createElement("DIV");
 	tip.className = "tooltiptext side" + (side || 1);
 	tipcont.appendChild(tip);
-	if (type(html) == "string") {
+	if (typeof(html) == "string") {
 		tip.innerHTML = html;
 	} else {
 		tip.appendChild(html);
