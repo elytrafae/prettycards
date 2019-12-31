@@ -59,7 +59,7 @@ function AddSoulHover(ele, soul, side) {
 }
 
 GM_addStyle(".PrettyCards_PopUpCardContainer {margin: auto;}");
-GM_addStyle(".PrettyCards_PopUpCardContainer div {margin: 2px; display: inline-table;}");
+GM_addStyle(".PrettyCards_PopUpCardContainer card {margin: 2px; display: inline-table;}");
 function AddSoulClick(ele) {
     ele.addEventListener("click", function(e) {
         var ele = e.target;
