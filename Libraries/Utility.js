@@ -51,6 +51,14 @@ function getRandomInt(min, max) {
 
 // Ok, these ones are mine!
 
+function loadCSSFromLink(url) {
+	e = document.createElement("link");
+	e.href = url;
+	e.setAttribute("rel", "stylesheet");
+	e.setAttribute("type", "text/css");
+	document.head.appendChild(e);
+}
+
 function loadScript(lnk, callback) {
 	var e = document.createElement("script");
 	e.src = "https://cdn.jsdelivr.net/gh/CMD-God/prettycards@"+ PrettyCardsVer +"/PageSpecific/" + lnk + ".js";
@@ -67,6 +75,33 @@ function Update() {
 }
 
 window.requestAnimationFrame(Update);
+
+function CreateEmptyPopUp(bg_color, isBox) {
+	var cover = document.createElement("DIV");
+	cover.className = "popup";
+	cover.style["background-color"] = bg_color || "rgba(0, 0, 0, 0.5)";
+	
+	var child = document.createElement("DIV");
+	child.className = "popupChild" + (isBox ? " popupBox" : "");
+	cover.appendChild(child);
+	
+	document.body.appendChild(cover);
+}
+
+loadCSSFromLink("https://raw.githubusercontent.com/CMD-God/prettycards/master/css/Tooltips.js")
+function AddTooltip(ele, html, side) { //side: 1-up, 2-right, 3-down, 4-left
+	var tipcont = document.createElement("DIV");
+	tipcont.className = "tooltip";
+	var tip = document.createElement("DIV");
+	tip.className = "tooltiptext side" + (side || 1);
+	tipcont.appendChild(tip);
+	if (type(html) == "string") {
+		tip.innerHTML = html;
+	} else {
+		tip.appendChild(html);
+	}
+	ele.appendChild(tipcont);
+}
 
 ////////////////////////
 
