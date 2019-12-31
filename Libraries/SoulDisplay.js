@@ -47,7 +47,7 @@ GM_addStyle(".PrettyCards_SoulHover_Desc {color: white; padding: 0.3em;}");
 GM_addStyle(".PrettyCards_SoulHover_Name {text-align: center; font-size: 2em;}");
 GM_addStyle(".PrettyCards_SoulHover_Soul {width: 5em; position: absolute; transform: translate(-50%, -50%); top: 0em; left: 0em;}");
 GM_addStyle(".PrettyCards_SoulHover_ClickMe {color:white}");
-function AddSoulHover(ele, soul) {
+function AddSoulHover(ele, soul, side) {
 	var soul_data = GetSoulData(soul);
 	var html =	'<div class="PrettyCards_SoulHover">'+
 					'<img class="PrettyCards_SoulHover_Soul" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + soul + '.png">'+
@@ -55,7 +55,7 @@ function AddSoulHover(ele, soul) {
 					'<p class="PrettyCards_SoulHover_Desc" data-i18n="[html]'+ soul_data.soulDescStringKey +'">'+ soul_data.desc + '</p>'+
 					'<p class="PrettyCards_SoulHover_ClickMe">(Click for more info)</p>'+
 				'</div>';
-	AddTooltip(ele, html, 4);
+	AddTooltip(ele, html, side || 4);
 }
 
 GM_addStyle(".PrettyCards_PopUpCardContainer {margin: auto;}");

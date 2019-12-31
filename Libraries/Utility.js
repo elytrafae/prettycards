@@ -12,6 +12,26 @@ function GM_addStyle(css) {
   sheet.insertRule(css, (sheet.rules || sheet.cssRules || []).length);
 }
 
+function FindByAttributeValue(attribute, value, element_type)    {
+  element_type = element_type || "*";
+  var All = document.getElementsByTagName(element_type);
+  for (var i = 0; i < All.length; i++)       {
+    if (All[i].getAttribute(attribute) == value) { return All[i]; }
+  }
+}
+
+function FindAllByExistingAttribute(attribute, element_type) {
+    element_type = element_type || "*";
+    var All = document.getElementsByTagName(element_type);
+    var match = [];
+    for (var i = 0; i < All.length; i++) {
+        if ((All[i].getAttribute(attribute) != null) && (All[i].getAttribute(attribute) != undefined)) { match.push(All[i]); }
+    }
+    return match;
+}
+
+window.FindAllByExistingAttribute = FindAllByExistingAttribute;
+
 // Function detecting on which page are we (Please Don't be mad at me, FiledMaster . . . )
 function onPage(name, fn) {
   var length = location.pathname.length, temp;
