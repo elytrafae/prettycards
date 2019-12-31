@@ -91,6 +91,7 @@ function CreateEmptyPopUp(bg_color, isBox) {
 GM_addStyle(".PrettyCards_tooltip {position: relative;}");
 GM_addStyle(".PrettyCards_tooltip .tooltiptext {visibility: hidden;position: absolute;z-index: 999;}");
 GM_addStyle(".PrettyCards_tooltip:hover .tooltiptext {visibility: visible;}");
+GM_addStyle(".PrettyCards_tooltip .tooltiptext:hover {visibility: hidden;}")
 function AddTooltip(ele, html, side) { //side: 1-up, 2-right, 3-down, 4-left
 	ele.className += " PrettyCards_tooltip";
 	var tip = document.createElement("DIV");
