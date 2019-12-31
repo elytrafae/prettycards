@@ -59,7 +59,7 @@ function AddSoulHover(ele, soul, side) {
 }
 
 GM_addStyle(".PrettyCards_PopUpCardContainer {margin: auto;}");
-GM_addStyle(".PrettyCards_PopUpCardContainer card {margin: 2px; display: inline-table;}");
+GM_addStyle(".PrettyCards_PopUpCardContainer .card {margin: 2px; display: inline-table;}");
 function AddSoulClick(ele) {
     ele.addEventListener("click", function(e) {
         var ele = e.target;
@@ -69,14 +69,16 @@ function AddSoulClick(ele) {
         card_cont.addClass("PrettyCards_PopUpCardContainer");
         var list = soulCards[data.id];
         //console.log(list);
-        for (var i=0; i < list.length; i++) {
-            window.appendCard(card_cont, list[i]);
-        }
+		if (list) {
+			for (var i=0; i < list.length; i++) {
+				window.appendCard(card_cont, list[i]);
+			}
+		}
         //console.log(card_cont);
         var text$ = $('<div><img class="PrettyCards_SoulHover_Soul" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + data.id + '.png"/>'+
 					'<p class="PrettyCards_SoulHover_Name '+ data.id +'" data-i18n="[html]'+ data.soulStringKey +'">' + data.name + '</p>'+
 					'<p class="PrettyCards_SoulHover_Desc" data-i18n="[html]'+ data.soulDescStringKey +'">'+ data.desc + '</p>' +
-                    '<p>'+ data.name +'\'s Spells:</p></div>');
+                    (list ? '<p>'+ data.name +'\'s Spells:</p>)' : '')+'</div>');
         text$.append(card_cont);
         //console.log(text$);
         BootstrapDialog.show({
