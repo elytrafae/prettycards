@@ -76,13 +76,14 @@ function Update() {
 
 window.requestAnimationFrame(Update);
 
+
 function CreateEmptyPopUp(bg_color, isBox) {
 	var cover = document.createElement("DIV");
-	cover.className = "popup";
+	cover.className = "PrettyCards_popup";
 	cover.style["background-color"] = bg_color || "rgba(0, 0, 0, 0.5)";
 
 	var child = document.createElement("DIV");
-	child.className = "popupChild" + (isBox ? " popupBox" : "");
+	child.className = "PrettyCards_popupChild" + (isBox ? " popupBox" : "");
 	cover.appendChild(child);
 
 	document.body.appendChild(cover);
@@ -91,7 +92,11 @@ function CreateEmptyPopUp(bg_color, isBox) {
 GM_addStyle(".PrettyCards_tooltip {position: relative;}");
 GM_addStyle(".PrettyCards_tooltip .tooltiptext {visibility: hidden;position: absolute;z-index: 999;}");
 GM_addStyle(".PrettyCards_tooltip:hover .tooltiptext {visibility: visible;}");
-GM_addStyle(".PrettyCards_tooltip .tooltiptext:hover {visibility: hidden;}")
+GM_addStyle(".PrettyCards_tooltip .tooltiptext:hover {visibility: hidden;}");
+GM_addStyle(".PrettyCards_tooltip .tooltiptext.side1 {transform: translate(-50%, 0%); bottom: 105%; left: 50%;}");
+GM_addStyle(".PrettyCards_tooltip .tooltiptext.side2 {transform: translate(0%, -50%); left: 105%; top: 50%;}");
+GM_addStyle(".PrettyCards_tooltip .tooltiptext.side3 {transform: translate(-50%, 0%); top: 105%; left: 50%}");
+GM_addStyle(".PrettyCards_tooltip .tooltiptext.side4 {transform: translate(0%, -50%); right: 105%; top: 50%;}");
 function AddTooltip(ele, html, side) { //side: 1-up, 2-right, 3-down, 4-left
 	ele.className += " PrettyCards_tooltip";
 	var tip = document.createElement("DIV");
