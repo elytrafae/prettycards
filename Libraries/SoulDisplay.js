@@ -45,6 +45,7 @@ GetSoulCards();
 GM_addStyle(".PrettyCards_SoulHover {background-color: black; border: white solid 4px; width: 20em;}");
 GM_addStyle(".PrettyCards_SoulHover_Desc {color: white;}");
 GM_addStyle(".PrettyCards_SoulHover_Soul {width: 5em;}");
+GM_addStyle(".PrettyCards_SoulHover_ClickMe {color:white}");
 function AddSoulHover(ele, soul) {
 	var soul_data = GetSoulData(soul);
 	var html =	'<div class="PrettyCards_SoulHover">'+
