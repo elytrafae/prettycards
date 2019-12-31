@@ -1,7 +1,7 @@
 
 var soulCards = {};
 
-window.soulInfo = function(soul_name) {
+function GetSoulData(soul_name) {
 	var soulStringKey = 'soul-' + soul_name.replace('_', '-').toLowerCase();
     var soulDescStringKey = soulStringKey + '-desc';
     var name = $.i18n(soulStringKey);
@@ -9,7 +9,11 @@ window.soulInfo = function(soul_name) {
 	
 	console.log(name, desc);
 	
-	SoulPopUp();
+	return {name: name, desc: desc, id: soul_name}
+}
+
+window.soulInfo = function(soul_name) {
+	GetSoulData(soul_name);
 }
 
 function GetSoulCards() {
@@ -36,6 +40,17 @@ function GetSoulCards() {
 }
 
 GetSoulCards();
+
+function AddSoulHover(ele, soul) {
+	var soul_data = GetSoulData(soul);
+	var html =	'<div class="PrettyCards_SoulHover '+ soul +'">'+
+					'<img class="PrettyCards_SoulHover_Soul" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + soul + '.png">'+
+					'<p class="PrettyCards_SoulHover_Name">' + soul_data.name + '</p>'+
+					'<p class="PrettyCards_SoulHover_Desc">'+ soul_data.desc + '</p>'+
+					'<p class="PrettyCards_SoulHover_ClickMe">(Click for more info)</p>'+
+				'</div>';
+	AddTooltip(ele, html, 1);
+}
 
 function SoulPopUp(id, name, desc) {
 	

@@ -80,29 +80,28 @@ function CreateEmptyPopUp(bg_color, isBox) {
 	var cover = document.createElement("DIV");
 	cover.className = "popup";
 	cover.style["background-color"] = bg_color || "rgba(0, 0, 0, 0.5)";
-	
+
 	var child = document.createElement("DIV");
 	child.className = "popupChild" + (isBox ? " popupBox" : "");
 	cover.appendChild(child);
-	
+
 	document.body.appendChild(cover);
 }
 
-GM_addStyle(".tooltip {position: relative;display: inline-block;}");
-GM_addStyle(".tooltip .tooltiptext {visibility: hidden;width: 120px;background-color: black;color: #fff;text-align: center;padding: 5px 0;border-radius: 6px;position: absolute;z-index: 1;}");
-GM_addStyle(".tooltip:hover .tooltiptext {visibility: visible;}");
+GM_addStyle(".PrettyCards_tooltip {position: relative;}");
+GM_addStyle(".PrettyCards_tooltip .tooltiptext {visibility: hidden;position: absolute;z-index: 1;}");
+GM_addStyle(".PrettyCards_tooltip:hover .tooltiptext {visibility: visible;}");
 function AddTooltip(ele, html, side) { //side: 1-up, 2-right, 3-down, 4-left
-	var tipcont = document.createElement("DIV");
-	tipcont.className = "tooltip";
+	ele.className += " PrettyCards_tooltip";
 	var tip = document.createElement("DIV");
 	tip.className = "tooltiptext side" + (side || 1);
-	tipcont.appendChild(tip);
+	ele.appendChild(tip);
 	if (typeof(html) == "string") {
 		tip.innerHTML = html;
 	} else {
 		tip.appendChild(html);
 	}
-	ele.appendChild(tipcont);
+	//ele.appendChild(tipcont);
 }
 
 ////////////////////////
