@@ -88,7 +88,9 @@ function CreateEmptyPopUp(bg_color, isBox) {
 	document.body.appendChild(cover);
 }
 
-loadCSSFromLink("https://raw.githubusercontent.com/CMD-God/prettycards/master/css/Tooltips.js")
+GM_addStyle(".tooltip {position: relative;display: inline-block;}");
+GM_addStyle(".tooltip .tooltiptext {visibility: hidden;width: 120px;background-color: black;color: #fff;text-align: center;padding: 5px 0;border-radius: 6px;position: absolute;z-index: 1;}");
+GM_addStyle(".tooltip:hover .tooltiptext {visibility: visible;}");
 function AddTooltip(ele, html, side) { //side: 1-up, 2-right, 3-down, 4-left
 	var tipcont = document.createElement("DIV");
 	tipcont.className = "tooltip";
