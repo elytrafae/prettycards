@@ -154,9 +154,10 @@ function _SoulSelectClick(e) {
         cont.style = "text-align: justify;"
         cont.heart = e.target;
         cont.PrettyCards_OriginalSoulSelect = e.target.PrettyCards_OriginalSoulSelect;
-        var i = 0
-        for (var key in soulCards) {
+        for (var i=0; i < cont.PrettyCards_OriginalSoulSelect.children.length; i++) {
             //txt += '<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + key + '.png" class="PrettyCards_SoulImage">';
+			var sel = cont.PrettyCards_OriginalSoulSelect.children[i];
+			var key = sel.value;
             var div = document.createElement("div");
             div.className = "PrettyCards_SoulDiv";
             var img = document.createElement("img");
@@ -167,7 +168,6 @@ function _SoulSelectClick(e) {
             AddSoulHover(div, key, 3, "(Click to select!)");
             div.appendChild(img);
             cont.appendChild(div);
-            i++
         }
         console.log(cont);
         SoulSelectDialog = BootstrapDialog.show({
@@ -184,14 +184,14 @@ function _SoulSelectClick(e) {
     }
 }
 
-function CustomizeSoulSelectObj(select) {
+function CustomizeSoulSelectObj(select, startSoul) {
     var div = document.createElement("div");
     div.style = "text-align: center;";
     var img = document.createElement("IMG");
-    img.src = 'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + select.value + '.png';
+    img.src = 'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + (startSoul || select.value) + '.png';
     img.onclick = _SoulSelectClick;
     img.PrettyCards_OriginalSoulSelect = select;
-    AddSoulHover(div, select.value, 4, "(Click to change!)");
+    AddSoulHover(div, (startSoul || select.value), 4, "(Click to change!)");
     div.appendChild(img);
     select.parentNode.insertBefore(div, select.nextSibling);
     select.style.display = "none";
