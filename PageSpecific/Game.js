@@ -23,4 +23,9 @@ onPage("Game", function() {
         AddSoulHover(info2, info2.getAttribute("data-soul"), 1);
         AddSoulClick(info2);
     }, 12000);
+
+    //window.$(document).ajaxComplete((event, xhr, settings) => {
+      //console.log("Ajax Complete! ", event, xhr, settings);
+      //if (settings.url !== 'PacksConfig' || !settings.data) return;
+    //});
 })
