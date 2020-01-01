@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PrettyCards
 // @namespace    http://tampermonkey.net/
-// @version      1.0-pre
+// @version      1.1-pre
 // @updateURL    https://raw.githubusercontent.com/CMD-God/prettycards/master/PrettyCards.user.js
 // @description  Make Undercards look fabulous!
 // @author       CMD_God
