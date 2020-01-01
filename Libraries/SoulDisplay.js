@@ -184,14 +184,14 @@ function _SoulSelectClick(e) {
     }
 }
 
-function CustomizeSoulSelectObj(select, startSoul) {
+function CustomizeSoulSelectObj(select, startSoul, side) {
     var div = document.createElement("div");
     div.style = "text-align: center;";
     var img = document.createElement("IMG");
     img.src = 'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + (startSoul || select.value) + '.png';
     img.onclick = _SoulSelectClick;
     img.PrettyCards_OriginalSoulSelect = select;
-    AddSoulHover(div, (startSoul || select.value), 4, "(Click to change!)");
+    AddSoulHover(div, (startSoul || select.value), side || 4, "(Click to change!)");
     div.appendChild(img);
     select.parentNode.insertBefore(div, select.nextSibling);
     select.style.display = "none";
