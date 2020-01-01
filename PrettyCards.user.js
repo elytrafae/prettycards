@@ -14,7 +14,7 @@
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/CardIntroSongManager.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/SoulDisplay.js
 
-/// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Play.js
+// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Play.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Packs.js
 /// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Artifacts.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Decks.js
