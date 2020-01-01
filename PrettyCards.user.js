@@ -13,6 +13,7 @@
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/TextLibrary.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/CardIntroSongManager.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/SoulDisplay.js
+// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/ArtifactDisplay.js
 
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Play.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Packs.js
