@@ -195,6 +195,7 @@ function CustomizeSoulSelectObj(select) {
     div.appendChild(img);
     select.parentNode.insertBefore(div, select.nextSibling);
     select.style.display = "none";
+	return div
 }
 
 /*

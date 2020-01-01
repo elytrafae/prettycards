@@ -78,7 +78,7 @@ function add_Packs_CSS() {
     GM_addStyle("#openCardsCont #packCont img {height: 230px;}");
     GM_addStyle("#openCardsCont .card_cont {position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%; display: none;}");
     GM_addStyle("#openCardsCont .card_img {}");
-    GM_addStyle("#openCardsCont .card_cont .card {display: none; border: 0px;}");
+    GM_addStyle("#openCardsCont .card_cont .card {display: none; border: 0px; margin: 0 0 30px 0}");
     GM_addStyle("#openCardsCont .card_cont .card .cardName {font-size: 12px;}");
     GM_addStyle("#openCardsCont .pack_shard {position: absolute; top: 50%; left: 50%; background-repeat:no-repeat; width: 230px; height: 115px; background-size: 100% 200%;z-index: 10001; display: none; pointer-events: none;}");
     GM_addStyle("#cardsOpen {display: none;}");
@@ -125,7 +125,7 @@ function showCards(results) {
         e.style["z-index"] = 101 + results.list.length - i;
 
         var img = document.createElement("IMG");
-        img.src = "images/cardsBack/" + extension + "Card" + rarity + ".png";
+        img.src = "images/cardBacks/" + extension + "Card" + rarity + ".png";
         img.className = "card_img";
         e.appendChild(img);
 
@@ -136,17 +136,18 @@ function showCards(results) {
         var useless = document.createElement("div"); // Insert Unnecessary Aqua Is Useless Joke Here
         if (results.list[i].shiny > 0) {card.shiny = true;} else {card.shiny = false;}
         var thingy = window.appendCard(useless, card)[0];
-        var tbody = thingy.firstElementChild;
+        //var tbody = thingy.firstElementChild;
 
-        var row = document.createElement("tr");
-        tbody.appendChild(row);
+        //var row = document.createElement("tr");
+        //tbody.appendChild(row);
 
-        var td = document.createElement("td");
-        td.id = "quantity";
-        td.innerHTML = (results.list[i].normal > 0 ? ('<span>' + results.list[i].normal + "x</span>") : "")
-        td.innerHTML += (results.list[i].shiny > 0 ? (' <span class="rainbowText">' + results.list[i].shiny + 'x</span>') : "");
-        td.setAttribute("colspan", "4");
-        row.appendChild(td);
+        var q = document.createElement("div");
+        q.id = "quantity";
+        q.className = "cardQuantity";
+        q.innerHTML = (results.list[i].normal > 0 ? ('<span>' + results.list[i].normal + "x</span>") : "")
+        q.innerHTML += (results.list[i].shiny > 0 ? (' <span class="rainbowText">' + results.list[i].shiny + 'x</span>') : "");
+        //q.setAttribute("colspan", "4");
+        thingy.appendChild(q);
 
         e.appendChild(thingy);
         //console.log(thingy);
