@@ -39,4 +39,4 @@ function CreateArtifactImage(name, src, is_legend, art_id) {
 	return div
 }
 
-document.body.appendChild(CreateArtifactImage("Draw", "Draw", false, 2))
+//document.body.appendChild(CreateArtifactImage("Draw", "Draw", false, 2))
