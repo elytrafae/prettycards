@@ -22,6 +22,7 @@ window.openPacks = function(type, _count) {
     window.$(document).ajaxComplete((event, xhr, settings) => {
       //console.log("Event Fired!", event, xhr, settings);
       //if (settings.url !== 'PacksConfig' || !settings.data) return;
+      clearResults();
       const data = JSON.parse(settings.data);
       if (data.status || xhr.responseJSON.action !== 'getCards') {return};
           //results.packs += 1;
@@ -72,7 +73,7 @@ function add_Packs_CSS() {
     GM_addStyle("#packsCont .btn {height: 2.8em;}");
     GM_addStyle("#packsCont .button_row {height: 3.5em;}");
     GM_addStyle("#packsCont .button_row td {height: 3.5em;}");
-    GM_addStyle("#openCardsCont {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; display: none;z-index: 100;}");
+    GM_addStyle("#openCardsCont {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; display: none;z-index: 100;}");
     GM_addStyle("#openCardsCont #packCont {position: absolute; top: 50%; left: 50%; z-index: 10000; transform: translate(-50%, -50%);}");
     GM_addStyle("#openCardsCont #packCont p {font-size: 2.5em; text-align: center;}")
     GM_addStyle("#openCardsCont #packCont img {height: 230px;}");
@@ -96,6 +97,8 @@ var element_list = [];
 function showCards(results) {
     // This is the function which shows all the cards
     var img_name;
+    console.log("all_cards_cont: ", all_cards_cont);
+    all_cards_cont.innerHTML = "";
     // I know that I keep arguing about YanDev using ifs and switch cases for asset loading when he could use parsing . . .
     // But please believe me when I say that this is the cleanest method I could go about this.
     switch (results.pack_type) {

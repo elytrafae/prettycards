@@ -28,7 +28,7 @@ function ProcessJingle(card) {
 		nums[name] = (nums[name] || 0) + 1;
 	} else {
 		if (card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION") {
-			PlaySFX("https://undercards.net/musics/cards/" + name + ".ogg");
+			PlayJingle("https://undercards.net/musics/cards/" + name + ".ogg");
 			console.log("ProcessJingle fallback!");
 			return true;
 		} else {
@@ -38,8 +38,15 @@ function ProcessJingle(card) {
 	}
 	console.log(name, nums[name]);
 	var song_nr = (israndom ? getRandomInt(1, numberOfSongsCardsHave[name]) : ((nums[name]-1) % numberOfSongsCardsHave[name])+1)
-	card.card_Jingle = PlaySFX("https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/cards/" + name + "/intro_" + song_nr + ".ogg");
+	card.card_Jingle = PlayJingle("https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/cards/" + name + "/intro_" + song_nr + ".ogg");
 	return true;
+}
+
+var jingleChannel = document.createElement("audio");
+document.head.appendChild(jingleChannel);
+jingleChannel.autoplay = true;
+function PlayJingle(url) {
+    jingleChannel.src = url;
 }
 
 function PlaySFX(url) {
