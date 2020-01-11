@@ -5,11 +5,11 @@ GM_addStyle(".cardImage {background-size:cover!important}");
 
 for (var i=0; i < bonusExtensions.length; i++) {
   var ext = bonusExtensions[i];
-  GM_addStyle(".monster.ext_"+ ext +" .cardFrame {url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_monster.png')}");
-  GM_addStyle(".spell.ext_"+ ext +" .cardFrame {url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_spell.png')}");
+  GM_addStyle(".monster.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_monster.png')}");
+  GM_addStyle(".spell.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_spell.png')}");
 }
 
-GM_addStyle(".cardBackground.ext_DDLC {url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_background.png')}");
+GM_addStyle(".card.ext_DDLC .cardBackground {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_background.png')}");
 
 function AppendCustomCard(container, card) {
     var html$ = window.appendCard(container, card);
