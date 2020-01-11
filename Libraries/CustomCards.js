@@ -5,16 +5,16 @@ GM_addStyle(".cardImage {background-size:cover!important}");
 
 for (var i=0; i < bonusExtensions.length; i++) {
   var ext = bonusExtensions[i];
-  GM_addStyle(".monster.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_monster.png')}");
-  GM_addStyle(".spell.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_spell.png')}");
+  GM_addStyle(".monster.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_monster.png');}");
+  GM_addStyle(".spell.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_spell.png');}");
 }
 
-GM_addStyle(".card.ext_DDLC .cardBackground {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_background.png')}");
+GM_addStyle(".card.ext_DDLC .cardBackground {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_background.png'); top: 7px; height: 231px;}");
 
 function AppendCustomCard(container, card) {
     var html$ = window.appendCard(container, card);
     html$.addClass("ext_" + card.extension);
-    html$.find(".cardImage").css('background', "#000 url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
+    html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
     html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '_' + card.rarity + '.png\') no-repeat');
 }
 
