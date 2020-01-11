@@ -8,16 +8,18 @@
 // @exclude      https://*.undercards.net/*/*
 // @grant        none
 
+// @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/Events.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/Utility.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/TextLibrary.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/CardIntroSongManager.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/SoulDisplay.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/ArtifactDisplay.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/Localization.js
+// @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/CustomCards.js
 
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/PageSpecific/Play.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/PageSpecific/Packs.js
-/// @require     file:///D:/Undercards/PrettCards_Git/prettycards/PageSpecific/Artifacts.js
+// @require     file:///D:/Undercards/PrettCards_Git/prettycards/PageSpecific/Artifacts.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/PageSpecific/Decks.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/PageSpecific/Game.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/PageSpecific/GamesList.js

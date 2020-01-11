@@ -9,12 +9,14 @@
 // @exclude      https://*.undercards.net/*/*
 // @grant        none
 
+// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/Events.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/Utility.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/TextLibrary.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/CardIntroSongManager.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/SoulDisplay.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/ArtifactDisplay.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/Localization.js
+// @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/Libraries/CustomCards.js
 
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Play.js
 // @require      https://raw.githubusercontent.com/CMD-God/prettycards/master/PageSpecific/Packs.js

@@ -306,9 +306,8 @@ onPage("Packs", function() {
     test_button.test_JSON = test_JSON;
 	//AddTooltip(test_button, '<span class="DETERMINATION">THIS IS A TEST</span>', 2)
 	setTimeout( function () {
-        var custom_card_JSON = '{"attack":1,"hp":1,"maxHp":1,"originalAttack":1,"originalHp":1,"dodge":0,"thorns":0,"armor":0,"paralyzed":0,"silence":false,"kr":0,"cantAttack":false,"charge":false,"taunt":false,"ranged":false,"invulnerable":false,"haste":false,"transparency":false,"anotherChance":false,"candy":false,"id":2000,"fixedId":2000,"typeCard":0,"name":"Lemon Bread","image":"Lemon_Bread","cost":6,"rarity":"COMMON","originalCost":6,"shiny":false,"quantity":1,"extension":"BASE","tribes":["CHIBI"],"selectCards":[],"ownerId":0,"imageExtension":"png"}';
-        window.appendCard($(document.body), JSON.parse(custom_card_JSON));
-    }, 200);
+        AppendCustomCard($(document.body), window.getCard(2000));
+    }, 2000);
     ///////////////
 
     var list = document.querySelectorAll(".mainContent br");

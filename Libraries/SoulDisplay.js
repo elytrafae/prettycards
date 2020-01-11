@@ -17,30 +17,18 @@ window.soulInfo = function(soul_name) {
 	GetSoulData(soul_name);
 }
 
-function GetSoulCards() {
+underscript.eventManager.on('CardsLoad', function() {
 	soulCards = {};
-	if (window.allCards != undefined) {
-		if (allCards.length > 0) {
-			for (var i=0; i < allCards.length; i++) {
-				var card = allCards[i];
-				if (card.soul) {
-					if (!soulCards[card.soul.name]) {
-						soulCards[card.soul.name] = [];
-					}
-					soulCards[card.soul.name].push(card);
-				}
+	for (var i=0; i < allCards.length; i++) {
+		var card = allCards[i];
+		if (card.soul) {
+			if (!soulCards[card.soul.name]) {
+				soulCards[card.soul.name] = [];
 			}
-			//console.log("soulCards: ", soulCards);
-		} else {
-			console.log("Cards Not Fetched yet. Retry in 1 second.");
-			setTimeout(GetSoulCards, 1000);
+			soulCards[card.soul.name].push(card);
 		}
-	} else {
-		console.log("This page does not handle cards!");
 	}
-}
-
-GetSoulCards();
+});
 
 GM_addStyle(".PrettyCards_SoulImage {width: 5em;}")
 
@@ -203,4 +191,3 @@ if (lastOpenedDialog !== null) {
                         lastOpenedDialog.close();
                     }
 */
-
