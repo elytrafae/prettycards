@@ -15,7 +15,7 @@ onPage("Decks", function() {
 	})
 })*/
 
-onPage("Decks", function() {
+underscript.onPage("Decks", function() {
     var soulSelect = document.getElementById("selectSouls");
     CustomizeSoulSelectObj(soulSelect);
     document.getElementById("soulInfo").style.display = "none";

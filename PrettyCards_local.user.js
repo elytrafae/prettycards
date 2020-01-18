@@ -8,6 +8,7 @@
 // @exclude      https://*.undercards.net/*/*
 // @grant        none
 
+// @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/UnderscriptChecker.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/Events.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/Utility.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/TextLibrary.js
@@ -35,5 +36,5 @@
 (function() {
     'use strict';
 
-    
+
 })();

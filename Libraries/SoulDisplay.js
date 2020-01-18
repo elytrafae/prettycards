@@ -17,12 +17,12 @@ window.soulInfo = function(soul_name) {
 	GetSoulData(soul_name);
 }
 
-underscript.eventManager.on('CardsLoad', function() {
+PrettyCards_plugin.events.on('CardsLoad', function() {
 	soulCards = {};
 	for (var i=0; i < allCards.length; i++) {
 		var card = allCards[i];
 		if (card.soul) {
-			if (!soulCards[card.soul.name]) {
+			if (typeof(soulCards[card.soul.name]) === "undefined" || !soulCards[card.soul.name]) {
 				soulCards[card.soul.name] = [];
 			}
 			soulCards[card.soul.name].push(card);

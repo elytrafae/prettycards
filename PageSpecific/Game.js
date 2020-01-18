@@ -12,7 +12,7 @@ onPage("Game", function() {
     }, 12000);
 })*/
 
-onPage("Game", function() {
+underscript.onPage("Game", function() {
     setTimeout( function() {
 		var info1 = document.getElementById("enemyUsername");
         console.log(info1);

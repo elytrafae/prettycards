@@ -5,7 +5,7 @@ function _GetCards() {
 	if (window.allCards != undefined) {
 		if (allCards.length > 0) {
 			console.log("Calling CardsLoad event!");
-			underscript.eventManager.emit('CardsLoad', {allCards: window.allCards});
+			PrettyCards_plugin.events.emit('CardsLoad', {allCards: window.allCards});
 		} else {
 			console.log("Cards Not Fetched yet. Retry in 0.5 seconds.");
 			setTimeout(_GetCards, 500);

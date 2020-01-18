@@ -1,4 +1,4 @@
-onPage("Play", function() {
+underscript.onPage("Play", function() {
 	console.log("PrettyCards: Playing");
 	var mainCont = document.getElementsByClassName("mainContent")[0];
 	//console.log(mainCont);

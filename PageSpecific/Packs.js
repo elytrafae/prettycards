@@ -53,7 +53,7 @@ window.openPacks = function(type, _count) {
                     results.list.push(rar[key]);
                 }
             }
-            //console.log(results);
+            console.log(results);
             //console.log(JSON.stringify(results));
             showCards(results);
         }
@@ -294,7 +294,7 @@ function cardOpenUpdate() {
 
 var bg, pack_cont, pack, pack_count, pack_shard1, pack_shard2, all_cards_cont;
 
-onPage("Packs", function() {
+underscript.onPage("Packs", function() {
     add_Packs_CSS();
 
     /// For testing
@@ -306,7 +306,8 @@ onPage("Packs", function() {
     test_button.test_JSON = test_JSON;
 	//AddTooltip(test_button, '<span class="DETERMINATION">THIS IS A TEST</span>', 2)
 	setTimeout( function () {
-        AppendCustomCard($(document.body), window.getCard(2000));
+        console.log($(document.body).append);
+        appendCard(window.getCard(2000), $(document.body));
     }, 2000);
     ///////////////
 
