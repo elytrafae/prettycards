@@ -2,6 +2,7 @@
 
 if (settings.easter_egg_cards.value()) {
   var bonusExtensions = ["DDLC"];
+  var bonusTribes = ["CHIBI"];
 
   GM_addStyle(".cardImage {background-size:cover!important}");
 
@@ -24,6 +25,15 @@ if (settings.easter_egg_cards.value()) {
       if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
         html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '_' + card.rarity + '.png\') no-repeat');
       };
+      var tribe_elements = html$.find(".cardTribes").children();
+      console.log("tribe elements: ", tribe_elements);
+      for (var i=0; i < card.tribes.length; i++) {
+        var tribe = card.tribes[i];
+        if (bonusTribes.includes(tribe)) {
+          console.log(tribe, " is a custom tribe!");
+          tribe_elements[i].src = "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/" + tribe + ".png";
+        }
+      }
     }
   });
 
