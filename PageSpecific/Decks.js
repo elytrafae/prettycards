@@ -16,7 +16,9 @@ onPage("Decks", function() {
 })*/
 
 underscript.onPage("Decks", function() {
+  if (settings.replace_soul_selection.value()) {
     var soulSelect = document.getElementById("selectSouls");
     CustomizeSoulSelectObj(soulSelect);
     document.getElementById("soulInfo").style.display = "none";
+  }
 })

@@ -25,6 +25,25 @@ PrettyCards_plugin = underscript.plugin("PrettyCards");
 
 var settings = [];
 settings.packs = PrettyCards_plugin.settings().add({
-  key: 'Disable Fancy Pack Opening Animation',
+  'key': 'packs_page',
+  'name': 'Enable Fancy Packs Page', // Name in settings page
+  'type': 'boolean',
+  'refresh': true, // true to add note "Will require you to refresh the page"
+  'default': true, // default value
 });
-console.log(settings.packs.value());
+
+settings.replace_soul_selection = PrettyCards_plugin.settings().add({
+  'key': 'replace_soul_selection',
+  'name': 'Replace Soul Selection', // Name in settings page
+  'type': 'boolean',
+  'refresh': true, // true to add note "Will require you to refresh the page"
+  'default': true, // default value
+});
+
+settings.easter_egg_cards = PrettyCards_plugin.settings().add({
+  'key': 'enable_easter_egg_cards',
+  'name': 'Enable Custom Easter Egg Cards (Crossover Cards Created By Me)', // Name in settings page
+  'type': 'boolean',
+  'refresh': true, // true to add note "Will require you to refresh the page"
+  'default': false, // default value
+});
