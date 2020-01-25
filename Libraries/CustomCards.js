@@ -4,8 +4,8 @@ if (settings.easter_egg_cards.value()) {
   var bonusExtensions = ["DDLC"];
   var bonusTribes = ["CHIBI", "DOKI", "CHRSPELL"];
 
-  GM_addStyle(".cardImage {background-size:cover!important}");
-  GM_addStyle(".cardRarity {background-size:cover!important}")
+  GM_addStyle(".cardImage {background-size:contain!important; background-position: center!important;}");
+  GM_addStyle(".cardRarity {background-size:contain!important; background-position: center!important;}")
 
   for (var i=0; i < bonusExtensions.length; i++) {
     var ext = bonusExtensions[i];
