@@ -21,7 +21,7 @@ $.i18n().load( {
 			['card-name-' + (customCardsStart+7)] : 'Yuri',
 			['card-'+ (customCardsStart+7)] : 'Whenever this survives {{DMG}}, give this +1 {{HP}}. {{KW:SUICIDE}}: {{KW:PARALYZE}} all monsters on the board.',
 			['card-name-' + (customCardsStart+8)] : 'Monika',
-			['card-'+ (customCardsStart+8)] : '{{KW:MAGIC}}: Kill an ally {{TRIBE:DOKI|1}} to summon an exact copy of this card. {{KW:DUST}}: Add another random {{TRIBE:DOKI|1}} to your hand.',
+			['card-'+ (customCardsStart+8)] : '{{KW:MAGIC}}: Kill an ally {{TRIBE:DOKI|1}} to summon a base copy of this card. {{KW:DUST}}: Add another random {{TRIBE:DOKI|1}} to your hand with -2 {{COST}}.',
 			['card-name-' + (customCardsStart+9)] : 'Protagonist',
 			['card-'+ (customCardsStart+9)] : '{{KW:TAUNT}}. Whenever a {{KW:SUICIDE}} effect is activated, add a 1/1 copy of the triggering monster into your deck and give it +1/+1 for every card in your hand.',
 			['card-name-' + (customCardsStart+10)] : 'Just Monika',

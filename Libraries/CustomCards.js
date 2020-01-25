@@ -208,11 +208,11 @@ if (settings.easter_egg_cards.value()) {
                 imageExtension : "png"
             },
             {
-                  attack : 2,
-                  hp : 4,
-                  maxHp : 4,
-                  originalAttack : 2,
-                  originalHp : 4,
+                  attack : 3,
+                  hp : 3,
+                  maxHp : 3,
+                  originalAttack : 3,
+                  originalHp : 3,
                   dodge : 0,
                   thorns : 0,
                   armor : 0,
@@ -246,11 +246,11 @@ if (settings.easter_egg_cards.value()) {
                   imageExtension : "png"
               },
               {
-                    attack : 2,
-                    hp : 5,
-                    maxHp : 5,
-                    originalAttack : 2,
-                    originalHp : 5,
+                    attack : 3,
+                    hp : 4,
+                    maxHp : 4,
+                    originalAttack : 3,
+                    originalHp : 4,
                     dodge : 0,
                     thorns : 0,
                     armor : 0,
