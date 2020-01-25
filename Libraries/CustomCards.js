@@ -5,6 +5,7 @@ if (settings.easter_egg_cards.value()) {
   var bonusTribes = ["CHIBI"];
 
   GM_addStyle(".cardImage {background-size:cover!important}");
+  GM_addStyle(".cardRarity {background-size:cover!important}")
 
   for (var i=0; i < bonusExtensions.length; i++) {
     var ext = bonusExtensions[i];
@@ -21,16 +22,13 @@ if (settings.easter_egg_cards.value()) {
     if (card.fixedId >= customCardsStart) {
       html$.addClass("ext_" + card.extension);
       html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
-      console.log("card extension", card.extension);
       if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
-        html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '_' + card.rarity + '.png\') no-repeat');
+        html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
       };
       var tribe_elements = html$.find(".cardTribes").children();
-      console.log("tribe elements: ", tribe_elements);
       for (var i=0; i < card.tribes.length; i++) {
         var tribe = card.tribes[i];
         if (bonusTribes.includes(tribe)) {
-          console.log(tribe, " is a custom tribe!");
           tribe_elements[i].src = "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/" + tribe + ".png";
         }
       }
