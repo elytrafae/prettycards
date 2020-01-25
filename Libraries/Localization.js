@@ -24,7 +24,7 @@ $.i18n().load( {
 			['card-'+ (customCardsStart+8)] : '{{KW:MAGIC}}: Kill an ally {{TRIBE:DOKI|1}} to summon a base copy of this card. {{KW:DUST}}: Add another random {{TRIBE:DOKI|1}} to your hand with -2 {{COST}}.',
 			['card-name-' + (customCardsStart+9)] : 'Protagonist',
 			['card-'+ (customCardsStart+9)] : '{{KW:TAUNT}}. Whenever a {{KW:SUICIDE}} effect is activated, add a 1/1 copy of the triggering monster into your deck and give it +1/+1 for every card in your hand.',
-			['card-name-' + (customCardsStart+10)] : 'Just Monika',
+			['card-name-' + (customCardsStart+10)] : '{{PLURAL:$1|Just Monika|Just Monikas}}',
 			['card-'+ (customCardsStart+10)] : '{{KW:MAGIC}}: Add all the {{TRIBE:CHRSPELL|2}} to your deck. {{KW:SUICIDE}} effects trigger an additional time.',
 			['card-name-' + (customCardsStart+11)] : 'Sayori.chr',
 			['card-'+ (customCardsStart+11)] : '{{KW:TURBO}}: Remove all negative effects from ally monsters, apply them to the monsters in front of them, discard this and draw a card.',
@@ -33,7 +33,7 @@ $.i18n().load( {
 			['card-name-' + (customCardsStart+13)] : 'Yuri.chr',
 			['card-'+ (customCardsStart+13)] : '{{KW:TURBO}}: Kill the enemy monster with the lowest HP, discard this and draw a card.',
 			['card-name-' + (customCardsStart+14)] : 'Monika.chr',
-			['card-'+ (customCardsStart+14)] : '{{KW:TURBO}}: Add a {{CARD:' + (customCardsStart+10) + '}} to your deck, discard this and draw a card.',
+			['card-'+ (customCardsStart+14)] : '{{KW:TURBO}}: Send a random ally and enemy from the board to their owner\'s hands, discard this and draw a card.',
 		}
 } );
 
