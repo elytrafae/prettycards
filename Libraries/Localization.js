@@ -49,6 +49,8 @@ $.i18n().load( {
 			['card-'+ (customCardsStart+20)] : '{{KW:DODGE}} (2). {{KW:DUST}}: Add the captured monster to your hand with -3 {{COST}}.',
 			['card-name-' + (customCardsStart+21)] : 'Hat Attack',
 			['card-'+ (customCardsStart+21)] : 'Add {{ARTIFACT:'+ (customArtifactStart) +'}} artifact.',
+			['card-name-' + (customCardsStart+22)] : 'Flames Of Envy',
+			['card-'+ (customCardsStart+22)] : 'Give a monster +3 {{ATK}} for this turn.',
 		}
 } );//{{ARTIFACT:25}}
 
