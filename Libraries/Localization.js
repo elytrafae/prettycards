@@ -1,5 +1,6 @@
 
 const customCardsStart = 2000;
+const customArtifactStart = 100;
 
 // Cards
 $.i18n().load( {
@@ -34,15 +35,38 @@ $.i18n().load( {
 			['card-'+ (customCardsStart+13)] : '{{KW:TURBO}}: Kill the enemy monster with the lowest HP, discard this and draw a card.',
 			['card-name-' + (customCardsStart+14)] : 'Monika.chr',
 			['card-'+ (customCardsStart+14)] : '{{KW:TURBO}}: Send a random ally and enemy from the board to their owner\'s hands, discard this and draw a card.',
+			['card-name-' + (customCardsStart+15)] : '{{PLURAL:$1|Melissa Christmas|Melissa Christmases}}',
+			['card-'+ (customCardsStart+15)] : '{{KW:TURN-START}}: Look at {{TRIBE:MELISSAATTACK|2}} and choose one to add to your hand. {{TRIBE:MELISSAATTACK|2}} {{COST}} 2 less.',
+			['card-name-' + (customCardsStart+16)] : 'Green Potion',
+			['card-'+ (customCardsStart+16)] : 'Heal a {{DMG}}-ed ally monster by 5 HP. Deal the excess healing as {{DMG}} to the opponent.',
+			['card-name-' + (customCardsStart+17)] : 'Red Potion',
+			['card-'+ (customCardsStart+17)] : 'Deal 2 {{DMG}} 3 times to a monster.',
+			['card-name-' + (customCardsStart+18)] : 'Cauldron',
+			['card-'+ (customCardsStart+18)] : '{{KW:TAUNT}}. {{KW:DISARMED}}. {{KW:DODGE}} (1). {{KW:DUST}}: Deal this\'s {{ATK}} as {{DMG}} to the killer.',
+			['card-name-' + (customCardsStart+19)] : 'Frogify',
+			['card-'+ (customCardsStart+19)] : 'Summon an enemy {{CARD:' + (customCardsStart+20) + '|1}} and capture a selected enemy monster into it.',
+			['card-name-' + (customCardsStart+20)] : 'Hopping Frog',
+			['card-'+ (customCardsStart+20)] : '{{KW:DODGE}} (2). {{KW:DUST}}: Add the captured monster to your hand with -3 {{COST}}.',
+			['card-name-' + (customCardsStart+21)] : 'Hat Attack',
+			['card-'+ (customCardsStart+21)] : 'Add {{ARTIFACT:'+ (customArtifactStart) +'}} artifact.',
 		}
-} );
+} );//{{ARTIFACT:25}}
 
 // Tribes
 $.i18n().load( {
 	en: {
 			'tribe-chibi' : '{{PLURAL:$1|Chibi|Chibis}}',
 			'tribe-doki' : '{{PLURAL:$1|Doki|Dokis}}',
-			'tribe-chrspell' : '{{PLURAL:$1|.chr spell|.chr spells}}'
+			'tribe-chrspell' : '{{PLURAL:$1|.chr spell|.chr spells}}',
+			'tribe-melissaattack' : '{{PLURAL:$1|Melissa\'s Attack|Melissa\'s Attacks}}'
+		}
+} );
+
+// Artifacts
+$.i18n().load( {
+	en: {
+			['artifact-name-' + (customArtifactStart)] : 'Melissa\'s Hat',
+			['artifact-' + (customArtifactStart)] : 'Whenever a spell is played, deal 1 {{DMG}} to a random enemy monster. If it was a {{TRIBE:MELISSAATTACK}}, give it -1 {{ATK}}, too.',
 		}
 } );
 
