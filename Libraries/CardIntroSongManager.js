@@ -4,7 +4,9 @@ var numberOfSongsCardsHave = { //How many Jingles does a Card have in my Git Fol
 	Asgore : 3,
 	Sans : 5,
 	"The Heroine" : 5,
-	Susie : 2
+	Susie : 2,
+
+	"Melissa Christmas" : 3
 };
 
 var israndom = true; //Sould the Jingle be selected randomly or based on how many times was the card played?

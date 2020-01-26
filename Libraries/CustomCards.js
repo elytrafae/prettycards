@@ -31,8 +31,8 @@ if (settings.easter_egg_cards.value()) {
       var cardNameDiv$ = html$.find('.cardName div');
       var cardDescDiv$ = html$.find('.cardDesc div');
 
-      cardNameDiv$.css('font-size', getResizedFontSize(cardNameDiv$, 25));
-      cardDescDiv$.css('font-size', getResizedFontSize(cardDescDiv$, 81));
+      //cardNameDiv$.css('font-size', getResizedFontSize(cardNameDiv$, 25));
+      //cardDescDiv$.css('font-size', getResizedFontSize(cardDescDiv$, 81));
       var tribe_elements = html$.find(".cardTribes").children();
       for (var i=0; i < card.tribes.length; i++) {
         var tribe = card.tribes[i];
