@@ -606,7 +606,7 @@ if (settings.easter_egg_cards.value()) {
       maxHp : 6,
       originalAttack : 4,
       originalHp : 6,
-      dodge : 1,
+      dodge : 0,
       thorns : 0,
       armor : 0,
       paralyzed : 0,

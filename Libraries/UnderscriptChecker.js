@@ -42,8 +42,16 @@ settings.replace_soul_selection = PrettyCards_plugin.settings().add({
 
 settings.easter_egg_cards = PrettyCards_plugin.settings().add({
   'key': 'enable_easter_egg_cards',
-  'name': 'Enable Custom Easter Egg Cards (Crossover Cards Created By Me)', // Name in settings page
+  'name': 'Enable Custom Easter Egg Cards', // Name in settings page
   'note': 'Crossover cards created by me.<br>Warning! Doesn\'t always work (for some reason)!',
+  'type': 'boolean',
+  'refresh': true, // true to add note "Will require you to refresh the page"
+  'default': false, // default value
+});
+
+settings.debug_mode = PrettyCards_plugin.settings().add({
+  'key': 'debug_mode',
+  'name': 'Enable Debug Mode', // Name in settings page
   'type': 'boolean',
   'refresh': true, // true to add note "Will require you to refresh the page"
   'default': false, // default value
