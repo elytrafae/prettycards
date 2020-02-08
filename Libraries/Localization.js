@@ -36,11 +36,11 @@ $.i18n().load( {
 			['card-name-' + (customCardsStart+14)] : 'Monika.chr',
 			['card-'+ (customCardsStart+14)] : '{{KW:TURBO}}: Send a random ally and enemy from the board to their owner\'s hands, discard this and draw a card.',
 			['card-name-' + (customCardsStart+15)] : '{{PLURAL:$1|Melissa Christmas|Melissa Christmases}}',
-			['card-'+ (customCardsStart+15)] : '{{KW:TURN-START}}: Look at {{TRIBE:MELISSAATTACK|2}} and choose one to add to your hand. {{TRIBE:MELISSAATTACK|2}} {{COST}} 2 less.',
+			['card-'+ (customCardsStart+15)] : '{{KW:MAGIC}} and {{KW:TURN-START}}: Look at {{TRIBE:MELISSAATTACK|2}} and choose one to add to your hand. {{TRIBE:MELISSAATTACK|2}} {{COST}} 2 less.',
 			['card-name-' + (customCardsStart+16)] : 'Green Potion',
 			['card-'+ (customCardsStart+16)] : 'Heal a {{DMG}}-ed ally monster by 5 HP. Deal the excess healing as {{DMG}} to the opponent.',
 			['card-name-' + (customCardsStart+17)] : 'Red Potion',
-			['card-'+ (customCardsStart+17)] : 'Deal 2 {{DMG}} 3 times to a monster.',
+			['card-'+ (customCardsStart+17)] : 'Deal 2 {{DMG}} to 4 random enemy monsters.',
 			['card-name-' + (customCardsStart+18)] : 'Cauldron',
 			['card-'+ (customCardsStart+18)] : '{{KW:TAUNT}}. {{KW:DISARMED}}. {{KW:DODGE}} (1). {{KW:DUST}}: Deal this\'s {{ATK}} as {{DMG}} to the killer.',
 			['card-name-' + (customCardsStart+19)] : 'Frogify',
@@ -50,7 +50,7 @@ $.i18n().load( {
 			['card-name-' + (customCardsStart+21)] : 'Hat Attack',
 			['card-'+ (customCardsStart+21)] : 'Add {{ARTIFACT:'+ (customArtifactStart) +'}} artifact.',
 			['card-name-' + (customCardsStart+22)] : 'Flames Of Envy',
-			['card-'+ (customCardsStart+22)] : 'Give a monster +3 {{ATK}} for this turn.',
+			['card-'+ (customCardsStart+22)] : 'Give a monster +4 {{ATK}} for this turn.',
 		}
 } );//{{ARTIFACT:25}}
 
