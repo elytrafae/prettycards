@@ -1,23 +1,25 @@
 
 
 function GM_addStyle(css) {
-  const style = document.getElementById("GM_addStyleBy8626") || (function() {
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.id = "GM_addStyleBy8626";
-    document.head.appendChild(style);
-    return style;
-  })();
-  const sheet = style.sheet;
-  sheet.insertRule(css, (sheet.rules || sheet.cssRules || []).length);
+    const style = document.getElementById("GM_addStyleBy8626") || (function () {
+            const style = document.createElement('style');
+            style.type = 'text/css';
+            style.id = "GM_addStyleBy8626";
+            document.head.appendChild(style);
+            return style;
+        })();
+    const sheet = style.sheet;
+    sheet.insertRule(css, (sheet.rules || sheet.cssRules || []).length);
 }
 
-function FindByAttributeValue(attribute, value, element_type)    {
-  element_type = element_type || "*";
-  var All = document.getElementsByTagName(element_type);
-  for (var i = 0; i < All.length; i++)       {
-    if (All[i].getAttribute(attribute) == value) { return All[i]; }
-  }
+function FindByAttributeValue(attribute, value, element_type) {
+    element_type = element_type || "*";
+    var All = document.getElementsByTagName(element_type);
+    for (var i = 0; i < All.length; i++) {
+        if (All[i].getAttribute(attribute) == value) {
+            return All[i];
+        }
+    }
 }
 
 function FindAllByExistingAttribute(attribute, element_type) {
@@ -25,7 +27,9 @@ function FindAllByExistingAttribute(attribute, element_type) {
     var All = document.getElementsByTagName(element_type);
     var match = [];
     for (var i = 0; i < All.length; i++) {
-        if ((All[i].getAttribute(attribute) != null) && (All[i].getAttribute(attribute) != undefined)) { match.push(All[i]); }
+        if ((All[i].getAttribute(attribute) != null) && (All[i].getAttribute(attribute) != undefined)) {
+            match.push(All[i]);
+        }
     }
     return match;
 }
@@ -34,16 +38,17 @@ window.FindAllByExistingAttribute = FindAllByExistingAttribute;
 
 // Function detecting on which page are we (Please Don't be mad at me, FiledMaster . . . )
 function onPage(name, fn) {
-  var length = location.pathname.length, temp;
-  if ((temp = location.pathname.indexOf(".")) === -1 && (temp = location.pathname.indexOf("/")) === -1) {
-    temp = null;
-  }
-  var r = location.pathname.substring(1, temp || length) === name;
-  if (typeof fn === "function" && r) {
-	console.log("PrettyCards Page: " + name);
-    fn();
-  }
-  return r;
+    var length = location.pathname.length,
+    temp;
+    if ((temp = location.pathname.indexOf(".")) === -1 && (temp = location.pathname.indexOf("/")) === -1) {
+        temp = null;
+    }
+    var r = location.pathname.substring(1, temp || length) === name;
+    if (typeof fn === "function" && r) {
+        console.log("PrettyCards Page: " + name);
+        fn();
+    }
+    return r;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -52,13 +57,13 @@ function onPage(name, fn) {
 // ALGORYTHMS! . . . MATH!
 
 // Converts from degrees to radians.
-Math.radians = function(degrees) {
-  return degrees * Math.PI / 180;
+Math.radians = function (degrees) {
+    return degrees * Math.PI / 180;
 };
 
 // Converts from radians to degrees.
-Math.degrees = function(radians) {
-  return radians * 180 / Math.PI;
+Math.degrees = function (radians) {
+    return radians * 180 / Math.PI;
 };
 
 function getRandomInt(min, max) {
@@ -72,41 +77,41 @@ function getRandomInt(min, max) {
 // Ok, these ones are mine!
 
 function loadCSSFromLink(url) {
-	e = document.createElement("link");
+    e = document.createElement("link");
+	e.rel  = 'stylesheet';
+	e.type = 'text/css';
 	e.href = url;
-	e.setAttribute("rel", "stylesheet");
-	e.setAttribute("type", "text/css");
 	document.head.appendChild(e);
 }
 
 function loadScript(lnk, callback) {
-	var e = document.createElement("script");
-	e.src = "https://cdn.jsdelivr.net/gh/CMD-God/prettycards@"+ PrettyCardsVer +"/PageSpecific/" + lnk + ".js";
-	e.onload = callback || function() {};
-	document.body.appendChild(e);
+    var e = document.createElement("script");
+    e.src = "https://cdn.jsdelivr.net/gh/CMD-God/prettycards@" + PrettyCardsVer + "/PageSpecific/" + lnk + ".js";
+    e.onload = callback || function () {};
+    document.body.appendChild(e);
 }
-
 
 var updateFunctions = [];
 
 function Update() {
-    updateFunctions.forEach((func) => {func()});
+    updateFunctions.forEach((func) => {
+        func()
+    });
     window.requestAnimationFrame(Update);
 }
 
 window.requestAnimationFrame(Update);
 
-
 function CreateEmptyPopUp(bg_color, isBox) {
-	var cover = document.createElement("DIV");
-	cover.className = "PrettyCards_popup";
-	cover.style["background-color"] = bg_color || "rgba(0, 0, 0, 0.5)";
+    var cover = document.createElement("DIV");
+    cover.className = "PrettyCards_popup";
+    cover.style["background-color"] = bg_color || "rgba(0, 0, 0, 0.5)";
 
-	var child = document.createElement("DIV");
-	child.className = "PrettyCards_popupChild" + (isBox ? " popupBox" : "");
-	cover.appendChild(child);
+    var child = document.createElement("DIV");
+    child.className = "PrettyCards_popupChild" + (isBox ? " popupBox" : "");
+    cover.appendChild(child);
 
-	document.body.appendChild(cover);
+    document.body.appendChild(cover);
 }
 
 GM_addStyle(".PrettyCards_tooltip {position: relative;}");
@@ -120,22 +125,22 @@ GM_addStyle(".PrettyCards_tooltip .tooltiptext.side4 {transform: translate(0%, -
 
 GM_addStyle("@keyframes PrettyCards_Tooltip {0% {opacity: 0;} 100% {opacity: 1;}}");
 function AddTooltip(ele, html, side) { //side: 1-up, 2-right, 3-down, 4-left
-	ele.className += " PrettyCards_tooltip";
-	var tip = document.createElement("DIV");
-	tip.className = "tooltiptext side" + (side || 1);
-	ele.appendChild(tip);
-	if (typeof(html) == "string") {
-		tip.innerHTML = html;
-	} else {
-		tip.appendChild(html);
-	}
-	//ele.appendChild(tipcont);
+    ele.className += " PrettyCards_tooltip";
+    var tip = document.createElement("DIV");
+    tip.className = "tooltiptext side" + (side || 1);
+    ele.appendChild(tip);
+    if (typeof(html) == "string") {
+        tip.innerHTML = html;
+    } else {
+        tip.appendChild(html);
+    }
+    //ele.appendChild(tipcont);
 }
 
 ////////////////////////
 
 // Function Replaced so no Undefineds would show up!
-window.artifactsInfo = function(box) {
+window.artifactsInfo = function (box) {
     if ($(box).children().length > 0) {
         var text = "";
         $(box).children().each(function () {
@@ -156,16 +161,17 @@ window.artifactsInfo = function(box) {
             title: $.i18n('dialog-information'),
             message: text,
             buttons: [{
-                label: $.i18n('dialog-ok'),
-                cssClass: 'btn-primary',
-                action: function (dialog) {
-                    dialog.close();
+                    label: $.i18n('dialog-ok'),
+                    cssClass: 'btn-primary',
+                    action: function (dialog) {
+                        dialog.close();
+                    }
                 }
-            }]
+            ]
         });
     }
 }
 //////////////////////////////////////////////////////////////////////
 
-var temp_func = window._PrettyCardsStart || function() {};
+var temp_func = window._PrettyCardsStart || function () {};
 temp_func();

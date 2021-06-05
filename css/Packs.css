@@ -1,0 +1,11 @@
+
+.PrettyCards_PacksRow {
+	text-align: center;
+	width: 100%;
+}
+
+.PrettyCards_PackCell {
+	display: inline-block;
+	width: 32%;
+	text-align: center;
+}

@@ -61,7 +61,7 @@ function _SoulClickFunc(e) {
     //console.log(list);
     if (list) {
         for (var i=0; i < list.length; i++) {
-            window.appendCard(card_cont, list[i]);
+            window.appendCard( list[i], card_cont );
         }
     }
     //console.log(card_cont);

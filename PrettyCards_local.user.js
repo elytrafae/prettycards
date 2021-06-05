@@ -8,6 +8,10 @@
 // @exclude      https://*.undercards.net/*/*
 // @grant        none
 
+// @resource   PACKS_CSS file:///D:/Undercards/PrettCards_Git/prettycards/css/Packs.css
+// @grant      GM_getResourceText
+// @grant      GM_addStyle
+
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/UnderscriptChecker.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/Events.js
 // @require     file:///D:/Undercards/PrettCards_Git/prettycards/Libraries/Utility.js
@@ -33,8 +37,12 @@
 
 
 
+const my_css = GM_getResourceText("PACKS_CSS");
+console.log("CSS Loaded: ", my_css);
+GM_addStyle(my_css);
+
 (function() {
     'use strict';
-
+	
 
 })();

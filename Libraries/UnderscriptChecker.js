@@ -23,7 +23,7 @@ if (typeof(underscript) === "undefined") {
 PrettyCards_plugin = underscript.plugin("PrettyCards");
 //console.log("Plugin: ", PrettyCards_plugin);
 
-var settings = [];
+settings = [];
 settings.packs = PrettyCards_plugin.settings().add({
   'key': 'packs_page',
   'name': 'Enable Fancy Packs Page', // Name in settings page
