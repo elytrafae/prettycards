@@ -63,14 +63,21 @@ for (var i=0; i < packs_data.length; i++) {
 function GenerateBuyRow(pack_data) {
 	return `
 		<input type="number" class="PrettyCards_PackBuyCount" data-packid="${pack_data.code_id}" value="1" min="1" pattern="[0-9]">
-		x <button class="PrettyCards_PackGBuy" data-packid="${pack_data.code_id}">Buy (<span class="PrettyCards_PackGPrice" data-packid="${pack_data.code_id}">100</span> <img src="images/icons/gold.png" class="height-16">)</button>
-		 <button class="PrettyCards_PackUcpBuy" data-packid="${pack_data.code_id}">Buy (<span class="ucp PrettyCards_PackUcpPrice" data-packid="${pack_data.code_id}">10</span> UCP)</button>
+		x <button class="PrettyCards_PackGBuy btn-primary" data-packid="${pack_data.code_id}">Buy (<span class="PrettyCards_PackGPrice" data-packid="${pack_data.code_id}">100</span> <img src="images/icons/gold.png" class="height-16">)</button>
+		 <button class="PrettyCards_PackUcpBuy btn-primary" data-packid="${pack_data.code_id}">Buy (<span class="ucp PrettyCards_PackUcpPrice" data-packid="${pack_data.code_id}">10</span> UCP)</button>
+	`;
+}
+
+function GenerateOpenRow(pack_data) {
+	return `
+		<input type="number" class="PrettyCards_PackOpenCount" data-packid="${pack_data.code_id}" value="1" min="1" pattern="[0-9]">
+		x <button class="PrettyCards_PackOpen btn-primary" data-packid="${pack_data.code_id}">Open <span class="PrettyCards_PackOpenCountButton" data-packid="${pack_data.code_id}">1</span></button>
 	`;
 }
 
 function GeneratePack(pack_data, pack_count) {
 	var buystr = (pack_data.does_exist && (pack_data.g_cost > -1)) ? GenerateBuyRow(pack_data) : "This pack cannot be bought.";
-	var openstr = pack_data.does_exist ? "yes" : "no";
+	var openstr = pack_data.does_exist ? GenerateOpenRow(pack_data) : "This pack cannot be opened.";
 	return `
 	<div class="PrettyCards_FloatingPack">
 		<img src="${pack_data.image}">
@@ -116,6 +123,16 @@ function ChangePrices(code_id, count) {
 	document.querySelector(".PrettyCards_PackUcpPrice[data-packid="+ code_id +"]").innerHTML = Math.min(count * data.ucp_cost, Math.floor(pagegetters.ucp/data.ucp_cost)*data.ucp_cost);
 }
 
+function ChangePackCountButton(code_id, count) {
+	count = Number(count);
+	console.log(count, code_id);
+	if (count == NaN) {
+		return;
+	}
+	var data = packs_data2[code_id];
+	document.querySelector(".PrettyCards_PackOpenCountButton[data-packid="+ code_id +"]").innerHTML = Math.min(count, 50);
+}
+
 function InitPacks() {
 	DeleteUglyPage();
 	
@@ -136,14 +153,17 @@ function InitPacks() {
 		var txt = GeneratePack(data);
 		document.querySelector(".PrettyCards_PackCell[data-packid="+ data.code_id +"]").innerHTML = txt;
 		console.log(packs_data[i], txt);
-		if (data.g_cost > -1) {
+		if (data.does_exist) {
+			document.querySelector(".PrettyCards_PackOpenCount[data-packid="+ data.code_id +"]").onchange = function(e) {SanitizeNumberInput(this);ChangePackCountButton(this.getAttribute("data-packid"), this.value)};
+			if (data.g_cost > -1) {
 			document.querySelector(".PrettyCards_PackBuyCount[data-packid="+ data.code_id +"]").onchange = function(e) {SanitizeNumberInput(this);ChangePrices(this.getAttribute("data-packid"), this.value)};
+			}
 		}
 	}
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@480a1ecd355d15a6eec631871f965c18bf6adf90/css/Packs.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c24dbbfdded645980f70657013dcba25fa12acb5/css/Packs.css");
 }
 
 console.log("InitPacks", InitPacks);
