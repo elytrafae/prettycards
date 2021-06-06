@@ -10,7 +10,7 @@ var packs_data = [
 	{
 		g_cost : 100,
 		ucp_cost : 10,
-		image: "",
+		image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack_old.png",
 		name: "Undertale Pack",
 		description: "Contains 4 random Undertale Cards.",
 		code_id: "Pack", // Open command: open + ID, Buy G command: add + ID, Buy UCP command: add + ID + Ucp
@@ -19,7 +19,7 @@ var packs_data = [
 	{
 		g_cost : 100,
 		ucp_cost : 10,
-		image: "",
+		image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack_old.png",
 		name: "Deltarune Pack",
 		description: "Contains 4 random Deltarune Cards.",
 		code_id: "DRPack",
@@ -28,7 +28,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image: "",
+		image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack_old.png",
 		name: "Shiny Pack",
 		description: "Contains 4 random Shiny Cards.",
 		code_id: "ShinyPack",
@@ -37,7 +37,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image: "",
+		image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack_old.png",
 		name: "Super Pack",
 		description: `Contains a random ${rarityIconsHTML.BASE.COMMON}/${rarityIconsHTML.DELTARUNE.COMMON}, ${rarityIconsHTML.BASE.RARE}/${rarityIconsHTML.DELTARUNE.RARE}, ${rarityIconsHTML.BASE.EPIC}/${rarityIconsHTML.DELTARUNE.EPIC} and ${rarityIconsHTML.BASE.LEGENDARY}/${rarityIconsHTML.DELTARUNE.LEGENDARY} card.`,
 		code_id: "SuperPack",
@@ -46,7 +46,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image: "",
+		image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack_old.png",
 		name: "Final Pack",
 		description: `Contains a random ${rarityIconsHTML.BASE.RARE}/${rarityIconsHTML.DELTARUNE.RARE}, ${rarityIconsHTML.BASE.EPIC}/${rarityIconsHTML.DELTARUNE.EPIC}, ${rarityIconsHTML.BASE.LEGENDARY}/${rarityIconsHTML.DELTARUNE.LEGENDARY} and ${rarityIconsHTML.BASE.DETERMINATION}/${rarityIconsHTML.DELTARUNE.DETERMINATION} card.`,
 		code_id: "FinalPack",
@@ -80,7 +80,7 @@ function GeneratePack(pack_data, pack_count) {
 	var openstr = pack_data.does_exist ? GenerateOpenRow(pack_data) : "This pack cannot be opened.";
 	return `
 	<div class="PrettyCards_FloatingPack">
-		<img src="${pack_data.image}">
+		<img class="PrettyCards_FloatingPackImage" src="${pack_data.image}">
 		<div class="PrettyCards_PackText">
 			<div class="PrettyCards_PackName">${pack_data.name}</div>
 			<div class="PrettyCards_PackDescription">${pack_data.description}</div>
@@ -133,6 +133,16 @@ function ChangePackCountButton(code_id, count) {
 	document.querySelector(".PrettyCards_PackOpenCountButton[data-packid="+ code_id +"]").innerHTML = Math.min(count, 50);
 }
 
+function onPackMouseOver(code_id) {
+	console.log("Mouse enter", code_id);
+	$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").slideDown( "slow", function() {});
+}
+
+function onPackMouseLeave(code_id) {
+	console.log("Mouse leave", code_id);
+	$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").slideUp( "slow", function() {});
+}
+
 function InitPacks() {
 	DeleteUglyPage();
 	
@@ -141,18 +151,25 @@ function InitPacks() {
 			<div class="PrettyCards_PackCell" data-packid="Pack"></div>
 			<div class="PrettyCards_PackCell" data-packid="DRPack"></div>
 		</div>
+		<div class="PrettyCards_PackSpacer"></div>
 		<div class="PrettyCards_PacksRow">
 			<div class="PrettyCards_PackCell" data-packid="ShinyPack"></div>
 			<div class="PrettyCards_PackCell" data-packid="SuperPack"></div>
 			<div class="PrettyCards_PackCell" data-packid="FinalPack"></div>
 		</div>
+		<div class="PrettyCards_PackSpacer"></div>
 	`
 	
 	for (var i=0; i < packs_data.length; i++) {
 		var data = packs_data[i];
 		var txt = GeneratePack(data);
-		document.querySelector(".PrettyCards_PackCell[data-packid="+ data.code_id +"]").innerHTML = txt;
-		console.log(packs_data[i], txt);
+		var pack_cell = document.querySelector(".PrettyCards_PackCell[data-packid="+ data.code_id +"]");
+		pack_cell.innerHTML = txt;
+		
+		pack_cell.onmouseover = function(e) {onPackMouseOver(this.getAttribute("data-packid"))};
+		pack_cell.onmouseleave = function(e) {onPackMouseLeave(this.getAttribute("data-packid"))};
+		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_PackText").slideUp(0);
+		
 		if (data.does_exist) {
 			document.querySelector(".PrettyCards_PackOpenCount[data-packid="+ data.code_id +"]").onchange = function(e) {SanitizeNumberInput(this);ChangePackCountButton(this.getAttribute("data-packid"), this.value)};
 			if (data.g_cost > -1) {
@@ -163,7 +180,7 @@ function InitPacks() {
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c24dbbfdded645980f70657013dcba25fa12acb5/css/Packs.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@e736689b245d086d5458b41873a4796d8360a616/css/Packs.css");
 }
 
 console.log("InitPacks", InitPacks);

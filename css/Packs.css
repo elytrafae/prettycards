@@ -8,6 +8,7 @@
 	display: inline-block;
 	width: 32%;
 	text-align: center;
+	position: relative;
 }
 
 .PrettyCards_PackBuyCount, .PrettyCards_PackOpenCount {
@@ -26,14 +27,20 @@
 
 .PrettyCards_PackText div {
 	margin-bottom: 8px;
-	display: none;
 }
 
-.PrettyCards_PackCell:hover .PrettyCards_PackText {
-	display: initial;
+.PrettyCards_PackText {
+	overflow-y: hidden;
+	position: absolute;
 }
 
-.PrettyCards_FloatingPack {
-	width: 100%;
+.PrettyCards_FloatingPackImage {
+	width: 60%;
 	margin: 0px;
+	position: relative;
+	top: 0px;
+}
+
+.PrettyCards_PackSpacer {
+	height: 15em;
 }
