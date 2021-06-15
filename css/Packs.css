@@ -1,4 +1,9 @@
 
+.PrettyCards_MainContainer {
+	width: 100%;
+	margin: 0px;
+}
+
 .PrettyCards_PacksRow {
 	text-align: center;
 	width: 100%;
@@ -32,15 +37,60 @@
 .PrettyCards_PackText {
 	overflow-y: hidden;
 	position: absolute;
+	width: 100%;
+}
+
+.PrettyCards_FloatingPack {
+	width: 100%;
+	margin: 0px;
+	position: relative;
+	top: 0px;
+	animation: upDown 1.5s alternate infinite ease-in-out;
 }
 
 .PrettyCards_FloatingPackImage {
 	width: 60%;
 	margin: 0px;
-	position: relative;
-	top: 0px;
+	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_mask.svg);
+}
+
+.PrettyCards_PackAmount {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	right: 0px;
+	text-align: center;
+	font-size: 4em;
+	color: gold;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 .PrettyCards_PackSpacer {
 	height: 15em;
+}
+
+.PrettyCards_HalfPackSpacer {
+	height: 7.5em;
+}
+
+.PrettyCards_ThirdPackSpacer {
+	height: 5em;
+}
+
+@keyframes upDown {
+  to { transform: translatey(-2em);}
+}
+
+.PrettyCards_PacksRow.PrettyCards_WideTemplate {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+}
+
+.PrettyCards_PacksRow.PrettyCards_WideTemplate .PrettyCards_PackCell {
+	width: 19%;
+}
+
+#cardsOpen {
+	display: none;
 }

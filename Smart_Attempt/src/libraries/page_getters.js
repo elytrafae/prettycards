@@ -10,6 +10,10 @@ class pagegetters {
 	static get ucp() {
 		return Number(document.getElementById("ucp").innerHTML);
 	}
+	
+	static GetNumberOfPacks(code_id) {
+		return Number(document.getElementById("nb" + code_id + "s").innerHTML);
+	}
 }
 
 console.log("Page Getters Loaded!", pagegetters);
