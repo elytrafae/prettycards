@@ -52,6 +52,12 @@
 	width: 60%;
 	margin: 0px;
 	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_mask.svg);
+	mask-position: center;
+	mask-size: cover;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 
 .PrettyCards_PackAmount {
@@ -63,6 +69,11 @@
 	font-size: 4em;
 	color: gold;
 	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.PrettyCards_InvisiblePack { /*Since the element does not stretch for the background, we are gonna force it to take up the right shape with an invisible version of the image!*/
+	width:100%;
+	opacity: 0;
 }
 
 .PrettyCards_PackSpacer {

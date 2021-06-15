@@ -51,7 +51,8 @@ class PacksPageTemplate {
 		<div class="PrettyCards_PackContainer">
 			<div class="PrettyCards_FloatingPack">
 				<div class="PrettyCards_FloatingPackImage" style="background-image: url(${pack_data.image})">
-						<div class="PrettyCards_PackAmount">${pack_data.amount}</div>
+					<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack_old.png" class="PrettyCards_InvisiblePack">
+					<div class="PrettyCards_PackAmount">${pack_data.amount}</div>
 				</div>
 			</div>
 			<div class="PrettyCards_PackText">
