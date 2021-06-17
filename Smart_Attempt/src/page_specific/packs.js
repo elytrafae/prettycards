@@ -8,6 +8,8 @@ import {NormalPacksTemplate} from "./../libraries/packs_page_templates/normal.js
 import {WidePacksTemplate} from "./../libraries/packs_page_templates/wide.js";
 import {ClassicPacksTemplate} from "./../libraries/packs_page_templates/classic.js";
 
+import {StartOpenPackAnimation} from "./../libraries/pack_open_anim_manager.js";
+
 var pagetemplates = [NormalPacksTemplate, WidePacksTemplate, ClassicPacksTemplate];
 
 var settingsoptions = [];
@@ -117,13 +119,15 @@ function deletUglyPage() { // Nothing personal.
 function InitPacks() {
 	
 	deletUglyPage();
-	document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div>";
+	document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
 
 	ChangeTemplate(settings.packs_page_template.value(), null);
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@424a670083bbbf121abe1e4a30460a3d0351b3c8/css/Packs.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@dedc90f4d941b86f15212799dd6bdfdd1b5241e1/css/Packs.css");
+	
+	setTimeout( function() {StartOpenPackAnimation(packs_data2.Pack);}, 1000);
 }
 
 console.log("InitPacks", InitPacks);

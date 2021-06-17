@@ -123,7 +123,7 @@ class PacksPageTemplate {
 		pack_cell.addEventListener( "mouseover", this.onPackMouseOver);
 		pack_cell.addEventListener( "mouseleave", this.onPackMouseLeave);
 		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_PackText").slideUp(0);
-		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_FloatingPackImage").css("animation-delay", (Math.random()*1.5) + "s");
+		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_FloatingPack").css("animation-delay", (-Math.random()*1.5) + "s");
 		if (data.does_exist) {
 			document.querySelector(".PrettyCards_PackOpenCount[data-packid="+ data.code_id +"]").onchange = this.onPackOpenCountChange;
 			if (data.g_cost > -1) {

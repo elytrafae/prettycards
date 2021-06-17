@@ -54,6 +54,9 @@
 	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_mask.svg);
 	mask-position: center;
 	mask-size: cover;
+	-webkit-mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_mask.svg);
+	-webkit-mask-position: center;
+	-webkit-mask-size: cover;
 	display: inline-block;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -104,4 +107,8 @@
 
 #cardsOpen {
 	display: none;
+}
+
+.PrettyCards_AnimationPack {
+	position: absolute;
 }
