@@ -1,16 +1,16 @@
 
-import {NormalPacksTemplate} from "./base.js";
+import {PackOpenAnimationTemplate} from "./base.js";
 
-class NormalPackOpenAnimation {
+class NormalPackOpenAnimationTemplate extends PackOpenAnimationTemplate {
 	
-	static displayName() {
-		return "Normal";
-	}
-	
-	static description() {
-		return "The default pack open animation.";
+	constructor() {
+		super();
+		this.displayName = "Normal";
+		this.description = "The default pack open animation.";
 	}
 	
 }
+
+var NormalPackOpenAnimation = new NormalPackOpenAnimationTemplate();
 
 export {NormalPackOpenAnimation};

@@ -5,14 +5,14 @@ class NormalPacksTemplate extends PacksPageTemplate {
 	
 	// The rest is the default functions :P
 	
-	static displayName() {
-		return "Normal";
-	}
-	
-	static description() {
-		return "The default theme. Looks quite ugly.";
+	constructor() {
+		super();
+		this.displayName = "Normal";
+		this.description = "The default theme. Looks quite ugly.";
 	}
 	
 }
-	
-export {NormalPacksTemplate};
+
+var NormalPacksPage = new NormalPacksTemplate();
+
+export {NormalPacksPage};

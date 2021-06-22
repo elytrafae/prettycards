@@ -4,25 +4,24 @@ import {pagegetters} from "./../libraries/page_getters.js";
 import {PrettyCards_plugin, settings} from "./../libraries/underscript_checker.js";
 import {utility} from "./../libraries/utility.js";
 
-import {NormalPacksTemplate} from "./../libraries/packs_page_templates/normal.js";
-import {WidePacksTemplate} from "./../libraries/packs_page_templates/wide.js";
-import {ClassicPacksTemplate} from "./../libraries/packs_page_templates/classic.js";
+import {NormalPacksPage} from "./../libraries/packs_page_templates/normal.js";
+import {WidePacksPage} from "./../libraries/packs_page_templates/wide.js";
 
 import {StartOpenPackAnimation} from "./../libraries/pack_open_anim_manager.js";
 
-var pagetemplates = [NormalPacksTemplate, WidePacksTemplate, ClassicPacksTemplate];
+var pagetemplates = [NormalPacksPage, WidePacksPage];
 
 var settingsoptions = [];
 var settingsnote = "Select the look of the Packs Page!";
 
 for (var i=0; i < pagetemplates.length; i++) {
-	settingsoptions[i] = pagetemplates[i].displayName();
-	settingsnote += ("<br>" + pagetemplates[i].displayName() + ": " + pagetemplates[i].description());
+	settingsoptions[i] = pagetemplates[i].displayName;
+	settingsnote += ("<br>" + pagetemplates[i].displayName + ": " + pagetemplates[i].description);
 }
 
 function GetPageTemplateByName(name) {
 	for (var i=0; i < pagetemplates.length; i++) {
-		if (pagetemplates[i].displayName() == name) {
+		if (pagetemplates[i].displayName == name) {
 			return pagetemplates[i];
 		}
 	}
@@ -127,7 +126,15 @@ function InitPacks() {
 	
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@dedc90f4d941b86f15212799dd6bdfdd1b5241e1/css/Packs.css");
 	
-	setTimeout( function() {StartOpenPackAnimation(packs_data2.Pack);}, 1000);
+	if (settings.debug_mode.value) {
+		console.log("DEBUG mode activated!")
+		var test_button = document.createElement("BUTTON");
+		test_button.style = "font-size: 3em; color: black; position: fixed; bottom: 0px; right: 0px;";
+		test_button.innerHTML = "Test Animation";
+		test_button.onclick = function() {StartOpenPackAnimation(packs_data2.Pack)};
+		document.querySelector(".mainContent").appendChild(test_button);
+		//setTimeout( function() {StartOpenPackAnimation(packs_data2.Pack);}, 1000);
+	}
 }
 
 console.log("InitPacks", InitPacks);

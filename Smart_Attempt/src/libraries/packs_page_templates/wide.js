@@ -5,15 +5,13 @@ class WidePacksTemplate extends PacksPageTemplate {
 	
 	// The rest is the default functions :P
 	
-	static displayName() {
-		return "Wide";
+	constructor() {
+		super();
+		this.displayName = "Wide";
+		this.description = "Probably the closest to how I envisioned the page.";
 	}
 	
-	static description() {
-		return "Probably the closest to how I envisioned the page.";
-	}
-	
-	static pageAdditions() { // Required
+	pageAdditions() { // Required
 		return `
 			<div class="PrettyCards_ThirdPackSpacer"></div>
 			<div class="PrettyCards_PacksRow PrettyCards_WideTemplate">
@@ -29,4 +27,6 @@ class WidePacksTemplate extends PacksPageTemplate {
 	
 }
 	
-export {WidePacksTemplate};
+var WidePacksPage = new WidePacksTemplate();
+
+export {WidePacksPage};
