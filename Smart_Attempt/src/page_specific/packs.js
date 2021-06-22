@@ -124,7 +124,7 @@ function InitPacks() {
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@dedc90f4d941b86f15212799dd6bdfdd1b5241e1/css/Packs.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@de615fe6531c76e89d8a92e642b41e2b1864ad2d/css/Packs.css");
 	
 	if (settings.debug_mode.value) {
 		console.log("DEBUG mode activated!")
