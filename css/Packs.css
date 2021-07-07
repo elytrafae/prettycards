@@ -128,3 +128,93 @@
 	display: none;
 	z-index: 222;
 }
+
+.PrettyCards_CardBack {
+	width: 170px;
+	height: 242px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.PrettyCards_FlippableCardContainer {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	transition: transform 0s;
+	perspective: 1000px;
+}
+
+.PrettyCards_FlipContainer {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transition: transform 0s;
+	transform-style: preserve-3d;
+}
+
+.PrettyCards_CardBack, .PrettyCards_CardFront {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.PrettyCards_CardFront {
+	
+}
+
+.PrettyCards_CardBack {
+	width: 100%;
+	height:100%;
+	position: absolute;
+	top: 0px;
+    background-repeat: no-repeat;
+    background-position: center;
+	background-color: black;
+	transform: rotateY(180deg);
+}
+
+.PrettyCards_CardBack.DELTARUNE.PrettyCards_CardBackHoverable {
+    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardNORMAL.png)!important;
+}
+
+.PrettyCards_CardBack.DELTARUNE.COMMON {
+    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardCOMMON.png);
+}
+
+.PrettyCards_CardBack.DELTARUNE.RARE {
+    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardRARE.png);
+}
+
+.PrettyCards_CardBack.DELTARUNE.EPIC {
+    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardEPIC.png);
+}
+
+.PrettyCards_CardBack.DELTARUNE.LEGENDARY {
+    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardLEGENDARY.png);
+}
+
+.PrettyCards_CardBack.DELTARUNE.DETERMINATION {
+    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardDETERMINATION.png);
+}
+
+.PrettyCards_CardBack.BASE.PrettyCards_CardBackHoverable {
+    background-image: url(https://undercards.net/images/cardBacks/BASECardNORMAL.png)!important;
+}
+
+.PrettyCards_CardBack.BASE.COMMON {
+    background-image: url(https://undercards.net/images/cardBacks/BASECardCOMMON.png);
+}
+
+.PrettyCards_CardBack.BASE.RARE {
+    background-image: url(https://undercards.net/images/cardBacks/BASECardRARE.png);
+}
+
+.PrettyCards_CardBack.BASE.EPIC {
+    background-image: url(https://undercards.net/images/cardBacks/BASECardEPIC.png);
+}
+
+.PrettyCards_CardBack.BASE.LEGENDARY {
+    background-image: url(https://undercards.net/images/cardBacks/BASECardLEGENDARY.png);
+}
+
+.PrettyCards_CardBack.BASE.DETERMINATION {
+    background-image: url(https://undercards.net/images/cardBacks/BASECardDETERMINATION.png);
+}

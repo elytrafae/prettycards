@@ -8,6 +8,7 @@ class PacksPageTemplate {
 	constructor() {
 		this.displayName = "Base";
 		this.description = "This should not be visible!";
+		this.packs_data2 = {};
 	}
 	
 	pageAdditions() { // Required
@@ -48,7 +49,7 @@ class PacksPageTemplate {
 		<div class="PrettyCards_PackContainer">
 			<div class="PrettyCards_FloatingPack">
 				<div class="PrettyCards_FloatingPackImage" style="background-image: url(${pack_data.image})">
-					<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack_old.png" class="PrettyCards_InvisiblePack">
+					<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack.png" class="PrettyCards_InvisiblePack">
 					<div class="PrettyCards_PackAmount">${pack_data.amount}</div>
 				</div>
 			</div>
@@ -69,16 +70,20 @@ class PacksPageTemplate {
 		val = val.replace(".", "");
 		input.value = val;
 	}
-
+	
 	changePrices(code_id, count) {
 		count = Number(count);
 		//console.log(count, code_id);
 		if (count == NaN) {
 			return;
 		}
-		var data = packs_data2[code_id];
-		document.querySelector(".PrettyCards_PackGPrice[data-packid="+ code_id +"]").innerHTML = Math.min(count * data.g_cost, Math.floor(pagegetters.gold/data.g_cost)*data.g_cost);
-		document.querySelector(".PrettyCards_PackUcpPrice[data-packid="+ code_id +"]").innerHTML = Math.min(count * data.ucp_cost, Math.floor(pagegetters.ucp/data.ucp_cost)*data.ucp_cost);
+		var data = this.packs_data2[code_id];
+		
+		data.g_buy_count = Math.min(count, Math.floor(pagegetters.gold/data.g_cost));
+		data.ucp_buy_count = Math.min(count, Math.floor(pagegetters.ucp/data.ucp_cost));
+		
+		document.querySelector(".PrettyCards_PackGPrice[data-packid="+ code_id +"]").innerHTML = data.g_buy_count*data.g_cost;
+		document.querySelector(".PrettyCards_PackUcpPrice[data-packid="+ code_id +"]").innerHTML = data.ucp_buy_count*data.ucp_cost;
 	}
 
 	changePackCountButton(code_id, count) {
@@ -87,8 +92,11 @@ class PacksPageTemplate {
 		if (count == NaN) {
 			return;
 		}
-		var data = packs_data2[code_id];
-		document.querySelector(".PrettyCards_PackOpenCountButton[data-packid="+ code_id +"]").innerHTML = Math.min(count, data.amount);
+		var data = this.packs_data2[code_id];
+		
+		data.open_count = Math.min(count, data.amount);
+		
+		document.querySelector(".PrettyCards_PackOpenCountButton[data-packid="+ code_id +"]").innerHTML = data.open_count;
 	}
 	
 	onPackMouseOver(e) {
@@ -116,15 +124,81 @@ class PacksPageTemplate {
 		this.changePrices(e.target.getAttribute("data-packid"), e.target.value);
 	}
 	
+	onPackGBuyClick(e) { // Should be called by the button.
+		var data = this.packs_data2[e.target.getAttribute("data-packid")];
+		var id = data.code_id;
+		id = id.substring(0, id.length-4);
+		console.log(data.g_buy_count, id);
+		underscript.buyPacks(data.g_buy_count, {type : id, gold : true});
+		
+		data.amount += data.g_buy_count;
+		this.updatePackCount(data.code_id);
+	}
+	
+	onPackUcpBuyClick(e) { // Should be called by the button.
+		const self = this;
+		var data = this.packs_data2[e.target.getAttribute("data-packid")];
+		window.BootstrapDialog.show({
+			title: 'Buy packs with UCP?',
+			message: $.i18n(`Buy ${data.ucp_buy_count} pack${data.ucp_buy_count > 1 ? 's' : ''} for {{UCP:${data.ucp_buy_count * data.ucp_cost}}} UCP?`),
+			buttons: [{
+				label: $.i18n('dialog-continue'),
+				cssClass: 'btn-success',
+				action(diag) {
+					self.onPackUcpBuy(data);
+					diag.close();
+				},
+			}, {
+				label: $.i18n('dialog-cancel'),
+				cssClass: 'btn-danger',
+				action(diag) {
+					diag.close();
+				},
+			}],
+		});
+	}
+	
+	onPackUcpBuy(data) { // Should be called after the player agrees to buying packs with UCP.
+		var id = data.code_id;
+		id = id.substring(0, id.length-4);
+		console.log(data.ucp_buy_count, id);
+		underscript.buyPacks(data.ucp_buy_count, {type : id, gold : false});
+		
+		data.amount += data.ucp_buy_count;
+		this.updatePackCount(data.code_id);
+	}
+	
+	onPackOpenClick(e) { // Should be called by the button.
+		if (underscript.openingPacks()) {
+			return;
+		}
+		var data = this.packs_data2[e.target.getAttribute("data-packid")];
+		var id = data.code_id;
+		id = id.substring(0, id.length-4);
+		console.log(data.open_count, id);
+		window.PrettyCards_pack_being_opened = data;
+		underscript.openPacks(data.open_count, id);
+		
+		data.amount -= data.open_count;
+		this.updatePackCount(data.code_id);
+	}
+	
+	updatePackCount(id) {
+		document.querySelector(".PrettyCards_PackCell[data-packid="+ id +"] .PrettyCards_PackAmount").innerHTML = this.packs_data2[id].amount;
+	}
+	
 	onPackGeneration(data, pack_cell) { // Optional, but has default behaviour.
 		pack_cell.addEventListener( "mouseover", this.onPackMouseOver);
 		pack_cell.addEventListener( "mouseleave", this.onPackMouseLeave);
 		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_PackText").slideUp(0);
 		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_FloatingPack").css("animation-delay", (-Math.random()*1.5) + "s");
 		if (data.does_exist) {
-			document.querySelector(".PrettyCards_PackOpenCount[data-packid="+ data.code_id +"]").onchange = this.onPackOpenCountChange;
+			document.querySelector(".PrettyCards_PackOpenCount[data-packid="+ data.code_id +"]").onchange = this.onPackOpenCountChange.bind(this);
+			document.querySelector(".PrettyCards_PackOpen[data-packid="+ data.code_id +"]").onclick = this.onPackOpenClick.bind(this);
 			if (data.g_cost > -1) {
-			document.querySelector(".PrettyCards_PackBuyCount[data-packid="+ data.code_id +"]").onchange = this.onPackBuyCountChange;
+				document.querySelector(".PrettyCards_PackBuyCount[data-packid="+ data.code_id +"]").onchange = this.onPackBuyCountChange.bind(this);
+				document.querySelector(".PrettyCards_PackGBuy[data-packid="+ data.code_id +"]").onclick = this.onPackGBuyClick.bind(this);
+				document.querySelector(".PrettyCards_PackUcpBuy[data-packid="+ data.code_id +"]").onclick = this.onPackUcpBuyClick.bind(this);
 			}
 		}
 	}
@@ -137,7 +211,8 @@ class PacksPageTemplate {
 		this.onPackGeneration(data, pack_cell);
 	}
 	
-	generatePage(packs_data) { // Required
+	generatePage(packs_data, packs_data2) { // Required
+		this.packs_data2 = packs_data2;
 		
 		document.getElementById("PrettyCards_MainContent").innerHTML =  this.pageAdditions();
 				

@@ -1,20 +1,25 @@
 
 import $ from "/src/third_party/jquery-3.6.0.min.js";
+import {utility} from "/src/libraries/utility.js";
+import {FlippableCard} from "/src/libraries/flippable_card.js";
 //import $ from "/src/third_party/jquery-2.2.4.min.js";
 
 class PackOpenAnimationTemplate {
 	
 	constructor() {
-		this.clicks_to_break = 5;
+		this.clicks_to_break = 1;
 		this.current_click = 0;
 		this.pack_data;
+		this.cards;
 		this.displayName = "Base";
 		this.description = "You shouldn't be able to see this!";
-	} 
+	}
 	
-	OnPackMoveBegin(moveto_x, moveto_y, pack_data) {
+	// Events
+	OnPackMoveBegin(moveto_x, moveto_y, pack_data, cards) {
 		//console.log("Animation Begins!");
 		this.pack_data = pack_data;
+		this.cards = cards;
 		this.current_click = 0;
 		$("#PrettyCards_PackOpenContent").css("display", "block");
 		
@@ -42,12 +47,76 @@ class PackOpenAnimationTemplate {
 	}
 	
 	OnPackBreakBegin() {
-		console.log("Pack finally broke!");
+		this.SpawnCards();
+		
+		var parts = this.RipPackHorizontally();
+		this.up = parts[0];
+		this.down = parts[1];
+		
+		$(this.up).animate({top: "-=30%", opacity: "0"}, 800, "swing");
+		$(this.down).animate({top: "+=30%", opacity: "0"}, 800, "swing", this.OnPackBreakFinish.bind(this));
 	}
 	
-	RipPackHorizontally() {
-		//$("#PrettyCards_PackOpenContent").append("<img src=\""+  +"\">")
+	OnPackBreakFinish() {
+		console.log("BreakAnimationFinished!");
+		this.up.remove();
+		this.down.remove();
 	}
+	
+	
+	// Utility Functions
+	RipPackHorizontally() {
+		var up = document.createElement("IMG");
+		up.className = "PrettyCards_RippedPack_Up";
+		up.src = this.pack_data.image_without_extension + "_HorizontalRip_Top" + this.pack_data.image_extension;
+		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], up);
+		document.getElementById("PrettyCards_PackOpenContent").appendChild(up);
+		
+		var down = document.createElement("IMG");
+		down.className = "PrettyCards_RippedPack_Down";
+		down.src = this.pack_data.image_without_extension + "_HorizontalRip_Bottom" + this.pack_data.image_extension;
+		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], down);
+		document.getElementById("PrettyCards_PackOpenContent").appendChild(down);
+		
+		$(".PrettyCards_AnimationPack").css("opacity", 0);
+		
+		return [up, down];
+	}
+	
+	RipPackVertically() {
+		var left = document.createElement("IMG");
+		left.className = "PrettyCards_RippedPack_Left";
+		left.src = this.pack_data.image_without_extension + "_VerticalRip_Left" + this.pack_data.image_extension;
+		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], left);
+		document.getElementById("PrettyCards_PackOpenContent").appendChild(left);
+		
+		var right = document.createElement("IMG");
+		right.className = "PrettyCards_RippedPack_Right";
+		right.src = this.pack_data.image_without_extension + "_VerticalRip_Right" + this.pack_data.image_extension;
+		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], right);
+		document.getElementById("PrettyCards_PackOpenContent").appendChild(right);
+		
+		$(".PrettyCards_AnimationPack").css("opacity", 0);
+		
+		return [left, right];
+	}
+	
+	SpawnCards() {
+		// TODO finish this.
+		for (var i=0; i < this.cards.length; i++) {
+			var flipcard = new FlippableCard(this.cards[i], false);
+			flipcard.appendTo(document.getElementById("PrettyCards_PackOpenContent"));
+			flipcard.moveTo(window.innerWidth/2, window.innerHeight/2);
+			//flipcard.scaleTo(2, 2000);
+		}
+		//var flipcard = new FlippableCard(window.getCardWithName("Librarian"), false);
+		//flipcard.appendTo(document.getElementById("PrettyCards_PackOpenContent"));
+		//flipcard.glideTo(1000, 600, 1000);
+		//flipcard.scaleTo(2, 2000);
+		//flipcard.flipToFront(1000);
+	}
+	
+	
 	
 }
 
