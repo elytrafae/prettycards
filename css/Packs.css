@@ -171,50 +171,23 @@
 	transform: rotateY(180deg);
 }
 
-.PrettyCards_CardBack.DELTARUNE.PrettyCards_CardBackHoverable {
-    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardNORMAL.png)!important;
+.PrettyCards_CardSummary {
+	width: 100%;
+	padding-left: 10%;
+	padding-right: 10%;
+	overflow-y: auto;
+	text-align: center;
+	max-height: 100%;
+	top: 100%;
+	position: absolute;
 }
 
-.PrettyCards_CardBack.DELTARUNE.COMMON {
-    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardCOMMON.png);
+.card .cardName {
+	text-align: left;
 }
 
-.PrettyCards_CardBack.DELTARUNE.RARE {
-    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardRARE.png);
-}
-
-.PrettyCards_CardBack.DELTARUNE.EPIC {
-    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardEPIC.png);
-}
-
-.PrettyCards_CardBack.DELTARUNE.LEGENDARY {
-    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardLEGENDARY.png);
-}
-
-.PrettyCards_CardBack.DELTARUNE.DETERMINATION {
-    background-image: url(https://undercards.net/images/cardBacks/DELTARUNECardDETERMINATION.png);
-}
-
-.PrettyCards_CardBack.BASE.PrettyCards_CardBackHoverable {
-    background-image: url(https://undercards.net/images/cardBacks/BASECardNORMAL.png)!important;
-}
-
-.PrettyCards_CardBack.BASE.COMMON {
-    background-image: url(https://undercards.net/images/cardBacks/BASECardCOMMON.png);
-}
-
-.PrettyCards_CardBack.BASE.RARE {
-    background-image: url(https://undercards.net/images/cardBacks/BASECardRARE.png);
-}
-
-.PrettyCards_CardBack.BASE.EPIC {
-    background-image: url(https://undercards.net/images/cardBacks/BASECardEPIC.png);
-}
-
-.PrettyCards_CardBack.BASE.LEGENDARY {
-    background-image: url(https://undercards.net/images/cardBacks/BASECardLEGENDARY.png);
-}
-
-.PrettyCards_CardBack.BASE.DETERMINATION {
-    background-image: url(https://undercards.net/images/cardBacks/BASECardDETERMINATION.png);
+.PrettyCards_CardSummaryTitle {
+	width: 100%;
+	text-align: center;
+	font-size: 4em;
 }

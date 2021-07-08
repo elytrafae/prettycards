@@ -24,6 +24,37 @@ class Utility {
 			to_element.style.cssText = cssText
 		}
 	}
+	
+	completeCopyArray(arr) {
+		if (!Array.isArray(arr)) {
+			return this.completeCopy(arr);
+		}
+		var copy = [];
+		for (var i=0; i < arr.length; i++) {
+			if (typeof(arr[i]) == "object") {
+				copy[i] = this.completeCopy(arr[i]);
+			} else {
+				copy[i] = arr[i];
+			}
+		}
+		return copy;
+	}
+	
+	completeCopy(object) { // WARNING! Does not handle recursive refernces!
+		if (Array.isArray(object)) {
+			return this.completeCopyArray(object);
+		}
+		var copy = {};
+		for (var id in object) {
+			if (typeof(object[id]) == "object") {
+				copy[id] = this.completeCopy(object[id]);
+			} else {
+				copy[id] = object[id];
+			}
+		}
+		return object;
+	}
+	
 }
 
 var utility = new Utility();

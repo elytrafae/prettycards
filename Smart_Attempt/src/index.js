@@ -1,4 +1,6 @@
 
+import {} from "./libraries/jquery_additions.js";
+
 import {PrettyCards_plugin, settings} from "./libraries/underscript_checker.js";
 
 import {InitPacks} from "./page_specific/packs.js";

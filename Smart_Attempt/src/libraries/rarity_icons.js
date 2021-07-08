@@ -16,4 +16,4 @@ for (var i=0; i < extensions.length; i++) {
 	}
 }
 
-export {rarityIconsHTML};
+export {rarityIconsHTML, rarities};
