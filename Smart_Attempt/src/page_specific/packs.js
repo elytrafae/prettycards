@@ -64,7 +64,7 @@ var packs_data = [
 	{
 		g_cost : 100,
 		ucp_cost : 10,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack",
+		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/DeltarunePack",
 		image_extension: ".png",
 		name: "Deltarune Pack",
 		description: "Contains 4 random Deltarune Cards.",
@@ -77,8 +77,8 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack",
-		image_extension: ".png",
+		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/ShinyPack",
+		image_extension: ".gif",
 		name: "Shiny Pack",
 		description: "Contains 4 random Shiny Cards.",
 		code_id: "ShinyPack",
@@ -139,7 +139,7 @@ function InitPacks() {
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ec17383c2c4f2cd1cd9f08bd52700f2980a9e590/css/Packs.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@621f23fad227a24f0019d60cf303245726e49bbd/css/Packs.css");
 	
 	if (settings.debug_mode.value) {
 		console.log("DEBUG mode activated!")

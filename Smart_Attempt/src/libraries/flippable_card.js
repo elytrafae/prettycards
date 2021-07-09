@@ -90,12 +90,19 @@ class FlippableCard {
 		this.container.style.transform = "none";
 	}
 	
-	handleRotation(now) { // This is a woratround for a css issue with flipped shiny cards.
-		if (!this.isShiny) {return;}
+	handleRotation(now) { // This is a woratround for a css issue with flipped shiny cards (and all cards on Firefox >:( )
 		if (now < 90) {
-			this.shinySlot.style["mix-blend-mode"] = "multiply";
+			this.front.style.opacity = "1";
+			this.back.style.opacity = "0";
+			if (this.isShiny) {
+				this.shinySlot.style["mix-blend-mode"] = "multiply";
+			}
 		} else {
-			this.shinySlot.style["mix-blend-mode"] = "normal";
+			this.front.style.opacity = "0";
+			this.back.style.opacity = "1";
+			if (this.isShiny) {
+				this.shinySlot.style["mix-blend-mode"] = "normal";
+			}
 		}
 	}
 	
