@@ -160,6 +160,12 @@ function InitPacks() {
 		test_button2.onclick = function() {StartOpenPackAnimation(packs_data2.DRPack, test_data2)};
 		test_container.appendChild(test_button2);
 		
+		var test_button3 = document.createElement("BUTTON");
+		test_button3.style = "font-size: 3em; color: black;";
+		test_button3.innerHTML = "Test Animation Shiny";
+		test_button3.onclick = function() {StartOpenPackAnimation(packs_data2.ShinyPack, test_data)};
+		test_container.appendChild(test_button3);
+		
 		document.querySelector(".mainContent").appendChild(test_container);
 		
 		//setTimeout( function() {StartOpenPackAnimation(packs_data2.Pack);}, 1000);
