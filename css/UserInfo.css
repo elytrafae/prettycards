@@ -1,0 +1,20 @@
+
+.PrettyCards_UserHeader {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-x: center;
+	padding: 3px 15px 3px 47px;
+}
+
+.PrettyCards_UserTitle {
+	font-size: 24px;
+	text-shadow: rgb(51 51 51) 3px 2px;
+}
+
+.PrettyCards_UserProfilePic {
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	top: -25px;
+	left: -25px;
+}

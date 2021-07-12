@@ -1,11 +1,51 @@
 
 import {PrettyCards_plugin, settings} from "./underscript_checker.js";
 import {NormalPackOpenAnimation} from "./../libraries/pack_open_animation_templates/normal.js";
+import {OnuPackOpenAnimation} from "./../libraries/pack_open_animation_templates/onu.js";
 
 PrettyCards_plugin.events.on('openedPacks', function (open_data) {
 	StartOpenPackAnimation(window.PrettyCards_pack_being_opened, open_data.cards);
 	this.canceled = true;
 });
+
+var currAnim = NormalPackOpenAnimation;
+var anims = [NormalPackOpenAnimation, OnuPackOpenAnimation];
+
+var settingsoptions = [];
+var settingsnote = "Select the pack opening animation!";
+
+for (var i=0; i < anims.length; i++) {
+	settingsoptions[i] = anims[i].displayName;
+	settingsnote += ("<br>" + anims[i].displayName + ": " + anims[i].description);
+}
+
+function GetAnimByName(name) {
+	for (var i=0; i < anims.length; i++) {
+		if (anims[i].displayName == name) {
+			return anims[i];
+		}
+	}
+	return null;
+}
+
+function ChangeTemplate(newname, oldname) {
+	currAnim = GetAnimByName(newname);
+}
+
+settings.packs_animation_template = PrettyCards_plugin.settings().add({
+	'key': 'packs_animation_template', // key
+	'name': 'Pack Opening Animation', // Name in settings page
+	'type': 'select',
+	'note': settingsnote, // Show note when hovering over setting
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	//'disabled': boolean or `function(): boolean`, // true to disable setting
+	'default': "Normal", // default value
+	'options': settingsoptions, // Options for type 'select'
+	'reset': true, // Adds a reset button (sets to default)
+	'onChange': ChangeTemplate, // called when value is changed
+});
+
+ChangeTemplate(settings.packs_animation_template.value(), null);
 
 function StartOpenPackAnimation(pack_data, open_data) {
 	var pack_image = document.createElement("IMG");
@@ -24,7 +64,7 @@ function StartOpenPackAnimation(pack_data, open_data) {
 	
 	document.getElementById("PrettyCards_PackOpenContent").appendChild(pack_image);
 	
-	NormalPackOpenAnimation.OnPackMoveBegin((window.innerWidth-viewportOffset.width)/2, (window.innerHeight-viewportOffset.height)/2, pack_data, open_data);
+	currAnim.OnPackMoveBegin((window.innerWidth-viewportOffset.width)/2, (window.innerHeight-viewportOffset.height)/2, pack_data, open_data);
 }
 
 

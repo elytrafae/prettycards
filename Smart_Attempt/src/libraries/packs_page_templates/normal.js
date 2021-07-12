@@ -7,7 +7,7 @@ class NormalPacksTemplate extends PacksPageTemplate {
 	
 	constructor() {
 		super();
-		this.displayName = "Normal";
+		this.displayName = "Default";
 		this.description = "The default theme. Looks quite ugly.";
 	}
 	

@@ -145,7 +145,10 @@ class PackOpenAnimationTemplate {
 		console.log("Card Summary Container", container);
 	}
 	
-	OnExitFade() {
+	OnExitFade(e) {
+		if (!$(e.target).is(".PrettyCards_CardSummary")) {
+			return true;
+		}
 		$("#PrettyCards_PackOpenContent").animate({opacity: "0"}, {
 			duration: 1000, 
 			easing: "swing",
@@ -239,7 +242,7 @@ class PackOpenAnimationTemplate {
 			flipcard.moveTo(window.innerWidth/2, window.innerHeight/2);
 			this.flipCards.unshift(flipcard);
 		}
-		console.log("flipCards initialized! ", this.flipCards);
+		//console.log("flipCards initialized! ", this.flipCards);
 	}
 	
 }
