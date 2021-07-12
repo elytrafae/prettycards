@@ -1,6 +1,8 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {utility} from "/src/libraries/utility.js";
 
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c77e027d77f453bc8e074950d1261f1dce67553b/css/UserInfo.css");
 window.PrettyCards_plugin = PrettyCards_plugin;
 
 function sendUserInfoEvent(e) {
