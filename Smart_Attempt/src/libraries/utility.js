@@ -55,6 +55,11 @@ class Utility {
 		return object;
 	}
 	
+	// This. Code. Is. ANCIENT. What is up with this, Onu!?!?
+	addFriend(username, callback) {
+		$.post("Friends", {username: "Jazmin290", addFriend: "Add friend"}, callback);
+	}
+	
 }
 
 var utility = new Utility();

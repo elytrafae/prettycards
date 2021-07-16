@@ -1,9 +1,10 @@
 
-.PrettyCards_UserHeader {
+.bootstrap-dialog.type-primary .modal-header.PrettyCards_UserHeader {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position-x: center;
 	padding: 3px 15px 3px 47px;
+	background-color: black;
 }
 
 .bootstrap-dialog .bootstrap-dialog-title.PrettyCards_UserTitle {
@@ -17,4 +18,54 @@
 	height: 64px;
 	top: -25px;
 	left: -25px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.column {
+	float: left;
+	width: 50%;
+	padding: 10px;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.PrettyCards_UserColumn {
+	padding: 15px;
+	font-size: 18px;
+}
+
+.PrettyCards_UserLV {
+	color: #00b8ff;
+}
+
+.Old_Legend {
+	color: #d6a6e6;
+}
+
+.rainbowAvatar {
+	position: absolute;
+	mix-blend-mode: multiply;
+	opacity: .6;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.PrettyCards_UserHeader .rainbowAvatar {
+	width: 64px;
+	height: 64px;
+	top: -25px;
+	left: -25px;
+}
+
+.PrettyCards_UserGroupContainer {
+	white-space: nowrap;
 }
