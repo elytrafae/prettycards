@@ -4,7 +4,9 @@ import {utility} from "/src/libraries/utility.js";
 import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.js";
 import {pagegetters} from "/src/libraries/page_getters.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c9bccdf56d44627ea54089bffe36256c2923bb94/css/UserInfo.css");
+import {ChallengePlayerScreen} from "/src/libraries/private_games/private_game_screen.js";
+
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3327dc099073de91a57d9a1b4a1ce28a473d8587/css/UserInfo.css");
 utility.loadCSSFromLink("https://undercards.net/css/meters.css");
 window.PrettyCards_plugin = PrettyCards_plugin;
 
@@ -272,6 +274,16 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		}
 	} else {
 		spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> This player is not in a match.';
+	}
+	
+	if (!pagegetters.IsMyself(user.id) && user.gameId <= -1) {
+		var challengeContainer = document.createElement("DIV");
+		challengeContainer.innerHTML = '<span class="glyphicon glyphicon-flash red"></span> Challenge!';
+		challengeContainer.style.cursor = "pointer";
+		challengeContainer.onclick = function() {
+			ChallengePlayerScreen(user);
+		};
+		column1.appendChild(challengeContainer);
 	}
 	/////////////
 	

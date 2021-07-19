@@ -1,0 +1,45 @@
+
+.PrettyCards_SmallSoul {
+	height: 32px;
+}
+
+.PrettyCards_NormalSoul {
+	height: 64px;
+}
+
+.PrettyCards_Soul_DETERMINATION.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #ff0000);
+}
+
+.PrettyCards_Soul_BRAVERY.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #fca500);
+}
+
+.PrettyCards_Soul_JUSTICE.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #ffff00);
+}
+
+.PrettyCards_Soul_KINDNESS.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #00c000);
+}
+
+.PrettyCards_Soul_PATIENCE.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #41fcff);
+}
+
+.PrettyCards_Soul_INTEGRITY.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #0064ff);
+}
+
+.PrettyCards_Soul_PERSEVERANCE.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #d535d9);
+}
+
+.PrettyCards_Soul_MONSTER.PrettyCards_SelectedSoul {
+	filter: drop-shadow(0px 0px 15px #ffffff);
+}
+
+.PrettyCards_Soul_SWITCH.PrettyCards_SelectedSoul {
+	/*filter: drop-shadow(0px 0px 15px linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 50%, rgba(65,252,255,1) 50%, rgba(65,252,255,1) 100%));*/
+	filter: drop-shadow(0px 0px 15px #D400FF);
+}
