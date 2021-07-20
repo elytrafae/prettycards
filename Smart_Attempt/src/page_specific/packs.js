@@ -172,6 +172,4 @@ function InitPacks() {
 	}
 }
 
-console.log("InitPacks", InitPacks);
-
 export {InitPacks};

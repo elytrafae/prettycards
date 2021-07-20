@@ -42,6 +42,7 @@ function sendUserInfoEvent(ele) {
 	
 	var infos = $(ele).data('infos');
     var user = infos.user;
+	console.log(infos);
 	
 	const preEvenet = PrettyCards_plugin.events.emit("preChat:getInfo", {infos : infos, user : user}, true);
 	if (!preEvenet.canceled) {
@@ -51,16 +52,14 @@ function sendUserInfoEvent(ele) {
 	}
 }
 
-
 /*
+// The User Info itself is redirected to overriding the getInfo function. This section is for noting which chat is every message in.
 function processChatMessageHTML(ele, msg) {
 	console.log("HTML Chat message: ", ele, msg);
 	if (!ele) {
 		console.log("Message received in a chat room you are not currently in. Returning.");
 		return;
 	}
-	var user_span = ele.querySelector(".chat-user");
-	user_span.onclick = sendUserInfoEvent;
 }
 
 function processChatMessageEvent(data) {
@@ -81,6 +80,7 @@ PrettyCards_plugin.events.on("Chat:getHistory", processChatHistoryEvent);
 PrettyCards_plugin.events.on("Chat:getMessage", processChatMessageEvent);
 PrettyCards_plugin.events.on("Chat:getPrivateHistory", processChatHistoryEvent);
 PrettyCards_plugin.events.on("Chat:getPrivateMessage", processChatMessageEvent);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
 PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
@@ -281,7 +281,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		challengeContainer.innerHTML = '<span class="glyphicon glyphicon-flash red"></span> Challenge!';
 		challengeContainer.style.cursor = "pointer";
 		challengeContainer.onclick = function() {
-			ChallengePlayerScreen(user);
+			ChallengePlayerScreen(user, data.infos);
 		};
 		column1.appendChild(challengeContainer);
 	}

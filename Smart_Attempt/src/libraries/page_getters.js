@@ -108,6 +108,5 @@ class pagegetters {
 }
 
 window.pagegetters = pagegetters;
-console.log("Page Getters Loaded!", pagegetters);
 
 export {pagegetters};

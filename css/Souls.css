@@ -1,10 +1,12 @@
 
 .PrettyCards_SmallSoul {
 	height: 32px;
+	margin: 1.5px;
 }
 
 .PrettyCards_NormalSoul {
 	height: 64px;
+	margin: 2px;
 }
 
 .PrettyCards_Soul_DETERMINATION.PrettyCards_SelectedSoul {
@@ -42,4 +44,20 @@
 .PrettyCards_Soul_SWITCH.PrettyCards_SelectedSoul {
 	/*filter: drop-shadow(0px 0px 15px linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 50%, rgba(65,252,255,1) 50%, rgba(65,252,255,1) 100%));*/
 	filter: drop-shadow(0px 0px 15px #D400FF);
+}
+
+.tippy-box[data-inertia][data-state='visible'] {
+	transition-timing-function: cubic-bezier(1,1,0,0);
+}
+
+.PrettyCards_DeckTooltip {
+	text-align: left;
+}
+
+.PrettyCards_ArtifactContainer {
+	margin-bottom: 8px;
+}
+
+.PrettyCards_ChallengeMessageButton {
+	margin-left: 10px;
 }

@@ -1,11 +1,11 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
-var isHost = JSON.parse(localStorage.getItem("PrettyCards_PrivateGameIsHost"));
-var gameName = localStorage.getItem("PrettyCards_PrivateGameName");
-var gameCreator = localStorage.getItem("PrettyCards_PrivateGameCreator");
-var recipients = JSON.parse(localStorage.getItem("PrettyCards_PrivateGameRecipients") || '["everyone"]');
-var soul = localStorage.getItem("PrettyCards_PrivateGameSoul") || localStorage.getItem("customDeck");
+var isHost = JSON.parse(sessionStorage.getItem("PrettyCards_PrivateGameIsHost"));
+var gameName = sessionStorage.getItem("PrettyCards_PrivateGameName");
+var gameCreator = sessionStorage.getItem("PrettyCards_PrivateGameCreator");
+var recipients = JSON.parse(sessionStorage.getItem("PrettyCards_PrivateGameRecipients") || '["everyone"]');
+var soul = sessionStorage.getItem("PrettyCards_PrivateGameSoul") || localStorage.getItem("customDeck");
 
 function HostChallenge() {
 	console.log("Initiating as host!");
@@ -15,7 +15,7 @@ function HostChallenge() {
 
 function OnSomeoneJoin(data) {
 	if (recipients.includes("everyone") || recipients.includes(data.username)) {
-		localStorage.removeItem("PrettyCards_PrivateGameName");
+		sessionStorage.removeItem("PrettyCards_PrivateGameName");
 		window.start();
 	} else {
 		window.banUser();
@@ -36,7 +36,7 @@ function OnGameListLoad(data) {
 		var game = games[i];
 		//if (game.name == gameName) {
 		if (game.owner.usernameSafe == gameCreator) {
-			localStorage.removeItem("PrettyCards_PrivateGameName");
+			sessionStorage.removeItem("PrettyCards_PrivateGameName");
 			socket.send(JSON.stringify({action: "joinGame",gameId: game.id, soul: soul, gamePassword: ""}));
 		}
 	}
