@@ -31,10 +31,8 @@ function processChatMessageHTML(ele, msg) {
 					var soulContainer = document.createElement("SPAN");
 					soulContainer.style = "white-space: nowrap;";
 					soulContainer.innerHTML = soulSelector.SetUp("PrettyCards_ChallengeMessage_" + msg.id + "_", "Small");
-					setTimeout(function () {
-						soulSelector.AddDeckTooltips();
-					}, 50);
 					ele.appendChild(soulContainer);
+					soulSelector.AddDeckTooltips();
 				
 					var acceptButton = document.createElement("BUTTON");
 					acceptButton.innerHTML = "Accept!";

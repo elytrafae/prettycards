@@ -1,18 +1,9 @@
 
-import {
-	utility
-}
-from "/src/libraries/utility.js";
-import {
-	pagegetters
-}
-from "/src/libraries/page_getters.js";
+import {utility} from "/src/libraries/utility.js";
+import {pagegetters} from "/src/libraries/page_getters.js";
+import {AddTooltip} from "/src/libraries/tooltips.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
-import {
-	PrettyCards_plugin,
-	settings
-}
-from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@1edf00a84189614e8030eb6637abf84316cee582/css/Souls.css");
 
@@ -81,7 +72,7 @@ class SoulSelector {
 		var html = "";
 		for (var i = 0; i < cards.length; i++) {
 			var card = cards[i];
-			html += `${card.shiny ? '<span class="rainbowText">S</span> ' : ''}${card.name}<br>`;
+			html += `${card.shiny ? '<span class="rainbowText">S</span> ' : ''}<span class="${card.rarity}">${card.name}</span><br>`;
 		}
 		return html;
 	}
@@ -113,10 +104,11 @@ class SoulSelector {
 	AddDeckTooltips() {
 		var playableDecks = this.GetPlayableDecks();
 		for (var deckName in playableDecks) {
-			console.log("#" + this.idPrefix + deckName, document.querySelector("#" + this.idPrefix + deckName));
+			//console.log("#" + this.idPrefix + deckName, document.querySelector("#" + this.idPrefix + deckName));
 			const el = document.querySelector("#" + this.idPrefix + deckName);
 			var html = '<div class="PrettyCards_DeckTooltip">' + this.GenerateArtifacts(playableDecks[deckName].artifacts) + this.GenerateCards(playableDecks[deckName].cards) + "</div>";
-			console.log(window.document.body.getBoundingClientRect, window.document.body.getBoundingClientRect());
+			//console.log(window.document.body.getBoundingClientRect, window.document.body.getBoundingClientRect());
+			/*
 			window.tippy("#" + this.idPrefix + deckName, {
 				content: html,
 				allowHTML: true,
@@ -133,7 +125,8 @@ class SoulSelector {
 							options: {
 								fallbackPlacements: ['bottom', 'top', 'right', 'left'],
 								padding: 8,
-								boundary: document,
+								boundary: 'document',
+								rootBoundary: 'document',
 							},
 						}, {
 							name: 'preventOverflow',
@@ -151,6 +144,8 @@ class SoulSelector {
 					//popperInstance.update()
 				},
 			});
+			*/
+			AddTooltip(el, html, {});
 		}
 	}
 	

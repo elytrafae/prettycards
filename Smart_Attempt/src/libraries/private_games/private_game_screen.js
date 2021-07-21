@@ -5,7 +5,7 @@ import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@1edf00a84189614e8030eb6637abf84316cee582/css/Souls.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@e42698ff17778d9145c81a88d817089fe31927b9/css/Souls.css");
 
 var soulSelector = new SoulSelector();
 
