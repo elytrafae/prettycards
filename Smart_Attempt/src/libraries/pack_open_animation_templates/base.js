@@ -57,8 +57,8 @@ class PackOpenAnimationTemplate {
 		this.up = parts[0];
 		this.down = parts[1];
 		
-		//$(this.up).animate({top: "-=30%", opacity: "0"}, 800, "swing");
-		//$(this.down).animate({top: "+=30%", opacity: "0"}, 800, "swing", this.OnPackBreakFinish.bind(this));
+		$(this.up).animate({top: "-=30%", opacity: "0"}, 800, "swing");
+		$(this.down).animate({top: "+=30%", opacity: "0"}, 800, "swing", this.OnPackBreakFinish.bind(this));
 	}
 	
 	OnPackBreakFinish() {

@@ -88,7 +88,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack",
+		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/SuperPack",
 		image_extension: ".png",
 		name: "Super Pack",
 		description: `Contains a random ${rarityIconsHTML.BASE.COMMON}/${rarityIconsHTML.DELTARUNE.COMMON}, ${rarityIconsHTML.BASE.RARE}/${rarityIconsHTML.DELTARUNE.RARE}, ${rarityIconsHTML.BASE.EPIC}/${rarityIconsHTML.DELTARUNE.EPIC} and ${rarityIconsHTML.BASE.LEGENDARY}/${rarityIconsHTML.DELTARUNE.LEGENDARY} card.`,
@@ -99,7 +99,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack",
+		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/FinalPack",
 		image_extension: ".png",
 		name: "Final Pack",
 		description: `Contains a random ${rarityIconsHTML.BASE.RARE}/${rarityIconsHTML.DELTARUNE.RARE}, ${rarityIconsHTML.BASE.EPIC}/${rarityIconsHTML.DELTARUNE.EPIC}, ${rarityIconsHTML.BASE.LEGENDARY}/${rarityIconsHTML.DELTARUNE.LEGENDARY} and ${rarityIconsHTML.BASE.DETERMINATION}/${rarityIconsHTML.DELTARUNE.DETERMINATION} card.`,
@@ -139,7 +139,7 @@ function InitPacks() {
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@327efc495b1769772ef42357bd62cc353b309f55/css/Packs.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@5503c34da17d5225835c03f2d567a54bdf68bdf8/css/Packs.css");
 	
 	if (settings.debug_mode.value) {
 		console.log("DEBUG mode activated!")
