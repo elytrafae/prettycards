@@ -25,6 +25,7 @@ function GetPageTemplateByName(name) {
 			return pagetemplates[i];
 		}
 	}
+	console.error("Cannot find Packs Page Template with name ", name);
 	return null;
 }
 
@@ -39,7 +40,7 @@ settings.packs_page_template = PrettyCards_plugin.settings().add({
 	'note': settingsnote, // Show note when hovering over setting
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	//'disabled': boolean or `function(): boolean`, // true to disable setting
-	'default': "Normal", // default value
+	'default': settingsoptions[0], // default value
 	'options': settingsoptions, // Options for type 'select'
 	'reset': true, // Adds a reset button (sets to default)
 	'onChange': ChangeTemplate, // called when value is changed
@@ -135,7 +136,7 @@ function InitPacks() {
 	hideUglyPage();
 	document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
 
-	ChangeTemplate(settings.packs_page_template.value(), null);
+	ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
