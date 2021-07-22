@@ -57,8 +57,8 @@ class PackOpenAnimationTemplate {
 		this.up = parts[0];
 		this.down = parts[1];
 		
-		$(this.up).animate({top: "-=30%", opacity: "0"}, 800, "swing");
-		$(this.down).animate({top: "+=30%", opacity: "0"}, 800, "swing", this.OnPackBreakFinish.bind(this));
+		//$(this.up).animate({top: "-=30%", opacity: "0"}, 800, "swing");
+		//$(this.down).animate({top: "+=30%", opacity: "0"}, 800, "swing", this.OnPackBreakFinish.bind(this));
 	}
 	
 	OnPackBreakFinish() {
@@ -162,19 +162,26 @@ class PackOpenAnimationTemplate {
 	
 	// Utility Functions
 	RipPackHorizontally() {
+		var anim_pack = document.getElementsByClassName("PrettyCards_AnimationPack")[0];
+		var anim_pack_rect = anim_pack.getBoundingClientRect();
+		
 		var up = document.createElement("DIV");
 		up.className = "PrettyCards_RippedPack_Up PrettyCards_RippedPack";
-		up.innerHTML = '<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack.png"></img>';
-		up.style.backgroundImage = "url(" + this.pack_data.image_without_extension + "_HorizontalRip_Top" + this.pack_data.image_extension + ")";
-		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], up);
+		up.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		up.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
+		up.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
+		up.style.width = anim_pack_rect.width + "px";
+		up.style.height = anim_pack_rect.height + "px";
 		document.getElementById("PrettyCards_PackOpenContent").appendChild(up);
 		
 		var down = document.createElement("DIV");
 		down.className = "PrettyCards_RippedPack_Down PrettyCards_RippedPack";
-		down.innerHTML = '<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack.png"></img>';
-		down.style.backgroundImage = "url(" + this.pack_data.image_without_extension + "_HorizontalRip_Bottom" + this.pack_data.image_extension + ")";
-		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], up);
-		document.getElementById("PrettyCards_PackOpenContent").appendChild(up);
+		down.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		down.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
+		down.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
+		down.style.width = anim_pack_rect.width + "px";
+		down.style.height = anim_pack_rect.height + "px";
+		document.getElementById("PrettyCards_PackOpenContent").appendChild(down);
 		
 		$(".PrettyCards_AnimationPack").css("opacity", 0);
 		
@@ -182,16 +189,25 @@ class PackOpenAnimationTemplate {
 	}
 	
 	RipPackVertically() {
-		var left = document.createElement("IMG");
-		left.className = "PrettyCards_RippedPack_Left";
-		left.src = this.pack_data.image_without_extension + "_VerticalRip_Left" + this.pack_data.image_extension;
-		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], left);
+		var anim_pack = document.getElementsByClassName("PrettyCards_AnimationPack")[0];
+		var anim_pack_rect = anim_pack.getBoundingClientRect();
+		
+		var left = document.createElement("DIV");
+		left.className = "PrettyCards_RippedPack_Left PrettyCards_RippedPack";
+		left.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		left.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
+		left.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
+		left.style.width = anim_pack_rect.width + "px";
+		left.style.height = anim_pack_rect.height + "px";
 		document.getElementById("PrettyCards_PackOpenContent").appendChild(left);
 		
-		var right = document.createElement("IMG");
-		right.className = "PrettyCards_RippedPack_Right";
-		right.src = this.pack_data.image_without_extension + "_VerticalRip_Right" + this.pack_data.image_extension;
-		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], right);
+		var right = document.createElement("DIV");
+		right.className = "PrettyCards_RippedPack_Left PrettyCards_RippedPack";
+		right.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		right.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
+		right.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
+		right.style.width = anim_pack_rect.width + "px";
+		right.style.height = anim_pack_rect.height + "px";
 		document.getElementById("PrettyCards_PackOpenContent").appendChild(right);
 		
 		$(".PrettyCards_AnimationPack").css("opacity", 0);
