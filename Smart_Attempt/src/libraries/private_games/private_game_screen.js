@@ -7,6 +7,7 @@ import {SoulSelector} from "/src/libraries/soul_selector.js";
 
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@e42698ff17778d9145c81a88d817089fe31927b9/css/Souls.css");
 
+var shouldGoToGameList = false;
 var soulSelector = new SoulSelector();
 
 function GetChallengeHTML(user) {
@@ -69,7 +70,16 @@ function SendChallenge(gameName, recipients, soul) {
 		console.log("Private message: ", message, String(messageInfos.user.id));
 		window.sendPrivateMessage(message, String(messageInfos.user.id));
 	}
-	window.location = '/GamesList';
+	shouldGoToGameList = true;
 }
+
+function CheckToGoToGameList(data) {
+	if (shouldGoToGameList && JSON.parse(data.chatMessage).user.id === window.selfId) {
+		window.location = '/GamesList';
+	}
+}
+
+PrettyCards_plugin.events.on("Chat:getPrivateMessage", CheckToGoToGameList);
+PrettyCards_plugin.events.on("Chat:getMessage", CheckToGoToGameList);
 
 export {ChallengePlayerScreen};

@@ -162,17 +162,19 @@ class PackOpenAnimationTemplate {
 	
 	// Utility Functions
 	RipPackHorizontally() {
-		var up = document.createElement("IMG");
-		up.className = "PrettyCards_RippedPack_Up";
-		up.src = this.pack_data.image_without_extension + "_HorizontalRip_Top" + this.pack_data.image_extension;
+		var up = document.createElement("DIV");
+		up.className = "PrettyCards_RippedPack_Up PrettyCards_RippedPack";
+		up.innerHTML = '<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack.png"></img>';
+		up.style.backgroundImage = "url(" + this.pack_data.image_without_extension + "_HorizontalRip_Top" + this.pack_data.image_extension + ")";
 		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], up);
 		document.getElementById("PrettyCards_PackOpenContent").appendChild(up);
 		
-		var down = document.createElement("IMG");
-		down.className = "PrettyCards_RippedPack_Down";
-		down.src = this.pack_data.image_without_extension + "_HorizontalRip_Bottom" + this.pack_data.image_extension;
-		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], down);
-		document.getElementById("PrettyCards_PackOpenContent").appendChild(down);
+		var down = document.createElement("DIV");
+		down.className = "PrettyCards_RippedPack_Down PrettyCards_RippedPack";
+		down.innerHTML = '<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack.png"></img>';
+		down.style.backgroundImage = "url(" + this.pack_data.image_without_extension + "_HorizontalRip_Bottom" + this.pack_data.image_extension + ")";
+		utility.copyCSS(document.getElementsByClassName("PrettyCards_AnimationPack")[0], up);
+		document.getElementById("PrettyCards_PackOpenContent").appendChild(up);
 		
 		$(".PrettyCards_AnimationPack").css("opacity", 0);
 		
