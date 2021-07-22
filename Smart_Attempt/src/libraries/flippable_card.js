@@ -42,6 +42,8 @@ class FlippableCard {
 		this.isShiny = card_data.shiny;
 		this.shinySlot = this.front.querySelector(".shinySlot");
 		
+		this.card_data = card_data;
+		
 		this.handleRotation(180);
 	}
 	
@@ -104,6 +106,17 @@ class FlippableCard {
 				this.shinySlot.style["mix-blend-mode"] = "normal";
 			}
 		}
+	}
+	
+	playJingle() {
+		if (this.card_data.rarity != "LEGENDARY" && this.card_data.rarity != "DETERMINATION") {
+			return;
+		}
+		var soundPath = '/musics/cards/' + this.card_data.name.split(' ').join('_') + '.ogg';
+		var audio = new Audio(soundPath);
+		audio.volume = 0.4;
+		audio.play();
+		this.silent = true;
 	}
 	
 }

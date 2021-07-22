@@ -32,6 +32,7 @@ class OnuPackOpenAnimationTemplate extends PackOpenAnimationTemplate {
 			flipcard.flipToBack(0);
 			$(flipcard.container).click(function() {
 				flipcard.flipToFace(500);
+				flipcard.playJingle();
 				$(flipcard.container).unbind("click");
 			})
 		}

@@ -16,6 +16,7 @@ class PackOpenAnimationTemplate {
 		this.flipCards = [];
 		this.displayName = "Base";
 		this.description = "You shouldn't be able to see this!";
+		this.audio = new Audio();
 	}
 	
 	// Events
@@ -109,6 +110,7 @@ class PackOpenAnimationTemplate {
 		this.flipCards[this.card_viewed].glideTo(window.innerWidth/2, window.innerHeight/2, 500);
 		this.flipCards[this.card_viewed].scaleTo(1.5, 500);
 		this.flipCards[this.card_viewed].flipToFace(500);
+		this.flipCards[this.card_viewed].playJingle();
 	}
 	
 	OnCardViewFinish() {
