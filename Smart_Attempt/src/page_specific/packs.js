@@ -142,6 +142,7 @@ function InitPacks() {
 	
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@5503c34da17d5225835c03f2d567a54bdf68bdf8/css/Packs.css");
 	
+	/*
 	if (settings.debug_mode.value) {
 		console.log("DEBUG mode activated!")
 		var test_container = document.createElement("DIV");
@@ -171,6 +172,7 @@ function InitPacks() {
 		
 		//setTimeout( function() {StartOpenPackAnimation(packs_data2.Pack);}, 1000);
 	}
+	*/
 }
 
 export {InitPacks};

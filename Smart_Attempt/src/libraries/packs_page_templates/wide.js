@@ -22,6 +22,8 @@ class WidePacksTemplate extends PacksPageTemplate {
 				<div class="PrettyCards_PackCell" data-packid="FinalPack"></div>
 			</div>
 			<div class="PrettyCards_PackSpacer"></div>
+			<div class="PrettyCards_PackSpacer"></div>
+			<div class="PrettyCards_PackSpacer"></div>
 		`;
 	}
 	

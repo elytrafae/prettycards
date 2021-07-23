@@ -285,6 +285,71 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		};
 		column1.appendChild(challengeContainer);
 	}
+	
+	var modContainer = document.createElement("DIV");
+	if (pagegetters.IsSelfMod() && !pagegetters.IsMyself(user.id)) {
+		var times = {
+			1 : '1 sec',
+			30 : '30 sec',
+			60 : '1 min',
+			600 : '10 min',
+			3600 : '1 hour',
+			21600 : '6 hours',
+			43200 : '12 hours',
+			43200 : '1 day'
+		}
+		modContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off gray"></span> ' + window.$.i18n('chat-time-out-user') + ' ';
+		
+		var input = document.createElement("INPUT");
+		input.setAttribute("type", "text");
+		input.id = "PrettyCards_Timeout";
+		input.style = "display:inline; width: 110px; margin-right: 15px;";
+		input.setAttribute( "list", "PrettyCards_TimeoutList");
+		
+		input.onchange = function() {
+			for (var sec in times) {
+				if (times[sec] == this.value) {
+					this.value = sec;
+					break;
+				}
+			}
+		}
+		
+		var dataList = document.createElement("DATALIST");
+		dataList.id = "PrettyCards_TimeoutList";
+		for (var sec in times) {
+			dataList.innerHTML += '<option value="' + times[sec] + '"></option>';
+		}
+		//dataList.innerHTML += '<option value="-1"><input type="number"></input></option>';
+		
+		/*
+		var select = document.createElement("SELECT");
+		select.id = "PrettyCards_Timeout";
+		for (var sec in times) {
+			select.innerHTML += '<option value="' + sec + '">' + times[sec] + '</option>';
+		}
+		select.innerHTML += '<option value="-1"><input type="number"></input></option>';
+		*/
+		
+		var button = document.createElement("BUTTON"); //<button class="btn btn-primary" onclick="">Timeout!</button>
+		button.className = "btn btn-primary";
+		button.innerHTML = "Timeout!";
+		button.onclick = function() {
+			var val = $('#PrettyCards_Timeout').val();
+			for (var sec in times) {
+				if (times[sec] == val) {
+					val = sec;
+					break;
+				}
+			}
+			console.log("timeout", String(user.id), val);
+			window.timeout(String(user.id), val);
+		}
+		modContainer.appendChild(input);
+		modContainer.appendChild(button);
+		modContainer.appendChild(dataList);
+	}
+	column1.appendChild(modContainer);
 	/////////////
 	
 	// Column 2

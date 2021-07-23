@@ -32,23 +32,27 @@ settings.packs = PrettyCards_plugin.settings().add({
         'default': true, // default value
     });
 
+
 settings.replace_soul_selection = PrettyCards_plugin.settings().add({
         'key': 'replace_soul_selection',
-        'name': 'Replace Soul Selection', // Name in settings page
+        'name': 'Replace Soul Selection.', // Name in settings page
+		'note': 'Warning! Currently does nothing. I dunno if I will reimplement this in the future.',
         'type': 'boolean',
         'refresh': true, // true to add note "Will require you to refresh the page"
         'default': true, // default value
     });
 
+
 settings.easter_egg_cards = PrettyCards_plugin.settings().add({
         'key': 'enable_easter_egg_cards',
         'name': 'Enable Custom Easter Egg Cards', // Name in settings page
-        'note': 'Crossover cards created by me.<br>Warning! Doesn\'t always work (for some reason)!',
+        'note': 'Crossover cards created by me.<br>Warning! Currently does nothing. I dunno if I will reimplement them in the future.',
         'type': 'boolean',
         'refresh': true, // true to add note "Will require you to refresh the page"
         'default': false, // default value
     });
 
+/*
 settings.debug_mode = PrettyCards_plugin.settings().add({
         'key': 'debug_mode',
         'name': 'Enable Debug Mode', // Name in settings page
@@ -56,5 +60,6 @@ settings.debug_mode = PrettyCards_plugin.settings().add({
         'refresh': true, // true to add note "Will require you to refresh the page"
         'default': false, // default value
     });
+*/
 
 export {PrettyCards_plugin, settings};
