@@ -1,21 +1,25 @@
 
+
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
+import {CustomCardsDictionary} from "/src/libraries/custom_cards/custom_cards_dictionary.js";
+import {SetUpFilters} from "/src/libraries/custom_cards/custom_card_filters.js"
+
+import {} from "/src/libraries/custom_cards/custom_cards_ddlc.js"
 
 var bonusExtensions = ["DDLC", "LUNA"];
 var bonusTribes = ["CHIBI", "DOKI", "CHRSPELL", "MELISSAATTACK"];
-var customCardsStart = 2000;
 
-
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b6c7dac53c2af7f56eb0305594d9e824f174ebb5/css/CustomCards.css");
 
 if (settings.easter_egg_cards.value()) {
 
 	PrettyCards_plugin.events.on("appendCard()", function(data) {
 		var html$ = data.element;
 		var card = data.card;
-		if (card.fixedId >= customCardsStart) {
+		if (card.fixedId >= CustomCardsDictionary.customCardsStart) {
 			html$.addClass("ext_" + card.extension);
-			html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
+			html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + ".png') no-repeat");
 			if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
 				html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
 			};
@@ -34,34 +38,59 @@ if (settings.easter_egg_cards.value()) {
 		}
 	});
 	
-	/*
-	PrettyCards_plugin.events.on('Deck:Change', function(data) {
-		console.log("It worked!", data);
-		for (var i=0; i < _CustomCards.length; i++) {
-			window.allCards.push(_CustomCards[i]);
-			if (_CustomCards[i].rarity !== "GENERATED") {
-				//var shiny = utility.completeCopy(_CustomCards[i]);
-				//shiny.shiny = true;
-				window.collection.push(_CustomCards[i]);
-				//window.collection.push(shiny);
-				for (var key in window.deckCollections) {
-					window.deckCollections[key].push(_CustomCards[i]);
-					//window.deckCollections[key].push(shiny);
+	function AddAllCards() {
+		for (var i=0; i < CustomCardsDictionary.customCards.length; i++) {
+			var card = CustomCardsDictionary.customCards[i];
+			window.allCards.push(card);
+		}
+	}
+	
+	function AddCollection() {
+		
+		var isDecks = underscript.onPage("Decks");
+		for (var i=0; i < CustomCardsDictionary.customCards.length; i++) {
+			var card = CustomCardsDictionary.customCards[i];
+			if (card.rarity !== "TOKEN" || !isDecks) {
+				console.log(card);
+				var shiny = utility.completeCopy(card);
+				shiny.shiny = true;
+				window.collection.push(card);
+				window.collection.push(shiny);
+				if (isDecks) {
+					for (var key in window.deckCollections) {
+						window.deckCollections[key].push(card);
+						window.deckCollections[key].push(shiny);
+					}
 				}
 			}
 		}
-		console.log("underscript.onPage('Decks')", underscript.onPage("Decks"));
-		if (underscript.onPage("Decks")) {
+		
+		if (isDecks) {
 			for (var key in window.deckCollections) {
-			deckCollections[key].sort(function (a, b) {
-				return compare(a.cost, b.cost) || $.i18n('card-name-' + a.id, 1).localeCompare($.i18n('card-name-' + b.id, 1)) || (a.shiny - b.shiny);
-			 });
-			console.log("Deck Collection", key, deckCollections[key]);
+				window.deckCollections[key].sort(function (a, b) {
+					return compare(a.cost, b.cost) || $.i18n('card-name-' + a.id, 1).localeCompare($.i18n('card-name-' + b.id, 1)) || (a.shiny - b.shiny);
+				});
+				//console.log("Deck Collection", key, deckCollections[key]);
 			}
-			//refreshDeckList();
-			console.log("Decks page insertion complete!");
 		}
+		
+		window.collection.sort(function (a, b) {
+			return compare(a.cost, b.cost) || $.i18n('card-name-' + a.id, 1).localeCompare($.i18n('card-name-' + b.id, 1)) || (a.shiny - b.shiny);
+		});
+		
+		setTimeout(applyFilters, 100);
+	}
+	
+	PrettyCards_plugin.events.on('Deck:Loaded Craft:Loaded', function(data) {
+		AddCollection();
 	});
-	*/
-	console.log("CardsLoad event added!");
+	
+	window.document.addEventListener("allCardsReady", function() {
+		AddAllCards();
+	});
+	
+	if (underscript.onPage("Decks") || underscript.onPage("Crafting")) {
+		SetUpFilters();
+	}
+	
 }

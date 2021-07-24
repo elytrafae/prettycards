@@ -1,5 +1,6 @@
 
 class Utility {
+	
 	loadCSSFromLink(url) {
 		var e = document.createElement("link");
 		e.rel  = 'stylesheet';
@@ -52,7 +53,7 @@ class Utility {
 				copy[id] = object[id];
 			}
 		}
-		return object;
+		return copy;
 	}
 	
 	// This. Code. Is. ANCIENT. What is up with this, Onu!?!?

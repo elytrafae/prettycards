@@ -22,6 +22,7 @@ window.PrettyCards_plugin = PrettyCards_plugin;
 	- For some reason it does not work on private messages. Fixed!
 	- Underscript: Right-Click, then Profile shows the default profile screen. Fixed by overriding getInfo.
 	- Add Friend/Unfriend, Private Message, Spectate.
+	- Added Admin controls.
 */
 
 var leaderboard = [];
