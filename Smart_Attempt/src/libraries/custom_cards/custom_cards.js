@@ -12,6 +12,27 @@ var bonusTribes = ["CHIBI", "DOKI", "CHRSPELL", "MELISSAATTACK"];
 
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b6c7dac53c2af7f56eb0305594d9e824f174ebb5/css/CustomCards.css");
 
+window.getResizedFontSize = function(container, maxHeight) {
+	console.log("Start: ", container);
+    var fontSize = 12;
+    var max = 10;
+    var i = 0;
+    var $clonedContainer = container.parent().clone();
+    $clonedContainer.appendTo('body');
+    $clonedContainer.css('font-size', fontSize + 'px');
+    var $clonedContainerDiv = $clonedContainer.find('div');
+	console.log($clonedContainerDiv.outerHeight());
+    while ($clonedContainerDiv.outerHeight() >= maxHeight && i < max) {
+        fontSize = fontSize - 0.5;
+        $clonedContainer.css('font-size', fontSize + 'px');
+        i++;
+		console.log(fontSize, i);
+    }
+    $clonedContainer.remove();
+	console.log("Return", fontSize);
+    return fontSize;
+}
+
 if (settings.easter_egg_cards.value()) {
 
 	PrettyCards_plugin.events.on("appendCard()", function(data) {
@@ -26,8 +47,17 @@ if (settings.easter_egg_cards.value()) {
 			var cardNameDiv$ = html$.find('.cardName div');
 			var cardDescDiv$ = html$.find('.cardDesc div');
 
-			//cardNameDiv$.css('font-size', getResizedFontSize(cardNameDiv$, 25));
-			//cardDescDiv$.css('font-size', getResizedFontSize(cardDescDiv$, 81));
+			//console.log(getResizedFontSize(cardNameDiv$, 25) + "px");
+			console.log("Name Resize Start ", card.name);
+			var nameSize = getResizedFontSize(cardNameDiv$, 25);
+			cardNameDiv$.css('font-size', (nameSize + "px"));
+			console.log("cardNameDiv font-size", nameSize + "px");
+			
+			console.log("Description Resize Start ", card.name);
+			var descSize = getResizedFontSize(cardDescDiv$, 81);
+			cardDescDiv$.css('font-size', (descSize + "px"));
+			console.log("cardDescDiv font-size", descSize + "px");
+			
 			var tribe_elements = html$.find(".cardTribes").children();
 			for (var i=0; i < card.tribes.length; i++) {
 				var tribe = card.tribes[i];

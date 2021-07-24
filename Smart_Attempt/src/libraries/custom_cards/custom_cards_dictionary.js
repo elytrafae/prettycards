@@ -133,7 +133,8 @@ $.i18n().load( {
 			'tribe-chibi' : '{{PLURAL:$1|Chibi|Chibis}}',
 			'tribe-doki' : '{{PLURAL:$1|Doki|Dokis}}',
 			'tribe-chrspell' : '{{PLURAL:$1|.chr spell|.chr spells}}',
-			'tribe-melissaattack' : '{{PLURAL:$1|Melissa\'s Attack|Melissa\'s Attacks}}'
+			'tribe-melissaattack' : '{{PLURAL:$1|Melissa\'s Attack|Melissa\'s Attacks}}',
+			'tribe-yuriknife' : '{{PLURAL:$1|Yuri\'s Knife|Yuri\'s Knives}}'
 		}
 } );
 

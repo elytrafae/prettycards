@@ -183,6 +183,8 @@ CustomCardsDictionary.AddCustomArtifact("File Explorer",
 	Order of {{TRIBE:CHRSPELL|2}}: ${CustomCardsDictionary.DescriptionCard("Sayori.chr", 1)} > ${CustomCardsDictionary.DescriptionCard("Natsuki.chr", 1)} > ${CustomCardsDictionary.DescriptionCard("Yuri.chr", 1)} > ${CustomCardsDictionary.DescriptionCard("Monika.chr", 1)} > Start over.`
 );
 
+// Advanced Dokis
+
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Just Monika|Just Monikas}}",
 	image: "Just_Monika",
@@ -192,6 +194,63 @@ CustomCardsDictionary.AddCustomCard({
 	description: "{{KW:MAGIC}}: Add the " + CustomCardsDictionary.DescriptionArtifact("File Explorer") + " artifact. Whenever you summon a monster, trigger its {{KW:SUICIDE}} effect.",
 	extension: "DDLC",
 	rarity: "DETERMINATION"
+});
+
+CustomCardsDictionary.AddCustomCard({
+	name: "{{PLURAL:$1|Sad Sayori|Sad Sayoris}}",
+	image: "Depressed_Sayori",
+	cost: 6,
+	attack: 2,
+	hp: 5,
+	description: "{{KW:MAGIC}}: Enemies cannot be healed or receive extra {{HP}} until the start of your next turn. {{KW:SUICIDE}}: Heal all allies by 4.",
+	extension: "DDLC",
+	rarity: "LEGENDARY"
+});
+
+CustomCardsDictionary.AddCustomCard({
+	name: "{{PLURAL:$1|Club President Sayori|Club President Sayoris}}",
+	image: "Club_President_Sayori",
+	cost: 8,
+	attack: 6,
+	hp: 6,
+	description: "{{KW:MAGIC}}: Kill all ally monsters. Shuffle two random {{TRIBE:CHRSPELL|2}} into your deck for each of them.",
+	extension: "DDLC",
+	rarity: "LEGENDARY"
+});
+
+CustomCardsDictionary.AddCustomCard({
+	name: "{{PLURAL:$1|Obsessed Yuri|Obsessed Yuris}}",
+	image: "Obsessed_Yuri",
+	cost: 8,
+	attack: 4,
+	hp: 5,
+	armor: true,
+	description: "{{KW:ARMOR}}. Whenever this takes {{DMG}}, shuffle a random {{TRIBE:YURIKNIFE}} into your deck. {{KW:SUICIDE}}: Cast 3 random {{TRIBE:YURIKNIFE|2}} on random targets.",
+	extension: "DDLC",
+	rarity: "LEGENDARY"
+});
+
+CustomCardsDictionary.AddCustomCard({
+	name: "{{PLURAL:$1|Corrupted Natsuki|Corrupted Natsukis}}",
+	image: "Corrupted_Natsuki",
+	cost: 10,
+	attack: 8,
+	hp: 2,
+	haste: true,
+	description: "{{KW:HASTE}}. {{KW:SUICIDE}}: If this killed an enemy monster, deal the excess {{DMG}} this received to the enemy player.",
+	extension: "DDLC",
+	rarity: "LEGENDARY"
+});
+
+CustomCardsDictionary.AddCustomCard({
+	name: "{{PLURAL:$1|Club President Monika|Club President Monikas}}",
+	image: "Club_President_Monika",
+	cost: 5,
+	attack: 4,
+	hp: 4,
+	description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} {{KW:SUICIDE}} monsters from your dustpile. Trigger their {{KW:SUICIDE}} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
+	extension: "DDLC",
+	rarity: "LEGENDARY"
 });
 
 export {};
