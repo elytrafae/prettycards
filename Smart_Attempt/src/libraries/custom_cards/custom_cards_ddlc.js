@@ -152,7 +152,7 @@ CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Natsuki.chr|Natsuki.chrs}}",
 	image: "NatsukiCHR",
 	cost: 0,
-	description: "{{KW:TURBO}}: Summon a random 5-{{COST}} monster, trigger its {{KW:MAGIC}}, burn this and draw a card.",
+	description: "{{KW:TURBO}}: Add a random 5-{{COST}} monster from your dustpile to your hand, give it -4 {{COST}}, burn this and draw a card.",
 	tribes: ["CHRSPELL"],
 	extension: "DDLC",
 	rarity: "TOKEN"
