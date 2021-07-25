@@ -188,7 +188,8 @@ CustomCardsDictionary.AddCustomArtifact("File Explorer",
 
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Just Monika|Just Monikas}}",
-	image: "Just_Monika_Full",
+	image: "Just_Monika_Breaking",
+	background: "Just_Monika_Breaking_BG",
 	cost: 9,
 	attack: 6,
 	hp: 6,

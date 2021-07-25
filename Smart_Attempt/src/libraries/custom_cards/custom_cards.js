@@ -47,6 +47,11 @@ if (settings.easter_egg_cards.value()) {
 			if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
 				html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
 			};
+			
+			if (card.background) {
+				
+			}
+			
 			var cardNameDiv$ = html$.find('.cardName div');
 			var cardDescDiv$ = html$.find('.cardDesc div');
 			
