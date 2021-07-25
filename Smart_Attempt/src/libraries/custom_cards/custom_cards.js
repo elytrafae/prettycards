@@ -10,7 +10,7 @@ import {} from "/src/libraries/custom_cards/custom_cards_ddlc.js"
 var bonusExtensions = ["DDLC", "LUNA"];
 var bonusTribes = ["CHIBI", "DOKI", "CHRSPELL", "MELISSAATTACK"];
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b6c7dac53c2af7f56eb0305594d9e824f174ebb5/css/CustomCards.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a1ff9abe8c10f03bb1530d8a1076bee0eadeb3d5/css/CustomCards.css");
 
 function test_getResizedFontSize(container, maxHeight) {
 	console.log("Start: ", container);
@@ -49,7 +49,11 @@ if (settings.easter_egg_cards.value()) {
 			};
 			
 			if (card.background) {
-				
+				var bg = $('<div class="breakingSkinBackground"></div>');
+				bg.css("background", "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.background + ".png') no-repeat");
+				bg.css("background-size", "contain");
+				bg.css("background-position", "center");
+				html$.append(bg);
 			}
 			
 			var cardNameDiv$ = html$.find('.cardName div');

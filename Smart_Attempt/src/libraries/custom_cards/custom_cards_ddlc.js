@@ -195,7 +195,7 @@ CustomCardsDictionary.AddCustomCard({
 	hp: 6,
 	description: "{{KW:MAGIC}}: Add the " + CustomCardsDictionary.DescriptionArtifact("File Explorer") + " artifact. Whenever you summon a monster, trigger its {{KW:SUICIDE}} effect.",
 	extension: "DDLC",
-	typeSkin: 1,
+	typeSkin: 2,
 	rarity: "DETERMINATION"
 });
 
