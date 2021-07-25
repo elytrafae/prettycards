@@ -173,6 +173,8 @@ var filters_data = {
 	*/
 };
 
+var oldIsRemoved;
+
 function SetUpFilters() {
 	var filterTd = document.getElementsByClassName("filter")[0].parentElement;
 	var customFiltersP = document.createElement("P");
@@ -201,9 +203,12 @@ function SetUpFilters() {
 			}
 		}
 	}
+	
+	oldIsRemoved = window.isRemoved;
+	window.isRemoved = newIsRemoved;
 }
 
-var oldIsRemoved = window.isRemoved;
+
 
 // More efficient, but would both break Underscript AND it would break without specific Underscript settings.
 /*
@@ -251,7 +256,7 @@ window.isRemoved = function(card) {
 	return false;
 }*/
 
-window.isRemoved = function(card) {
+function newIsRemoved(card) {
 	
 	var response = oldIsRemoved(card);
 	var localResult = false;

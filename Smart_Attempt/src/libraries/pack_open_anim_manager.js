@@ -42,6 +42,7 @@ settings.packs_animation_template = PrettyCards_plugin.settings().add({
 	//'disabled': boolean or `function(): boolean`, // true to disable setting
 	'default': settingsoptions[0], // default value
 	'options': settingsoptions, // Options for type 'select'
+	'refresh': false,
 	'reset': true, // Adds a reset button (sets to default)
 	'onChange': ChangeTemplate, // called when value is changed
 });

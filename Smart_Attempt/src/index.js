@@ -8,6 +8,7 @@ import {} from "./libraries/private_games/private_game_host.js";
 import {} from "./libraries/private_games/private_game_recipient.js";
 
 import {} from "/src/libraries/custom_cards/custom_cards.js";
+import {} from "/src/libraries/custom_cards/breaking_skin_hover.js";
 
 import {InitPacks} from "./page_specific/packs.js";
 

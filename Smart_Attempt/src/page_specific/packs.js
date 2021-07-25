@@ -43,6 +43,7 @@ settings.packs_page_template = PrettyCards_plugin.settings().add({
 	'default': settingsoptions[0], // default value
 	'options': settingsoptions, // Options for type 'select'
 	'reset': true, // Adds a reset button (sets to default)
+	'refresh': false,
 	'onChange': ChangeTemplate, // called when value is changed
 });
 

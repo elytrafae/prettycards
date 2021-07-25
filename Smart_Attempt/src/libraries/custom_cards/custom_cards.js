@@ -53,7 +53,7 @@ if (settings.easter_egg_cards.value()) {
 				bg.css("background", "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.background + ".png') no-repeat");
 				bg.css("background-size", "contain");
 				bg.css("background-position", "center");
-				html$.append(bg);
+				html$.prepend(bg);
 			}
 			
 			var cardNameDiv$ = html$.find('.cardName div');
