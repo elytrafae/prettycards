@@ -59,7 +59,7 @@ CustomCardsDictionary.AddCustomCard({
 	cost: 4,
 	attack: 3,
 	hp: 3,
-	description: "Immune to incoming effects. {{KW:SUICIDE}}: Deal 1 {{DMG}} to all enemy monsters. If they have 2 or more status effects, deal 3 {{DMG}} instead.",
+	description: "{{KW:MAGIC}}: Draw a {{TRIBE:DOKI|1}} from your deck. {{KW:SUICIDE}}: Deal 1 {{DMG}} to all enemy monsters. Damaged targets get -3 Max {{HP}} instead.",
 	tribes: ["DOKI"],
 	extension: "DDLC",
 	rarity: "EPIC"
@@ -117,7 +117,7 @@ CustomCardsDictionary.AddCustomCard({
 	attack: 3,
 	hp: 7,
 	taunt: true,
-	description: "{{KW:TAUNT}}. Whenever a {{KW:SUICIDE}} effect is activated, add a 1/1 copy of the triggering monster into your deck and give it +1/+1 for every {{TRIBE:DOKI|1}} in your hand.",
+	description: "{{KW:TAUNT}}. {{KW:TURN-END}}: Add a copy of every unique monster to your deck whose {{KW:SUICIDE}} effect was triggered this turn.",
 	//tribes: ["DOKI"],
 	extension: "DDLC",
 	rarity: "EPIC"
@@ -180,6 +180,7 @@ CustomCardsDictionary.AddCustomCard({
 
 CustomCardsDictionary.AddCustomArtifact("File Explorer", 
 	`{{KW:TURN-END}}: If a monster died this turn, add the next {{TRIBE:CHRSPELL|1}} to the top of your deck. Add an additional one for every ally {{KW:SUICIDE}} effect triggered this turn. 
+	
 	Order of {{TRIBE:CHRSPELL|2}}: ${CustomCardsDictionary.DescriptionCard("Sayori.chr", 1)} > ${CustomCardsDictionary.DescriptionCard("Natsuki.chr", 1)} > ${CustomCardsDictionary.DescriptionCard("Yuri.chr", 1)} > ${CustomCardsDictionary.DescriptionCard("Monika.chr", 1)} > Start over.`
 );
 
@@ -187,12 +188,13 @@ CustomCardsDictionary.AddCustomArtifact("File Explorer",
 
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Just Monika|Just Monikas}}",
-	image: "Just_Monika",
+	image: "Just_Monika_Full",
 	cost: 9,
 	attack: 6,
 	hp: 6,
 	description: "{{KW:MAGIC}}: Add the " + CustomCardsDictionary.DescriptionArtifact("File Explorer") + " artifact. Whenever you summon a monster, trigger its {{KW:SUICIDE}} effect.",
 	extension: "DDLC",
+	typeSkin: 1,
 	rarity: "DETERMINATION"
 });
 
@@ -202,7 +204,7 @@ CustomCardsDictionary.AddCustomCard({
 	cost: 6,
 	attack: 2,
 	hp: 5,
-	description: "{{KW:MAGIC}}: Enemies cannot be healed or receive extra {{HP}} until the start of your next turn. {{KW:SUICIDE}}: Heal all allies by 4.",
+	description: "{{KW:MAGIC}}: Enemies cannot be healed or receive extra {{HP}} until the start of your next turn. {{KW:SUICIDE}}: Give +3 {{HP}} to every ally.",
 	extension: "DDLC",
 	rarity: "LEGENDARY"
 });

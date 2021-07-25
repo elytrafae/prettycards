@@ -89,7 +89,7 @@ var filters_data = [
 */
 
 var filters_data = {
-	
+	/*
 	rarity: [
 		{
 			id : "baseRarityInput",
@@ -141,6 +141,7 @@ var filters_data = {
 			val : 0
 		}
 	],
+	*/
 	extension: [
 		{
 			id : "undertaleInput",
@@ -159,6 +160,7 @@ var filters_data = {
 			val: "DDLC"
 		}
 	],
+	/*
 	shiny: [
 		{
 			id : "shinyInput",
@@ -168,6 +170,7 @@ var filters_data = {
 			val : true
 		}
 	]
+	*/
 };
 
 function SetUpFilters() {
@@ -183,7 +186,6 @@ function SetUpFilters() {
 		for (var i=filters.length-1; i >= 0; i--) {
 			var filter = filters[i];
 			var bannedFrom = filter.banFromPage || [];
-			console.log(window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
 			if (!bannedFrom.includes( window.location.href.substr(window.location.href.lastIndexOf('/') + 1) )) {
 				var ele = document.getElementById(filter.id);
 				if (ele) {
@@ -194,7 +196,7 @@ function SetUpFilters() {
 					$customFiltersP.append(label);
 				}
 			} else {
-				console.log(filter.id, "banned!");
+				//console.log(filter.id, "banned!");
 				filters.splice(i, 1);
 			}
 		}
@@ -203,6 +205,8 @@ function SetUpFilters() {
 
 var oldIsRemoved = window.isRemoved;
 
+// More efficient, but would both break Underscript AND it would break without specific Underscript settings.
+/*
 window.isRemoved = function(card) {
 	for (var filterType in filters_data) {
 		var filters = filters_data[filterType];
@@ -227,7 +231,83 @@ window.isRemoved = function(card) {
 		}
 	}
 	
+	// Search bar
+	var searchValue = $('#searchInput').val().toLowerCase();
+	if (searchValue.length > 0) {
+		var findableString = "";
+		findableString += window.$.i18n('card-name-' + card.id, 1);
+		findableString += window.$.i18n('card-' + card.id);
+		for (var i = 0; i < card.tribes.length; i++) {
+			var tribe = card.tribes[i];
+			findableString += window.$.i18n('tribe-' + tribe.toLowerCase().replace(/_/g, '-'));
+		}
+		if (card.hasOwnProperty('soul')) {
+			findableString += window.$.i18n('soul-' + card.soul.name.toLowerCase().replace(/_/g, '-'));
+		}
+		var finalString = findableString.toLowerCase().replace(/(<.*?>)/g, '');
+		return !finalString.includes(searchValue);
+	}
+	
 	return false;
+}*/
+
+window.isRemoved = function(card) {
+	
+	var response = oldIsRemoved(card);
+	var localResult = false;
+	
+	for (var filterType in filters_data) {
+		var filters = filters_data[filterType];
+		var switches = [];
+		for (var i=0; i < filters.length; i++) {
+			var filter = filters[i];
+			var ele = filter.element;
+			if (ele.prop('checked')) {
+				switches[i] = filter.val;
+			}
+		}
+		if (switches.length > 0 && !switches.includes(card[filterType])) {
+			localResult = true;
+		}
+		if (switches.length == 0) {
+			for (var i=0; i < filters.length; i++) {
+				var filter = filters[i];
+				if (filter.notIncludeDefault && card[filterType] == filter.val) {
+					localResult = true;
+				}
+			}
+		}
+	}
+	
+	if (response == localResult) {
+		return response;
+	}
+	
+	if (localResult) {
+		return localResult;
+	}
+	
+	// At this point we can assume that multiple inputs of the same type were pressed.
+	for (var filterType in filters_data) {
+		var filters = filters_data[filterType];
+		//var switches = [];
+		var x = card[filterType];
+		for (var i=0; i < filters.length; i++) {
+			var filter = filters[i];
+			var ele = filter.element;
+			if (ele.prop('checked')) {
+				//switches[i] = filter.val;
+				card[filterType] = filter.val;
+				if (!oldIsRemoved(card)) {
+					card[filterType] = x;
+					return false;
+				}
+			}
+		}
+		card[filterType] = x;
+	}
+	
+	return true;
 	
 }
 

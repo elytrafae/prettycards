@@ -12,7 +12,7 @@ var bonusTribes = ["CHIBI", "DOKI", "CHRSPELL", "MELISSAATTACK"];
 
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b6c7dac53c2af7f56eb0305594d9e824f174ebb5/css/CustomCards.css");
 
-window.getResizedFontSize = function(container, maxHeight) {
+function test_getResizedFontSize(container, maxHeight) {
 	console.log("Start: ", container);
     var fontSize = 12;
     var max = 10;
@@ -40,21 +40,27 @@ if (settings.easter_egg_cards.value()) {
 		var card = data.card;
 		if (card.fixedId >= CustomCardsDictionary.customCardsStart) {
 			html$.addClass("ext_" + card.extension);
+			//if (card.extension == "DDLC") {
+			//	html$.find().css("font-family", "Aller");
+			//}
 			html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + ".png') no-repeat");
 			if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
 				html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
 			};
 			var cardNameDiv$ = html$.find('.cardName div');
 			var cardDescDiv$ = html$.find('.cardDesc div');
+			
+			cardNameDiv$.css("font-family", "Aller");
+			cardDescDiv$.css("font-family", "Aller");
 
 			//console.log(getResizedFontSize(cardNameDiv$, 25) + "px");
 			console.log("Name Resize Start ", card.name);
-			var nameSize = getResizedFontSize(cardNameDiv$, 25);
+			var nameSize = test_getResizedFontSize(cardNameDiv$, 25);
 			cardNameDiv$.css('font-size', (nameSize + "px"));
 			console.log("cardNameDiv font-size", nameSize + "px");
 			
 			console.log("Description Resize Start ", card.name);
-			var descSize = getResizedFontSize(cardDescDiv$, 81);
+			var descSize = test_getResizedFontSize(cardDescDiv$, 81);
 			cardDescDiv$.css('font-size', (descSize + "px"));
 			console.log("cardDescDiv font-size", descSize + "px");
 			
