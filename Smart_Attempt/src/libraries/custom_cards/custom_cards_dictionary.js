@@ -75,7 +75,7 @@ class _CustomCardsDictionary {
 	}
 	
 	AddCustomArtifact(name, description) {
-		var artifact = {id : customArtifactStart + customArtifacts.length, name : name, description : description};
+		var artifact = {id : customArtifactStart + this.customArtifacts.length, name : name, description : description};
 		
 		$.i18n().load( {
 		en: {

@@ -21,12 +21,12 @@ function test_getResizedFontSize(container, maxHeight) {
     $clonedContainer.appendTo('body');
     $clonedContainer.css('font-size', fontSize + 'px');
     var $clonedContainerDiv = $clonedContainer.find('div');
-	console.log($clonedContainerDiv.outerHeight());
+	console.log("Before While: ", fontSize, i, $clonedContainerDiv.outerHeight());
     while ($clonedContainerDiv.outerHeight() >= maxHeight && i < max) {
         fontSize = fontSize - 0.5;
         $clonedContainer.css('font-size', fontSize + 'px');
         i++;
-		console.log(fontSize, i);
+		console.log("While: ", fontSize, i, $clonedContainerDiv.outerHeight());
     }
     $clonedContainer.remove();
 	console.log("Return", fontSize);
@@ -43,6 +43,7 @@ if (settings.easter_egg_cards.value()) {
 			//if (card.extension == "DDLC") {
 			//	html$.find().css("font-family", "Aller");
 			//}
+			
 			html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + ".png') no-repeat");
 			if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
 				html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
@@ -56,6 +57,7 @@ if (settings.easter_egg_cards.value()) {
 				html$.prepend(bg);
 			}
 			
+			/*
 			var cardNameDiv$ = html$.find('.cardName div');
 			var cardDescDiv$ = html$.find('.cardDesc div');
 			
@@ -72,7 +74,7 @@ if (settings.easter_egg_cards.value()) {
 			var descSize = test_getResizedFontSize(cardDescDiv$, 81);
 			cardDescDiv$.css('font-size', (descSize + "px"));
 			console.log("cardDescDiv font-size", descSize + "px");
-			
+			*/
 			var tribe_elements = html$.find(".cardTribes").children();
 			for (var i=0; i < card.tribes.length; i++) {
 				var tribe = card.tribes[i];
@@ -137,5 +139,9 @@ if (settings.easter_egg_cards.value()) {
 	if (underscript.onPage("Decks") || underscript.onPage("Crafting")) {
 		SetUpFilters();
 	}
+	
+	var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
+	console.log("Aller Loader!", allerLoader);
+	window.$("body").append(allerLoader); 
 	
 }

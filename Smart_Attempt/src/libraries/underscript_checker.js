@@ -21,6 +21,7 @@ if (typeof(underscript) === "undefined") {
 }
 
 var PrettyCards_plugin = underscript.plugin("PrettyCards");
+//var PrettyCards_plugin = underscript.plugin('<span class="RARE">PrettyCards</span>');
 //console.log("Plugin: ", PrettyCards_plugin);
 
 var settings = [];

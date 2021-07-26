@@ -7,7 +7,7 @@
 // @supportURL  https://github.com/CMD-God/prettycards
 // @match       https://*.undercards.net/*
 // @exclude     https://*.undercards.net/*/*
-// @updateURL   https://unpkg.com/prettycards/dist/prettycards.meta.js
+// @updateURL   https://github.com/CMD-God/prettycards/releases/latest/download/prettycards.user.js
 // @downloadURL https://unpkg.com/prettycards/dist/prettycards.user.js
 // @grant       none
 // ==/UserScript==

@@ -2,6 +2,7 @@
 import {} from "./libraries/jquery_additions.js";
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {} from "/src/libraries/updater.js";
 
 import {} from "./libraries/chat/user_info.js";
 import {} from "./libraries/private_games/private_game_host.js";
