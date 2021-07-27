@@ -12,6 +12,8 @@ import {} from "/src/libraries/custom_cards/custom_cards.js";
 import {} from "/src/libraries/custom_cards/breaking_skin_hover.js";
 import {} from "/src/libraries/custom_cards/theme_song_viewer.js";
 
+import {} from "./libraries/main_menu.js";
+
 import {InitPacks} from "./page_specific/packs.js";
 
 
