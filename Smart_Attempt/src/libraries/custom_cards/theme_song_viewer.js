@@ -14,8 +14,13 @@ settings.theme_song_preview = PrettyCards_plugin.settings().add({
 	'default': false, // default value
 });
 
+var cardExceptions = {
+	358 : "/sounds/load.wav",
+	351 : "/sounds/gasterBlaster.wav"
+}
+
 const audio = new Audio();
-console.log("Audio", audio);
+//console.log("Audio", audio);
 
 if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 
@@ -23,7 +28,10 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 		var html$ = data.element;
 		var card = data.card;
 		var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
-		if ("hasThemeSong" in card) {
+		if (card.id in cardExceptions) { // Load and Gaster Blaster respectively.
+			//console.log(card, "This is a Gaster Blaster or a Load!");
+			doesCardHaveTheme = true;
+		} else if ("hasThemeSong" in card) {
 			doesCardHaveTheme = card.hasThemeSong;
 		}
 		
@@ -38,9 +46,13 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 			var _SRC = "";
 			if (customExtension != null) {
 				_SRC = customExtension.themeSongFolder + $.i18n('card-name-' + card.id, 1).split(' ').join('_') + '.ogg';
-				console.log(card, card.id, $.i18n('card-name-' + card.id, 1), _SRC);
+				//console.log(card, card.id, $.i18n('card-name-' + card.id, 1), _SRC);
 			} else {
-				_SRC = "/musics/cards/" + $.i18n('card-name-' + card.id, 1).split(' ').join('_') + ".ogg";
+				if (card.id in cardExceptions) {
+					_SRC = cardExceptions[card.id];
+				} else {
+					_SRC = "/musics/cards/" + $.i18n('card-name-' + card.id, 1).split(' ').join('_') + ".ogg";
+				}
 			}
 			const SRC = _SRC;
 			var button = $('<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer"></span>');

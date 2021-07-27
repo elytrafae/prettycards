@@ -7,7 +7,7 @@ import {SetUpFilters} from "/src/libraries/custom_cards/custom_card_filters.js"
 
 import {} from "/src/libraries/custom_cards/custom_cards_ddlc.js"
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a1ff9abe8c10f03bb1530d8a1076bee0eadeb3d5/css/CustomCards.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@8dca1debaca4bce1363a1d5f38ef576639a41f58/css/CustomCards.css");
 
 if (settings.easter_egg_cards.value()) {
 
@@ -17,7 +17,6 @@ if (settings.easter_egg_cards.value()) {
 		if (card.fixedId >= CustomCardsDictionary.customCardsStart) {
 			html$.addClass("ext_" + card.extension);
 			
-			console.log(CustomCardsDictionary.customExtensions);
 			var customExtension = null;
 			for (var i=0; i < CustomCardsDictionary.customExtensions.length; i++) {
 				var extension = CustomCardsDictionary.customExtensions[i];
@@ -81,7 +80,7 @@ if (settings.easter_egg_cards.value()) {
 		for (var i=0; i < CustomCardsDictionary.customCards.length; i++) {
 			var card = CustomCardsDictionary.customCards[i];
 			if (card.rarity !== "TOKEN" || !isDecks) {
-				console.log(card);
+				//console.log(card);
 				var shiny = utility.completeCopy(card);
 				shiny.shiny = true;
 				window.collection.push(card);
@@ -115,9 +114,14 @@ if (settings.easter_egg_cards.value()) {
 		AddCollection();
 	});
 	
-	window.document.addEventListener("allCardsReady", function() {
+	if (!window.allCards || window.allCards.length == 0) {
+		window.document.addEventListener("allCardsReady", function() {
+			AddAllCards();
+		});
+	} else {
 		AddAllCards();
-	});
+	}
+
 	
 	if (underscript.onPage("Decks") || underscript.onPage("Crafting")) {
 		SetUpFilters();
