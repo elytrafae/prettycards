@@ -63,3 +63,16 @@
 	-webkit-text-fill-color: transparent;
 	display: inline-block;
 }
+
+.card:hover .PrettyCards_CardThemeSongPlayer {
+	display: block;
+}
+
+.PrettyCards_CardThemeSongPlayer {
+	display: none;
+	font-size: 30px;
+	position: absolute;
+	top: 40px;
+	left: 14px;
+	z-index: 7;
+}

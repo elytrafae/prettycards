@@ -3,7 +3,12 @@ import {CustomCardsDictionary} from "/src/libraries/custom_cards/custom_cards_di
 
 // Extension
 
-CustomCardsDictionary.AddCustomCardExtension("DDLC", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/");
+CustomCardsDictionary.AddCustomCardExtension(
+	"DDLC", 
+	"https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/", 
+	"https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/",
+	"https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/cards/DDLC/",
+);
 
 // Tribes
 
@@ -76,6 +81,7 @@ CustomCardsDictionary.AddCustomCard({
 	rarity: "COMMON"
 });
 
+// Chibi MC sprite by GyleToTheRescue on Deviantart
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Chibi MC|Chibi MCs}}",
 	image: "Chibi_MC",
@@ -417,10 +423,11 @@ CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Traumatized MC|Traumatized MCs}}",
 	image: "Traumatized_MC",
 	cost: 6,
-	attack: 4,
+	attack: 3,
+	//creatorInfo: {typeCreator: 0, id: 69},
 	hp: 4,
 	taunt: true,
-	description: "{{KW:TAUNT}}. {{KW:DUST}}: Summon a random {{TRIBE:DOKI}} and trigger its {{KW:SUICIDE}} or {{KW:DUST}} effect.",
+	description: "{{KW:TAUNT}}. {{KW:DUST}}: Summon a random {{TRIBE:DOKI}} from your dustpile and trigger its {{KW:SUICIDE}} or {{KW:DUST}} effect.",
 	//description: "{{KW:SUICIDE}} monsters cost 1 less. {{KW:DUST}}: Summon a random {{TRIBE:DOKI}} and trigger its {{KW:SUICIDE}} or {{KW:DUST}} effect.",
 	extension: "DDLC",
 	rarity: "LEGENDARY"

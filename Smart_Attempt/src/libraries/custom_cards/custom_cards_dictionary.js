@@ -140,10 +140,8 @@ class _CustomCardsDictionary {
 		this.customTribes.push(tribe);
 	}
 	
-	// https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/'
-	// https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/"
-	AddCustomCardExtension(id, rarityIconFolder, cardImageFolder) {
-		var extension = {id: id.toUpperCase(), rarityIconFolder: rarityIconFolder, cardImageFolder: cardImageFolder};
+	AddCustomCardExtension(id, rarityIconFolder, cardImageFolder, themeSongFolder) {
+		var extension = {id: id.toUpperCase(), rarityIconFolder: rarityIconFolder, cardImageFolder: cardImageFolder, themeSongFolder: themeSongFolder};
 		
 		this.customExtensions.push(extension);
 	}

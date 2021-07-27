@@ -16,19 +16,20 @@ $.get("https://api.github.com/repos/CMD-God/prettycards/releases/latest", {}, fu
 				text: "There is a new version of PrettyCards available for download!<br>" + data.name,
 				footer: "Click here to update!",
 				onClose() {
-					sessionStorage.setItem("PrettyCards_UpdateToVersion", data.tag_name);
+					localStorage.setItem("PrettyCards_UpdateToVersion", data.tag_name);
 					window.open(data.assets[0].browser_download_url, '_blank').focus();
 				}
 			}
 		);
-	} else if (sessionStorage.getItem("PrettyCards_UpdateToVersion") == version) {
+	} else if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
+		console.log("Update Successful Toast!");
 		PrettyCards_plugin.toast(
 			{
-				title: "Update Successful: " + data.name,
-				text: data.body
+				title: "Update Successful!<br>" + data.name,
+				text: (data.body || "No patch notes attached")
 			}
 		);
-		sessionStorage.removeItem("PrettyCards_UpdateToVersion");
+		localStorage.removeItem("PrettyCards_UpdateToVersion");
 	}
 })
 

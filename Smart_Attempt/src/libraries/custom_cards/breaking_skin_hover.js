@@ -12,30 +12,9 @@ settings.breaking_skin_fix = PrettyCards_plugin.settings().add({
 	'default': false, // default value
 });
 
-/*
-function HoverHandle(html$, index) {
-	console.log("Hover handle!", index);
-	html$.find(".cardName").css("z-index", index);
-	html$.find(".cardCost").css("z-index", index);
-	html$.find(".cardDesc").css("z-index", index);
-	html$.find(".cardATK").css("z-index", index);
-	html$.find(".cardHP").css("z-index", index);
-}*/
 
-console.log(settings.breaking_skin_fix);
 if (settings.breaking_skin_fix.value()) {
-	/*
-	console.log("breaking_skin_fix is on!");
-	PrettyCards_plugin.events.on("appendCard()", function(data) {
-		const html$ = data.element;
-		var card = data.card;
-		console.log("CARD! CARD!", card.typeSkin, card.name);
-		if (card.typeSkin >= 2) {
-			console.log("Breaking card found!", card, html$);
-			html$.hover(function() {HoverHandle(html$, "7")}, function() {HoverHandle(html$, "5")});
-		}
-	});
-	*/
+
 	$("head").append(`<style>
 		.card.breaking-skin:hover .cardName {
 			z-index: 7;
