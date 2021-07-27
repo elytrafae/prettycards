@@ -11,6 +11,9 @@ class _CustomCardsDictionary {
 		this.customArtifacts = [];
 		this.customCardsStart = 2000;
 		this.customArtifactStart = 200;
+		
+		this.customTribes = [];
+		this.customExtensions = [];
 	}
 	
 	AddCustomCard(settings) {
@@ -125,8 +128,29 @@ class _CustomCardsDictionary {
 		return "{{CARD:" + (customCardsStart + this.customCards.length) + "|" + num + "}}";
 	}
 	
+	AddCustomTribe(id, name, icon) {
+		var tribe = {id: id.toUpperCase(), name: name, icon: icon};
+		
+		$.i18n().load({
+			en: {
+				['tribe-' + id.toLowerCase()] : name
+			}
+		});
+		
+		this.customTribes.push(tribe);
+	}
+	
+	// https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/'
+	// https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/"
+	AddCustomCardExtension(id, rarityIconFolder, cardImageFolder) {
+		var extension = {id: id.toUpperCase(), rarityIconFolder: rarityIconFolder, cardImageFolder: cardImageFolder};
+		
+		this.customExtensions.push(extension);
+	}
+	
 }
 
+/*
 // Tribes
 $.i18n().load( {
 	en: {
@@ -137,6 +161,7 @@ $.i18n().load( {
 			'tribe-yuriknife' : '{{PLURAL:$1|Yuri\'s Knife|Yuri\'s Knives}}'
 		}
 } );
+*/
 
 // Artifacts
 $.i18n().load( {

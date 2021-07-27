@@ -7,31 +7,7 @@ import {SetUpFilters} from "/src/libraries/custom_cards/custom_card_filters.js"
 
 import {} from "/src/libraries/custom_cards/custom_cards_ddlc.js"
 
-var bonusExtensions = ["DDLC", "LUNA"];
-var bonusTribes = ["CHIBI", "DOKI", "CHRSPELL", "MELISSAATTACK"];
-
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a1ff9abe8c10f03bb1530d8a1076bee0eadeb3d5/css/CustomCards.css");
-
-function test_getResizedFontSize(container, maxHeight) {
-	console.log("Start: ", container);
-    var fontSize = 12;
-    var max = 10;
-    var i = 0;
-    var $clonedContainer = container.parent().clone();
-    $clonedContainer.appendTo('body');
-    $clonedContainer.css('font-size', fontSize + 'px');
-    var $clonedContainerDiv = $clonedContainer.find('div');
-	console.log("Before While: ", fontSize, i, $clonedContainerDiv.outerHeight());
-    while ($clonedContainerDiv.outerHeight() >= maxHeight && i < max) {
-        fontSize = fontSize - 0.5;
-        $clonedContainer.css('font-size', fontSize + 'px');
-        i++;
-		console.log("While: ", fontSize, i, $clonedContainerDiv.outerHeight());
-    }
-    $clonedContainer.remove();
-	console.log("Return", fontSize);
-    return fontSize;
-}
 
 if (settings.easter_egg_cards.value()) {
 
@@ -40,46 +16,53 @@ if (settings.easter_egg_cards.value()) {
 		var card = data.card;
 		if (card.fixedId >= CustomCardsDictionary.customCardsStart) {
 			html$.addClass("ext_" + card.extension);
-			//if (card.extension == "DDLC") {
-			//	html$.find().css("font-family", "Aller");
-			//}
 			
-			html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + ".png') no-repeat");
-			if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
-				html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
-			};
-			
-			if (card.background) {
-				var bg = $('<div class="breakingSkinBackground"></div>');
-				bg.css("background", "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.background + ".png') no-repeat");
-				bg.css("background-size", "contain");
-				bg.css("background-position", "center");
-				html$.prepend(bg);
+			console.log(CustomCardsDictionary.customExtensions);
+			var customExtension = null;
+			for (var i=0; i < CustomCardsDictionary.customExtensions.length; i++) {
+				var extension = CustomCardsDictionary.customExtensions[i];
+				if (extension.id === card.extension) {
+					customExtension = extension;
+				}
 			}
 			
-			/*
+			if (customExtension != null) {
+				html$.find(".cardImage").css('background', "url('" + customExtension.cardImageFolder + card.image + ".png') no-repeat");
+				html$.find('.cardRarity').css('background', "transparent url('" + customExtension.rarityIconFolder + card.rarity + ".png') no-repeat");
+				
+				if (card.background) {
+					var bg = $('<div class="breakingSkinBackground"></div>');
+					bg.css('background', "url('" + customExtension.cardImageFolder + card.background + ".png') no-repeat");
+					bg.css("background-size", "contain");
+					bg.css("background-position", "center");
+					html$.prepend(bg);
+				}
+			}
+			
 			var cardNameDiv$ = html$.find('.cardName div');
 			var cardDescDiv$ = html$.find('.cardDesc div');
 			
 			cardNameDiv$.css("font-family", "Aller");
 			cardDescDiv$.css("font-family", "Aller");
+			
+			cardNameDiv$.css('font-size', '');
+			cardDescDiv$.css('font-size', '');
 
 			//console.log(getResizedFontSize(cardNameDiv$, 25) + "px");
-			console.log("Name Resize Start ", card.name);
-			var nameSize = test_getResizedFontSize(cardNameDiv$, 25);
+			var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
 			cardNameDiv$.css('font-size', (nameSize + "px"));
-			console.log("cardNameDiv font-size", nameSize + "px");
 			
-			console.log("Description Resize Start ", card.name);
-			var descSize = test_getResizedFontSize(cardDescDiv$, 81);
+			var descSize = window.getResizedFontSize(cardDescDiv$, 81);
 			cardDescDiv$.css('font-size', (descSize + "px"));
-			console.log("cardDescDiv font-size", descSize + "px");
-			*/
+			
 			var tribe_elements = html$.find(".cardTribes").children();
 			for (var i=0; i < card.tribes.length; i++) {
 				var tribe = card.tribes[i];
-				if (bonusTribes.includes(tribe)) {
-					tribe_elements[i].src = "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/" + tribe + ".png";
+				for (var j=0; j < CustomCardsDictionary.customTribes.length; j++) {
+					var tribeData = CustomCardsDictionary.customTribes[j];
+					if (tribeData.id === tribe) {
+						tribe_elements[i].src = tribeData.icon;
+					}
 				}
 			}
 		}
@@ -142,6 +125,7 @@ if (settings.easter_egg_cards.value()) {
 	
 	var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
 	console.log("Aller Loader!", allerLoader);
-	window.$("body").append(allerLoader); 
+	window.$("body").append(allerLoader);
+	setTimeout(function() {allerLoader.remove()}, 100); 
 	
 }

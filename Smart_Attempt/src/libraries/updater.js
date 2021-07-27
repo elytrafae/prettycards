@@ -25,7 +25,7 @@ $.get("https://api.github.com/repos/CMD-God/prettycards/releases/latest", {}, fu
 		PrettyCards_plugin.toast(
 			{
 				title: "Update Successful: " + data.name,
-				text: "insert patch notes here!" + data.name
+				text: data.body
 			}
 		);
 		sessionStorage.removeItem("PrettyCards_UpdateToVersion");

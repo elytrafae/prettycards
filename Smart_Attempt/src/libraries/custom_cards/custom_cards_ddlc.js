@@ -1,6 +1,17 @@
 
 import {CustomCardsDictionary} from "/src/libraries/custom_cards/custom_cards_dictionary.js"
 
+// Extension
+
+CustomCardsDictionary.AddCustomCardExtension("DDLC", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/");
+
+// Tribes
+
+CustomCardsDictionary.AddCustomTribe("CHIBI", "{{PLURAL:$1|Chibi|Chibis}}", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/CHIBI.png");
+CustomCardsDictionary.AddCustomTribe("DOKI", "{{PLURAL:$1|Doki|Dokis}}", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/DOKI.png");
+CustomCardsDictionary.AddCustomTribe("CHRSPELL", "{{PLURAL:$1|.chr spell|.chr spells}}", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/CHRSPELL.png");
+CustomCardsDictionary.AddCustomTribe("YURIKNIFE", "{{PLURAL:$1|Yuri\'s Knife|Yuri\'s Knives}}", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/YURIKNIFE.png");
+
 // Chibis
 
 CustomCardsDictionary.AddCustomArtifact("Chibi Power", `The counter starts at 0. All ally {{TRIBE:CHIBI|2}} have +1/+1/+1 wherever they are per counter.`);
@@ -56,7 +67,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Chibi Amy|Chibi Amys}}",
 	image: "Chibi_Amy",
-	cost: 5,
+	cost: 4,
 	attack: 2,
 	hp: 2,
 	description: "{{KW:MAGIC}}: Add the " + CustomCardsDictionary.DescriptionArtifact("Chibi Power") + " artifact, increase its counter by 1, and summon a {{CARD:115}}.",
@@ -65,6 +76,18 @@ CustomCardsDictionary.AddCustomCard({
 	rarity: "COMMON"
 });
 
+CustomCardsDictionary.AddCustomCard({
+	name: "{{PLURAL:$1|Chibi MC|Chibi MCs}}",
+	image: "Chibi_MC",
+	cost: 5,
+	attack: 2,
+	hp: 2,
+	taunt: true,
+	description: "{{KW:TAUNT}}. {{KW:MAGIC}}: Add the " + CustomCardsDictionary.DescriptionArtifact("Chibi Power") + " artifact, increase its counter by 1, give another ally {{TRIBE:CHIBI|1}} {{KW:TAUNT}}.",
+	tribes: ["CHIBI"],
+	extension: "DDLC",
+	rarity: "COMMON"
+});
 
 CustomCardsDictionary.AddCustomArtifact("Chibify", `All other ally cards are {{TRIBE:CHIBI|2}}, too, wherever they are.`);
 
@@ -77,7 +100,7 @@ CustomCardsDictionary.AddCustomCard({
 	description: "{{KW:DELAY}}: 3 random {{TRIBE:CHIBI|2}} in your hand get -2 {{cost}}. {{KW:NEED}}: You have 6 or more {{TRIBE:CHIBI|2}} in your dustpile. {{KW:MAGIC}}: Add the " + CustomCardsDictionary.DescriptionArtifact("Chibify") + " artifact.",
 	tribes: ["CHIBI"],
 	extension: "DDLC",
-	rarity: "DETERMINATION"
+	rarity: "LEGENDARY"
 });
 
 // Regular Cast
@@ -139,6 +162,7 @@ CustomCardsDictionary.AddCustomCard({
 	rarity: "EPIC"
 });
 
+// MC Sprites by Childish-N
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Main Character|Main Characters}}",
 	image: "Protagonist",
@@ -380,10 +404,11 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Club President Monika|Club President Monikas}}",
 	image: "Club_President_Monika",
-	cost: 5,
-	attack: 4,
+	cost: 6,
+	attack: 5,
 	hp: 4,
-	description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} {{KW:SUICIDE}} monsters from your dustpile. Trigger their {{KW:SUICIDE}} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
+	description: "{{KW:MAGIC}}: Burn up to 4 {{KW:SUICIDE}} monsters from your dustpile. Trigger their {{KW:SUICIDE}} effects (as if they belonged to this card).",
+	//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} {{KW:SUICIDE}} monsters from your dustpile. Trigger their {{KW:SUICIDE}} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
 	extension: "DDLC",
 	rarity: "LEGENDARY"
 });
