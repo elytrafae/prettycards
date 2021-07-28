@@ -8,7 +8,7 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 var version = GM_info.script.version;
 
 $.get("https://api.github.com/repos/CMD-God/prettycards/releases/latest", {}, function(data) {
-	console.log("data: ", data, "version: ", version);
+	//console.log("data: ", data, "version: ", version);
 	if (version != "local" && version != data.tag_name) {
 		PrettyCards_plugin.toast(
 			{

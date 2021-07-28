@@ -31,7 +31,7 @@ class pagegetters {
 			var games = [];
 			tableRows.each(function (index, element) {
 				var game = {};
-				console.log(index, element);
+				//console.log(index, element);
 				
 				var player1Cell = element.children[0];
 				var player1Data = {};

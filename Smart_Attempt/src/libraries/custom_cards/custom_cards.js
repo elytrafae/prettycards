@@ -5,7 +5,8 @@ import {utility} from "/src/libraries/utility.js";
 import {CustomCardsDictionary} from "/src/libraries/custom_cards/custom_cards_dictionary.js";
 import {SetUpFilters} from "/src/libraries/custom_cards/custom_card_filters.js"
 
-import {} from "/src/libraries/custom_cards/custom_cards_ddlc.js"
+import {} from "/src/libraries/custom_cards/custom_cards_ddlc.js";
+import {} from "/src/libraries/custom_cards/custom_cards_switch.js";
 
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@8dca1debaca4bce1363a1d5f38ef576639a41f58/css/CustomCards.css");
 
@@ -25,24 +26,38 @@ if (settings.easter_egg_cards.value()) {
 				}
 			}
 			
+			var imageURL = "";
+			var rarityURL = "";
+			var backgroundURL = "";
+			
 			if (customExtension != null) {
-				html$.find(".cardImage").css('background', "url('" + customExtension.cardImageFolder + card.image + ".png') no-repeat");
-				html$.find('.cardRarity').css('background', "transparent url('" + customExtension.rarityIconFolder + card.rarity + ".png') no-repeat");
+				imageURL = customExtension.cardImageFolder + card.image + ".png";
+				rarityURL = customExtension.rarityIconFolder + card.rarity + ".png";
+				backgroundURL = customExtension.cardImageFolder + card.background + ".png";
+			} else {
+				imageURL = card.image;
+				rarityURL = "images/rarity/" + card.extension + "_" + card.rarity + ".png";
+				backgroundURL = card.background;
+			}
+			
+			html$.find(".cardImage").css('background', "url('" + imageURL + "') no-repeat");
+			html$.find('.cardRarity').css('background', "transparent url('" + rarityURL + "') no-repeat");
 				
-				if (card.background) {
-					var bg = $('<div class="breakingSkinBackground"></div>');
-					bg.css('background', "url('" + customExtension.cardImageFolder + card.background + ".png') no-repeat");
-					bg.css("background-size", "contain");
-					bg.css("background-position", "center");
-					html$.prepend(bg);
-				}
+			if (card.background) {
+				var bg = $('<div class="breakingSkinBackground"></div>');
+				bg.css('background', "url('" + backgroundURL + "') no-repeat");
+				bg.css("background-size", "contain");
+				bg.css("background-position", "center");
+				html$.prepend(bg);
 			}
 			
 			var cardNameDiv$ = html$.find('.cardName div');
 			var cardDescDiv$ = html$.find('.cardDesc div');
 			
-			cardNameDiv$.css("font-family", "Aller");
-			cardDescDiv$.css("font-family", "Aller");
+			if (card.extension === "DDLC") {
+				cardNameDiv$.css("font-family", "Aller");
+				cardDescDiv$.css("font-family", "Aller");
+			}
 			
 			cardNameDiv$.css('font-size', '');
 			cardDescDiv$.css('font-size', '');
@@ -128,7 +143,7 @@ if (settings.easter_egg_cards.value()) {
 	}
 	
 	var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
-	console.log("Aller Loader!", allerLoader);
+	//console.log("Aller Loader!", allerLoader);
 	window.$("body").append(allerLoader);
 	setTimeout(function() {allerLoader.remove()}, 100); 
 	

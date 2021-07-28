@@ -63,6 +63,6 @@ settings.debug_mode = PrettyCards_plugin.settings().add({
     });
 */
 
-console.log(settings);
+//console.log(settings);
 
 export {PrettyCards_plugin, settings};

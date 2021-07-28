@@ -64,6 +64,14 @@
 	display: inline-block;
 }
 
+span.SWITCH {
+	background: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
+	text-shadow: none;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+}
+
 .card:hover .PrettyCards_CardThemeSongPlayer {
 	display: block;
 }
