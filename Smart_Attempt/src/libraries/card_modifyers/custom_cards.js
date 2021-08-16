@@ -5,8 +5,9 @@ import {utility} from "/src/libraries/utility.js";
 import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js";
 import {SetUpFilters} from "/src/libraries/card_modifyers/custom_card_filters.js"
 
-import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc.js";
-import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
+//import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc.js";
+import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
+//import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
 
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@812c80b65096d967ff9dd3da22b60e0c828c250a/css/CustomCards.css");
 

@@ -66,6 +66,7 @@ class _CustomCardsDictionary {
 		card.originalAttack = card.attack;
 		card.originalCost = card.cost;
 		card.baseImage = card.image;
+		card.isCustom = true;
 		
 		var extension = this.GetCustomExtensionByName(card.extension);
 		
@@ -198,8 +199,8 @@ $.i18n().load( {
 // Keywords
 $.i18n().load( {
 	en: {
-			'kw-suicide' : 'Sacrifice',
-			'kw-suicide-desc' : 'This ability is triggered when this creature dies during it\'s owner\'s turn.',
+			'kw-sacrifice' : 'Sacrifice',
+			'kw-sacrifice-desc' : 'This ability is triggered when this creature dies during it\'s owner\'s turn.',
 			'kw-suicide' : 'Suicide',
 			'kw-suicide-desc' : 'Alias for {{KW:SACRIFICE}}.'
 		}

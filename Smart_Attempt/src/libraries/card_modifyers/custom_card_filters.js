@@ -171,6 +171,15 @@ var filters_data = {
 		}
 	]
 	*/
+	isCustom: [
+		{
+			id : "PrettyCards_CustomFilter",
+			icon : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/DOKI.png",
+			type: "checkbox",
+			val: true,
+			notIncludeDefault: true
+		}
+	]
 };
 
 var oldIsRemoved;
