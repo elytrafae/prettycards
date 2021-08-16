@@ -2,13 +2,13 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
-import {CustomCardsDictionary} from "/src/libraries/custom_cards/custom_cards_dictionary.js";
-import {SetUpFilters} from "/src/libraries/custom_cards/custom_card_filters.js"
+import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js";
+import {SetUpFilters} from "/src/libraries/card_modifyers/custom_card_filters.js"
 
-import {} from "/src/libraries/custom_cards/custom_cards_ddlc.js";
-import {} from "/src/libraries/custom_cards/custom_cards_switch.js";
+import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc.js";
+import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@8dca1debaca4bce1363a1d5f38ef576639a41f58/css/CustomCards.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@812c80b65096d967ff9dd3da22b60e0c828c250a/css/CustomCards.css");
 
 if (settings.easter_egg_cards.value()) {
 
@@ -18,27 +18,9 @@ if (settings.easter_egg_cards.value()) {
 		if (card.fixedId >= CustomCardsDictionary.customCardsStart) {
 			html$.addClass("ext_" + card.extension);
 			
-			var customExtension = null;
-			for (var i=0; i < CustomCardsDictionary.customExtensions.length; i++) {
-				var extension = CustomCardsDictionary.customExtensions[i];
-				if (extension.id === card.extension) {
-					customExtension = extension;
-				}
-			}
-			
-			var imageURL = "";
-			var rarityURL = "";
-			var backgroundURL = "";
-			
-			if (customExtension != null) {
-				imageURL = customExtension.cardImageFolder + card.image + ".png";
-				rarityURL = customExtension.rarityIconFolder + card.rarity + ".png";
-				backgroundURL = customExtension.cardImageFolder + card.background + ".png";
-			} else {
-				imageURL = card.image;
-				rarityURL = "images/rarity/" + card.extension + "_" + card.rarity + ".png";
-				backgroundURL = card.background;
-			}
+			var imageURL = card.imageURL;
+			var rarityURL = card.rarityURL;
+			var backgroundURL = card.backgroundURL;
 			
 			html$.find(".cardImage").css('background', "url('" + imageURL + "') no-repeat");
 			html$.find('.cardRarity').css('background', "transparent url('" + rarityURL + "') no-repeat");

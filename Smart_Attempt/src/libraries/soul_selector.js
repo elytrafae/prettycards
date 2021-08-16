@@ -108,7 +108,7 @@ class SoulSelector {
 			const el = document.querySelector("#" + this.idPrefix + deckName);
 			var html = '<div class="PrettyCards_DeckTooltip">' + this.GenerateArtifacts(playableDecks[deckName].artifacts) + this.GenerateCards(playableDecks[deckName].cards) + "</div>";
 			//console.log(window.document.body.getBoundingClientRect, window.document.body.getBoundingClientRect());
-			/*
+			
 			window.tippy("#" + this.idPrefix + deckName, {
 				content: html,
 				allowHTML: true,
@@ -116,27 +116,8 @@ class SoulSelector {
 				inertia: true,
 				placement: "auto",
 				appendTo: window.document.body,
+				boundary: 'window',
 				getReferenceClientRect: window.document.body.getBoundingClientRect,
-				popperOptions: {
-					strategy: 'fixed',
-					boundary: document,
-					modifiers: [{
-							name: 'flip',
-							options: {
-								fallbackPlacements: ['bottom', 'top', 'right', 'left'],
-								padding: 8,
-								boundary: 'document',
-								rootBoundary: 'document',
-							},
-						}, {
-							name: 'preventOverflow',
-							options: {
-								altAxis: true,
-								tether: false,
-							},
-						},
-					],
-				},
 				onShow(instance) {
 					//console.log(instance, el._tippy, instance == el._tippy);
 					//const { popperInstance, options } = el._tippy;
@@ -144,8 +125,8 @@ class SoulSelector {
 					//popperInstance.update()
 				},
 			});
-			*/
-			AddTooltip(el, html, {});
+			
+			//AddTooltip(el, html, {});
 		}
 	}
 	

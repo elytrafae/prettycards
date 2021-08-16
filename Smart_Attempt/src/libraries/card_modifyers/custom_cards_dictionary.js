@@ -67,6 +67,18 @@ class _CustomCardsDictionary {
 		card.originalCost = card.cost;
 		card.baseImage = card.image;
 		
+		var extension = this.GetCustomExtensionByName(card.extension);
+		
+		if (extension) {
+			card.imageURL = extension.cardImageFolder + card.image + ".png";
+			card.rarityURL = extension.rarityIconFolder + card.rarity + ".png";
+			card.backgroundURL = extension.cardImageFolder + card.background + ".png";
+		} else {
+			card.imageURL = card.image;
+			card.rarityURL = "images/rarity/" + card.extension + "_" + card.rarity + ".png";
+			card.backgroundURL = card.background;
+		}
+		
 		window.$.i18n().load( {
 			en: { 
 				["card-name-" + card.id] : card.name,
@@ -74,27 +86,31 @@ class _CustomCardsDictionary {
 			}
 		})
 		
+		card.name = window.$.i18n("card-name-" + card.id, 1);
+		
 		this.customCards.push(card);
 	}
 	
-	AddCustomArtifact(name, description) {
-		var artifact = {id : customArtifactStart + this.customArtifacts.length, name : name, description : description};
+	AddCustomArtifact(translate_name, description) {
+		var artifact = {id : customArtifactStart + this.customArtifacts.length, translate_name : translate_name, description : description};
 		
 		$.i18n().load( {
 		en: {
-				['artifact-name-' + (artifact.id)] : artifact.name,
+				['artifact-name-' + (artifact.id)] : artifact.translate_name,
 				['artifact-' + (artifact.id)] : artifact.description,
 			}
 		});
+		
+		artifact.name = $.i18n("artifact-name-" + artifact.id, 1);
 		
 		this.customArtifacts.push(artifact);
 	}
 	
 	GetCustomCardByName(name) {
 		for (var i=0; i < this.customCards.length; i++) {
-			//if (this.customCards[i].name === name) {
+			if (this.customCards[i].name === name) {
 			//if (window.$.i18n("card-name-" + this.customCards[i].id) === name) {
-			if (this.customCards[i].name.split("|").includes(name)) {
+			//if (this.customCards[i].name.split("|").includes(name)) {
 				return this.customCards[i];
 			}
 		}
@@ -103,8 +119,8 @@ class _CustomCardsDictionary {
 	
 	GetCustomArtifactByName(name) {
 		for (var i=0; i < this.customArtifacts.length; i++) {
-			//if (this.customArtifacts[i].name === name) {
-			if (window.$.i18n("artifact-name-" + this.customArtifacts[i].id) === name) {
+			if (this.customArtifacts[i].name === name) {
+			//if (window.$.i18n("artifact-name-" + this.customArtifacts[i].id) === name) {
 				return this.customArtifacts[i];
 			}
 		}
@@ -146,6 +162,16 @@ class _CustomCardsDictionary {
 		this.customExtensions.push(extension);
 	}
 	
+	GetCustomExtensionByName(name) {
+		for (var i=0; i < this.customExtensions.length; i++) {
+			var extension = this.customExtensions[i];
+			if (extension.id === name) {
+				return extension;
+			}
+		}
+		return null;
+	}
+	
 }
 
 /*
@@ -159,7 +185,6 @@ $.i18n().load( {
 			'tribe-yuriknife' : '{{PLURAL:$1|Yuri\'s Knife|Yuri\'s Knives}}'
 		}
 } );
-*/
 
 // Artifacts
 $.i18n().load( {
@@ -168,12 +193,15 @@ $.i18n().load( {
 			['artifact-' + (customArtifactStart)] : 'Whenever a spell is played, deal 1 {{DMG}} to a random enemy monster. If it was a {{TRIBE:MELISSAATTACK}}, give it -1 {{ATK}}, too.',
 		}
 } );
+*/
 
 // Keywords
 $.i18n().load( {
 	en: {
+			'kw-suicide' : 'Sacrifice',
+			'kw-suicide-desc' : 'This ability is triggered when this creature dies during it\'s owner\'s turn.',
 			'kw-suicide' : 'Suicide',
-			'kw-suicide-desc' : 'This ability is triggered when this creature dies during it\'s owner\'s turn.'
+			'kw-suicide-desc' : 'Alias for {{KW:SACRIFICE}}.'
 		}
 } );
 

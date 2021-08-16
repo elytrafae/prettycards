@@ -1,5 +1,5 @@
 
-import {CustomCardsDictionary} from "/src/libraries/custom_cards/custom_cards_dictionary.js"
+import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js"
 
 // Extension
 
@@ -127,7 +127,7 @@ CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Cupcake|Cupcakes}}",
 	image: "Cupcake",
 	cost: 1,
-	description: "Heal for 4 {{HP}} to a damaged ally or deal 3 {{DMG}} to an enemy monster.",
+	description: "Heal yourself for 6 {{HP}} or heal a damaged ally monster by 2 {{HP}} and give it {{KW:CANDY}}.",
 	extension: "DDLC",
 	rarity: "TOKEN"
 });
@@ -159,7 +159,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Monika|Monikas}}",
 	image: "Monika",
-	cost: 5,
+	cost: 4,
 	attack: 3,
 	hp: 3,
 	description: "{{KW:MAGIC}}: Kill an ally {{TRIBE:DOKI|1}} to summon another " + CustomCardsDictionary.DescriptionSelfCard() + ". {{KW:DUST}}: Add another random {{TRIBE:DOKI|1}} to your hand with -2 {{COST}}.",
@@ -174,9 +174,9 @@ CustomCardsDictionary.AddCustomCard({
 	image: "Protagonist",
 	cost: 6,
 	attack: 3,
-	hp: 7,
+	hp: 5,
 	taunt: true,
-	description: "{{KW:TAUNT}}. {{KW:TURN-END}}: Add a copy of every unique monster to your deck whose {{KW:SUICIDE}} effect was triggered this turn.",
+	description: "{{KW:TAUNT}}. {{KW:TURN-END}}: Add a copy of every monster to your deck whose {{KW:SUICIDE}} effect was triggered this turn.",
 	//tribes: ["DOKI"],
 	extension: "DDLC",
 	rarity: "EPIC"
@@ -201,7 +201,9 @@ CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Sayori.chr|Sayori.chrs}}",
 	image: "SayoriCHR",
 	cost: 0,
-	description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, apply them to the monsters in front of them, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, apply them to the monsters in front of them, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, burn this and draw a card.",
+	description: "Heal a damaged ally monster by 6. Excess Healing goes to you. Draw a card.",
 	tribes: ["CHRSPELL"],
 	extension: "DDLC",
 	rarity: "TOKEN"
@@ -211,7 +213,11 @@ CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Natsuki.chr|Natsuki.chrs}}",
 	image: "NatsukiCHR",
 	cost: 0,
-	description: "{{KW:TURBO}}: Add a random 5-{{COST}} monster from your dustpile to your hand, give it -4 {{COST}}, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: Add a random 5-{{COST}} monster from your dustpile to your hand, give it -4 {{COST}}, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: Burn a random 4 or 5 {{COST}} monster in your dustpile (prefer {{TRIBE:DOKI|2}}), add it to your hand, give it -2 {{COST}}, burn this and draw a card.",
+	//description: "Look at all {{TRIBE:DOKI|2}} in your dustpile and choose one. Add it to your hand. Give it -2 {{COST}}. Draw a card.",
+	//description: "Look at 3 random 4-{{COST}} cards in your dustpile and burn one. Add it to your hand. Give it -1 {{COST}}. Draw a card.",
+	description: "Draw a {{TRIBE:DOKI|1}}. Give it -1 {{cost}}.",
 	tribes: ["CHRSPELL"],
 	extension: "DDLC",
 	rarity: "TOKEN"
@@ -221,7 +227,9 @@ CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Yuri.chr|Yuri.chrs}}",
 	image: "YuriCHR",
 	cost: 0,
-	description: "{{KW:TURBO}}: Kill the enemy monster with the lowest {{HP}}, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: Kill the enemy monster with the lowest {{HP}}, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: Give the enemy monster with the liwest {{HP}} -4 {{HP}}, burn this and draw a card.",
+	description: "Give an enemy monster -3 {{HP}}. Draw a card.",
 	tribes: ["CHRSPELL"],
 	extension: "DDLC",
 	rarity: "TOKEN"
@@ -231,7 +239,9 @@ CustomCardsDictionary.AddCustomCard({
 	name: "{{PLURAL:$1|Monika.chr|Monika.chrs}}",
 	image: "MonikaCHR",
 	cost: 0,
-	description: "{{KW:TURBO}}: Send a random ally and enemy non-{{RARITY:DETERMINATION}} monster from the board to their owners' hands, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: Send a random ally and enemy non-{{RARITY:DETERMINATION}} monster from the board to their owners' hands, burn this and draw a card.",
+	//description: "{{KW:TURBO}}: {{KW:SILENCE}} an enemy non-{{RARITY:DETERMINATION}} monster, burn this and draw a card.",
+	description: "{{KW:SILENCE}} an enemy non-{{RARITY:DETERMINATION}} monster, then give it -1 {{ATK}}. Draw a card.",
 	tribes: ["CHRSPELL"],
 	extension: "DDLC",
 	rarity: "TOKEN"

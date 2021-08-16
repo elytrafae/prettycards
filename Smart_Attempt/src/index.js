@@ -8,9 +8,10 @@ import {} from "./libraries/chat/user_info.js";
 import {} from "./libraries/private_games/private_game_host.js";
 import {} from "./libraries/private_games/private_game_recipient.js";
 
-import {} from "/src/libraries/custom_cards/custom_cards.js";
-import {} from "/src/libraries/custom_cards/breaking_skin_hover.js";
-import {} from "/src/libraries/custom_cards/theme_song_viewer.js";
+import {} from "/src/libraries/card_modifyers/custom_cards.js";
+import {} from "/src/libraries/card_modifyers/breaking_skin_hover.js";
+import {} from "/src/libraries/card_modifyers/theme_song_viewer.js";
+import {} from "/src/libraries/card_modifyers/card_flavor.js";
 
 import {} from "./libraries/main_menu.js";
 

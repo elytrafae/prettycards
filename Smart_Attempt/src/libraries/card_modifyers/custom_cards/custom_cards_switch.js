@@ -1,10 +1,10 @@
 
-import {CustomCardsDictionary} from "/src/libraries/custom_cards/custom_cards_dictionary.js"
+import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js"
 
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Spellbook|Spellbooks}}",
-	image: "Spellbook",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Spellbook.png",
 	cost: 0,
 	description: "Look at all {{SOUL:SWITCH}} spells (rarity <= {{RARITY:EPIC}}). Choose one to add to your hand. If your opponent has more monsters on the board than you, give it -1 {{cost}}.",
 	extension: "BASE",
@@ -21,7 +21,7 @@ window.$.i18n().load( {
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Magic Orbs|Magic Orbs}}",
-	image: "Magic_Orbs",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Magic_Orbs_2.png",
 	cost: 1,
 	description: "Swap the {{ATK}} and {{HP}} of a monster. Draw a card.",
 	extension: "BASE",
@@ -31,7 +31,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Sacrificial Lamb|Sacrificial Lambs}}",
-	image: "Sacrificial_Lamb",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Sacrificial_Lamb.png",
 	cost: 4,
 	description: "Burn a random {{KW:GENERATED}} spell in your hand to kill an enemy monster.",
 	extension: "BASE",
@@ -41,7 +41,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Sabotage|Sabotages}}",
-	image: "Sabotage",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Sabotage.png",
 	cost: 2,
 	description: "Add 2 copis of the enemy's soul's {{RARITY:BASE}} spell to your hand.",
 	extension: "BASE",
@@ -51,7 +51,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Chaotic Powers|Chaotic Powers}}",
-	image: "Chaotic_Powers",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Chaotic_Powers.png",
 	cost: 4,
 	description: "Add 3 random other spells ({{cost}} <= 4) to your hand which you didn't cast this game.",
 	extension: "DELTARUNE",
@@ -61,7 +61,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Mass Necromancy|Mass Necromancies}}",
-	image: "Mass_Necromancy",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Even_Necromancy.png",
 	cost: 5,
 	description: "For ever 3 different {{KW:GENERATED}} spells you've cast this game, burn a random monster in your dustpile and add it to your deck.",
 	extension: "BASE",
@@ -71,7 +71,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Slice of Temptation|Slices of Temptation}}",
-	image: "Slice_of_Temptation",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/An_Honest_Heal.png",
 	cost: 2,
 	description: "Both players draw a card. If they already have 7 cards in their hand, deal fatigue {{DMG}} to them twice instead.",
 	extension: "BASE",
@@ -81,7 +81,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Life Drain|Life Drains}}",
-	image: "Life_Drain",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Life_Drain.png",
 	cost: 2,
 	description: "Give an enemy monster -2 {{HP}}. Give the monster in front of it +3 {{HP}}.",
 	extension: "BASE",
@@ -91,7 +91,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Power Drain|Power Drains}}",
-	image: "Power_Drain",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Power_Drain.png",
 	cost: 2,
 	description: "Give an enemy monster -2 {{ATK}}. Give the monster in front of it +2 {{ATK}}. {{KW:DELAY}}: Add a " + CustomCardsDictionary.DescriptionCard("Life Drain", 1) + " to your hand.",
 	extension: "BASE",
@@ -101,7 +101,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
-	image: "Triggers_of_Lunacy",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Triggers_Of_Lunacy.png",
 	cost: 2,
 	description: "Deal 1 {{DMG}} to all enemy monsters for every 2 spells you've casted this game. This costs 1 more for every 2 spells you've casted this game.",
 	extension: "BASE",
@@ -111,7 +111,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Mew Mew's Special|Mew Mew's Specials}}",
-	image: "Mew_Mew_Special",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Mew_Mew_Special.png",
 	cost: 2,
 	description: "Select a non-{{RARITY:DETERMINATION}} monster in your hand. {{KW:DELAY}}: Add an exact copy of it to your hand.",
 	extension: "BASE",
@@ -121,7 +121,7 @@ CustomCardsDictionary.AddCustomCard({
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Royal Switch|Royal Switches}}",
-	image: "Royal_Switch",
+	image: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/BASE/Switch_Soul/Royal_Switch.png",
 	cost: 4,
 	description: "Give all ally monsters +1/+1 for every 6 {{KW:GENERATED}} spells you've casted this game.",
 	extension: "BASE",
