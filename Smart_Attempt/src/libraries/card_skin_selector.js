@@ -1,4 +1,6 @@
 
+import {utility} from "/src/libraries/utility.js";
+
 var allCardSkins = [];
 var ownedCardSkins = [];
 var defaultCardSkins = [];
@@ -22,6 +24,8 @@ if (!window.allCards || window.allCards.length == 0) {
 } else {
 	ProcessDefaultSkins();
 }
+
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@7a9363ca1506ee0f5f9080fcdc313cf4dd34d175/css/CardSkinSelector.css");
 
 function ProcessDefaultSkins() {
 	for (var i=0; i < allCards.length; i++) {
@@ -94,6 +98,8 @@ class CardSkinSelector {
 	}
 	
 	GetHTML(skins) {
+		
+		
 		var cont = document.createElement("DIV");
 		for (var i=0; i < skins.length; i++) {
 			var skin = skins[i];
