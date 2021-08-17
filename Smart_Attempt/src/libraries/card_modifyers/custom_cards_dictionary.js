@@ -200,7 +200,7 @@ $.i18n().load( {
 $.i18n().load( {
 	en: {
 			'kw-sacrifice' : 'Sacrifice',
-			'kw-sacrifice-desc' : 'This ability is triggered when this creature dies during it\'s owner\'s turn.',
+			'kw-sacrifice-desc' : 'This ability is triggered when this monster dies during it\'s owner\'s turn.',
 			'kw-suicide' : 'Suicide',
 			'kw-suicide-desc' : 'Alias for {{KW:SACRIFICE}}.'
 		}

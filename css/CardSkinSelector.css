@@ -1,0 +1,17 @@
+
+.PrettyCards_SkinDiv {
+	width: 160px; 
+	height: 90px; 
+	margin: 5px; 
+	display: inline-block;
+}
+
+.PrettyCards_SkinText {
+	display:table-cell;
+	vertical-align: middle;
+	width: 160px;
+	height: 90px;
+	text-align: center; 
+	background-color: rgba(100, 100, 100, 0.3);
+	text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+}

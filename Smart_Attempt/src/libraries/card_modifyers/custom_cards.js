@@ -101,9 +101,10 @@ if (settings.easter_egg_cards.value()) {
 			}
 		}
 		
+		/*
 		window.collection.sort(function (a, b) {
 			return compare(a.cost, b.cost) || $.i18n('card-name-' + a.id, 1).localeCompare($.i18n('card-name-' + b.id, 1)) || (a.shiny - b.shiny);
-		});
+		});*/
 		
 		setTimeout(applyFilters, 100);
 	}
