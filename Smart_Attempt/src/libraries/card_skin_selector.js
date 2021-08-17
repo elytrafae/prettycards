@@ -25,7 +25,7 @@ if (!window.allCards || window.allCards.length == 0) {
 	ProcessDefaultSkins();
 }
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3568e660ae849ee088b677cb0e2d40d80d82ad77/css/CardSkinSelector.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@90b78dbb4b0dcc0973493b7465a2fe3e3af5a4f0/css/CardSkinSelector.css");
 
 function ProcessDefaultSkins() {
 	for (var i=0; i < allCards.length; i++) {
