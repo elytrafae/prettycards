@@ -25,7 +25,7 @@ if (!window.allCards || window.allCards.length == 0) {
 	ProcessDefaultSkins();
 }
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@7a9363ca1506ee0f5f9080fcdc313cf4dd34d175/css/CardSkinSelector.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3568e660ae849ee088b677cb0e2d40d80d82ad77/css/CardSkinSelector.css");
 
 function ProcessDefaultSkins() {
 	for (var i=0; i < allCards.length; i++) {
@@ -56,6 +56,10 @@ class CardSkinSelector {
 		this.onlyAvailable = false;
 		this.includeOnu = true;
 		
+		this.container = null;
+		this.skinElements = [];
+		this.skins = [];
+		this.searchBar = null;
 	}
 	
 	GetSkinsToDisplay() {
@@ -98,25 +102,36 @@ class CardSkinSelector {
 	}
 	
 	GetHTML(skins) {
-		
+		this.searchBar = document.createElement("INPUT");
+		this.searchBar.className = "form-control";
+		console.log(this);
+		$(this.searchBar).keyup(this.ApplyFilters.bind(this));
 		
 		var cont = document.createElement("DIV");
-		for (var i=0; i < skins.length; i++) {
-			var skin = skins[i];
+		
+		cont.appendChild(this.searchBar);
+		
+		for (var i=0; i < this.skins.length; i++) {
+			var skin = this.skins[i];
 			var div = document.createElement("DIV");
 			div.className = "PrettyCards_SkinDiv";
 			div.style.background = "url(images/cards/" + skin.image + ".png) no-repeat transparent";
 			
 			div.innerHTML = '<div class="PrettyCards_SkinText">' + skin.name + (skin.authorName !== "" ? '<br><span class="Artist">' + skin.authorName + '</span>' : '') + '</div>';
+			if (skin.typeSkin > 0) {
+				div.innerHTML += '<div class="PrettyCards_FullSkinPreview"><img src="images/cards/' + skin.image + '.png"></div>';
+			}
 			
+			this.skinElements.push(div);
 			cont.appendChild(div);
 		}
+		this.container = cont;
 		return cont;
 	}
 	
 	OpenDialogue() {
-		var skins = this.GetSkinsToDisplay();
-		var html = this.GetHTML(skins);
+		this.skins = this.GetSkinsToDisplay();
+		var html = this.GetHTML();
 		BootstrapDialog.show({
 			title: "Select a card skin!",
 			size: BootstrapDialog.SIZE_WIDE,
@@ -130,6 +145,38 @@ class CardSkinSelector {
 				}
 			]
 		});
+	}
+	
+	ApplyFilters() {
+		console.log("Filters!");
+		for (var i=0; i < this.skinElements.length; i++) {
+			//console.log(this.skinElements)
+			this.skinElements[i].style.display = this.isRemoved(this.skins[i]) ? "none" : "";
+		}
+	}
+	
+	isRemoved(skin) {
+		var searchValue = $(this.searchBar).val().toLowerCase();
+		console.log("Search value:", searchValue);
+		
+		 if (searchValue.length > 0) {
+			var findableString = '';
+			findableString += $.i18n('card-name-' + skin.cardId, 1);
+			findableString += skin.name;
+			findableString += skin.authorName;
+			if (skin.typeSkin == 0) {
+				findableString += "normal";
+			} else if (skin.typeSkin == 1) {
+				findableString += "full";
+			} else if (skin.typeSkin == 2) {
+				findableString += "breaking";
+			}
+			//findableString += skin.ucpCost;
+			console.log(findableString, skin);
+			
+			return !findableString.toLowerCase().includes(searchValue);
+		 }
+		 return false;
 	}
 	
 }

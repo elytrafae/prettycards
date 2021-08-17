@@ -1,9 +1,11 @@
 
 .PrettyCards_SkinDiv {
+	position: relative;
 	width: 160px; 
 	height: 90px; 
 	margin: 5px; 
 	display: inline-block;
+	border: 1px white solid;
 }
 
 .PrettyCards_SkinText {
@@ -18,4 +20,21 @@
 
 .PrettyCards_SkinDiv:hover .PrettyCards_SkinText {
 	display: none;
+}
+
+.PrettyCards_FullSkinPreview {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.PrettyCards_SkinDiv:hover .PrettyCards_FullSkinPreview {
+	display: block;
+}
+
+.PrettyCards_FullSkinPreview img {
+	width: 100%;
+	height: 100%;
+	margin: 0;
 }
