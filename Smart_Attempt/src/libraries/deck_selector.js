@@ -1,7 +1,10 @@
 
 import {SoulSelector} from "/src/libraries/soul_selector.js";
+import {utility} from "/src/libraries/utility.js";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
+
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@180176f20f419a1f6002aed5a51893198188e96c/css/SavedDeckList.css");
 
 function GetAllDecks() {
 	var decks = [];
@@ -57,6 +60,7 @@ class SavedDeckSelector {
 	constructor() {
 		this.callback = function() {};
 		this.closable = false;
+		this.deckSouls = {};
 	}
 	
 	GetHTML(decks) {
@@ -68,8 +72,8 @@ class SavedDeckSelector {
 		
 		this.soulSelector = new SoulSelector();
 		this.soulSelector.changeSoulCallback = function(clickedSoul) {
-			//element.scrollIntoView({ behavior: 'smooth', block: 'center'});
-		}
+			this.deckSouls[clickedSoul][0].scrollIntoView({ behavior: 'smooth', block: 'start'});
+		}.bind(this);
 		this.soulSelector.highlightSelectedSoul = false;
 		this.soulSelector.soulsToDisplay = [];
 		for (var soul in decks) {
@@ -81,9 +85,17 @@ class SavedDeckSelector {
 		decksContainer.className = "PrettyCards_DeckListContainer";
 		container.appendChild(decksContainer);
 		
+		this.deckSouls = {};
 		for (var soul in decks) {
 			var $deck = $('<div><div class="PrettyCards_DeckHeader ' + soul + '">' + soul + '</div></div>');
 			
+			for (var i=0; i < decks[soul].length; i++) {
+				var deck = decks[soul][i];
+				var card = window.appendCard(window.allCards[0], $deck);
+				card.find(".cardName div").html('<span class="' + soul + '">' + deck.name + '</span>');
+				card.find(".cardDesc div").html('<span class="' + soul + '">' + deck.name + '</span>');
+			}
+			this.deckSouls[soul] = $deck;
 			$(decksContainer).append($deck);
 		}
 		

@@ -18,6 +18,40 @@
 
 .PrettyCards_DeckHeader.DETERMINATION {
 	color: black;
-	background-color: red;
+	background-color: #FF0000;
 }
 
+.PrettyCards_DeckHeader.BRAVERY {
+	color: black;
+	background-color: #FCA500;
+}
+
+.PrettyCards_DeckHeader.JUSTICE {
+	color: black;
+	background-color: #FFFF00;
+}
+
+.PrettyCards_DeckHeader.KINDNESS {
+	color: black;
+	background-color: #00C000;
+}
+
+.PrettyCards_DeckHeader.PATIENCE {
+	color: black;
+	background-color: #41FCFF;
+}
+
+.PrettyCards_DeckHeader.INTEGRITY {
+	color: black;
+	background-color: #0064FF;
+}
+
+.PrettyCards_DeckHeader.PERSEVERANCE {
+	color: black;
+	background-color: #D535D9;
+}
+
+.PrettyCards_DeckListContainer .card {
+	display: inline-block;
+	margin: 5px 10px;
+}
