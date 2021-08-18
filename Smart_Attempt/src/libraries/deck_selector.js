@@ -4,7 +4,7 @@ import {utility} from "/src/libraries/utility.js";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@180176f20f419a1f6002aed5a51893198188e96c/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b626a3a5da3c6da54973f2411583749186957832/css/SavedDeckList.css");
 
 function GetAllDecks() {
 	var decks = [];
@@ -92,8 +92,15 @@ class SavedDeckSelector {
 			for (var i=0; i < decks[soul].length; i++) {
 				var deck = decks[soul][i];
 				var card = window.appendCard(window.allCards[0], $deck);
-				card.find(".cardName div").html('<span class="' + soul + '">' + deck.name + '</span>');
+				var cardNameDiv$ = card.find(".cardName div");
+				cardNameDiv$.html('<span class="' + soul + '">' + deck.name + '</span>');
 				card.find(".cardDesc div").html('<span class="' + soul + '">' + deck.name + '</span>');
+				card.find(".cardFrame").css("background-image", "url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png)");
+				
+				cardNameDiv$.css('font-size', '');
+
+				var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
+				cardNameDiv$.css('font-size', (nameSize + "px"));
 			}
 			this.deckSouls[soul] = $deck;
 			$(decksContainer).append($deck);

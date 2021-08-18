@@ -55,3 +55,11 @@
 	display: inline-block;
 	margin: 5px 10px;
 }
+
+.PrettyCards_DeckListContainer .card .cardCost {
+	display: none;
+}
+
+.PrettyCards_DeckListContainer .card .cardName {
+	width: 160px;
+}
