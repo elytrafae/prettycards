@@ -25,7 +25,7 @@ if (!window.allCards || window.allCards.length == 0) {
 	ProcessDefaultSkins();
 }
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@90b78dbb4b0dcc0973493b7465a2fe3e3af5a4f0/css/CardSkinSelector.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@02023f7bd7ddd4d155aae8046212bf4dff67b1a4/css/CardSkinSelector.css");
 
 function ProcessDefaultSkins() {
 	for (var i=0; i < allCards.length; i++) {
@@ -135,6 +135,8 @@ class CardSkinSelector {
 		BootstrapDialog.show({
 			title: "Select a card skin!",
 			size: BootstrapDialog.SIZE_WIDE,
+			closable: true,
+            closeByBackdrop: false,
 			message: html,
 			buttons: [{
 					label: "Nevermind!",

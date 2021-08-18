@@ -1,0 +1,23 @@
+
+.PrettyCards_DecklistSoulsContainer {
+	text-align:center;
+}
+
+.PrettyCards_DeckListContainer {
+	width: 840px;
+	height: 500px;
+	overflow-y: auto;
+}
+
+.PrettyCards_DeckHeader {
+	font-size: 30px;
+	padding-left: 50px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+
+.PrettyCards_DeckHeader.DETERMINATION {
+	color: black;
+	background-color: red;
+}
+

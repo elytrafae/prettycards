@@ -44,6 +44,9 @@ class SoulSelector {
 	constructor() {
 		this.selectedSoul = "KINDNESS";
 		this.idPrefix = "PrettyCards_ChallengeSoul_";
+		this.highlightSelectedSoul = true;
+		this.changeSoulCallback = function() {};
+		this.soulsToDisplay = [];
 	}
 
 	GetPlayableDecks() {
@@ -79,23 +82,33 @@ class SoulSelector {
 
 	ChangeDeck(deckName) {
 		//console.log("Changing deck for ", this, document.getElementById(this.idPrefix + this.selectedSoul), this.idPrefix + this.selectedSoul);
-		$(document.getElementById(this.idPrefix + this.selectedSoul)).removeClass("PrettyCards_SelectedSoul");
+		if (this.highlightSelectedSoul) {
+			$(document.getElementById(this.idPrefix + this.selectedSoul)).removeClass("PrettyCards_SelectedSoul");
+		}
 		this.selectedSoul = deckName;
-		$(document.getElementById(this.idPrefix + this.selectedSoul)).addClass("PrettyCards_SelectedSoul");
+		if (this.highlightSelectedSoul) {
+			$(document.getElementById(this.idPrefix + this.selectedSoul)).addClass("PrettyCards_SelectedSoul");
+		}
+		this.changeSoulCallback(this.selectedSoul);
 	}
 
 	SetUp(idPrefix, sizeClass) {
 		this.idPrefix = idPrefix;
 
 		var playableDecks = this.GetPlayableDecks();
+		if (this.soulsToDisplay.length <= 0) {
+			this.soulsToDisplay = Object.keys(playableDecks);
+		}
 		var html = "";
 		var firstSoul = "";
 		window["PrettyCards_ChangeDeck_" + this.idPrefix] = this.ChangeDeck.bind(this);
-		for (var deckName in playableDecks) {
+		//for (var deckName in this.soulsToDisplay) {
+		for (var i=0; i < this.soulsToDisplay.length; i++) {
+			var deckName = this.soulsToDisplay[i];
 			if (firstSoul === "") {
 				firstSoul = deckName;
 			}
-			html += `<img src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${deckName}.png" id="${this.idPrefix}${deckName}" onclick='PrettyCards_ChangeDeck_${this.idPrefix}("${deckName}");' class="PrettyCards_Soul_${deckName} PrettyCards_${sizeClass}Soul ${deckName === firstSoul ? "PrettyCards_SelectedSoul" : ""}"></img>`;
+			html += `<img src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${deckName}.png" id="${this.idPrefix}${deckName}" onclick='PrettyCards_ChangeDeck_${this.idPrefix}("${deckName}");' class="PrettyCards_Soul_${deckName} PrettyCards_${sizeClass}Soul ${(deckName === firstSoul && this.highlightSelectedSoul) ? "PrettyCards_SelectedSoul" : ""}"></img>`;
 		}
 		this.selectedSoul = firstSoul;
 		return html;
