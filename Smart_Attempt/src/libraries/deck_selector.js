@@ -142,6 +142,12 @@ class SavedDeckSelector {
 		return container;
 	}
 	
+	AppendTo(ele) {
+		this.decks = GetAllDecksOrganized();
+		ele.appendChild(this.GetHTML(this.decks));
+	}
+	
+	/*
 	OpenDialogue() {
 		this.decks = GetAllDecksOrganized();
 		
@@ -160,7 +166,7 @@ class SavedDeckSelector {
 			]
 		});
 		this.dial.enableButtons(this.closable);
-	}
+	}*/
 	
 }
 

@@ -4,8 +4,8 @@
 }
 
 .PrettyCards_DeckListContainer {
-	width: 840px;
-	height: 500px;
+	width: 100%;
+	height: 640px;
 	overflow-y: auto;
 }
 
@@ -53,7 +53,7 @@
 
 .PrettyCards_DeckListContainer .card {
 	display: inline-block;
-	margin: 5px 10px;
+	margin: 5px 0px;
 }
 
 .PrettyCards_DeckListContainer .card .cardCost {

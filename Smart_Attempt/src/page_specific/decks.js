@@ -7,15 +7,20 @@ var deckSelector = new SavedDeckSelector();
 var skinSelector = new CardSkinSelector();
 var deckName = document.createElement("INPUT");
 var changeDeckImage = document.createElement("BUTTON");
+var changeDeckScreen = document.createElement("DIV");
 var currentDeck = null;
 
-function ChangeDeckDialogue() {
+var deckEditPage = document.querySelector(".mainContent > table");
+
+function ChangeDeckScreen() {
 	deckSelector.callback = function(deck) {
 		ChangeDeck(deck);
-		deckSelector.dial.close();
+		changeDeckScreen.style.display = "none";
 	}.bind(this);
 	deckSelector.closable = true;
-	deckSelector.OpenDialogue();
+	//deckSelector.OpenDialogue();
+	changeDeckScreen.style.display = "initial";
+	deckEditPage.style.display = "none";
 }
 
 function ChangeDeck(deck) {
@@ -24,6 +29,7 @@ function ChangeDeck(deck) {
 	deckName.value = deck.name;
 	deckName.className = "form-control " + deck.soul;
 	changeDeckImage.style.backgroundImage = "url(/images/cards/" + deck.image.image + ".png)";
+	deckEditPage.style.display = "initial";
 }
 
 function ChangeDeckImageDialogue() {
@@ -50,11 +56,18 @@ function ChangeDeckName() {
 function InitDecks() {
 	PrettyCards_plugin.events.on("SoulSelector:decksLoaded", function(data) {
 		deckSelector.callback = function(deck) {
-			deckSelector.dial.close();
+			changeDeckScreen.style.display = "none";
 			ChangeDeck(deck);
 		}
-		deckSelector.OpenDialogue();
+		deckSelector.AppendTo(changeDeckScreen);
 	});
+	
+	deckEditPage.style.display = "none";
+	
+	document.querySelectorAll(".mainContent > br").forEach(function (br) {br.remove()});
+	
+	document.getElementsByClassName("mainContent")[0].appendChild(changeDeckScreen);
+	
 	
 	var oldDeckButtons = document.querySelector(".btn-storage").parentElement;
 	oldDeckButtons.style = "display: none;";
@@ -76,13 +89,13 @@ function InitDecks() {
 	
 	var changeDeckButton = document.createElement("BUTTON");
 	newDeckButtons.appendChild(changeDeckButton);
-	changeDeckButton.style = "width: 50%; margin: 0;";
+	changeDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 	changeDeckButton.className = "btn btn-primary";
 	changeDeckButton.innerHTML = "Change<br>Deck";
-	changeDeckButton.onclick = ChangeDeckDialogue.bind(this);
+	changeDeckButton.onclick = ChangeDeckScreen.bind(this);
 	
 	newDeckButtons.appendChild(changeDeckImage);
-	changeDeckImage.style = "width: 50%; margin: 0; background-image: url(/images/cards/Dummy.png); background-size: cover; background-position: center;";
+	changeDeckImage.style = "width: 50%; margin: 0; background-image: url(/images/cards/Dummy.png); background-size: cover; background-position: center; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 	changeDeckImage.className = "btn btn-primary";
 	changeDeckImage.innerHTML = "Change<br>Image";
 	changeDeckImage.onclick = ChangeDeckImageDialogue.bind(this);
