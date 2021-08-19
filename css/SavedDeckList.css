@@ -81,8 +81,18 @@
     font-size: 25px;
     line-height: 25px;
 }
-}
 
 .PrettyCards_DeckCardErase:hover {
 	color: #CC0000;
+}
+
+.PrettyCards_ChooseDeckScreenContainer {
+	position: relative;
+}
+
+.PrettyCards_DeckListCloseButton {
+	position: absolute;
+	top: 5px;
+	right: 8px;
+	font-size: 25px;
 }

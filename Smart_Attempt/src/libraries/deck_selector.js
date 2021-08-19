@@ -5,9 +5,9 @@ import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetic
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@363fd868ae7ac22ba9602b9afaca89acd66dc732/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@075d5c355590cec634d029e0f58956a26b463c16/css/SavedDeckList.css");
 
-var demonEasterEgg = Math.random() <= 0.22;//0.022;
+var demonEasterEgg = Math.random() <= 0.022;
 
 const dummy_skin = {
 	active: true,
@@ -40,6 +40,7 @@ const onu_skin = {
 function GetAllDecks() {
 	var decks = [];
 	DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
+	console.log("Weird debug #1", window.localStorage.length);
 	for (var i = 0; i < window.localStorage.length; i++){
 		var key = window.localStorage.key(i);
 		if (key.includes(DECK_STORAGE_PREFIX)) {
@@ -81,7 +82,7 @@ function appendCardDeck($parent, deck) {
 	var cardNameDiv$ = card.find(".cardName div");
 	card.find(".cardName").css("width", "160px");
 	cardNameDiv$.html(deck.name);
-	cardNameDiv$.addClass(deck.soul);
+	card.find(".cardName").addClass(deck.soul);
 	card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.name + '</span>');
 	card.find(".cardFrame").css("background-image", "url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png)");
 	
@@ -96,7 +97,16 @@ function appendCardDeck($parent, deck) {
 
 function GetAllDecksOrganized() {
 	var decks = GetAllDecks();
-	var orderedDecks = {};
+	var orderedDecks = {
+		DETERMINATION: [],
+		BRAVERY: [],
+		JUSTICE: [],
+		KINDNESS: [],
+		PATIENCE: [],
+		INTEGRITY: [],
+		PERSEVERANCE: [],
+		//SWITCH: []
+	};
 	for (var i=0; i < decks.length; i++) {
 		var deck = decks[i];
 		if (!orderedDecks[deck.soul]) {
@@ -125,38 +135,11 @@ function GetFirstAvailableId(decks, soul) { // MUST BE ORDERED DECK LIST!
 	return i;
 }
 
-function DeleteDeckDialogue(deck) {
-	var title = demonEasterEgg ? "ERASE deck?" : "Delete deck?";
-	var text = demonEasterEgg ? "<span class='red'>Shall we erase this pointless deck?</span>" : "Are you sure you want to delete this deck?";
-	var yes_option = demonEasterEgg ? "ERASE" : "Delete";
-	var no_option = demonEasterEgg ? "DO NOT." : "Cancel";
-	
-	BootstrapDialog.show({
-		title: title,
-		message: text,
-		buttons: [
-			{
-				label: no_option,
-				cssClass: 'btn-primary us-normal',
-				action(dialog) {
-					dialog.close();
-				}
-			},
-			{
-				label: yes_option,
-				cssClass: 'btn-primary us-cancel',
-				action(dialog) {
-					dialog.close();
-				}
-			}
-		]
-	});
-}
-
 class SavedDeckSelector {
 	
 	constructor() {
 		this.callback = function() {};
+		this.closeCallback = function() {};
 		this.closable = false;
 		this.deckSouls = {};
 		this.decks = [];
@@ -165,6 +148,7 @@ class SavedDeckSelector {
 	
 	GetHTML(decks) {
 		var container = document.createElement("DIV");
+		container.className = "PrettyCards_ChooseDeckScreenContainer";
 		
 		var soulContainer = document.createElement("DIV");
 		soulContainer.className = "PrettyCards_DecklistSoulsContainer";
@@ -185,6 +169,14 @@ class SavedDeckSelector {
 		decksContainer.className = "PrettyCards_DeckListContainer";
 		container.appendChild(decksContainer);
 		
+		if (this.closable) {
+			var closeButton = document.createElement("BUTTON");
+			closeButton.className = "btn btn-primary PrettyCards_DeckListCloseButton";
+			closeButton.innerHTML = demonEasterEgg ? "LATER" : "Nevermind";
+			closeButton.onclick = this.closeCallback;
+			container.appendChild(closeButton);
+		}
+		
 		this.deckSouls = {};
 		for (var soul in decks) {
 			var $deck = $('<div><div class="PrettyCards_DeckHeader ' + soul + '">' + soul + '</div></div>');
@@ -196,9 +188,10 @@ class SavedDeckSelector {
 				if (this.canEditDecks) {
 					card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? "ERASE" : "DELETE") + '</div>');
 					card.find(".PrettyCards_DeckCardErase").click(function(e) {
-						DeleteDeckDialogue(deck);
+						this.DeleteDeckDialogue(deck);
 						e.stopPropagation();
 					}.bind(this));
+					card.find(".cardFooter").css("display", "none");
 				}
 				
 				card.click(function() {
@@ -233,6 +226,49 @@ class SavedDeckSelector {
 	AppendTo(ele) {
 		this.decks = GetAllDecksOrganized();
 		ele.appendChild(this.GetHTML(this.decks));
+		this.parent = ele;
+	}
+	
+	Reload() {
+		this.parent.innerHTML = "";
+		this.AppendTo(this.parent);
+	}
+	
+	DeleteDeckDialogue(deck) {
+		var title = demonEasterEgg ? "ERASE deck?" : "Delete deck?";
+		var text = demonEasterEgg ? "<span class='red'>Shall we erase this pointless deck?</span>" : "Are you sure you want to delete this deck?";
+		var yes_option = demonEasterEgg ? "ERASE" : "Delete";
+		var no_option = demonEasterEgg ? "DO NOT." : "Cancel";
+		
+		const self = this;
+		BootstrapDialog.show({
+			title: title,
+			message: text,
+			buttons: [
+				{
+					label: no_option,
+					cssClass: 'btn-primary us-normal',
+					action(dialog) {
+						dialog.close();
+					}
+				},
+				{
+					label: yes_option,
+					cssClass: 'btn-danger us-normal',
+					action(dialog) {
+						self.DeleteDeck(deck);
+						self.Reload();
+						dialog.close();
+					}
+				}
+			]
+		});
+	}
+
+	DeleteDeck(deck) {
+		window.localStorage.removeItem(deck.key);
+		window.localStorage.removeItem(deck.key + ".name");
+		window.localStorage.removeItem("prettycards.deck." + selfId + "." + deck.soul + "." + deck.id + ".image");
 	}
 	
 	/*

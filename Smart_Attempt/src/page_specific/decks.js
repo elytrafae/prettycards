@@ -16,8 +16,9 @@ var deckEditPage = document.querySelector(".mainContent > table");
 function ChangeDeckScreen() {
 	deckSelector.callback = function(deck) {
 		ChangeDeck(deck);
-		changeDeckScreen.style.display = "none";
+		CloseDeckScreen();
 	}.bind(this);
+	deckSelector.closeCallback = CloseDeckScreen.bind(this);
 	changeDeckScreen.innerHTML = "";
 	deckSelector.closable = true;
 	deckSelector.AppendTo(changeDeckScreen);
@@ -30,6 +31,10 @@ function ChangeDeck(deck) {
 	currentDeck = deck;
 	console.log("Changing deck to", deck);
 	LoadDeck(deck);
+}
+
+function CloseDeckScreen() {
+	changeDeckScreen.style.display = "none";
 	deckEditPage.style.display = "initial";
 }
 
@@ -224,7 +229,7 @@ function InitDecks() {
 	//PrettyCards_plugin.events.on("SoulSelector:decksLoaded", function(data) {
 	SoulSelector.ExecuteOnDeckLoad(function() {
 		deckSelector.callback = function(deck) {
-			changeDeckScreen.style.display = "none";
+			CloseDeckScreen();
 			ChangeDeck(deck);
 		}
 		deckSelector.canEditDecks = true;
