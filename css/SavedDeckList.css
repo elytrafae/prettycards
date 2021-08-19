@@ -63,3 +63,26 @@
 .PrettyCards_DeckListContainer .card .cardName {
 	width: 160px;
 }
+
+.PrettyCards_DeckListContainer .card .cardRarity {
+	display: none;
+}
+
+.PrettyCards_DeckCardErase {
+	height: 25px;
+	width: 160px;
+	position: absolute;
+	padding-left: 5px;
+	padding-right: 5px;
+	left: 8px;
+	top: 212px;
+	text-align: center;
+	color: red;
+    font-size: 25px;
+    line-height: 25px;
+}
+}
+
+.PrettyCards_DeckCardErase:hover {
+	color: #CC0000;
+}

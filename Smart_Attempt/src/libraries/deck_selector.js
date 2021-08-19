@@ -5,7 +5,9 @@ import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetic
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@910cbf162a7f6dd7f8913baa987d9c9754c502b9/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@363fd868ae7ac22ba9602b9afaca89acd66dc732/css/SavedDeckList.css");
+
+var demonEasterEgg = Math.random() <= 0.22;//0.022;
 
 const dummy_skin = {
 	active: true,
@@ -14,6 +16,20 @@ const dummy_skin = {
 	cardName: "Dummy",
 	id: -1,
 	image: "Dummy",
+	name: "Default",
+	owned: true,
+	typeSkin: 0,
+	ucpCost: 0,
+	unavailable: false
+}
+
+const onu_skin = {
+	active: true,
+	authorName: "",
+	cardId: -1,
+	cardName: "Onutrem",
+	id: -1,
+	image: "Onutrem",
 	name: "Default",
 	owned: true,
 	typeSkin: 0,
@@ -40,24 +56,43 @@ function GetAllDecks() {
 			if (skin) {
 				skin = JSON.parse(skin);
 			} else {
-				skin = dummy_skin;
+				skin = demonEasterEgg ? onu_skin : dummy_skin;
 			}
-			console.log(skin);
-			
+			//console.log(skin);
+			console.log("Key: ", key);
 			var deck = {
 				soul : rest_sliced[0],
 				id : Number(rest_sliced[1]),
 				name : (window.localStorage[key + ".name"] || ("Unnamed " + rest_sliced[0] + " Deck")),
 				cards : parsedDeck.cards,
 				artifacts : parsedDeck.artifacts,
-				image : skin
+				image : skin,
+				key: key
 			}
+			console.log("deck.key", deck.key);
 			decks.push(deck);
 		}
 	}
 	return decks;
 }
 
+function appendCardDeck($parent, deck) {
+	var card = window.appendCard(window.allCards[0], $parent);
+	var cardNameDiv$ = card.find(".cardName div");
+	card.find(".cardName").css("width", "160px");
+	cardNameDiv$.html(deck.name);
+	cardNameDiv$.addClass(deck.soul);
+	card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.name + '</span>');
+	card.find(".cardFrame").css("background-image", "url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png)");
+	
+	SetDeckSkin(card, deck.image);
+	
+	cardNameDiv$.css('font-size', '');
+	
+	var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
+	cardNameDiv$.css('font-size', (nameSize + "px"));
+	return card;
+}
 
 function GetAllDecksOrganized() {
 	var decks = GetAllDecks();
@@ -79,6 +114,45 @@ function GetAllDecksOrganized() {
 	return orderedDecks;
 }
 
+function GetFirstAvailableId(decks, soul) { // MUST BE ORDERED DECK LIST!
+	var decksForSoul = decks[soul];
+	var i = 0;
+	//var id = 0;
+	while (i < decksForSoul.length && i == decksForSoul[i].id) {
+		i++;
+		//id++;
+	}
+	return i;
+}
+
+function DeleteDeckDialogue(deck) {
+	var title = demonEasterEgg ? "ERASE deck?" : "Delete deck?";
+	var text = demonEasterEgg ? "<span class='red'>Shall we erase this pointless deck?</span>" : "Are you sure you want to delete this deck?";
+	var yes_option = demonEasterEgg ? "ERASE" : "Delete";
+	var no_option = demonEasterEgg ? "DO NOT." : "Cancel";
+	
+	BootstrapDialog.show({
+		title: title,
+		message: text,
+		buttons: [
+			{
+				label: no_option,
+				cssClass: 'btn-primary us-normal',
+				action(dialog) {
+					dialog.close();
+				}
+			},
+			{
+				label: yes_option,
+				cssClass: 'btn-primary us-cancel',
+				action(dialog) {
+					dialog.close();
+				}
+			}
+		]
+	});
+}
+
 class SavedDeckSelector {
 	
 	constructor() {
@@ -86,6 +160,7 @@ class SavedDeckSelector {
 		this.closable = false;
 		this.deckSouls = {};
 		this.decks = [];
+		this.canEditDecks = false;
 	}
 	
 	GetHTML(decks) {
@@ -116,25 +191,38 @@ class SavedDeckSelector {
 			
 			for (var i=0; i < decks[soul].length; i++) {
 				const deck = decks[soul][i];
-				var card = window.appendCard(window.allCards[0], $deck);
-				var cardNameDiv$ = card.find(".cardName div");
-				card.find(".cardName").css("width", "160px");
-				cardNameDiv$.html(deck.name);
-				cardNameDiv$.addClass(soul);
-				card.find(".cardDesc div").html('<span class="' + soul + '">' + deck.name + '</span>');
-				card.find(".cardFrame").css("background-image", "url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png)");
-				
-				SetDeckSkin(card, deck.image);
-				
-				cardNameDiv$.css('font-size', '');
-				
-				var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
-				cardNameDiv$.css('font-size', (nameSize + "px"));
+				var card = appendCardDeck($deck, deck);
+								
+				if (this.canEditDecks) {
+					card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? "ERASE" : "DELETE") + '</div>');
+					card.find(".PrettyCards_DeckCardErase").click(function(e) {
+						DeleteDeckDialogue(deck);
+						e.stopPropagation();
+					}.bind(this));
+				}
 				
 				card.click(function() {
 					this.callback(deck);
 				}.bind(this));
 			}
+			
+			if (this.canEditDecks) {
+				var id = GetFirstAvailableId(decks, soul);
+				const newCardDeck = {
+					image: demonEasterEgg ? onu_skin : dummy_skin,
+					soul: soul,
+					name: ("New " + soul + " Deck"),
+					cards: [],
+					artifacts: [],
+					id: id,
+					key: DECK_STORAGE_PREFIX + soul + "." + id
+				}
+				var newDeckCard = appendCardDeck($deck, newCardDeck);
+				newDeckCard.click(function() {
+					this.callback(newCardDeck);
+				}.bind(this));
+			}
+			
 			this.deckSouls[soul] = $deck;
 			$(decksContainer).append($deck);
 		}
