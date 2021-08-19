@@ -104,6 +104,8 @@ class CardSkinSelector {
 	GetHTML(skins) {
 		this.searchBar = document.createElement("INPUT");
 		this.searchBar.className = "form-control";
+		this.searchBar.setAttribute("type", "text");
+		this.searchBar.placeholder = "Search . . .";
 		console.log(this);
 		$(this.searchBar).keyup(this.ApplyFilters.bind(this));
 		
@@ -111,8 +113,12 @@ class CardSkinSelector {
 		
 		cont.appendChild(this.searchBar);
 		
+		var skinsCont = document.createElement("DIV");
+		skinsCont.className = "PrettyCards_SkinsContainer";
+		cont.appendChild(skinsCont);
+		
 		for (var i=0; i < this.skins.length; i++) {
-			var skin = this.skins[i];
+			const skin = this.skins[i];
 			var div = document.createElement("DIV");
 			div.className = "PrettyCards_SkinDiv";
 			div.style.background = "url(images/cards/" + skin.image + ".png) no-repeat transparent";
@@ -122,17 +128,26 @@ class CardSkinSelector {
 				div.innerHTML += '<div class="PrettyCards_FullSkinPreview"><img src="images/cards/' + skin.image + '.png"></div>';
 			}
 			
+			div.onclick = function() {
+				this.callback(skin);
+			}.bind(this);
+			
 			this.skinElements.push(div);
-			cont.appendChild(div);
+			skinsCont.appendChild(div);
 		}
 		this.container = cont;
 		return cont;
 	}
 	
 	OpenDialogue() {
+		this.container = null;
+		this.skinElements = [];
+		this.skins = [];
+		this.searchBar = null;
+		
 		this.skins = this.GetSkinsToDisplay();
 		var html = this.GetHTML();
-		BootstrapDialog.show({
+		this.dial = BootstrapDialog.show({
 			title: "Select a card skin!",
 			size: BootstrapDialog.SIZE_WIDE,
 			closable: true,

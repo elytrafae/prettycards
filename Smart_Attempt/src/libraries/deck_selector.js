@@ -1,10 +1,25 @@
 
 import {SoulSelector} from "/src/libraries/soul_selector.js";
 import {utility} from "/src/libraries/utility.js";
+import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetics_manager.js";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b626a3a5da3c6da54973f2411583749186957832/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@910cbf162a7f6dd7f8913baa987d9c9754c502b9/css/SavedDeckList.css");
+
+const dummy_skin = {
+	active: true,
+	authorName: "",
+	cardId: 1,
+	cardName: "Dummy",
+	id: -1,
+	image: "Dummy",
+	name: "Default",
+	owned: true,
+	typeSkin: 0,
+	ucpCost: 0,
+	unavailable: false
+}
 
 function GetAllDecks() {
 	var decks = [];
@@ -20,6 +35,14 @@ function GetAllDecks() {
 			if (rest_sliced[2] === "name") {continue;}
 			
 			var parsedDeck = JSON.parse(val);
+			var image_key = "prettycards.deck." + selfId + "." + rest_sliced[0] + "." + rest_sliced[1] + ".image";
+			var skin = window.localStorage[image_key];
+			if (skin) {
+				skin = JSON.parse(skin);
+			} else {
+				skin = dummy_skin;
+			}
+			console.log(skin);
 			
 			var deck = {
 				soul : rest_sliced[0],
@@ -27,6 +50,7 @@ function GetAllDecks() {
 				name : (window.localStorage[key + ".name"] || ("Unnamed " + rest_sliced[0] + " Deck")),
 				cards : parsedDeck.cards,
 				artifacts : parsedDeck.artifacts,
+				image : skin
 			}
 			decks.push(deck);
 		}
@@ -61,6 +85,7 @@ class SavedDeckSelector {
 		this.callback = function() {};
 		this.closable = false;
 		this.deckSouls = {};
+		this.decks = [];
 	}
 	
 	GetHTML(decks) {
@@ -90,17 +115,25 @@ class SavedDeckSelector {
 			var $deck = $('<div><div class="PrettyCards_DeckHeader ' + soul + '">' + soul + '</div></div>');
 			
 			for (var i=0; i < decks[soul].length; i++) {
-				var deck = decks[soul][i];
+				const deck = decks[soul][i];
 				var card = window.appendCard(window.allCards[0], $deck);
 				var cardNameDiv$ = card.find(".cardName div");
-				cardNameDiv$.html('<span class="' + soul + '">' + deck.name + '</span>');
+				card.find(".cardName").css("width", "160px");
+				cardNameDiv$.html(deck.name);
+				cardNameDiv$.addClass(soul);
 				card.find(".cardDesc div").html('<span class="' + soul + '">' + deck.name + '</span>');
 				card.find(".cardFrame").css("background-image", "url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png)");
 				
+				SetDeckSkin(card, deck.image);
+				
 				cardNameDiv$.css('font-size', '');
-
+				
 				var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
 				cardNameDiv$.css('font-size', (nameSize + "px"));
+				
+				card.click(function() {
+					this.callback(deck);
+				}.bind(this));
 			}
 			this.deckSouls[soul] = $deck;
 			$(decksContainer).append($deck);
@@ -110,12 +143,12 @@ class SavedDeckSelector {
 	}
 	
 	OpenDialogue() {
-		var decks = GetAllDecksOrganized();
+		this.decks = GetAllDecksOrganized();
 		
-		BootstrapDialog.show({
+		this.dial = BootstrapDialog.show({
 			title: "Select a deck!",
 			size: BootstrapDialog.SIZE_WIDE,
-			message: this.GetHTML(decks),
+			message: this.GetHTML(this.decks),
 			closable: this.closable,
 			buttons: [{
 					label: "Nevermind!",
@@ -126,6 +159,7 @@ class SavedDeckSelector {
 				}
 			]
 		});
+		this.dial.enableButtons(this.closable);
 	}
 	
 }

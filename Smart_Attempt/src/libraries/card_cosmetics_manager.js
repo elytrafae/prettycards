@@ -30,6 +30,18 @@ function SetCosmeticsForCardData(card_data) {
 	return card_data;
 }
 
+function SetDeckSkin(card, card_skin) {
+	card.find(".cardImage").css("background-image", "url(/images/cards/" + card_skin.image + ".png)");
+	
+	var skinTypeString = "standard-skin";
+	if (card_skin.typeSkin == 1) {
+		skinTypeString = "full-skin";
+	} else if (card_skin.typeSkin == 2) {
+		skinTypeString = "breaking-skin";
+	}
+	card.removeClass("standard-skin").addClass(skinTypeString);
+}
+
 FetchCardCosmeticsData();
 
-export {SetCosmeticsForCardData};
+export {SetCosmeticsForCardData, SetDeckSkin};
