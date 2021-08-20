@@ -5,7 +5,7 @@ import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetic
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@09d4d759420b90135121b0efad0b416fd4dca97d/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b7a0476740a23a171b2730bff57edf2382aa1b63/css/SavedDeckList.css");
 
 var demonEasterEgg = Math.random() <= 0.022;
 
@@ -176,8 +176,7 @@ function appendCardDeck($parent, deck) {
 	cardNameDiv$.css('font-size', (nameSize + "px"));
 	
 	if (deck.isBase) {
-		var frameTintContainer = $('<div class="PrettyCards_BaseTintContainer">');
-		card.prepend('<div class="PrettyCards_BaseDeckTint"></div>');
+		card.addClass("PrettyCards_BaseDeckCard");
 	}
 	
 	return card;
