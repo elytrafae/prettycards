@@ -5,7 +5,7 @@ import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetic
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@075d5c355590cec634d029e0f58956a26b463c16/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@09d4d759420b90135121b0efad0b416fd4dca97d/css/SavedDeckList.css");
 
 var demonEasterEgg = Math.random() <= 0.022;
 
@@ -60,7 +60,7 @@ function GetAllDecks() {
 				skin = demonEasterEgg ? onu_skin : dummy_skin;
 			}
 			//console.log(skin);
-			console.log("Key: ", key);
+			//console.log("Key: ", key);
 			var deck = {
 				soul : rest_sliced[0],
 				id : Number(rest_sliced[1]),
@@ -70,11 +70,93 @@ function GetAllDecks() {
 				image : skin,
 				key: key
 			}
-			console.log("deck.key", deck.key);
+			//console.log("deck.key", deck.key);
 			decks.push(deck);
 		}
 	}
 	return decks;
+}
+
+function CompareDecks(baseDeck, saveDeck) {
+	if (baseDeck.cards.length != saveDeck.cards.length || baseDeck.artifacts.length != saveDeck.artifacts.length) {
+		return false;
+	}
+	
+	for (var i=0; i < baseDeck.artifacts.length; i++) {
+		if (!saveDeck.artifacts.includes(baseDeck.artifacts[i].id)) {
+			return false;
+		}
+	}
+	
+	var saveDeckCards = utility.completeCopy(saveDeck.cards);
+	for (var i=0; i < baseDeck.cards.length; i++) {
+		var card = baseDeck.cards[i];
+		var found = -1;
+		for (var j=0; j < saveDeckCards.length; j++) {
+			if (saveDeckCards[j].id == card.id && (!!saveDeckCards[j].shiny) == card.shiny) {
+				found = j;
+				break;
+			}
+		}
+		if (found < 0) {
+			return false;
+		}
+		saveDeckCards.splice(found, 1);
+	}
+	
+	return true;
+}
+
+function ProcessBaseDecks(organizedDecks) {
+	var baseDecks = SoulSelector.GetDecks();
+	console.log("baseDecks", baseDecks);
+	for (var soul in baseDecks) {
+		console.log("Processing ", soul);
+		var found = false;
+		var baseDeck = baseDecks[soul];
+		if (!organizedDecks[soul] || baseDeck.cards.length <= 0) {
+			continue;
+		}
+		for (var i=0; i < organizedDecks[soul].length; i++) {
+			var saveDeck = organizedDecks[soul][i];
+			saveDeck.isBase = CompareDecks(baseDeck, saveDeck);
+			if (saveDeck.isBase) {
+				found = true;
+				console.log("Deck found!", saveDeck);
+			}
+		}
+		if (!found) {
+			var id = GetFirstAvailableId(organizedDecks, soul);
+			var cards = [];
+			var artifacts = [];
+			var key = DECK_STORAGE_PREFIX + soul + "." + id;
+			var name = ("Autogen " + soul + " Deck");
+			for (var i=0; i < baseDeck.cards.length; i++) {
+				var card = {id: baseDeck.cards[i].id};
+				if (baseDeck.cards[i].shiny) {
+					card.shiny = true;
+				}
+				cards.push(card);
+			}
+			for (var i=0; i < baseDeck.artifacts.length; i++) {
+				artifacts.push(baseDeck.artifacts[i].id);
+			}
+			window.localStorage[key] = JSON.stringify({cards: cards, artifacts: artifacts});
+			window.localStorage[key + ".name"] = name;
+			organizedDecks[soul].push({
+				image: demonEasterEgg ? onu_skin : dummy_skin,
+				soul: soul,
+				name: name,
+				cards: cards,
+				artifacts: artifacts,
+				id: id,
+				key: key,
+				isBase: true
+			})
+			
+			console.log("Autogen ", organizedDecks[soul], soul);
+		}
+	}
 }
 
 function appendCardDeck($parent, deck) {
@@ -83,8 +165,8 @@ function appendCardDeck($parent, deck) {
 	card.find(".cardName").css("width", "160px");
 	cardNameDiv$.html(deck.name);
 	card.find(".cardName").addClass(deck.soul);
-	card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.name + '</span>');
-	card.find(".cardFrame").css("background-image", "url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png)");
+	card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.name + '</span>' + (deck.isBase ? '<br><span class="grey">(Loaded)</span>' : '') );
+	card.find(".cardFrame").css("background-image", "url(" + (deck.isBase ? "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
 	
 	SetDeckSkin(card, deck.image);
 	
@@ -92,6 +174,12 @@ function appendCardDeck($parent, deck) {
 	
 	var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
 	cardNameDiv$.css('font-size', (nameSize + "px"));
+	
+	if (deck.isBase) {
+		var frameTintContainer = $('<div class="PrettyCards_BaseTintContainer">');
+		card.prepend('<div class="PrettyCards_BaseDeckTint"></div>');
+	}
+	
 	return card;
 }
 
@@ -172,7 +260,7 @@ class SavedDeckSelector {
 		if (this.closable) {
 			var closeButton = document.createElement("BUTTON");
 			closeButton.className = "btn btn-primary PrettyCards_DeckListCloseButton";
-			closeButton.innerHTML = demonEasterEgg ? "LATER" : "Nevermind";
+			closeButton.innerHTML = demonEasterEgg ? "<span class='red'>LATER</span>" : "Nevermind";
 			closeButton.onclick = this.closeCallback;
 			container.appendChild(closeButton);
 		}
@@ -225,6 +313,7 @@ class SavedDeckSelector {
 	
 	AppendTo(ele) {
 		this.decks = GetAllDecksOrganized();
+		ProcessBaseDecks(this.decks);
 		ele.appendChild(this.GetHTML(this.decks));
 		this.parent = ele;
 	}

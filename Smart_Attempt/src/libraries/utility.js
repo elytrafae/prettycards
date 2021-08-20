@@ -56,6 +56,15 @@ class Utility {
 		return copy;
 	}
 	
+	deleteByValue(arr, item) {
+		var index = arr.indexOf(item);
+		if (index !== -1) {
+			arr.splice(index, 1);
+			return true;
+		}
+		return false;
+	}
+	
 	// This. Code. Is. ANCIENT. What is up with this, Onu!?!?
 	addFriend(username, callback) {
 		$.post("Friends", {username: "Jazmin290", addFriend: "Add friend"}, callback);

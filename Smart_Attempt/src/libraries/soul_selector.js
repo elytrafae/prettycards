@@ -150,6 +150,10 @@ class SoulSelector {
 		}
 		PrettyCards_plugin.events.on("SoulSelector:decksLoaded", callback);
 	}
+	
+	static GetDecks() {
+		return decks;
+	}
 
 }
 

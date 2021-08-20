@@ -4,6 +4,9 @@ import {} from "./libraries/jquery_additions.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {} from "/src/libraries/updater.js";
 
+// The Event ensurer MUST be required AFTER underscript stuff, but BEFORE anything else that might require it!
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+
 import {} from "./libraries/chat/user_info.js";
 import {} from "./libraries/private_games/private_game_host.js";
 import {} from "./libraries/private_games/private_game_recipient.js";

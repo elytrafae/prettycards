@@ -4,6 +4,8 @@ import {SavedDeckSelector} from "/src/libraries/deck_selector.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+
 var deckSelector = new SavedDeckSelector();
 var skinSelector = new CardSkinSelector();
 var deckName = document.createElement("INPUT");
@@ -227,7 +229,7 @@ function SaveDeck() { // This does NOT save deck images and names!
 
 function InitDecks() {
 	//PrettyCards_plugin.events.on("SoulSelector:decksLoaded", function(data) {
-	SoulSelector.ExecuteOnDeckLoad(function() {
+	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected", function() {
 		deckSelector.callback = function(deck) {
 			CloseDeckScreen();
 			ChangeDeck(deck);
