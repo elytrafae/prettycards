@@ -91,11 +91,11 @@ function CompareDecks(baseDeck, saveDeck) {
 	var baseDeckCards = [...baseDeck.cards]; // Shallow copy of array, to allow sorting without changing the order
 	var saveDeckCards = [...saveDeck.cards]; // Shallow copy, avoid memory overheads and excess object creation
 	baseDeckCards.sort((a, b) => a.id - b.id || a.shiny - b.shiny);
-	saveDeckCards.sort((a, b) => a.id - b.id || a.shiny - b.shiny);
+	saveDeckCards.sort(({id: aID, shiny: aShiny = false}, {id: bID, shiny: bShiny = false}) => aID - bID || aShiny - bShiny);
 	for (var i=0; i < baseDeckCards.length; i++) {
 		var card = baseDeckCards[i];
-		var other = saveDeckCards[i];
-		if (card.id !== other.id || card.shiny !== other.shiny) {
+		var { id, shiny = false } = saveDeckCards[i];
+		if (card.id !== id || card.shiny !== shiny) {
 			return false;
 		}
 	}
