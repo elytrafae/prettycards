@@ -56,15 +56,15 @@
 	margin: 5px 0px;
 }
 
-.PrettyCards_DeckListContainer .card .cardCost {
+.card.PrettyCards_DeckCard .cardCost {
 	display: none;
 }
 
-.PrettyCards_DeckListContainer .card .cardName {
+.card.PrettyCards_DeckCard .cardName {
 	width: 160px;
 }
 
-.PrettyCards_DeckListContainer .card .cardRarity {
+.card.PrettyCards_DeckCard .cardRarity {
 	display: none;
 }
 
@@ -98,6 +98,6 @@
 	font-size: 25px;
 }
 
-.PrettyCards_DeckListContainer .card.PrettyCards_BaseDeckCard .cardBackground {
+.card.PrettyCards_BaseDeckCard .cardBackground {
 	box-shadow: gold 0px 0px 5px 5px;
 }

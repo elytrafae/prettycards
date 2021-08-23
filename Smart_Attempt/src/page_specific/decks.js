@@ -9,7 +9,8 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 var deckSelector = new SavedDeckSelector();
 var skinSelector = new CardSkinSelector();
 var deckName = document.createElement("INPUT");
-var changeDeckImage = document.createElement("BUTTON");
+var deckDesc = document.createElement("TEXTAREA");
+var editDeckButton = document.createElement("BUTTON");
 var changeDeckScreen = document.createElement("DIV");
 var currentDeck = null;
 
@@ -59,6 +60,57 @@ function ChangeDeckName() {
 	var nameValue = $(deckName).val();
 	var key = currentDeck.key + ".name";
 	window.localStorage[key] = nameValue;
+}
+
+function EditDeckScreenHTML() {
+	var cont = document.createElement("DIV");
+	
+	var col1 = document.createElement("DIV");
+	col1.style = "display: inline-block; margin: 0; float:left; min-height:250px;";
+	cont.appendChild(col1);
+	
+	var col2 = document.createElement("DIV");
+	col2.style = "display: inline-block; margin: 0; float:right; width: 200px;";
+	cont.appendChild(col2);
+	
+	col1.innerHTML = "<span>Deck Name: </span>";
+	
+	col1.appendChild(deckName);
+	deckName.value = currentDeck.name;
+	deckName.className = "form-control " + currentDeck.soul;
+	deckName.style = "background: rgba(0,0,0,.5); width: 50%; display: inline-block;";
+	deckName.placeholder = "Deck Name";
+	$(deckName).unbind("keyup").keyup(ChangeDeckName.bind(this)); // I dunno why I did this, but it shouldn't be a biggie :3
+	
+	var deckDescSpan = document.createElement("SPAN");
+	deckDescSpan.innerHTML = "<br>Deck Description:";
+	col1.appendChild(deckDescSpan);
+	
+	col1.appendChild(deckDesc);
+	deckDesc.style = "background: rgba(0,0,0,.5); width: 50%; display: inline-block;"
+	
+	deckSelector.appendCardDeck($(col2), currentDeck, true);
+	
+	return cont;
+}
+
+function EditDeckScreen() {
+	BootstrapDialog.show({
+		title: "Select a card skin!",
+		size: BootstrapDialog.SIZE_WIDE,
+		closable: true,
+		closeByBackdrop: false,
+		message: EditDeckScreenHTML(),
+		buttons: [
+			{
+				label: "Ok!",
+				cssClass: 'btn-primary us-normal',
+				action(dialog) {
+					dialog.close();
+				}
+			}
+		]
+	});
 }
 
 const maxDupesPerRarity = {
@@ -212,9 +264,9 @@ function LoadDeck(deck) {
 	checkCompletion();
 	refreshDeckList();
 	
-	deckName.value = deck.name;
-	deckName.className = "form-control " + deck.soul;
-	changeDeckImage.style.backgroundImage = "url(/images/cards/" + deck.image.image + ".png)";
+	//deckName.value = deck.name;
+	//deckName.className = "form-control " + deck.soul;
+	//changeDeckImage.style.backgroundImage = "url(/images/cards/" + deck.image.image + ".png)";
 }
 
 function SaveDeck() { // This does NOT save deck images and names!
@@ -265,6 +317,7 @@ function InitDecks() {
 	
 	newDeckButtons.className = "PrettyCards_DeckButtons";
 	
+	/*
 	newDeckButtons.appendChild(deckName);
 	//deckName.style = "text-align: center";
 	deckName.value = "Placeholder Deck";
@@ -273,6 +326,7 @@ function InitDecks() {
 	deckName.style = "background: rgba(0,0,0,.5);";
 	deckName.placeholder = "Deck Name";
 	$(deckName).keyup(ChangeDeckName.bind(this));
+	*/
 	
 	var changeDeckButton = document.createElement("BUTTON");
 	newDeckButtons.appendChild(changeDeckButton);
@@ -281,11 +335,12 @@ function InitDecks() {
 	changeDeckButton.innerHTML = "Change<br>Deck";
 	changeDeckButton.onclick = ChangeDeckScreen.bind(this);
 	
-	newDeckButtons.appendChild(changeDeckImage);
-	changeDeckImage.style = "width: 50%; margin: 0; background-image: url(/images/cards/Dummy.png); background-size: cover; background-position: center; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
-	changeDeckImage.className = "btn btn-primary";
-	changeDeckImage.innerHTML = "Change<br>Image";
-	changeDeckImage.onclick = ChangeDeckImageDialogue.bind(this);
+	newDeckButtons.appendChild(editDeckButton);
+	//editDeckButton.style = "width: 50%; margin: 0; background-image: url(/images/cards/Dummy.png); background-size: cover; background-position: center; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
+	editDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
+	editDeckButton.className = "btn btn-primary";
+	editDeckButton.innerHTML = "Edit<br>Deck";
+	editDeckButton.onclick = EditDeckScreen.bind(this);
 }
 
 export {InitDecks};

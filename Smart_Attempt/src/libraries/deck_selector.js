@@ -155,29 +155,6 @@ function ProcessBaseDecks(organizedDecks) {
 	}
 }
 
-function appendCardDeck($parent, deck) {
-	var card = window.appendCard(window.allCards[0], $parent);
-	var cardNameDiv$ = card.find(".cardName div");
-	card.find(".cardName").css("width", "160px");
-	cardNameDiv$.html(deck.name);
-	card.find(".cardName").addClass(deck.soul);
-	card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.name + '</span>' + (deck.isBase ? '<br><span class="grey">(Loaded)</span>' : '') );
-	card.find(".cardFrame").css("background-image", "url(" + (deck.isBase ? "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
-	
-	SetDeckSkin(card, deck.image);
-	
-	cardNameDiv$.css('font-size', '');
-	
-	var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
-	cardNameDiv$.css('font-size', (nameSize + "px"));
-	
-	if (deck.isBase) {
-		card.addClass("PrettyCards_BaseDeckCard");
-	}
-	
-	return card;
-}
-
 function GetAllDecksOrganized() {
 	var decks = GetAllDecks();
 	var orderedDecks = {
@@ -266,7 +243,7 @@ class SavedDeckSelector {
 			
 			for (var i=0; i < decks[soul].length; i++) {
 				const deck = decks[soul][i];
-				var card = appendCardDeck($deck, deck);
+				var card = this.appendCardDeck($deck, deck);
 								
 				if (this.canEditDecks) {
 					card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? "ERASE" : "DELETE") + '</div>');
@@ -293,7 +270,7 @@ class SavedDeckSelector {
 					id: id,
 					key: DECK_STORAGE_PREFIX + soul + "." + id
 				}
-				var newDeckCard = appendCardDeck($deck, newCardDeck);
+				var newDeckCard = this.appendCardDeck($deck, newCardDeck);
 				newDeckCard.click(function() {
 					this.callback(newCardDeck);
 				}.bind(this));
@@ -353,6 +330,30 @@ class SavedDeckSelector {
 		window.localStorage.removeItem(deck.key);
 		window.localStorage.removeItem(deck.key + ".name");
 		window.localStorage.removeItem("prettycards.deck." + selfId + "." + deck.soul + "." + deck.id + ".image");
+	}
+	
+	appendCardDeck($parent, deck, ignoreBase) {
+		var card = window.appendCard(window.allCards[0], $parent);
+		card.addClass("PrettyCards_DeckCard");
+		var cardNameDiv$ = card.find(".cardName div");
+		card.find(".cardName").css("width", "160px");
+		cardNameDiv$.html(deck.name);
+		card.find(".cardName").addClass(deck.soul);
+		card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.name + '</span>' + ( (!ignoreBase && deck.isBase) ? '<br><span class="grey">(Loaded)</span>' : '') );
+		card.find(".cardFrame").css("background-image", "url(" + ( (!ignoreBase && deck.isBase) ? "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
+		
+		SetDeckSkin(card, deck.image);
+		
+		cardNameDiv$.css('font-size', '');
+		
+		var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
+		cardNameDiv$.css('font-size', (nameSize + "px"));
+		
+		if (deck.isBase) {
+			card.addClass("PrettyCards_BaseDeckCard");
+		}
+		
+		return card;
 	}
 	
 	/*
