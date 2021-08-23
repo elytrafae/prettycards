@@ -71,32 +71,39 @@ const maxDupesPerRarity = {
 	TOKEN: 0
 }
 
-function addCardSilent(idCard, shiny, dontUpdateDeck) {
-	var card = null;
-	for (var i=0; i < window.deckCollections[window.soul].length; i++) {
-		var _card = window.deckCollections[window.soul][i];
+function findInCollection(collection, idCard, shiny) {
+	for (var i=0; i < collection.length; i++) {
+		var _card = collection[i];
 		if (_card.id == idCard && _card.shiny == shiny) {
-			card = _card;
-			break;
+			return _card;
 		}
 	}
-	if (!card || card.quantity <= 0 || window.decks[window.soul].length >= 25) {
-		console.log("Return 1", card);
-		return;
+	return null;
+}
+
+function canCardBeAdded(card, deck) {
+	if (!card || card.quantity <= 0 || deck.length >= 25) {
+		return false;
 	}
 	var nrInDeck = 0;
-	for (var i=0; i < window.decks[window.soul].length; i++) {
-		var _card = window.decks[window.soul][i];
+	for (var i=0; i < deck.length; i++) {
+		var _card = deck[i];
 		if (card.id == _card.id) {
 			nrInDeck++;
 		}
 	}
 	if (nrInDeck >= maxDupesPerRarity[card.rarity]) {
-		console.log("Return 2", card);
+		return false;
+	}
+	return true;
+}
+
+function addCardSilent(idCard, shiny, dontUpdateDeck) {
+	var deckSoul = window.soul;
+	var card = findInCollection(window.deckCollections[deckSoul], idCard, shiny);
+	if (!canCardBeAdded(card, window.decks[window.soul])) {
 		return;
 	}
-	
-	var deckSoul = window.soul;
 	updateQuantity(deckSoul, card, -1);
 	addDeckCardSlot(deckSoul, card);
 	refreshDeckList();
@@ -108,14 +115,7 @@ function addCardSilent(idCard, shiny, dontUpdateDeck) {
 }
 
 function removeCardSilent(idCard, shiny) {
-	var card = null;
-	for (var i=0; i < window.deckCollections[window.soul].length; i++) {
-		var _card = window.deckCollections[window.soul][i];
-		if (_card.id == idCard && _card.shiny == shiny) {
-			card = _card;
-			break;
-		}
-	}
+	var card = findInCollection(window.deckCollections[window.soul], idCard, shiny);
 	var deckSoul = window.soul;
 	updateQuantity(deckSoul, card, 1);
 	removeDeckCardSlot(deckSoul, card);
@@ -198,11 +198,20 @@ function LoadDeck(deck) {
 	removeAllCardsSilent(true);
 	for (var i=0; i < deck.cards.length; i++) {
 		var card = deck.cards[i];
-		addCardSilent(card.id, !(!card.shiny), true);
+		//addCardSilent(card.id, !(!card.shiny), true);
+		var card = findInCollection(window.deckCollections[window.soul], card.id, !(!card.shiny));
+		if (canCardBeAdded(card, window.decks[window.soul])) {
+			window.decks[window.soul].push(card);
+			updateQuantity(window.soul, card, -1);
+		}
 	}
 	for (var i=0; i < deck.artifacts.length; i++) {
 		addArtifactSilent(deck.artifacts[i]);
 	}
+	
+	checkCompletion();
+	refreshDeckList();
+	
 	deckName.value = deck.name;
 	deckName.className = "form-control " + deck.soul;
 	changeDeckImage.style.backgroundImage = "url(/images/cards/" + deck.image.image + ".png)";

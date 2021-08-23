@@ -20,12 +20,15 @@ import {} from "./libraries/main_menu.js";
 
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";
+import {InitPlay} from "/src/page_specific/play.js";
 
 if (settings.packs.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
 	InitPacks();
 } else if (underscript.onPage("Decks")) {
 	InitDecks();
+} else if (underscript.onPage("Play")) {
+	InitPlay();
 }
 
 /*

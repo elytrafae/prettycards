@@ -5,7 +5,7 @@ import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetic
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@b7a0476740a23a171b2730bff57edf2382aa1b63/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@26ee7ae2f9a96be692b92d40c0a9e2f1b8fbd356/css/SavedDeckList.css");
 
 var demonEasterEgg = Math.random() <= 0.022;
 

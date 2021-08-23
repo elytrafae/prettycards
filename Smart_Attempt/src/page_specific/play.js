@@ -1,0 +1,7 @@
+
+
+function InitPlay() {
+	
+}
+
+export {InitPlay};
