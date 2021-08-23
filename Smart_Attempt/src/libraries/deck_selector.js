@@ -88,20 +88,16 @@ function CompareDecks(baseDeck, saveDeck) {
 		}
 	}
 	
-	var saveDeckCards = utility.completeCopy(saveDeck.cards);
-	for (var i=0; i < baseDeck.cards.length; i++) {
-		var card = baseDeck.cards[i];
-		var found = -1;
-		for (var j=0; j < saveDeckCards.length; j++) {
-			if (saveDeckCards[j].id == card.id && (!!saveDeckCards[j].shiny) == card.shiny) {
-				found = j;
-				break;
-			}
-		}
-		if (found < 0) {
+	var baseDeckCards = [...baseDeck.cards]; // Shallow copy of array, to allow sorting without changing the order
+	var saveDeckCards = [...saveDeck.cards]; // Shallow copy, avoid memory overheads and excess object creation
+	baseDeckCards.sort((a, b) => a.id - b.id || a.shiny - b.shiny);
+	saveDeckCards.sort((a, b) => a.id - b.id || a.shiny - b.shiny);
+	for (var i=0; i < baseDeckCards.length; i++) {
+		var card = baseDeckCards[i];
+		var other = saveDeckCards[i];
+		if (card.id !== other.id || card.shiny !== other.shiny) {
 			return false;
 		}
-		saveDeckCards.splice(found, 1);
 	}
 	
 	return true;
