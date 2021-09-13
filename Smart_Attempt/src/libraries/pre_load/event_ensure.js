@@ -3,7 +3,7 @@
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 
-var eventsToListenFor = ["PrettyCards:onLoad", "SoulSelector:decksLoaded", "Chat:Connected"];
+var eventsToListenFor = ["PrettyCards:onLoad", "SoulSelector:decksLoaded", "Chat:Connected", "PrettyCards:onArtifacts"];
 var eventsFired = {};
 var eventsData = {};
 
@@ -76,5 +76,7 @@ if ('loading' == document.readyState) {
 }
 
 console.log("EventEnsure initialized at " + document.readyState + " state!");
+
+
 
 export {ExecuteWhen};

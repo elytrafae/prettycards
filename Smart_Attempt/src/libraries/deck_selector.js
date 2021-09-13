@@ -5,7 +5,7 @@ import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetic
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@26ee7ae2f9a96be692b92d40c0a9e2f1b8fbd356/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@68d2b206b796953e92cd6124cd84bad37e7288a2/css/SavedDeckList.css");
 
 var demonEasterEgg = Math.random() <= 0.022;
 
@@ -53,6 +53,7 @@ function GetAllDecks() {
 			
 			var parsedDeck = JSON.parse(val);
 			var image_key = "prettycards.deck." + selfId + "." + rest_sliced[0] + "." + rest_sliced[1] + ".image";
+			var desc_key = "prettycards.deck." + selfId + "." + rest_sliced[0] + "." + rest_sliced[1] + ".description";
 			var skin = window.localStorage[image_key];
 			if (skin) {
 				skin = JSON.parse(skin);
@@ -68,6 +69,7 @@ function GetAllDecks() {
 				cards : parsedDeck.cards,
 				artifacts : parsedDeck.artifacts,
 				image : skin,
+				description: (window.localStorage[desc_key] || ""),
 				key: key
 			}
 			//console.log("deck.key", deck.key);
@@ -265,6 +267,7 @@ class SavedDeckSelector {
 					image: demonEasterEgg ? onu_skin : dummy_skin,
 					soul: soul,
 					name: ("New " + soul + " Deck"),
+					description: "",
 					cards: [],
 					artifacts: [],
 					id: id,
@@ -339,7 +342,7 @@ class SavedDeckSelector {
 		card.find(".cardName").css("width", "160px");
 		cardNameDiv$.html(deck.name);
 		card.find(".cardName").addClass(deck.soul);
-		card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.name + '</span>' + ( (!ignoreBase && deck.isBase) ? '<br><span class="grey">(Loaded)</span>' : '') );
+		card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.description.replaceAll("\n", "<br>") + '</span>' + ( (!ignoreBase && deck.isBase) ? '<p style="color:grey; margin:0px;">(Loaded)</p>' : '') );
 		card.find(".cardFrame").css("background-image", "url(" + ( (!ignoreBase && deck.isBase) ? "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
 		
 		SetDeckSkin(card, deck.image);
@@ -349,7 +352,7 @@ class SavedDeckSelector {
 		var nameSize = window.getResizedFontSize(cardNameDiv$, 25);
 		cardNameDiv$.css('font-size', (nameSize + "px"));
 		
-		if (deck.isBase) {
+		if (!ignoreBase && deck.isBase) {
 			card.addClass("PrettyCards_BaseDeckCard");
 		}
 		

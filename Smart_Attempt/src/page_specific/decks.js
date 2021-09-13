@@ -12,6 +12,7 @@ var deckName = document.createElement("INPUT");
 var deckDesc = document.createElement("TEXTAREA");
 var editDeckButton = document.createElement("BUTTON");
 var changeDeckScreen = document.createElement("DIV");
+var col2;
 var currentDeck = null;
 
 var deckEditPage = document.querySelector(".mainContent > table");
@@ -51,25 +52,41 @@ function ChangeDeckImageDialogue() {
 
 function ChangeDeckImage(skin) {
 	console.log(skin);
-	changeDeckImage.style.backgroundImage = "url(/images/cards/" + skin.image + ".png)";
+	//changeDeckImage.style.backgroundImage = "url(/images/cards/" + skin.image + ".png)";
 	var key = "prettycards.deck." + selfId + "." + currentDeck.soul + "." + currentDeck.id + ".image";
+	currentDeck.image = skin;
 	window.localStorage[key] = JSON.stringify(skin);
+	
+	ReloadDeckEditPreview();
 }
 
 function ChangeDeckName() {
 	var nameValue = $(deckName).val();
+	currentDeck.name = nameValue;
 	var key = currentDeck.key + ".name";
 	window.localStorage[key] = nameValue;
+	
+	ReloadDeckEditPreview();
+}
+
+function ChangeDeckDescription() {
+	var descValue = $(deckDesc).val();
+	currentDeck.description = descValue;
+	var key = "prettycards.deck." + selfId + "." + currentDeck.soul + "." + currentDeck.id + ".description";
+	window.localStorage[key] = descValue;
+	
+	ReloadDeckEditPreview();
 }
 
 function EditDeckScreenHTML() {
 	var cont = document.createElement("DIV");
+	cont.style = "min-height: 230px;"
 	
 	var col1 = document.createElement("DIV");
-	col1.style = "display: inline-block; margin: 0; float:left; min-height:250px;";
+	col1.style = "display: inline-block; margin: 0; float:left; min-height:250px; width: 320px;";
 	cont.appendChild(col1);
 	
-	var col2 = document.createElement("DIV");
+	col2 = document.createElement("DIV");
 	col2.style = "display: inline-block; margin: 0; float:right; width: 200px;";
 	cont.appendChild(col2);
 	
@@ -78,26 +95,42 @@ function EditDeckScreenHTML() {
 	col1.appendChild(deckName);
 	deckName.value = currentDeck.name;
 	deckName.className = "form-control " + currentDeck.soul;
-	deckName.style = "background: rgba(0,0,0,.5); width: 50%; display: inline-block;";
+	deckName.style = "background: rgba(0,0,0,.5);";
 	deckName.placeholder = "Deck Name";
 	$(deckName).unbind("keyup").keyup(ChangeDeckName.bind(this)); // I dunno why I did this, but it shouldn't be a biggie :3
 	
 	var deckDescSpan = document.createElement("SPAN");
-	deckDescSpan.innerHTML = "<br>Deck Description:";
+	deckDescSpan.innerHTML = "<br>Deck Description:<br>";
 	col1.appendChild(deckDescSpan);
 	
 	col1.appendChild(deckDesc);
-	deckDesc.style = "background: rgba(0,0,0,.5); width: 50%; display: inline-block;"
+	deckDesc.className = currentDeck.soul;
+	deckDesc.style = "background: rgba(0,0,0,.5); width: 100%; max-width: 320px;"
+	deckDesc.value = currentDeck.description;
+	$(deckDesc).unbind("keyup").keyup(ChangeDeckDescription.bind(this));
 	
-	deckSelector.appendCardDeck($(col2), currentDeck, true);
+	var changeImage = document.createElement("BUTTON");
+	changeImage.innerHTML = "Change Deck Image";
+	changeImage.className = "btn btn-primary";
+	changeImage.style = "display: block; margin-top: 10px;"
+	$(changeImage).unbind("keyup").keyup(ChangeDeckImageDialogue.bind(this));
+	col1.appendChild(changeImage);
+	
+	ReloadDeckEditPreview();
 	
 	return cont;
 }
 
+function ReloadDeckEditPreview() {
+	console.log("Reload deck edit preview");
+	col2.innerHTML = "";
+	deckSelector.appendCardDeck($(col2), currentDeck, true);
+}
+
 function EditDeckScreen() {
 	BootstrapDialog.show({
-		title: "Select a card skin!",
-		size: BootstrapDialog.SIZE_WIDE,
+		title: "Edit deck!",
+		size: BootstrapDialog.SIZE_NORMAL,
 		closable: true,
 		closeByBackdrop: false,
 		message: EditDeckScreenHTML(),

@@ -1,0 +1,4 @@
+
+img[legendary="true"] {
+	filter: drop-shadow(0.1em 0.08em 0.4em #ff0);
+}
