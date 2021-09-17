@@ -359,6 +359,21 @@ class SavedDeckSelector {
 		return card;
 	}
 	
+	getDeckBySoulAndId(soul, id) {
+		this.decks = GetAllDecksOrganized();
+		var soulDecks = this.decks[soul];
+		if (!soulDecks) {
+			return null;
+		}
+		for (var i=0; i < soulDecks.length; i++) {
+			var deck = soulDecks[i];
+			if (deck.id === id) {
+				return deck;
+			}
+		}
+		return null;
+	} 
+	
 	/*
 	OpenDialogue() {
 		this.decks = GetAllDecksOrganized();

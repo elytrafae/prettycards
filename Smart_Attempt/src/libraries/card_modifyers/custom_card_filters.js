@@ -153,12 +153,14 @@ var filters_data = {
 			type: "checkbox",
 			val : "DELTARUNE"
 		},
+		/*
 		{
 			id : "PrettyCards_DDLCFilter",
 			icon : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/DOKI.png",
 			type: "checkbox",
 			val: "DDLC"
 		}
+		*/
 	],
 	/*
 	shiny: [
@@ -171,6 +173,7 @@ var filters_data = {
 		}
 	]
 	*/
+	/*
 	isCustom: [
 		{
 			id : "PrettyCards_CustomFilter",
@@ -179,7 +182,7 @@ var filters_data = {
 			val: true,
 			notIncludeDefault: true
 		}
-	]
+	]*/
 };
 
 var oldIsRemoved;

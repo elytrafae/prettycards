@@ -1,5 +1,8 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {utility} from "/src/libraries/utility.js";
+
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@af14e02dc63e4a9f75dfebc48794006d841e4178/css/Artifacts.css");
 
 class ArtifactDisplay {
 	
@@ -21,7 +24,7 @@ class ArtifactDisplay {
 	ReturnArtifactIcon(artifact_id) {
 		var artifact = this.GetArtifactById(artifact_id);
 		//console.log(this.artifacts, artifact);
-		return `<img class="pointer" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.legendary.toString()}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="images/artifacts/${artifact.image}.png">`;
+		return `<img class="pointer" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.legendary.toString()}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="images/artifacts/${artifact.image}.png"> `;
 	}
 
 	GetAllArtifacts() {

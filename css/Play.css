@@ -1,0 +1,12 @@
+
+.game-mode:not(.closed):hover {
+	opacity: .7;
+	cursor: pointer;
+}
+
+.game-mode {
+	text-align: center;
+	margin: 5px;
+	width: 280px;
+	height: 230px;
+}

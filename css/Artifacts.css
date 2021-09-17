@@ -1,4 +1,29 @@
 
+@keyframes LegendaryArtifact {
+	from { filter: drop-shadow(0.1em 0.08em 0.2em #ff0); }
+	to { filter: drop-shadow(0.1em 0.08em 0.4em #ff0); }
+}
+
+@keyframes DTArtifact {
+	from { filter: drop-shadow(0.1em 0.08em 0.05em #f00); }
+	to { filter: drop-shadow(0.1em 0.08em 0.4em #f00); }
+}
+
 img[legendary="true"] {
-	filter: drop-shadow(0.1em 0.08em 0.4em #ff0);
+	animation: LegendaryArtifact 2s alternate infinite ease-in-out;
+}
+
+img[name="Cloudy Glasses"],
+img[name="Crab Apple"],
+img[name="Economics"],
+img[name="Save"],
+img[name="Sea Tea"],
+img[name="Seap"],
+img[name="Torn Notebook"],
+img[name="True Justice"] {
+	filter: drop-shadow(0.1em 0.08em 0.4em #00ca78);
+}
+
+img[name="Genocide"],img[name="Outbreak"] {
+	animation: DTArtifact 1.5s alternate infinite ease-in-out;
 }
