@@ -10,3 +10,8 @@
 	width: 280px;
 	height: 230px;
 }
+
+.tippy-box[data-theme~='invisible'] {
+	background-color: tomato;
+	color: yellow;
+}

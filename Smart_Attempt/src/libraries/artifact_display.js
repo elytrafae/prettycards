@@ -2,7 +2,7 @@
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@af14e02dc63e4a9f75dfebc48794006d841e4178/css/Artifacts.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@68a145e64b796c36bf3b02b2f4abda3f40ebfc60/css/Artifacts.css");
 
 class ArtifactDisplay {
 	

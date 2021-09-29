@@ -4,6 +4,7 @@ import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {SavedDeckSelector} from "/src/libraries/deck_selector.js";
 import {DeckEditor} from "/src/libraries/deck_editor.js";
+import {utility} from "/src/libraries/utility.js";
 
 var playLocked = true;
 var deckSelectLocked = true;
@@ -35,6 +36,8 @@ function DeckSelectorCallback(deck) {
 	CloseDeckSelector();
 }
 
+var last_tooltip;
+
 function SetSelectedDeck(deck) {
 	selectedDeck = deck;
 	var arts = "";
@@ -48,6 +51,26 @@ function SetSelectedDeck(deck) {
 	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckSoul"] = deck.soul;
 	playLocked = false;
 	deckSelectLocked = false;
+	
+	var dummy = $("<div></div>");
+	deckSelector.appendCardDeck(dummy, deck, false);
+	
+	if (last_tooltip) {
+		console.log(last_tooltip);
+		last_tooltip.destroy();
+	}
+	
+	last_tooltip = window.tippy('#selectedDeck', {
+		content: dummy.html(),
+		allowHTML: true,
+		arrow: true,
+		inertia: true,
+		placement: "auto",
+		appendTo: window.document.body,
+		boundary: 'window',
+		getReferenceClientRect: window.document.body.getBoundingClientRect,
+		theme: "invisible"
+	})[0];
 }
 
 function StartJoiningQueue(game_mode) {
@@ -81,17 +104,19 @@ function StartJoiningQueue(game_mode) {
 
 function InitPlay() {
 	console.log("Init Play!");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@68a145e64b796c36bf3b02b2f4abda3f40ebfc60/css/Play.css");
+	/*
 	$("#phase1").append(`
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-1" id="selectedDeckContainer"></div>
-				<div class="col-md-1" id="standardContainer"></div>
+				<div class="col-md-6" id="selectedDeckContainer"></div>
+				<div class="col-md-6" id="standardContainer"></div>
 			</div><div class="row">
-				<div class="col-md-1" id="rankedContainer"></div>
-				<div class="col-md-1" id="customContainer"></div>
+				<div class="col-md-6" id="rankedContainer"></div>
+				<div class="col-md-6" id="customContainer"></div>
 			</div>
 		</div>
-	`);
+	`);*/
 	$('#playDecks').css("display", "none");
 	$('#playDecks').parent().append('<div id="selectedDeck"></div>');
 	$('.mainContent').append('<div id="deckSelectContainer" hidden></div>');
@@ -103,9 +128,11 @@ function InitPlay() {
 	);
 	$("#selectedDeck").parent().next().append('<span id="deckSelectArtifacts"></span>');
 	
+	/*
 	$("#standardContainer").append($("#standard-mode").addClass("game-mode"));
 	$("#rankedContainer").append($("#ranked-mode").addClass("game-mode"));
 	$("#customContainer").append($("#custom-mode").addClass("game-mode"));
+	*/
 	
 	$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
 	$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
