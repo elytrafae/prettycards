@@ -9,7 +9,7 @@ settings.breaking_skin_fix = PrettyCards_plugin.settings().add({
 	'note': 'Whenever you hover over a breaking skin card, the name, description, cost, ATK and HP will go over the skin.',
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
-	'default': false, // default value
+	'default': true, // default value
 });
 
 

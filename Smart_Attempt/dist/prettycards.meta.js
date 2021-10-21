@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        PrettyCards
-// @version     2.3.0
+// @version     2.4.0
 // @author      CMD_God
 // @description Make (parts of) Undercards look fabulous!
 // @homepage    https://github.com/CMD-God/prettycards
