@@ -69,7 +69,7 @@ function SetSelectedDeck(deck) {
 		appendTo: window.document.body,
 		boundary: 'window',
 		getReferenceClientRect: window.document.body.getBoundingClientRect,
-		theme: "invisible"
+		theme: ".invisible"
 	})[0];
 }
 
@@ -104,7 +104,7 @@ function StartJoiningQueue(game_mode) {
 
 function InitPlay() {
 	console.log("Init Play!");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@68a145e64b796c36bf3b02b2f4abda3f40ebfc60/css/Play.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4e9d065ce4753eb8d83d43fdfa583ee47aa80cea/css/Play.css");
 	/*
 	$("#phase1").append(`
 		<div class="container-fluid">

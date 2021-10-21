@@ -199,10 +199,12 @@ $.i18n().load( {
 // Keywords
 $.i18n().load( {
 	en: {
+			'kw-fallen' : 'Fallen',
+			'kw-fallen-desc' : 'This ability is triggered when this monster dies during it\'s owner\'s turn.',
 			'kw-sacrifice' : 'Sacrifice',
-			'kw-sacrifice-desc' : 'This ability is triggered when this monster dies during it\'s owner\'s turn.',
+			'kw-sacrifice-desc' : 'Alias for {{KW:FALLEN}}.',
 			'kw-suicide' : 'Suicide',
-			'kw-suicide-desc' : 'Alias for {{KW:SACRIFICE}}.'
+			'kw-suicide-desc' : 'Alias for {{KW:FALLEN}}.'
 		}
 } );
 
