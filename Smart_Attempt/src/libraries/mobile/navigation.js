@@ -30,6 +30,17 @@ var menu_data = {
 	"Disconnect" : "Disconnect"
 }
 
+var user_menu_data = {
+	"header-profile" : "Profile",
+	"header-history" : "History",
+	"header-avatars" : "Avatars",
+	"header-card-skins" : "CardSkins",
+	"header-profile-skins" : "ProfileSkins",
+	"header-frame-skins" : "FrameSkins",
+	"header-settings" : "Settings",
+	"header-translate" : "Translate"
+}
+
 $("head").append(`<style>
 
 	.PrettyCards_Mobile_HeaderButton {
@@ -147,8 +158,9 @@ function ProcessName(name) {
 	return b;
 }
 
-function CreateSideBarPortion(obj) {
+function CreateSideBarPortion(obj, bg_color = "#000000") {
 	var container = $("<div></div>");
+	container.css("background-color", bg_color);
 	for (var name in obj) {
 		var link = obj[name];
 		var line;
@@ -177,6 +189,10 @@ function CreateSideNavMenu() {
 	$("body").append(menu_obj);
 	
 	if (window.selfId) {
+		var user_menu = CreateSideBarPortion(user_menu_data, "#333333");
+		user_menu.addClass("PrettyCards_Hidden");
+		menu_obj.prepend(user_menu);
+		
 		var avatar = $("nav .avatar")[0];
 		var gold = $("#golds").text();
 		var ucp = $("#ucp").text();
@@ -188,10 +204,13 @@ function CreateSideNavMenu() {
 					<td>${selfUsername}</td>
 				</tr>
 				<tr>
-					<td>( <span class="yellow">${gold}</span> <img src="images/icons/gold.png" class="height-32"> / <span class="ucp">${ucp}</span> ${$.i18n("item-ucp")} )</td>
+					<td>(<span class="yellow">${gold}</span> <img src="images/icons/gold.png" class="height-32"> / <span class="ucp">${ucp}</span> ${$.i18n("item-ucp")})</td>
 				</tr>
 			</table>
 		`);
+		user_part.click(function() {
+			user_menu.toggleClass("PrettyCards_Hidden");
+		})
 		menu_obj.prepend(user_part);
 	}
 }
