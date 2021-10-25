@@ -3,7 +3,7 @@
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 
-var eventsToListenFor = ["PrettyCards:onLoad", "SoulSelector:decksLoaded", "Chat:Connected", "PrettyCards:onArtifacts"];
+var eventsToListenFor = ["PrettyCards:onLoad", "SoulSelector:decksLoaded", "Chat:Connected", "PrettyCards:onArtifacts", "translation:loaded"];
 var eventsFired = {};
 var eventsData = {};
 
