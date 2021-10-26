@@ -10,6 +10,8 @@ utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3327dc0
 utility.loadCSSFromLink("https://undercards.net/css/meters.css");
 window.PrettyCards_plugin = PrettyCards_plugin;
 
+var $ = window.$;
+
 /*
 	Remaining Checklist:
 	- Add Ignore/Unignore and Mention actions.

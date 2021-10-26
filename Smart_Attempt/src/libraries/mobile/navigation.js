@@ -26,8 +26,7 @@ var menu_data = {
 		"header-cosmetics": "CosmeticsShop",
 		"item-ucp": "Shop"
 	},
-	"{quests}" : "Quests",
-	"Disconnect" : "Disconnect"
+	"{quests}" : "Quests"
 }
 
 var user_menu_data = {
@@ -38,7 +37,29 @@ var user_menu_data = {
 	"header-profile-skins" : "ProfileSkins",
 	"header-frame-skins" : "FrameSkins",
 	"header-settings" : "Settings",
-	"header-translate" : "Translate"
+	"header-translate" : "Translate",
+	"Disconnect" : "Disconnect"
+}
+
+var footer_data = {
+	'{friends}' : "Friends",
+	'<span class="glyphicon glyphicon-comment blue"></span>' : "#",
+	'<img src="/images/leaderboard.png">' : "/leaderboard.jsp",
+	'<img src="/images/friendship.png">' : "/friendshipLeaderboard.jsp",
+	'<img src="/images/social/discord.png">' : "https://discord.gg/wVmCQk6",
+	'<img src="/images/social/twitter.png">' : "https://twitter.com/undercardsgame",
+	'<img src="/images/social/facebook.png">' : "https://www.facebook.com/undercards",
+	'<img src="/images/social/reddit.png">' : "https://www.reddit.com/r/UnderCards",
+	'<img src="/images/social/wiki.png">' : "http://undercards.wikia.com/",
+	'<img src="./images/cardBacks/BASECardDETERMINATION.png">' : "https://undercard.feildmaster.com"
+}
+
+var footer_about_data = {
+	'footer-about' : {
+		'footer-staff' : "Staff",
+		'footer-legal' : "legal.jsp",
+		'<img alt="mail" src="/images/social/gmail.png"> footer-mail' : "mailto:undercardsgame@gmail.com"
+	}
 }
 
 $("head").append(`<style>
@@ -80,6 +101,10 @@ $("head").append(`<style>
 		color: white;
 	}
 	
+	.PrettyCards_NavBarItem img {
+		height: 40px;
+	}
+	
 	.PrettyCards_Hidden {
 		display: none;
 	}
@@ -104,7 +129,20 @@ $("head").append(`<style>
 		padding: 0px 5px;
 	}
 	
+	.PrettyCards_Divider {
+		margin: 20px;
+		border: 1px solid white;
+	}
 	
+	.PrettyCards_NavBarInline {
+		display: inline-block;
+		margin: 10px;
+	}
+	
+	.PrettyCards_NavBarCopyright {
+		font-size: 25px;
+		text-align: center;
+	}
 </style>`);
 
 settings.mobile_mode = PrettyCards_plugin.settings().add({
@@ -155,34 +193,44 @@ function ProcessName(name) {
 	var b = a.join(" ");
 	b = b.replace("{packs}", packs);
 	b = b.replace("{quests}", quests);
+	b = b.replace("{friends}", friends);
 	return b;
 }
 
-function CreateSideBarPortion(obj, bg_color = "#000000") {
+function CreateSideBarPortion(obj, bg_color = "#000000", inline = false) {
 	var container = $("<div></div>");
 	container.css("background-color", bg_color);
+	var class_name = "PrettyCards_NavBarItem";
+	if (inline) {
+		class_name += " PrettyCards_NavBarInline"
+	}
 	for (var name in obj) {
 		var link = obj[name];
 		var line;
 		var actual_name = ProcessName(name);
-		if (typeof(link) == "string") {
-			line = $('<div class="PrettyCards_NavBarItem"><a href="' + link + '">' + actual_name + '</a></div>');
-		} else {
-			line = $('<div class="PrettyCards_NavBarItem"><a href="#">' + actual_name + '</a></div>');
-			var cont = CreateSideBarPortion(link);
-			cont.addClass("PrettyCards_Hidden");
-			AddToggleFunctionTo(line.find("a"), cont);
-			line.append(cont);
+		if (actual_name.length > 0) {
+			if (typeof(link) == "string") {
+				line = $('<div class="' + class_name + '"><a href="' + link + '">' + actual_name + '</a></div>');
+			} else {
+				line = $('<div class="' + class_name + '"><a href="#">' + actual_name + '</a></div>');
+				var cont = CreateSideBarPortion(link);
+				cont.addClass("PrettyCards_Hidden");
+				AddToggleFunctionTo(line.find("a"), cont);
+				line.append(cont);
+			}
+			container.append(line);
 		}
-		container.append(line);
 	}
 	return container;
 }
 
 var packs;
 var quests;
+var friends;
 
 function CreateSideNavMenu() {
+	friends = window.selfId ? '<span class="glyphicon glyphicon-user green"></span>' : "";
+	
 	$("#PrettyCards_Mobile_NavBar").remove();
 	var menu_obj = $('<div id="PrettyCards_Mobile_NavBar" class="PrettyCards_Hidden"></div>');
 	menu_obj.append(CreateSideBarPortion(window.selfId ? menu_data : menu_data_nologin));
@@ -213,6 +261,11 @@ function CreateSideNavMenu() {
 		})
 		menu_obj.prepend(user_part);
 	}
+	
+	menu_obj.append('<div class="PrettyCards_Divider"></div>');
+	menu_obj.append(CreateSideBarPortion(footer_data, "#000000", true));
+	menu_obj.append(CreateSideBarPortion(footer_about_data));
+	menu_obj.append('<div class="PrettyCards_NavBarCopyright">Undercards © 2021<br>' + $.i18n("footer-copyright") + '</div>');
 }
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
