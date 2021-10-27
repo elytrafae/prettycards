@@ -3,6 +3,7 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 var $ = window.$;
+console.log("$", $);
 
 var menu_data_nologin = {
 	"Home" : "/",
@@ -62,7 +63,7 @@ var footer_about_data = {
 	}
 }
 
-$("head").append(`<style>
+window.$("head").append(`<style>
 
 	.PrettyCards_Mobile_HeaderButton {
 		font-size: 30px;
