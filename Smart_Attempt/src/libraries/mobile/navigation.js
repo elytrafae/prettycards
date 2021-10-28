@@ -1,9 +1,9 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+import {utility} from "/src/libraries/utility.js";
 
 var $ = window.$;
-console.log("$", $);
 
 var menu_data_nologin = {
 	"Home" : "/",
@@ -62,89 +62,6 @@ var footer_about_data = {
 		'<img alt="mail" src="/images/social/gmail.png"> footer-mail' : "mailto:undercardsgame@gmail.com"
 	}
 }
-
-window.$("head").append(`<style>
-
-	.PrettyCards_Mobile_HeaderButton {
-		font-size: 30px;
-		padding: 5px;
-		height: 50px;
-		width: 50px;
-		color: black;
-	}
-	
-	.PrettyCards_HeaderFlex {
-		display: flex;
-	}
-	
-	#PrettyCards_HeaderMid {
-		width: 100%;
-	}
-	
-	#PrettyCards_Mobile_NavBar {
-		background-color: black;
-		border: 3px solid white;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 50%;
-		height: 100%;
-		overflow-y: auto;
-		z-index: 100;
-	}
-	
-	.PrettyCards_NavBarItem {
-		font-size: 40px;
-		margin-left: 20px;
-	}
-	
-	.PrettyCards_NavBarItem a {
-		color: white;
-	}
-	
-	.PrettyCards_NavBarItem img {
-		height: 40px;
-	}
-	
-	.PrettyCards_Hidden {
-		display: none;
-	}
-	
-	#PrettyCards_Mobile_NavBarBG {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 99;
-		opacity: 0.5;
-		background-color: black;
-	}
-	
-	.PrettyCards_NavBarProfile {
-		font-size: 25px;
-		margin: 5px;
-	}
-	
-	.PrettyCards_NavBarProfile td {
-		padding: 0px 5px;
-	}
-	
-	.PrettyCards_Divider {
-		margin: 20px;
-		border: 1px solid white;
-	}
-	
-	.PrettyCards_NavBarInline {
-		display: inline-block;
-		margin: 10px;
-	}
-	
-	.PrettyCards_NavBarCopyright {
-		font-size: 25px;
-		text-align: center;
-	}
-</style>`);
 
 settings.mobile_mode = PrettyCards_plugin.settings().add({
 	'key': 'mobile_mode',
@@ -270,6 +187,7 @@ function CreateSideNavMenu() {
 }
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4e9d065ce4753eb8d83d43fdfa583ee47aa80cea/css/Play.css");
 	ExecuteWhen("translation:loaded", function () {
 		packs = $(".nbPacksHeader").text();
 		quests = $("a[href=Quests]").text();
