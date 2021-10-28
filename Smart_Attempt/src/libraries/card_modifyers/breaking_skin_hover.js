@@ -15,7 +15,7 @@ settings.breaking_skin_fix = PrettyCards_plugin.settings().add({
 
 if (settings.breaking_skin_fix.value()) {
 
-	$("head").append(`<style>
+	window.$("head").append(`<style>
 		.card.breaking-skin:hover .cardName {
 			z-index: 7;
 		}

@@ -105,18 +105,21 @@ function StartJoiningQueue(game_mode) {
 function InitPlay() {
 	console.log("Init Play!");
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4e9d065ce4753eb8d83d43fdfa583ee47aa80cea/css/Play.css");
-	/*
+	
 	$("#phase1").append(`
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-6" id="selectedDeckContainer"></div>
+		<div class="PrettyCards_GamemodeContainer">
+			<div class="PrettyCards_GamemodeDeck">
+			
+			</div>
+			<div class="PrettyCards_Gamemodes">
 				<div class="col-md-6" id="standardContainer"></div>
-			</div><div class="row">
 				<div class="col-md-6" id="rankedContainer"></div>
 				<div class="col-md-6" id="customContainer"></div>
+				<div class="col-md-6" id="tornamentContainer"></div>
 			</div>
 		</div>
-	`);*/
+	`);
+	
 	$('#playDecks').css("display", "none");
 	$('#playDecks').parent().append('<div id="selectedDeck"></div>');
 	$('.mainContent').append('<div id="deckSelectContainer" hidden></div>');
@@ -128,11 +131,10 @@ function InitPlay() {
 	);
 	$("#selectedDeck").parent().next().append('<span id="deckSelectArtifacts"></span>');
 	
-	/*
+	
 	$("#standardContainer").append($("#standard-mode").addClass("game-mode"));
 	$("#rankedContainer").append($("#ranked-mode").addClass("game-mode"));
 	$("#customContainer").append($("#custom-mode").addClass("game-mode"));
-	*/
 	
 	$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
 	$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};

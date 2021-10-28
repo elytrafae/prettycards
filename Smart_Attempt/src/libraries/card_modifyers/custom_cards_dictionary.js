@@ -1,8 +1,12 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+
 var customCards = [];
 var customArtifacts = [];
 var customCardsStart = 2000;
 var customArtifactStart = 200;
+
+var $ = window.$;
 
 class _CustomCardsDictionary {
 	
@@ -175,38 +179,19 @@ class _CustomCardsDictionary {
 	
 }
 
-/*
-// Tribes
-$.i18n().load( {
-	en: {
-			'tribe-chibi' : '{{PLURAL:$1|Chibi|Chibis}}',
-			'tribe-doki' : '{{PLURAL:$1|Doki|Dokis}}',
-			'tribe-chrspell' : '{{PLURAL:$1|.chr spell|.chr spells}}',
-			'tribe-melissaattack' : '{{PLURAL:$1|Melissa\'s Attack|Melissa\'s Attacks}}',
-			'tribe-yuriknife' : '{{PLURAL:$1|Yuri\'s Knife|Yuri\'s Knives}}'
-		}
-} );
-
-// Artifacts
-$.i18n().load( {
-	en: {
-			['artifact-name-' + (customArtifactStart)] : 'Melissa\'s Hat',
-			['artifact-' + (customArtifactStart)] : 'Whenever a spell is played, deal 1 {{DMG}} to a random enemy monster. If it was a {{TRIBE:MELISSAATTACK}}, give it -1 {{ATK}}, too.',
-		}
-} );
-*/
-
 // Keywords
-$.i18n().load( {
-	en: {
-			'kw-fallen' : 'Fallen',
-			'kw-fallen-desc' : 'This ability is triggered when this monster dies during it\'s owner\'s turn.',
-			'kw-sacrifice' : 'Sacrifice',
-			'kw-sacrifice-desc' : 'Alias for {{KW:FALLEN}}.',
-			'kw-suicide' : 'Suicide',
-			'kw-suicide-desc' : 'Alias for {{KW:FALLEN}}.'
-		}
-} );
+ExecuteWhen("PrettyCards:onLoad", function() {
+	$.i18n().load( {
+		en: {
+				'kw-fallen' : 'Fallen',
+				'kw-fallen-desc' : 'This ability is triggered when this monster dies during it\'s owner\'s turn.',
+				'kw-sacrifice' : 'Sacrifice',
+				'kw-sacrifice-desc' : 'Alias for {{KW:FALLEN}}.',
+				'kw-suicide' : 'Suicide',
+				'kw-suicide-desc' : 'Alias for {{KW:FALLEN}}.'
+			}
+	});
+});
 
 var CustomCardsDictionary = new _CustomCardsDictionary();
 

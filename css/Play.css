@@ -11,7 +11,17 @@
 	height: 230px;
 }
 
-.tippy-box[data-theme~='invisible'] {
-	background-color: tomato;
-	color: yellow;
+.PrettyCards_GamemodeContainer {
+	width: 100%;
+	display: flex;
+}
+
+.PrettyCards_GamemodeDeck {
+	width: 280px;
+	margin: 5px;
+	height: 240px;
+}
+
+.PrettyCards_Gamemodes {
+	display: flex; 
 }

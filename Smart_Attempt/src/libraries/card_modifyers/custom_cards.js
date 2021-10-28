@@ -3,11 +3,14 @@
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js";
-import {SetUpFilters} from "/src/libraries/card_modifyers/custom_card_filters.js"
+import {SetUpFilters} from "/src/libraries/card_modifyers/custom_card_filters.js";
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 //import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc.js";
 //import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
 //import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
+
+var $ = window.$;
 
 utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@812c80b65096d967ff9dd3da22b60e0c828c250a/css/CustomCards.css");
 
@@ -126,9 +129,12 @@ if (settings.easter_egg_cards.value()) {
 		SetUpFilters();
 	}
 	
-	var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
-	//console.log("Aller Loader!", allerLoader);
-	window.$("body").append(allerLoader);
-	setTimeout(function() {allerLoader.remove()}, 100); 
+	
+	ExecuteWhen("PrettyCards:onLoad", function() {
+		var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
+		//console.log("Aller Loader!", allerLoader);
+		window.$("body").append(allerLoader);
+		setTimeout(function() {allerLoader.remove()}, 100);
+	});
 	
 }
