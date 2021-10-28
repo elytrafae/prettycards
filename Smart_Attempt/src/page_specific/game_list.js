@@ -16,8 +16,7 @@ var deckSelector = new SavedDeckSelector();
 var gamemode_functions = {
 	normal: window.joinGame,
 	password: window.joinGamePassword,
-	event: window.sendJoinEventQueue,
-	boss: window.sendJoinBossQueue
+	create: window.createGame
 }
 
 function OpenDeckSelector() {
@@ -49,7 +48,6 @@ function SetSelectedDeck(deck) {
 	}
 	console.log("Artifacts to display: ", arts, deck.artifacts);
 	$('#PrettyCards_DeckArtifacts').html(arts);
-	$('#selectedDeck').html(`<span class="${deck.soul}">Selected Deck: ${deck.name}</span>`);
 	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckId"] = deck.id;
 	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckSoul"] = deck.soul;
 	playLocked = false;
@@ -81,7 +79,7 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 		}
 		if (status == "success") {
 			//console.log("success");
-			$('#playDecks').val(selectedDeck.soul);
+			$('#customDecks').val(selectedDeck.soul);
 			gamemode_functions[game_mode](id);
 		} else {
 			console.log("DeckEditor.ImportDeck error!");
@@ -93,7 +91,7 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 
 function InitGameList() {
 	console.log("Init Play!");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ecff356b9b60bf5f8873da33bad5221e7dc1b228/css/Play.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4ebd16e8aea3023000642a69626c90174162a8f6/css/Play.css");
 	
 	$("#state1 > table").css("display", "none");
 	$("#state1 br").css("display", "none");
@@ -130,6 +128,8 @@ function InitGameList() {
 	$("#PrettyCards_JoinCreate").append($("#state1 button"));
 	//$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
 	//$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
+	
+	$("#PrettyCards_JoinCreate button")[0].onclick = function() {window.PrettyCards_StartJoiningQueue(null, 'create')}
 	
 	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts", function () {
 		deckSelector.closable = true;

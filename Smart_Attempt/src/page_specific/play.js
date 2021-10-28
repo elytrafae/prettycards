@@ -91,7 +91,7 @@ function StartJoiningQueue(game_mode) {
 
 function InitPlay() {
 	console.log("Init Play!");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ecff356b9b60bf5f8873da33bad5221e7dc1b228/css/Play.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4ebd16e8aea3023000642a69626c90174162a8f6/css/Play.css");
 	
 	$("#phase1 > table").css("display", "none");
 	$("#game-modes").css("display", "none");
