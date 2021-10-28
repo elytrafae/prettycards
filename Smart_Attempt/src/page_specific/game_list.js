@@ -1,4 +1,6 @@
 
+// Otherwise known as "Customs"
+
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
@@ -12,8 +14,8 @@ var selectedDeck = {};
 var deckSelector = new SavedDeckSelector();
 
 var gamemode_functions = {
-	standard: window.sendJoinQueue,
-	ranked: window.sendJoinRankedQueue,
+	normal: window.joinGame,
+	password: window.joinGamePassword,
 	event: window.sendJoinEventQueue,
 	boss: window.sendJoinBossQueue
 }
@@ -22,12 +24,12 @@ function OpenDeckSelector() {
 	if (deckSelectLocked) {
 		return;
 	}
-	$("#phase1").attr("hidden", true).css("display", "none");
+	$("#state1").attr("hidden", true).css("display", "none");
 	$("#deckSelectContainer").attr("hidden", false);
 }
 
 function CloseDeckSelector() {
-	$("#phase1").attr("hidden", false).css("display", "block");
+	$("#state1").attr("hidden", false).css("display", "block");
 	$("#deckSelectContainer").attr("hidden", true);
 }
 
@@ -48,8 +50,8 @@ function SetSelectedDeck(deck) {
 	console.log("Artifacts to display: ", arts, deck.artifacts);
 	$('#PrettyCards_DeckArtifacts').html(arts);
 	$('#selectedDeck').html(`<span class="${deck.soul}">Selected Deck: ${deck.name}</span>`);
-	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckId"] = deck.id;
-	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckSoul"] = deck.soul;
+	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckId"] = deck.id;
+	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckSoul"] = deck.soul;
 	playLocked = false;
 	deckSelectLocked = false;
 	
@@ -58,7 +60,7 @@ function SetSelectedDeck(deck) {
 	deckSelector.appendCardDeck(deck_cont, deck, false);
 }
 
-function StartJoiningQueue(game_mode) {
+window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 	if (playLocked) {
 		return;
 	}
@@ -80,7 +82,7 @@ function StartJoiningQueue(game_mode) {
 		if (status == "success") {
 			//console.log("success");
 			$('#playDecks').val(selectedDeck.soul);
-			gamemode_functions[game_mode]();
+			gamemode_functions[game_mode](id);
 		} else {
 			console.log("DeckEditor.ImportDeck error!");
 		}
@@ -89,27 +91,30 @@ function StartJoiningQueue(game_mode) {
 
 // Tournament mode element: <div id="tournament-mode" class="col-xs-4 game-mode"><h2 data-i18n="[html]game-type-tournament"></h2></div>
 
-function InitPlay() {
+function InitGameList() {
 	console.log("Init Play!");
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ecff356b9b60bf5f8873da33bad5221e7dc1b228/css/Play.css");
 	
-	$("#phase1 > table").css("display", "none");
+	$("#state1 > table").css("display", "none");
+	$("#state1 br").css("display", "none");
+	$(".mainContent > br").css("display", "none");
 	$("#game-modes").css("display", "none");
-	$("#phase1").append(`
+	$("#state1").append(`
 		<div class="PrettyCards_GamemodeContainer">
 			<div class="PrettyCards_GamemodeDeck">
 				<div id="PrettyCards_DeckContainer"></div>
 				<div id="PrettyCards_DeckArtifacts"></div>
-				<div id="PrettyCards_SeasonRewards">
-					<a style="color: gray; border: 1px dotted gray; padding: 5px; background-color: black;" href="rewards.jsp" class="pointer" data-i18n="[html]play-rewards"></a>
-				</div>
+				<div id="PrettyCards_JoinCreate"></div>
 			</div>
-			<div class="PrettyCards_Gamemodes">
-				<div id="standardContainer"></div>
-				<div id="rankedContainer"></div>
-				<div id="customContainer"></div>
-				<div id="tornamentContainer">
-				</div>
+			<div class="PrettyCards_GamesList">
+				<table id="PrettyCards_Games" class="table table-bordered">
+					<tr>
+						<td data-i18n="[html]lobby-game-name"></td>
+						<td data-i18n="[html]lobby-game-owner"></td>
+						<td data-i18n="[html]lobby-game-slots"></td>
+						<td data-i18n="[html]lobby-game-password"></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	`);
@@ -120,14 +125,11 @@ function InitPlay() {
 			"opacity": "0",
 			"position": "absolute"
 		}
-	);	
+	);
 	
-	$("#standardContainer").append($("#standard-mode").addClass("game-mode"));
-	$("#rankedContainer").append($("#ranked-mode").addClass("game-mode"));
-	$("#customContainer").append($("#custom-mode").addClass("game-mode"));
-	
-	$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
-	$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
+	$("#PrettyCards_JoinCreate").append($("#state1 button"));
+	//$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
+	//$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
 	
 	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts", function () {
 		deckSelector.closable = true;
@@ -136,8 +138,8 @@ function InitPlay() {
 		
 		deckSelector.AppendTo($("#deckSelectContainer")[0]);
 		console.log("All events matched!");
-		var deckId = Number(window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckId"]);
-		var deckSoul = window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckSoul"];
+		var deckId = Number(window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckId"]);
+		var deckSoul = window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckSoul"];
 		if (typeof(deckId) == "number" && typeof(deckSoul) == "string") {
 			var deck = deckSelector.getDeckBySoulAndId(deckSoul, deckId);
 			if (deck == null) {
@@ -175,6 +177,24 @@ function InitPlay() {
 	})
 	
 	$("#PrettyCards_DeckContainer").click(OpenDeckSelector);
+	
+	window.regenerateTable = function(games) {
+		$("#PrettyCards_Games").find("tr:gt(0)").remove();
+		for (var i = 0; i < games.length; i++) {
+			var slots;
+			if (games[i].player !== undefined) {
+				slots = "2/2";
+			} else {
+				slots = "1/2";
+			}
+			var gameMode = '{{MODE:' + games[i].gameType + '}}';
+			if (games[i].isPrivate) {
+				$('#PrettyCards_Games tr:last').after('<tr class="pointer" onclick="PrettyCards_StartJoiningQueue(' + games[i].id + ', \'password\')"><td>' + games[i].name + '</td><td>' + games[i].owner.username + '</td><td>' + slots + '</td><td>' + $.i18n("lobby-yes") + '</td></tr>');
+			} else {
+				$('#PrettyCards_Games tr:last').after('<tr class="pointer" onclick="PrettyCards_StartJoiningQueue(' + games[i].id + ', \'normal\')"><td>' + games[i].name + '</td><td>' + games[i].owner.username + '</td><td>' + slots + '</td><td>' + $.i18n("lobby-no") + '</td></tr>');
+			}
+		}
+	}
 }
 
-export {InitPlay};
+export {InitGameList};

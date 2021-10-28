@@ -30,6 +30,10 @@
 	width: 580px;
 }
 
+.PrettyCards_GamesList {
+	width: 580px;
+}
+
 #PrettyCards_DeckContainer {
 	display: flex;
 	justify-content: space-evenly;
@@ -43,4 +47,17 @@
 #PrettyCards_SeasonRewards {
 	margin-top: 40px;
 	text-align: center;
+}
+
+#PrettyCards_JoinCreate {
+	margin-top: 40px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: column;
+}
+
+#PrettyCards_JoinCreate button {
+	display: block;
+	margin: 5px;
 }

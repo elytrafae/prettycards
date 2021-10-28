@@ -1,4 +1,10 @@
 
+if (!window.allCards) {
+	$("body").append('<script src="js/card.js?v=063001" type="text/javascript"></script>');
+	$("head").append('<link href="css/cards.css?v=063001" rel="stylesheet" type="text/css">');
+	$("head").append('<link href="css/frames.css?v=063001" rel="stylesheet" type="text/css">');
+}
+
 class Utility {
 	
 	loadCSSFromLink(url) {
