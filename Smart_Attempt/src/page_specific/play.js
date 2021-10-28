@@ -87,9 +87,11 @@ function StartJoiningQueue(game_mode) {
 	})
 }
 
+// Tournament mode element: <div id="tournament-mode" class="col-xs-4 game-mode"><h2 data-i18n="[html]game-type-tournament"></h2></div>
+
 function InitPlay() {
 	console.log("Init Play!");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@d3253a79a77a5c7000640f95ed82ae2a01a533a1/css/Play.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ecff356b9b60bf5f8873da33bad5221e7dc1b228/css/Play.css");
 	
 	$("#phase1 > table").css("display", "none");
 	$("#game-modes").css("display", "none");
@@ -106,7 +108,8 @@ function InitPlay() {
 				<div id="standardContainer"></div>
 				<div id="rankedContainer"></div>
 				<div id="customContainer"></div>
-				<div id="tornamentContainer"></div>
+				<div id="tornamentContainer">
+				</div>
 			</div>
 		</div>
 	`);

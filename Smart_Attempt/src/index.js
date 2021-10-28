@@ -28,10 +28,12 @@ import {InitPlay} from "/src/page_specific/play.js";
 if (settings.packs.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
 	InitPacks();
-} else if (underscript.onPage("Decks")) {
-	InitDecks();
-} else if (underscript.onPage("Play")) {
-	InitPlay();
+} else if (settings.override_decks.value()) {
+	if (underscript.onPage("Decks")) {
+		InitDecks();
+	} else if (underscript.onPage("Play")) {
+		InitPlay();
+	}
 }
 
 // ! Deck and Play Page modifications are disabled for now !

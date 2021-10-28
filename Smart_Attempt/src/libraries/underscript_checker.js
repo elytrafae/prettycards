@@ -63,6 +63,16 @@ settings.debug_mode = PrettyCards_plugin.settings().add({
     });
 */
 
+settings.override_decks = PrettyCards_plugin.settings().add({
+        'key': 'override_decks',
+        'name': 'Override Deck System', // Name in settings page
+        'note': 'Overrides the current deck system locally with a more flexible one. This inludes the Decks page, Play page, Custom page and the Custom Challenge system.',
+        'type': 'boolean',
+		'disabled': true,
+        'refresh': true, // true to add note "Will require you to refresh the page"
+        'default': false, // default value
+    });
+
 //console.log(settings);
 
 export {PrettyCards_plugin, settings};
