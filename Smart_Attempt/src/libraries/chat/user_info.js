@@ -3,6 +3,7 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 import {utility} from "/src/libraries/utility.js";
 import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.js";
 import {pagegetters} from "/src/libraries/page_getters.js";
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 import {ChallengePlayerScreen} from "/src/libraries/private_games/private_game_screen.js";
 
@@ -28,14 +29,15 @@ var $ = window.$;
 */
 
 var leaderboard = [];
+
 function getRankedLeaderboard() {
-	$.get("Leaderboard?action=ranked", function(e) {
+	window.$.get("Leaderboard?action=ranked", function(e) {
 		//console.log(JSON.parse(e.leaderboard));
 		leaderboard = JSON.parse(e.leaderboard);
 	});
 }
 
-getRankedLeaderboard();
+ExecuteWhen("PrettyCards:onLoad", getRankedLeaderboard);
 
 var oldGetInfo = window.getInfo;
 

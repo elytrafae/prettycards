@@ -187,7 +187,7 @@ function CreateSideNavMenu() {
 }
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4e9d065ce4753eb8d83d43fdfa583ee47aa80cea/css/Play.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@8df4f5da7757066a3218524c04924b102c21fc31/css/Mobile_Sidebar.css");
 	ExecuteWhen("translation:loaded", function () {
 		packs = $(".nbPacksHeader").text();
 		quests = $("a[href=Quests]").text();
