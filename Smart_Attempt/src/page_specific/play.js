@@ -45,32 +45,17 @@ function SetSelectedDeck(deck) {
 		var artifact = deck.artifacts[i];
 		arts += artifactDisplay.ReturnArtifactIcon(artifact);
 	}
-	$('#deckSelectArtifacts').html(arts);
+	console.log("Artifacts to display: ", arts, deck.artifacts);
+	$('#PrettyCards_DeckArtifacts').html(arts);
 	$('#selectedDeck').html(`<span class="${deck.soul}">Selected Deck: ${deck.name}</span>`);
 	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckId"] = deck.id;
 	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckSoul"] = deck.soul;
 	playLocked = false;
 	deckSelectLocked = false;
 	
-	var dummy = $("<div></div>");
-	deckSelector.appendCardDeck(dummy, deck, false);
-	
-	if (last_tooltip) {
-		console.log(last_tooltip);
-		last_tooltip.destroy();
-	}
-	
-	last_tooltip = window.tippy('#selectedDeck', {
-		content: dummy.html(),
-		allowHTML: true,
-		arrow: true,
-		inertia: true,
-		placement: "auto",
-		appendTo: window.document.body,
-		boundary: 'window',
-		getReferenceClientRect: window.document.body.getBoundingClientRect,
-		theme: ".invisible"
-	})[0];
+	var deck_cont = $("#PrettyCards_DeckContainer");
+	deck_cont.html("");
+	deckSelector.appendCardDeck(deck_cont, deck, false);
 }
 
 function StartJoiningQueue(game_mode) {
@@ -104,18 +89,24 @@ function StartJoiningQueue(game_mode) {
 
 function InitPlay() {
 	console.log("Init Play!");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4e9d065ce4753eb8d83d43fdfa583ee47aa80cea/css/Play.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@d3253a79a77a5c7000640f95ed82ae2a01a533a1/css/Play.css");
 	
+	$("#phase1 > table").css("display", "none");
+	$("#game-modes").css("display", "none");
 	$("#phase1").append(`
 		<div class="PrettyCards_GamemodeContainer">
 			<div class="PrettyCards_GamemodeDeck">
-			
+				<div id="PrettyCards_DeckContainer"></div>
+				<div id="PrettyCards_DeckArtifacts"></div>
+				<div id="PrettyCards_SeasonRewards">
+					<a style="color: gray; border: 1px dotted gray; padding: 5px; background-color: black;" href="rewards.jsp" class="pointer" data-i18n="[html]play-rewards"></a>
+				</div>
 			</div>
 			<div class="PrettyCards_Gamemodes">
-				<div class="col-md-6" id="standardContainer"></div>
-				<div class="col-md-6" id="rankedContainer"></div>
-				<div class="col-md-6" id="customContainer"></div>
-				<div class="col-md-6" id="tornamentContainer"></div>
+				<div id="standardContainer"></div>
+				<div id="rankedContainer"></div>
+				<div id="customContainer"></div>
+				<div id="tornamentContainer"></div>
 			</div>
 		</div>
 	`);
@@ -163,7 +154,7 @@ function InitPlay() {
 		
 	})
 	
-	$("#selectedDeck").click(OpenDeckSelector);
+	$("#PrettyCards_DeckContainer").click(OpenDeckSelector);
 }
 
 export {InitPlay};

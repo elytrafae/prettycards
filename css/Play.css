@@ -12,16 +12,35 @@
 }
 
 .PrettyCards_GamemodeContainer {
-	width: 100%;
 	display: flex;
+	width: 1000px;
 }
 
 .PrettyCards_GamemodeDeck {
 	width: 280px;
 	margin: 5px;
 	height: 240px;
+	display: flex;
+	flex-direction: column;
 }
 
 .PrettyCards_Gamemodes {
-	display: flex; 
+	display: flex;
+	flex-wrap: wrap;
+	width: 580px;
+}
+
+#PrettyCards_DeckContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#PrettyCards_DeckArtifacts {
+	margin-top: 20px;
+	text-align: center;
+}
+
+#PrettyCards_SeasonRewards {
+	margin-top: 40px;
+	text-align: center;
 }
