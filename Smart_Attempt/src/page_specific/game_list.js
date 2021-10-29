@@ -71,7 +71,7 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 	);
 	deckSelectLocked = true;
 	playLocked = true;
-	DeckEditor.ImportDeck(selectedDeck, function(status) {
+	DeckEditor.ImportDeck(selectedDeck, function(status, data) {
 		deckSelectLocked = false;
 		playLocked = false;
 		if (toast.exists()) {
@@ -82,7 +82,7 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 			$('#customDecks').val(selectedDeck.soul);
 			gamemode_functions[game_mode](id);
 		} else {
-			console.log("DeckEditor.ImportDeck error!");
+			console.log("DeckEditor.ImportDeck error!", data);
 		}
 	})
 }

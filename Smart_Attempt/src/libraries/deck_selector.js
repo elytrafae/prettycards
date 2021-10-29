@@ -51,6 +51,7 @@ function GetAllDecks() {
 			
 			if (rest_sliced[2] === "name") {continue;}
 			
+			console.log("PROCESSING: ", key);
 			var parsedDeck = JSON.parse(val);
 			var image_key = "prettycards.deck." + selfId + "." + rest_sliced[0] + "." + rest_sliced[1] + ".image";
 			var desc_key = "prettycards.deck." + selfId + "." + rest_sliced[0] + "." + rest_sliced[1] + ".description";
@@ -289,8 +290,10 @@ class SavedDeckSelector {
 	AppendTo(ele) {
 		this.decks = GetAllDecksOrganized();
 		ProcessBaseDecks(this.decks);
-		ele.appendChild(this.GetHTML(this.decks));
+		var html = this.GetHTML(this.decks)
+		ele.appendChild(html);
 		this.parent = ele;
+		return html;
 	}
 	
 	Reload() {
@@ -342,7 +345,7 @@ class SavedDeckSelector {
 		card.find(".cardName").css("width", "160px");
 		cardNameDiv$.html(deck.name);
 		card.find(".cardName").addClass(deck.soul);
-		card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + deck.description.replaceAll("\n", "<br>") + '</span>' + ( (!ignoreBase && deck.isBase) ? '<p style="color:grey; margin:0px;">(Loaded)</p>' : '') );
+		card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + (deck.description || "").replaceAll("\n", "<br>") + '</span>' + ( (!ignoreBase && deck.isBase) ? '<p style="color:grey; margin:0px;">(Loaded)</p>' : '') );
 		card.find(".cardFrame").css("background-image", "url(" + ( (!ignoreBase && deck.isBase) ? "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
 		
 		SetDeckSkin(card, deck.image);

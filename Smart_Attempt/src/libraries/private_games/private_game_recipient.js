@@ -4,8 +4,11 @@ import {utility} from "/src/libraries/utility.js";
 import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.js";
 import {pagegetters} from "/src/libraries/page_getters.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
+import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/deck_selector.js";
+import {DeckEditor} from "/src/libraries/deck_editor.js";
 
-
+var custom_deck_sys = settings.override_decks.value();
+var deckSelector = new SavedDeckSelector();
 
 function processChatMessageHTML(ele, msg) {
 	//console.log("HTML Chat message: ", ele, msg);
@@ -27,17 +30,23 @@ function processChatMessageHTML(ele, msg) {
 					ele.style.backgroundColor = "black";
 					$(ele).find(".chat-message").html("invited you to a CUSTOM game.");
 				
-					var soulSelector = new SoulSelector();
-					var soulContainer = document.createElement("SPAN");
-					soulContainer.style = "white-space: nowrap;";
-					soulContainer.innerHTML = soulSelector.SetUp("PrettyCards_ChallengeMessage_" + msg.id + "_", "Small");
-					ele.appendChild(soulContainer);
-					soulSelector.AddDeckTooltips();
-				
+					if (!custom_deck_sys) {
+						var soulSelector = new SoulSelector();
+						var soulContainer = document.createElement("SPAN");
+						soulContainer.style = "white-space: nowrap;";
+						soulContainer.innerHTML = soulSelector.SetUp("PrettyCards_ChallengeMessage_" + msg.id + "_", "Small");
+						ele.appendChild(soulContainer);
+						soulSelector.AddDeckTooltips();
+					}
+					
 					var acceptButton = document.createElement("BUTTON");
 					acceptButton.innerHTML = "Accept!";
 					acceptButton.className = "btn btn-success PrettyCards_ChallengeMessageButton";
-					acceptButton.onclick = function() {AcceptChallenge(msg.user.usernameSafe, soulSelector.selectedSoul)};
+					if (custom_deck_sys) {
+						acceptButton.onclick = function() {AcceptChallengeCustomDeck(msg.user.usernameSafe)};
+					} else {
+						acceptButton.onclick = function() {AcceptChallenge(msg.user.usernameSafe, soulSelector.selectedSoul)};
+					}
 					ele.appendChild(acceptButton);
 				})
 			} else {
@@ -62,6 +71,63 @@ function processChatHistoryEvent(data) {
 	for (var i=0; i < messages.length; i++) {
 		processChatMessageHTML(elements[i], messages[i]);
 	}
+}
+
+var latest_dial;
+
+function SetUpDeckOnServer(deck, callback) {
+	var toast = PrettyCards_plugin.toast(
+		{
+			title: "Please wait!",
+			text: "Setting up the deck on the server . . .",
+		}
+	);
+	DeckEditor.ImportDeck(deck, function(status) {
+		if (toast.exists()) {
+			toast.close();
+		}
+		if (status == "success") {
+			//console.log("success");
+			callback();
+		} else {
+			console.log("DeckEditor.ImportDeck error!");
+		}
+	})
+}
+
+
+function CloseDeckSelector() {
+	latest_dial.close();
+}
+
+function AcceptChallengeCustomDeck(safeUserName) {
+	function DeckSelectorCallback(deck) {
+		CloseDeckSelector();
+		SetUpDeckOnServer(deck, function() {AcceptChallenge( safeUserName, deck.soul);})
+	}
+	
+	function OnShow() {
+		deckSelector.AppendTo(latest_dial.$modalBody[0].firstChild.firstChild)
+	}
+	
+	deckSelector.closable = false;
+	deckSelector.closeCallback = CloseDeckSelector;
+	deckSelector.callback = DeckSelectorCallback;
+	
+	latest_dial = window.BootstrapDialog.show({
+		title: "Choose a deck!",
+		size: window.BootstrapDialog.SIZE_LARGE,
+		message: "",
+		onshown: OnShow.bind(this),
+		buttons: [{
+				label: "Cancel!",
+				cssClass: 'btn-primary us-normal',
+				action(dialog) {
+					dialog.close();
+				}
+			}
+		]
+	});
 }
 
 function AcceptChallenge( safeUserName, soul) {

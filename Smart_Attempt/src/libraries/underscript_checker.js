@@ -21,6 +21,7 @@ if (typeof(window.underscript) === "undefined") {
 }
 
 var PrettyCards_plugin = window.underscript.plugin("PrettyCards");
+window.PrettyCards_plugin = PrettyCards_plugin;
 //var PrettyCards_plugin = underscript.plugin('<span class="RARE">PrettyCards</span>');
 //console.log("Plugin: ", PrettyCards_plugin);
 
@@ -68,9 +69,9 @@ settings.override_decks = PrettyCards_plugin.settings().add({
         'name': 'Override Deck System', // Name in settings page
         'note': 'Overrides the current deck system locally with a more flexible one. This inludes the Decks page, Play page, Custom page and the Custom Challenge system.',
         'type': 'boolean',
-		'disabled': true,
+		//'disabled': true,
         'refresh': true, // true to add note "Will require you to refresh the page"
-        'default': false, // default value
+        'default': true, // default value
     });
 
 //console.log(settings);

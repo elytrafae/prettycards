@@ -25,6 +25,7 @@ import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";
 import {InitPlay} from "/src/page_specific/play.js";
 import {InitGameList} from "/src/page_specific/game_list.js";
+import {InitHub} from "/src/page_specific/hub.js";
 
 if (settings.packs.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
@@ -37,6 +38,10 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 	} else if (underscript.onPage("GamesList")) {
 		InitGameList();
 	}
+}
+
+if (underscript.onPage("Hub")) {
+	InitHub();
 }
 
 // ! Deck and Play Page modifications are disabled for now !
