@@ -1,9 +1,9 @@
 
-if (typeof(underscript) === "undefined") {
-    if ((!localStorage.getItem("PrettyCards_DependencyErrorMessageShown")) || (localStorage.getItem("PrettyCards_DependencyErrorMessageShown") == "false")) {
-        var dialog = BootstrapDialog.show({
+if (typeof(window.underscript) === "undefined") {
+    if ((!window.localStorage.getItem("PrettyCards_DependencyErrorMessageShown")) || (window.localStorage.getItem("PrettyCards_DependencyErrorMessageShown") == "false")) {
+        var dialog = window.BootstrapDialog.show({
                 title: "Oh no!",
-                type: BootstrapDialog.TYPE_WARNING,
+                type: window.BootstrapDialog.TYPE_WARNING,
                 message: "Looks like you don't have Underscript installed, or you deactivated it! In order for PrettyCards to work, you need to have it up and running. Until then, the features of this userscript will simply not work. Thank you for your understanding.",
                 buttons: [{
                         label: "Proceed",
@@ -14,13 +14,13 @@ if (typeof(underscript) === "undefined") {
                     }
                 ]
             });
-        localStorage.setItem("PrettyCards_DependencyErrorMessageShown", true);
+        window.localStorage.setItem("PrettyCards_DependencyErrorMessageShown", true);
     };
 } else {
-    localStorage.setItem("PrettyCards_DependencyErrorMessageShown", false);
+    window.localStorage.setItem("PrettyCards_DependencyErrorMessageShown", false);
 }
 
-var PrettyCards_plugin = underscript.plugin("PrettyCards");
+var PrettyCards_plugin = window.underscript.plugin("PrettyCards");
 //var PrettyCards_plugin = underscript.plugin('<span class="RARE">PrettyCards</span>');
 //console.log("Plugin: ", PrettyCards_plugin);
 
