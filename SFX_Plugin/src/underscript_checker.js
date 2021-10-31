@@ -34,6 +34,30 @@ settings.turn_start = plugin.settings().add({
         'default': true, // default value
     });
 
+settings.buff = plugin.settings().add({
+        'key': 'buff',
+        'name': 'Enable the "Buff a Monster" sound.', // Name in settings page
+        'type': 'boolean',
+        'refresh': false, // true to add note "Will require you to refresh the page"
+        'default': true, // default value
+    });
+	
+settings.nerf = plugin.settings().add({
+        'key': 'nerf',
+        'name': 'Enable the "Nerf/Debuff a Monster" sound.', // Name in settings page
+        'type': 'boolean',
+        'refresh': false, // true to add note "Will require you to refresh the page"
+        'default': true, // default value
+    });
+	
+settings.paralyze = plugin.settings().add({
+        'key': 'paralyze',
+        'name': 'Enable the "Paralyze a Monster" sound.', // Name in settings page
+        'type': 'boolean',
+        'refresh': false, // true to add note "Will require you to refresh the page"
+        'default': true, // default value
+    });
+
 //console.log(settings);
 
 export {plugin, settings};

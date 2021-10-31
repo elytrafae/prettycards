@@ -2,28 +2,29 @@
 class AudioDictionary {
 	
 	constructor() {
-		var sounds = {
-			"your_turn_start" : "",
+		this.sounds = {
+			"your_turn_start" : "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Turn_Start.ogg",
 			"enemy_turn_start" : "",
 			"card_draw": "",
-			"monster_buff": "",
-			"monster_nerf": ""
+			"monster_buff": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Buff.ogg",
+			"monster_nerf": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Nerf.ogg",
+			"paralyze": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Paralyze.ogg"
 		}
-		var audio_objects = {}
+		this.audio_objects = {}
 	}
 	
-	PlaySoundEffect(name) {
-		if (false) { // Insert condition for SFX being turned off here.
+	PlaySoundEffect(name, volume = 0.2) {
+		if (!window.soundEnabled) {
 			return;
 		}
-		if (audio_objects[name]) {
-			audio_objects[name].stop();
+		if (this.audio_objects[name]) {
+			this.audio_objects[name].pause();
 		}
 		var musicPath = this.sounds[name];
 		var audio = new Audio(musicPath);
-		audio.volume = 0.1;
+		audio.volume = volume;
 		audio.play();
-		audio_objects[name] = audio;
+		this.audio_objects[name] = audio;
 	}
 	
 }
