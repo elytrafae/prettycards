@@ -57,6 +57,14 @@ settings.paralyze = plugin.settings().add({
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': true, // default value
     });
+	
+settings.kr = plugin.settings().add({
+        'key': 'kr',
+        'name': 'Enable the "Give KR to a Monster" sound.', // Name in settings page
+        'type': 'boolean',
+        'refresh': false, // true to add note "Will require you to refresh the page"
+        'default': true, // default value
+    });
 
 //console.log(settings);
 

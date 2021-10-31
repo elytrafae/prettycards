@@ -48,8 +48,16 @@ if (window.underscript.onPage("Game")) {
 	WrapWithEvent("freezeAnimation");
 	plugin.events.on("freezeAnimation", function(data) {
 		console.log("FREEZE_DATA", data);
-		if (settings.nerf.value()) {
+		if (settings.paralyze.value()) {
 			audioDictionary.PlaySoundEffect("paralyze");
+		}
+	});
+	
+	WrapWithEvent("poisonAnimation");
+	plugin.events.on("poisonAnimation", function(data) {
+		console.log("KR_DATA", data);
+		if (settings.kr.value()) {
+			audioDictionary.PlaySoundEffect("kr");
 		}
 	});
 }

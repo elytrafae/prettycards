@@ -8,7 +8,8 @@ class AudioDictionary {
 			"card_draw": "",
 			"monster_buff": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Buff.ogg",
 			"monster_nerf": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Nerf.ogg",
-			"paralyze": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Paralyze.ogg"
+			"paralyze": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Paralyze.ogg",
+			"kr": "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/KR.ogg"
 		}
 		this.audio_objects = {}
 	}
