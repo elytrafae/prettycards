@@ -1,0 +1,30 @@
+{
+    "name": "prettycards_audio",
+    "version": "1.0.0",
+    "description": "Add vibrant sounds to an Undercards match!",
+    "main": "prettycards_audio.user.js",
+    "homepage": "https://github.com/CMD-God/prettycards",
+    "bugs": "https://github.com/CMD-God/prettycards",
+    "scripts": {
+        "start": "webpack --config webpack.config.js --watch --stdin --dev",
+        "build": "webpack --config webpack.config.js",
+        "prepack": "webpack --config webpack.config.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "files": [
+        "dist/*.js"
+    ],
+    "keywords": [
+		"prettycards_audio",
+		"prettycards",
+        "underscript",
+        "plugin"
+    ],
+    "author": "CMD_God",
+    "license": "",
+    "devDependencies": {
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11",
+        "webpack-userscript": "^2.5.1"
+    }
+}
