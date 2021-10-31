@@ -29,16 +29,16 @@ if (window.underscript.onPage("Game")) {
 		}
 	});
 	
-	WrapWithEvent("attackNerfAnimation");
-	plugin.events.on("attackNerfAnimation", function(data) {
+	WrapWithEvent("attackDebuffAnimation");
+	plugin.events.on("attackDebuffAnimation", function(data) {
 		console.log("ATK_NERF_DATA", data);
 		if (settings.nerf.value()) {
 			audioDictionary.PlaySoundEffect("monster_nerf");
 		}
 	});
 	
-	WrapWithEvent("hpNerfAnimation");
-	plugin.events.on("hpNerfAnimation", function(data) {
+	WrapWithEvent("hpDebuffAnimation");
+	plugin.events.on("hpDebuffAnimation", function(data) {
 		console.log("HP_NERF_DATA", data);
 		if (settings.nerf.value()) {
 			audioDictionary.PlaySoundEffect("monster_nerf");
