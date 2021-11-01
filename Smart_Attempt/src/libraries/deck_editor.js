@@ -19,30 +19,31 @@ class DeckEditor {
 				//console.log("Requests left: ", posts_in_progress, data);
 				if (posts_in_progress == 0) {
 					
-					setTimeout(function () {cb("success")}, 1000); // For some reason it doesn't work when I do it instantly. Let's see if Onu lets me do it one second later.
+					setTimeout(function () {cb("success")}, 500); // For some reason it doesn't work when I do it instantly. Let's see if Onu lets me do it one second later.
 				}
 			} else {
 				console.log("ERROR WHILE IMPORTING DECK!", data)
 				cb("error", data);
 			}
 		}
-		
-		DeckEditor.RemoveEverything(deck.soul, function(data, status) {
-			//console.log("Removed everything! ", data, status);
-			if (status == "success") {
-				for (var i=0; i < deck.cards.length; i++) {
-					var card = deck.cards[i];
-					posts_in_progress++;
-					DeckEditor.AddCard(card.id, card.shiny, deck.soul, callback);
+		$.get("/Decks", {}, function() {
+			DeckEditor.RemoveEverything(deck.soul, function(data, status) {
+				//console.log("Removed everything! ", data, status);
+				if (status == "success") {
+					for (var i=0; i < deck.cards.length; i++) {
+						var card = deck.cards[i];
+						posts_in_progress++;
+						DeckEditor.AddCard(card.id, card.shiny, deck.soul, callback);
+					}
+					for (var i=0; i < deck.artifacts.length; i++) {
+						var artifact = deck.artifacts[i];
+						posts_in_progress++;
+						DeckEditor.AddArtifact(artifact, deck.soul, callback);
+					}
+				} else {
+					cb("error");
 				}
-				for (var i=0; i < deck.artifacts.length; i++) {
-					var artifact = deck.artifacts[i];
-					posts_in_progress++;
-					DeckEditor.AddArtifact(artifact, deck.soul, callback);
-				}
-			} else {
-				cb("error");
-			}
+			})
 		})
 	}
 	
