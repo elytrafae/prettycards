@@ -6,10 +6,11 @@ var ajaxUrl = "DecksConfig";
 class DeckEditor {
 	
 	static ImportDeck(deck, cb) {
-		if (deck.isBase) {
+		/*
+		if (deck.isBase) { // This condition is causing me a bunch of headache, so let's just remove it . . .
 			cb("success");
 			return;
-		}
+		}*/
 		var posts_in_progress = 0;
 		
 		var callback = function(data, status) {
@@ -17,7 +18,8 @@ class DeckEditor {
 				posts_in_progress--;
 				//console.log("Requests left: ", posts_in_progress, data);
 				if (posts_in_progress == 0) {
-					cb("success");
+					
+					setTimeout(function () {cb("success")}, 1000); // For some reason it doesn't work when I do it instantly. Let's see if Onu lets me do it one second later.
 				}
 			} else {
 				console.log("ERROR WHILE IMPORTING DECK!", data)

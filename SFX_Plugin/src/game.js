@@ -15,7 +15,7 @@ if (window.underscript.onPage("Game")) {
 	
 	WrapWithEvent("attackBuffAnimation");
 	plugin.events.on("attackBuffAnimation", function(data) {
-		console.log("ATK_BUFF_DATA", data);
+		//console.log("ATK_BUFF_DATA", data);
 		if (settings.buff.value()) {
 			audioDictionary.PlaySoundEffect("monster_buff");
 		}
@@ -23,7 +23,7 @@ if (window.underscript.onPage("Game")) {
 	
 	WrapWithEvent("hpBuffAnimation");
 	plugin.events.on("hpBuffAnimation", function(data) {
-		console.log("HP_BUFF_DATA", data);
+		//console.log("HP_BUFF_DATA", data);
 		if (settings.buff.value()) {
 			audioDictionary.PlaySoundEffect("monster_buff");
 		}
@@ -31,7 +31,7 @@ if (window.underscript.onPage("Game")) {
 	
 	WrapWithEvent("attackDebuffAnimation");
 	plugin.events.on("attackDebuffAnimation", function(data) {
-		console.log("ATK_NERF_DATA", data);
+		//console.log("ATK_NERF_DATA", data);
 		if (settings.nerf.value()) {
 			audioDictionary.PlaySoundEffect("monster_nerf");
 		}
@@ -39,7 +39,7 @@ if (window.underscript.onPage("Game")) {
 	
 	WrapWithEvent("hpDebuffAnimation");
 	plugin.events.on("hpDebuffAnimation", function(data) {
-		console.log("HP_NERF_DATA", data);
+		//console.log("HP_NERF_DATA", data);
 		if (settings.nerf.value()) {
 			audioDictionary.PlaySoundEffect("monster_nerf");
 		}
@@ -47,7 +47,7 @@ if (window.underscript.onPage("Game")) {
 	
 	WrapWithEvent("freezeAnimation");
 	plugin.events.on("freezeAnimation", function(data) {
-		console.log("FREEZE_DATA", data);
+		//console.log("FREEZE_DATA", data);
 		if (settings.paralyze.value()) {
 			audioDictionary.PlaySoundEffect("paralyze");
 		}
@@ -55,9 +55,32 @@ if (window.underscript.onPage("Game")) {
 	
 	WrapWithEvent("poisonAnimation");
 	plugin.events.on("poisonAnimation", function(data) {
-		console.log("KR_DATA", data);
+		//console.log("KR_DATA", data);
 		if (settings.kr.value()) {
 			audioDictionary.PlaySoundEffect("kr");
 		}
 	});
+	
+	WrapWithEvent("silenceAnimation");
+	plugin.events.on("silenceAnimation", function(data) {
+		//console.log("SILENCE_DATA", data);
+		if (settings.silence.value()) {
+			audioDictionary.PlaySoundEffect("silence");
+		}
+	});
+	
+	WrapWithEvent("hpStatAnimation");
+	plugin.events.on("hpStatAnimation", function(data) {
+		//console.log("SILENCE_DATA", data);
+		if (settings.crit_spell.value() && data[2] <= -7) {
+			audioDictionary.PlaySoundEffect("crit_spell");
+		}
+	});
+	
+	
+	
+	/*
+	plugin.events.on("updateMonster", function(data) {
+		console.log("updateMonster Data", data);
+	})*/
 }
