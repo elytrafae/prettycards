@@ -25,61 +25,69 @@ window.PrettyCardsAudio_plugin = plugin;
 //var PrettyCards_plugin = underscript.plugin('<span class="RARE">PrettyCards</span>');
 //console.log("Plugin: ", PrettyCards_plugin);
 
+var default_value = 50
+
 var settings = [];
 settings.turn_start = plugin.settings().add({
         'key': 'turn_start',
         'name': 'Enable the "Turn Start" sound.', // Name in settings page
-        'type': 'boolean',
+        'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
+        'default': default_value, // default value
+		'reset': true,
     });
 
 settings.buff = plugin.settings().add({
         'key': 'buff',
         'name': 'Enable the "Buff a Monster" sound.', // Name in settings page
-        'type': 'boolean',
+        'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
+        'default': default_value, // default value
+		'reset': true,
     });
 	
 settings.nerf = plugin.settings().add({
         'key': 'nerf',
         'name': 'Enable the "Nerf/Debuff a Monster" sound.', // Name in settings page
-        'type': 'boolean',
+        'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
+        'default': default_value, // default value,
+		'reset': true,
     });
 	
 settings.paralyze = plugin.settings().add({
         'key': 'paralyze',
         'name': 'Enable the "Paralyze a Monster" sound.', // Name in settings page
-        'type': 'boolean',
+        'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
+        'default': default_value, // default value
+		'reset': true,
     });
 	
 settings.kr = plugin.settings().add({
         'key': 'kr',
         'name': 'Enable the "Give KR to a Monster" sound.', // Name in settings page
-        'type': 'boolean',
+        'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
+        'default': default_value, // default value
+		'reset': true,
     });
 	
 settings.silence = plugin.settings().add({
         'key': 'silence',
         'name': 'Enable the "Give Silence to a Monster" sound.', // Name in settings page
-        'type': 'boolean',
+        'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
+        'default': default_value, // default value
+		'reset': true,
     });
 /*
 settings.crit_spell = plugin.settings().add({
         'key': 'crit_spell',
         'name': 'Enable the "Critical Spell" sound. By a "Critical Spell", I mean a spell or monster effect that deals 7 or more damage, similar to how attacks have this, too. Unfortunately, this doesn\'t work properly because the server refuses to tell me what dealt the damage.', // Name in settings page
-        'type': 'boolean',
+        'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
+        'default': default_value, // default value
     });
 */
 

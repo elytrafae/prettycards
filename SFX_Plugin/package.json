@@ -1,6 +1,6 @@
 {
     "name": "prettycards_audio",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Add vibrant sounds to an Undercards match!",
     "main": "prettycards_audio.user.js",
     "homepage": "https://github.com/CMD-God/prettycards",

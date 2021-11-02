@@ -16,8 +16,8 @@ class AudioDictionary {
 		this.audio_objects = {}
 	}
 	
-	PlaySoundEffect(name, volume = 0.2) {
-		if (!window.soundEnabled) {
+	PlaySoundEffect(name, volume_setting = 50, volume = 0.4) {
+		if (!window.soundEnabled || volume_setting <= 0) {
 			return;
 		}
 		if (this.audio_objects[name]) {
@@ -25,7 +25,7 @@ class AudioDictionary {
 		}
 		var musicPath = this.sounds[name];
 		var audio = new Audio(musicPath);
-		audio.volume = volume;
+		audio.volume = volume * (volume_setting/100);
 		audio.play();
 		this.audio_objects[name] = audio;
 	}

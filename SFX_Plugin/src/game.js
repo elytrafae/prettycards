@@ -8,65 +8,51 @@ console.log("PrettyCards Audio!");
 if (window.underscript.onPage("Game")) {
 	plugin.events.on("getTurnStart", function(data) {
 		//console.log("DATA", data);
-		if (settings.turn_start.value() && (window.userId == data.idPlayer)) {
-			audioDictionary.PlaySoundEffect("your_turn_start", 0.5);
+		if (window.userId == data.idPlayer) {
+			audioDictionary.PlaySoundEffect("your_turn_start", settings.turn_start.value(), 1);
 		}
 	});
 	
 	WrapWithEvent("attackBuffAnimation");
 	plugin.events.on("attackBuffAnimation", function(data) {
 		//console.log("ATK_BUFF_DATA", data);
-		if (settings.buff.value()) {
-			audioDictionary.PlaySoundEffect("monster_buff");
-		}
+		audioDictionary.PlaySoundEffect("monster_buff", settings.buff.value());
 	});
 	
 	WrapWithEvent("hpBuffAnimation");
 	plugin.events.on("hpBuffAnimation", function(data) {
 		//console.log("HP_BUFF_DATA", data);
-		if (settings.buff.value()) {
-			audioDictionary.PlaySoundEffect("monster_buff");
-		}
+		audioDictionary.PlaySoundEffect("monster_buff", settings.buff.value());
 	});
 	
 	WrapWithEvent("attackDebuffAnimation");
 	plugin.events.on("attackDebuffAnimation", function(data) {
 		//console.log("ATK_NERF_DATA", data);
-		if (settings.nerf.value()) {
-			audioDictionary.PlaySoundEffect("monster_nerf");
-		}
+		audioDictionary.PlaySoundEffect("monster_nerf", settings.nerf.value());
 	});
 	
 	WrapWithEvent("hpDebuffAnimation");
 	plugin.events.on("hpDebuffAnimation", function(data) {
 		//console.log("HP_NERF_DATA", data);
-		if (settings.nerf.value()) {
-			audioDictionary.PlaySoundEffect("monster_nerf");
-		}
+		audioDictionary.PlaySoundEffect("monster_nerf", settings.nerf.value());
 	});
 	
 	WrapWithEvent("freezeAnimation");
 	plugin.events.on("freezeAnimation", function(data) {
 		//console.log("FREEZE_DATA", data);
-		if (settings.paralyze.value()) {
-			audioDictionary.PlaySoundEffect("paralyze");
-		}
+		audioDictionary.PlaySoundEffect("paralyze", settings.paralyze.value());
 	});
 	
 	WrapWithEvent("poisonAnimation");
 	plugin.events.on("poisonAnimation", function(data) {
 		//console.log("KR_DATA", data);
-		if (settings.kr.value()) {
-			audioDictionary.PlaySoundEffect("kr");
-		}
+		audioDictionary.PlaySoundEffect("kr", settings.kr.value());
 	});
 	
 	WrapWithEvent("silenceAnimation");
 	plugin.events.on("silenceAnimation", function(data) {
 		//console.log("SILENCE_DATA", data);
-		if (settings.silence.value()) {
-			audioDictionary.PlaySoundEffect("silence");
-		}
+		audioDictionary.PlaySoundEffect("silence", settings.silence.value());
 	});
 	
 	/*
