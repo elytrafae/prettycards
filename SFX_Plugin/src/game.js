@@ -69,15 +69,22 @@ if (window.underscript.onPage("Game")) {
 		}
 	});
 	
-	WrapWithEvent("hpStatAnimation");
+	/*
+	WrapWithEvent("hpStatAnimation"); // Would have really wanted to do this, but I don't want to torture myself.
 	plugin.events.on("hpStatAnimation", function(data) {
 		//console.log("SILENCE_DATA", data);
 		if (settings.crit_spell.value() && data[2] <= -7) {
 			audioDictionary.PlaySoundEffect("crit_spell");
 		}
 	});
+	*/
 	
-	
+	/*
+	plugin.events.on("getFight getFightPlayer", function(data) {
+		console.log("FIGHT_DATA", data);
+		var attacker = data.attack_monster;
+	})
+	*/
 	
 	/*
 	plugin.events.on("updateMonster", function(data) {
