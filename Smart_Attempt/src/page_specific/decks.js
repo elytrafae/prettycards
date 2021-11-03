@@ -80,15 +80,17 @@ function ChangeDeckDescription() {
 }
 
 function EditDeckScreenHTML() {
+	var cont_cont = document.createElement("DIV");
 	var cont = document.createElement("DIV");
-	cont.style = "min-height: 230px;"
+	cont.style = "min-height: 230px;";
+	cont_cont.appendChild(cont);
 	
 	var col1 = document.createElement("DIV");
 	col1.style = "display: inline-block; margin: 0; float:left; min-height:250px; width: 320px;";
 	cont.appendChild(col1);
 	
 	col2 = document.createElement("DIV");
-	col2.style = "display: inline-block; margin: 0; float:right; width: 200px;";
+	col2.style = "display: inline-block; margin: 0; width: 235px; display: flex; justify-content: space-evenly;";
 	cont.appendChild(col2);
 	
 	col1.innerHTML = "<span>Deck Name: </span>";
@@ -114,12 +116,29 @@ function EditDeckScreenHTML() {
 	changeImage.innerHTML = "Change Deck Image";
 	changeImage.className = "btn btn-primary";
 	changeImage.style = "display: block; margin-top: 10px;"
-	$(changeImage).click(ChangeDeckImageDialogue.bind(this));
+	changeImage.onclick = ChangeDeckImageDialogue.bind(this);
 	col1.appendChild(changeImage);
+	
+	var emergencyLoad = document.createElement("BUTTON");
+	emergencyLoad.innerHTML = "Emergency Load Deck";
+	emergencyLoad.className = "btn btn-danger";
+	emergencyLoad.style = "display: block; margin-top: 10px;"
+	emergencyLoad.onclick = function () {
+		DeckEditor.ImportDeck(currentDeck, function() {})
+	};
+	col1.appendChild(emergencyLoad);
+	
+	var note = document.createElement("P");
+	note.className = "gray";
+	note.style = "margin-top: 15px;";
+	note.innerHTML = "NOTE: The Emergency Load Deck immediately uploads the selected deck to the server. It is not an intended feature for my deck system, but one that should be used if the system breaks again.";
+	cont_cont.appendChild(note);
 	
 	ReloadDeckEditPreview();
 	
-	return cont;
+	
+	
+	return cont_cont;
 }
 
 function ReloadDeckEditPreview() {
@@ -294,7 +313,7 @@ function SilenceDeckFunctions() {
 
 function LoadDeck(deck) {
 	if (deck.isBase) {
-		DeckEditor.ImportDeck(deck, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
+		DeckEditor.OptimalImportDeck(deck, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
 	}
 	
 	window.soul = deck.soul;

@@ -34,17 +34,6 @@ settings.packs = PrettyCards_plugin.settings().add({
         'default': true, // default value
     });
 
-
-settings.replace_soul_selection = PrettyCards_plugin.settings().add({
-        'key': 'replace_soul_selection',
-        'name': 'Replace Soul Selection.', // Name in settings page
-		'note': 'Warning! Currently does nothing. I dunno if I will reimplement this in the future.',
-        'type': 'boolean',
-        'refresh': true, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
-    });
-
-
 settings.easter_egg_cards = PrettyCards_plugin.settings().add({
         'key': 'enable_easter_egg_cards',
         'name': 'Enable Custom Cards', // Name in settings page

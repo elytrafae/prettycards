@@ -5,12 +5,7 @@ var ajaxUrl = "DecksConfig";
 
 class DeckEditor {
 	
-	static ImportDeck(deck, cb) {
-		/*
-		if (deck.isBase) { // This condition is causing me a bunch of headache, so let's just remove it . . .
-			cb("success");
-			return;
-		}*/
+	static OptimalImportDeck(deck, cb) {
 		var posts_in_progress = 0;
 		
 		var callback = function(data, status) {
@@ -18,31 +13,52 @@ class DeckEditor {
 				posts_in_progress--;
 				//console.log("Requests left: ", posts_in_progress, data);
 				if (posts_in_progress == 0) {
-					
-					setTimeout(function () {cb("success")}, 500); // For some reason it doesn't work when I do it instantly. Let's see if Onu lets me do it one second later.
+					cb("success");
 				}
 			} else {
 				console.log("ERROR WHILE IMPORTING DECK!", data)
 				cb("error", data);
 			}
 		}
-		$.get("/Decks", {}, function() {
-			DeckEditor.RemoveEverything(deck.soul, function(data, status) {
-				//console.log("Removed everything! ", data, status);
-				if (status == "success") {
-					for (var i=0; i < deck.cards.length; i++) {
-						var card = deck.cards[i];
-						posts_in_progress++;
-						DeckEditor.AddCard(card.id, card.shiny, deck.soul, callback);
-					}
-					for (var i=0; i < deck.artifacts.length; i++) {
-						var artifact = deck.artifacts[i];
-						posts_in_progress++;
-						DeckEditor.AddArtifact(artifact, deck.soul, callback);
-					}
-				} else {
-					cb("error");
+		DeckEditor.RemoveEverything(deck.soul, function(data, status) {
+			//console.log("Removed everything! ", data, status);
+			if (status == "success") {
+				for (var i=0; i < deck.cards.length; i++) {
+					var card = deck.cards[i];
+					posts_in_progress++;
+					DeckEditor.AddCard(card.id, card.shiny, deck.soul, callback);
 				}
+				for (var i=0; i < deck.artifacts.length; i++) {
+					var artifact = deck.artifacts[i];
+					posts_in_progress++;
+					DeckEditor.AddArtifact(artifact, deck.soul, callback);
+				}
+			} else {
+				cb("error");
+			}
+		})
+	} 
+	
+	static ImportDeck(deck, cb) {
+		/*
+		if (deck.isBase) { // This condition is causing me a bunch of headache, so let's just remove it . . .
+			cb("success");
+			return;
+		}*/
+		
+		$.get("/Decks", {}, function() {
+			$.get("/DecksConfig", {}, function() {
+				DeckEditor.OptimalImportDeck(deck, function(status, data) {
+					if (status == "success") {
+						$.get(window.location.pathname, {}, function() {
+							setTimeout(function () {
+								cb("success");
+							}, 500);
+						})
+					} else {
+						cb(status, data);
+					}
+				})
 			})
 		})
 	}

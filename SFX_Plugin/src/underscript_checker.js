@@ -30,7 +30,7 @@ var default_value = 50
 var settings = [];
 settings.turn_start = plugin.settings().add({
         'key': 'turn_start',
-        'name': 'Enable the "Turn Start" sound.', // Name in settings page
+        'name': 'Turn Start volume', // Name in settings page
         'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value
@@ -39,7 +39,7 @@ settings.turn_start = plugin.settings().add({
 
 settings.buff = plugin.settings().add({
         'key': 'buff',
-        'name': 'Enable the "Buff a Monster" sound.', // Name in settings page
+        'name': 'Buff volume', // Name in settings page
         'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value
@@ -48,7 +48,7 @@ settings.buff = plugin.settings().add({
 	
 settings.nerf = plugin.settings().add({
         'key': 'nerf',
-        'name': 'Enable the "Nerf/Debuff a Monster" sound.', // Name in settings page
+        'name': 'Nerf/Debuff volume', // Name in settings page
         'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value,
@@ -57,7 +57,7 @@ settings.nerf = plugin.settings().add({
 	
 settings.paralyze = plugin.settings().add({
         'key': 'paralyze',
-        'name': 'Enable the "Paralyze a Monster" sound.', // Name in settings page
+        'name': 'Paralyze volume', // Name in settings page
         'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value
@@ -66,7 +66,7 @@ settings.paralyze = plugin.settings().add({
 	
 settings.kr = plugin.settings().add({
         'key': 'kr',
-        'name': 'Enable the "Give KR to a Monster" sound.', // Name in settings page
+        'name': 'KR volume', // Name in settings page
         'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value
@@ -75,17 +75,27 @@ settings.kr = plugin.settings().add({
 	
 settings.silence = plugin.settings().add({
         'key': 'silence',
-        'name': 'Enable the "Give Silence to a Monster" sound.', // Name in settings page
+        'name': 'Silence volume', // Name in settings page
         'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value
 		'reset': true,
     });
 
+settings.crit_spell_anim = plugin.settings().add({
+        'key': 'crit_spell_anim',
+        'name': 'Enable the "Critical Spell" animation.', // Name in settings page
+        //'note': 'By a "Critical Spell", I mean a spell or monster effect that deals 7 or more damage, similar to how attacks have this, too. Unfortunately, this doesn\'t work properly 100% of the time because the server refuses to tell me what dealt the damage and so I have to do some magic guessing.',
+		'type': 'boolean',
+        'refresh': false, // true to add note "Will require you to refresh the page"
+        'default': true, // default value
+    });
+
 settings.crit_spell = plugin.settings().add({
         'key': 'crit_spell',
-        'name': 'Enable the "Critical Spell" sound. By a "Critical Spell", I mean a spell or monster effect that deals 7 or more damage, similar to how attacks have this, too. Unfortunately, this doesn\'t work properly 100% of the time because the server refuses to tell me what dealt the damage and so I have to do some magic guessing.', // Name in settings page
-        'type': 'slider',
+        'name': 'Critical Spell volume', // Name in settings page
+        'note': 'By a "Critical Spell", I mean a spell or monster effect that deals 7 or more damage, similar to how attacks have this, too. Unfortunately, this doesn\'t work properly 100% of the time because the server refuses to tell me what dealt the damage and so I have to do some magic guessing.',
+		'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value
     });

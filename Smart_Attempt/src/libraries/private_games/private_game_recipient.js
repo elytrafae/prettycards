@@ -82,7 +82,7 @@ function SetUpDeckOnServer(deck, callback) {
 			text: "Setting up the deck on the server . . .",
 		}
 	);
-	DeckEditor.ImportDeck(deck, function(status) {
+	DeckEditor.OptimalImportDeck(deck, function(status) {
 		if (toast.exists()) {
 			toast.close();
 		}

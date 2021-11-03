@@ -428,4 +428,4 @@ class SavedDeckSelector {
 	
 }
 
-export {SavedDeckSelector, dummy_skin, onu_skin};
+export {SavedDeckSelector, dummy_skin, onu_skin, GetAllDecks};

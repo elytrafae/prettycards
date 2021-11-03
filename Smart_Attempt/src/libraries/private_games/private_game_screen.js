@@ -125,7 +125,7 @@ function SetUpDeckOnServer(callback) {
 		}
 	);
 	playLocked = true;
-	DeckEditor.ImportDeck(selectedDeck, function(status) {
+	DeckEditor.OptimalImportDeck(selectedDeck, function(status) {
 		playLocked = false;
 		if (toast.exists()) {
 			toast.close();

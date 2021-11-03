@@ -10,6 +10,9 @@ var damager_id = 0; // The damager id
 var player_id = 0; // In case of souls and artifacts
 
 function CritSpellAnimation() {
+	if (!settings.crit_spell_anim.value()) {
+		return;
+	}
 	var $mainContent = window.$('.mainContent');
 	$mainContent.effect("shake", {direction: "up", times: 1, distance: 5}, 25);
 	$mainContent.effect("shake", {direction: "right", times: 1, distance: 5}, 25);

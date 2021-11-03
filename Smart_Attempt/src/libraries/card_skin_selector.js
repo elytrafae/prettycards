@@ -6,6 +6,8 @@ var ownedCardSkins = [];
 var notOwnedCardSkins = [];
 var defaultCardSkins = [];
 
+var bonusBaseCards = ["Heal Delivery", "Explosion", "Sacrifice", "Same Fate", "Onutrem"];
+
 var skinLists = [defaultCardSkins, ownedCardSkins, notOwnedCardSkins];
 var listNames = ["Default Card Skins", "Owned Card Skins", "Not Owned Card Skins"]
 
@@ -47,7 +49,7 @@ if (!window.allCards || window.allCards.length == 0) {
 	ProcessDefaultSkins();
 }
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@61cd42478251d9132f22bd84d53d450b083b7fd4/css/CardSkinSelector.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@6c68b7bd6c297292b47161ebdb18620017cf68ce/css/CardSkinSelector.css");
 
 function ProcessDefaultSkins() {
 	for (var i=0; i < allCards.length; i++) {
@@ -59,26 +61,29 @@ function ProcessDefaultSkins() {
 			cardName: card.name,
 			id: -1,
 			image: card.image,
-			name: "Default",
+			name: card.name,
 			owned: true,
 			typeSkin: 0,
 			ucpCost: 0,
 			unavailable: false
 		});
 	}
-	defaultCardSkins.push({
-		active: true,
-		authorName: "Onutrem",
-		cardId: -1,
-		cardName: "Onutrem",
-		id: -1,
-		image: "Onutrem",
-		name: "Onutrem",
-		owned: true,
-		typeSkin: 0,
-		ucpCost: 0,
-		unavailable: false
-	});
+	for (var i=0; i < bonusBaseCards.length; i++) {
+		var name = bonusBaseCards[i];
+		defaultCardSkins.push({
+			active: true,
+			authorName: "",
+			cardId: -1,
+			cardName: name,
+			id: -1,
+			image: name.replaceAll(" ", "_"),
+			name: name,
+			owned: true,
+			typeSkin: 0,
+			ucpCost: 0,
+			unavailable: false
+		});
+	}
 	//console.log(defaultCardSkins);
 }
 
@@ -125,7 +130,7 @@ class CardSkinSelector {
 			category_header.className = "PrettyCards_SkinHeader";
 			category_header.innerHTML = listNames[i];
 			
-			var category_container = document.createElement("DIV");
+			const category_container = document.createElement("DIV");
 			for (var j=0; j < list.length; j++) {
 				const skin = list[j];
 				var div = document.createElement("DIV");
@@ -144,6 +149,11 @@ class CardSkinSelector {
 				this.skinElements.push(div);
 				category_container.appendChild(div);
 			}
+			
+			category_header.onclick = function() {
+				$(category_container).toggle();
+			}
+			
 			skinsCont.appendChild(category_header);
 			skinsCont.appendChild(category_container);
 		}

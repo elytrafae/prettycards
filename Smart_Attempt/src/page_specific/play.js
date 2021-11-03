@@ -2,7 +2,7 @@
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
-import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/deck_selector.js";
+import {SavedDeckSelector, dummy_skin, onu_skin, GetAllDecks} from "/src/libraries/deck_selector.js";
 import {DeckEditor} from "/src/libraries/deck_editor.js";
 import {utility} from "/src/libraries/utility.js";
 
@@ -15,7 +15,12 @@ var gamemode_functions = {
 	standard: window.sendJoinQueue,
 	ranked: window.sendJoinRankedQueue,
 	event: window.sendJoinEventQueue,
-	boss: window.sendJoinBossQueue
+	boss: window.sendJoinBossQueue,
+	reload: ReloadPage
+}
+
+function ReloadPage() {
+	window.location.reload();
 }
 
 function OpenDeckSelector() {
@@ -90,8 +95,25 @@ function StartJoiningQueue(game_mode) {
 // Tournament mode element: <div id="tournament-mode" class="col-xs-4 game-mode"><h2 data-i18n="[html]game-type-tournament"></h2></div>
 
 function InitPlay() {
-	console.log("Init Play!");
+	//console.log("Init Play!");
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4ebd16e8aea3023000642a69626c90174162a8f6/css/Play.css");
+	
+	if (document.querySelector('span[data-i18n="[html]play-incomplete"]')) {
+		console.log("NO DECKS!");
+		ExecuteWhen("PrettyCards:onArtifacts", function () {
+			var decks = GetAllDecks();
+			for (var i=0; i < decks.length; i++) {
+				var deck = decks[i];
+				if (deckSelector.IsValidDeck(deck)) {
+					playLocked = false;
+					selectedDeck = deck;
+					StartJoiningQueue("reload");
+					break;
+				}
+			}
+		})
+		return;
+	}
 	
 	$("#phase1 > table").css("display", "none");
 	$("#game-modes").css("display", "none");
