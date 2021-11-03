@@ -3,19 +3,41 @@ import {utility} from "/src/libraries/utility.js";
 
 var allCardSkins = [];
 var ownedCardSkins = [];
+var notOwnedCardSkins = [];
 var defaultCardSkins = [];
+
+var skinLists = [defaultCardSkins, ownedCardSkins, notOwnedCardSkins];
+var listNames = ["Default Card Skins", "Owned Card Skins", "Not Owned Card Skins"]
 
 $.get("CardSkinsConfig?action=shop", {}, function(data) {
 	//console.log(data);
 	allCardSkins = JSON.parse(data.cardSkins);
+	ProcessCardSkinLists();
 	//console.log(allCardSkins);
 });
 
+/*
 $.get("CardSkinsConfig?action=profile", {}, function(data) {
 	//console.log(data);
 	ownedCardSkins = JSON.parse(data.cardSkins);
-	//console.log(ownedCardSkins);
+	ProcessNotOwnedSkins();
+	console.log("OWNED_CARD_SKINS:", ownedCardSkins);
 });
+*/
+
+function ProcessCardSkinLists() {
+	for (var i=0; i < allCardSkins.length; i++) {
+		var skin = allCardSkins[i];
+		if (skin.owned) {
+			ownedCardSkins.push(skin);
+		} else {
+			notOwnedCardSkins.push(skin);
+		}
+	}
+	
+	skinLists[1] = ownedCardSkins;
+	//console.log("Not owned card skins: ", notOwnedCardSkins);
+}
 
 if (!window.allCards || window.allCards.length == 0) {
 	window.document.addEventListener("allCardsReady", function() {
@@ -44,6 +66,19 @@ function ProcessDefaultSkins() {
 			unavailable: false
 		});
 	}
+	defaultCardSkins.push({
+		active: true,
+		authorName: "Onutrem",
+		cardId: -1,
+		cardName: "Onutrem",
+		id: -1,
+		image: "Onutrem",
+		name: "Onutrem",
+		owned: true,
+		typeSkin: 0,
+		ucpCost: 0,
+		unavailable: false
+	});
 	//console.log(defaultCardSkins);
 }
 
@@ -51,10 +86,6 @@ class CardSkinSelector {
 	
 	constructor() {
 		this.callback = function() {};
-		this.includeDefault = true;
-		this.onlyOwned = false;
-		this.onlyAvailable = false;
-		this.includeOnu = true;
 		
 		this.container = null;
 		this.skinElements = [];
@@ -64,44 +95,13 @@ class CardSkinSelector {
 	
 	GetSkinsToDisplay() {
 		var skinsToDisplay = [];
-		if (this.includeDefault) {
-			skinsToDisplay = skinsToDisplay.concat(defaultCardSkins);
-		}
-		var l = [];
-		if (this.onlyOwned) {
-			l = ownedCardSkins;
-		} else {
-			l = allCardSkins;
-		}
-		if (this.onlyAvailable) {
-			for (var i=0; i < l.length; i++) {
-				var skin = l[i];
-				if (!skin.unavailable) {
-					skinsToDisplay.push(skin);
-				}
-			}
-		} else {
-			skinsToDisplay = skinsToDisplay.concat(l);
-		}
-		if (this.includeOnu) {
-			skinsToDisplay.push({
-				active: true,
-				authorName: "Onutrem",
-				cardId: -1,
-				cardName: "Onutrem",
-				id: -1,
-				image: "Onutrem",
-				name: "Onutrem",
-				owned: true,
-				typeSkin: 0,
-				ucpCost: 0,
-				unavailable: false
-			});
+		for (var i=0; i < skinLists.length; i++) {
+			skinsToDisplay = skinsToDisplay.concat(skinLists[i]);
 		}
 		return skinsToDisplay;
 	}
 	
-	GetHTML(skins) {
+	GetHTML() {
 		this.searchBar = document.createElement("INPUT");
 		this.searchBar.className = "form-control";
 		this.searchBar.setAttribute("type", "text");
@@ -117,24 +117,37 @@ class CardSkinSelector {
 		skinsCont.className = "PrettyCards_SkinsContainer";
 		cont.appendChild(skinsCont);
 		
-		for (var i=0; i < this.skins.length; i++) {
-			const skin = this.skins[i];
-			var div = document.createElement("DIV");
-			div.className = "PrettyCards_SkinDiv";
-			div.style.background = "url(images/cards/" + skin.image + ".png) no-repeat transparent";
+		for (var i=0; i < skinLists.length; i++) {
+			var list = skinLists[i];
+			//console.log("LIST ", i, list);
 			
-			div.innerHTML = '<div class="PrettyCards_SkinText">' + skin.name + (skin.authorName !== "" ? '<br><span class="Artist">' + skin.authorName + '</span>' : '') + '</div>';
-			if (skin.typeSkin > 0) {
-				div.innerHTML += '<div class="PrettyCards_FullSkinPreview"><img src="images/cards/' + skin.image + '.png"></div>';
+			var category_header = document.createElement("DIV");
+			category_header.className = "PrettyCards_SkinHeader";
+			category_header.innerHTML = listNames[i];
+			
+			var category_container = document.createElement("DIV");
+			for (var j=0; j < list.length; j++) {
+				const skin = list[j];
+				var div = document.createElement("DIV");
+				div.className = "PrettyCards_SkinDiv";
+				div.style.background = "url(images/cards/" + skin.image + ".png) no-repeat transparent";
+				
+				div.innerHTML = '<div class="PrettyCards_SkinText">' + skin.name + (skin.authorName !== "" ? '<br><span class="Artist">' + skin.authorName + '</span>' : '') + '</div>';
+				if (skin.typeSkin > 0) {
+					div.innerHTML += '<div class="PrettyCards_FullSkinPreview"><img src="images/cards/' + skin.image + '.png"></div>';
+				}
+				
+				div.onclick = function() {
+					this.callback(skin);
+				}.bind(this);
+				
+				this.skinElements.push(div);
+				category_container.appendChild(div);
 			}
-			
-			div.onclick = function() {
-				this.callback(skin);
-			}.bind(this);
-			
-			this.skinElements.push(div);
-			skinsCont.appendChild(div);
+			skinsCont.appendChild(category_header);
+			skinsCont.appendChild(category_container);
 		}
+		
 		this.container = cont;
 		return cont;
 	}
@@ -165,7 +178,7 @@ class CardSkinSelector {
 	}
 	
 	ApplyFilters() {
-		console.log("Filters!");
+		//console.log("Filters!");
 		for (var i=0; i < this.skinElements.length; i++) {
 			//console.log(this.skinElements)
 			this.skinElements[i].style.display = this.isRemoved(this.skins[i]) ? "none" : "";
@@ -174,7 +187,7 @@ class CardSkinSelector {
 	
 	isRemoved(skin) {
 		var searchValue = $(this.searchBar).val().toLowerCase();
-		console.log("Search value:", searchValue);
+		//console.log("Search value:", searchValue);
 		
 		 if (searchValue.length > 0) {
 			var findableString = '';
@@ -189,7 +202,7 @@ class CardSkinSelector {
 				findableString += "breaking";
 			}
 			//findableString += skin.ucpCost;
-			console.log(findableString, skin);
+			//console.log(findableString, skin);
 			
 			return !findableString.toLowerCase().includes(searchValue);
 		 }

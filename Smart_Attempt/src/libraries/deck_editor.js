@@ -110,7 +110,52 @@ class DeckEditor {
 				}
 			}
 		});
-	} 
+	}
+	
+	static RemoveArtifacts(soul, callback) {
+		$.ajax({
+            url: ajaxUrl,
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify({
+                action: "clearArtifacts",
+                soul: soul
+            }),
+            contentType: "application/json",
+            success: function(data) {
+                if (data.action === "getArtifactsCleared") {
+                    callback(data, "success");
+                } else {
+					callback(data, "error");
+				}
+            }
+        });
+	}
+	
+	static RemoveCard(card_id, shiny, soul, callback) {
+		$.ajax({
+            url: ajaxUrl,
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify({
+                action: "removeCard",
+                idCard: card_id,
+                isShiny: shiny,
+                soul: soul
+            }),
+            contentType: "application/json",
+            complete: function() {
+                canRemove = true;
+            },
+            success: function(data) {
+                if (data.status === undefined) {
+                    callback(data, "success");
+                } else {
+                    callback(data, "error");
+                }
+            }
+        });
+	}
 	
 }
 

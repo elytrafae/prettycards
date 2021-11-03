@@ -2,6 +2,7 @@
 import {SoulSelector} from "/src/libraries/soul_selector.js";
 import {utility} from "/src/libraries/utility.js";
 import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetics_manager.js";
+import {artifactDisplay} from "/src/libraries/artifact_display.js";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
@@ -51,7 +52,7 @@ function GetAllDecks() {
 			
 			if (rest_sliced[2] === "name") {continue;}
 			
-			console.log("PROCESSING: ", key);
+			//console.log("PROCESSING: ", key);
 			var parsedDeck = JSON.parse(val);
 			var image_key = "prettycards.deck." + selfId + "." + rest_sliced[0] + "." + rest_sliced[1] + ".image";
 			var desc_key = "prettycards.deck." + selfId + "." + rest_sliced[0] + "." + rest_sliced[1] + ".description";
@@ -110,7 +111,7 @@ function ProcessBaseDecks(organizedDecks) {
 	var baseDecks = SoulSelector.GetDecks();
 	console.log("baseDecks", baseDecks);
 	for (var soul in baseDecks) {
-		console.log("Processing ", soul);
+		//console.log("Processing ", soul);
 		var found = false;
 		var baseDeck = baseDecks[soul];
 		if (!organizedDecks[soul] || baseDeck.cards.length <= 0) {
@@ -207,6 +208,30 @@ class SavedDeckSelector {
 		this.deckSouls = {};
 		this.decks = [];
 		this.canEditDecks = false;
+		this.hideInvalidDecks = true;
+	}
+	
+	IsValidDeck(deck) { // ONLY DO IT AFTER THE ARTIFACTS HAVE BEEN LOADED!
+		if (deck.cards.length != 25) {
+			return false;
+		}
+		if (deck.artifacts.length == 0 || deck.artifacts.length >= 3) {
+			return false;
+		}
+		var art1 = artifactDisplay.GetArtifactById(deck.artifacts[0]);
+		if (!art1) {
+			console.log("ARTIFACT WITH ID" + deck.artifacts[0] + " NOT FOUND!");
+			return false;
+		}
+		if (deck.artifacts.length == 1) {
+			return art1.legendary;
+		}
+		var art2 = artifactDisplay.GetArtifactById(deck.artifacts[1]);
+		if (!art2) {
+			console.log("ARTIFACT WITH ID" + deck.artifacts[1] + " NOT FOUND!");
+			return false;
+		}
+		return !art1.legendary && !art2.legendary;
 	}
 	
 	GetHTML(decks) {
@@ -246,20 +271,23 @@ class SavedDeckSelector {
 			
 			for (var i=0; i < decks[soul].length; i++) {
 				const deck = decks[soul][i];
-				var card = this.appendCardDeck($deck, deck);
-								
-				if (this.canEditDecks) {
-					card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? "ERASE" : "DELETE") + '</div>');
-					card.find(".PrettyCards_DeckCardErase").click(function(e) {
-						this.DeleteDeckDialogue(deck);
-						e.stopPropagation();
+				console.log("DECK HIDING: ", deck, !this.IsValidDeck(deck));
+				if (!this.hideInvalidDecks || this.IsValidDeck(deck)) {
+					var card = this.appendCardDeck($deck, deck);
+									
+					if (this.canEditDecks) {
+						card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? "ERASE" : "DELETE") + '</div>');
+						card.find(".PrettyCards_DeckCardErase").click(function(e) {
+							this.DeleteDeckDialogue(deck);
+							e.stopPropagation();
+						}.bind(this));
+						card.find(".cardFooter").css("display", "none");
+					}
+					
+					card.click(function() {
+						this.callback(deck);
 					}.bind(this));
-					card.find(".cardFooter").css("display", "none");
 				}
-				
-				card.click(function() {
-					this.callback(deck);
-				}.bind(this));
 			}
 			
 			if (this.canEditDecks) {

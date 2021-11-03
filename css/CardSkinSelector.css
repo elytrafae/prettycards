@@ -1,4 +1,9 @@
 
+.PrettyCards_SkinHeader {
+	font-size: 25px;
+	padding: 5px;
+}
+
 .PrettyCards_SkinDiv {
 	position: relative;
 	width: 160px; 

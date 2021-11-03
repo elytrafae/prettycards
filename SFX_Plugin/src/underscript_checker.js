@@ -81,15 +81,15 @@ settings.silence = plugin.settings().add({
         'default': default_value, // default value
 		'reset': true,
     });
-/*
+
 settings.crit_spell = plugin.settings().add({
         'key': 'crit_spell',
-        'name': 'Enable the "Critical Spell" sound. By a "Critical Spell", I mean a spell or monster effect that deals 7 or more damage, similar to how attacks have this, too. Unfortunately, this doesn\'t work properly because the server refuses to tell me what dealt the damage.', // Name in settings page
+        'name': 'Enable the "Critical Spell" sound. By a "Critical Spell", I mean a spell or monster effect that deals 7 or more damage, similar to how attacks have this, too. Unfortunately, this doesn\'t work properly 100% of the time because the server refuses to tell me what dealt the damage and so I have to do some magic guessing.', // Name in settings page
         'type': 'slider',
         'refresh': false, // true to add note "Will require you to refresh the page"
         'default': default_value, // default value
     });
-*/
+
 
 //console.log(settings);
 

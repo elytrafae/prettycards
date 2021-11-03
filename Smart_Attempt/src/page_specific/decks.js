@@ -3,6 +3,7 @@ import {CardSkinSelector} from "/src/libraries/card_skin_selector.js";
 import {SavedDeckSelector} from "/src/libraries/deck_selector.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
+import {DeckEditor} from "/src/libraries/deck_editor.js";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
@@ -113,7 +114,7 @@ function EditDeckScreenHTML() {
 	changeImage.innerHTML = "Change Deck Image";
 	changeImage.className = "btn btn-primary";
 	changeImage.style = "display: block; margin-top: 10px;"
-	$(changeImage).unbind("keyup").keyup(ChangeDeckImageDialogue.bind(this));
+	$(changeImage).click(ChangeDeckImageDialogue.bind(this));
 	col1.appendChild(changeImage);
 	
 	ReloadDeckEditPreview();
@@ -197,6 +198,9 @@ function addCardSilent(idCard, shiny, dontUpdateDeck) {
 	if (!dontUpdateDeck) {
 		SaveDeck();
 	}
+	if (currentDeck.isBase) {
+		DeckEditor.AddCard(idCard, shiny, currentDeck.soul, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
+	}
 }
 
 function removeCardSilent(idCard, shiny) {
@@ -208,12 +212,14 @@ function removeCardSilent(idCard, shiny) {
 	applyFilters();
 	showPage(currentPage);
 	removeCardHover();
-	if (!dontUpdateDeck) {
-		SaveDeck();
+	
+	SaveDeck();
+	if (currentDeck.isBase) {
+		DeckEditor.RemoveCard(idCard, shiny, currentDeck.soul, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
 	}
 }
 
-function addArtifactSilent(idArtifact, dontUpdateDeck) {
+function addArtifactSilent(idArtifact, dontUpdateDeck, is_importing = false) {
 	var artifact = null;
 	for (var i=0; i < window.userArtifacts.length; i++) {
 		var _artifact = window.userArtifacts[i];
@@ -231,6 +237,9 @@ function addArtifactSilent(idArtifact, dontUpdateDeck) {
 	if (!dontUpdateDeck) {
 		SaveDeck();
 	}
+	if (currentDeck.isBase && !is_importing) {
+		DeckEditor.AddArtifact(idArtifact, currentDeck.soul, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
+	}
 }
 
 function clearArtifactsSilent() {
@@ -241,9 +250,12 @@ function clearArtifactsSilent() {
 	if (!dontUpdateDeck) {
 		SaveDeck();
 	}
+	if (currentDeck.isBase) {
+		DeckEditor.RemoveArtifacts(currentDeck.soul, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
+	}
 }
 
-function removeAllCardsSilent(dontUpdateDeck) {
+function removeAllCardsSilent(dontUpdateDeck, is_importing = false) {
 	$('#deckCards' + window.soul).empty();
 	$('#nbCardDeck' + window.soul).html(0);
 	for (var i=0; i < window.decks[window.soul].length; i++) {
@@ -260,6 +272,9 @@ function removeAllCardsSilent(dontUpdateDeck) {
 	canClearCards = true;
 	if (!dontUpdateDeck) {
 		SaveDeck();
+	}
+	if (currentDeck.isBase && !is_importing) {
+		DeckEditor.RemoveEverything(currentDeck.soul, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
 	}
 }
 
@@ -278,9 +293,13 @@ function SilenceDeckFunctions() {
 }
 
 function LoadDeck(deck) {
+	if (deck.isBase) {
+		DeckEditor.ImportDeck(deck, function() {}); // Please tell me I won't have to do anything more with this in the future . . .
+	}
+	
 	window.soul = deck.soul;
 	updateSoul();
-	removeAllCardsSilent(true);
+	removeAllCardsSilent(true, true);
 	for (var i=0; i < deck.cards.length; i++) {
 		var card = deck.cards[i];
 		//addCardSilent(card.id, !(!card.shiny), true);
@@ -291,7 +310,7 @@ function LoadDeck(deck) {
 		}
 	}
 	for (var i=0; i < deck.artifacts.length; i++) {
-		addArtifactSilent(deck.artifacts[i]);
+		addArtifactSilent(deck.artifacts[i], true, true);
 	}
 	
 	checkCompletion();
@@ -323,12 +342,13 @@ function SaveDeck() { // This does NOT save deck images and names!
 
 function InitDecks() {
 	//PrettyCards_plugin.events.on("SoulSelector:decksLoaded", function(data) {
-	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected", function() {
+	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts", function() {
 		deckSelector.callback = function(deck) {
 			CloseDeckScreen();
 			ChangeDeck(deck);
 		}
 		deckSelector.canEditDecks = true;
+		deckSelector.hideInvalidDecks = false;
 		deckSelector.AppendTo(changeDeckScreen);
 	});
 	

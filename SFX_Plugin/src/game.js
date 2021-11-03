@@ -5,6 +5,20 @@ import {WrapWithEvent} from "/src/wrap_with_event.js";
 
 console.log("PrettyCards Audio!");
 
+var damage_type = ""; // Can be "ATTACK" or "SPELL"
+var damager_id = 0; // The damager id
+var player_id = 0; // In case of souls and artifacts
+
+function CritSpellAnimation() {
+	var $mainContent = window.$('.mainContent');
+	$mainContent.effect("shake", {direction: "up", times: 1, distance: 5}, 25);
+	$mainContent.effect("shake", {direction: "right", times: 1, distance: 5}, 25);
+	$mainContent.effect("shake", {direction: "up", times: 1, distance: 5}, 25);
+	$mainContent.effect("shake", {direction: "right", times: 1, distance: 5}, 25);
+	
+	audioDictionary.PlaySoundEffect("crit_spell", settings.crit_spell.value());
+}
+
 if (window.underscript.onPage("Game")) {
 	plugin.events.on("getTurnStart", function(data) {
 		//console.log("DATA", data);
@@ -55,25 +69,46 @@ if (window.underscript.onPage("Game")) {
 		audioDictionary.PlaySoundEffect("silence", settings.silence.value());
 	});
 	
-	/*
-	WrapWithEvent("hpStatAnimation"); // Would have really wanted to do this, but I don't want to torture myself.
-	plugin.events.on("hpStatAnimation", function(data) {
-		//console.log("SILENCE_DATA", data);
-		if (settings.crit_spell.value() && data[2] <= -7) {
-			audioDictionary.PlaySoundEffect("crit_spell");
-		}
-	});
-	*/
-	
-	/*
 	plugin.events.on("getFight getFightPlayer", function(data) {
 		console.log("FIGHT_DATA", data);
-		var attacker = data.attack_monster;
+		damage_type = "ATTACK";
+		damager_id = data.attackMonster;
 	})
-	*/
+	
+	plugin.events.on("getDoingEffect", function(data) {
+		console.log("CARD_EFFECT_DATA", data);
+		damage_type = "CARD_EFFECT";
+		damager_id = data.monsterId || data.spellId;
+	})
+	
+	plugin.events.on("getArtifactDoingEffect", function(data) {
+		console.log("ARTIFACT_EFFECT_DATA", data);
+		damage_type = "ARTIFACT_EFFECT";
+		damager_id = data.artifactId;
+		player_id = data.playerId;
+	})
+	
+	plugin.events.on("getSoulDoingEffect", function(data) {
+		console.log("SOUL_EFFECT_DATA", data);
+		damage_type = "SOUL_EFFECT";
+		damager_id = data.playerId;
+		player_id = data.playerId;
+	})
+	
+	WrapWithEvent("hpStatAnimation");
+	plugin.events.on("hpStatAnimation", function(data) {
+		console.log("HP_SET_ANIMATION_DATA", data);
+		console.log("HP_CHANGE_SOURCE: ", damage_type, damager_id, player_id);
+		if (data[2] <= -7 && damage_type.endsWith("_EFFECT")) {
+			CritSpellAnimation()
+		}
+	});
 	
 	/*
 	plugin.events.on("updateMonster", function(data) {
 		console.log("updateMonster Data", data);
 	})*/
+	
+	
+	
 }
