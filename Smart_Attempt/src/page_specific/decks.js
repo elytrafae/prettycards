@@ -309,6 +309,8 @@ function SilenceDeckFunctions() {
 	window.addArtifact = addArtifactSilent;
 	
 	window.clearArtifacts = clearArtifactsSilent;
+	
+	window.showDeckLoad = ModifiedShowDeckLoad;
 }
 
 function LoadDeck(deck) {
@@ -357,6 +359,30 @@ function SaveDeck() { // This does NOT save deck images and names!
 	
 	window.localStorage[currentDeck.key] = JSON.stringify(deck);
 	console.log(currentDeck.key, window.localStorage[currentDeck.key]);
+}
+
+var oldShowDeckLoad = window.showDeckLoad;
+function ModifiedShowDeckLoad(jsonDeck) {
+	var jsonDeckSoul = jsonDeck.classe || jsonDeck.soul;
+	if (jsonDeckSoul != currentDeck.soul) {
+		BootstrapDialog.show({
+			title: "Unable to Import!",
+			//size: BootstrapDialog.SIZE_WIDE,
+			type: window.BootstrapDialog.TYPE_DANGER,
+			message: 'The deck you are trying to import is of a different soul. Please open or create a new <span class="' + jsonDeckSoul + '">' + jsonDeckSoul + '</span> deck to import this deck!',
+			buttons: [
+				{
+					label: $.i18n('dialog-ok'),
+					cssClass: 'btn-primary',
+					action: function (dialog) {
+						dialog.close();
+					}
+				}
+			]
+		});
+		return;
+	}
+	oldShowDeckLoad(jsonDeck);
 }
 
 function InitDecks() {

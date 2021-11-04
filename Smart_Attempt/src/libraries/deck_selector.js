@@ -7,7 +7,7 @@ import {DeckEditor} from "/src/libraries/deck_editor.js";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@80e5e6452391df6da42b842460213037a5f7b147/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@94daf3bb5fc49aa8c77887f9ad89f963a0f4bc17/css/SavedDeckList.css");
 
 var demonEasterEgg = Math.random() <= 0.022;
 
@@ -170,7 +170,8 @@ function GetAllDecksOrganized() {
 		PATIENCE: [],
 		INTEGRITY: [],
 		PERSEVERANCE: [],
-		SWITCH: []
+		//SWITCH: [],
+		//MONSTER: [],
 	};
 	for (var i=0; i < decks.length; i++) {
 		var deck = decks[i];
@@ -352,7 +353,7 @@ class SavedDeckSelector {
 					label: yes_option,
 					cssClass: 'btn-danger us-normal',
 					action(dialog) {
-						self.DeleteDeck(deck, self.Reload);
+						self.DeleteDeck(deck);
 						dialog.close();
 					}
 				}
@@ -360,15 +361,19 @@ class SavedDeckSelector {
 		});
 	}
 
-	DeleteDeck(deck, cb) {
+	DeleteDeck(deck) {
 		window.localStorage.removeItem(deck.key);
 		window.localStorage.removeItem(deck.key + ".name");
 		window.localStorage.removeItem("prettycards.deck." + selfId + "." + deck.soul + "." + deck.id + ".image");
 		window.localStorage.removeItem("prettycards.deck." + selfId + "." + deck.soul + "." + deck.id + ".description");
 		if (deck.isBase) {
-			DeckEditor.RemoveEverything(deck.soul, cb);
+			DeckEditor.RemoveEverything(deck.soul, function () {
+				SoulSelector.GetDecks()[deck.soul] = {cards: [], artifacts: []};
+				this.Reload();
+			}.bind(this));
 		} else {
-			cb();
+			//cb();
+			this.Reload();
 		}
 	}
 	
