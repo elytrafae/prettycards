@@ -58,7 +58,7 @@
 
 .PrettyCards_DeckHeader.SWITCH {
 	color: black;
-	background-color: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
+	background: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
 }
 
 .PrettyCards_DeckListContainer .card {

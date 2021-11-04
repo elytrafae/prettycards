@@ -7,7 +7,7 @@ import {DeckEditor} from "/src/libraries/deck_editor.js";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@68d2b206b796953e92cd6124cd84bad37e7288a2/css/SavedDeckList.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@80e5e6452391df6da42b842460213037a5f7b147/css/SavedDeckList.css");
 
 var demonEasterEgg = Math.random() <= 0.022;
 
