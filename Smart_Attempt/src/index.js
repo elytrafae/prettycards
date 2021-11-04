@@ -2,6 +2,7 @@
 import {} from "./libraries/jquery_additions.js";
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {} from "/src/libraries/custom_page_base.js";
 import {} from "/src/libraries/updater.js";
 
 // The Event ensurer MUST be required AFTER underscript stuff, but BEFORE anything else that might require it!
