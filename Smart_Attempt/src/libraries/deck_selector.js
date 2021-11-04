@@ -3,6 +3,7 @@ import {SoulSelector} from "/src/libraries/soul_selector.js";
 import {utility} from "/src/libraries/utility.js";
 import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetics_manager.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
+import {DeckEditor} from "/src/libraries/deck_editor.js";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
@@ -169,7 +170,7 @@ function GetAllDecksOrganized() {
 		PATIENCE: [],
 		INTEGRITY: [],
 		PERSEVERANCE: [],
-		//SWITCH: []
+		SWITCH: []
 	};
 	for (var i=0; i < decks.length; i++) {
 		var deck = decks[i];
@@ -351,8 +352,7 @@ class SavedDeckSelector {
 					label: yes_option,
 					cssClass: 'btn-danger us-normal',
 					action(dialog) {
-						self.DeleteDeck(deck);
-						self.Reload();
+						self.DeleteDeck(deck, self.Reload);
 						dialog.close();
 					}
 				}
@@ -360,10 +360,16 @@ class SavedDeckSelector {
 		});
 	}
 
-	DeleteDeck(deck) {
+	DeleteDeck(deck, cb) {
 		window.localStorage.removeItem(deck.key);
 		window.localStorage.removeItem(deck.key + ".name");
 		window.localStorage.removeItem("prettycards.deck." + selfId + "." + deck.soul + "." + deck.id + ".image");
+		window.localStorage.removeItem("prettycards.deck." + selfId + "." + deck.soul + "." + deck.id + ".description");
+		if (deck.isBase) {
+			DeckEditor.RemoveEverything(deck.soul, cb);
+		} else {
+			cb();
+		}
 	}
 	
 	appendCardDeck($parent, deck, ignoreBase) {

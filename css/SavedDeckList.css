@@ -51,6 +51,16 @@
 	background-color: #D535D9;
 }
 
+.PrettyCards_DeckHeader.MONSTER {
+	color: black;
+	background-color: #FFFFFF;
+}
+
+.PrettyCards_DeckHeader.SWITCH {
+	color: black;
+	background-color: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
+}
+
 .PrettyCards_DeckListContainer .card {
 	display: inline-block;
 	margin: 5px 0px;
