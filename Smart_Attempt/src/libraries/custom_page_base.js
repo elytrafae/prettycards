@@ -26,8 +26,8 @@ if (IsOnCustomPage()) {
 	xmlHttp.send(null);
 	*/
 	
-	//$.get("https://raw.githubusercontent.com/CMD-God/prettycards/master/html_templates/undercards.html", function (data) {
-	$.get("/Decks", function (data) {
+	$.get("https://raw.githubusercontent.com/CMD-God/prettycards/master/html_templates/undercards.html", function (data) {
+	//$.get("/Decks", function (data) {
 		console.log(data);
 		document.open();
 		document.write(data);
