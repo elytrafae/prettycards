@@ -181,7 +181,7 @@ class _CustomCardsDictionary {
 
 // Keywords
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	$.i18n().load( {
+	window.$.i18n().load( {
 		en: {
 				'kw-fallen' : 'Fallen',
 				'kw-fallen-desc' : 'This ability is triggered when this monster dies during it\'s owner\'s turn.',

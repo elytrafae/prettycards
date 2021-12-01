@@ -62,7 +62,7 @@ class pagegetters {
 				game.player1 = player1Data;
 				game.player2 = player2Data;
 				
-				console.log(game);
+				//console.log(game);
 				games.push(game);
 			});
 			callback(games);

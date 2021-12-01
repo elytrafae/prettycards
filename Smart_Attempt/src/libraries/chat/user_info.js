@@ -7,8 +7,6 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 import {ChallengePlayerScreen} from "/src/libraries/private_games/private_game_screen.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3327dc099073de91a57d9a1b4a1ce28a473d8587/css/UserInfo.css");
-utility.loadCSSFromLink("https://undercards.net/css/meters.css");
 window.PrettyCards_plugin = PrettyCards_plugin;
 
 var $ = window.$;
@@ -29,6 +27,8 @@ var $ = window.$;
 */
 
 var leaderboard = [];
+var $;
+var oldGetInfo;
 
 function getRankedLeaderboard() {
 	window.$.get("Leaderboard?action=ranked", function(e) {
@@ -39,15 +39,22 @@ function getRankedLeaderboard() {
 
 ExecuteWhen("PrettyCards:onPageLoad", getRankedLeaderboard);
 
-var oldGetInfo = window.getInfo;
+function onPageLoaded() {
+	oldGetInfo = window.getInfo;
+	window.getInfo = sendUserInfoEvent;
+	$ = window.$;
+	
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3327dc099073de91a57d9a1b4a1ce28a473d8587/css/UserInfo.css");
+	utility.loadCSSFromLink("https://undercards.net/css/meters.css");
+}
 
-window.getInfo = sendUserInfoEvent;
+ExecuteWhen("PrettyCards:onPageLoad", onPageLoaded);
 
 function sendUserInfoEvent(ele) {
 	
 	var infos = $(ele).data('infos');
     var user = infos.user;
-	console.log(infos);
+	//console.log(infos);
 	
 	const preEvenet = PrettyCards_plugin.events.emit("preChat:getInfo", {infos : infos, user : user}, true);
 	if (!preEvenet.canceled) {
@@ -89,7 +96,7 @@ PrettyCards_plugin.events.on("Chat:getPrivateMessage", processChatMessageEvent);
 */
 
 PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
-	console.log("Chat:getInfo ", data);
+	//console.log("Chat:getInfo ", data);
 	var user = data.user;
 	var header = data.popupElement.querySelector(".modal-header");
 	data.popup.$modalDialog[0].className = "modal-dialog modal-lg";
@@ -347,7 +354,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 					break;
 				}
 			}
-			console.log("timeout", String(user.id), val);
+			//console.log("timeout", String(user.id), val);
 			window.timeout(String(user.id), val);
 		}
 		modContainer.appendChild(input);

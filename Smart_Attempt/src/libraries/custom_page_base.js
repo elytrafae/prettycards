@@ -53,7 +53,7 @@ if (IsOnCustomPage()) {
 			document.close();
 			$.cache = {};
 		},
-		async: false
+		//async: false
     });
 	
 	//waitTillNextDocumentReady().then(function() {
