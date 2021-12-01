@@ -1,11 +1,12 @@
 
 // This is a script that should help with calling things AFTER certain one-time events have been fired.
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
-import {utility} from "/src/libraries/utility.js";
 
-var eventsToListenFor = ["PrettyCards:onLoad", "SoulSelector:decksLoaded", "Chat:Connected", "PrettyCards:onArtifacts", "translation:loaded"];
+var eventsToListenFor = ["PrettyCards:onLoad", "PrettyCards:onPageLoad","SoulSelector:decksLoaded", "Chat:Connected", "PrettyCards:onArtifacts", "translation:loaded"];
 var eventsFired = {};
 var eventsData = {};
+
+import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {utility} from "/src/libraries/utility.js";
 
 var waitingObjects = [];
 
@@ -19,6 +20,10 @@ function ExecuteWhen(events, callback) { // events is a space-devided string OR 
 	}
 	for (var i=0; i < events.length; i++) {
 		var e = events[i];
+		var found = eventsToListenFor.find(element => element === e);
+		if (!found) {
+			console.log("! ExecuteWhen WARNING ! The event ", e, " is not being tracked!");
+		}
 		if (!eventsFired[e]) {
 			obj.eventsToWaitFor.push(e);
 		}
@@ -65,6 +70,13 @@ function ExecuteWaitingObjectCallbackIfPossible(obj) {
 
 InitListeners();
 
+document.addEventListener("load", function() {
+	if (window.$) {
+		PrettyCards_plugin.events.emit("PrettyCards:onPageLoad");
+	}
+})
+
+
 if ('loading' == document.readyState) {
 	// This script is running at document-start time.
 	document.addEventListener("load", function() {
@@ -74,6 +86,14 @@ if ('loading' == document.readyState) {
 	// This script is running after document-start.
 	PrettyCards_plugin.events.emit("PrettyCards:onLoad");
 }
+
+ExecuteWhen("PrettyCards:onPageLoad", function () {
+	if (!window.allCards) {
+		window.$("body").append('<script src="js/card.js?v=063001" type="text/javascript"></script>');
+		window.$("head").append('<link href="css/cards.css?v=063001" rel="stylesheet" type="text/css">');
+		window.$("head").append('<link href="css/frames.css?v=063001" rel="stylesheet" type="text/css">');
+	}
+});
 
 console.log("EventEnsure initialized at " + document.readyState + " state!");
 

@@ -104,14 +104,14 @@ class PacksPageTemplate {
 		var code_id = e.currentTarget.getAttribute("data-packid");
 		if (!code_id) {console.log("Mouse Over Return", e);return;}
 		//console.log("Mouse Over", e, code_id);
-		$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").stop().slideDown( 250, function() {});
+		//$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").stop().slideDown( 250, function() {});
 	}
 	
 	onPackMouseLeave(e) {
 		var code_id = e.currentTarget.getAttribute("data-packid");
 		if (!code_id) {console.log("Mouse Leave Return", e);return;}
 		//console.log("Mouse Leave", e, code_id);
-		$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").stop().slideUp( 250, function() {});
+		//$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").stop().slideUp( 250, function() {});
 	}
 	
 	onPackOpenCountChange(e) {
@@ -190,7 +190,7 @@ class PacksPageTemplate {
 	onPackGeneration(data, pack_cell) { // Optional, but has default behaviour.
 		pack_cell.addEventListener( "mouseover", this.onPackMouseOver);
 		pack_cell.addEventListener( "mouseleave", this.onPackMouseLeave);
-		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_PackText").slideUp(0);
+		//$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_PackText").slideUp(0);
 		$(".PrettyCards_PackCell[data-packid="+ data.code_id +"] .PrettyCards_FloatingPack").css("animation-delay", (-Math.random()*1.5) + "s");
 		if (data.does_exist) {
 			document.querySelector(".PrettyCards_PackOpenCount[data-packid="+ data.code_id +"]").onchange = this.onPackOpenCountChange.bind(this);

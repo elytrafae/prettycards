@@ -1,4 +1,5 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {rarityIconsHTML, rarities} from "./../libraries/rarity_icons.js";
 import {pagegetters} from "./../libraries/page_getters.js";
 import {PrettyCards_plugin, settings} from "./../libraries/underscript_checker.js";
@@ -134,12 +135,13 @@ function hideUglyPage() { // Nothing personal.
 
 function InitPacks() {
 	
-	hideUglyPage();
-	document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
-
-	ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
+	ExecuteWhen("PrettyCards:onPageLoad", function () {
+		hideUglyPage();
+		document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
+		ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
+	});
 	
-	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
+	//PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@5503c34da17d5225835c03f2d567a54bdf68bdf8/css/Packs.css");
 	

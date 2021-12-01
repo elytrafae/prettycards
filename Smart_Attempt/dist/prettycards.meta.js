@@ -10,4 +10,5 @@
 // @updateURL   https://github.com/CMD-God/prettycards/releases/latest/download/prettycards.user.js
 // @downloadURL https://unpkg.com/prettycards/dist/prettycards.user.js
 // @grant       none
+// @run-at      document-start
 // ==/UserScript==

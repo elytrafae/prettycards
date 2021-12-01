@@ -1,4 +1,5 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 
 var allCardSkins = [];
@@ -11,11 +12,13 @@ var bonusBaseCards = ["Heal Delivery", "Explosion", "Sacrifice", "Same Fate", "O
 var skinLists = [defaultCardSkins, ownedCardSkins, notOwnedCardSkins];
 var listNames = ["Default Card Skins", "Owned Card Skins", "Not Owned Card Skins"]
 
-$.get("CardSkinsConfig?action=shop", {}, function(data) {
-	//console.log(data);
-	allCardSkins = JSON.parse(data.cardSkins);
-	ProcessCardSkinLists();
-	//console.log(allCardSkins);
+ExecuteWhen("PrettyCards:onPageLoad", function () {
+	$.get("CardSkinsConfig?action=shop", {}, function(data) {
+		//console.log(data);
+		allCardSkins = JSON.parse(data.cardSkins);
+		ProcessCardSkinLists();
+		//console.log(allCardSkins);
+	});
 });
 
 /*

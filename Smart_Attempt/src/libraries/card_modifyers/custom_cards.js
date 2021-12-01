@@ -130,7 +130,7 @@ if (settings.easter_egg_cards.value()) {
 	}
 	
 	
-	ExecuteWhen("PrettyCards:onLoad", function() {
+	ExecuteWhen("PrettyCards:onPageLoad", function() {
 		var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
 		//console.log("Aller Loader!", allerLoader);
 		window.$("body").append(allerLoader);

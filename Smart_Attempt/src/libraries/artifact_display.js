@@ -1,4 +1,5 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 
@@ -42,7 +43,8 @@ var artifactDisplay = new ArtifactDisplay();
 
 window.artifactDisplay = artifactDisplay;
 
-artifactDisplay.GetAllArtifacts();
-
+ExecuteWhen("PrettyCards:onPageLoad", function() {
+	artifactDisplay.GetAllArtifacts();
+});
 
 export {artifactDisplay};

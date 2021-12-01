@@ -1,4 +1,6 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+
 var credits = `
 	<span style="font-size: 2em;">General</span>
 	<span>Uses Underscript's API.</span>
@@ -25,35 +27,35 @@ function showCredits() {
 	});
 }
 window.showPrettyCardsCredits = showCredits;
-
-if (true) {	
-	var x = $(document).width() - 450;
-	var y = 300;
-	
-	var menuBase = $(`<div class="dropdown" style="position: absolute; top: 0px; right: 15px; display: none;">
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PrettyCards Menu</button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			<p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p>
-			<p style="color: grey">More coming . . . Somewhen.</p>
-		</div>
-	</div>`)
-	
-	var isfadedIn = false;
-	$("body").mousemove(function (e) {
-		//console.log(e);
-		if (e.pageX >= x && e.pageY <= y) {
-			if (!isfadedIn) {
-				menuBase.stop().fadeIn();
-				isfadedIn = true;
+ExecuteWhen("PrettyCards:onPageLoad", function() {
+	if (true) {	
+		var x = $(document).width() - 450;
+		var y = 300;
+		
+		var menuBase = $(`<div class="dropdown" style="position: absolute; top: 0px; right: 15px; display: none;">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PrettyCards Menu</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p>
+				<p style="color: grey">More coming . . . Somewhen.</p>
+			</div>
+		</div>`)
+		
+		var isfadedIn = false;
+		$("body").mousemove(function (e) {
+			//console.log(e);
+			if (e.pageX >= x && e.pageY <= y) {
+				if (!isfadedIn) {
+					menuBase.stop().fadeIn();
+					isfadedIn = true;
+				}
+			} else {
+				if (isfadedIn) {
+					menuBase.stop().fadeOut();
+					isfadedIn = false;
+				}
 			}
-		} else {
-			if (isfadedIn) {
-				menuBase.stop().fadeOut();
-				isfadedIn = false;
-			}
-		}
-	})
-	
-	$("body").append(menuBase);
-	
-}
+		})
+		
+		$("body").append(menuBase);
+	}
+});

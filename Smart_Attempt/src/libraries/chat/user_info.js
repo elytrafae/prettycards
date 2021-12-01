@@ -37,7 +37,7 @@ function getRankedLeaderboard() {
 	});
 }
 
-ExecuteWhen("PrettyCards:onLoad", getRankedLeaderboard);
+ExecuteWhen("PrettyCards:onPageLoad", getRankedLeaderboard);
 
 var oldGetInfo = window.getInfo;
 

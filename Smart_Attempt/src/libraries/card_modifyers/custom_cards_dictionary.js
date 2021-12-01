@@ -180,7 +180,7 @@ class _CustomCardsDictionary {
 }
 
 // Keywords
-ExecuteWhen("PrettyCards:onLoad", function() {
+ExecuteWhen("PrettyCards:onPageLoad", function() {
 	$.i18n().load( {
 		en: {
 				'kw-fallen' : 'Fallen',

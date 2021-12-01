@@ -1,6 +1,7 @@
 
 // This library makes it so when you hover over a breaking skin card, the text goes over the skin (onto z-index 7).
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 settings.breaking_skin_fix = PrettyCards_plugin.settings().add({
@@ -12,30 +13,31 @@ settings.breaking_skin_fix = PrettyCards_plugin.settings().add({
 	'default': true, // default value
 });
 
+ExecuteWhen("PrettyCards:onPageLoad", function () {
+	if (settings.breaking_skin_fix.value()) {
 
-if (settings.breaking_skin_fix.value()) {
-
-	window.$("head").append(`<style>
-		.card.breaking-skin:hover .cardName {
-			z-index: 7;
-		}
-		
-		.card.breaking-skin:hover .cardCost {
-			z-index: 7;
-		}
-		
-		.card.breaking-skin:hover .cardDesc {
-			z-index: 7;
-		}
-		
-		.card.breaking-skin:hover .cardATK {
-			z-index: 7;
-		}
-		
-		.card.breaking-skin:hover .cardHP {
-			z-index: 7;
-		}
-	</style>`);
-}
+		window.$("head").append(`<style>
+			.card.breaking-skin:hover .cardName {
+				z-index: 7;
+			}
+			
+			.card.breaking-skin:hover .cardCost {
+				z-index: 7;
+			}
+			
+			.card.breaking-skin:hover .cardDesc {
+				z-index: 7;
+			}
+			
+			.card.breaking-skin:hover .cardATK {
+				z-index: 7;
+			}
+			
+			.card.breaking-skin:hover .cardHP {
+				z-index: 7;
+			}
+		</style>`);
+	}
+})
 
 export {};

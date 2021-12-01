@@ -1,4 +1,6 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+
 var cardSkins = [];
 var frameName = "Undertale";
 
@@ -42,6 +44,8 @@ function SetDeckSkin(card, card_skin) {
 	card.removeClass("standard-skin").addClass(skinTypeString);
 }
 
-FetchCardCosmeticsData();
+ExecuteWhen("PrettyCards:onPageLoad", function() {
+	FetchCardCosmeticsData();
+});
 
 export {SetCosmeticsForCardData, SetDeckSkin};

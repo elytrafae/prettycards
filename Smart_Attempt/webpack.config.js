@@ -23,7 +23,7 @@ module.exports = {
         downloadURL: `https://unpkg.com/${package.name}/dist/${package.name}.user.js`,
         require: [],
         grant: 'none',
-		//"run-at" : "document-start" 
+		"run-at" : "document-start" 
       },
       pretty: true,
     }),

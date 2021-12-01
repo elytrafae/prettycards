@@ -1,4 +1,5 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 var settingsoptions = ["None", "Tooltip", "Description", "Description (simple)"];
@@ -45,47 +46,49 @@ function HoverHelper() { // A huge part of the two Hover settings is the same, s
 	});
 }
 
-if (settings.card_flavour.value() !== settingsoptions[0]) {
-	
-	$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/translation/en/card_flavor.json", {}, function(data) {
-		console.log(data);
-		window.$.i18n().load({
-			en: data
-		});
-	});
-	
-	if (settings.card_flavour.value() === settingsoptions[1]) {
-		PrettyCards_plugin.events.on("appendCard()", function(data) {
-			var html$ = data.element;
-			var card = data.card;
-			
-			var flavorText = window.$.i18n("card-flavor-" + card.id);
-			if (flavorText === ("card-flavor-" + card.id)) {
-				console.debug("This card doesn't have flavor!", card.name, card);
-				return;
-			}
-			window.tippy(html$[0], {
-				content: flavorText,
-				allowHTML: true,
-				arrow: true,
-				placement: "bottom",
-				appendTo: window.document.body,
-				boundary: 'window',
-				getReferenceClientRect: window.document.body.getBoundingClientRect
+ExecuteWhen("PrettyCards:onPageLoad", function() {
+	if (settings.card_flavour.value() !== settingsoptions[0]) {
+		
+		$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/translation/en/card_flavor.json", {}, function(data) {
+			console.log(data);
+			window.$.i18n().load({
+				en: data
 			});
 		});
-	} else if (settings.card_flavour.value() === settingsoptions[2]) {
-		HoverHelper();
-	} else if (settings.card_flavour.value() === settingsoptions[3]) {
-		$("head").append(`<style>
-			.card.cardHover .cardDesc div {
-				display: table-cell !important;
-			}
-			.card.cardHover .cardDesc div.PrettyCards_CardFlavor {
-				display: none !important;
-			}
-		</style>`);
-		HoverHelper();
+		
+		if (settings.card_flavour.value() === settingsoptions[1]) {
+			PrettyCards_plugin.events.on("appendCard()", function(data) {
+				var html$ = data.element;
+				var card = data.card;
+				
+				var flavorText = window.$.i18n("card-flavor-" + card.id);
+				if (flavorText === ("card-flavor-" + card.id)) {
+					console.debug("This card doesn't have flavor!", card.name, card);
+					return;
+				}
+				window.tippy(html$[0], {
+					content: flavorText,
+					allowHTML: true,
+					arrow: true,
+					placement: "bottom",
+					appendTo: window.document.body,
+					boundary: 'window',
+					getReferenceClientRect: window.document.body.getBoundingClientRect
+				});
+			});
+		} else if (settings.card_flavour.value() === settingsoptions[2]) {
+			HoverHelper();
+		} else if (settings.card_flavour.value() === settingsoptions[3]) {
+			$("head").append(`<style>
+				.card.cardHover .cardDesc div {
+					display: table-cell !important;
+				}
+				.card.cardHover .cardDesc div.PrettyCards_CardFlavor {
+					display: none !important;
+				}
+			</style>`);
+			HoverHelper();
+		}
+		
 	}
-	
-}
+});
