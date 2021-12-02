@@ -12,7 +12,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 var $ = window.$;
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@812c80b65096d967ff9dd3da22b60e0c828c250a/css/CustomCards.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a8ae331a3fb0ad9c3dd908132d0b9016af8e7dde/css/CustomCards.css");
 
 if (settings.easter_egg_cards.value()) {
 
@@ -116,21 +116,20 @@ if (settings.easter_egg_cards.value()) {
 		AddCollection();
 	});
 	
-	if (!window.allCards || window.allCards.length == 0) {
-		window.document.addEventListener("allCardsReady", function() {
-			AddAllCards();
-		});
-	} else {
-		AddAllCards();
-	}
-
-	
-	if (underscript.onPage("Decks") || underscript.onPage("Crafting")) {
-		SetUpFilters();
-	}
-	
-	
 	ExecuteWhen("PrettyCards:onPageLoad", function() {
+		if (!window.allCards || window.allCards.length == 0) {
+			window.document.addEventListener("allCardsReady", function() {
+				AddAllCards();
+			});
+		} else {
+			AddAllCards();
+		}
+
+		
+		if (underscript.onPage("Decks") || underscript.onPage("Crafting")) {
+			SetUpFilters();
+		}
+		
 		var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
 		//console.log("Aller Loader!", allerLoader);
 		window.$("body").append(allerLoader);

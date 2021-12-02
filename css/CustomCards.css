@@ -72,11 +72,11 @@ span.SWITCH {
 	display: inline-block;
 }
 
-.card:hover ..glyphicon.PrettyCards_CardThemeSongPlayer {
+.card:hover .glyphicon.PrettyCards_CardThemeSongPlayer {
 	display: block;
 }
 
-..glyphicon.PrettyCards_CardThemeSongPlayer {
+.glyphicon.PrettyCards_CardThemeSongPlayer {
 	display: none;
 	font-size: 30px;
 	position: absolute;
