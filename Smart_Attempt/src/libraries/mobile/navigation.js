@@ -3,7 +3,9 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 
-var $ = window.$;
+ExecuteWhen("translation:loaded", function () {
+	var $ = window.$;
+});
 
 var menu_data_nologin = {
 	"Home" : "/",

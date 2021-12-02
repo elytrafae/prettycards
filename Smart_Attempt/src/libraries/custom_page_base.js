@@ -14,12 +14,19 @@ function IsOnCustomPage() {
 }
 
 var page_loads = 0;
+var pageLoadEventFired = false;
+
+function SendOnPageLoadEvent() {
+	if (window.$ && !pageLoadEventFired) {
+		PrettyCards_plugin.events.emit("PrettyCards:onPageLoad");
+		pageLoadEventFired = true;
+	}
+}
+
 $(document).ready(function () {
 	page_loads++;
 	console.log("PAGE LOAD NR. " + page_loads);
-	if (window.$) {
-		PrettyCards_plugin.events.emit("PrettyCards:onPageLoad");
-	}
+	SendOnPageLoadEvent();
 })
 
 function waitTillNextDocumentReady() {
@@ -52,6 +59,8 @@ if (IsOnCustomPage()) {
 			document.write(data);
 			document.close();
 			$.cache = {};
+			
+			document.body.onload = function(){SendOnPageLoadEvent();};
 		},
 		//async: false
     });

@@ -70,13 +70,6 @@ function ExecuteWaitingObjectCallbackIfPossible(obj) {
 
 InitListeners();
 
-document.addEventListener("load", function() {
-	if (window.$) {
-		PrettyCards_plugin.events.emit("PrettyCards:onPageLoad");
-	}
-})
-
-
 if ('loading' == document.readyState) {
 	// This script is running at document-start time.
 	document.addEventListener("load", function() {
