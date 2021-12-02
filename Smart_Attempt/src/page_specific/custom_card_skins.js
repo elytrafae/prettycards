@@ -1,4 +1,5 @@
 
+import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 function appendCardCustomCardSkin(skin, container) {
@@ -15,6 +16,8 @@ function appendCardCustomCardSkin(skin, container) {
 }
 
 function DoStuffWhenAllCardsAreReady() {
+	card_options = GetOptionsWithCards();
+	console.log(card_options);
 	for (var i=0; i < skins.length; i++) {
 		var skin = skins[i];
 		appendCardCustomCardSkin(skin, window.$("#PrettyCards_CardListContainer"));
@@ -23,10 +26,20 @@ function DoStuffWhenAllCardsAreReady() {
 
 var deleteModeOn = false;
 
+function GetOptionsWithCards() {
+	var txt = "";
+	for (var i=0; i < window.allCards.length; i++) {
+		var card = window.allCards[i];
+		txt = txt + '<option value="' + (card.fixedId || card.id) + '">' + card.name + '</option>'; 
+	}
+	return txt;
+}
+
 function EditCardSkinScreen(skin) {
 	
 	var container = document.createElement("DIV");
 	container.id = "PrettyCards_CustomCardSkins_EditContainer";
+	container.className = "PrettyCards_RowFlex";
 	
 	var col1 = document.createElement("DIV");
 	col1.className = "PrettyCards_CustomCardSkins_EditColumn";
@@ -56,6 +69,61 @@ function EditCardSkinScreen(skin) {
 	input2.value = skin.authorName;
 	input2.setAttribute("type", "text");
 	col1.appendChild(input2);
+	
+	var p3 = document.createElement("P");
+	p3.innerHTML = "Skin Type";
+	p3.className = "PrettyCards_InvertedP";
+	col1.appendChild(p3);
+	
+	var input3 = document.createElement("SELECT");
+	input3.className = "form-control white";
+	input3.innerHTML = `
+		<option value="0">Normal</option>
+		<option value="1">Full</option>
+		<option value="2">Breaking</option>
+	`;
+	input3.value = skin.typeSkin;
+	col1.appendChild(input3);
+	
+	var p4 = document.createElement("P");
+	p4.innerHTML = "Card (Currently doesn't matter)";
+	p4.className = "PrettyCards_InvertedP";
+	col1.appendChild(p4);
+	
+	var input4 = document.createElement("SELECT");
+	input4.className = "form-control white";
+	input4.innerHTML = card_options;
+	input4.value = skin.cardId;
+	col1.appendChild(input4);
+	
+	var p5 = document.createElement("P");
+	p5.innerHTML = "Image";
+	p5.className = "PrettyCards_InvertedP";
+	col1.appendChild(p5);
+	
+	var mini_cont = document.createElement("DIV");
+	mini_cont.className = "PrettyCards_RowFlex";
+	col1.appendChild(mini_cont);
+	
+	var input5 = document.createElement("INPUT");
+	input5.className = "form-control";
+	input5.value = skin.image;
+	input5.setAttribute("type", "text");
+	mini_cont.appendChild(input5);
+	
+	var input5_label = document.createElement("LABEL");
+	input5_label.setAttribute("for", "PrettyCards_EditCardSkin_FileInput");
+	input5_label.innerHTML = '<span class="glyphicon glyphicon-file"></span>';
+	mini_cont.appendChild(input5_label);
+	
+	var input5_file = document.createElement("INPUT");
+	input5_file.className = "form-control white";
+	input5_file.id = "PrettyCards_EditCardSkin_FileInput";
+	input5_file.setAttribute("name", "PrettyCards_EditCardSkin_FileInput");
+	input5_file.style = "display: none;";
+	//input5.value = skin.cardId;
+	input5_file.setAttribute("type", "file");
+	mini_cont.appendChild(input5_file);
 	
 	//console.log("size", window.BootstrapDialog.SIZE_LARGE);
 	window.BootstrapDialog.show({
@@ -110,8 +178,10 @@ function GetCustomCardSkinsList() {
 }
 
 var skins;
+var card_options;
 function InitCustomCardSkins() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
+		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@2af98ae4d6c3a3cd7367b862497461074bc337d0/css/CustomCardSkins.css");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CardSkinsTab" style="font-size: 2em; margin-bottom: 1em;">
 				<button id="PrettyCards_CreateCustomCardSkinButton" class="brn btn-success">Create New</button>

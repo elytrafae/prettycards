@@ -1,5 +1,9 @@
 
 #PrettyCards_CustomCardSkins_EditContainer {
+	
+}
+
+.PrettyCards_RowFlex {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
