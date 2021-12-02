@@ -12,7 +12,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 var $ = window.$;
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a8ae331a3fb0ad9c3dd908132d0b9016af8e7dde/css/CustomCards.css");
+utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4d7f04e981c9ca53c9af2245f441d2fbbbcef01f/css/CustomCards.css");
 
 if (settings.easter_egg_cards.value()) {
 

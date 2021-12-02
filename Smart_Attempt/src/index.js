@@ -28,6 +28,7 @@ import {InitPlay} from "/src/page_specific/play.js";
 import {InitGameList} from "/src/page_specific/game_list.js";
 import {InitHub} from "/src/page_specific/hub.js";
 import {InitGame} from "/src/page_specific/game.js";
+import {InitCustomCardSkins} from "/src/page_specific/custom_card_skins.js";
 
 if (settings.packs.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
@@ -36,6 +37,8 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 	InitHub();
 } else if (underscript.onPage("Game")) {
 	InitGame();
+} else if (underscript.onPage("CustomCardSkins")) {
+	InitCustomCardSkins();
 }
 
 if (settings.override_decks.value()) {

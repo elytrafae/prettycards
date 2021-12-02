@@ -1,0 +1,14 @@
+
+#PrettyCards_CustomCardSkins_EditContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.PrettyCards_CustomCardSkins_EditColumn {
+	width: 50%;
+}
+
+.PrettyCards_InvertedP {
+	margin: 10px 0 0;
+}

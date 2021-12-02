@@ -1,4 +1,5 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
@@ -68,4 +69,13 @@ if (IsOnCustomPage()) {
 	//waitTillNextDocumentReady().then(function() {
 	//	console.log("THIS DOESN'T MATTER BECAUSE THE CODE GOES ON REGARDLESS!");
 	//});
+	
+	ExecuteWhen("PrettyCards:onPageLoad", function () { // I did this only to make sure this works on custom pages, too . . . For some reason underscript breaks there.
+		window.socketChat.onmessage = function (event) {
+			window.onMessageChat(event);
+			var data = JSON.parse(event.data);
+			//console.log(data);
+			PrettyCards_plugin.events.emit("PC_Chat:" + data.action, data); 
+		};
+	});
 }
