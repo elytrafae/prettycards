@@ -26,6 +26,22 @@ function DoStuffWhenAllCardsAreReady() {
 
 var deleteModeOn = false;
 
+function uploadImageFile() {
+	const preview = document.querySelector('img');
+	const file = document.getElementById("PrettyCards_EditCardSkin_FileInput").files[0];
+	const reader = new FileReader();
+
+	reader.addEventListener("load", function () {
+		// convert image file to base64 string
+		//preview.src = reader.result;
+		document.getElementById("PrettyCards_EditCardSkin_ImageInput").value = reader.result;
+	}, false);
+
+	if (file) {
+		reader.readAsDataURL(file);
+	}
+}
+
 function GetOptionsWithCards() {
 	var txt = "";
 	for (var i=0; i < window.allCards.length; i++) {
@@ -107,13 +123,15 @@ function EditCardSkinScreen(skin) {
 	
 	var input5 = document.createElement("INPUT");
 	input5.className = "form-control";
+	input5.id = "PrettyCards_EditCardSkin_ImageInput";
+	input5.setAttribute("maxlength", 999999);
 	input5.value = skin.image;
 	input5.setAttribute("type", "text");
 	mini_cont.appendChild(input5);
 	
 	var input5_label = document.createElement("LABEL");
 	input5_label.setAttribute("for", "PrettyCards_EditCardSkin_FileInput");
-	input5_label.innerHTML = '<span class="glyphicon glyphicon-file"></span>';
+	input5_label.innerHTML = '<div class="btn btn-primary" style="font-size: 16px;"><span class="glyphicon glyphicon-file"></span></div>';
 	mini_cont.appendChild(input5_label);
 	
 	var input5_file = document.createElement("INPUT");
@@ -122,6 +140,8 @@ function EditCardSkinScreen(skin) {
 	input5_file.setAttribute("name", "PrettyCards_EditCardSkin_FileInput");
 	input5_file.style = "display: none;";
 	//input5.value = skin.cardId;
+	input5_file.onchange = uploadImageFile;
+	input5_file.setAttribute("accept", "image/*");
 	input5_file.setAttribute("type", "file");
 	mini_cont.appendChild(input5_file);
 	
@@ -181,7 +201,8 @@ var skins;
 var card_options;
 function InitCustomCardSkins() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
-		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@2af98ae4d6c3a3cd7367b862497461074bc337d0/css/CustomCardSkins.css");
+		window.$("title").html("PrettyCards - Custom Card Skins");
+		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@f31052e233e8c85235fc30c8823f0b96a0511e66/css/CustomCardSkins.css");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CardSkinsTab" style="font-size: 2em; margin-bottom: 1em;">
 				<button id="PrettyCards_CreateCustomCardSkinButton" class="brn btn-success">Create New</button>
