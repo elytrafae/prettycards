@@ -4,10 +4,12 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 function appendCardCustomCardSkin(skin, container) {
 	
-	var card = window.getCard(skin.cardId) || window.allCards[0];
+	var card = utility.completeCopy(window.getCard(skin.cardId) || window.allCards[0]);
+	console.log("TYPE SKIN", skin.typeSkin, typeof(skin.typeSkin));
+	card.typeSkin = skin.typeSkin;
 	var $card = window.appendCard(card, container);
 	
-	$card.find(".cardImage").css("background-image", 'url("' + skin.image + '")');
+	$card.find(".cardImage").css("background-image", 'url("' + skin.image + '")').css("background-size", "contain");
 	$card.find(".cardDesc").find("div").html(skin.name + '<br><span class="Artist">' + skin.authorName + '</span>');
 	
 	$card.click(DoCardClickAction);
@@ -15,17 +17,36 @@ function appendCardCustomCardSkin(skin, container) {
 	return $card;
 }
 
-function DoStuffWhenAllCardsAreReady() {
-	card_options = GetOptionsWithCards();
-	console.log(card_options);
+function ConstructSkinSelectionMenu() {
+	var container = window.$("#PrettyCards_CardListContainer");
+	container.html("");
 	for (var i=0; i < skins.length; i++) {
 		var skin = skins[i];
-		appendCardCustomCardSkin(skin, window.$("#PrettyCards_CardListContainer"));
+		appendCardCustomCardSkin(skin, container);
 	}
 }
 
-var deleteModeOn = false;
+function DoStuffWhenAllCardsAreReady() {
+	card_options = GetOptionsWithCards();
+	//console.log(card_options);
+	ConstructSkinSelectionMenu();
+}
 
+var deleteModeOn = false;
+function ToggleDeleteMode() {
+	if (deleteModeOn) {
+		// Disable Delete Mode
+		$(".cardBackground").css("box-shadow", "");
+		deleteModeOn = false;
+	} else {
+		// Enable Delete Mode
+		$(".cardBackground").css("box-shadow", "0px 0px 10px 6px rgba(255,0,0,0.8)");
+		deleteModeOn = true;
+	}
+}
+
+/*
+var imageDataURL = "";
 function uploadImageFile() {
 	const preview = document.querySelector('img');
 	const file = document.getElementById("PrettyCards_EditCardSkin_FileInput").files[0];
@@ -34,13 +55,18 @@ function uploadImageFile() {
 	reader.addEventListener("load", function () {
 		// convert image file to base64 string
 		//preview.src = reader.result;
-		document.getElementById("PrettyCards_EditCardSkin_ImageInput").value = reader.result;
+		console.log("RESULT: ", reader.result);
+		//window.open(reader.result);
+		//document.getElementById("PrettyCards_EditCardSkin_ImageInput").value = reader.result;
+		DeactivateInput(document.getElementById("PrettyCards_EditCardSkin_ImageInput"));
+		imageDataURL = reader.result;
 	}, false);
 
 	if (file) {
 		reader.readAsDataURL(file);
 	}
 }
+*/
 
 function GetOptionsWithCards() {
 	var txt = "";
@@ -51,8 +77,69 @@ function GetOptionsWithCards() {
 	return txt;
 }
 
+/*
+function ActivateInput(input) {
+	input.disabled = false;
+	input.placeholder = "";
+}
+
+function DeactivateInput(input) {
+	input.disabled = true;
+	input.value = "";
+	input.placeholder = "Image Uploaded . . .";
+}*/
+
+function DeleteCardSkin() {
+	
+}
+
+function SaveCardSkin(index, name, authorName, typeSkin, cardId, image) {
+	var skin = {
+		active: false,
+		authorName: authorName,
+		cardId: cardId,
+		cardName: window.getCard(cardId).name,
+		id: -22,
+		image: image,
+		name: name,
+		owned: true,
+		typeSkin: typeSkin,
+		ucpCost: -9999,
+		isCustom: true,
+		unavailable: true
+	}
+	
+	localStorage[GetCustomCardSkinStorageIndex(index)] = JSON.stringify(skin);
+	//localStorage[GetCustomCardSkinStorageIndex(index) + ".image"] = image;
+	
+	//skin.image = image;
+	skin.storageId = index;
+	skins[index] = skin;
+	ConstructSkinSelectionMenu();
+}
+
+function CreateNewSkin() {
+	var skin = {
+		active: false,
+		authorName: window.selfUsername || "Unknown",
+		cardId: 1,
+		cardName: window.getCard(1).name,
+		id: -22,
+		image: "",
+		name: "New Skin",
+		owned: true,
+		typeSkin: 0,
+		ucpCost: -9999,
+		isCustom: true,
+		unavailable: true,
+		storageId: skins.length
+	}
+	EditCardSkinScreen(skin);
+}
+
 function EditCardSkinScreen(skin) {
 	
+	//imageDataURL = "";
 	var container = document.createElement("DIV");
 	container.id = "PrettyCards_CustomCardSkins_EditContainer";
 	container.className = "PrettyCards_RowFlex";
@@ -117,22 +204,26 @@ function EditCardSkinScreen(skin) {
 	p5.className = "PrettyCards_InvertedP";
 	col1.appendChild(p5);
 	
+	var input5 = document.createElement("INPUT");
+	input5.className = "form-control";
+	input5.id = "PrettyCards_EditCardSkin_ImageInput";
+	//input5.setAttribute("maxlength", 999999);
+	input5.value = skin.image;
+	input5.setAttribute("type", "text");
+	col1.appendChild(input5);
+	
+	/*
 	var mini_cont = document.createElement("DIV");
 	mini_cont.className = "PrettyCards_RowFlex";
 	col1.appendChild(mini_cont);
 	
-	var input5 = document.createElement("INPUT");
-	input5.className = "form-control";
-	input5.id = "PrettyCards_EditCardSkin_ImageInput";
-	input5.setAttribute("maxlength", 999999);
-	input5.value = skin.image;
-	input5.setAttribute("type", "text");
-	mini_cont.appendChild(input5);
-	
-	var input5_label = document.createElement("LABEL");
-	input5_label.setAttribute("for", "PrettyCards_EditCardSkin_FileInput");
-	input5_label.innerHTML = '<div class="btn btn-primary" style="font-size: 16px;"><span class="glyphicon glyphicon-file"></span></div>';
-	mini_cont.appendChild(input5_label);
+	if (skin.image.startsWith("data:")) {
+		DeactivateInput(input5);
+		imageDataURL = skin.image;
+	} else {
+		ActivateInput(input5);
+		input5.value = skin.image;
+	}
 	
 	var input5_file = document.createElement("INPUT");
 	input5_file.className = "form-control white";
@@ -145,6 +236,20 @@ function EditCardSkinScreen(skin) {
 	input5_file.setAttribute("type", "file");
 	mini_cont.appendChild(input5_file);
 	
+	var input5_label = document.createElement("BUTTON");
+	input5_label.className = "btn btn-primary";
+	//input5_label.setAttribute("for", "PrettyCards_EditCardSkin_FileInput");
+	//input5_label.innerHTML = '<div class="btn btn-primary"><span class="glyphicon glyphicon-open-file"></span> Upload Image</div>';
+	input5_label.innerHTML = '<span class="glyphicon glyphicon-open-file"></span> Upload File';
+	input5_label.onclick = function() {input5_file.click();}
+	mini_cont.appendChild(input5_label);
+	
+	var input5_cancel = document.createElement("BUTTON");
+	input5_cancel.className = "btn btn-danger";
+	input5_cancel.innerHTML = '<span class="glyphicon glyphicon-remove"></span> Clear File';
+	input5_cancel.onclick = function() {imageDataURL = "";ActivateInput(input5);}
+	mini_cont.appendChild(input5_cancel);
+	*/
 	//console.log("size", window.BootstrapDialog.SIZE_LARGE);
 	window.BootstrapDialog.show({
 		title: "Edit Card Skin!",
@@ -153,8 +258,20 @@ function EditCardSkinScreen(skin) {
 		//onshown: OnShow.bind(this),
 		buttons: [{
 				label: "Cancel!",
-				cssClass: 'btn-primary us-normal',
+				cssClass: 'btn btn-danger us-normal',
 				action(dialog) {
+					dialog.close();
+				}
+			},
+			{
+				label: "Save!",
+				cssClass: 'btn btn-primary us-normal',
+				action(dialog) {
+					var image = input5.value;
+					if (image.length <= 0) {
+						image = imageDataURL;
+					}
+					SaveCardSkin(skin.storageId, input1.value, input2.value, Number(input3.value), Number(input4.value), image);
 					dialog.close();
 				}
 			}
@@ -184,12 +301,22 @@ function GetCustomCardSkinFromLocalStorage(index) {
 	return JSON.parse(string);
 }
 
+/*
+function GetImageFromLocalStorage(index) {
+	var string = window.localStorage[GetCustomCardSkinStorageIndex(index) + ".image"];
+	if (!string) {
+		return "";
+	}
+	return string;
+}*/
+
 function GetCustomCardSkinsList() {
 	var skins = [];
 	var i = 0;
 	var skin = GetCustomCardSkinFromLocalStorage(0);
 	while (skin) {
 		skin.storageId = i;
+		//skin.image = GetImageFromLocalStorage(i);
 		skins[i] = skin;
 		i++;
 		skin = GetCustomCardSkinFromLocalStorage(i);
@@ -211,6 +338,8 @@ function InitCustomCardSkins() {
 			<div id="PrettyCards_CardListContainer"></div>
 		`);
 		
+		$("#PrettyCards_CreateCustomCardSkinButton").click(CreateNewSkin);
+		$("#PrettyCards_DeleteCustomCardSkinButton").click(ToggleDeleteMode);
 		skins = GetCustomCardSkinsList();
 		console.log("SKINS", skins);
 		

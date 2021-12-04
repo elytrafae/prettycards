@@ -38,6 +38,13 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 			}
 		</style>`);
 	}
+	
+	// Let's be real. This just improves things.
+	window.$("head").append(`<style>
+		.card .cardImage {
+			background-size: contain;
+		}
+	</style>`);
 })
 
 export {};

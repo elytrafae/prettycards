@@ -3,6 +3,12 @@
 	
 }
 
+#PrettyCards_CardListContainer {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
 .PrettyCards_RowFlex {
 	display: flex;
 	flex-direction: row;
