@@ -156,7 +156,7 @@ function ImageHelpDialogue() {
 		'<h1>How do I get an image link?</h1>' +
 		'<p>There are quite a lot of options out there host-wise, but what\'s important is that the link you type in is pointing towards the raw image. Nothing else, nothing more.</p>' +
 		'<h1>How do I upload an image if I don\'t have a server of my own, or don\'t pay a host?</h1>' +
-		'<p>You can use image sharing sites, or even <i>some</i> social media sites to do the hosting for you. I would personally recommend <a href="https://imgur.com/">Imgur</a>, as it\'s easy to upload an image there AND the compression is minimal.</p>' +
+		'<p>You can use image sharing sites, or even <i>some</i> social media sites to do the hosting for you. I would personally recommend <a href="https://imgur.com/">Imgur</a>, as it\'s easy to upload an image there AND the compression is minimal. Discord is also a similarly excellent choice.</p>' +
 		'<p>After uploading the image to your preferred "hosting service", right-click the image, then click "Copy Image Address" or "Copy Image Link". Then paste THAT into the Image Link input and you should be done. This should work ~90% of the time.</p>' +
 		'<h1>I did what you said and it\'s still not working. What do I do?</h1>' +
 		'<p>Contact me on Discord so we can sort this issue out, and potentially correct or expand upon this tutorial for others who may be struggling.</p>' +
