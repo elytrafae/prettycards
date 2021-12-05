@@ -6,11 +6,12 @@ var allCardSkins = [];
 var ownedCardSkins = [];
 var notOwnedCardSkins = [];
 var defaultCardSkins = [];
+var customCardSkins = [];
 
 var bonusBaseCards = ["Heal Delivery", "Explosion", "Sacrifice", "Same Fate", "Onutrem"];
 
-var skinLists = [defaultCardSkins, ownedCardSkins, notOwnedCardSkins];
-var listNames = ["Default Card Skins", "Owned Card Skins", "Not Owned Card Skins"]
+var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCardSkins];
+var listNames = ["Custom Card Skins", "Default Card Skins", "Owned Card Skins", "Not Owned Card Skins"]
 
 ExecuteWhen("PrettyCards:onPageLoad", function () {
 	$.get("CardSkinsConfig?action=shop", {}, function(data) {
@@ -18,6 +19,9 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 		allCardSkins = JSON.parse(data.cardSkins);
 		ProcessCardSkinLists();
 		//console.log(allCardSkins);
+	});
+	ExecuteWhen("Chat:Connected", function() {
+		ProcessCustomCardSkins();
 	});
 });
 
@@ -30,6 +34,19 @@ $.get("CardSkinsConfig?action=profile", {}, function(data) {
 });
 */
 
+function ProcessCustomCardSkins() {
+	var skin = window.localStorage["prettycards.custom_card_skin." + window.selfId + ".0"];
+	var i = 0;
+	while (typeof(skin) === "string") {
+		//console.log("SKIN BEING ADDED: ", skin);
+		customCardSkins.push(JSON.parse(skin));
+		i++;
+		skin = window.localStorage["prettycards.custom_card_skin." + window.selfId + "." + i];
+	}
+	skinLists[0] = customCardSkins;
+	//console.log("CUSTOM CARD SKINS: ", customCardSkins);
+}
+
 function ProcessCardSkinLists() {
 	for (var i=0; i < allCardSkins.length; i++) {
 		var skin = allCardSkins[i];
@@ -40,7 +57,7 @@ function ProcessCardSkinLists() {
 		}
 	}
 	
-	skinLists[1] = ownedCardSkins;
+	skinLists[2] = ownedCardSkins;
 	//console.log("Not owned card skins: ", notOwnedCardSkins);
 }
 
@@ -136,13 +153,18 @@ class CardSkinSelector {
 			const category_container = document.createElement("DIV");
 			for (var j=0; j < list.length; j++) {
 				const skin = list[j];
+				var image = "images/cards/" + skin.image + ".png";
+				if (skin.isCustom) {
+					image = skin.image;
+				}
 				var div = document.createElement("DIV");
 				div.className = "PrettyCards_SkinDiv";
-				div.style.background = "url(images/cards/" + skin.image + ".png) no-repeat transparent";
+				div.style.background = "url(" + image + ") no-repeat transparent";
+				div.style.backgroundSize = "cover";
 				
 				div.innerHTML = '<div class="PrettyCards_SkinText">' + skin.name + (skin.authorName !== "" ? '<br><span class="Artist">' + skin.authorName + '</span>' : '') + '</div>';
 				if (skin.typeSkin > 0) {
-					div.innerHTML += '<div class="PrettyCards_FullSkinPreview"><img src="images/cards/' + skin.image + '.png"></div>';
+					div.innerHTML += '<div class="PrettyCards_FullSkinPreview"><img src="' + image + '"></div>';
 				}
 				
 				div.onclick = function() {

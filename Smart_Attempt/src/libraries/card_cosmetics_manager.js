@@ -33,7 +33,11 @@ function SetCosmeticsForCardData(card_data) {
 }
 
 function SetDeckSkin(card, card_skin) {
-	card.find(".cardImage").css("background-image", "url(/images/cards/" + card_skin.image + ".png)");
+	var image = "/images/cards/" + card_skin.image + ".png";
+	if (card_skin.isCustom) {
+		image = card_skin.image;
+	}
+	card.find(".cardImage").css("background-image", "url(" + image + ")");
 	
 	var skinTypeString = "standard-skin";
 	if (card_skin.typeSkin == 1) {

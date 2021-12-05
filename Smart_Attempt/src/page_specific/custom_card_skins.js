@@ -38,10 +38,12 @@ function ToggleDeleteMode() {
 		// Disable Delete Mode
 		$(".cardBackground").css("box-shadow", "");
 		deleteModeOn = false;
+		window.$("#PrettyCards_DeleteCustomCardSkinButton").html("Delete");
 	} else {
 		// Enable Delete Mode
 		$(".cardBackground").css("box-shadow", "0px 0px 10px 6px rgba(255,0,0,0.8)");
 		deleteModeOn = true;
+		window.$("#PrettyCards_DeleteCustomCardSkinButton").html("Cancel");
 	}
 }
 
@@ -89,8 +91,16 @@ function DeactivateInput(input) {
 	input.placeholder = "Image Uploaded . . .";
 }*/
 
-function DeleteCardSkin() {
+function DeleteCardSkin(skin) {
+	for (var i = skin.storageId; i < skins.length-1; i++) {
+		localStorage[GetCustomCardSkinStorageIndex(i)] = localStorage[GetCustomCardSkinStorageIndex(i+1)];
+		skins[i+1].storageId--;
+	}
+	localStorage.removeItem(GetCustomCardSkinStorageIndex(skins.length-1));
 	
+	skins.splice(skin.storageId, 1);
+	ToggleDeleteMode();
+	ConstructSkinSelectionMenu();
 }
 
 function SaveCardSkin(index, name, authorName, typeSkin, cardId, image) {
@@ -119,6 +129,9 @@ function SaveCardSkin(index, name, authorName, typeSkin, cardId, image) {
 }
 
 function CreateNewSkin() {
+	if (deleteModeOn) {
+		ToggleDeleteMode();
+	}
 	var skin = {
 		active: false,
 		authorName: window.selfUsername || "Unknown",
@@ -135,6 +148,37 @@ function CreateNewSkin() {
 		storageId: skins.length
 	}
 	EditCardSkinScreen(skin);
+}
+
+function ImageHelpDialogue() {
+	var message = '<h1>Why is a link needed instead of an uploaded image from my PC?</h1>' +
+		'<p>Because localStorage, the place where I need to store things around here, has quite some strict policies with memory usage, and image data would most of the time take up all of the available space and more, causing a bunch of issues. So, instead, I settled with a method that is reliable and will always work.</p>' +
+		'<h1>How do I get an image link?</h1>' +
+		'<p>There are quite a lot of options out there host-wise, but what\'s important is that the link you type in is pointing towards the raw image. Nothing else, nothing more.</p>' +
+		'<h1>How do I upload an image if I don\'t have a server of my own, or don\'t pay a host?</h1>' +
+		'<p>You can use image sharing sites, or even <i>some</i> social media sites to do the hosting for you. I would personally recommend <a href="https://imgur.com/">Imgur</a>, as it\'s easy to upload an image there AND the compression is minimal.</p>' +
+		'<p>After uploading the image to your preferred "hosting service", right-click the image, then click "Copy Image Address" or "Copy Image Link". Then paste THAT into the Image Link input and you should be done. This should work ~90% of the time.</p>' +
+		'<h1>I did what you said and it\'s still not working. What do I do?</h1>' +
+		'<p>Contact me on Discord so we can sort this issue out, and potentially correct or expand upon this tutorial for others who may be struggling.</p>' +
+		'<br>' +
+		'<p class="gray">Thanks for reading! ^^</p>';
+	
+	window.BootstrapDialog.show({
+		title: "Image URL Help",
+		size: window.BootstrapDialog.SIZE_WIDE,
+		message: message,
+		closable: true,
+		//closeByBackdrop: false,
+		//onshown: OnShow.bind(this),
+		buttons: [{
+				label: "Close!",
+				cssClass: 'btn btn-primary us-normal',
+				action(dialog) {
+					dialog.close();
+				}
+			}
+		]
+	});
 }
 
 function EditCardSkinScreen(skin) {
@@ -200,9 +244,13 @@ function EditCardSkinScreen(skin) {
 	col1.appendChild(input4);
 	
 	var p5 = document.createElement("P");
-	p5.innerHTML = "Image";
+	p5.innerHTML = "Image Link";
 	p5.className = "PrettyCards_InvertedP";
 	col1.appendChild(p5);
+	
+	var mini_cont = document.createElement("DIV");
+	mini_cont.className = "PrettyCards_RowFlex";
+	col1.appendChild(mini_cont);
 	
 	var input5 = document.createElement("INPUT");
 	input5.className = "form-control";
@@ -210,7 +258,13 @@ function EditCardSkinScreen(skin) {
 	//input5.setAttribute("maxlength", 999999);
 	input5.value = skin.image;
 	input5.setAttribute("type", "text");
-	col1.appendChild(input5);
+	mini_cont.appendChild(input5);
+	
+	var input5_help = document.createElement("BUTTON");
+	input5_help.className = "btn btn-primary";
+	input5_help.innerHTML = '<span class="glyphicon glyphicon-question-sign"></span>';
+	input5_help.onclick = ImageHelpDialogue;
+	mini_cont.appendChild(input5_help);
 	
 	/*
 	var mini_cont = document.createElement("DIV");
@@ -255,6 +309,8 @@ function EditCardSkinScreen(skin) {
 		title: "Edit Card Skin!",
 		size: window.BootstrapDialog.SIZE_LARGE,
 		message: container,
+		closable: true,
+		closeByBackdrop: false,
 		//onshown: OnShow.bind(this),
 		buttons: [{
 				label: "Cancel!",
@@ -268,9 +324,9 @@ function EditCardSkinScreen(skin) {
 				cssClass: 'btn btn-primary us-normal',
 				action(dialog) {
 					var image = input5.value;
-					if (image.length <= 0) {
-						image = imageDataURL;
-					}
+					//if (image.length <= 0) {
+					//	image = imageDataURL;
+					//}
 					SaveCardSkin(skin.storageId, input1.value, input2.value, Number(input3.value), Number(input4.value), image);
 					dialog.close();
 				}
@@ -286,7 +342,11 @@ function DoCardClickAction(e) {
 	var index = Array.prototype.indexOf.call(document.getElementById("PrettyCards_CardListContainer").children, $card[0]);
 	var skin = skins[index];
 	console.log(skin);
-	EditCardSkinScreen(skin);
+	if (deleteModeOn) {
+		DeleteCardSkin(skin);
+	} else {
+		EditCardSkinScreen(skin);
+	}
 }
 
 function GetCustomCardSkinStorageIndex(index) {
@@ -329,7 +389,7 @@ var card_options;
 function InitCustomCardSkins() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
 		window.$("title").html("PrettyCards - Custom Card Skins");
-		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@f31052e233e8c85235fc30c8823f0b96a0511e66/css/CustomCardSkins.css");
+		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3cd3ed92fe302df05ae12aea1b6eee3b04ef5b3e/css/CustomCardSkins.css");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CardSkinsTab" style="font-size: 2em; margin-bottom: 1em;">
 				<button id="PrettyCards_CreateCustomCardSkinButton" class="brn btn-success">Create New</button>
@@ -338,8 +398,8 @@ function InitCustomCardSkins() {
 			<div id="PrettyCards_CardListContainer"></div>
 		`);
 		
-		$("#PrettyCards_CreateCustomCardSkinButton").click(CreateNewSkin);
-		$("#PrettyCards_DeleteCustomCardSkinButton").click(ToggleDeleteMode);
+		window.$("#PrettyCards_CreateCustomCardSkinButton").click(CreateNewSkin);
+		window.$("#PrettyCards_DeleteCustomCardSkinButton").click(ToggleDeleteMode);
 		skins = GetCustomCardSkinsList();
 		console.log("SKINS", skins);
 		

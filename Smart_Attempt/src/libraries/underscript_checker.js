@@ -21,6 +21,8 @@ if (typeof(window.underscript) === "undefined") {
 }
 
 var PrettyCards_plugin = window.underscript.plugin("PrettyCards");
+var prettycards = {};
+window.prettycards = prettycards;
 window.PrettyCards_plugin = PrettyCards_plugin;
 //var PrettyCards_plugin = underscript.plugin('<span class="RARE">PrettyCards</span>');
 //console.log("Plugin: ", PrettyCards_plugin);
@@ -65,4 +67,4 @@ settings.override_decks = PrettyCards_plugin.settings().add({
 
 //console.log(settings);
 
-export {PrettyCards_plugin, settings};
+export {PrettyCards_plugin, settings, prettycards};
