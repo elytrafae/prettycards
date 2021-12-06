@@ -16,6 +16,7 @@ if (typeof(window.underscript) === "undefined") {
             });
         window.localStorage.setItem("PrettyCards_DependencyErrorMessageShown", true);
     };
+	console.error("PrettyCards Error: Underscript is not installed!");
 } else {
     window.localStorage.setItem("PrettyCards_DependencyErrorMessageShown", false);
 }
