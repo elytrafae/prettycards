@@ -27,7 +27,7 @@ function DoStuffWhenAllCardsAreReady() {
 function InitCustomCards() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
 		window.$("title").html("PrettyCards - Custom Cards");
-		//utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3cd3ed92fe302df05ae12aea1b6eee3b04ef5b3e/css/CustomCardSkins.css");
+		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@248edd1665fff4d07deb6765d93f0392e37fd018/css/CustomCards.css");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CustomCardCategories"></div>
 			<div id="PrettyCards_CustomCardShowcase"></div>

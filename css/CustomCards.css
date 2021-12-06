@@ -86,20 +86,20 @@ span.SWITCH {
 }
 
 #PrettyCards_CustomCardCategories {
-	display: flex;
+	/*display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: wrap;*/
 }
 
 .PrettyCards_CardCollection {
 	background-color: #111111;
-	width: 50%;
+	/*width: calc(50% - 0.5em);*/
 	margin: 0.25em;
-	padding: 0.2em;
+	padding: 0.4em 0.6em;
 }
 
 .PrettyCards_CollectionName {
-	font-size: 2.5em;
+	font-size: 2em;
 }
 
 .PrettyCards_CollectionAuthor {

@@ -44,6 +44,18 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "COMMON"
 	});
 	
+	var c1 = window.prettycards.newCollection({
+		name: "Another Card Set",
+		author: "Candice",
+		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/"
+	});
+	
+	var c2 = window.prettycards.newCollection({
+		name: "edsfvsdcscdscd",
+		author: "nanana",
+		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/"
+	});
+	
 })
 
 /*
