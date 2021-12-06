@@ -1,10 +1,39 @@
 
 import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
 
+var customCardsStart = 2000;
+var nextCustomCardId = customCardsStart;
+
+var collections = [];
+
+function newCollection(settings) {
+	var collection = new CustomCardCollection(settings);
+	collections.push(collection);
+	return collection;
+}
+
 class CustomCardCollection {
 	
-	constructor() {
+	constructor(settings) {
+		this.cards = [];
+		this.tribes = [];
+		this.cardImagePrefix = settings.cardImagePrefix || "";
+		this.rarityIconPrefix = settings.rarityIconPrefix ||"";
+		this.tribeImagePrefix = settings.tribeImagePrefix || "";
 		
+		this.name = settings.name || "UNNAMED CATEGORY";
+		this.author = settings.author || "";
+	}
+	
+	newCard(settings) {
+		var card = new Card(settings);
+		card.collection = this;
+		this.cards.push(card);
+	}
+	
+	newTribe(settings) {
+		var tribe = new Tribe(settings);
+		this.tribes.push(tribe);
 	}
 	
 }
@@ -12,66 +41,129 @@ class CustomCardCollection {
 class Card {
 	
 	constructor(settings) {
-		this.card_data = {
-			armor: false,
-			//attack: 1,
-			baseImage: "Tiny_Froggit",
-			burn: 0,
-			candy: false,
-			cantAttack: false,
-			charge: false,
-			cost: 0,
-			dodge: 0,
-			extension: "BASE",
-			fixedId: 196,
-			frameSkinName: "Undertale",
-			haste: false,
-			//hp: 1,
-			image: "Tiny_Froggit",
-			invulnerable: false,
-			kr: 0,
-			name: "Tiny Froggit",
-			ownerId: 0,
-			paralyzed: 0,
-			playedTurn: 0,
-			quantity: 99999,
-			rarity: "COMMON",
-			selectCards: [],
-			shiny: false,
-			silence: false,
-			taunt: false,
-			transparency: false,
-			tribes: [],
-			typeCard: 1,
-			typeSkin: 0,
-			shockEnabled: false,
-			supportEnabled: false
-		}
+		this.armor = false;
+		//this.attack = 1;
+		this.burn = 0;
+		this.candy = false;
+		this.cantAttack = false;
+		this.charge = false;
+		this.cost = 0;
+		this.dodge = 0;
+		this.extension = "BASE";
+		this.fixedId = 196;
+		this.frameSkinName = "Undertale";
+		this.haste = false;
+		//this.hp = 1;
+		this.image = "Tiny_Froggit";
+		this.invulnerable = false;
+		this.kr = false;
+		this.name = "Tiny Froggit";
+		this.ownerId = 0;
+		this.paralyzed = 0;
+		this.playedTurn = 0;
+		this.quantity = 99999;
+		this.rarity = "COMMON";
+		this.selectCards = [];
+		this.shiny = false;
+		this.silence = false;
+		this.taunt = false;
+		this.transparency = false;
+		this.tribes = [];
+		this.typeCard = 1;
+		this.typeSkin = 0;
+		this.shockEnabled = false;
+		this.supportEnabled = false;
+		this.loop = 0;
+		this.program = 0;
+		
+		this.onRender = function() {};
 		
 		for (var prop in settings) {
-			this.card_data[prop] = settings[prop];
+			this[prop] = settings[prop];
 		}
 		
-		if (card_data.attack || card_data.hp) {
-			card_data.typeCard = 0;
+		if (this.attack || this.hp) {
+			this.typeCard = 0;
 		}
 		
-		card_data.id = customCardsStart + this.customCards.length;
-		card_data.fixedId = card.id;
-		card_data.maxHp = card.hp;
-		card_data.originalHp = card.hp;
-		card_data.originalAttack = card.attack;
-		card_data.originalCost = card.cost;
-		card_data.baseImage = card.image;
-		card_data.isCustom = true;
+		Object.defineProperty(this, "id", {
+			value: nextCustomCardId,
+			writable: false
+		});
+		Object.defineProperty(this, "fixedId", {
+			value: nextCustomCardId,
+			writable: false
+		});
+		nextCustomCardId++;
+		
+		this.maxHp = this.hp;
+		this.originalHp = this.hp;
+		this.originalAttack = this.attack;
+		this.originalCost = this.cost;
+		this.baseImage = this.image;
+		this.isCustom = true;
 		
 		window.$.i18n().load( {
 			en: { 
-				["card-name-" + card_data.id] : card_data.name,
-				["card-" + card_data.id] : card_data.description,
+				["card-name-" + this.id] : this.name,
+				["card-" + this.id] : (this.description || this.desc),
 			}
 		})
 		
-		card_data.name = window.$.i18n("card-name-" + card_data.id, 1);
+		this.name = window.$.i18n("card-name-" + this.id, 1);
 	}
+	
+	mention(nr = "1") {
+		return "{{CARD:" + this.id + "|" + nr + "}}";
+	}
+	
+	setName(name, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["card-name-" + this.id] = name;
+		window.$.i18n().load(data);
+	}
+	
+	getName(nr = 1) {
+		return window.$.i18n("card-name-" + this.id, nr);
+	}
+	
+	setDescription(desc, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["card-" + this.id] = desc;
+		window.$.i18n().load(data);
+	}
+	
+	getDescription() {
+		return window.$.i18n("card-" + this.id);
+	}
+	
 }
+
+class Tribe {
+	
+	constructor(settings) {
+		this.name = settings.name || "{{PLURAL:$1|Unnamed Tribe|Unnamed_Tribes}}";
+		this.id = settings.id || "unnamed_tribe";
+		this.image = settings.image || "NO_IMAGE";
+		this.setName(this.name);
+		this.name = window.$.i18n("tribe-" + this.id, 1);
+	}
+	
+	setName(name, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["tribe-" + this.id] = name;
+		window.$.i18n().load(data);
+	}
+	
+	getName(nr = 1) {
+		return window.$.i18n("tribe-" + this.id, nr);
+	}
+	
+}
+
+prettycards.newCollection = newCollection;
+
+export {collections};

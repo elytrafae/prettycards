@@ -37,6 +37,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				<p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p>
 				<p style="cursor: pointer;" onclick="window.location.href = '/CustomCardSkins';">Custom Card Skins</p>
+				<p style="cursor: pointer;" onclick="window.location.href = '/CustomCards';">Custom Cards</p>
 				<p style="color: grey">More coming . . . Somewhen.</p>
 			</div>
 		</div>`)

@@ -1,52 +1,15 @@
 
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js"
 
 // Extension
 
-/*
 CustomCardsDictionary.AddCustomCardExtension(
 	"DDLC", 
 	"https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/", 
 	"https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/",
 	"https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/cards/DDLC/",
 );
-*/
 
-PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
-	
-	var c = window.prettycards.newCollection({
-		name: "Doki Doki Literature Club Set",
-		author: "CMD_God",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/"
-	});
-	
-	c.newTribe({
-		name: "{{PLURAL:$1|Doki|Dokis}}",
-		image: "DOKI",
-		id: "DOKI"
-	});
-	
-	c.newTribe({
-		name: "{{PLURAL:$1|CHR Spell|CHR Spells}}",
-		image: "CHRSPELL",
-		id: "CHRSPELL"
-	});
-	
-	c.newCard({
-		name: "{{PLURAL:$1|Sayori|Sayoris}}",
-		image: "Sayori",
-		cost: 4,
-		attack: 5,
-		hp: 4,
-		description: "{{KW:MAGIC}}: Deal 2 {{DMG}} to adjacent ally monsters. {{KW:FALLEN}}: Give all {{TRIBE:DOKI|2}} in your hand +1 {{HP}}.",
-		tribes: ["DOKI"],
-		extension: "DDLC",
-		rarity: "COMMON"
-	});
-	
-})
-
-/*
 // Tribes
 
 CustomCardsDictionary.AddCustomTribe("DOKI", "{{PLURAL:$1|Doki|Dokis}}", "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/DOKI.png");
@@ -275,5 +238,5 @@ CustomCardsDictionary.AddCustomCard({
 	typeSkin: 2,
 	rarity: "DETERMINATION"
 });
-*/
+
 export {};

@@ -84,3 +84,29 @@ span.SWITCH {
 	left: 14px;
 	z-index: 7;
 }
+
+#PrettyCards_CustomCardCategories {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.PrettyCards_CardCollection {
+	background-color: #111111;
+	width: 50%;
+	margin: 0.25em;
+	padding: 0.2em;
+}
+
+.PrettyCards_CollectionName {
+	font-size: 2.5em;
+}
+
+.PrettyCards_CollectionAuthor {
+	font-size: 1.5em;
+}
+
+.PrettyCards_CollectionDetails {
+	font-size: 1.2em;
+	float: right;
+}
