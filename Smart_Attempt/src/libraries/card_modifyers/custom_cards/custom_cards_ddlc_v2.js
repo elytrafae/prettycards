@@ -17,10 +17,11 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	var c = window.prettycards.newCollection({
 		name: "Doki Doki Literature Club Set",
 		author: "CMD_God",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/"
+		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/",
+		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/"
 	});
 	
-	c.newTribe({
+	var doki = c.newTribe({
 		name: "{{PLURAL:$1|Doki|Dokis}}",
 		image: "DOKI",
 		id: "DOKI"
@@ -45,13 +46,26 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		attack: 5,
 		hp: 4,
 		description: "{{KW:MAGIC}}: Deal 2 {{DMG}} to adjacent ally monsters. {{KW:FALLEN}}: Give all {{TRIBE:DOKI|2}} in your hand +1 {{HP}}.",
-		tribes: ["DOKI"],
+		tribes: [doki, "FROGGIT"],
+		extension: "DDLC",
+		rarity: "COMMON"
+	});
+	
+	c.newCard({
+		name: "{{PLURAL:$1|Natsuki|Natsukis}}",
+		image: "Natsuki",
+		cost: 3,
+		attack: 3,
+		hp: 3,
+		description: "Force an ally {{KW:FALLEN}} monster to attack the monster in front of it.",
+		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON"
 	});
 	
 	c.newArtifact({
 		name: "File Explorer", 
+		image: "File_Explorer",
 		description: `{{KW:TURN-END}}: If an ally monster died this turn, add the next ${chr_spells.mention()} to the top of your deck. Whenever you summon a {{KW:FALLEN}} monster, if it's on the right, give it -2/-1 and trigger its {{KW:FALLEN}} effect. \nOrder of ${chr_spells.mention(2)}: `
 	});
 	

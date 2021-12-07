@@ -2,8 +2,9 @@
 import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {} from "/src/libraries/card_modifyers/custom_cards_new.js";
 
-import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new";
+import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
 
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
 
@@ -38,6 +39,15 @@ function ViewCollection(c) {
 			appendArtifact(c.artifacts[i], c, arts);
 		}
 		showcase.append(arts);
+	}
+	
+	if (c.cards.length > 0) {
+		showcase.append(`<h2>Cards</h2>`);
+		var cards = $(`<div id="PrettyCards_CardsShowcase"></div>`);
+		for (var i=0; i < c.cards.length; i++) {
+			window.appendCard(c.cards[i], cards);
+		}
+		showcase.append(cards);
 	}
 	
 }

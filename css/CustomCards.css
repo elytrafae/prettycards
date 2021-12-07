@@ -123,3 +123,13 @@ span.SWITCH {
 	font-size: 2em;
 	text-align: right;
 }
+
+#PrettyCards_CardsShowcase,#PrettyCards_ArtifactsShowcase {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+#PrettyCards_CardsShowcase .card {
+	margin: 2px;
+}

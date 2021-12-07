@@ -182,6 +182,10 @@ class Tribe {
 		this.name = window.$.i18n("tribe-" + this.id, 1);
 	}
 	
+	toString() { // This is so Tribe objects can be used freely in cards' tribes attribute.
+		return this.id.toString();
+	}
+	
 	setName(name, language = "en") {
 		var data = {};
 		data[language] = {};
