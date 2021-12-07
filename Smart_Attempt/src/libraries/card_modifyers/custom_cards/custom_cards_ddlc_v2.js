@@ -46,7 +46,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		attack: 5,
 		hp: 4,
 		description: "{{KW:MAGIC}}: Deal 2 {{DMG}} to adjacent ally monsters. {{KW:FALLEN}}: Give all {{TRIBE:DOKI|2}} in your hand +1 {{HP}}.",
-		tribes: [doki, "FROGGIT"],
+		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON"
 	});
