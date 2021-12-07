@@ -31,7 +31,8 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 }
 
 .PrettyCards_Artifact {
-	width: 2em;
-	height: 2em;
+	width: 4em;
+	height: 4em;
 	margin: 0.5em;
+	cursor: pointer;
 }
