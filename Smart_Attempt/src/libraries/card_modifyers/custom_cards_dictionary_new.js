@@ -3,6 +3,8 @@ import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscr
 
 var customCardsStart = 2000;
 var nextCustomCardId = customCardsStart;
+var customArtifactsStart = 200;
+var nextCustomArtifact = customArtifactsStart;
 
 var collections = [];
 
@@ -145,7 +147,10 @@ class Tribe {
 	
 	constructor(settings) {
 		this.name = settings.name || "{{PLURAL:$1|Unnamed Tribe|Unnamed_Tribes}}";
-		this.id = settings.id || "unnamed_tribe";
+		Object.defineProperty(this, "id", {
+			value: settings.id || "unnamed_tribe",
+			writable: false
+		});
 		this.image = settings.image || "NO_IMAGE";
 		this.setName(this.name);
 		this.name = window.$.i18n("tribe-" + this.id, 1);
@@ -160,6 +165,26 @@ class Tribe {
 	
 	getName(nr = 1) {
 		return window.$.i18n("tribe-" + this.id, nr);
+	}
+	
+	mention(nr = 1) {
+		return "{{TRIBE:" + this.id + "|" + nr + "}}";
+	}
+	
+}
+
+class Artifact {
+	
+	constructor(settings) {
+		this.name = settings.name || "UNNAMED ARTIFACT";
+		this.description = settings.description || "NO EFFECT";
+		this.image = settings.image || "NO_IMAGE";
+		this.rarity = settings.rarity || "COMMON";
+		Object.defineProperty(this, "id", {
+			value: nextCustomArtifact,
+			writable: false
+		});
+		nextCustomArtifact++;
 	}
 	
 }
