@@ -19,9 +19,11 @@ class CustomCardCollection {
 	constructor(settings) {
 		this.cards = [];
 		this.tribes = [];
+		this.artifacts = [];
 		this.cardImagePrefix = settings.cardImagePrefix || "";
 		this.rarityIconPrefix = settings.rarityIconPrefix ||"";
 		this.tribeImagePrefix = settings.tribeImagePrefix || "";
+		this.artifactImagePrefix = settings.artifactImagePrefix || "";
 		
 		this.name = settings.name || "UNNAMED CATEGORY";
 		this.author = settings.author || "";
@@ -36,6 +38,11 @@ class CustomCardCollection {
 	newTribe(settings) {
 		var tribe = new Tribe(settings);
 		this.tribes.push(tribe);
+	}
+	
+	newArtifact(settings) {
+		var artifact = new Artifact(settings);
+		this.artifacts.push(artifact);
 	}
 	
 }
@@ -185,6 +192,39 @@ class Artifact {
 			writable: false
 		});
 		nextCustomArtifact++;
+		window.$.i18n().load( {
+			en: { 
+				["artifact-name-" + this.id] : this.name,
+				["artifact-" + this.id] : this.description,
+			}
+		});
+		this.name = window.$.i18n("artifact-name-" + this.id, 1);
+	}
+	
+	mention(nr = 1) {
+		return "{{ARTIFACT:" + this.id + "|" + nr + "}}";
+	}
+	
+	setName(name, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["artifact-name-" + this.id] = name;
+		window.$.i18n().load(data);
+	}
+	
+	getName(nr = 1) {
+		return window.$.i18n("artifact-name-" + this.id, nr);
+	}
+	
+	setDescription(desc, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["artifact-" + this.id] = desc;
+		window.$.i18n().load(data);
+	}
+	
+	getDescription() {
+		return window.$.i18n("artifact-" + this.id);
 	}
 	
 }
