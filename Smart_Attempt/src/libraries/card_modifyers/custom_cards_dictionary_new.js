@@ -8,6 +8,22 @@ var nextCustomArtifact = customArtifactsStart;
 
 var collections = [];
 
+function uniqueNameId(type, id, i = 0) {
+	var s = type + id.toLowerCase();
+	if (i > 0) {
+		s = s + i;
+	}
+	//console.log("uniqueNameId", s, i, window.$.i18n(s));
+	if (window.$.i18n(s) != s) {
+		return uniqueNameId(type, id, i+1);
+	}
+	var ret = id;
+	if (i > 0) {
+		ret = ret + i;
+	}
+	return ret;
+}
+
 function newCollection(settings) {
 	var collection = new CustomCardCollection(settings);
 	collections.push(collection);
@@ -33,16 +49,19 @@ class CustomCardCollection {
 		var card = new Card(settings);
 		card.collection = this;
 		this.cards.push(card);
+		return card;
 	}
 	
 	newTribe(settings) {
 		var tribe = new Tribe(settings);
 		this.tribes.push(tribe);
+		return tribe;
 	}
 	
 	newArtifact(settings) {
 		var artifact = new Artifact(settings);
 		this.artifacts.push(artifact);
+		return artifact;
 	}
 	
 }
@@ -155,7 +174,7 @@ class Tribe {
 	constructor(settings) {
 		this.name = settings.name || "{{PLURAL:$1|Unnamed Tribe|Unnamed_Tribes}}";
 		Object.defineProperty(this, "id", {
-			value: settings.id || "unnamed_tribe",
+			value: uniqueNameId("tribe-", settings.id || "unnamed_tribe"),
 			writable: false
 		});
 		this.image = settings.image || "NO_IMAGE";
@@ -166,12 +185,13 @@ class Tribe {
 	setName(name, language = "en") {
 		var data = {};
 		data[language] = {};
-		data[language]["tribe-" + this.id] = name;
+		data[language]["tribe-" + this.id.toLowerCase()] = name;
+		//console.log("Tribe Name data: ", data);
 		window.$.i18n().load(data);
 	}
 	
 	getName(nr = 1) {
-		return window.$.i18n("tribe-" + this.id, nr);
+		return window.$.i18n("tribe-" + this.id.toLowerCase(), nr);
 	}
 	
 	mention(nr = 1) {

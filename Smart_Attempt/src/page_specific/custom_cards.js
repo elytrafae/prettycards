@@ -7,13 +7,48 @@ import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary
 
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
 
+function appendArtifact(artifact, c, $parent) {
+	var art = $(`<img class="PrettyCards_Artifact" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
+	art.click(function () {
+		window.artifactInfo(artifact.id);
+	})
+	$parent.append(art);
+	return art;
+}
+
+function ViewCollection(c) {
+	console.log("VIEW COLLECTION!", c);
+	var showcase = $("#PrettyCards_CustomCardShowcase");
+	$("#PrettyCards_CustomCardCategories").css("display", "none");
+	showcase.css("display", "block").html("");
+	
+	var header = $(`
+		<div class="PrettyCards_BigCollectionName">${c.name}</div>
+		<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
+	`);
+	
+	showcase.append(header);
+	
+	// Insert Soul Section Here!
+	
+	if (c.artifacts.length > 0) {
+		showcase.append(`<h2>Artifacts</h2>`);
+		var arts = $(`<div id="PrettyCards_ArtifactsShowcase"></div>`);
+		for (var i=0; i < c.artifacts.length; i++) {
+			appendArtifact(c.artifacts[i], c, arts);
+		}
+		showcase.append(arts);
+	}
+	
+}
+
 function DoStuffWhenAllCardsAreReady() {
 	PrettyCards_plugin.events.emit("PrettyCards:customCards");
 	console.log(collections);
 	var cont = $("#PrettyCards_CustomCardCategories");
 	for (var i=0; i < collections.length; i++) {
-		var c = collections[i];
-		cont.append(`
+		const c = collections[i];
+		var collection = $(`
 			<div class="PrettyCards_CardCollection">
 				<div class="PrettyCards_CollectionName">${c.name}</div>
 				<div class="PrettyCards_CollectionAuthor Artist">${c.author}</div>
@@ -21,17 +56,23 @@ function DoStuffWhenAllCardsAreReady() {
 					<div>${c.cards.length} ${(c.cards.length == 1) ? "Card" : "Cards"}</div>
 				</div>
 			</div>`);
+		collection.click(function() {
+			ViewCollection(c);
+		})
+		cont.append(collection);
 	}
 }
 
 function InitCustomCards() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
 		window.$("title").html("PrettyCards - Custom Cards");
-		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@248edd1665fff4d07deb6765d93f0392e37fd018/css/CustomCards.css");
+		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@43bd9ccd71b3bfd1c3ba3e5338bdcda9cf7aae9a/css/CustomCards.css");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CustomCardCategories"></div>
 			<div id="PrettyCards_CustomCardShowcase"></div>
 		`);
+		
+		$("#PrettyCards_CustomCardShowcase").css("display", "none");
 		
 		if (window.allCards && window.allCards.length > 0) {
 			DoStuffWhenAllCardsAreReady();

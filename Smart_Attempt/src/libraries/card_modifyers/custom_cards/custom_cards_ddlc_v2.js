@@ -26,8 +26,14 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		id: "DOKI"
 	});
 	
-	c.newTribe({
+	var chr_spells = c.newTribe({
 		name: "{{PLURAL:$1|CHR Spell|CHR Spells}}",
+		image: "CHRSPELL",
+		id: "CHRSPELL"
+	});
+	
+	c.newTribe({
+		name: "{{PLURAL:$1|CHR Spell test|CHR Spells test}}",
 		image: "CHRSPELL",
 		id: "CHRSPELL"
 	});
@@ -44,16 +50,9 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "COMMON"
 	});
 	
-	var c1 = window.prettycards.newCollection({
-		name: "Another Card Set",
-		author: "Candice",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/"
-	});
-	
-	var c2 = window.prettycards.newCollection({
-		name: "edsfvsdcscdscd",
-		author: "nanana",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/"
+	c.newArtifact({
+		name: "File Explorer", 
+		description: `{{KW:TURN-END}}: If an ally monster died this turn, add the next ${chr_spells.mention()} to the top of your deck. Whenever you summon a {{KW:FALLEN}} monster, if it's on the right, give it -2/-1 and trigger its {{KW:FALLEN}} effect. \nOrder of ${chr_spells.mention(2)}: `
 	});
 	
 })

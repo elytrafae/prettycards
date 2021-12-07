@@ -96,6 +96,7 @@ span.SWITCH {
 	/*width: calc(50% - 0.5em);*/
 	margin: 0.25em;
 	padding: 0.4em 0.6em;
+	cursor: pointer;
 }
 
 .PrettyCards_CollectionName {
@@ -109,4 +110,16 @@ span.SWITCH {
 .PrettyCards_CollectionDetails {
 	font-size: 1.2em;
 	float: right;
+}
+
+.PrettyCards_BigCollectionName {
+	width: 100%;
+	font-size: 3em;
+	text-align: center;
+}
+
+.PrettyCards_BigCollectionAuthor {
+	width: 100%;
+	font-size: 2em;
+	text-align: right;
 }

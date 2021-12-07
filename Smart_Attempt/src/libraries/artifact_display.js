@@ -3,8 +3,6 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@68a145e64b796c36bf3b02b2f4abda3f40ebfc60/css/Artifacts.css");
-
 class ArtifactDisplay {
 	
 	constructor() {
@@ -44,6 +42,7 @@ var artifactDisplay = new ArtifactDisplay();
 window.artifactDisplay = artifactDisplay;
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@68a145e64b796c36bf3b02b2f4abda3f40ebfc60/css/Artifacts.css");
 	artifactDisplay.GetAllArtifacts();
 });
 
