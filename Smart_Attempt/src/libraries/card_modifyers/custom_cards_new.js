@@ -16,8 +16,15 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		PrettyCards_plugin.events.on("PC_appendCard", function(data) {
 			console.log("appendCard", data);
 			var card = data.card;
-			var $element = data.element;
+			var element = data.element;
+			if (!card.isCustom) {
+				return;
+			}
 			
+			element.addClass("ext_" + card.extension);
+			
+			element.find(".cardImage").css("background-image", 'url("' + card.collection.cardImagePrefix + card.image + '.png")');
+			element.find(".cardRarity").css("background-image", 'url("' + card.collection.rarityImagePrefix + card.image + '.png")');
 		});
 	}
 });
