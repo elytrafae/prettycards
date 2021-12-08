@@ -178,7 +178,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 8,
 		attack: 5,
 		hp: 9,
-		description: `{{KW:FALLEN}}: Summon 3 random non-{{RARITY:DETERMINATION}} ${doki.me(2)} from your dustpile. {{KW:DELAY}}: Kill then and lose 2 Max {{HP}} for each killed.`,
+		description: `{{KW:FALLEN}}: Summon 3 random non-{{RARITY:DETERMINATION}} ${doki.me(2)} from your dustpile. {{KW:DELAY}}: Kill them and lose 2 Max {{HP}} for each killed.`,
 		//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} {{KW:FALLEN}} monsters from your dustpile. Trigger their {{KW:FALLEN}} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
 		tribes: [doki],
 		extension: "DDLC",
