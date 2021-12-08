@@ -35,6 +35,7 @@ function ViewCollection(c) {
 	var header = $(`
 		<div class="PrettyCards_BigCollectionName">${c.name}</div>
 		<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
+		<div>${c.note}</div>
 	`);
 	
 	showcase.append(header);

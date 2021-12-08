@@ -48,6 +48,7 @@ class CustomCardCollection {
 		
 		this.name = settings.name || "UNNAMED CATEGORY";
 		this.author = settings.author || "";
+		this.note = settings.note || "";
 		this.universalCustomFont = settings.universalCustomFont || "";
 	}
 	

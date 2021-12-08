@@ -15,7 +15,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		
 		// PrettyCards_plugin.events.on("appendCard()", function(data) { // Cannot use this because Underscript is in zombie mode on custom pages.
 		PrettyCards_plugin.events.on("PC_appendCard", function(data) {
-			console.log("appendCard", data);
+			//console.log("appendCard", data);
 			var card = data.card;
 			var element = data.element;
 			if (!card.isCustom) {
@@ -52,7 +52,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			var customFontName = (card.customFont != "") ? card.customFont : collection.universalCustomFont;
 			
 			if (customFontName != "") {
-				console.log("customFontName", customFontName, card);
+				//console.log("customFontName", customFontName, card);
 				var cardNameDiv$ = element.find('.cardName div');
 				var cardDescDiv$ = element.find('.cardDesc div');
 				
