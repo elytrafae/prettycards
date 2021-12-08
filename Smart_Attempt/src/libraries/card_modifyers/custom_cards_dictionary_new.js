@@ -38,10 +38,12 @@ class CustomCardCollection {
 		this.cards = [];
 		this.tribes = [];
 		this.artifacts = [];
+		this.souls = [];
 		this.cardImagePrefix = settings.cardImagePrefix || "";
-		this.rarityIconPrefix = settings.rarityIconPrefix ||"";
+		this.rarityImagePrefix = settings.rarityImagePrefix || settings.rarityIconPrefix || "";
 		this.tribeImagePrefix = settings.tribeImagePrefix || "";
 		this.artifactImagePrefix = settings.artifactImagePrefix || "";
+		this.soulImagePrefix = settings.soulImagePrefix || "";
 		
 		this.name = settings.name || "UNNAMED CATEGORY";
 		this.author = settings.author || "";
@@ -64,6 +66,12 @@ class CustomCardCollection {
 		var artifact = new Artifact(settings);
 		this.artifacts.push(artifact);
 		return artifact;
+	}
+	
+	newSoul(settings) {
+		var soul = new Soul(settings);
+		this.souls.push(soul);
+		return soul;
 	}
 	
 }
