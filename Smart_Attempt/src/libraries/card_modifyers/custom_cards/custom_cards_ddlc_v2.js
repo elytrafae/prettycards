@@ -19,7 +19,9 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		author: "CMD_God",
 		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/",
 		rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/"
+		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
+		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
+		universalCustomFont: "Aller"
 	});
 	
 	var doki = c.newTribe({
@@ -62,6 +64,56 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON"
+	});
+	
+	c.newCard({
+		name: "{{PLURAL:$1|Yuri|Yuris}}",
+		image: "Yuri",
+		cost: 3,
+		attack: 3,
+		hp: 2,
+		description: "{{KW:MAGIC}}: {{KW:PARALYZE}} an enemy monster. {{KW:FALLEN}}: If it's alive, give it -2 {{ATK}}. Otherwise give -1 {{ATK}} to a random enemy monster.",
+		tribes: [doki],
+		extension: "DDLC",
+		rarity: "COMMON"
+	});
+	
+	c.newCard({
+		name: "{{PLURAL:$1|Monika|Monikas}}",
+		image: "Monika",
+		cost: 7,
+		attack: 4,
+		hp: 6,
+		description: "{{KW:TAUNT}}. {{KW:FALLEN}}: Give the top 3 {{KW:FALLEN}} monsters in your deck -1 {{cost}}.",
+		tribes: [doki],
+		extension: "DDLC",
+		rarity: "RARE"
+	});
+	
+	// Amy Sprite Sheet by u/Meddy-sin
+	c.newCard({
+		name: "{{PLURAL:$1|Amy|Amys}}",
+		image: "Amy",
+		cost: 4,
+		attack: 5,
+		hp: 2,
+		//description: "Whenever you summon an {{KW:ARACHNID}} give it +1/+1. {{KW:DUST}}: Fill your board with {{CARD:115|2}} and give them +1/+1.",
+		description: "{{KW:MAGIC}}: Kill an ally {{KW:FALLEN}} monster to deal their {{HP}} as {{DMG}} to yourself and trigger its {{KW:FALLEN}} effect. {{KW:FALLEN}}: Add a copy of it to your deck with -1 {{cost}}.",
+		tribes: ["DOKI"],
+		extension: "DDLC",
+		rarity: "RARE"
+	});
+	
+	c.newCard({
+		name: "{{PLURAL:$1|Alphys's PC|Alphys's PCs}}",
+		image: "Alphys_PC",
+		cost: 6,
+		attack: 5,
+		hp: 7,
+		description: "Look at 3 random non-{{RARITY:DETERMINATION}} {{TRIBE:DOKI|2}} you don't have in your deck and catch one. {{KW:DUST}}: Release it into your deck.",
+		extension: "BASE",
+		rarity: "RARE",
+		customFont: "DTM-Mono"
 	});
 	
 	c.newArtifact({

@@ -47,6 +47,7 @@ class CustomCardCollection {
 		
 		this.name = settings.name || "UNNAMED CATEGORY";
 		this.author = settings.author || "";
+		this.universalCustomFont = settings.universalCustomFont || "";
 	}
 	
 	newCard(settings) {
@@ -72,6 +73,17 @@ class CustomCardCollection {
 		var soul = new Soul(settings);
 		this.souls.push(soul);
 		return soul;
+	}
+	
+	getTribeById(id) {
+		//console.log("getTribeById", id);
+		for (var i=0; i < this.tribes.length; i++) {
+			var tribe = this.tribes[i];
+			if (tribe.id == id) {
+				return tribe;
+			}
+		}
+		return null;
 	}
 	
 }
@@ -115,6 +127,7 @@ class Card {
 		this.program = 0;
 		
 		this.onRender = function() {};
+		this.customFont = "";
 		
 		for (var prop in settings) {
 			this[prop] = settings[prop];
@@ -200,7 +213,7 @@ class Tribe {
 	}
 	
 	toString() { // This is so Tribe objects can be used freely in cards' tribes attribute.
-		return this.id.toString();
+		return this.id.toString(); // The toString is only there for safety.
 	}
 	
 	setName(name, language = "en") {
