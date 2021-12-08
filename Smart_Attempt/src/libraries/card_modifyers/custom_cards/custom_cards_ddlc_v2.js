@@ -25,7 +25,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		universalCustomFont: "Aller",
 		note: `This is a Doki Doki Literature Club themed card set I wanted to make for the longest time. I wanted it to be perfect, so I often modified it, asked for feedback and even the custom cards idea was born because of this set. So, please enjoy and don't be afraid to give me feedback! ^^
 		<br><br>
-		NOTE: Hand nerfs cannot bring a monste below 1 HP. I didn't add this in every instance because some cards are full enough already.`
+		NOTE: Hand nerfs cannot bring a monster below 1 HP. I didn't add this in every instance because some cards are full enough already.`
 	});
 	
 	var test_soul = c.newSoul({
