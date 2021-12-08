@@ -5,6 +5,8 @@ var customCardsStart = 2000;
 var nextCustomCardId = customCardsStart;
 var customArtifactsStart = 200;
 var nextCustomArtifact = customArtifactsStart;
+var customSoulsStart = 200;
+var nextCustomSoul = customSoulsStart;
 
 var collections = [];
 
@@ -145,6 +147,10 @@ class Card {
 		return "{{CARD:" + this.id + "|" + nr + "}}";
 	}
 	
+	me(nr = "1") {
+		return this.mention(nr);
+	}
+	
 	setName(name, language = "en") {
 		var data = {};
 		data[language] = {};
@@ -202,6 +208,10 @@ class Tribe {
 		return "{{TRIBE:" + this.id + "|" + nr + "}}";
 	}
 	
+	me(nr = "1") {
+		return this.mention(nr);
+	}
+	
 }
 
 class Artifact {
@@ -229,6 +239,10 @@ class Artifact {
 		return "{{ARTIFACT:" + this.id + "|" + nr + "}}";
 	}
 	
+	me(nr = "1") {
+		return this.mention(nr);
+	}
+	
 	setName(name, language = "en") {
 		var data = {};
 		data[language] = {};
@@ -249,6 +263,34 @@ class Artifact {
 	
 	getDescription() {
 		return window.$.i18n("artifact-" + this.id);
+	}
+	
+}
+
+class Soul {
+	
+	constructor(settings) {
+		Object.defineProperty(this, "id", {
+			value: nextCustomSoul,
+			writable: false
+		});
+		nextCustomSoul++;
+		Object.defineProperty(this, "name", {
+			value: uniqueNameId("soul-name-", settings.name || "NONAME"),
+			writable: false
+		});
+		this.displayName = settings.displayName || "NoName";
+		this.image = settings.image || "NO_IMAGE";
+		this.description = settings.description || "No description";
+		
+		window.$.i18n().load( {
+			en: { 
+				["soul-name-" + this.name] : this.displayName,
+				["soul-" + this.name] : this.description,
+			}
+		});
+		
+		this.displayName = window.$.i18n("soul-name-" + this.name, 1);
 	}
 	
 }
