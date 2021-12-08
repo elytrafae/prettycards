@@ -146,9 +146,12 @@ class Card {
 				["card-name-" + this.id] : this.name,
 				["card-" + this.id] : (this.description || this.desc),
 			}
-		})
+		});
+				
+		this.tribes = this.tribes.map((el) => el.toString());
 		
 		this.name = window.$.i18n("card-name-" + this.id, 1);
+		window.allCards.push(this);
 	}
 	
 	mention(nr = "1") {
