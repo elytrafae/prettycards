@@ -24,7 +24,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			element.addClass("ext_" + card.extension);
 			
 			element.find(".cardImage").css("background-image", 'url("' + card.collection.cardImagePrefix + card.image + '.png")');
-			element.find(".cardRarity").css("background-image", 'url("' + card.collection.rarityImagePrefix + card.image + '.png")');
+			element.find(".cardRarity").css("background-image", 'url("' + card.collection.rarityImagePrefix + card.extension + '_' + card.rarity + '.png")');
 		});
 	}
 });

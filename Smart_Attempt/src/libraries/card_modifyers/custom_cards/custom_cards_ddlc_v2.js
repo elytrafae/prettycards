@@ -18,7 +18,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "Doki Doki Literature Club Set",
 		author: "CMD_God",
 		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/",
-		rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/",
+		rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
 		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/"
 	});
 	
