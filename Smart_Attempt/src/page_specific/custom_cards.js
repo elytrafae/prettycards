@@ -17,6 +17,15 @@ function appendArtifact(artifact, c, $parent) {
 	return art;
 }
 
+function appendSoul(soul, c, $parent) {
+	var s = $(`<img class="PrettyCards_Soul" src="${c.soulImagePrefix + soul.image + ".png"}">`);
+	s.click(function () {
+		window.soulInfo(soul.name);
+	})
+	$parent.append(s);
+	return s;
+}
+
 function ViewCollection(c) {
 	console.log("VIEW COLLECTION!", c);
 	var showcase = $("#PrettyCards_CustomCardShowcase");
@@ -30,7 +39,14 @@ function ViewCollection(c) {
 	
 	showcase.append(header);
 	
-	// Insert Soul Section Here!
+	if (c.souls.length > 0) {
+		showcase.append(`<h2>Souls</h2>`);
+		var souls = $(`<div id="PrettyCards_SoulsShowcase"></div>`);
+		for (var i=0; i < c.souls.length; i++) {
+			appendSoul(c.souls[i], c, souls);
+		}
+		showcase.append(souls);
+	}
 	
 	if (c.artifacts.length > 0) {
 		showcase.append(`<h2>Artifacts</h2>`);

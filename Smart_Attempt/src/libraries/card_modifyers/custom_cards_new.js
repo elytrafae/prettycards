@@ -2,6 +2,7 @@
 import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	if (underscript.onPage("CustomCards")) {
@@ -21,6 +22,9 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				return;
 			}
 			var collection = card.collection;
+			if (typeof(collection) == "number") {
+				collection = collections[collection];
+			}
 			
 			element.addClass("ext_" + card.extension);
 			
@@ -39,7 +43,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			
 			if (card.background) {
 				var bg = $('<div class="breakingSkinBackground"></div>');
-				bg.css('background', "url('" + collection.cardImagePrefix + card.background + "') no-repeat");
+				bg.css('background', "url('" + collection.cardImagePrefix + card.background + ".png') no-repeat");
 				bg.css("background-size", "contain");
 				bg.css("background-position", "center");
 				element.prepend(bg);
@@ -67,6 +71,11 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			}
 			
 		});
+		
+		var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
+		//console.log("Aller Loader!", allerLoader);
+		window.$("body").append(allerLoader);
+		setTimeout(function() {allerLoader.remove()}, 100);
 	}
 });
 

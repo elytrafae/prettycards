@@ -124,7 +124,14 @@ span.SWITCH {
 	text-align: right;
 }
 
-#PrettyCards_CardsShowcase,#PrettyCards_ArtifactsShowcase {
+.PrettyCards_Soul {
+	width: 4em;
+	height: 4em;
+	margin: 0.5em;
+	cursor: pointer;
+}
+
+#PrettyCards_CardsShowcase,#PrettyCards_ArtifactsShowcase,#PrettyCards_SoulsShowcase {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;

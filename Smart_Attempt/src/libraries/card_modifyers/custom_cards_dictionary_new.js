@@ -5,7 +5,7 @@ var customCardsStart = 2000;
 var nextCustomCardId = customCardsStart;
 var customArtifactsStart = 200;
 var nextCustomArtifact = customArtifactsStart;
-var customSoulsStart = 200;
+var customSoulsStart = 20;
 var nextCustomSoul = customSoulsStart;
 
 var collections = [];
@@ -28,6 +28,7 @@ function uniqueNameId(type, id, i = 0) {
 
 function newCollection(settings) {
 	var collection = new CustomCardCollection(settings);
+	collection.id = collections.length; // This is ugly, but it works. Just some simple logic I use all the time.
 	collections.push(collection);
 	return collection;
 }
@@ -84,6 +85,10 @@ class CustomCardCollection {
 			}
 		}
 		return null;
+	}
+	
+	toJSON() {
+		return this.id;
 	}
 	
 }
@@ -309,12 +314,42 @@ class Soul {
 		
 		window.$.i18n().load( {
 			en: { 
-				["soul-name-" + this.name] : this.displayName,
-				["soul-" + this.name] : this.description,
+				["soul-" + this.name.toLowerCase()] : this.displayName,
+				["soul-" + this.name.toLowerCase() + "-desc"] : this.description,
 			}
 		});
 		
-		this.displayName = window.$.i18n("soul-name-" + this.name, 1);
+		this.displayName = window.$.i18n("soul-" + this.name.toLowerCase(), 1);
+	}
+	
+	mention(nr = "1") {
+		return "{{SOUL:" + this.name + "|" + nr + "}}";
+	}
+	
+	me(nr = "1") {
+		return this.mention(nr);
+	}
+	
+	setName(name, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["soul-" + this.name.toLowerCase()] = name;
+		window.$.i18n().load(data);
+	}
+	
+	getName(nr = 1) {
+		return window.$.i18n("soul-" + this.name.toLowerCase(), nr);
+	}
+	
+	setDescription(desc, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["soul-" + this.name.toLowerCase() + "-desc"] = desc;
+		window.$.i18n().load(data);
+	}
+	
+	getDescription() {
+		return window.$.i18n("soul-" + this.name.toLowerCase() + "-desc");
 	}
 	
 }

@@ -49,7 +49,7 @@ function RegexProcessor(full, stat1, stat2, stat3) {
 
 if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()) {
 	
-	PrettyCards_plugin.events.on("appendCard()", function(data) {
+	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
 		var html$ = data.element;
 		var card = data.card;
 		
@@ -59,9 +59,10 @@ if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()
 			text = text.replaceAll(card_numbers_regex, RegexProcessor);
 		}
 		if (settings.non_dt_inconsistency.value()) {
-			//text = text.replaceAll(non_dt_regex, NonDTCorrector);
+			text = text.replaceAll(non_dt_regex, NonDTCorrector);
 		}
 		html$.find(".cardDesc div").html(text);
+		//console.log(html$.find(".cardDesc div"));
 	});
 	
 }
