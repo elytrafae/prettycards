@@ -42,7 +42,7 @@ class CustomCardCollection {
 		this.artifacts = [];
 		this.souls = [];
 		this.cardImagePrefix = settings.cardImagePrefix || "";
-		this.rarityImagePrefix = settings.rarityImagePrefix || settings.rarityIconPrefix || "";
+		this.rarityImagePrefix = settings.rarityImagePrefix || settings.rarityIconPrefix || "images/rarity/";
 		this.tribeImagePrefix = settings.tribeImagePrefix || "";
 		this.artifactImagePrefix = settings.artifactImagePrefix || "";
 		this.soulImagePrefix = settings.soulImagePrefix || "";
