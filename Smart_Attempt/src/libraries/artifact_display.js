@@ -7,14 +7,6 @@ class ArtifactDisplay {
 	
 	constructor() {
 		this.artifacts = [];
-		
-		// The following three variables are the reason why I can even check what an artifact's rarity should be. 
-		// Only used on artifacts the server sends. Custom ones should be handled by the author.
-		this.commonArtifactCost = 300;
-		this.legendaryArtifactCost = 1000;
-		this.DTArtifactIds = [25, 34, 43]; // Genocide, Outbreak and Ultimate Fusion respectively.
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 	}
 	
 	GetArtifactById(id) {
@@ -37,8 +29,8 @@ class ArtifactDisplay {
 		if (artifact.rarity) {
 			return artifact.rarity;
 		}
-		if (artifact.cost != this.commonArtifactCost && artifact.cost != this.legendaryArtifactCost) {
-			artifact.rarity = this.DTArtifactIds.includes(artifact.id) ? "DETERMINATION" : "TOKEN";
+		if (artifact.cost != ArtifactDisplay.commonArtifactCost && artifact.cost != ArtifactDisplay.legendaryArtifactCost) {
+			artifact.rarity = ArtifactDisplay.DTArtifactIds.includes(artifact.id) ? "DETERMINATION" : "TOKEN";
 		} else {
 			artifact.rarity = artifact.legendary ? "LEGENDARY" : "COMMON";
 		}
@@ -88,6 +80,13 @@ class ArtifactDisplay {
 		$("body").append(backdrop);
 	}
 }
+
+// The following three variables are the reason why I can even check what an artifact's rarity should be. 
+// Only used on artifacts the server sends. Custom ones should be handled by the author.
+ArtifactDisplay.commonArtifactCost = 300;
+ArtifactDisplay.legendaryArtifactCost = 1000;
+ArtifactDisplay.DTArtifactIds = [25, 34, 43]; // Genocide, Outbreak and Ultimate Fusion respectively.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var artifactDisplay = new ArtifactDisplay();
 
