@@ -1,17 +1,6 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
-// Extension
-
-/*
-c.newCardExtension(
-	"DDLC", 
-	"https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/DDLC/", 
-	"https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/",
-	"https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/cards/DDLC/",
-);
-*/
-
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
