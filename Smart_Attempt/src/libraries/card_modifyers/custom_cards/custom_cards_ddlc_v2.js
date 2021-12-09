@@ -250,8 +250,9 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	});
 	
 	var file_exp = c.newArtifact({
-		name: "File Explorer", 
+		name: "Character Folder", 
 		image: "File_Explorer",
+		rarity: "DETERMINATION",
 		description: `{{KW:TURN-END}}: If an ally monster died this turn, add the next ${chr_spells.me()} to the top of your deck. Whenever you summon a {{KW:FALLEN}} monster, if it's on the right, give it -2/-1 and trigger its {{KW:FALLEN}} effect. 
 		Order of ${chr_spells.me(2)}: ${sayori_chr.me()} > ${natsuki_chr.me()} > ${yuri_chr.me()} > ${monika_chr.me()} > Start over.`
 	});

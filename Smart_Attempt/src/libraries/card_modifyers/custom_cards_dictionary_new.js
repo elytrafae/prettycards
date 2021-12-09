@@ -1,4 +1,5 @@
 
+import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
 
 var customCardsStart = 2000;
@@ -67,6 +68,7 @@ class CustomCardCollection {
 	
 	newArtifact(settings) {
 		var artifact = new Artifact(settings);
+		artifact.collection = this;
 		this.artifacts.push(artifact);
 		return artifact;
 	}
@@ -263,6 +265,8 @@ class Artifact {
 			}
 		});
 		this.name = window.$.i18n("artifact-name-" + this.id, 1);
+		
+		artifactDisplay.artifacts.push(this);
 	}
 	
 	mention(nr = 1) {

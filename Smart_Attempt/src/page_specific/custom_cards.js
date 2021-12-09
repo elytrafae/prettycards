@@ -91,7 +91,7 @@ function DoStuffWhenAllCardsAreReady() {
 }
 
 function InitCustomCards() {
-	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
+	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos PrettyCards:onArtifacts", function () {
 		window.$("title").html("PrettyCards - Custom Cards");
 		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@df7db0178802a6558e68f9282f8a8729f5483507/css/CustomCards.css");
 		window.$(".mainContent").html(`
