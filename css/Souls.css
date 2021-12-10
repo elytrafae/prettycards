@@ -37,11 +37,11 @@
 	filter: drop-shadow(0px 0px 15px #d535d9);
 }
 
-.PrettyCards_Soul_MONSTER.PrettyCards_SelectedSoul.PrettyCards_DisplaySoul_MONSTER {
+.PrettyCards_Soul_MONSTER.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_MONSTER {
 	filter: drop-shadow(0px 0px 15px #ffffff);
 }
 
-.PrettyCards_Soul_SWITCH.PrettyCards_SelectedSoul.PrettyCards_DisplaySoul_SWITCH {
+.PrettyCards_Soul_SWITCH.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_SWITCH {
 	/*filter: drop-shadow(0px 0px 15px linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 50%, rgba(65,252,255,1) 50%, rgba(65,252,255,1) 100%));*/
 	filter: drop-shadow(0px 0px 15px #D400FF);
 }

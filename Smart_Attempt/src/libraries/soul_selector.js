@@ -7,7 +7,7 @@ import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@d9c1c3f8bab9a11ff7de5ce72787d38b7e7298f0/css/Souls.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3167253c681ccc05712fd2863d46f5240851b1b5/css/Souls.css");
 });
 
 var areDecksLoaded = false;
