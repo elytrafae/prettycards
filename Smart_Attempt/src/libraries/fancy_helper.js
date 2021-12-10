@@ -4,16 +4,18 @@
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 
+
+
 class FancyDisplay {
 	
 	constructor(data) {
 		this.data = data;
-		this.backdrop = window.$(`<div class="PrettyCards_ScreenCover PrettyCards_HalfTransparentBG"></div>`);
-		this.backdrop.click(function() {this.remove();});
+		//this.backdrop = window.$(`<div class="PrettyCards_ScreenCover PrettyCards_HalfTransparentBG"></div>`);
+		//this.backdrop.click(function() {this.remove();});
 		
 		this.box = window.$(`<div class="PrettyCards_ArtifactDisplayBox"></div>`);
 		this.box.click(function (e) {e.stopPropagation();});
-		this.backdrop.append(this.box);
+		//this.backdrop.append(this.box);
 		
 		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"><img class="PrettyCards_ArtifactImage ${data.image_class}" src="${data.image}"></img></div>`);
 		this.box.append(this.circle);
@@ -25,8 +27,23 @@ class FancyDisplay {
 		this.box.append(this.name);
 		this.box.append(this.rarity);
 		this.box.append(this.description);
+		
+		//$("body").append(this.backdrop);
+		window.BootstrapDialog.show({
+            title: 'You shouldn\'t be able to see this!',
+            message: this.box,
+			onshow: this.OnShow
+        });
+		
+	}
 	
-		$("body").append(this.backdrop);
+	OnShow(dial) {
+		console.log(dial);
+		dial.$modalFooter.css("display", "none");
+		dial.$modalHeader.css("display", "none");
+		dial.$modalContent.css("background-color", "transparent").css("box-shadow", "initial").css("border", "none").css("padding", "0px");
+		dial.$modalBody.css("border", "none").css("background-color", "transparent").css("padding", "0px").css("box-shadow", "initial");
+		
 	}
 	
 	static ViewArtifactInfo(id) {

@@ -37,6 +37,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	cursor: pointer;
 }
 
+/*
 .PrettyCards_ScreenCover {
 	position: fixed;
 	top: 0px;
@@ -52,17 +53,17 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 .PrettyCards_HalfTransparentBG {
 	background-color: rgba(0, 0, 0, 0.5);
 }
+*/
 
 .PrettyCards_ArtifactDisplayBox {
 	/*position: absolute;*/
 	position: relative;
-	margin: 150px auto;
+	margin-top: 150px;
 	border: 5px solid white;
 	background-color: black;
 	width: 600px;
 	padding: 12px;
 	padding-top: 60px;
-	z-index: 1050;
 }
 
 .PrettyCards_ArtifactCircle {
