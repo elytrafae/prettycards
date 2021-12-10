@@ -76,7 +76,6 @@ class ArtifactDisplay {
 		box.append(rarity);
 		box.append(description);
 	
-	
 		$("body").append(backdrop);
 	}
 }
