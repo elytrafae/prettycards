@@ -74,6 +74,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	position: absolute;
 	left: 204px;
 	top: -140px;
+	overflow: hidden;
 }
 
 .PrettyCards_ArtifactImage {
