@@ -9,39 +9,39 @@
 	margin: 2px;
 }
 
-.PrettyCards_Soul_DETERMINATION.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_DETERMINATION.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_DETERMINATION {
 	filter: drop-shadow(0px 0px 15px #ff0000);
 }
 
-.PrettyCards_Soul_BRAVERY.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_BRAVERY.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_BRAVERY {
 	filter: drop-shadow(0px 0px 15px #fca500);
 }
 
-.PrettyCards_Soul_JUSTICE.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_JUSTICE.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_JUSTICE {
 	filter: drop-shadow(0px 0px 15px #ffff00);
 }
 
-.PrettyCards_Soul_KINDNESS.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_KINDNESS.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_KINDNESS {
 	filter: drop-shadow(0px 0px 15px #00c000);
 }
 
-.PrettyCards_Soul_PATIENCE.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_PATIENCE.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_PATIENCE {
 	filter: drop-shadow(0px 0px 15px #41fcff);
 }
 
-.PrettyCards_Soul_INTEGRITY.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_INTEGRITY.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_INTEGRITY {
 	filter: drop-shadow(0px 0px 15px #0064ff);
 }
 
-.PrettyCards_Soul_PERSEVERANCE.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_PERSEVERANCE.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_PERSEVERENCE {
 	filter: drop-shadow(0px 0px 15px #d535d9);
 }
 
-.PrettyCards_Soul_MONSTER.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_MONSTER.PrettyCards_SelectedSoul.PrettyCards_DisplaySoul_MONSTER {
 	filter: drop-shadow(0px 0px 15px #ffffff);
 }
 
-.PrettyCards_Soul_SWITCH.PrettyCards_SelectedSoul {
+.PrettyCards_Soul_SWITCH.PrettyCards_SelectedSoul.PrettyCards_DisplaySoul_SWITCH {
 	/*filter: drop-shadow(0px 0px 15px linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 50%, rgba(65,252,255,1) 50%, rgba(65,252,255,1) 100%));*/
 	filter: drop-shadow(0px 0px 15px #D400FF);
 }

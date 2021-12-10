@@ -1,11 +1,14 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 import {pagegetters} from "/src/libraries/page_getters.js";
 import {AddTooltip} from "/src/libraries/tooltips.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@1edf00a84189614e8030eb6637abf84316cee582/css/Souls.css");
+ExecuteWhen("PrettyCards:onPageLoad", function() {
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@d9c1c3f8bab9a11ff7de5ce72787d38b7e7298f0/css/Souls.css");
+});
 
 var areDecksLoaded = false;
 var decks = {};

@@ -15,7 +15,7 @@ class FancyDisplay {
 		this.box.click(function (e) {e.stopPropagation();});
 		this.backdrop.append(this.box);
 		
-		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"><img class="PrettyCards_ArtifactImage" src="${data.image}"></img></div>`);
+		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"><img class="PrettyCards_ArtifactImage ${data.image_class}" src="${data.image}"></img></div>`);
 		this.box.append(this.circle);
 		
 		this.name = window.$(`<div class="PrettyCards_ArtifactDisplayName ${data.text_class}">${data.name}</div>`);
@@ -40,7 +40,8 @@ class FancyDisplay {
 			image: image_src,
 			text_class: artifact.rarity || "COMMON",
 			rarity_text: artifact.rarity + " Artifact",
-			description: $.i18n("artifact-" + artifact.id)
+			description: $.i18n("artifact-" + artifact.id),
+			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity + (artifact.rarity == "LEGENDARY" || artifact.rarity == "DETERMINATION" ? " PrettyCards_ArtifactDisplay_Floating" : "")
 		};
 		var helper = new FancyDisplay(data);
 	}
@@ -48,8 +49,8 @@ class FancyDisplay {
 	static ViewSoulInfo(id) {
 		var customObj = null;
 		for (var i = 0; i < FancyDisplay.customSouls.length; i++) {
-			var soul = FancyDisplay.customSouls;
-			if (soul.name == id) {
+			var soul = FancyDisplay.customSouls[i];
+			if (soul.name === id) {
 				customObj = soul;
 				break;
 			}
@@ -59,13 +60,15 @@ class FancyDisplay {
 			
 			image_src = customObj.collection.soulImagePrefix + customObj.image + ".png";
 		}
-		console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
+		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
+		
 		var data = {
 			name: $.i18n("soul-" + id.toLowerCase()),
 			text_class: id,
 			rarity_text: "Soul",
 			description: $.i18n("soul-" + id.toLowerCase() + "-desc"),
-			image: image_src
+			image: image_src,
+			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id
 		};
 		var helper = new FancyDisplay(data);
 	}
