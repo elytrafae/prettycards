@@ -41,7 +41,7 @@ class FancyDisplay {
 			text_class: artifact.rarity || "COMMON",
 			rarity_text: artifact.rarity + " Artifact",
 			description: $.i18n("artifact-" + artifact.id),
-			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity + (artifact.rarity == "LEGENDARY" || artifact.rarity == "DETERMINATION" ? " PrettyCards_ArtifactDisplay_Floating" : "")
+			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity
 		};
 		var helper = new FancyDisplay(data);
 	}

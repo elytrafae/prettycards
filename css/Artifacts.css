@@ -106,22 +106,23 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 
 .PrettyCards_ArtifactDisplay_LEGENDARY {
 	filter: drop-shadow(0px 0px 15px gold);
+	animation: LegendaryArtifactFloat 2s alternate infinite ease-in-out;
 }
 
 .PrettyCards_ArtifactDisplay_Floating {
-	animation: ArtifactFloat 2s alternate infinite ease-in-out;
+	animation: LegendaryArtifactFloat 2s alternate infinite ease-in-out;
 }
 
 .PrettyCards_ArtifactDisplay_DETERMINATION {
-	animation: DTGlow 2s alternate infinite ease-in-out;
+	animation: DTArtifactFloat 2s alternate infinite ease-in-out;
 }
 
-@keyframes ArtifactFloat {
+@keyframes LegendaryArtifactFloat {
 	from { transform: translatey(12px);}
 	to { transform: translatey(-12px);}
 }
 
-@keyframes DTGlow {
-	from {filter: drop-shadow(0px 0px 5px #770000);}
-	to {filter: drop-shadow(0px 0px 15px #EE0000);}
+@keyframes DTArtifactFloat {
+	from {filter: drop-shadow(0px 0px 5px #770000); transform: translatey(12px);}
+	to {filter: drop-shadow(0px 0px 15px #EE0000); transform: translatey(-12px);}
 }
