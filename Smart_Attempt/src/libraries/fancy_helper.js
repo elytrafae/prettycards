@@ -22,7 +22,8 @@ class FancyDisplay {
 		
 		this.name = window.$(`<div class="PrettyCards_ArtifactDisplayName ${data.text_class}">${data.name}</div>`);
 		this.rarity = window.$(`<div class="PrettyCards_ArtifactDisplayRarity ${data.text_class}">${data.rarity_text}</div>`);
-		this.description = window.$(`<div class="PrettyCards_ArtifactDisplayDescription">${data.description}</div>`);
+		this.description = window.$(`<div class="PrettyCards_ArtifactDisplayDescription"></div>`);
+		this.description.append(data.description);
 		
 		this.box.append(this.name);
 		this.box.append(this.rarity);
@@ -79,11 +80,22 @@ class FancyDisplay {
 		}
 		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
 		
+		var desc = window.$(`<div><div>${window.$.i18n("soul-" + id.toLowerCase() + "-desc")}</div><div class="PrettyCards_SoulDisplay_SpellsHeader">${id} Spells:</div></div>`);
+		var cards = window.$(`<div class="PrettyCards_SoulDisplay_Spells"></div>`);
+		for (var i=0; i < window.allCards.length; i++) {
+			var card = window.allCards[i];
+			if (card.soul && card.soul.name === id) {
+				window.appendCard(card, cards);
+			}
+		}
+		
+		desc.append(cards);
+		
 		var data = {
-			name: $.i18n("soul-" + id.toLowerCase()),
+			name: window.$.i18n("soul-" + id.toLowerCase()),
 			text_class: id,
 			rarity_text: "Soul",
-			description: $.i18n("soul-" + id.toLowerCase() + "-desc"),
+			description: desc,
 			image: image_src,
 			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id
 		};

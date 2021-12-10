@@ -102,6 +102,19 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	font-size: 16px;
 }
 
+.PrettyCards_SoulDisplay_SpellsHeader {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+
+.PrettyCards_SoulDisplay_Spells {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 0 19px;
+}
+
 .PrettyCards_ArtifactDisplay_TOKEN {
 	filter: drop-shadow(0px 0px 10px #00c800);
 }
