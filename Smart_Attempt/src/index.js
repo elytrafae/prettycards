@@ -20,6 +20,8 @@ import {} from "/src/libraries/card_modifyers/theme_song_viewer.js";
 import {} from "/src/libraries/card_modifyers/card_flavor.js";
 import {} from "/src/libraries/card_modifyers/card_description_corrections.js";
 
+import {FancyDisplay} from "/src/libraries/fancy_helper.js";
+
 import {} from "./libraries/main_menu.js";
 
 import {InitPacks} from "./page_specific/packs.js";

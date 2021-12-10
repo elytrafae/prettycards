@@ -1,5 +1,6 @@
 
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
+import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
 
 var customCardsStart = 2000;
@@ -75,6 +76,7 @@ class CustomCardCollection {
 	
 	newSoul(settings) {
 		var soul = new Soul(settings);
+		soul.collection = this;
 		this.souls.push(soul);
 		return soul;
 	}
@@ -325,6 +327,8 @@ class Soul {
 		});
 		
 		this.displayName = window.$.i18n("soul-" + this.name.toLowerCase(), 1);
+		
+		FancyDisplay.customSouls.push(this);
 	}
 	
 	mention(nr = "1") {

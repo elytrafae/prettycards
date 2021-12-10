@@ -51,33 +51,6 @@ class ArtifactDisplay {
 		}.bind(this));
 	}
 	
-	ViewArtifactInfo(id) {
-		var artifact = this.GetArtifactById(id);
-		var backdrop = $(`<div class="PrettyCards_ScreenCover PrettyCards_HalfTransparentBG"></div>`);
-		backdrop.click(function() {this.remove();});
-		
-		var box = $(`<div class="PrettyCards_ArtifactDisplayBox"></div>`);
-		box.click(function (e) {e.stopPropagation();});
-		backdrop.append(box);
-		
-		var image_src = "images/artifacts/" + artifact.image + ".png";
-		if (artifact.collection) {
-			image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
-		}
-		
-		var artifactCircle = $(`<div class="PrettyCards_ArtifactCircle"><img class="PrettyCards_ArtifactImage" src="${image_src}"></img></div>`);
-		box.append(artifactCircle);
-		
-		var name = $(`<div class="PrettyCards_ArtifactDisplayName ${artifact.rarity || "COMMON"}">${$.i18n("artifact-name-" + artifact.id)}</div>`);
-		var rarity = $(`<div class="PrettyCards_ArtifactDisplayRarity ${artifact.rarity || "COMMON"}">${artifact.rarity} Artifact</div>`);
-		var description = $(`<div class="PrettyCards_ArtifactDisplayDescription">${$.i18n("artifact-" + artifact.id)}</div>`);
-		
-		box.append(name);
-		box.append(rarity);
-		box.append(description);
-	
-		$("body").append(backdrop);
-	}
 }
 
 // The following three variables are the reason why I can even check what an artifact's rarity should be. 
@@ -94,8 +67,6 @@ window.artifactDisplay = artifactDisplay;
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@30ec987c2c773c48dfcf563d7b97241b3f1dc70f/css/Artifacts.css");
 	artifactDisplay.GetAllArtifacts();
-	
-	window.artifactInfo = artifactDisplay.ViewArtifactInfo.bind(artifactDisplay);
 });
 
 export {artifactDisplay};
