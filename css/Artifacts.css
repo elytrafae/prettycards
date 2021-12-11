@@ -118,7 +118,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 .PrettyCards_ArtifactListRow {
 	margin: 15px 0px;
 	margin-left: 20px;
-	min-height: 130px;
+	min-height: 100px;
 	position: relative;
 }
 
@@ -145,7 +145,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 
 .PrettyCards_ArtifactListName {
 	font-size: 20px;
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 .PrettyCards_ArtifactListDescription {

@@ -32,6 +32,7 @@ class FancyListDisplay {
 			buttons: [
 				{
 					label: window.$.i18n("dialog-ok"),
+					cssClass: 'btn-primary',
 					action: function(dialog) {
 						dialog.close();
 					}
