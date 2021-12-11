@@ -17,13 +17,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		NOTE: Hand nerfs cannot bring a monster below 1 HP. I didn't add this in every instance because some cards are full enough already.`
 	});
 	
-	var test_soul = c.newSoul({
-		name: "TESTSOUL",
-		displayName: "Test Soul",
-		description: "This is a test soul.",
-		image: "SWITCH2"
-	});
-	
 	var doki = c.newTribe({
 		name: "{{PLURAL:$1|Doki|Dokis}}",
 		image: "DOKI",
