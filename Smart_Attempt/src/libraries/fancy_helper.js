@@ -4,7 +4,44 @@
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 
-
+class FancyListDisplay {
+	
+	constructor(datas) {
+		
+		var container = window.$(`<div class="PrettyCards_ArtifactListContainer"></div>`);
+		
+		for (var i=0; i < datas.length; i++) {
+			var data = datas[i];
+			var row = window.$(`<div class="PrettyCards_ArtifactListRow"></div>`);
+			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class}" src="${data.image}"></img></div>`);
+			row.append(circle);
+			
+			var name = window.$(`<div class="PrettyCards_ArtifactListName ${data.text_class}">${data.name} (${data.rarity_text})</div>`);
+			var description = window.$(`<div class="PrettyCards_ArtifactListDescription"></div>`);
+			description.append(data.description);
+			
+			row.append(name);
+			row.append(description);
+			container.append(row);
+		}
+		
+		window.BootstrapDialog.show({
+            title: window.$.i18n("artifacts-title"),
+            message: container,
+			//onshow: this.OnShow
+			buttons: [
+				{
+					label: window.$.i18n("dialog-ok"),
+					action: function(dialog) {
+						dialog.close();
+					}
+				}
+			]
+        });
+		
+	}
+	
+}
 
 class FancyDisplay {
 	
@@ -102,6 +139,31 @@ class FancyDisplay {
 		var helper = new FancyDisplay(data);
 	}
 	
+	static ViewArtifactsInfo(box) {
+		console.log(box);
+		 if (window.$(box).find('.artifact-img').length > 0) {
+			var datas = [];
+			$(box).find('.artifact-img').each(function() {
+				var artifactId = Number($(this).attr("artifactId"));
+				var artifact = artifactDisplay.GetArtifactById(artifactId);
+				console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
+				var image_src = "images/artifacts/" + artifact.image + ".png";
+				if (artifact.collection) {
+					image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
+				}
+				datas.push({
+					name: $.i18n("artifact-name-" + artifact.id),
+					image: image_src,
+					text_class: artifact.rarity || "COMMON",
+					rarity_text: artifact.rarity + " Artifact",
+					description: $.i18n("artifact-" + artifact.id),
+					image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity
+				});
+			});
+			var helper = new FancyListDisplay(datas);
+		 }
+	}
+	
 }
 
 FancyDisplay.customSouls = [];
@@ -109,6 +171,7 @@ FancyDisplay.customSouls = [];
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);
+	window.artifactsInfo = FancyDisplay.ViewArtifactsInfo.bind(this);
 });
 
 export {FancyDisplay};
