@@ -136,7 +136,6 @@ class Card {
 		this.loop = 0;
 		this.program = 0;
 		
-		this.onRender = function() {};
 		this.customFont = "";
 		
 		for (var prop in settings) {

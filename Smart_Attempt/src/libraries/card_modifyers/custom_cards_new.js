@@ -51,7 +51,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			
 			var customFontName = (card.customFont != "") ? card.customFont : collection.universalCustomFont;
 			
-			if (customFontName != "") {
+			if (customFontName != "" && customFontName != "DTM-Mono") {
 				//console.log("customFontName", customFontName, card);
 				var cardNameDiv$ = element.find('.cardName div');
 				var cardDescDiv$ = element.find('.cardDesc div');
@@ -69,6 +69,8 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				var descSize = window.getResizedFontSize(cardDescDiv$, 81);
 				cardDescDiv$.css('font-size', (descSize + "px"));
 			}
+			
+			//card.onRender(data); // Removing this system because clones do not mix well with this.
 			
 		});
 		
