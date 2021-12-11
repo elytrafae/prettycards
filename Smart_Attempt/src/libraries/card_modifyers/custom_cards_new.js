@@ -24,6 +24,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			var collection = card.collection;
 			if (typeof(collection) == "number") {
 				collection = collections[collection];
+				card.collection = collection;
 			}
 			
 			element.addClass("ext_" + card.extension);

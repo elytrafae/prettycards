@@ -42,7 +42,9 @@ class CustomCardCollection {
 		this.tribes = [];
 		this.artifacts = [];
 		this.souls = [];
+		this.keywords = [];
 		this.cardImagePrefix = settings.cardImagePrefix || "";
+		this.cardSongPrefix = settings.cardSongPrefix || "";
 		this.rarityImagePrefix = settings.rarityImagePrefix || settings.rarityIconPrefix || "images/rarity/";
 		this.tribeImagePrefix = settings.tribeImagePrefix || "";
 		this.artifactImagePrefix = settings.artifactImagePrefix || "";
@@ -79,6 +81,12 @@ class CustomCardCollection {
 		soul.collection = this;
 		this.souls.push(soul);
 		return soul;
+	}
+	
+	newKeyword(settings) {
+		var kw = new Keyword(settings);
+		this.keywords.push(kw);
+		return kw;
 	}
 	
 	getTribeById(id) {
@@ -358,6 +366,60 @@ class Soul {
 	
 	getDescription() {
 		return window.$.i18n("soul-" + this.name.toLowerCase() + "-desc");
+	}
+	
+}
+
+class Keyword {
+	
+	constructor(settings) {
+		Object.defineProperty(this, "id", {
+			value: uniqueNameId("kw-", settings.id || "NOID"),
+			writable: false
+		});
+		this.name = settings.name || "NoName";
+		this.description = settings.description || "No description";
+		
+		window.$.i18n().load( {
+			en: { 
+				["kw-" + this.id.toLowerCase()] : this.name,
+				["kw-" + this.id.toLowerCase() + "-desc"] : this.description,
+			}
+		});
+		
+		this.name = window.$.i18n("kw-" + this.id.toLowerCase(), 1);
+		
+		//FancyDisplay.customSouls.push(this);
+	}
+	
+	mention(nr = "1") {
+		return "{{KW:" + this.id + "|" + nr + "}}";
+	}
+	
+	me(nr = "1") {
+		return this.mention(nr);
+	}
+	
+	setName(name, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["kw-" + this.id.toLowerCase()] = name;
+		window.$.i18n().load(data);
+	}
+	
+	getName(nr = 1) {
+		return window.$.i18n("kw-" + this.id.toLowerCase(), nr);
+	}
+	
+	setDescription(desc, language = "en") {
+		var data = {};
+		data[language] = {};
+		data[language]["kw-" + this.id.toLowerCase() + "-desc"] = desc;
+		window.$.i18n().load(data);
+	}
+	
+	getDescription() {
+		return window.$.i18n("kw-" + this.id.toLowerCase() + "-desc");
 	}
 	
 }

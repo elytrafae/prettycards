@@ -131,6 +131,15 @@ span.SWITCH {
 	cursor: pointer;
 }
 
+.PrettyCards_CollectionBackButton {
+	font-size: 1.5em;
+	cursor: pointer;
+}
+
+.PrettyCards_CollectionBackButton:hover {
+	color: #41fcff;
+}
+
 #PrettyCards_CardsShowcase,#PrettyCards_ArtifactsShowcase,#PrettyCards_SoulsShowcase {
 	display: flex;
 	flex-direction: row;

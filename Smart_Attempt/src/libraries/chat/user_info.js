@@ -230,6 +230,38 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		});
 	}
 	
+	var ignoreContainer = document.createElement("DIV");
+	column1.appendChild(ignoreContainer);
+	
+	function UpdateIgnoreText() {
+		ignoreContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off red"></span> ' + (underscript.user.isIgnored(user) ? "Unignore" : "Ignore");
+	}
+	
+	if (!pagegetters.IsMyself(user.id)) {
+		UpdateIgnoreText();
+		ignoreContainer.style.cursor = "pointer";
+		ignoreContainer.onclick = function() {
+			console.log("IGNORING USER", user, underscript.user.isIgnored(user));
+			if (underscript.user.isIgnored(user)) {
+				underscript.user.unIgnore(user);
+			} else {
+				underscript.user.ignore(user);
+			}
+			UpdateIgnoreText();
+		}
+	} else {
+		if (!demoniocEasterEgg) {
+			ignoreContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off gray"></span> Can\'t ignore yourself!';
+		} else {
+			var ignoreButtonMessages = [
+				"Believe me, I tried doing this a lot . . .",
+				"You don't even like yourself, huh?",
+				"You will always find a way to harrass yourself anyway."
+			];
+			ignoreContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-volume-off"></span> ' + ignoreButtonMessages[Math.floor(Math.random() * ignoreButtonMessages.length)] + "</span>";
+		}
+	}
+	
 	var privateMessageContainer = document.createElement("DIV");
 	column1.appendChild(privateMessageContainer);
 	if (!pagegetters.IsMyself(user.id) && (pagegetters.IsSelfMod() || pagegetters.IsMyFriend(user.id))) {

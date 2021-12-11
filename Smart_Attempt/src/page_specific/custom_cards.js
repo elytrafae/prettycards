@@ -33,10 +33,13 @@ function ViewCollection(c) {
 	showcase.css("display", "block").html("");
 	
 	var header = $(`
+		<div class="PrettyCards_CollectionBackButton"><span class="glyphicon glyphicon-arrow-left"></span> Back to Collection Select Screen</div>
 		<div class="PrettyCards_BigCollectionName">${c.name}</div>
 		<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
 		<div>${c.note}</div>
 	`);
+	
+	header[0].onclick = ViewCollectionSelectScreen;
 	
 	showcase.append(header);
 	
@@ -67,6 +70,11 @@ function ViewCollection(c) {
 		showcase.append(cards);
 	}
 	
+}
+
+function ViewCollectionSelectScreen() {
+	$("#PrettyCards_CustomCardCategories").css("display", "block");
+	$("#PrettyCards_CustomCardShowcase").css("display", "none");
 }
 
 function DoStuffWhenAllCardsAreReady() {

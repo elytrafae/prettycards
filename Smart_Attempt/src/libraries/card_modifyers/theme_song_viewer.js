@@ -3,7 +3,7 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
-import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js";
+import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
 
 settings.theme_song_preview = PrettyCards_plugin.settings().add({
 	'key': 'theme_song_preview',
@@ -24,7 +24,7 @@ const audio = new Audio();
 
 if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 
-	PrettyCards_plugin.events.on("appendCard()", function(data) {
+	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
 		var html$ = data.element;
 		var card = data.card;
 		var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
@@ -36,16 +36,14 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 		}
 		
 		if (doesCardHaveTheme) {
-			var customExtension = null;
-			for (var i=0; i < CustomCardsDictionary.customExtensions.length; i++) {
-				var extension = CustomCardsDictionary.customExtensions[i];
-				if (extension.id === card.extension) {
-					customExtension = extension;
-				}
+			var collection = card.collection;
+			if (typeof(collection) == "number") {
+				collection = collections[collection];
+				card.collection = collection;
 			}
 			var _SRC = "";
-			if (customExtension != null) {
-				_SRC = customExtension.themeSongFolder + $.i18n('card-name-' + card.id, 1).split(' ').join('_') + '.ogg';
+			if (collection) {
+				_SRC = collection.cardSongPrefix + $.i18n('card-name-' + card.id, 1).split(' ').join('_') + '.ogg';
 				//console.log(card, card.id, $.i18n('card-name-' + card.id, 1), _SRC);
 			} else {
 				if (card.id in cardExceptions) {

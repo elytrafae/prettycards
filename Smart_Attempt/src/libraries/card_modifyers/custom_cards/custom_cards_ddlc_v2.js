@@ -7,6 +7,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "Doki Doki Literature Club Set",
 		author: "CMD_God",
 		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/",
+		cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/DDLC/",
 		rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
 		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
 		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
@@ -29,13 +30,19 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		id: "CHRSPELL"
 	});
 	
+	var fallen = c.newKeyword({
+		name: "Fallen",
+		description: "This effect triggers when this monster dies during its owner's turn.",
+		id: "FALLEN"
+	});
+	
 	c.newCard({
 		name: "{{PLURAL:$1|Sayori|Sayoris}}",
 		image: "Sayori",
 		cost: 4,
 		attack: 5,
 		hp: 4,
-		description: `{{KW:MAGIC}}: Deal 2 {{DMG}} to adjacent ally monsters. {{KW:FALLEN}}: Give all ${doki.me(2)} in your hand +1 {{HP}}.`,
+		description: `{{KW:MAGIC}}: Deal 2 {{DMG}} to adjacent ally monsters. ${fallen.me()}: Give all ${doki.me(2)} in your hand +1 {{HP}}.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON"
@@ -47,7 +54,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 3,
 		attack: 3,
 		hp: 3,
-		description: "Force an ally {{KW:FALLEN}} monster to attack the monster in front of it.",
+		description: `Force an ally ${fallen.me()} monster to attack the monster in front of it.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON"
@@ -59,7 +66,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 3,
 		attack: 3,
 		hp: 2,
-		description: "{{KW:MAGIC}}: {{KW:PARALYZE}} an enemy monster. {{KW:FALLEN}}: If it's alive, give it -2 {{ATK}}. Otherwise give -1 {{ATK}} to a random enemy monster.",
+		description: `{{KW:MAGIC}}: {{KW:PARALYZE}} an enemy monster. ${fallen.me()}: If it's alive, give it -2 {{ATK}}. Otherwise give -1 {{ATK}} to a random enemy monster.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON"
@@ -71,7 +78,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 7,
 		attack: 4,
 		hp: 6,
-		description: "{{KW:TAUNT}}. {{KW:FALLEN}}: Give the top 3 {{KW:FALLEN}} monsters in your deck -1 {{cost}}.",
+		description: `{{KW:TAUNT}}. ${fallen.me()}: Give the top 3 ${fallen.me()} monsters in your deck -1 {{cost}}.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "RARE"
@@ -85,7 +92,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		attack: 5,
 		hp: 2,
 		//description: "Whenever you summon an {{KW:ARACHNID}} give it +1/+1. {{KW:DUST}}: Fill your board with {{CARD:115|2}} and give them +1/+1.",
-		description: "{{KW:MAGIC}}: Kill an ally {{KW:FALLEN}} monster to deal their {{HP}} as {{DMG}} to yourself and trigger its {{KW:FALLEN}} effect. {{KW:FALLEN}}: Add a copy of it to your deck with -1 {{cost}}.",
+		description: `{{KW:MAGIC}}: Kill an ally ${fallen.me()} monster to deal their {{HP}} as {{DMG}} to yourself and trigger its ${fallen.me()} effect. ${fallen.me()}: Add a copy of it to your deck with -1 {{cost}}.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "RARE"
@@ -97,7 +104,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		attack: 5,
 		hp: 7,
-		description: "Look at 3 random non-{{RARITY:DETERMINATION}} {{TRIBE:DOKI|2}} you don't have in your deck and catch one. {{KW:DUST}}: Release it into your deck.",
+		description: `Look at 3 random non-{{RARITY:DETERMINATION}} {{TRIBE:DOKI|2}} you don't have in your deck and catch one. {{KW:DUST}}: Release it into your deck.`,
 		extension: "BASE",
 		rarity: "RARE",
 		customFont: "DTM-Mono"
@@ -121,7 +128,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 4,
 		attack: 3,
 		hp: 2,
-		description: "{{KW:MAGIC}}: An ally {{KW:FALLEN}} monster can attack another monster. {{KW:FALLEN}}: Trigger the effect of a random {{KW:FALLEN}} monster in your hand and return it to your deck with +1/-1.",
+		description: `{{KW:MAGIC}}: An ally ${fallen.me()} monster can attack another monster. ${fallen.me()}: Trigger the effect of a random ${fallen.me()} monster in your hand and return it to your deck with +1/-1.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "EPIC"
@@ -134,7 +141,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		attack: 6,
 		hp: 5,
 		//armor: true,
-		description: "{{KW:MAGIC}}: Target an ally {{KW:FALLEN}} monster. {{KW:DELAY}}: If it's dead, {{KW:SILENCE}} and deal 3 {{DMG}} and give -2 {{ATK}} to the monster in front of it.",
+		description: `{{KW:MAGIC}}: Target an ally ${fallen.me()} monster. {{KW:DELAY}}: If it's dead, {{KW:SILENCE}} and deal 3 {{DMG}} and give -2 {{ATK}} to the monster in front of it.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "EPIC"
@@ -147,8 +154,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		attack: 4,
 		hp: 4,
 		//haste: true,
-		//description: "{{KW:HASTE}}. {{KW:FALLEN}}: If this killed an enemy monster, deal the excess {{DMG}} this received to the enemy player.",
-		description: `{{KW:TRANSPARENCY}}. {{KW:FALLEN}}: Add a random ${doki.me()} from your dustpile back to your hand with -1 {{cost}} and -2 {{HP}}.`,
+		//description: "{{KW:HASTE}}. ${fallen.me()}: If this killed an enemy monster, deal the excess {{DMG}} this received to the enemy player.",
+		description: `{{KW:TRANSPARENCY}}. ${fallen.me()}: Add a random ${doki.me()} from your dustpile back to your hand with -1 {{cost}} and -2 {{HP}}.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "EPIC"
@@ -160,8 +167,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 8,
 		attack: 5,
 		hp: 9,
-		description: `{{KW:FALLEN}}: Summon 3 random non-{{RARITY:DETERMINATION}} ${doki.me(2)} from your dustpile. {{KW:DELAY}}: Kill them and lose 2 Max {{HP}} for each killed.`,
-		//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} {{KW:FALLEN}} monsters from your dustpile. Trigger their {{KW:FALLEN}} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
+		description: `${fallen.me()}: Summon 3 random non-{{RARITY:DETERMINATION}} ${doki.me(2)} from your dustpile. {{KW:DELAY}}: Kill them and lose 2 Max {{HP}} for each killed.`,
+		//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} ${fallen.me()} monsters from your dustpile. Trigger their ${fallen.me()} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "LEGENDARY"
@@ -173,7 +180,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		attack: 4,
 		hp: 6,
-		description: "{{KW:MAGIC}}: Fully heal all ally {{KW:FALLEN}} monsters and give them +1 {{ATK}}. {{KW:FALLEN}}: Force all enemy monsters to attack ally monsters in front of them.",
+		description: `{{KW:MAGIC}}: Fully heal all ally ${fallen.me()} monsters and give them +1 {{ATK}}. ${fallen.me()}: Force all enemy monsters to attack ally monsters in front of them.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "LEGENDARY"
@@ -187,7 +194,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 0,
 		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, apply them to the monsters in front of them, burn this and draw a card.",
 		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, burn this and draw a card.",
-		description: "Heal 5 {{HP}} split among all damaged ally monsters. Excess healing is healed to you. Draw a card.",
+		description: `Heal 5 {{HP}} split among all damaged ally monsters. Excess healing is healed to you. Draw a card.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN"
@@ -213,7 +220,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 0,
 		//description: "{{KW:TURBO}}: Kill the enemy monster with the lowest {{HP}}, burn this and draw a card.",
 		//description: "{{KW:TURBO}}: Give the enemy monster with the liwest {{HP}} -4 {{HP}}, burn this and draw a card.",
-		description: "Give an enemy monster -1/-2, then a random other enemy monster -1/-1. If there is only one enemy monster, draw a card.",
+		description: `Give an enemy monster -1/-2, then a random other enemy monster -1/-1. If there is only one enemy monster, draw a card.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN"
@@ -225,7 +232,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 0,
 		//description: "{{KW:TURBO}}: Send a random ally and enemy non-{{RARITY:DETERMINATION}} monster from the board to their owners' hands, burn this and draw a card.",
 		//description: "{{KW:TURBO}}: {{KW:SILENCE}} an enemy non-{{RARITY:DETERMINATION}} monster, burn this and draw a card.",
-		description: "{{KW:SILENCE}} an enemy monster if its {{ATK}} was 4 or less. Otherwise, give it -3 {{ATK}}.",
+		description: `{{KW:SILENCE}} an enemy monster if its {{ATK}} was 4 or less. Otherwise, give it -3 {{ATK}}.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN"
@@ -235,7 +242,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "Character Folder", 
 		image: "File_Explorer",
 		rarity: "DETERMINATION",
-		description: `{{KW:TURN-END}}: If an ally monster died this turn, add the next ${chr_spells.me()} to the top of your deck. Whenever you summon a {{KW:FALLEN}} monster, if it's on the right, give it -2/-1 and trigger its {{KW:FALLEN}} effect. 
+		description: `{{KW:TURN-END}}: If an ally monster died this turn, add the next ${chr_spells.me()} to the top of your deck. Whenever you summon a ${fallen.me()} monster, if it's on the right, give it -2/-1 and trigger its ${fallen.me()} effect. 
 		Order of ${chr_spells.me(2)}: ${sayori_chr.me()} > ${natsuki_chr.me()} > ${yuri_chr.me()} > ${monika_chr.me()} > Start over.`
 	});
 	
@@ -246,7 +253,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 11,
 		attack: 6,
 		hp: 9,
-		description: `{{KW:MAGIC}}: Add the ${file_exp.me()} artifact. {{KW:DELAY}}: Add the next ${chr_spells.me()} to your hand if an ally {{KW:FALLEN}} monster died this turn.`,
+		description: `{{KW:MAGIC}}: Add the ${file_exp.me()} artifact. {{KW:DELAY}}: Add the next ${chr_spells.me()} to your hand if an ally ${fallen.me()} monster died this turn.`,
 		tribes: [doki],
 		extension: "DDLC",
 		typeSkin: 2,
