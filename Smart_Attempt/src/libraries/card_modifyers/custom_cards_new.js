@@ -4,6 +4,23 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
 
+function OpenAuthorNote(card) {
+	window.BootstrapDialog.show({
+		title: "Author's Note",
+		message: window.$.i18n(card.note),
+		//onshow: this.OnShow
+		buttons: [
+			{
+				label: window.$.i18n("dialog-ok"),
+				cssClass: 'btn-primary',
+				action: function(dialog) {
+					dialog.close();
+				}
+			}
+		]
+	});
+}
+
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	if (underscript.onPage("CustomCards")) {
 		var oldAppendCard = window.appendCard;
@@ -72,7 +89,11 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			}
 			
 			if (card.note && card.note.length > 0) {
-				var noteIcon = window.$("<img></img>")
+				var noteIcon = window.$('<img src="https://github.com/CMD-God/prettycards/raw/master/img/CardPowers/note.png" class="infoPowers helpPointer" style="top: 66px;right: 138px;"></img>');
+				noteIcon.contextmenu(function() {
+					OpenAuthorNote(card);
+				});
+				element.find(".cardStatus").append(noteIcon);
 			}
 			
 			//card.onRender(data); // Removing this system because clones do not mix well with this.

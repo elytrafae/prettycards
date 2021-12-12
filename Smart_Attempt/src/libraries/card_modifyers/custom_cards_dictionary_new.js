@@ -2,6 +2,7 @@
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
+import {LoadFont, ListenForWhenAllFontsAreLoaded} from "/src/libraries/font_loader.js";
 
 var customCardsStart = 2000;
 var nextCustomCardId = customCardsStart;
@@ -87,6 +88,10 @@ class CustomCardCollection {
 		var kw = new Keyword(settings);
 		this.keywords.push(kw);
 		return kw;
+	}
+	
+	loadFont(name, url) {
+		LoadFont(name, url);
 	}
 	
 	getTribeById(id) {

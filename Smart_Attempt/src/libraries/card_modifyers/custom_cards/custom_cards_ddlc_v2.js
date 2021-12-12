@@ -12,11 +12,14 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
 		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
 		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
-		universalCustomFont: "Aller",
+		//universalCustomFont: "Aller",
 		note: `This is a Doki Doki Literature Club themed card set I wanted to make for the longest time. I wanted it to be perfect, so I often modified it, asked for feedback and even the custom cards idea was born because of this set. So, please enjoy and don't be afraid to give me feedback! ^^
 		<br><br>
 		NOTE: Hand nerfs cannot bring a monster below 1 HP. I didn't add this in every instance because some cards are full enough already.`
 	});
+	
+	var font_name = c.loadFont("Aller", "https://raw.githubusercontent.com/CMD-God/prettycards/master/fonts/Aller_Rg.ttf");
+	c.universalCustomFont = font_name;
 	
 	var doki = c.newTribe({
 		name: "{{PLURAL:$1|Doki|Dokis}}",
@@ -78,6 +81,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 7,
 		attack: 4,
 		hp: 6,
+		taunt: true,
 		description: `{{KW:TAUNT}}. ${fallen.me()}: Give the top 3 ${fallen.me()} monsters in your deck -1 {{cost}}.`,
 		tribes: [doki],
 		extension: "DDLC",
@@ -259,7 +263,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		typeSkin: 2,
-		rarity: "DETERMINATION"
+		rarity: "DETERMINATION",
+		note: `The DT of the ${doki.me()} tribe.`
 	});
 	
 })

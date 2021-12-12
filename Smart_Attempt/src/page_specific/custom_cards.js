@@ -5,6 +5,7 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 import {} from "/src/libraries/card_modifyers/custom_cards_new.js";
 
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
+import {LoadFont, ListenForWhenAllFontsAreLoaded} from "/src/libraries/font_loader.js";
 
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
 
@@ -77,9 +78,7 @@ function ViewCollectionSelectScreen() {
 	$("#PrettyCards_CustomCardShowcase").css("display", "none");
 }
 
-function DoStuffWhenAllCardsAreReady() {
-	PrettyCards_plugin.events.emit("PrettyCards:customCards");
-	console.log(collections);
+function SetUpCollectionSelectionPage() {
 	var cont = $("#PrettyCards_CustomCardCategories");
 	for (var i=0; i < collections.length; i++) {
 		const c = collections[i];
@@ -98,10 +97,16 @@ function DoStuffWhenAllCardsAreReady() {
 	}
 }
 
+function DoStuffWhenAllCardsAreReady() {
+	PrettyCards_plugin.events.emit("PrettyCards:customCards");
+	console.log(collections);
+	ListenForWhenAllFontsAreLoaded(SetUpCollectionSelectionPage);
+}
+
 function InitCustomCards() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos PrettyCards:onArtifacts", function () {
 		window.$("title").html("PrettyCards - Custom Cards");
-		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@cb746b2fbb5d5acf1d837a26dc477abcb7a74e00/css/CustomCards.css");
+		// utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@cb746b2fbb5d5acf1d837a26dc477abcb7a74e00/css/CustomCards.css"); // Moved to "Fancy Helper" because this needs to be loaded at all times
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CustomCardCategories"></div>
 			<div id="PrettyCards_CustomCardShowcase"></div>

@@ -1,6 +1,7 @@
 
 // Currently only for the fancy Artifact And Soul display thingy.
 
+import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 
@@ -189,6 +190,8 @@ class FancyDisplay {
 FancyDisplay.customSouls = [];
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@cb746b2fbb5d5acf1d837a26dc477abcb7a74e00/css/CustomCards.css");
+	
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);
 	window.artifactsInfo = FancyDisplay.ViewArtifactsInfo.bind(this);

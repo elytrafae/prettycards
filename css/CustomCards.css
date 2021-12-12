@@ -31,13 +31,15 @@
 	height: 231px;
 }
 
+/*
 @font-face {
 	font-family: Aller;
 	src: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/fonts/Aller_Rg.ttf);
 }
+*/
 
 .card.ext_DDLC {
-	font-family: Aller;
+	/*font-family: Aller;*/
 }
 
 .cardHeader, .cardFooter {
