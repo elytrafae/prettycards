@@ -120,7 +120,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 5,
 		attack: 4,
 		hp: 4,
-		description: `Look at 3 random ${doki.me(2)} (rarity <= {{RARITY:EPIC}}) and choose one. {{KW:DELAY}}: Summon it for both players and force yours to attack the enemy one.`,
+		description: `{{KW:MAGIC}}: Look at 3 random ${doki.me(2)} (rarity <= {{RARITY:EPIC}}) and choose one. {{KW:DELAY}}: Summon it for both players and force yours to attack the enemy one.`,
 		extension: "BASE",
 		rarity: "EPIC",
 		customFont: "DTM-Mono"

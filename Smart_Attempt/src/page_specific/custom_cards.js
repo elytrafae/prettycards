@@ -80,6 +80,7 @@ function ViewCollectionSelectScreen() {
 
 function SetUpCollectionSelectionPage() {
 	var cont = $("#PrettyCards_CustomCardCategories");
+	cont.html("");
 	for (var i=0; i < collections.length; i++) {
 		const c = collections[i];
 		var collection = $(`
@@ -87,6 +88,8 @@ function SetUpCollectionSelectionPage() {
 				<div class="PrettyCards_CollectionName">${c.name}</div>
 				<div class="PrettyCards_CollectionAuthor Artist">${c.author}</div>
 				<div class="PrettyCards_CollectionDetails">
+					<div>${c.souls.length} ${(c.souls.length == 1) ? "Soul" : "Souls"}</div>
+					<div>${c.artifacts.length} ${(c.artifacts.length == 1) ? "Artifact" : "Artifacts"}</div>
 					<div>${c.cards.length} ${(c.cards.length == 1) ? "Card" : "Cards"}</div>
 				</div>
 			</div>`);
@@ -98,8 +101,10 @@ function SetUpCollectionSelectionPage() {
 }
 
 function DoStuffWhenAllCardsAreReady() {
+	$("#PrettyCards_CustomCardCategories").html("Loading Custom Cards . . .");
 	PrettyCards_plugin.events.emit("PrettyCards:customCards");
 	console.log(collections);
+	$("#PrettyCards_CustomCardCategories").html("Loading Custom Fonts . . .");
 	ListenForWhenAllFontsAreLoaded(SetUpCollectionSelectionPage);
 }
 
@@ -108,7 +113,7 @@ function InitCustomCards() {
 		window.$("title").html("PrettyCards - Custom Cards");
 		// utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@cb746b2fbb5d5acf1d837a26dc477abcb7a74e00/css/CustomCards.css"); // Moved to "Fancy Helper" because this needs to be loaded at all times
 		window.$(".mainContent").html(`
-			<div id="PrettyCards_CustomCardCategories"></div>
+			<div id="PrettyCards_CustomCardCategories">Loading All Cards . . .</div>
 			<div id="PrettyCards_CustomCardShowcase"></div>
 		`);
 		

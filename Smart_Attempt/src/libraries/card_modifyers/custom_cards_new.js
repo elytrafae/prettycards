@@ -99,11 +99,6 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			//card.onRender(data); // Removing this system because clones do not mix well with this.
 			
 		});
-		
-		var allerLoader = window.$('<span style="font-family: Aller;">Aller Loader!</span>');
-		//console.log("Aller Loader!", allerLoader);
-		window.$("body").append(allerLoader);
-		setTimeout(function() {allerLoader.remove()}, 100);
 	}
 });
 

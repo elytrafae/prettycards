@@ -91,7 +91,7 @@ class CustomCardCollection {
 	}
 	
 	loadFont(name, url) {
-		LoadFont(name, url);
+		return LoadFont(name, url);
 	}
 	
 	getTribeById(id) {
