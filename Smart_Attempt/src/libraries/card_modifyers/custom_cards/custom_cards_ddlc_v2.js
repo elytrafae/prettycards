@@ -153,6 +153,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 5,
 		attack: 4,
 		hp: 4,
+		transparency: true,
 		//haste: true,
 		//description: "{{KW:HASTE}}. ${fallen.me()}: If this killed an enemy monster, deal the excess {{DMG}} this received to the enemy player.",
 		description: `{{KW:TRANSPARENCY}}. ${fallen.me()}: Add a random ${doki.me()} from your dustpile back to your hand with -1 {{cost}} and -2 {{HP}}.`,
@@ -243,7 +244,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		image: "File_Explorer",
 		rarity: "DETERMINATION",
 		description: `{{KW:TURN-END}}: If an ally monster died this turn, add the next ${chr_spells.me()} to the top of your deck. Whenever you summon a ${fallen.me()} monster, if it's on the right, give it -2/-1 and trigger its ${fallen.me()} effect. 
-		Order of ${chr_spells.me(2)}: ${sayori_chr.me()} > ${natsuki_chr.me()} > ${yuri_chr.me()} > ${monika_chr.me()} > Start over.`
+		Order of ${chr_spells.me(2)}: ${sayori_chr.me()} > ${natsuki_chr.me()} > ${yuri_chr.me()} > ${monika_chr.me()} > Start over.`,
+		note: `Basically, this is where the majority of Just Monika's power lies. While this artifact encourages this to be used in combination with the ${doki.me(2)}, the first effect can prove useful in other tribes, or even in a regular match as well, as most players often trade their cards anyway, so it isn't a dead weight if it ends up in the wrong deck, either.`
 	});
 	
 	c.newCard({

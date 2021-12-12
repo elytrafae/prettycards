@@ -71,6 +71,10 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				cardDescDiv$.css('font-size', (descSize + "px"));
 			}
 			
+			if (card.note && card.note.length > 0) {
+				var noteIcon = window.$("<img></img>")
+			}
+			
 			//card.onRender(data); // Removing this system because clones do not mix well with this.
 			
 		});

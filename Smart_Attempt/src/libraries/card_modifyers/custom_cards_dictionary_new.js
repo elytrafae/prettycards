@@ -145,6 +145,7 @@ class Card {
 		this.program = 0;
 		
 		this.customFont = "";
+		this.note = "";
 		
 		for (var prop in settings) {
 			this[prop] = settings[prop];
@@ -262,6 +263,7 @@ class Artifact {
 		this.description = settings.description || "NO EFFECT";
 		this.image = settings.image || "NO_IMAGE";
 		this.rarity = settings.rarity || "COMMON";
+		this.note = settings.note || "";
 		Object.defineProperty(this, "id", {
 			value: nextCustomArtifact,
 			writable: false
@@ -325,6 +327,7 @@ class Soul {
 		this.displayName = settings.displayName || "NoName";
 		this.image = settings.image || "NO_IMAGE";
 		this.description = settings.description || "No description";
+		this.note = settings.note || "";
 		
 		window.$.i18n().load( {
 			en: { 

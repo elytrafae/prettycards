@@ -67,6 +67,14 @@ class FancyDisplay {
 		this.box.append(this.rarity);
 		this.box.append(this.description);
 		
+		if (data.note && data.note.length > 0) {
+			this.noteTitle = window.$(`<div class="PrettyCards_ArtifactDisplayNoteTitle">Author's Note</div>`);
+			this.note = window.$(`<div class="PrettyCards_ArtifactDisplayNote">${data.note}</div>`);
+			
+			this.box.append(this.noteTitle);
+			this.box.append(this.note);
+		}
+		
 		//$("body").append(this.backdrop);
 		window.BootstrapDialog.show({
             title: 'You shouldn\'t be able to see this!',
@@ -97,7 +105,8 @@ class FancyDisplay {
 			text_class: artifact.rarity || "COMMON",
 			rarity_text: artifact.rarity + " Artifact",
 			description: $.i18n("artifact-" + artifact.id),
-			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity
+			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
+			note: window.$.i18n(artifact.note)
 		};
 		var helper = new FancyDisplay(data);
 	}
@@ -135,7 +144,8 @@ class FancyDisplay {
 			rarity_text: "Soul",
 			description: desc,
 			image: image_src,
-			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id
+			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id,
+			note: (customObj ? window.i18n(customObj.note) : "")
 		};
 		var helper = new FancyDisplay(data);
 	}
@@ -165,6 +175,15 @@ class FancyDisplay {
 		 }
 	}
 	
+	static TestArtifactsInfo() {
+		var box = window.$("<div></div>");
+		for (var i=0; i < artifactDisplay.artifacts.length; i++) {
+			var art = artifactDisplay.artifacts[i];
+			box.append(`<img class="artifact-img" artifactId="${art.id}">`);
+		}
+		window.artifactsInfo(box);
+	}
+	
 }
 
 FancyDisplay.customSouls = [];
@@ -173,6 +192,10 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);
 	window.artifactsInfo = FancyDisplay.ViewArtifactsInfo.bind(this);
+	
+	// Test functions
+	//window.testArtifactsInfo = FancyDisplay.TestArtifactsInfo.bind(this);
+	//
 });
 
 export {FancyDisplay};

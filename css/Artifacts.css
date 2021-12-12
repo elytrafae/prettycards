@@ -102,6 +102,11 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	font-size: 16px;
 }
 
+.PrettyCards_ArtifactDisplayNoteTitle {
+	margin-top: 30px;
+	font-size: 2em;
+}
+
 .PrettyCards_SoulDisplay_SpellsHeader {
 	margin-top: 20px;
 	text-align: center;
