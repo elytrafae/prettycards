@@ -186,7 +186,17 @@ class Card {
 				
 		this.tribes = this.tribes.map((el) => el.toString());
 		
-		this.name = window.$.i18n("card-name-" + this.id, 1);
+		Object.defineProperty(this, "tribes", {
+			value: Object.freeze(this.tribes),
+			writable: false
+		});
+		
+		Object.defineProperty(this, "name", {
+			value: window.$.i18n("card-name-" + this.id, 1),
+			writable: false
+		});
+		this.description = undefined;
+		
 		window.allCards.push(this);
 	}
 	

@@ -190,7 +190,7 @@ class FancyDisplay {
 FancyDisplay.customSouls = [];
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@0373e0af85ac1ab6f5f99ca4cad3010c540a2839/css/CustomCards.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@7a4783424a82a3ff182e420deed154100b57e885/css/CustomCards.css");
 	
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);

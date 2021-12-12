@@ -9,10 +9,16 @@
 	to { filter: drop-shadow(0.1em 0.08em 0.4em #f00); }
 }
 
+/*
 img[legendary="true"] {
+	animation: LegendaryArtifact 2s alternate infinite ease-in-out;
+}*/
+
+.PrettyCards_Artifact_LEGENDARY {
 	animation: LegendaryArtifact 2s alternate infinite ease-in-out;
 }
 
+/*
 img[name="Cloudy Glasses"],
 img[name="Crab Apple"],
 img[name="Economics"],
@@ -24,9 +30,19 @@ img[name="True Justice"],
 img[name="IQ"],
 img[name="Hail"] {
 	filter: drop-shadow(0.1em 0.08em 0.4em #00ca78);
+}*/
+
+.PrettyCards_Artifact_TOKEN {
+	filter: drop-shadow(0.1em 0.08em 0.4em #00ca78);
 }
 
+
+/*
 img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
+	animation: DTArtifact 1.5s alternate infinite ease-in-out;
+}*/
+
+.PrettyCards_Artifact_DETERMINATION {
 	animation: DTArtifact 1.5s alternate infinite ease-in-out;
 }
 
