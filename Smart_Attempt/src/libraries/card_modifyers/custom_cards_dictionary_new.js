@@ -175,7 +175,10 @@ class Card {
 		this.originalAttack = this.attack;
 		this.originalCost = this.cost;
 		this.baseImage = this.image;
-		this.isCustom = true;
+		Object.defineProperty(this, "isCustom", {
+			value: true,
+			writable: false
+		});
 		
 		window.$.i18n().load( {
 			en: { 

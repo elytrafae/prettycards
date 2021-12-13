@@ -65,8 +65,27 @@ var artifactDisplay = new ArtifactDisplay();
 window.artifactDisplay = artifactDisplay;
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@7a4783424a82a3ff182e420deed154100b57e885/css/Artifacts.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@025c3d570cb15ddbf7d1c876684c9b6bd628f007/css/Artifacts.css");
 	artifactDisplay.GetAllArtifacts();
+});
+
+PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
+	//console.log("DATA", data);
+	var backup_artifacts = [];
+	if (data.action == "getPlayersStats") {
+		var artifacts = JSON.parse(data.artifacts);
+		for (var player in artifacts) {
+			backup_artifacts = backup_artifacts.concat(artifacts[player]);
+		}
+	} else {
+		backup_artifacts = JSON.parse(data.enemyArtifacts).concat(JSON.parse(data.yourArtifacts));
+	}
+	//console.log("BACKUP", backup_artifacts);
+	for (var i=0; i < backup_artifacts.length; i++) {
+		var artifact = backup_artifacts[i];
+		artifactDisplay.SetRarityForArtifact(artifact);
+		window.$(".artifact-img[artifactId=" + artifact.id + "]").addClass("PrettyCards_Artifact_" + artifact.rarity);
+	}
 });
 
 export {artifactDisplay};
