@@ -173,7 +173,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:TRANSPARENCY}}. ${fallen.me()}: Add a random ${doki.me()} from your dustpile back to your hand with -1 {{cost}} and -2 {{HP}}.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "EPIC"
+		rarity: "EPIC",
+		note: `I wanted to mess around with things that can help one trigger ${fallen.me()} effects without the use of {{KW:Haste}}, bonus attacks or self damage . . . And the answer was {{KW:TRANSPARENCY}}!<br><br>I am unsure how cool the effect is, but I still think that something like this can be very useful in ${fallen.me()} decks.`
 	});
 
 	c.newCard({
@@ -186,7 +187,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} ${fallen.me()} monsters from your dustpile. Trigger their ${fallen.me()} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "LEGENDARY"
+		rarity: "LEGENDARY",
+		note: `This is one card I am not all that happy with now, personally, but I admit it can have some very clever strategies to ensure that the {{KW:DELAY}} effect doesn't hit you, so I left it as-is.`
 	});
 
 	c.newCard({
@@ -198,7 +200,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:MAGIC}}: Fully heal all ally ${fallen.me()} monsters and give them +1 {{ATK}}. ${fallen.me()}: Force all enemy monsters to attack ally monsters in front of them.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "LEGENDARY"
+		rarity: "LEGENDARY",
+		note: `This card just screams "TRADES!". This one, just like Depressed Sayori, originally had a very long text, so I modified the effect a little, but the principle is the same.`
 	});
 
 	// CHR Spells
@@ -212,7 +215,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `Heal 5 {{HP}} split among all damaged ally monsters. Excess healing is healed to you. Draw a card.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
-		rarity: "TOKEN"
+		rarity: "TOKEN",
+		note: `Semi-targeted heals and second best card draw out of the ${chr_spells.me(2)}.`
 	});
 
 	var natsuki_chr = c.newCard({
@@ -226,7 +230,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `Look at 3 random non-{{RARITY:DETERMINATION}} ${doki.me(3)} in your dustpile and choose one to add to the top of your deck with -1 {{cost}}. {{KW:DELAY}}: Draw 2 cards.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
-		rarity: "TOKEN"
+		rarity: "TOKEN",
+		note: `Revive and best card draw out of the ${chr_spells.me(2)}.`
 	});
 
 	var yuri_chr = c.newCard({
@@ -238,7 +243,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `Give an enemy monster -1/-2, then a random other enemy monster -1/-1. If there is only one enemy monster, draw a card.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
-		rarity: "TOKEN"
+		rarity: "TOKEN",
+		note: `Nerfs and either more nerfs or a conditional card draw if there was only one enemy monster.`
 	});
 
 	var monika_chr = c.newCard({
@@ -250,7 +256,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:SILENCE}} an enemy monster if its {{ATK}} was 4 or less. Otherwise, give it -3 {{ATK}}.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
-		rarity: "TOKEN"
+		rarity: "TOKEN",
+		note: `Powerful effect at the downside of no card draws.`
 	});
 	
 	var file_exp = c.newArtifact({
@@ -274,7 +281,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		extension: "DDLC",
 		typeSkin: 2,
 		rarity: "DETERMINATION",
-		note: `The DT of the ${doki.me()} tribe.`
+		note: `The DT of the ${doki.me()} tribe. The most notable aspects of this card are noted with ${file_exp.me()}.`
 	});
 	
 })
