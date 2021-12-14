@@ -231,7 +231,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN",
-		note: `Revive and best card draw out of the ${chr_spells.me(2)}.`
+		note: `Card revive and best card draw out of the ${chr_spells.me(2)}.`
 	});
 
 	var yuri_chr = c.newCard({
