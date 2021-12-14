@@ -48,7 +48,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:MAGIC}}: Deal 2 {{DMG}} to adjacent ally monsters. ${fallen.me()}: Give all ${doki.me(2)} in your hand +1 {{HP}}.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "COMMON"
+		rarity: "COMMON",
+		note: `One of the textbook examples of this tribe (or, at least, the old direction I wanted to take with it). <br><br>It has slightly better than average stats with an either negligable or useful side effect and a slightly weak ${fallen.me()} effect, which serves to make it easier for these monsters to trade. <br><br>I was thinking of modifying her slightly, but I am really unsure if I want that.`
 	});
 	
 	c.newCard({
@@ -60,7 +61,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `Force an ally ${fallen.me()} monster to attack the monster in front of it.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "COMMON"
+		rarity: "COMMON",
+		note: `Simple, effective, powerful. This is the main activator of the tribe. While it IS tribed old Politics Bear, this card fits here too perfectly to warrant changing it.`
 	});
 	
 	c.newCard({
@@ -72,7 +74,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:MAGIC}}: {{KW:PARALYZE}} an enemy monster. ${fallen.me()}: If it's alive, give it -2 {{ATK}}. Otherwise give -1 {{ATK}} to a random enemy monster.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "COMMON"
+		rarity: "COMMON",
+		note: `Originally created around anti-ping and {{KW:PARALYZE}}, then {{KW:KR}}. Now I feel like she sits at a pretty good spot with a choice system built into her ${fallen.me()} effect.`
 	});
 	
 	c.newCard({
@@ -85,7 +88,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:TAUNT}}. ${fallen.me()}: Give the top 3 ${fallen.me()} monsters in your deck -1 {{cost}}.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "RARE"
+		rarity: "RARE",
+		note: `The tribe's {{KW:TAUNT}}. I am unsure how well she would perform as I personally believe that {{KW:TAUNT}} and ${fallen.me()} don't synergize, but she's hardly a bad {{KW:TAUNT}} and the ${fallen.me()} effect is quite weak anyway, so she can offer protection to other ${fallen.me()} monsters with stronger effects.`
 	});
 	
 	// Amy Sprite Sheet by u/Meddy-sin
@@ -99,7 +103,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:MAGIC}}: Kill an ally ${fallen.me()} monster to deal their {{HP}} as {{DMG}} to yourself and trigger its ${fallen.me()} effect. ${fallen.me()}: Add a copy of it to your deck with -1 {{cost}}.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "RARE"
+		rarity: "RARE",
+		note: `One of the more complicated cards, but basically it's a double ${fallen.me()} trigger at the cost of your HP, and it can give you back copies of the cards. Pure value!`
 	});
 	
 	c.newCard({
@@ -108,10 +113,11 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		attack: 5,
 		hp: 7,
-		description: `Look at 3 random non-{{RARITY:DETERMINATION}} {{TRIBE:DOKI|2}} you don't have in your deck and catch one. {{KW:DUST}}: Release it into your deck.`,
+		description: `Look at 3 random non-{{RARITY:DETERMINATION}} {{TRIBE:DOKI|2}} you didn't start in your deck with and catch one. {{KW:DUST}}: Release it into your deck.`,
 		extension: "BASE",
 		rarity: "RARE",
-		customFont: "DTM-Mono"
+		customFont: "DTM-Mono",
+		note: `One of my headcanons as to how could such cards be added to Undercards was that Alphys would play a dating sim on her PC, but somehow the characters from the dating sim would come to life.`
 	});
 	
 	c.newCard({
@@ -123,7 +129,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:MAGIC}}: Look at 3 random ${doki.me(2)} (rarity <= {{RARITY:EPIC}}) and choose one. {{KW:DELAY}}: Summon it for both players and force yours to attack the enemy one.`,
 		extension: "BASE",
 		rarity: "EPIC",
-		customFont: "DTM-Mono"
+		customFont: "DTM-Mono",
+		note: `Most of the time the effect is just helpful to you, since there are few ${doki.me(2)} who mess this up. It's also {{KW:SUPPORT}} support!`
 	});
 	
 	c.newCard({
@@ -132,10 +139,12 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 4,
 		attack: 3,
 		hp: 2,
-		description: `{{KW:MAGIC}}: An ally ${fallen.me()} monster can attack another monster. ${fallen.me()}: Trigger the effect of a random ${fallen.me()} monster in your hand and return it to your deck with +1/-1.`,
+		description: `{{KW:MAGIC}}: Heal 3 {{HP}} for each other ally ${fallen.me()} monster. ${fallen.me()}: Trigger the effect of a random ${fallen.me()} monster in your hand and return it to your deck with +1/-1.`,
+		//description: `{{KW:MAGIC}}: Give an ally ${fallen.me()} monster in your hand +1/+2. ${fallen.me()}: Trigger the effect of a random ${fallen.me()} monster in your hand and return it to your deck with +1/-1.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "EPIC"
+		rarity: "EPIC",
+		note: `Probably the hardest one to give a magic to for me. This card's original magic caused this card's text to be unreadable, so I made it a bit simpler.`
 	});
 	
 	c.newCard({
@@ -148,7 +157,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		description: `{{KW:MAGIC}}: Target an ally ${fallen.me()} monster. {{KW:DELAY}}: If it's dead, {{KW:SILENCE}} and deal 3 {{DMG}} and give -2 {{ATK}} to the monster in front of it.`,
 		tribes: [doki],
 		extension: "DDLC",
-		rarity: "EPIC"
+		rarity: "EPIC",
+		note: `A ${fallen.me()} support card that doesn't actually HAVE a ${fallen.me()} keyword? Yes, and it can even singlehandedly take out some cards that couse you trouble if you play your cards right, such as a Mettaton NEO or Sans (if you really must).`
 	});
 	
 	c.newCard({
