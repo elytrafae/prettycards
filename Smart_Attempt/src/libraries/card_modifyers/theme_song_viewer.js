@@ -43,13 +43,13 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 			}
 			var _SRC = "";
 			if (collection) {
-				_SRC = collection.cardSongPrefix + $.i18n('card-name-' + card.id, 1).split(' ').join('_') + '.ogg';
+				_SRC = collection.cardSongPrefix + card.name.split(' ').join('_') + '.ogg';
 				//console.log(card, card.id, $.i18n('card-name-' + card.id, 1), _SRC);
 			} else {
 				if (card.id in cardExceptions) {
 					_SRC = cardExceptions[card.id];
 				} else {
-					_SRC = "/musics/cards/" + $.i18n('card-name-' + card.id, 1).split(' ').join('_') + ".ogg";
+					_SRC = "/musics/cards/" + card.name.split(' ').join('_') + ".ogg";
 				}
 			}
 			const SRC = _SRC;

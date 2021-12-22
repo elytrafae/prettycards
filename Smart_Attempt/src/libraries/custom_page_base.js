@@ -26,7 +26,7 @@ function SendOnPageLoadEvent() {
 
 $(document).ready(function () {
 	page_loads++;
-	console.log("PAGE LOAD NR. " + page_loads);
+	//console.log("PAGE LOAD NR. " + page_loads);
 	SendOnPageLoadEvent();
 })
 
@@ -39,7 +39,7 @@ function waitTillNextDocumentReady() {
 }
 
 if (IsOnCustomPage()) {
-	console.log("CUSTOM PAGE!");
+	//console.log("CUSTOM PAGE!");
 	
 	/*
 	$.get("https://raw.githubusercontent.com/CMD-God/prettycards/master/html_templates/undercards.html", function (data) {
@@ -51,7 +51,7 @@ if (IsOnCustomPage()) {
 	}, "text");
 	*/
 	
-	console.log("underscript", underscript);
+	//console.log("underscript", underscript);
 	$.ajax({
 		url: "https://raw.githubusercontent.com/CMD-God/prettycards/master/html_templates/undercards.html",
 		success: function (data) {

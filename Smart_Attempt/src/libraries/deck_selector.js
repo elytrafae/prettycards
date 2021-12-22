@@ -123,7 +123,7 @@ function ProcessBaseDecks(organizedDecks) {
 			saveDeck.isBase = CompareDecks(baseDeck, saveDeck);
 			if (saveDeck.isBase) {
 				found = true;
-				console.log("Deck found!", saveDeck);
+				//console.log("Deck found!", saveDeck);
 			}
 		}
 		if (!found) {
@@ -155,7 +155,7 @@ function ProcessBaseDecks(organizedDecks) {
 				isBase: true
 			})
 			
-			console.log("Autogen ", organizedDecks[soul], soul);
+			//console.log("Autogen ", organizedDecks[soul], soul);
 		}
 	}
 }

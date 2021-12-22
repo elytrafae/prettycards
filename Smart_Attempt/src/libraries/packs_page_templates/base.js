@@ -128,7 +128,7 @@ class PacksPageTemplate {
 		var data = this.packs_data2[e.target.getAttribute("data-packid")];
 		var id = data.code_id;
 		id = id.substring(0, id.length-4);
-		console.log(data.g_buy_count, id);
+		//console.log(data.g_buy_count, id);
 		underscript.buyPacks(data.g_buy_count, {type : id, gold : true});
 		
 		data.amount += data.g_buy_count;
@@ -161,7 +161,7 @@ class PacksPageTemplate {
 	onPackUcpBuy(data) { // Should be called after the player agrees to buying packs with UCP.
 		var id = data.code_id;
 		id = id.substring(0, id.length-4);
-		console.log(data.ucp_buy_count, id);
+		//console.log(data.ucp_buy_count, id);
 		underscript.buyPacks(data.ucp_buy_count, {type : id, gold : false});
 		
 		data.amount += data.ucp_buy_count;
@@ -175,7 +175,7 @@ class PacksPageTemplate {
 		var data = this.packs_data2[e.target.getAttribute("data-packid")];
 		var id = data.code_id;
 		id = id.substring(0, id.length-4);
-		console.log(data.open_count, id);
+		//console.log(data.open_count, id);
 		window.PrettyCards_pack_being_opened = data;
 		underscript.openPacks(data.open_count, id);
 		

@@ -10,7 +10,7 @@ import {LoadFont, ListenForWhenAllFontsAreLoaded} from "/src/libraries/font_load
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
 
 function appendArtifact(artifact, c, $parent) {
-	var art = $(`<img class="PrettyCards_Artifact" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
+	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
 	art.click(function () {
 		window.artifactInfo(artifact.id);
 	})

@@ -99,6 +99,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	//console.log("Chat:getInfo ", data);
 	var user = data.user;
 	var header = data.popupElement.querySelector(".modal-header");
+	var name_color = window.localStorage["prettycards.profile_skin_text_color." + window.selfId + "." + user.profileSkin.id] || "#FFFFFF"
 	data.popup.$modalDialog[0].className = "modal-dialog modal-lg";
 	
 	header.className += " PrettyCards_UserHeader";
@@ -106,6 +107,21 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	
 	var title = header.querySelector(".bootstrap-dialog-title");
 	title.className += " PrettyCards_UserTitle";
+	title.style.color = name_color;
+	
+	var footer = data.popupElement.querySelector(".bootstrap-dialog-footer-buttons");
+	footer.style = "display: flex; justify-content: flex-end; align-items: center;";
+	
+	var color_picker = document.createElement("INPUT");
+	color_picker.setAttribute("type", "color");
+	color_picker.value = name_color;
+	color_picker.style = "height: 32px; margin: 0px 4px;";
+	color_picker.oninput = function(e) {
+		//console.log(user);
+		title.style.color = color_picker.value;
+		window.localStorage["prettycards.profile_skin_text_color." + window.selfId + "." + user.profileSkin.id] = color_picker.value;
+	}
+	footer.prepend(color_picker);
 	
 	var pfp = data.popupElement.querySelector(".avatar"); // The style pixels all assume the PFP size is the default 64x64
 	pfp.className += " PrettyCards_UserProfilePic";
@@ -241,7 +257,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		UpdateIgnoreText();
 		ignoreContainer.style.cursor = "pointer";
 		ignoreContainer.onclick = function() {
-			console.log("IGNORING USER", user, underscript.user.isIgnored(user));
+			//console.log("IGNORING USER", user, underscript.user.isIgnored(user));
 			if (underscript.user.isIgnored(user)) {
 				underscript.user.unIgnore(user);
 			} else {
@@ -480,7 +496,7 @@ function sendMessageAsPositionInRanked(pos) {
 		rainbow: true,
 		user: leaderboard[pos-1]
 	}
-	console.log(fabricatedMessage);
+	//console.log(fabricatedMessage);
 	window.appendMessage(fabricatedMessage, 1, false);
 	var eventData = {chatMessage : JSON.stringify(fabricatedMessage), room : "chat-public-1"};
 	processChatMessageEvent(eventData);

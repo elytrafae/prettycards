@@ -86,7 +86,7 @@ class FancyDisplay {
 	}
 	
 	OnShow(dial) {
-		console.log(dial);
+		//console.log(dial);
 		dial.$modalFooter.css("display", "none");
 		dial.$modalHeader.css("display", "none");
 		dial.$modalContent.css("background-color", "transparent").css("box-shadow", "initial").css("border", "none").css("padding", "0px");
@@ -107,7 +107,7 @@ class FancyDisplay {
 			rarity_text: artifact.rarity + " Artifact",
 			description: $.i18n("artifact-" + artifact.id),
 			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
-			note: window.$.i18n(artifact.note)
+			note: window.$.i18n(artifact.note || "")
 		};
 		var helper = new FancyDisplay(data);
 	}
@@ -146,19 +146,19 @@ class FancyDisplay {
 			description: desc,
 			image: image_src,
 			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id,
-			note: (customObj ? window.i18n(customObj.note) : "")
+			note: (customObj ? window.i18n(customObj.note || "") : "")
 		};
 		var helper = new FancyDisplay(data);
 	}
 	
 	static ViewArtifactsInfo(box) {
-		console.log(box);
+		//console.log(box);
 		 if (window.$(box).find('.artifact-img').length > 0) {
 			var datas = [];
 			$(box).find('.artifact-img').each(function() {
 				var artifactId = Number($(this).attr("artifactId"));
 				var artifact = artifactDisplay.GetArtifactById(artifactId);
-				console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
+				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
 				var image_src = "images/artifacts/" + artifact.image + ".png";
 				if (artifact.collection) {
 					image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
@@ -193,6 +193,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@7a4783424a82a3ff182e420deed154100b57e885/css/CustomCards.css");
 	
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
+	window.showArtifactDescBox = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);
 	window.artifactsInfo = FancyDisplay.ViewArtifactsInfo.bind(this);
 	

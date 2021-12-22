@@ -81,7 +81,7 @@ function SetMobileView() {
 	//$(".mainContent").css("width", "100%");
 	
 	var temp = $('header').contents();
-	console.log(temp);
+	//console.log(temp);
 	$("header").html(`<div class="PrettyCards_HeaderFlex"><div id="PrettyCards_HeaderLeft"></div><div id="PrettyCards_HeaderMid"></div><div id="PrettyCards_HeaderRight"></div></div>`);
 	$("#PrettyCards_HeaderMid").append(temp);
 	
@@ -165,7 +165,7 @@ function CreateSideNavMenu() {
 		var avatar = $("nav .avatar")[0];
 		var gold = $("#golds").text();
 		var ucp = $("#ucp").text();
-		console.log("AVATAR", avatar);
+		//console.log("AVATAR", avatar);
 		var user_part = $(`
 			<table class="PrettyCards_NavBarProfile">
 				<tr>

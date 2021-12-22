@@ -50,7 +50,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 	if (settings.card_flavour.value() !== settingsoptions[0]) {
 		
 		$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/translation/en/card_flavor.json", {}, function(data) {
-			console.log(data);
+			//console.log(data);
 			window.$.i18n().load({
 				en: data
 			});

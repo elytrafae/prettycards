@@ -35,7 +35,7 @@ class PackOpenAnimationTemplate {
 	}
 	
 	OnPackMoveFinish() {
-		console.log("Pack Move Animation Finished.");
+		//console.log("Pack Move Animation Finished.");
 		$(".PrettyCards_AnimationPack").addClass("PrettyCards_Floating");
 		$("#PrettyCards_PackOpenContent").click(this.OnBeforeBreakClick.bind(this));
 	}
@@ -63,7 +63,7 @@ class PackOpenAnimationTemplate {
 	}
 	
 	OnPackBreakFinish() {
-		console.log("BreakAnimationFinished!");
+		//console.log("BreakAnimationFinished!");
 		this.up.remove();
 		this.down.remove();
 		
@@ -79,7 +79,7 @@ class PackOpenAnimationTemplate {
 	OnCardFinishedGliding() {
 		this.cards_finished_gliding++;
 		if (this.cards_finished_gliding >= this.flipCards.length) {
-			console.log("Gliding finished!");
+			//console.log("Gliding finished!");
 			this.OnFinishedGliding();
 		}
 	}
@@ -115,7 +115,7 @@ class PackOpenAnimationTemplate {
 	
 	OnCardViewFinish() {
 		$("#PrettyCards_PackOpenContent").unbind("click");
-		console.log("Card View Finish!");
+		//console.log("Card View Finish!");
 		this.OnCardSummary();
 		
 	}
@@ -144,7 +144,7 @@ class PackOpenAnimationTemplate {
 			easing: "swing",
 			complete: function() {$(container).click(self.OnExitFade.bind(self));}
 		});
-		console.log("Card Summary Container", container);
+		//console.log("Card Summary Container", container);
 	}
 	
 	OnExitFade(e) {
@@ -251,7 +251,7 @@ class PackOpenAnimationTemplate {
 				this.cards.push(card);
 			}
 		}
-		console.log("Sorted cards! ", this.cards);
+		//console.log("Sorted cards! ", this.cards);
 		
 	}
 	

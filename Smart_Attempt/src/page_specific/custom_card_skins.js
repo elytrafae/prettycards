@@ -161,7 +161,8 @@ function ImageHelpDialogue() {
 		'<h1>I did what you said and it\'s still not working. What do I do?</h1>' +
 		'<p>Contact me on Discord so we can sort this issue out, and potentially correct or expand upon this tutorial for others who may be struggling.</p>' +
 		'<br>' +
-		'<p class="gray">Thanks for reading! ^^</p>';
+		'<p class="gray">Thanks for reading! ^^</p>'+
+		'<p class="gray">PS: The recommended resolutions: <br>Normal Skins: 160x90<br>Full Skins: 160x230<br>Breaking Skins: 176x246</p>';
 	
 	window.BootstrapDialog.show({
 		title: "Image URL Help",

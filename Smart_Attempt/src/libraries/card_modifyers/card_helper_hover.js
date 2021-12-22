@@ -27,10 +27,10 @@ if (settings.card_number_colors.value()) {
 		// HAHAHAHAHAHAHAHAHAH!
 		// Like that's ever gonna happen!
 		var helpers = element.find(".helpPointer"); 
-		console.log(helpers);
+		//console.log(helpers);
 		helpers.each(function (i, e) {
 			var funcString = e.getAttribute("oncontextmenu");
-			console.log(funcString);
+			//console.log(funcString);
 		});
 	});
 	

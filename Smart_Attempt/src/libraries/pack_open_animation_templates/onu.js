@@ -11,7 +11,7 @@ class OnuPackOpenAnimationTemplate extends PackOpenAnimationTemplate {
 	}
 	
 	OnPackBreakFinish() {
-		console.log("BreakAnimationFinished!");
+		//console.log("BreakAnimationFinished!");
 		this.up.remove();
 		this.down.remove();
 		

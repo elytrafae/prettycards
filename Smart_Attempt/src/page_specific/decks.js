@@ -411,7 +411,7 @@ function InitDecks() {
 	
 	var newDeckButtons = document.createElement("DIV");
 	newDeckButtons.style = "margin-bottom: 5px;"
-	oldDeckButtons.parentElement.insertBefore(newDeckButtons, oldDeckButtons);
+	document.querySelector("#yourCardList").insertBefore(newDeckButtons, oldDeckButtons);
 	
 	newDeckButtons.className = "PrettyCards_DeckButtons";
 	

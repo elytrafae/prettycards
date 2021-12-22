@@ -33,13 +33,14 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		var x = $(document).width() - 450;
 		var y = 300;
 		
-		var menuBase = $(`<div class="dropdown" style="position: absolute; top: 0px; right: 15px; display: none;">
+		//<p style="color: grey">More coming . . . Somewhen.</p>
+		var menuBase = window.$(`<div class="dropdown" style="position: absolute; top: 0px; right: 15px; display: none;">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PrettyCards Menu</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p>
-				<p style="cursor: pointer;" onclick="window.location.href = '/CustomCardSkins';">Custom Card Skins</p>
-				<p style="cursor: pointer;" onclick="window.location.href = '/CustomCards';">Custom Cards</p>
-				<p style="color: grey">More coming . . . Somewhen.</p>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 3px 5px;">
+				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
+				<a href="/CustomCardSkins"><p style="cursor: pointer;">Custom Card Skins</p></a>
+				<a href="/CustomCards"><p style="cursor: pointer;">Custom Cards</p></a>
+				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">API Docs</p></a>
 			</div>
 		</div>`)
 		
