@@ -138,9 +138,7 @@ function AcceptChallenge( safeUserName, soul) {
 	window.location = '/GamesList';
 }
 
-PrettyCards_plugin.events.on("Chat:getHistory", processChatHistoryEvent);
-PrettyCards_plugin.events.on("Chat:getMessage", processChatMessageEvent);
-PrettyCards_plugin.events.on("Chat:getPrivateHistory", processChatHistoryEvent);
-PrettyCards_plugin.events.on("Chat:getPrivateMessage", processChatMessageEvent);
+PrettyCards_plugin.events.on("Chat:getHistory Chat:getPrivateHistory", processChatHistoryEvent);
+PrettyCards_plugin.events.on("Chat:getMessage Chat:getPrivateMessage", processChatMessageEvent);
 
 export {}

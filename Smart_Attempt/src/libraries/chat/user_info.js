@@ -204,7 +204,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 			"Aren't you your own best friend~?",
 			"I wonder if one betrays themself before their friends do . . .",
 			"Do you even trust youself as much as your friends?",
-			"Having only yourself by your side is possible one of the worst prisons.",
+			"Having only yourself by your side is possibly one of the worst prisons.",
 			"I wonder if you can friend your imaginary friends . . ."
 		];
 		friendButton.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-user"></span> ' + friendButtonMessages[Math.floor(Math.random() * friendButtonMessages.length)] + "</span>";

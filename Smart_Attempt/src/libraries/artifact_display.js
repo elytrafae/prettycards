@@ -57,7 +57,7 @@ class ArtifactDisplay {
 // Only used on artifacts the server sends. Custom ones should be handled by the author.
 ArtifactDisplay.commonArtifactCost = 300;
 ArtifactDisplay.legendaryArtifactCost = 1000;
-ArtifactDisplay.DTArtifactIds = [25, 34, 43]; // Genocide, Outbreak and Ultimate Fusion respectively.
+ArtifactDisplay.DTArtifactIds = [25, 34, 43, 46]; // Genocide, Outbreak, Ultimate Fusion and FREE KROMER respectively.
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var artifactDisplay = new ArtifactDisplay();

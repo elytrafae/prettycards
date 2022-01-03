@@ -25,6 +25,8 @@ import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 
 import {} from "./libraries/main_menu.js";
 
+import {} from "/src/libraries/custom_backgrounds.js";
+
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";
 import {InitPlay} from "/src/page_specific/play.js";
