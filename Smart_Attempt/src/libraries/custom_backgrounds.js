@@ -20,4 +20,4 @@ CreateBackgroundCanvas();
 // Test code only.
 var test = new CanvasDrawer(canvas);
 var gigaqueen = new GigaQueenBG();
-test.onupdate = gigaqueen.onupdate.bind(gigaqueen);
+//test.onupdate = gigaqueen.onupdate.bind(gigaqueen);

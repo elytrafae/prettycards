@@ -34,6 +34,7 @@ class CanvasDrawer {
 	draw_image_part(image, left, top, width, height, x, y, xscale, yscale, color = [255, 255, 255], alpha = 1) {
 		this.ctx.save();
 		this.ctx.scale(xscale, yscale);
+		this.ctx.rotate(Math.PI / 2); // This is deffinitely not hacky. Nonono.
 		//this.ctx.fillStyle = `rgba(${color[0]}, ${color[1]}, ${color[2]}, 1)`;
 		this.ctx.globalAlpha = alpha;
 		this.ctx.drawImage(image, left, top, width, height, x, y, image.width/xscale, image.height/yscale);

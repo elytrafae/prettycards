@@ -36,7 +36,7 @@ class GigaQueenBG {
 			rectsiner = 0
 		}
 		*/
-		this.bg_speed = 0.7
+		//this.bg_speed = 0.7
 		this.siner += (this.bg_speed * this.f)
 		if (this.siner >= 1000) {
 			this.siner -= 500;
@@ -46,6 +46,7 @@ class GigaQueenBG {
 		//surface_set_target(mysurface)
 		var remleft = this.siner
 		var oldlen = 0
+		this.bg_speed = this.bg_speed/2;
 		for (var i = 45; i < 144; i++) {
 			if (i == 0) {
 				oldlen = 2;
