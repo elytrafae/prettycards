@@ -25,7 +25,9 @@ class CanvasDrawer {
 		//this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.scale = window.innerHeight/480;
-		//this.ctx.scale(this.scale, this.scale);
+		this.canvas.height = window.innerHeight;
+		this.canvas.width = window.innerWidth;
+		this.ctx.scale(this.scale, this.scale);
 		this.onupdate(this.ctx, this);
 		this.ctx.restore();
 		window.requestAnimationFrame(this._update.bind(this));
@@ -40,7 +42,27 @@ class CanvasDrawer {
 		this.ctx.drawImage(image, left, top, width, height, x, y, image.width/xscale, image.height/yscale);
 		this.ctx.restore();
 	}
+}
+
+class BasicParallax {
+	
+	constructor(image) {
+		this.image = image;
+		this.image.style.display = "none";
+		document.body.appendChild(this.image);
+		this.x = 0;
+		this.y = 0;
+	}
+	
+	onupdate(ctx, canvas_drawer) {
+		var canvas = canvas_drawer.canvas;
+		var current_x = this.x;
+		while (current_x < canvas.width*canvas_drawer.scale) {
+			ctx.drawImage(this.image, current_x, this.y);
+			current_x += this.image.width;
+		}
+	}
 	
 }
 
-export {CanvasDrawer};
+export {CanvasDrawer, BasicParallax};
