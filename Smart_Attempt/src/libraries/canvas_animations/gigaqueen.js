@@ -1,9 +1,8 @@
 
-var global
 
 class GigaQueenBG {
 	
-	constructor() {
+	constructor(canvas_drawer) {
 		this.siner = 500;
 		this.rectsiner = 0;
 		this.f = 2;
@@ -12,10 +11,7 @@ class GigaQueenBG {
 		this.mysurface = -999;
 		this.oldlen = 0;
 				
-		this.image = new Image();
-		this.image.src = "https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/GigaQueen/bg_cityscape.png";
-		this.image.style.display = "none";
-		document.body.appendChild(this.image);
+		this.image = canvas_drawer.register_image("https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/GigaQueen/bg_cityscape.png");
 		console.log("GIGA BG: ", this);
 	}
 	

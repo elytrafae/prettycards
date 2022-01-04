@@ -1,4 +1,12 @@
 
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+
+var image_container = document.createElement("DIV");
+image_container.style.display = "none";
+
+ExecuteWhen("PrettyCards:onPageLoad", function() {
+	document.body.appendChild(image_container);
+});
 
 class CanvasDrawer {
 	
@@ -42,6 +50,14 @@ class CanvasDrawer {
 		this.ctx.drawImage(image, left, top, width, height, x, y, image.width/xscale, image.height/yscale);
 		this.ctx.restore();
 	}
+	
+	register_image(link) {
+		var image = new Image();
+		image.src = link;
+		//image.style.display = "none";
+		image_container.appendChild(image);
+		return image
+	}
 }
 
 class BasicParallax {
@@ -52,15 +68,26 @@ class BasicParallax {
 		document.body.appendChild(this.image);
 		this.x = 0;
 		this.y = 0;
+		this.xscale = 1;
+		this.yscale = 1;
 	}
 	
 	onupdate(ctx, canvas_drawer) {
+		ctx.save();
+		if (this.image.width <= 0) {
+			return;
+		}
+		ctx.scale(this.xscale, this.yscale);
 		var canvas = canvas_drawer.canvas;
 		var current_x = this.x;
-		while (current_x < canvas.width*canvas_drawer.scale) {
+		while (current_x < canvas.width*canvas_drawer.scale/this.xscale) {
 			ctx.drawImage(this.image, current_x, this.y);
 			current_x += this.image.width;
 		}
+		if (this.x <= -this.image.width) {
+			this.x += this.image.width;
+		}
+		ctx.restore();
 	}
 	
 }
