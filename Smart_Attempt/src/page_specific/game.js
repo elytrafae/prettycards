@@ -3,7 +3,7 @@ function InitGame() {
 	setTimeout(function() {
 		var oldPlayBackgroundMusic = window.playBackgroundMusic;
 		window.playBackgroundMusic = function(musicName) {
-			if (true) { // Testing purposes. Ok, the joke is annoying now.
+			if (false) { // Testing purposes. Ok, the joke is annoying now.
 				if (window.musicEnabled) {
 					var musicPath = 'https://github.com/CMD-God/prettycards/raw/master/audio/bgms/spamton_neo_mix_ex_wip.ogg';
 					window.music = new Audio(musicPath);
