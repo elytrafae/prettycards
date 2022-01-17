@@ -1,5 +1,5 @@
 
-import {CanvasDrawer, BasicParallax} from "/src/libraries/basic_canvas.js";
+import {CanvasDrawer, BasicParallax} from "/src/libraries/background/basic_canvas.js";
 
 
 class SpamtonCaveBG {

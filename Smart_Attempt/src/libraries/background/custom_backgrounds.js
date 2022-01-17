@@ -1,6 +1,6 @@
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
-import {CanvasDrawer} from "/src/libraries/basic_canvas.js";
+import {CanvasDrawer} from "/src/libraries/background/basic_canvas.js";
 
 import {GigaQueenBG} from "/src/libraries/canvas_animations/gigaqueen.js";
 import {SpamtonCaveBG} from "/src/libraries/canvas_animations/spamton_basement.js";
