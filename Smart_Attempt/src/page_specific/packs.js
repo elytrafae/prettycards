@@ -178,4 +178,4 @@ function InitPacks() {
 	*/
 }
 
-export {InitPacks};
+export {InitPacks, GetPageTemplateByName, settingsoptions};

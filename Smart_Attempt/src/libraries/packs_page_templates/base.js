@@ -126,9 +126,12 @@ class PacksPageTemplate {
 	
 	onPackGBuyClick(e) { // Should be called by the button.
 		var data = this.packs_data2[e.target.getAttribute("data-packid")];
+		var max_can_afford = Math.floor(pagegetters.gold/data.g_cost);
+		if (data.g_buy_count > max_can_afford) {data.g_buy_count = max_can_afford;} // Failsafe
 		var id = data.code_id;
 		id = id.substring(0, id.length-4);
 		//console.log(data.g_buy_count, id);
+		console.log("Buying Packs! ", data, id);
 		underscript.buyPacks(data.g_buy_count, {type : id, gold : true});
 		
 		data.amount += data.g_buy_count;
@@ -138,6 +141,8 @@ class PacksPageTemplate {
 	onPackUcpBuyClick(e) { // Should be called by the button.
 		const self = this;
 		var data = this.packs_data2[e.target.getAttribute("data-packid")];
+		var max_can_afford = Math.floor(pagegetters.gold/data.g_cost);
+		if (data.ucp_buy_count > max_can_afford) {data.ucp_buy_count = max_can_afford;} // Failsafe
 		window.BootstrapDialog.show({
 			title: 'Buy packs with UCP?',
 			message: $.i18n(`Buy ${data.ucp_buy_count} pack${data.ucp_buy_count > 1 ? 's' : ''} for {{UCP:${data.ucp_buy_count * data.ucp_cost}}} UCP?`),
@@ -173,14 +178,16 @@ class PacksPageTemplate {
 			return;
 		}
 		var data = this.packs_data2[e.target.getAttribute("data-packid")];
+		if (data.amount <= 0) {return;} // Failsafe #1
+		if (data.open_count > data.amount) {data.open_count = data.amount;} // Failsafe #2
 		var id = data.code_id;
 		id = id.substring(0, id.length-4);
 		//console.log(data.open_count, id);
 		window.PrettyCards_pack_being_opened = data;
 		underscript.openPacks(data.open_count, id);
 		
-		data.amount -= data.open_count;
-		this.updatePackCount(data.code_id);
+		//data.amount -= data.open_count; // Moved over for when the server actually responds.
+		//this.updatePackCount(data.code_id);
 	}
 	
 	updatePackCount(id) {
