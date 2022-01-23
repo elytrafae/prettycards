@@ -177,6 +177,9 @@ class PacksPageTemplate {
 		if (underscript.openingPacks()) {
 			return;
 		}
+		if (document.querySelector(".PrettyCards_PackOpenContent .PrettyCards_AnimationPack")) {
+			return;
+		}
 		var data = this.packs_data2[e.target.getAttribute("data-packid")];
 		if (data.amount <= 0) {return;} // Failsafe #1
 		if (data.open_count > data.amount) {data.open_count = data.amount;} // Failsafe #2

@@ -1,5 +1,6 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 var isHost = JSON.parse(sessionStorage.getItem("PrettyCards_PrivateGameIsHost"));
 var gameName = sessionStorage.getItem("PrettyCards_PrivateGameName");
@@ -43,6 +44,7 @@ function OnGameListLoad(data) {
 }
 
 function SetUpSocket() {
+	console.log("Socket Setup!", window.socket);
 	var socket = window.socket;
 	const oHandler = socket.onopen;
 	socket.onopen = function(event) {
@@ -63,7 +65,11 @@ function InitiateChallengeIfThereIs() {
 }
 
 if (underscript.onPage('GamesList')) {
-	SetUpSocket();
+	ExecuteWhen("PrettyCards:onPageLoad", function() { // Theoretical fix to one of Sernon's bugs?
+		SetUpSocket();
+	});
 }
+
+// PrettyCards_plugin.events.on('enterCustom', SetUpSocket); // You can switch to this when Feild makes this event a singleton.
 
 export {};

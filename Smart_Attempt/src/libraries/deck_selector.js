@@ -273,7 +273,7 @@ class SavedDeckSelector {
 			
 			for (var i=0; i < decks[soul].length; i++) {
 				const deck = decks[soul][i];
-				console.log("DECK HIDING: ", deck, !this.IsValidDeck(deck));
+				//console.log("DECK HIDING: ", deck, !this.IsValidDeck(deck));
 				if (!this.hideInvalidDecks || this.IsValidDeck(deck)) {
 					var card = this.appendCardDeck($deck, deck);
 									
