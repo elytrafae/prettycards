@@ -4,11 +4,11 @@
 import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
+import { PrettyCards_plugin } from "./underscript_checker";
 
 class FancyListDisplay {
 	
 	constructor(datas) {
-		
 		var container = window.$(`<div class="PrettyCards_ArtifactListContainer"></div>`);
 		
 		for (var i=0; i < datas.length; i++) {
@@ -96,6 +96,7 @@ class FancyDisplay {
 	
 	static ViewArtifactInfo(id) {
 		var artifact = artifactDisplay.GetArtifactById(id);
+		PrettyCards_plugin.events.emit("pre:viewArtifact()", artifact);
 		var image_src = "images/artifacts/" + artifact.image + ".png";
 		if (artifact.collection) {
 			image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
@@ -110,9 +111,11 @@ class FancyDisplay {
 			note: window.$.i18n(artifact.note || "")
 		};
 		var helper = new FancyDisplay(data);
+		PrettyCards_plugin.events.emit("viewArtifact()", {artifact: artifact, helper: helper});
 	}
 	
 	static ViewSoulInfo(id) {
+		PrettyCards_plugin.events.emit("pre:viewSoul", id);
 		var customObj = null;
 		for (var i = 0; i < FancyDisplay.customSouls.length; i++) {
 			var soul = FancyDisplay.customSouls[i];
@@ -149,9 +152,11 @@ class FancyDisplay {
 			note: (customObj ? window.i18n(customObj.note || "") : "")
 		};
 		var helper = new FancyDisplay(data);
+		PrettyCards_plugin.events.emit("viewSoul()", {id: id, helper: helper});
 	}
 	
 	static ViewArtifactsInfo(box) {
+		PrettyCards_plugin.events.emit("pre:viewArtifacts", box);
 		//console.log(box);
 		 if (window.$(box).find('.artifact-img').length > 0) {
 			var datas = [];
@@ -173,16 +178,19 @@ class FancyDisplay {
 				});
 			});
 			var helper = new FancyListDisplay(datas);
+			PrettyCards_plugin.events.emit("viewArtifacts()", {box: box, helper: helper});
 		 }
 	}
 	
 	static TestArtifactsInfo() {
+		PrettyCards_plugin.events.emit("pre:viewArtifacts", box);
 		var box = window.$("<div></div>");
 		for (var i=0; i < artifactDisplay.artifacts.length; i++) {
 			var art = artifactDisplay.artifacts[i];
 			box.append(`<img class="artifact-img" artifactId="${art.id}">`);
 		}
 		window.artifactsInfo(box);
+		PrettyCards_plugin.events.emit("viewArtifacts()", {});
 	}
 	
 }
@@ -198,7 +206,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 	window.artifactsInfo = FancyDisplay.ViewArtifactsInfo.bind(this);
 	
 	// Test functions
-	//window.testArtifactsInfo = FancyDisplay.TestArtifactsInfo.bind(this);
+	window.testArtifactsInfo = FancyDisplay.TestArtifactsInfo.bind(this);
 	//
 });
 

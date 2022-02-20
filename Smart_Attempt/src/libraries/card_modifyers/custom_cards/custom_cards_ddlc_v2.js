@@ -58,7 +58,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 3,
 		attack: 3,
 		hp: 3,
-		description: `Force an ally ${fallen.me()} monster to attack the monster in front of it.`,
+		description: `{{KW:MAGIC}}: Force an ally ${fallen.me()} monster to attack the monster in front of it.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON",

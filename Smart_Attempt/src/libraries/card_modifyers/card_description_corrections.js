@@ -25,7 +25,7 @@ var color_classes = ['cost-color', 'atk-color', 'hp-color'];
 var non_dt_regex = /non[-\s]dt/gmi;
 
 function NonDTCorrector(full) { // Why not throw this in here, too?
-	return 'non-<span class="DETERMINATION">DT</span>';
+	return 'non-' + window.$.i18n("{{RARITY:DETERMINATION}}");
 }
 
 function RegexProcessor(full, stat1, stat2, stat3) {
