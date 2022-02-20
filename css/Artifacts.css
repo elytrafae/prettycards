@@ -169,6 +169,41 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	padding-top: 5px;
 }
 
+.PrettyCards_ArtifactDisplayCounter {
+	position: absolute;
+	left: 330px;
+	top: -20px;
+	font-size: 3em;
+	background-color: black;
+	border: 5px solid white;
+	width: 1.6em;
+	height: 1.6em;
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 1.35;
+}
+
+.PrettyCards_ArtifactListCounter {
+	position: absolute;
+	left: -50px;
+	top: 55px;
+	font-size: 1.5em;
+	background-color: black;
+	border: 5px solid white;
+	width: 2em;
+	height: 2em;
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 1.55;
+}
+
+.PrettyCards_ArtifactDisplayDisabled {
+	font-size: 20px;
+	text-align: center;
+}
+
 .PrettyCards_ArtifactListDescription {
 	
 }

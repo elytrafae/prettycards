@@ -6,6 +6,8 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import { PrettyCards_plugin } from "./underscript_checker";
 
+const disabledText = "<span class='gray'>(Disabled)</span>";
+
 class FancyListDisplay {
 	
 	constructor(datas) {
@@ -14,10 +16,15 @@ class FancyListDisplay {
 		for (var i=0; i < datas.length; i++) {
 			var data = datas[i];
 			var row = window.$(`<div class="PrettyCards_ArtifactListRow"></div>`);
-			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class}" src="${data.image}"></img></div>`);
+			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
 			row.append(circle);
 			
-			var name = window.$(`<div class="PrettyCards_ArtifactListName ${data.text_class}">${data.name} (${data.rarity_text})</div>`);
+			if (data.counter && data.counter > 0) {
+				var counter = window.$(`<div class="PrettyCards_ArtifactListCounter">${data.counter}</div>`);
+				row.append(counter);
+			}
+
+			var name = window.$(`<div class="PrettyCards_ArtifactListName ${data.text_class}">${data.name} (${data.rarity_text}) ${data.disabled ? disabledText : ""}</div>`);
 			var description = window.$(`<div class="PrettyCards_ArtifactListDescription"></div>`);
 			description.append(data.description);
 			
@@ -56,16 +63,26 @@ class FancyDisplay {
 		this.box.click(function (e) {e.stopPropagation();});
 		//this.backdrop.append(this.box);
 		
-		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"><img class="PrettyCards_ArtifactImage ${data.image_class}" src="${data.image}"></img></div>`);
+		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"><img class="PrettyCards_ArtifactImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
 		this.box.append(this.circle);
 		
 		this.name = window.$(`<div class="PrettyCards_ArtifactDisplayName ${data.text_class}">${data.name}</div>`);
 		this.rarity = window.$(`<div class="PrettyCards_ArtifactDisplayRarity ${data.text_class}">${data.rarity_text}</div>`);
 		this.description = window.$(`<div class="PrettyCards_ArtifactDisplayDescription"></div>`);
 		this.description.append(data.description);
+		if (data.counter && data.counter > 0) {
+			this.counter = window.$(`<div class="PrettyCards_ArtifactDisplayCounter">${data.counter}</div>`);
+			this.box.append(this.counter);
+		}
 		
 		this.box.append(this.name);
 		this.box.append(this.rarity);
+
+		if (data.disabled) {
+			this.disabled = window.$(`<div class="PrettyCards_ArtifactDisplayDisabled gray">(Disabled)</div>`);
+			this.box.append(this.disabled);
+		}
+
 		this.box.append(this.description);
 		
 		if (data.note && data.note.length > 0) {
@@ -108,7 +125,9 @@ class FancyDisplay {
 			rarity_text: artifact.rarity + " Artifact",
 			description: $.i18n("artifact-" + artifact.id),
 			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
-			note: window.$.i18n(artifact.note || "")
+			note: window.$.i18n(artifact.note || ""),
+			disabled: artifact.disabled,
+			counter: artifact.counter
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewArtifact()", {artifact: artifact, helper: helper});
@@ -174,7 +193,9 @@ class FancyDisplay {
 					text_class: artifact.rarity || "COMMON",
 					rarity_text: artifact.rarity + " Artifact",
 					description: $.i18n("artifact-" + artifact.id),
-					image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity
+					image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
+					disabled: artifact.disabled,
+					counter: artifact.counter
 				});
 			});
 			var helper = new FancyListDisplay(datas);
