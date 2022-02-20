@@ -29,6 +29,7 @@ class ArtifactDisplay {
 		if (artifact.rarity) {
 			return artifact.rarity;
 		}
+		if (!this.GetArtifactById(artifact.id)) {this.artifacts.push(artifact);}
 		if (artifact.cost != ArtifactDisplay.commonArtifactCost && artifact.cost != ArtifactDisplay.legendaryArtifactCost) {
 			artifact.rarity = ArtifactDisplay.DTArtifactIds.includes(artifact.id) ? "DETERMINATION" : "TOKEN";
 		} else {

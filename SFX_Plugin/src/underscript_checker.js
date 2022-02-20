@@ -27,7 +27,7 @@ window.PrettyCardsAudio_plugin = plugin;
 
 var default_value = 50
 
-var settings = [];
+var settings = {};
 settings.turn_start = plugin.settings().add({
         'key': 'turn_start',
         'name': 'Turn Start volume', // Name in settings page

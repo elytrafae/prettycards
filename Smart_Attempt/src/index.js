@@ -8,6 +8,8 @@ import {} from "/src/libraries/updater.js";
 // The Event ensurer MUST be required AFTER underscript stuff, but BEFORE anything else that might require it!
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
+import {} from "/src/libraries/kromer_test.js";
+
 import {} from "./libraries/mobile/navigation.js";
 
 import {} from "./libraries/chat/user_info.js";
