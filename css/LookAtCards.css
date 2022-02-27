@@ -19,14 +19,21 @@
 	margin: 1em auto;
 	width: 80%;
 	min-width:  900px;
+	height: 100%;
 }
 
 .PrettyCards_LookAt_Title {
 	font-size: 3em;
+	height: 4em;
 	color: white;
 	text-align: center;
 }
 
 .PrettyCards_LookAt_CardContainer {
 	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	height: calc(100% - 4em);
 }
