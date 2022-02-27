@@ -181,6 +181,8 @@ class FancyDisplay {
 			var datas = [];
 			$(box).find('.artifact-img').each(function() {
 				var artifactId = Number($(this).attr("artifactId"));
+				var artifactCounter = Number($(this).next(".artifact-custom").html());
+				var isDisabled = $(this).hasClass("artifact-disabled");
 				var artifact = artifactDisplay.GetArtifactById(artifactId);
 				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
 				var image_src = "images/artifacts/" + artifact.image + ".png";
@@ -194,8 +196,8 @@ class FancyDisplay {
 					rarity_text: artifact.rarity + " Artifact",
 					description: $.i18n("artifact-" + artifact.id),
 					image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
-					disabled: artifact.disabled,
-					counter: artifact.counter
+					disabled: isDisabled, // || artifact.disabled,
+					counter: artifactCounter || artifact.counter
 				});
 			});
 			var helper = new FancyListDisplay(datas);

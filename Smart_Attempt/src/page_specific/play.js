@@ -11,6 +11,8 @@ var deckSelectLocked = true;
 var selectedDeck = {};
 var deckSelector = new SavedDeckSelector();
 
+var $ = window.$;
+
 var gamemode_functions = {
 	standard: window.sendJoinQueue,
 	ranked: window.sendJoinRankedQueue,

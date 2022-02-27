@@ -1,0 +1,32 @@
+
+.PrettyCards_LookAt_NoScroll {
+	overflow: none;
+}
+
+.PrettyCards_LookAt_Background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	overflow-y: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 222;
+}
+
+.PrettyCards_LookAt_Container {
+	margin: 1em auto;
+	width: 80%;
+	min-width:  900px;
+}
+
+.PrettyCards_LookAt_Title {
+	font-size: 3em;
+	color: white;
+	text-align: center;
+}
+
+.PrettyCards_LookAt_CardContainer {
+	display: flex;
+}
