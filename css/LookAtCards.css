@@ -25,6 +25,7 @@
 	font-size: 3em;
 	height: 3em;
 	color: white;
+	flex: 0 1 auto;
 	text-align: center;
 }
 

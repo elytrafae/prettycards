@@ -61,7 +61,7 @@ function LookAtCards(selectCards) {
 }
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
-    utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@23e70ccbc20a485ffb84c0dea6e9d8097ff8bb7d/css/LookAtCards.css")
+    utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ae99dbed06233b369f60038805a8fe507e48e405/css/LookAtCards.css")
     window.showSelectCards = LookAtCards;
 });
 
