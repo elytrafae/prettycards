@@ -64,3 +64,4 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
     utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@23e70ccbc20a485ffb84c0dea6e9d8097ff8bb7d/css/LookAtCards.css")
     window.showSelectCards = LookAtCards;
 });
+
