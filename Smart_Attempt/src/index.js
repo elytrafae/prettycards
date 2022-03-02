@@ -53,7 +53,7 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 } else if (underscript.onPage("CustomCards")) {
 	InitCustomCards();
 } else if (underscript.onPage("Friendship")) {
-	// InitFriendship();
+	InitFriendship();
 }
 
 if (settings.override_decks.value()) {

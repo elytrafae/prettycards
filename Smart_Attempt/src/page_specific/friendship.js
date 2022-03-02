@@ -1,12 +1,19 @@
-import { PrettyCards_plugin } from "../libraries/underscript_checker";
+import { PrettyCards_plugin, settings } from "../libraries/underscript_checker";
+
+settings.friendship_sort = PrettyCards_plugin.settings().add({
+    'key': 'friendship_sort',
+    'name': 'Enable Friendship Sorting', // Name in settings page
+    'type': 'boolean',
+    'refresh': true, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+});
+
 
 function GetXpForLevel(level) {
     return window.U0*level + (level*(level-1))/2*window.R;
 }
 
-function InitFriendship() {
-    
-
+function InitFriendshipSort() {
     var oldApplyFilters = window.applyFilters;
 
     var filterTable = window.$("table").first();
@@ -30,10 +37,9 @@ function InitFriendship() {
     }
 
     function ApplySorting() {
-        var sortFunction = function (a, b) {
-            return compare(window.friendshipItems[b.fixedId].notClaimed, window.friendshipItems[a.fixedId].notClaimed) || compare(b.xp, a.xp);
-        }
         var value = window.$("#PrettyCards_FriendshipSort").val();
+        if (value == 0) {return;} // Default sorting. No need to do it again.
+        var sortFunction;
         if (value == 1) {
             sortFunction = function (a, b) {
                 return a.rank - b.rank;
@@ -66,6 +72,12 @@ function InitFriendship() {
             card.xpUntilNextUcpReward = nextUCPRewardXP - card.xp;
         }
     })
+}
+
+function InitFriendship() {
+    if (settings.friendship_sort.value()) {
+        InitFriendshipSort();
+    }
 
 }
 
