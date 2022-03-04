@@ -1,4 +1,6 @@
 
+// I REALLY need to make this more flexible!
+
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
@@ -46,7 +48,7 @@ var user_menu_data = {
 
 var footer_data = {
 	'{friends}' : "Friends",
-	'<span class="glyphicon glyphicon-comment blue"></span>' : "#",
+	'<span class="glyphicon glyphicon-comment blue"></span>' : "js:openChatsList()",
 	'<img src="/images/leaderboard.png">' : "/leaderboard.jsp",
 	'<img src="/images/friendship.png">' : "/friendshipLeaderboard.jsp",
 	'<img src="/images/social/discord.png">' : "https://discord.gg/wVmCQk6",
@@ -118,6 +120,15 @@ function ProcessName(name) {
 	return b;
 }
 
+function ProcessLink(link) {
+	var isfunc = false;
+	if (typeof(link) == "string") {
+		isfunc = link.startsWith("js:");
+		link = link.replace("js:", "");
+	}
+	return {link, isfunc};
+}
+
 function CreateSideBarPortion(obj, bg_color = "#000000", inline = false) {
 	var container = $("<div></div>");
 	container.css("background-color", bg_color);
@@ -126,12 +137,16 @@ function CreateSideBarPortion(obj, bg_color = "#000000", inline = false) {
 		class_name += " PrettyCards_NavBarInline"
 	}
 	for (var name in obj) {
-		var link = obj[name];
+		var {link, isfunc} = ProcessLink(obj[name]);
 		var line;
 		var actual_name = ProcessName(name);
 		if (actual_name.length > 0) {
 			if (typeof(link) == "string") {
-				line = $('<div class="' + class_name + '"><a href="' + link + '">' + actual_name + '</a></div>');
+				var txt = '<a href="' + link + '">' + actual_name + '</a>';
+				if (isfunc) {
+					txt = '<span onclick="' + link + '">' + actual_name + '</span>';
+				}
+				line = $('<div class="' + class_name + '">' + txt + '</div>');
 			} else {
 				line = $('<div class="' + class_name + '"><span>' + actual_name + '</span></div>');
 				var cont = CreateSideBarPortion(link);
@@ -190,7 +205,7 @@ function CreateSideNavMenu() {
 }
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@8df4f5da7757066a3218524c04924b102c21fc31/css/Mobile_Sidebar.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@573356546d695d1ef113c75b7d0c32399c792718/css/Mobile_Sidebar.css");
 	ExecuteWhen("translation:loaded", function () {
 		packs = $(".nbPacksHeader").text();
 		quests = $("a[href=Quests]").text();
