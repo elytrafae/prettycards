@@ -30,6 +30,16 @@
 .PrettyCards_NavBarItem {
 	font-size: 40px;
 	margin-left: 20px;
+	user-select: none;
+}
+
+.PrettyCards_NavBarItem > span {
+	color: white;
+	cursor: pointer;
+}
+
+.PrettyCards_NavBarItem > span:hover {
+	text-decoration: underline;
 }
 
 .PrettyCards_NavBarItem a {

@@ -57,7 +57,7 @@ var mode = "TEXT";
 
     PrettyCards_plugin.events.on('pre:appendCard() pre:viewArtifacts() pre:viewArtifact() pre:viewSoul()', (card) => {
         const value = settings.rarity_text_change.value();
-        console.log("Setting Value: ", value);
+        //console.log("Setting Value: ", value);
         if (value === 'Text') return;
         if (card.extension) { // If the received data is actually a card . . .
             mode = value === 'Adapt' ? card.extension : DisplayToSystem(value); // convert value to appropriate extension

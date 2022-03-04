@@ -11,18 +11,46 @@ settings.kromer_test = PrettyCards_plugin.settings().add({
 	'default': false // default value
 });
 
+var translationKeys = ["item-ucp", "header-free-ucp", "shop-title", "quests-ucp", "settings-username-ucp", "packs-error-add", "reward-ucp", "cardskins-shop-confirm"];
+
+function toLocale(key, locale, data = []) {
+	const l = window.$.i18n().locale;
+	window.$.i18n().locale = locale;
+	let text;
+	try {
+		text = window.$.i18n(key, ...data);
+	} catch (e) {
+		text = 'ERROR';
+	}
+	window.$.i18n().locale = l;
+	return text;
+}
+
+function kromerify(lan) {
+	var obj = {};
+	for (var j=0; j < translationKeys.length; j++) {
+		var key = translationKeys[j];
+		obj[key] = toLocale(key, lan).replaceAll("UCP", "KROMER");
+	}
+	console.log("Translation changed!", obj, lan);
+	window.$.i18n().load(obj, lan);
+}
+
 if (settings.kromer_test.value()) {
 	PrettyCards_plugin.events.on('translation:loaded', () => {
-		window.$.i18n().load({
-			'item-ucp': "KROMER",
-			'header-free-ucp': "Free KROMER [[mobile]]",
-			'shop-title': "KROMER Shop",
-			'quests-ucp': "{{UCP:$1}} KROMER",
-			'settings-username-ucp': "You don't have enough KROMER!",
-			'packs-error-add': "Couldn't add a pack. Check if you have enough gold/KROMER.",
-			'reward-ucp': "KROMER",
-			'cardskins-shop-confirm': "Unlock this skin for {{UCP:$1}} KROMER?"
-		}, 'en');
+		/*
+		for (var i=0; i < window.availableLanguages.length; i++) {
+			var lan = window.availableLanguages[i];
+			kromerify(lan);
+		}*/
+		kromerify("en");
+		var lan = window.localStorage.getItem("language");
+		if (!lan) { // Should never happen, but . . . 
+			lan = window.getLanguage();
+		}
+		if (lan != "en") {
+			kromerify(lan);
+		}
 		$('.ucp').parent().each((_, e) => e.innerHTML = e.innerHTML.replace('UCP', 'KROMER'));
 	});
 }

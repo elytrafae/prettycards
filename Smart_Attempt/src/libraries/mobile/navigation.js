@@ -133,10 +133,10 @@ function CreateSideBarPortion(obj, bg_color = "#000000", inline = false) {
 			if (typeof(link) == "string") {
 				line = $('<div class="' + class_name + '"><a href="' + link + '">' + actual_name + '</a></div>');
 			} else {
-				line = $('<div class="' + class_name + '"><a href="#">' + actual_name + '</a></div>');
+				line = $('<div class="' + class_name + '"><span>' + actual_name + '</span></div>');
 				var cont = CreateSideBarPortion(link);
 				cont.addClass("PrettyCards_Hidden");
-				AddToggleFunctionTo(line.find("a"), cont);
+				AddToggleFunctionTo(line.find("span"), cont);
 				line.append(cont);
 			}
 			container.append(line);
