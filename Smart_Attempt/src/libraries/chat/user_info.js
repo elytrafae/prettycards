@@ -44,7 +44,7 @@ function onPageLoaded() {
 	window.getInfo = sendUserInfoEvent;
 	$ = window.$;
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3327dc099073de91a57d9a1b4a1ce28a473d8587/css/UserInfo.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ab48a746c0e44133c9b8a16ce70ef2d7fbc9f0e7/css/UserInfo.css");
 	utility.loadCSSFromLink("https://undercards.net/css/meters.css");
 }
 
@@ -451,7 +451,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	// Friendship Stuff
 	var friendshipContainer = document.createElement("DIV");
 	friendshipContainer.className = "PrettyCards_ChatFriendshipContainer";
-	column3.innerHTML = "<h2>Favorite Cards</h2>";
+	column3.innerHTML = "<h2 style='text-align:center;'>Favorite Cards</h2>";
 	column3.appendChild(friendshipContainer);
 
 	utility.getFriendshipInfo(user.id, function(data) {
@@ -468,20 +468,10 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		}
 
 		if (topRankCard.cardId == topXpCard.cardId) {
-			var level = window.getLevel(topRankCard.xp);
-			var card = utility.appendCardFriendship(window.getCard(topRankCard.cardId), $(friendshipContainer), level, utility.getXpForLevel(level) - topRankCard.xp, window.distanceNextLevel(level));
-			card.off("click");
-			card.find('.cardDesc').empty();
+			appendFriendshipCard(topRankCard, $(friendshipContainer), 3);
 		} else {
-			var level1 = window.getLevel(topXpCard.xp);
-			var card1 = utility.appendCardFriendship(window.getCard(topXpCard.cardId), $(friendshipContainer), level1, utility.getXpForLevel(level1) - topXpCard.xp, window.distanceNextLevel(level1));
-			card1.off("click");
-			card1.find('.cardDesc').empty();
-
-			var level2 = window.getLevel(topRankCard.xp);
-			var card2 = utility.appendCardFriendship(window.getCard(topRankCard.cardId), $(friendshipContainer), level2, utility.getXpForLevel(level2) - topRankCard.xp, window.distanceNextLevel(level2));
-			card2.off("click");
-			card2.find('.cardDesc').empty();
+			appendFriendshipCard(topXpCard, $(friendshipContainer), 1);
+			appendFriendshipCard(topRankCard, $(friendshipContainer), 2);
 		}
 	});
 
@@ -489,6 +479,21 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	/////////////////////
 	
 });
+
+function appendFriendshipCard(score, container, topType = 1) {
+	var topTxt;
+	switch (topType) {
+		case 1: topTxt = "TOP XP"; break;
+		case 2: topTxt = "TOP RANK"; break;
+		case 3: topTxt = "TOP XP & RANK"; break;
+	}
+	var level = window.getLevel(score.xp);
+	var card = utility.appendCardFriendship(window.getCard(score.cardId), container, level, utility.getXpForLevel(level) - score.xp, window.distanceNextLevel(level));
+	card.append('<div class="PrettyCards_FriendshipTop">' + topTxt + '</div>')
+	card.off("click");
+	card.find('.cardDesc').empty();
+	return card;
+}
 
 function getRankedPosition(user) {
 	if (leaderboard.length <= 0) {

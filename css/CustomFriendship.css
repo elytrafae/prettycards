@@ -1,0 +1,44 @@
+
+.friendship-level {
+    color: #fff;
+    position: absolute;
+    left: 62px;
+    top: 102px;
+    z-index: 8;
+    background-color: rgba(0,0,0,.7);
+    width: 50px;
+    height: 50px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    font-size: 22px;
+    text-align: center;
+    display: inline-block;
+    line-height: 42px
+}
+
+.friendship-xp {
+    color: #fff;
+    position: absolute;
+    left: 8px;
+    top: 174px;
+    z-index: 8;
+    width: 160px;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block
+}
+
+.friendship-bar progress {
+    width: 130px;
+    position: absolute;
+    left: 24px;
+    top: 142px;
+    z-index: 7
+}
+
+.PrettyCards_FriendshipTop {
+	left: 24px;
+    top: 142px;
+    z-index: 9;
+	
+}
