@@ -1,7 +1,7 @@
 
 // I REALLY need to make this more flexible!
 
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 
@@ -42,6 +42,7 @@ var user_menu_data = {
 	"header-profile-skins" : "ProfileSkins",
 	"header-frame-skins" : "FrameSkins",
 	"header-settings" : "Settings",
+	"PrettyCards Settings": "js:prettycards.openSettings()",
 	"header-translate" : "Translate",
 	"Disconnect" : "Disconnect"
 }
@@ -202,6 +203,10 @@ function CreateSideNavMenu() {
 	menu_obj.append(CreateSideBarPortion(footer_data, "#000000", true));
 	menu_obj.append(CreateSideBarPortion(footer_about_data));
 	menu_obj.append('<div class="PrettyCards_NavBarCopyright">Undercards © 2021<br>' + $.i18n("footer-copyright") + '</div>');
+}
+
+prettycards.openSettings = function() {
+	settings.packs.show(); // Temporary solution. Works with any setting.
 }
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {

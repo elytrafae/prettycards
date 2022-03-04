@@ -29,6 +29,7 @@ window.PrettyCards_plugin = PrettyCards_plugin;
 //console.log("Plugin: ", PrettyCards_plugin);
 
 var settings = {};
+window.PrettyCards_settings = settings;
 settings.packs = PrettyCards_plugin.settings().add({
         'key': 'packs_page',
         'name': 'Enable Fancy Packs Page', // Name in settings page
