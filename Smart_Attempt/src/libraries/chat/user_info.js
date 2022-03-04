@@ -13,7 +13,6 @@ var $ = window.$;
 
 /*
 	Remaining Checklist:
-	- Add Ignore/Unignore and Mention actions.
 	- Maybe get some more data to display? (Friendship would be very nice, but it would put a HUGE strain on both the server and the client.)
 	- Remember to update the CSS files at the end!
 	
@@ -24,6 +23,7 @@ var $ = window.$;
 	- Underscript: Right-Click, then Profile shows the default profile screen. Fixed by overriding getInfo.
 	- Add Friend/Unfriend, Private Message, Spectate.
 	- Added Admin controls.
+	- Add Ignore/Unignore and Mention actions.
 */
 
 var leaderboard = [];
@@ -432,6 +432,61 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	var winstreak = "<div>Winstreak: " + user.winStreak + "</div>";
 	column2.innerHTML += rank + wins + losses + winrate + winstreak;
 	/////////////
+
+	// Another set of rows
+	var row2 = document.createElement("DIV");
+	row2.className = "row";
+	
+	var column3 = document.createElement("DIV");
+	column3.className = "column PrettyCards_UserColumn";
+	row2.appendChild(column3);
+	
+	var column4 = document.createElement("DIV");
+	column4.className = "column PrettyCards_UserColumn";
+	row2.appendChild(column4);
+	
+	message.appendChild(row2);
+	//////////////////////
+
+	// Friendship Stuff
+	var friendshipContainer = document.createElement("DIV");
+	friendshipContainer.className = "PrettyCards_ChatFriendshipContainer";
+	column3.innerHTML = "<h2>Favorite Cards</h2>";
+	column3.appendChild(friendshipContainer);
+
+	utility.getFriendshipInfo(user.id, function(data) {
+		var topXpCard = data.scores[0];
+		var topRankCard = data.scores[0];
+		for (var i=1; i < data.scores.length; i++) {
+			var score = data.scores[i];
+			if (topXpCard.xp < score.xp || (topXpCard.xp == score.xp && topXpCard.rank < score.rank)) { // Find the highest XP, then worst Rank card.
+				topXpCard = score;
+			}
+			if (topRankCard.rank > score.rank || (topRankCard.rank == score.rank && topRankCard.xp > score.xp)) { // Find the best Rank, then the lowest XP card.
+				topRankCard = score;
+			}
+		}
+
+		if (topRankCard.cardId == topXpCard.cardId) {
+			var level = window.getLevel(topRankCard.xp);
+			var card = utility.appendCardFriendship(window.getCard(topRankCard.cardId), $(friendshipContainer), level, utility.getXpForLevel(level) - topRankCard.xp, window.distanceNextLevel(level));
+			card.off("click");
+			card.find('.cardDesc').empty();
+		} else {
+			var level1 = window.getLevel(topXpCard.xp);
+			var card1 = utility.appendCardFriendship(window.getCard(topXpCard.cardId), $(friendshipContainer), level1, utility.getXpForLevel(level1) - topXpCard.xp, window.distanceNextLevel(level1));
+			card1.off("click");
+			card1.find('.cardDesc').empty();
+
+			var level2 = window.getLevel(topRankCard.xp);
+			var card2 = utility.appendCardFriendship(window.getCard(topRankCard.cardId), $(friendshipContainer), level2, utility.getXpForLevel(level2) - topRankCard.xp, window.distanceNextLevel(level2));
+			card2.off("click");
+			card2.find('.cardDesc').empty();
+		}
+	});
+
+
+	/////////////////////
 	
 });
 

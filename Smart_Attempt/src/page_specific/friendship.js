@@ -1,4 +1,5 @@
 import { PrettyCards_plugin, settings } from "../libraries/underscript_checker";
+import { utility } from "../libraries/utility";
 
 settings.friendship_sort = PrettyCards_plugin.settings().add({
     'key': 'friendship_sort',
@@ -9,9 +10,7 @@ settings.friendship_sort = PrettyCards_plugin.settings().add({
 });
 
 
-function GetXpForLevel(level) {
-    return window.U0*level + (level*(level-1))/2*window.R;
-}
+
 
 function InitFriendshipSort() {
     var oldApplyFilters = window.applyFilters;
@@ -68,7 +67,7 @@ function InitFriendshipSort() {
             } else {
                 card.rank = 1000;
             }
-            var nextUCPRewardXP = GetXpForLevel(Math.ceil((card.level+1)/25)*25);
+            var nextUCPRewardXP = utility.getXpForLevel(Math.ceil((card.level+1)/25)*25);
             card.xpUntilNextUcpReward = nextUCPRewardXP - card.xp;
         }
     })

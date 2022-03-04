@@ -69,3 +69,12 @@
 .PrettyCards_UserGroupContainer {
 	white-space: nowrap;
 }
+
+.PrettyCards_ChatFriendshipContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+}

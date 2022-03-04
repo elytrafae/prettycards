@@ -86,6 +86,10 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 		window.$("head").append('<link href="css/cards.css?v=063001" rel="stylesheet" type="text/css">');
 		window.$("head").append('<link href="css/frames.css?v=063001" rel="stylesheet" type="text/css">');
 	}
+	if (!window.underscript.onPage("Friendship")) {
+		window.$("body").append('<script src="js/friendshipUtils.js?v=068003" type="text/javascript"></script>');
+		window.$("body").append('<link href="css/friendship.css?v=068003" rel="stylesheet" type="text/css">');
+	}
 });
 
 console.log("EventEnsure initialized at " + document.readyState + " state!");

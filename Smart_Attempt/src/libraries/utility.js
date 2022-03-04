@@ -1,4 +1,11 @@
 
+var collectionPlace = document.getElementById("collection"); // This is for a workaround with how friendship cards are added.
+if (!collectionPlace) {
+	collectionPlace = document.createElement("DIV");
+	collectionPlace.id = "collection";
+	collectionPlace.className = "PrettyCards_Hidden";
+	document.body.appendChild(collectionPlace);
+}
 
 class Utility {
 	
@@ -69,6 +76,23 @@ class Utility {
 	// This. Code. Is. ANCIENT. What is up with this, Onu!?!?
 	addFriend(username, callback) {
 		$.post("Friends", {username: "Jazmin290", addFriend: "Add friend"}, callback);
+	}
+	
+	appendCardFriendship(card, container, level, currentXp, maxXp) { // Why must you torture me . . . ?
+		var $card = window.appendCardFriendship(card, level, currentXp, maxXp);
+		container.append($card);
+		return $card;
+	}
+
+	getFriendshipInfo(id, cb) {
+		$.get("https://raw.githubusercontent.com/PrettyCards/friendship-server/main/data/" + id + ".json", {}, function(data) {
+			//console.log(JSON.parse(data));
+			cb(JSON.parse(data));
+		})
+	}
+
+	getXpForLevel(level) {
+		return window.U0*level + (level*(level-1))/2*window.R;
 	}
 	
 }
