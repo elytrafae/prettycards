@@ -37,8 +37,20 @@
 }
 
 .PrettyCards_FriendshipTop {
-	left: 24px;
-    top: 142px;
+	right: 117px;
+    top: 76px;
     z-index: 9;
-	
+    position: absolute;
+    background-color: darkmagenta;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 6em;
+    text-align: center;
+	border-bottom-right-radius: 0px;
+}
+
+.PrettyCards_FriendshipTop.PrettyCards_FriendshipTop_Right {
+	left: 115px;
+	border-bottom-right-radius: 1em;
+	border-bottom-left-radius: 0px;
 }

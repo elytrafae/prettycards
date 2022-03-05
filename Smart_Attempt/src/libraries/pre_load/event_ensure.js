@@ -88,7 +88,6 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 	}
 	if (!window.underscript.onPage("Friendship")) {
 		window.$("body").append('<script src="js/friendshipUtils.js?v=068003" type="text/javascript"></script>');
-		window.$("body").append('<link href="css/friendship.css?v=068003" rel="stylesheet" type="text/css">');
 	}
 });
 
