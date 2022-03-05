@@ -85,7 +85,7 @@ class Utility {
 	}
 
 	getFriendshipInfo(id, cb) {
-		$.get("https://raw.githubusercontent.com/PrettyCards/friendship-server/main/data/" + id + ".json", {}, function(data) {
+		return $.get("https://raw.githubusercontent.com/PrettyCards/friendship-server/main/data/" + id + ".json", {}, function(data) {
 			//console.log(JSON.parse(data));
 			cb(JSON.parse(data));
 		})

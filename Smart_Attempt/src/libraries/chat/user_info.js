@@ -44,8 +44,8 @@ function onPageLoaded() {
 	window.getInfo = sendUserInfoEvent;
 	$ = window.$;
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a26dc82c5692e345f736509d86b1817aac1e2d80/css/UserInfo.css");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a26dc82c5692e345f736509d86b1817aac1e2d80/css/CustomFriendship.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@7c8bba163dd5c2701183c5e5ef5f2e89a655bf64/css/UserInfo.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@7c8bba163dd5c2701183c5e5ef5f2e89a655bf64/css/CustomFriendship.css");
 	utility.loadCSSFromLink("https://undercards.net/css/meters.css");
 }
 
@@ -452,10 +452,13 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	// Friendship Stuff
 	var friendshipContainer = document.createElement("DIV");
 	friendshipContainer.className = "PrettyCards_ChatFriendshipContainer";
+	friendshipContainer.innerHTML = "<h2 class='gray'>Fetching data . . .</h2>";
+
 	column3.innerHTML = "<h2>Favorite Cards</h2>";
 	column3.appendChild(friendshipContainer);
 
 	utility.getFriendshipInfo(user.id, function(data) {
+		friendshipContainer.innerHTML = "";
 		var topXpCard = data.scores[0];
 		var topRankCard = data.scores[0];
 		for (var i=1; i < data.scores.length; i++) {
@@ -474,6 +477,15 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 			appendFriendshipCard(topXpCard, $(friendshipContainer), 1);
 			appendFriendshipCard(topRankCard, $(friendshipContainer), 2);
 		}
+
+		var lastFetched = document.createElement("P");
+		lastFetched.className = "gray";
+		var date = new Date(data.lastUpdated);
+		lastFetched.innerHTML = "Last fetched: " + date.toUTCString();
+		column3.appendChild(lastFetched);
+
+	}).fail(function() {
+		friendshipContainer.innerHTML = "<p class='red'>This user has no friendship leaderboard data.</p>";
 	});
 
 
