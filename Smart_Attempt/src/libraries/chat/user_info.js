@@ -44,8 +44,8 @@ function onPageLoaded() {
 	window.getInfo = sendUserInfoEvent;
 	$ = window.$;
 	
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@79bf26b2c2c7b88e7d4366e4a521d8ea8e63c762/css/UserInfo.css");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@79bf26b2c2c7b88e7d4366e4a521d8ea8e63c762/css/CustomFriendship.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a26dc82c5692e345f736509d86b1817aac1e2d80/css/UserInfo.css");
+	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@a26dc82c5692e345f736509d86b1817aac1e2d80/css/CustomFriendship.css");
 	utility.loadCSSFromLink("https://undercards.net/css/meters.css");
 }
 
@@ -493,7 +493,7 @@ function appendFriendshipCard(score, container, topType = 1) {
 	var level = window.getLevel(score.xp);
 	var card = utility.appendCardFriendship(window.getCard(score.cardId), container, level, utility.getXpForLevel(level) - score.xp, window.distanceNextLevel(level));
 	card.append('<div class="PrettyCards_FriendshipTop">' + topTxt + '</div>');
-	card.append(`<div class="rank"${score.rank <= 5 ? ' top' : ''} val="${score.rank}"></div>`);
+	card.append(`<div class="PrettyCards_FriendshipRank"${score.rank <= 5 ? ' top' : ''} val="${score.rank}"></div>`);
 	/*
 	if (topType == 1 || topType == 3) {
 		card.append('<div class="PrettyCards_FriendshipTop">TOP XP</div>')
