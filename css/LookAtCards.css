@@ -32,7 +32,6 @@
 .PrettyCards_LookAt_CardContainer {
 	display: flex;
 	flex-wrap: wrap;
-	align-content: center;
 	justify-content: center;
 	align-items: center;
 	width: 80%;

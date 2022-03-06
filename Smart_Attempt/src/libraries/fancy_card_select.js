@@ -60,8 +60,24 @@ function LookAtCards(selectCards) {
     document.body.appendChild(background);
 }
 
+settings.fancy_card_select = PrettyCards_plugin.settings().add({
+    'key': 'fancy_card_select',
+    'name': 'Enable Fancy "Choose a card" screen in games.', // Name in settings page
+    'type': 'boolean',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+    'onChange': function(newVal) {
+        window.showSelectCards = newVal ? LookAtCards : oldShowSelectCards;
+    }
+});
+
+var oldShowSelectCards;
+
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
-    utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ae99dbed06233b369f60038805a8fe507e48e405/css/LookAtCards.css")
-    window.showSelectCards = LookAtCards;
+    oldShowSelectCards = window.showSelectCards;
+    utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ae99dbed06233b369f60038805a8fe507e48e405/css/LookAtCards.css");
+    if (settings.fancy_card_select.value()) {
+        window.showSelectCards = LookAtCards;
+    }
 });
 

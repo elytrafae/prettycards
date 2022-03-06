@@ -9,9 +9,6 @@ settings.friendship_sort = PrettyCards_plugin.settings().add({
     'default': true, // default value
 });
 
-
-
-
 function InitFriendshipSort() {
     var oldApplyFilters = window.applyFilters;
 

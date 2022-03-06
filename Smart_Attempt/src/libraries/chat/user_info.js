@@ -13,7 +13,7 @@ var $ = window.$;
 
 /*
 	Remaining Checklist:
-	- Maybe get some more data to display? (Friendship would be very nice, but it would put a HUGE strain on both the server and the client.)
+	- Maybe get some more data to display. (IDEA: Challonge Tournaments)
 	- Remember to update the CSS files at the end!
 	
 	Done:
@@ -24,11 +24,20 @@ var $ = window.$;
 	- Add Friend/Unfriend, Private Message, Spectate.
 	- Added Admin controls.
 	- Add Ignore/Unignore and Mention actions.
+	- Show friendship leaderboard data!
 */
 
 var leaderboard = [];
 var $;
 var oldGetInfo;
+
+settings.user_info = PrettyCards_plugin.settings().add({
+    'key': 'user_info',
+    'name': 'Better User Info', // Name in settings page
+    'type': 'boolean',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+});
 
 function getRankedLeaderboard() {
 	window.$.get("Leaderboard?action=ranked", function(e) {
@@ -97,6 +106,7 @@ PrettyCards_plugin.events.on("Chat:getPrivateMessage", processChatMessageEvent);
 */
 
 PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
+	if (!settings.user_info.value()) {return;}
 	//console.log("Chat:getInfo ", data);
 	var user = data.user;
 	var header = data.popupElement.querySelector(".modal-header");
