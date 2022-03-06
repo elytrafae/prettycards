@@ -7,6 +7,8 @@ import {DeckEditor} from "/src/libraries/deck_editor.js";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
+var $ = window.$;
+
 var deckSelector = new SavedDeckSelector();
 var skinSelector = new CardSkinSelector();
 var deckName = document.createElement("INPUT");
@@ -405,15 +407,13 @@ function InitDecks() {
 	
 	SilenceDeckFunctions();
 	
-	var oldDeckButtons = document.querySelector(".btn-storage").parentElement;
-	oldDeckButtons.style = "display: none;";
+	var oldDeckButtons = $(".btn-storage").first().parent(); //document.querySelector(".btn-storage").parentElement;
+	oldDeckButtons.css("display", "none");
 	document.getElementById("selectSouls").style.display = "none";
 	
-	var newDeckButtons = document.createElement("DIV");
-	newDeckButtons.style = "margin-bottom: 5px;"
-	document.querySelector("#yourCardList").insertBefore(newDeckButtons, oldDeckButtons);
-	
-	newDeckButtons.className = "PrettyCards_DeckButtons";
+	var newDeckButtons = $("<div style='margin-bottom: 5px;' class='PrettyCards_DeckButtons'></div>");
+	//document.querySelector("#yourCardList").insertBefore(newDeckButtons, oldDeckButtons);
+	newDeckButtons.insertBefore(oldDeckButtons);
 	
 	/*
 	newDeckButtons.appendChild(deckName);
@@ -427,13 +427,13 @@ function InitDecks() {
 	*/
 	
 	var changeDeckButton = document.createElement("BUTTON");
-	newDeckButtons.appendChild(changeDeckButton);
+	newDeckButtons.append(changeDeckButton);
 	changeDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 	changeDeckButton.className = "btn btn-primary";
 	changeDeckButton.innerHTML = "Change<br>Deck";
 	changeDeckButton.onclick = ChangeDeckScreen.bind(this);
 	
-	newDeckButtons.appendChild(editDeckButton);
+	newDeckButtons.append(editDeckButton);
 	//editDeckButton.style = "width: 50%; margin: 0; background-image: url(/images/cards/Dummy.png); background-size: cover; background-position: center; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 	editDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 	editDeckButton.className = "btn btn-primary";

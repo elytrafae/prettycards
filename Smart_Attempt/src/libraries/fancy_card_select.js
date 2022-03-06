@@ -75,7 +75,7 @@ var oldShowSelectCards;
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
     oldShowSelectCards = window.showSelectCards;
-    utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@ae99dbed06233b369f60038805a8fe507e48e405/css/LookAtCards.css");
+    utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c9c9169ef8ea6eb546ce4d372a3cb2a7efa177cc/css/LookAtCards.css");
     if (settings.fancy_card_select.value()) {
         window.showSelectCards = LookAtCards;
     }
