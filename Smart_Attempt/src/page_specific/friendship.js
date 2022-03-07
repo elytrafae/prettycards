@@ -1,4 +1,4 @@
-import { PrettyCards_plugin, settings } from "../libraries/underscript_checker";
+import { prettycards, PrettyCards_plugin, settings } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
 settings.friendship_sort = PrettyCards_plugin.settings().add({
@@ -46,6 +46,9 @@ function InitFriendshipSort() {
             }
         } else if (value == 3) {
             sortFunction = function (a, b) {
+                if (a.level >= 200 && b.level < 200) {
+                    return true;
+                }
                 return a.xpUntilNextUcpReward - b.xpUntilNextUcpReward;
             }
         }
@@ -54,6 +57,18 @@ function InitFriendshipSort() {
 
     PrettyCards_plugin.events.on("Friendship:loaded", function (data) {
         var lb = JSON.parse(localStorage["underscript.cache.friendship"]);
+        // Test code //
+        PrettyCards_plugin.events.emit("PrettyCards:customCards");
+        console.log("COLLECTION: ", prettycards.ddlc_collection);
+        var id1 = prettycards.ddlc_collection.cards[16].fixedId;
+        prettycards.ddlc_collection.cards[16].xp = utility.getXpForLevel(219)-1;
+        friendshipItems[id1] = {claim: 5, idCard: id1, notClaimed: true, user: {}, xp: utility.getXpForLevel(224)-1};
+        window.collection.push(prettycards.ddlc_collection.cards[16]);
+        var id2 = prettycards.ddlc_collection.cards[12].fixedId;
+        prettycards.ddlc_collection.cards[12].xp = utility.getXpForLevel(219)-2;
+        friendshipItems[id2] = {claim: 5, idCard: id2, notClaimed: false, user: {}, xp: utility.getXpForLevel(224)-2};
+        window.collection.push(prettycards.ddlc_collection.cards[12]);
+        //////////////
         for (var i=0; i < window.collection.length; i++) {
             var card = window.collection[i];
             card.level = window.getLevel(card.xp);

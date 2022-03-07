@@ -1,4 +1,5 @@
 
+import { prettycards } from "../../underscript_checker";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
@@ -283,6 +284,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "DETERMINATION",
 		note: `The DT of the ${doki.me()} tribe. The most notable aspects of this card are noted with ${file_exp.me()}.`
 	});
+
+	prettycards.ddlc_collection = c;
 	
 })
 

@@ -1,3 +1,4 @@
+import { PrettyCards_plugin } from "./underscript_checker";
 
 var collectionPlace = document.getElementById("collection"); // This is for a workaround with how friendship cards are added.
 if (!collectionPlace) {
@@ -7,8 +8,22 @@ if (!collectionPlace) {
 	document.body.appendChild(collectionPlace);
 }
 
+var lastSHA;
+window.$.get("https://api.github.com/repos/CMD-God/prettycards/commits", function(data) {
+	console.log("REPOS", data);
+	lastSHA = data[0].sha;
+	PrettyCards_plugin.events.emit.singleton("PrettyCards_CommitCSSLoad");
+});
+
 class Utility {
 	
+	loadCSSFromGH(name) {
+		PrettyCards_plugin.events.on("PrettyCards_CommitCSSLoad", function() {
+			const url = `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${lastSHA}/css/${name}.css`;
+			utility.loadCSSFromLink(url);
+		});
+	}
+
 	loadCSSFromLink(url) {
 		var e = document.createElement("link");
 		e.rel  = 'stylesheet';
