@@ -98,7 +98,7 @@ function StartJoiningQueue(game_mode) {
 
 function InitPlay() {
 	//console.log("Init Play!");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4ebd16e8aea3023000642a69626c90174162a8f6/css/Play.css");
+	utility.loadCSSFromGH("Play");
 	
 	if (document.querySelector('span[data-i18n="[html]play-incomplete"]')) {
 		console.log("NO DECKS!");

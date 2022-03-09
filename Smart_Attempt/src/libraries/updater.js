@@ -5,6 +5,18 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 // https://github.com/CMD-God/prettycards/releases/latest/download/prettycards.user.js
 // function Toast({title, text, footer, className, css={}, buttons, timeout, onClose}={}) {
 
+var options = ["All the time", "Hourly", "Daily", "Never"];
+var times = [0, 3600000, 3600000*24, 9007199254740991];
+
+settings.update_frequency = PrettyCards_plugin.settings().add({
+	'key': 'update_frequency',
+	'name': 'Update Check Frequency', // Name in settings page
+	'type': 'select',
+	'options': options,
+	'refresh': false, // true to add note "Will require you to refresh the page"
+	'default': options[2], // default value; Daily
+});
+
 var version = GM_info.script.version;
 var lastChecked = window.localStorage.getItem("PrettyCards_LastCheckedUpdate");
 var now = Date.now();
@@ -16,7 +28,9 @@ function dayDifference(timestamp1, timestamp2) {
     return daysDifference;
 }
 
-if (dayDifference(now, lastChecked) >= 1) {
+var setting_time_id = options.indexOf(settings.update_frequency.value() || options[2]);
+
+if (now - lastChecked >= times[setting_time_id]) {
 	window.localStorage.setItem("PrettyCards_LastCheckedUpdate", now);
 	$.get("https://api.github.com/repos/CMD-God/prettycards/releases/latest", {}, function(data) {
 		//console.log("data: ", data, "version: ", version);

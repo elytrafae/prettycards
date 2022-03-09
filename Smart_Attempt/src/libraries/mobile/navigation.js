@@ -210,7 +210,7 @@ prettycards.openSettings = function() {
 }
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@573356546d695d1ef113c75b7d0c32399c792718/css/Mobile_Sidebar.css");
+	utility.loadCSSFromGH("Mobile_Sidebar");
 	ExecuteWhen("translation:loaded", function () {
 		packs = $(".nbPacksHeader").text();
 		quests = $("a[href=Quests]").text();

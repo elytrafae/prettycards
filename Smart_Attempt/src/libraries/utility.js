@@ -8,18 +8,25 @@ if (!collectionPlace) {
 	document.body.appendChild(collectionPlace);
 }
 
-var lastSHA;
-window.$.get("https://api.github.com/repos/CMD-God/prettycards/commits", function(data) {
-	console.log("REPOS", data);
-	lastSHA = data[0].sha;
-	PrettyCards_plugin.events.emit.singleton("PrettyCards_CommitCSSLoad");
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
+	if ( (!window.sessionStorage["prettycards.sha"]) || GM_info.script.version == "local") {
+		window.$.get("https://api.github.com/repos/CMD-God/prettycards/commits", function(data) {
+			console.log("REPOS", data);
+			window.sessionStorage["prettycards.sha"] = data[0].sha;
+			PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", data[0].sha);
+		});
+	} else {
+		console.log("SESSION STORAGE!");
+		PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", window.sessionStorage["prettycards.sha"]);
+	}
 });
+
 
 class Utility {
 	
 	loadCSSFromGH(name) {
-		PrettyCards_plugin.events.on("PrettyCards_CommitCSSLoad", function() {
-			const url = `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${lastSHA}/css/${name}.css`;
+		PrettyCards_plugin.events.on("PrettyCards:CommitCSSLoad", function(data) {
+			const url = `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${data}/css/${name}.css`;
 			utility.loadCSSFromLink(url);
 		});
 	}

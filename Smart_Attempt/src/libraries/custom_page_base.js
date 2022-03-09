@@ -19,7 +19,7 @@ var pageLoadEventFired = false;
 
 function SendOnPageLoadEvent() {
 	if (window.$ && !pageLoadEventFired) {
-		PrettyCards_plugin.events.emit("PrettyCards:onPageLoad");
+		PrettyCards_plugin.events.emit.singleton("PrettyCards:onPageLoad");
 		pageLoadEventFired = true;
 	}
 }

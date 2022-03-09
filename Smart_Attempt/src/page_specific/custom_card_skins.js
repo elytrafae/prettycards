@@ -390,7 +390,7 @@ var card_options;
 function InitCustomCardSkins() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
 		window.$("title").html("PrettyCards - Custom Card Skins");
-		utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@3cd3ed92fe302df05ae12aea1b6eee3b04ef5b3e/css/CustomCardSkins.css");
+		utility.loadCSSFromGH("CustomCardSkins");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CardSkinsTab" style="font-size: 2em; margin-bottom: 1em;">
 				<button id="PrettyCards_CreateCustomCardSkinButton" class="brn btn-success">Create New</button>

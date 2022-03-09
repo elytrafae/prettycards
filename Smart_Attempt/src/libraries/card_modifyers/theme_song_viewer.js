@@ -55,6 +55,7 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 			const SRC = _SRC;
 			var button = $('<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer"></span>');
 			button.click(function(e) {
+				console.log("Button clicked!", e);
 				audio.src = SRC;
 				audio.play();
 				e.stopPropagation();

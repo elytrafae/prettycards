@@ -7,7 +7,7 @@ import {SoulSelector} from "/src/libraries/soul_selector.js";
 import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/deck_selector.js";
 import {DeckEditor} from "/src/libraries/deck_editor.js";
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@e42698ff17778d9145c81a88d817089fe31927b9/css/Souls.css");
+utility.loadCSSFromGH("Souls");
 
 var custom_deck_sys = settings.override_decks.value();
 

@@ -69,7 +69,7 @@ if (!window.allCards || window.allCards.length == 0) {
 	ProcessDefaultSkins();
 }
 
-utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@6c68b7bd6c297292b47161ebdb18620017cf68ce/css/CardSkinSelector.css");
+utility.loadCSSFromGH("CardSkinSelector");
 
 function ProcessDefaultSkins() {
 	for (var i=0; i < allCards.length; i++) {

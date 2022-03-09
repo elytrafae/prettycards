@@ -143,7 +143,6 @@ function InitPacks() {
 	
 	//PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	//utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@5503c34da17d5225835c03f2d567a54bdf68bdf8/css/Packs.css");
 	utility.loadCSSFromGH("Packs");
 	
 	/*

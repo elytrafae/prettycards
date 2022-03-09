@@ -91,7 +91,7 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 
 function InitGameList() {
 	console.log("Init Play!");
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@4ebd16e8aea3023000642a69626c90174162a8f6/css/Play.css");
+	utility.loadCSSFromGH("Play");
 	
 	$("#state1 > table").css("display", "none");
 	$("#state1 br").css("display", "none");

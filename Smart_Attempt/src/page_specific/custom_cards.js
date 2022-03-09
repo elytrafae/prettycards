@@ -111,7 +111,6 @@ function DoStuffWhenAllCardsAreReady() {
 function InitCustomCards() {
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos PrettyCards:onArtifacts", function () {
 		window.$("title").html("PrettyCards - Custom Cards");
-		// utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@cb746b2fbb5d5acf1d837a26dc477abcb7a74e00/css/CustomCards.css"); // Moved to "Fancy Helper" because this needs to be loaded at all times
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CustomCardCategories">Loading All Cards . . .</div>
 			<div id="PrettyCards_CustomCardShowcase"></div>

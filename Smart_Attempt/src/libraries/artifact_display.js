@@ -66,7 +66,7 @@ var artifactDisplay = new ArtifactDisplay();
 window.artifactDisplay = artifactDisplay;
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@515d80046167df91c2889855179c5ff28b851f9e/css/Artifacts.css");
+	utility.loadCSSFromGH("Artifacts");
 	artifactDisplay.GetAllArtifacts();
 });
 
