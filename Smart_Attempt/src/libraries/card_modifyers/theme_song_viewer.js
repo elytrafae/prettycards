@@ -24,7 +24,7 @@ const audio = new Audio();
 //console.log("Audio", audio);
 
 window.prettycards.playThemeSongPreviewEvent = function(SRC, e) {
-	console.log("Button clicked!", e);
+	// console.log("Button clicked!", e);
 	audio.src = SRC;
 	audio.play();
 	e.stopPropagation();
