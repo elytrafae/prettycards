@@ -4,6 +4,7 @@
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
+import { prettycards } from "../underscript_checker";
 
 settings.theme_song_preview = PrettyCards_plugin.settings().add({
 	'key': 'theme_song_preview',
@@ -21,6 +22,13 @@ var cardExceptions = {
 
 const audio = new Audio();
 //console.log("Audio", audio);
+
+window.prettycards.playThemeSongPreviewEvent = function(SRC, e) {
+	console.log("Button clicked!", e);
+	audio.src = SRC;
+	audio.play();
+	e.stopPropagation();
+}
 
 if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 
@@ -53,13 +61,7 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 				}
 			}
 			const SRC = _SRC;
-			var button = $('<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer"></span>');
-			button.click(function(e) {
-				console.log("Button clicked!", e);
-				audio.src = SRC;
-				audio.play();
-				e.stopPropagation();
-			});
+			var button = $('<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="prettycards.playThemeSongPreviewEvent(\'' + SRC + '\', event)"></span>');
 			
 			html$.append(button);
 		}

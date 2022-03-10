@@ -85,6 +85,11 @@ span.SWITCH {
 	top: 40px;
 	left: 14px;
 	z-index: 7;
+	cursor: pointer;
+}
+
+.glyphicon.PrettyCards_CardThemeSongPlayer:hover {
+	color:#41fcff;
 }
 
 #PrettyCards_CustomCardCategories {
