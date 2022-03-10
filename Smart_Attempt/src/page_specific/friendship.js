@@ -58,6 +58,7 @@ function InitFriendshipSort() {
     PrettyCards_plugin.events.on("Friendship:loaded", function (data) {
         var lb = JSON.parse(localStorage["underscript.cache.friendship"]);
         // Test code //
+        /*
         PrettyCards_plugin.events.emit("PrettyCards:customCards");
         console.log("COLLECTION: ", prettycards.ddlc_collection);
         var id1 = prettycards.ddlc_collection.cards[16].fixedId;
@@ -68,6 +69,7 @@ function InitFriendshipSort() {
         prettycards.ddlc_collection.cards[12].xp = utility.getXpForLevel(219)-2;
         friendshipItems[id2] = {claim: 5, idCard: id2, notClaimed: false, user: {}, xp: utility.getXpForLevel(224)-2};
         window.collection.push(prettycards.ddlc_collection.cards[12]);
+        */
         //////////////
         for (var i=0; i < window.collection.length; i++) {
             var card = window.collection[i];
