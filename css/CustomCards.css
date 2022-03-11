@@ -58,6 +58,10 @@
     z-index: 1;
 }
 
+.cardName.SWITCH div {
+	display: inline-block;
+}
+
 .cardName.SWITCH div,.SWITCH {
 	background: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
 	text-shadow: none;
