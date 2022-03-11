@@ -168,7 +168,7 @@ class FancyDisplay {
 			description: desc,
 			image: image_src,
 			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id,
-			note: (customObj ? window.i18n(customObj.note || "") : "")
+			note: (customObj ? window.$.i18n(customObj.note || "") : "")
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewSoul()", {id: id, helper: helper});

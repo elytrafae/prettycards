@@ -58,15 +58,7 @@
     z-index: 1;
 }
 
-.SWITCH div {
-	background: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
-	text-shadow: none;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	display: inline-block;
-}
-
-span.SWITCH {
+.cardName.SWITCH div,.SWITCH {
 	background: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
 	text-shadow: none;
 	-webkit-background-clip: text;
