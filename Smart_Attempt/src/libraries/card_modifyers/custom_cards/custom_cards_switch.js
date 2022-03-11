@@ -92,7 +92,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Slice of Temptation|Slices of Temptation}}",
 		image: "An_Honest_Heal",
 		cost: 2,
-		description: "Both players draw a card. If they already have 7 cards in their hand, deal fatigue {{DMG}} to them twice instead.",
+		description: "Both players draw a card. If their hand is already full, deal fatigue {{DMG}} to them twice instead.",
 		extension: "BASE",
 		rarity: "RARE"
 	});

@@ -1,0 +1,11 @@
+
+.PrettyCards_PersonaBorder {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    background-color: #ffffff;
+    width: 100%;
+    aspect-ratio: 13/2;
+    clip-path: polygon(4% 0, 100% 0%, 96% 100%, 0% 100%);
+}
+

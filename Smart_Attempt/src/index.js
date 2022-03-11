@@ -24,6 +24,8 @@ import {} from "/src/libraries/card_modifyers/card_description_corrections.js";
 import {} from "/src/libraries/card_modifyers/rarity_text_changer.js";
 // import {} from "/src/libraries/card_modifyers/card_helper_hover.js";
 
+import {} from "/src/libraries/persona_overlay.js";
+
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {} from "/src/libraries/fancy_card_select.js";
 
