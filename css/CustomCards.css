@@ -63,7 +63,7 @@
 	text-shadow: none;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	display: inline-block;
+	/*display: inline-block;*/
 }
 
 .card:hover .glyphicon.PrettyCards_CardThemeSongPlayer {
