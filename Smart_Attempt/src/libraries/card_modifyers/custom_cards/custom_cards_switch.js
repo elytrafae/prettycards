@@ -1,6 +1,41 @@
 
-import {CustomCardsDictionary} from "/src/libraries/card_modifyers/custom_cards_dictionary.js"
+import { prettycards } from "../../underscript_checker";
+import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
+PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
+	
+	var c = window.prettycards.newCollection({
+		name: "Switch Soul Set",
+		author: "CMD_God",
+		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/Switch_Soul/",
+		//cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/DDLC/",
+		//rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
+		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
+		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
+		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
+		//universalCustomFont: "Aller",
+		note: `A collaboration between @Baltoni#7741 and I for Soultest back in the day, now in a fresh format!`
+	});
+	
+	var soul = c.newSoul({
+		displayName: "SWITCH",
+		description: "",
+		image: "SWITCH",
+		name: "SWITCH",
+		note: "An idea for a spell-oriented soul. Unfortunately, I lost access to the original sheet where I submitted all of these cards, so they will have minimal reasoning now . . ."
+	});
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Spellbook|Spellbooks}}",
+		image: "Spellbook",
+		cost: 0,
+		description: `Look at all ${soul.me()} spells (rarity <= {{RARITY:EPIC}}). Choose one to add to your hand. If your opponent has more monsters on the board than you, give it -1 {{cost}}.`,
+		extension: "BASE",
+		rarity: "TOKEN"
+	});
+})
+/*
 CustomCardsDictionary.AddCustomCard({
 	soul: {name : "SWITCH", id: 22},
 	name: "{{PLURAL:$1|Spellbook|Spellbooks}}",
@@ -128,3 +163,4 @@ CustomCardsDictionary.AddCustomCard({
 	tribes: ["ROYAL_INVENTION"],
 	rarity: "TOKEN"
 });
+*/

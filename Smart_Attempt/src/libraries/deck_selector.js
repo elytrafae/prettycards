@@ -172,11 +172,15 @@ function GetAllDecksOrganized() {
 		PERSEVERANCE: [],
 		//SWITCH: [],
 		//MONSTER: [],
+		//FEAR: [],
+		//HATE: []
 	};
 	for (var i=0; i < decks.length; i++) {
 		var deck = decks[i];
 		if (!orderedDecks[deck.soul]) {
-			orderedDecks[deck.soul] = [];
+			// orderedDecks[deck.soul] = []; // No more waiting for Onu to add new souls!
+			console.warn("NEW DECK TYPE DISCOVERED ON CLIENT! " + deck.soul);
+			continue;
 		}
 		orderedDecks[deck.soul].push(deck);
 	}
