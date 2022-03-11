@@ -10,8 +10,11 @@ function CreateOverlay(card, side) {
     var border = $('<div class="PrettyCards_PersonaBorder"></div>');
     var back = $('<div class="PrettyCards_PersonaBack"></div>');
     border.append(back);
-    var image = $(`<img src="images/cards/${card.image}.png">`);
+    var image = $(`<img src="images/cards/${card.image}.png" class="PrettyCards_PersonaImage">`);
     back.append(image);
+
+    image.css("left", "200%");
+    image.animate({"left": "-100%"}, 1000, "swing");
 
     $("body").append(border);
 }

@@ -14,6 +14,13 @@
     background-color: #000000;
     width: auto;
     height: 100%;
-    margin: 1% 0px;
+    margin: 0px 1%;
     clip-path: polygon(3% 4%, 99% 5%, 96% 96%, 0% 98%);
+}
+
+.PrettyCards_PersonaImage {
+    height: 200%;
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
 }
