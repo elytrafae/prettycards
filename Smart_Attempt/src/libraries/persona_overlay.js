@@ -1,6 +1,14 @@
-import { PrettyCards_plugin } from "./underscript_checker";
+import { PrettyCards_plugin, settings } from "./underscript_checker";
 import { utility } from "./utility";
 
+settings.persona_overlay = PrettyCards_plugin.settings().add({
+	'key': 'persona_overlay',
+	'name': 'Persona Overlay', // Name in settings page
+	'note': "Just . . . Play a LEGENDARY or DT card to see it.<br>Warning: Looks way worse than in my head!",
+	'type': 'boolean',
+	'refresh': false, // true to add note "Will require you to refresh the page"
+	'default': false, // default value
+});
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
     utility.loadCSSFromGH("PersonaOverlay");
@@ -14,8 +22,9 @@ function Linearizer(sin) {
 }
 
 PrettyCards_plugin.events.on("getMonsterPlayed", function(data) {
+    if (!settings.persona_overlay.value()) {return;}
     var card = JSON.parse(data.card);
-    console.log("PLAYED: ", card);
+    // console.log("PLAYED: ", card);
     if (card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION") {
         CreateOverlay(card, null);
     }
