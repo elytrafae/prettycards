@@ -6,7 +6,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
 		name: "Switch Soul Set",
-		author: "CMD_God",
+		author: "Baltoni and CMD_God",
 		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/Switch_Soul/",
 		//cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/DDLC/",
 		//rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
@@ -30,7 +30,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Spellbook|Spellbooks}}",
 		image: "Spellbook",
 		cost: 0,
-		description: `Look at all ${soul.me()} spells (rarity <= {{RARITY:EPIC}}). Choose one to add to your hand. If your opponent has more monsters on the board than you, give it -1 {{cost}}.`,
+		description: `Look at 3 random ${soul.me()} spells (rarity <= {{RARITY:EPIC}}). Choose one to add to your hand. If your opponent has more monsters on the board than you, give it -1 {{cost}}.`,
 		extension: "BASE",
 		rarity: "TOKEN"
 	});
@@ -81,8 +81,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Mass Necromancy|Mass Necromancies}}",
 		image: "Even_Necromancy",
-		cost: 5,
-		description: "For ever 3 different {{KW:GENERATED}} spells you've cast this game, burn a random monster in your dustpile and add it to your deck.",
+		cost: 3,
+		description: "For ever 3 different spells you've cast this game, burn a random monster in your dustpile and add it to your hand (max: 3).",
 		extension: "BASE",
 		rarity: "RARE"
 	});
@@ -121,10 +121,10 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Body Swap|Body Swaps}}",
+		name: "{{PLURAL:$1|Breeze of Freedom|Breezes of Freedom}}",
 		image: "Body_Swap",
 		cost: 3,
-		description: "Swap the {{ATK}} and {{HP}} of a monster with the {{ATK}} and {{HP}} of the monster to its right.",
+		description: "Add a random {{TRIBE:CHAOS_WEAPON}} to your hand. Set its cost to 1.",
 		extension: "DELTARUNE",
 		rarity: "RARE"
 	});
@@ -133,8 +133,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
 		image: "Triggers_Of_Lunacy",
-		cost: 2,
-		description: "Deal 1 {{DMG}} to all enemy monsters for every 2 spells you've casted this game. This costs 1 more for every 2 spells you've casted this game.",
+		cost: 17,
+		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
 		extension: "BASE",
 		rarity: "EPIC"
 	});

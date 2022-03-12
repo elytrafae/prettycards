@@ -132,7 +132,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin: 0 60px;
+	margin: 0 61px;
 }
 
 .PrettyCards_SoulDisplay_Spells .card {
