@@ -94,11 +94,14 @@ class FancyDisplay {
 		}
 		
 		//$("body").append(this.backdrop);
-		window.BootstrapDialog.show({
+		var dial = window.BootstrapDialog.show({
             title: 'You shouldn\'t be able to see this!',
+			size: data.size || window.BootstrapDialog.SIZE_NORMAL,
             message: this.box,
 			onshow: this.OnShow
         });
+
+		dial.$modalDialog[0].className = "modal-dialog modal-lg";
 		
 	}
 	
@@ -168,7 +171,8 @@ class FancyDisplay {
 			description: desc,
 			image: image_src,
 			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id,
-			note: (customObj ? window.$.i18n(customObj.note || "") : "")
+			note: (customObj ? window.$.i18n(customObj.note || "") : ""),
+			size: BootstrapDialog.SIZE_LARGE
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewSoul()", {id: id, helper: helper});

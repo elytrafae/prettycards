@@ -160,6 +160,9 @@ class Card {
 			this.typeCard = 0;
 		}
 		
+		this.id = nextCustomCardId;
+		this.fixedId = nextCustomCardId;
+		/*
 		Object.defineProperty(this, "id", {
 			value: nextCustomCardId,
 			writable: false
@@ -168,6 +171,7 @@ class Card {
 			value: nextCustomCardId,
 			writable: false
 		});
+		*/
 		nextCustomCardId++;
 		
 		this.maxHp = this.hp;
@@ -175,10 +179,14 @@ class Card {
 		this.originalAttack = this.attack;
 		this.originalCost = this.cost;
 		this.baseImage = this.image;
+
+		this.isCustom = true;
+		/*
 		Object.defineProperty(this, "isCustom", {
 			value: true,
 			writable: false
 		});
+		*/
 		
 		window.$.i18n().load( {
 			en: { 
@@ -189,6 +197,7 @@ class Card {
 				
 		this.tribes = this.tribes.map((el) => el.toString());
 		
+		/*
 		Object.defineProperty(this, "tribes", {
 			value: Object.freeze(this.tribes),
 			writable: false
@@ -198,6 +207,8 @@ class Card {
 			value: window.$.i18n("card-name-" + this.id, 1),
 			writable: false
 		});
+		*/
+		this.name = window.$.i18n("card-name-" + this.id, 1);
 		this.description = undefined;
 		
 		window.allCards.push(this);
