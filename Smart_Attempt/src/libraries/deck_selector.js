@@ -175,6 +175,9 @@ function GetAllDecksOrganized() {
 		//FEAR: [],
 		//HATE: []
 	};
+	if (utility.onTestServer()) {
+		orderedDecks["MONSTER"] = [];
+	}
 	for (var i=0; i < decks.length; i++) {
 		var deck = decks[i];
 		if (!orderedDecks[deck.soul]) {

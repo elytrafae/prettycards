@@ -11,12 +11,12 @@ if (!collectionPlace) {
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
 	if ( (!window.sessionStorage["prettycards.sha"]) || GM_info.script.version == "local") {
 		window.$.get("https://api.github.com/repos/CMD-God/prettycards/commits", function(data) {
-			console.log("REPOS", data);
+			//console.log("REPOS", data);
 			window.sessionStorage["prettycards.sha"] = data[0].sha;
 			PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", data[0].sha);
 		});
 	} else {
-		console.log("SESSION STORAGE!");
+		//console.log("SESSION STORAGE!");
 		PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", window.sessionStorage["prettycards.sha"]);
 	}
 });
@@ -115,6 +115,10 @@ class Utility {
 
 	getXpForLevel(level) {
 		return window.U0*level + (level*(level-1))/2*window.R;
+	}
+
+	onTestServer() {
+		return !['www','undercards'].includes(window.location.hostname.split('.')[0]);
 	}
 	
 }

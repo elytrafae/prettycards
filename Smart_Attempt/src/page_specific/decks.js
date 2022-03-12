@@ -6,6 +6,7 @@ import {SoulSelector} from "/src/libraries/soul_selector.js";
 import {DeckEditor} from "/src/libraries/deck_editor.js";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+import { utility } from "../libraries/utility";
 
 var $ = window.$;
 
@@ -199,7 +200,7 @@ function canCardBeAdded(card, deck) {
 			nrInDeck++;
 		}
 	}
-	if (nrInDeck >= maxDupesPerRarity[card.rarity]) {
+	if (!utility.onTestServer() && nrInDeck >= maxDupesPerRarity[card.rarity]) {
 		return false;
 	}
 	return true;
