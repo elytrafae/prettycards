@@ -1,6 +1,7 @@
 import { PrettyCards_plugin, settings } from "./underscript_checker";
 import { utility } from "./utility";
 
+/*
 settings.persona_overlay = PrettyCards_plugin.settings().add({
 	'key': 'persona_overlay',
 	'name': 'Persona Overlay', // Name in settings page
@@ -9,6 +10,7 @@ settings.persona_overlay = PrettyCards_plugin.settings().add({
 	'refresh': false, // true to add note "Will require you to refresh the page"
 	'default': false, // default value
 });
+*/
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
     utility.loadCSSFromGH("PersonaOverlay");
@@ -22,6 +24,7 @@ function Linearizer(sin) {
 }
 
 PrettyCards_plugin.events.on("getMonsterPlayed", function(data) {
+    return; // Temporarily Removed Feature
     if (!settings.persona_overlay.value()) {return;}
     var card = JSON.parse(data.card);
     // console.log("PLAYED: ", card);
