@@ -1,14 +1,18 @@
 
 .PrettyCards_SwitchLeft {
+    /*
     text-shadow: -1px -1px rgb(0, 255, 255), 1px 1px cyan, -1px 1px cyan, 1px -1px cyan;
-    border-radius: 0.1em;
-    background-color: rgba(0, 255, 255, 0.3);
     color:rgb(0, 255, 255);
+    */
+    border-radius: 0.3em;
+    background-color: rgba(0, 255, 255, 0.4);
 }
 
 .PrettyCards_SwitchRight {
+    /*
     text-shadow: -1px -1px red, 1px 1px red, -1px 1px red, 1px -1px red;
-    border-radius: 0.1em;
-    background-color: rgba(255, 0, 0, 0.3);
     color: red;
+    */
+    border-radius: 0.3em;
+    background-color: rgba(255, 0, 0, 0.4);
 }

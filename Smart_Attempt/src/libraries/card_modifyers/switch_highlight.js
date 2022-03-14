@@ -33,20 +33,30 @@ function switchifyCard(cardId, lan = "en") {
     console.log(startPos, sepPos, endPos, text);
 }
 
+function switchifyLanguage(lan = 'en') {
+    var messages = $.i18n.messageStore.messages[lan];
+    for (var key in messages) {
+        if (key.startsWith("card-") && !key.startsWith("card-name-")) {
+            var id = Number(key.substring(5));
+            switchifyCard(id, lan);
+        }
+    }
+}
+
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
     utility.loadCSSFromGH("SwitchHighlight");
 })
 
 PrettyCards_plugin.events.on('translation:loaded', (data) => {
     console.log("Translation Value", data);
-    //kromerify("en");
+    switchifyLanguage('en');
     var lan = window.localStorage.getItem("language");
     if (!lan) { // Should never happen, but . . . 
         lan = window.getLanguage();
     }
-    //if (lan != "en") {
-    //    kromerify(lan);
-    //}
+    if (lan != "en") {
+        switchifyLanguage(lan);
+    }
 });
 
 window.prettycards.switchifyCard = switchifyCard;
