@@ -23,6 +23,8 @@ function switchifyCard(card, lan = "en") {
     // Has to be in a reverse order, since we are adding things to the "character array".
     text = text.splice(endPos, `</span>`);
     text = text.splice(sepPos + switchSeparators[lan].length, `<span class="PrettyCards_SwitchRight">`);
+    text = text.splice(sepPos + switchSeparators[lan].length, `</span>`);
+    text = text.splice(sepPos, `<span class="PrettyCards_SwitchSeparator">`);
     text = text.splice(sepPos, `</span>`);
     text = text.splice(startPos + switchStart.length + 1, `<span class="PrettyCards_SwitchLeft">`);
 
