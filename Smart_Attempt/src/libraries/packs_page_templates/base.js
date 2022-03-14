@@ -141,7 +141,7 @@ class PacksPageTemplate {
 	onPackUcpBuyClick(e) { // Should be called by the button.
 		const self = this;
 		var data = this.packs_data2[e.target.getAttribute("data-packid")];
-		var max_can_afford = Math.floor(pagegetters.gold/data.g_cost);
+		var max_can_afford = Math.floor(pagegetters.ucp/data.ucp_cost);
 		if (data.ucp_buy_count > max_can_afford) {data.ucp_buy_count = max_can_afford;} // Failsafe
 		window.BootstrapDialog.show({
 			title: 'Buy packs with UCP?',

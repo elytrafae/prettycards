@@ -47,6 +47,8 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
     utility.loadCSSFromGH("SwitchHighlight");
 })
 
+// Feature temporarily disabled
+/*
 PrettyCards_plugin.events.on('translation:loaded', (data) => {
     console.log("Translation Value", data);
     switchifyLanguage('en');
@@ -58,5 +60,6 @@ PrettyCards_plugin.events.on('translation:loaded', (data) => {
         switchifyLanguage(lan);
     }
 });
+*/
 
 window.prettycards.switchifyCard = switchifyCard;
