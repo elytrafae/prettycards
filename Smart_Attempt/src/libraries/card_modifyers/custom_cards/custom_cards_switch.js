@@ -51,7 +51,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Sacrificial Lamb|Sacrificial Lambs}}",
 		image: "Sacrificial_Lamb",
-		cost: 4,
+		cost: 5,
 		description: "Burn a random {{KW:GENERATED}} spell in your hand to kill an enemy monster.",
 		extension: "BASE",
 		rarity: "COMMON"
@@ -97,6 +97,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "RARE"
 	});
 
+	/*
 	var power_drain = c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Power Drain|Power Drains}}",
@@ -118,6 +119,17 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	});
 
 	power_drain.setDescription(`Give an enemy monster -2 {{ATK}}. Give the monster in front of it +2 {{ATK}}. {{KW:DELAY}}: Add a ${life_drain.me()} to your hand.`);
+	*/
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Power Drain|Power Drains}}",
+		image: "Power_Drain",
+		cost: 3,
+		description: "Burn all the spells in your hand. {{KW:DELAY}}: Add exact copies of them back to your hand and give them -2 {{cost}}.",
+		extension: "BASE",
+		rarity: "RARE"
+	});
 
 	c.newCard({
 		soul: soul,
@@ -144,7 +156,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Mew Mew's Special|Mew Mew's Specials}}",
 		image: "Mew_Mew_Special",
 		cost: 2,
-		description: "Select a non-{{RARITY:DETERMINATION}} monster in your hand. {{KW:DELAY}}: Add an exact copy of it to your hand.",
+		description: "Select a non-{{RARITY:DETERMINATION}} monster in your hand. {{KW:DELAY}}: Add a copy of it to your hand.",
 		extension: "BASE",
 		rarity: "EPIC"
 	});
