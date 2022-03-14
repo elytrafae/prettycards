@@ -33,9 +33,11 @@ function switchifyCard(cardId, lan = "en") {
     console.log(startPos, sepPos, endPos, text);
 }
 
-PrettyCards_plugin.events.on('translation:loaded', (data) => {
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
     utility.loadCSSFromGH("SwitchHighlight");
+})
 
+PrettyCards_plugin.events.on('translation:loaded', (data) => {
     console.log("Translation Value", data);
     //kromerify("en");
     var lan = window.localStorage.getItem("language");
