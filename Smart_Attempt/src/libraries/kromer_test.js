@@ -37,7 +37,8 @@ function kromerify(lan) {
 }
 
 if (settings.kromer_test.value()) {
-	PrettyCards_plugin.events.on('translation:loaded', () => {
+	PrettyCards_plugin.events.on('translation:loaded', (data) => {
+		console.log("Translation Value", data);
 		/*
 		for (var i=0; i < window.availableLanguages.length; i++) {
 			var lan = window.availableLanguages[i];

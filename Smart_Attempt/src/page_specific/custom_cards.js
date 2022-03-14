@@ -8,7 +8,7 @@ import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary
 import {LoadFont, ListenForWhenAllFontsAreLoaded} from "/src/libraries/font_loader.js";
 
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
-// import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
+import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
 
 function appendArtifact(artifact, c, $parent) {
 	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
