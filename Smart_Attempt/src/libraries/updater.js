@@ -35,28 +35,43 @@ if (now - lastChecked >= times[setting_time_id]) {
 	$.get("https://api.github.com/repos/CMD-God/prettycards/releases/latest", {}, function(data) {
 		//console.log("data: ", data, "version: ", version);
 		if (version != "local" && version != data.tag_name) {
-			PrettyCards_plugin.toast(
-				{
-					title: "New PrettyCards version!",
-					text: "There is a new version of PrettyCards available for download!<br>" + data.name,
-					footer: "Click here to update!",
-					onClose() {
-						localStorage.setItem("PrettyCards_UpdateToVersion", data.tag_name);
-						window.open(data.assets[0].browser_download_url, '_blank').focus();
-					}
-				}
-			);
-		} else if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
-			console.log("Update Successful Toast!");
-			PrettyCards_plugin.toast(
-				{
-					title: "Update Successful!<br>" + data.name,
-					text: (data.body || "No patch notes attached")
-				}
-			);
-			localStorage.removeItem("PrettyCards_UpdateToVersion");
+			var toastData = {
+				name: data.name,
+				tag_name: data.tag_name,
+				download_url: data.assets[0].browser_download_url
+			}
+			window.localStorage.setItem("prettycards.update.toastdata", JSON.stringify(toastData));
 		}
 	})
+}
+
+var updateToastData = window.localStorage.getItem("prettycards.update.toastdata");
+
+if (updateToastData) {
+	var data = JSON.parse(updateToastData);
+	PrettyCards_plugin.toast(
+		{
+			title: "New PrettyCards version!",
+			text: "There is a new version of PrettyCards available for download!<br>" + data.name,
+			footer: "Click here to update!",
+			onClose() {
+				localStorage.setItem("PrettyCards_UpdateToVersion", data.tag_name);
+				window.open(data.download_url, '_blank').focus();
+			}
+		}
+	);
+}
+
+if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
+	console.log("Update Successful Toast!");
+	PrettyCards_plugin.toast(
+		{
+			title: "Update Successful!<br>" + data.name,
+			text: (data.body || "No patch notes attached")
+		}
+	);
+	localStorage.removeItem("prettycards.update.toastdata");
+	localStorage.removeItem("PrettyCards_UpdateToVersion");
 }
 
 export {};
