@@ -1,0 +1,8 @@
+
+.PrettyCards_SwitchLeft {
+    text-shadow: -1px -1px cyan, 1px 1px cyan, -1px 1px cyan, 1px -1px cyan;
+}
+
+.PrettyCards_SwitchRight {
+    text-shadow: -1px -1px red, 1px 1px red, -1px 1px red, 1px -1px red;
+}

@@ -136,7 +136,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Breeze of Freedom|Breezes of Freedom}}",
 		image: "Body_Swap",
 		cost: 3,
-		description: "Add a random {{TRIBE:CHAOS_WEAPON}} to your hand. Set its cost to 1.",
+		description: "Add a random {{TRIBE:CHAOS_WEAPON}} to your hand. Set its {{cost}} to 1.",
 		extension: "DELTARUNE",
 		rarity: "RARE"
 	});

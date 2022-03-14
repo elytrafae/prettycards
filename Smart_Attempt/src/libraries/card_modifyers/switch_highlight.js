@@ -1,4 +1,5 @@
 import { prettycards, PrettyCards_plugin } from "../underscript_checker";
+import {utility} from "/src/libraries/utility.js";
 
 var switchStart = "{{KW:SWITCH}}:";
 var switchSeparators = {
@@ -9,8 +10,8 @@ var switchEnders = {
 }
 
 
-function switchifyCard(card, lan = "en") {
-    var text = $.i18n.messageStore.get(lan, "card-" + card.fixedId);
+function switchifyCard(cardId, lan = "en") {
+    var text = $.i18n.messageStore.get(lan, "card-" + cardId);
     var startPos = text.indexOf(switchStart);
 
     if (startPos < 0) {return;}
@@ -28,11 +29,13 @@ function switchifyCard(card, lan = "en") {
     text = text.splice(sepPos, `</span>`);
     text = text.splice(startPos + switchStart.length + 1, `<span class="PrettyCards_SwitchLeft">`);
 
-    $.i18n.messageStore.set(lan, {["card-" + card.fixedId]: text});
+    $.i18n.messageStore.set(lan, {["card-" + cardId]: text});
     console.log(startPos, sepPos, endPos, text);
 }
 
 PrettyCards_plugin.events.on('translation:loaded', (data) => {
+    utility.loadCSSFromGH("SwitchHighlight");
+
     console.log("Translation Value", data);
     //kromerify("en");
     var lan = window.localStorage.getItem("language");
