@@ -5,7 +5,7 @@ var cardSkins = [];
 var frameName = "Undertale";
 
 function FetchCardCosmeticsData() {
-	$.get("https://undercards.net/CardSkinsConfig", {action: "profile"},function( data ) {
+	$.get("/CardSkinsConfig", {action: "profile"},function( data ) {
 		cardSkins = JSON.parse(data.cardSkins);
 		frameName = data.frameName;
 		//console.log("Card Cosmetics data fetched!", data, cardSkins, frameName);
