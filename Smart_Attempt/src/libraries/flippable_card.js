@@ -24,8 +24,8 @@ class FlippableCard {
 		$(this.front).append(appendText);
 		$(this.front).css("height", "275px");
 		
-		const hovered_url = "url(https://undercards.net/images/cardBacks/" + card_data.extension + "Card" + card_data.rarity + ".png)";
-		const normal_url = "url(https://undercards.net/images/cardBacks/" + card_data.extension + "CardNORMAL.png)";
+		const hovered_url = "url(/images/cardBacks/" + card_data.extension + "Card" + card_data.rarity + ".png)";
+		const normal_url = "url(/images/cardBacks/" + card_data.extension + "CardNORMAL.png)";
 		
 		this.back = document.createElement("DIV");
 		this.back.style.backgroundImage = hoverable ? normal_url : hovered_url;
