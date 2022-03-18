@@ -1,7 +1,7 @@
 
 // A script for editing decks outside of the decks page!
 
-var ajaxUrl = "DecksConfig";
+var ajaxUrl = "/DecksConfig";
 
 class DeckEditor {
 	

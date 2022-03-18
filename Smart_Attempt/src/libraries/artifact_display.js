@@ -40,7 +40,7 @@ class ArtifactDisplay {
 
 	GetAllArtifacts() {
 		console.log("Getting Artifact Data!");
-		$.get("https://undercards.net/DecksConfig", {}, function(data) {
+		$.get("/DecksConfig", {}, function(data) {
 			this.artifacts = JSON.parse(data.allArtifacts);
 
 			// Setting artifact rarities for my system.

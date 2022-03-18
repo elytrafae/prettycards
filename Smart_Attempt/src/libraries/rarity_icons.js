@@ -4,7 +4,7 @@ var rarities = ["BASE", "COMMON", "RARE", "EPIC", "LEGENDARY", "DETERMINATION", 
 var extensions = ["BASE", "DELTARUNE"];
 
 function GenerateRarityIconHTML(extension, rarity) {
-	return `<img src="images/rarity/${extension}_${rarity}.png" title="${rarity}">`;
+	return `<img src="/images/rarity/${extension}_${rarity}.png" title="${rarity}">`;
 }
 
 for (var i=0; i < extensions.length; i++) {

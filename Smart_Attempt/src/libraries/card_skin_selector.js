@@ -14,7 +14,7 @@ var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCard
 var listNames = ["Custom Card Skins", "Default Card Skins", "Owned Card Skins", "Not Owned Card Skins"]
 
 ExecuteWhen("PrettyCards:onPageLoad", function () {
-	$.get("CardSkinsConfig?action=shop", {}, function(data) {
+	$.get("/CardSkinsConfig?action=shop", {}, function(data) {
 		//console.log(data);
 		allCardSkins = JSON.parse(data.cardSkins);
 		ProcessCardSkinLists();
