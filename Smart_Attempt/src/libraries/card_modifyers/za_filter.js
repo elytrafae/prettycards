@@ -21,9 +21,11 @@ function allRarityUpdate(e) {
     window.showPage(0);
 }
 
-if (window.underscript.onPage("Crafting") && settings.za_filter.value()) {
+const pagesToWorkOn = ["Crafting", "Decks", "Friendship", "CardSkins"];
+
+if (pagesToWorkOn.includes(window.location.pathname.substring(1)) && settings.za_filter.value()) {
     var label = $('<label><input type="checkbox" id="everyRarityInput"> <img style="height: 24px;" src="' + icon + '" alt="Check all rarities"></label>');
     label.find("input").change(allRarityUpdate);
-	$("#baseGenInput").parent().parent().append(label);
+	$("#deltaruneInput").parent().parent().append(label);
 }
 

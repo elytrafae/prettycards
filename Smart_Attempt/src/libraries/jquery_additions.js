@@ -1,4 +1,5 @@
 
+import { PrettyCards_plugin } from "./underscript_checker";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 // Code from stackoverflow: https://stackoverflow.com/questions/15191058/css-rotation-cross-browser-with-jquery-animate
@@ -24,5 +25,19 @@ $.fn.animateRotate = function(startAngle, endAngle, duration, easing, step, comp
         });
     });
 };
+
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+    console.log("DROPPABLE LOAD!");
+    var oldDroppable = window.$.fn.droppable;
+    
+    /*
+    window.$.fn.droppable = function(a, b, c, d) {
+        console.log("DROPPABLE CALLED!", a, b, c, d, this);
+        var ret = oldDroppable(a, b, c, d).bind(this);
+        return ret;
+    }
+    */
+})
+
 
 export {};

@@ -30,7 +30,7 @@ function switchifyCard(cardId, lan = "en") {
     text = text.splice(startPos + switchStart.length + 1, `<span class="PrettyCards_SwitchLeft">`);
 
     $.i18n.messageStore.set(lan, {["card-" + cardId]: text});
-    console.log(startPos, sepPos, endPos, text);
+    //console.log(startPos, sepPos, endPos, text);
 }
 
 function switchifyLanguage(lan = 'en') {
@@ -48,7 +48,6 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
 })
 
 // Feature temporarily disabled
-/*
 PrettyCards_plugin.events.on('translation:loaded', (data) => {
     console.log("Translation Value", data);
     switchifyLanguage('en');
@@ -60,6 +59,41 @@ PrettyCards_plugin.events.on('translation:loaded', (data) => {
         switchifyLanguage(lan);
     }
 });
+
+var oldUpdateDroppables = window.updateDroppables;
+
+window.updateDroppables = function($card) {
+    oldUpdateDroppables($card);
+    if ($card.hasClass('canPlay')) {
+        if ($card.hasClass('monster') && $card.find(".PrettyCards_SwitchLeft").length > 0) {
+            $('.droppableMonster:not(:has(.monster))').droppable({
+                over: function(event, ui) {
+                    console.log(event, ui);
+                },
+                start: function(event, ui) {
+                    console.log("DRAG START!", event, ui);
+                },
+                hoverClass: 'dropping',
+                accept: '.monster'
+            });
+        }
+/*
+        if ($card.hasClass('spell')) { // So far, there are no Switch Spells. I'll worry about this later.
+            $(".droppableSpell").droppable({
+                drop: function (event, ui) {
+                    if ($(ui.draggable).hasClass('spell')) {
+                        sendPlaySpell(ui.draggable.attr('id'));
+                    }
+
+                    $card.draggable('option', 'revert', true);
+
+                },
+                hoverClass: 'dropping',
+                accept: '.spell'
+            });
+        }
 */
+    }
+}
 
 window.prettycards.switchifyCard = switchifyCard;
