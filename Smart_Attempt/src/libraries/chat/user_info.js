@@ -55,7 +55,7 @@ function onPageLoaded() {
 	
 	utility.loadCSSFromGH("UserInfo");
 	utility.loadCSSFromGH("CustomFriendship");
-	utility.loadCSSFromLink("https://undercards.net/css/meters.css");
+	utility.loadCSSFromLink("/css/meters.css");
 }
 
 ExecuteWhen("PrettyCards:onPageLoad", onPageLoaded);

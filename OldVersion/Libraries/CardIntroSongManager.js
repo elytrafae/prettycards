@@ -30,7 +30,7 @@ function ProcessJingle(card) {
 		nums[name] = (nums[name] || 0) + 1;
 	} else {
 		if (card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION") {
-			PlayJingle("https://undercards.net/musics/cards/" + name + ".ogg");
+			PlayJingle("/musics/cards/" + name + ".ogg");
 			console.log("ProcessJingle fallback!");
 			return true;
 		} else {
