@@ -94,6 +94,8 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	top: -28px;
+	left: -36px;
 }
 
 .PrettyCards_SplitSoul_Left,.PrettyCards_SplitSoul_Right {
@@ -109,8 +111,6 @@
 	transform: translate(-50%, -50%);
 	top: 50%;
 	position: absolute;
-	top: -28px;
-	left: -36px;
 }
 
 .PrettyCards_SplitSoul_Left img {
