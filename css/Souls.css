@@ -77,3 +77,32 @@
 .PrettyCards_ChallengeMessageButton {
 	margin-left: 10px;
 }
+
+.PrettyCards_SplitSoul_Container {
+	position: relative;
+	width: 256px;
+	height: 256px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.PrettyCards_SplitSoul_Left,.PrettyCards_SplitSoul_Right {
+	width: 128px;
+	height: 256px;
+}
+
+.PrettyCards_SplitSoul_Container img {
+	width: 128px;
+	height: 128px;
+	transform: translate(-50%, -50%);
+	top: 50%;
+}
+
+.PrettyCards_SplitSoul_Left img {
+	right: 0px;
+}
+
+.PrettyCards_SplitSoul_Right img {
+	left: 0px;
+}

@@ -5,6 +5,7 @@ import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import { PrettyCards_plugin } from "./underscript_checker";
+import { createFloatingSoul } from "./floating_souls";
 
 const disabledText = "<span class='gray'>(Disabled)</span>";
 
@@ -63,7 +64,9 @@ class FancyDisplay {
 		this.box.click(function (e) {e.stopPropagation();});
 		//this.backdrop.append(this.box);
 		
-		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"><img class="PrettyCards_ArtifactImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
+		// <img class="PrettyCards_ArtifactImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img>
+		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"></div>`);
+		this.circle.append(createFloatingSoul(data.image, data.image_class, "", ""));
 		this.box.append(this.circle);
 		
 		this.name = window.$(`<div class="PrettyCards_ArtifactDisplayName ${data.text_class}">${data.name}</div>`);
