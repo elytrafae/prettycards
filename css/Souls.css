@@ -47,11 +47,11 @@
 }
 */
 
-.PrettyCards_DisplaySoul_SWITCH:first-child {
+.PrettyCards_DisplaySoul_SWITCH .PrettyCards_SplitSoul_Left img {
 	filter: drop-shadow(0px 0px 15px #41FCFF);
 }
 
-.PrettyCards_DisplaySoul_SWITCH {
+.PrettyCards_DisplaySoul_SWITCH .PrettyCards_SplitSoul_Right img {
 	filter: drop-shadow(0px 0px 15px #FF0000);
 }
 
