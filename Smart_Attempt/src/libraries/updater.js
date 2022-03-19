@@ -38,6 +38,7 @@ if (now - lastChecked >= times[setting_time_id]) {
 			var toastData = {
 				name: data.name,
 				tag_name: data.tag_name,
+				body: data.body,
 				download_url: data.assets[0].browser_download_url
 			}
 			window.localStorage.setItem("prettycards.update.toastdata", JSON.stringify(toastData));
@@ -60,18 +61,18 @@ if (updateToastData) {
 			}
 		}
 	);
-}
 
-if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
-	console.log("Update Successful Toast!");
-	PrettyCards_plugin.toast(
-		{
-			title: "Update Successful!<br>" + data.name,
-			text: (data.body || "No patch notes attached")
-		}
-	);
-	localStorage.removeItem("prettycards.update.toastdata");
-	localStorage.removeItem("PrettyCards_UpdateToVersion");
+	if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
+		console.log("Update Successful Toast!");
+		PrettyCards_plugin.toast(
+			{
+				title: "Update Successful!<br>" + (data.name || "No name available"),
+				text: (data.body || "No patch notes attached")
+			}
+		);
+		localStorage.removeItem("prettycards.update.toastdata");
+		localStorage.removeItem("PrettyCards_UpdateToVersion");
+	}
 }
 
 export {};
