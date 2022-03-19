@@ -97,13 +97,13 @@
 .PrettyCards_SplitSoul_Container img {
 	width: 128px;
 	height: 128px;
-	transform: translate(-50%, -50%);
+	transform: translate(50%, 50%);
 	top: 50%;
 	position: absolute;
 }
 
 .PrettyCards_SplitSoul_Left img {
-	right: 0px;
+	left: 100%;
 }
 
 .PrettyCards_SplitSoul_Right img {
