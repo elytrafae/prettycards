@@ -26,18 +26,41 @@ $.fn.animateRotate = function(startAngle, endAngle, duration, easing, step, comp
     });
 };
 
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    console.log("DROPPABLE LOAD!");
-    var oldDroppable = window.$.fn.droppable;
-    
-    /*
-    window.$.fn.droppable = function(a, b, c, d) {
-        console.log("DROPPABLE CALLED!", a, b, c, d, this);
-        var ret = oldDroppable(a, b, c, d).bind(this);
-        return ret;
+/*
+function wrapFunction(original, n) {
+    return function() {
+        original(...arguments);
+        n(...arguments);
     }
-    */
+}
+
+const customPropStart = "_custom_";
+
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+    var oldDraggable = window.$.fn.draggable;
+
+    window.$.fn.draggable = function(a, b, c, d) {
+        console.log("DRAGGABLE CALLED!", a, b, c, d, this);
+        if ( a != "option" || (a == "option" && (c == null || c == undefined)) || (typeof a === 'object' && a !== null)) {
+            return oldDraggable.call(this, a, b, c, d);
+        }
+
+        var data = a;
+        if (a == "option") {
+            data = {[b]: c};
+        }
+        // Modify the input data somehow here!
+        for (var key in data) {
+            if (key.startsWith(customPropStart)) {
+                var originalName = key.substring(customPropStart.length);
+                data[originalName] = wrapFunction(data[originalName] || oldDraggable.call(this, "option", originalName) || function() {}, data[key]);
+            }
+        }
+        console.log("MODIFIED DATA", data);
+        return oldDraggable.call(this, data);
+    }
 })
+*/
 
 
 export {};

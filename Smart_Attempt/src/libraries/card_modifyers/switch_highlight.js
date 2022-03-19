@@ -48,8 +48,8 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
 })
 
 // Feature temporarily disabled
-PrettyCards_plugin.events.on('translation:loaded', (data) => {
-    console.log("Translation Value", data);
+PrettyCards_plugin.events.on('translation:loaded', () => {
+    return;
     switchifyLanguage('en');
     var lan = window.localStorage.getItem("language");
     if (!lan) { // Should never happen, but . . . 
@@ -60,40 +60,43 @@ PrettyCards_plugin.events.on('translation:loaded', (data) => {
     }
 });
 
+/*
 var oldUpdateDroppables = window.updateDroppables;
-
 window.updateDroppables = function($card) {
     oldUpdateDroppables($card);
     if ($card.hasClass('canPlay')) {
-        if ($card.hasClass('monster') && $card.find(".PrettyCards_SwitchLeft").length > 0) {
+        if ($card.hasClass('monster')) { //&& $card.find(".PrettyCards_SwitchLeft").length > 0) { // Check disabled for testing purposes.
             $('.droppableMonster:not(:has(.monster))').droppable({
                 over: function(event, ui) {
-                    console.log(event, ui);
-                },
-                start: function(event, ui) {
-                    console.log("DRAG START!", event, ui);
+                    console.log("DRAGGING OVER!", event, ui);
                 },
                 hoverClass: 'dropping',
                 accept: '.monster'
             });
         }
-/*
-        if ($card.hasClass('spell')) { // So far, there are no Switch Spells. I'll worry about this later.
-            $(".droppableSpell").droppable({
-                drop: function (event, ui) {
-                    if ($(ui.draggable).hasClass('spell')) {
-                        sendPlaySpell(ui.draggable.attr('id'));
-                    }
 
-                    $card.draggable('option', 'revert', true);
+        // So far, there are no Switch Spells. I'll worry about this later.
 
-                },
-                hoverClass: 'dropping',
-                accept: '.spell'
-            });
-        }
-*/
     }
 }
+*/
+
+/*
+var oldMakeDraggable = window.makeDraggable;
+window.makeDraggable = function() {
+    oldMakeDraggable();
+    if (!window.spectate && window.userId == window.userTurn) {
+        $("#handCards .canPlay").draggable({
+            _custom_start: function() {
+                console.log("DRAGGING STARTED!");
+            },
+            _custom_stop: function() {
+                console.log("DRAGGING ENDED!");
+            }
+        });
+    }
+}
+*/
+
 
 window.prettycards.switchifyCard = switchifyCard;
