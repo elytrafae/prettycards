@@ -90,6 +90,8 @@
 .PrettyCards_SplitSoul_Left,.PrettyCards_SplitSoul_Right {
 	width: 128px;
 	height: 256px;
+	position: relative;
+	overflow-x: hidden;
 }
 
 .PrettyCards_SplitSoul_Container img {
@@ -97,6 +99,7 @@
 	height: 128px;
 	transform: translate(-50%, -50%);
 	top: 50%;
+	position: absolute;
 }
 
 .PrettyCards_SplitSoul_Left img {
