@@ -19,7 +19,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var soul = c.newSoul({
 		displayName: "HATE",
-		description: "",
+		description: "Whenever an ally monster dies during your turn, spend a counter to give the lowest {{HP}} enemy monster -1/-1. {{KW:TURN-START}}: Set the counter to 3.",
 		image: "HATE",
 		name: "HATE",
 		note: "An idea for a soul that is oriented around killing its own minions and self damage."
@@ -41,134 +41,123 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Magic Orbs|Magic Orbs}}",
+		name: "{{PLURAL:$1|???|???s}}",
 		image: "Magic_Orbs_2",
-		cost: 1,
-		description: "Swap the {{ATK}} and {{HP}} of a monster. Draw a card.",
+		cost: "?",
+		description: "",
 		extension: "BASE",
 		rarity: "BASE"
 	});
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Sacrificial Lamb|Sacrificial Lambs}}",
-		image: "Sacrificial_Lamb",
-		cost: 5,
-		description: "Burn a random {{KW:GENERATED}} spell in your hand to kill an enemy monster.",
+		name: "{{PLURAL:$1|Desparation|Desparations}}",
+		image: "Desparation",
+		cost: 1,
+		description: "Kill a 1+ base {{cost}} ally monster to draw 2 cards. If it has 5+ base {{cost}}, give them -1 {{cost}}, too.",
 		extension: "BASE",
 		rarity: "COMMON"
 	});
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Sabotage|Sabotages}}",
+		name: "{{PLURAL:$1|???|???s}}",
 		image: "Sabotage",
-		cost: 2,
-		description: "Add 2 copies of the enemy's soul's {{RARITY:BASE}} spell to your hand.",
+		cost: "?",
+		description: "",
 		extension: "BASE",
 		rarity: "COMMON"
 	});
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Chaotic Powers|Chaotic Powers}}",
+		name: "{{PLURAL:$1|???|???s}}",
 		image: "Chaotic_Powers",
-		cost: 4,
-		description: "Add 3 random other spells ({{cost}} <= 4) to your hand which you didn't cast this game.",
+		cost: "?",
+		description: "",
 		extension: "DELTARUNE",
 		rarity: "COMMON"
 	});
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Mass Necromancy|Mass Necromancies}}",
-		image: "Even_Necromancy",
+		name: "{{PLURAL:$1|Magic Knife|Magic Knives}}",
+		image: "Magic_Knife",
 		cost: 3,
-		description: "For ever 3 different spells you've cast this game, burn a random monster in your dustpile and add it to your hand (max: 3).",
+		description: "Deal 3 DMG to a monster. If it survived, heal it by 3 and give it +2/+1.",
 		extension: "BASE",
 		rarity: "RARE"
 	});
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Slice of Temptation|Slices of Temptation}}",
-		image: "An_Honest_Heal",
-		cost: 2,
-		description: "Both players draw a card. If their hand is already full, deal fatigue {{DMG}} to them twice instead.",
+		name: "{{PLURAL:$1|Eye for an Eye|Eye for an Eyes}}",
+		image: "Eye_For_An_Eye",
+		cost: 4,
+		description: "Kill an ally monster to kill a random enemy monster costing less than the killed ally monster.",
 		extension: "BASE",
 		rarity: "RARE"
 	});
 
-	/*
-	var power_drain = c.newCard({
+    c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Power Drain|Power Drains}}",
-		image: "Power_Drain",
+		name: "{{PLURAL:$1|Theft|Thefts}}",
+		image: "Theft",
+		cost: 4,
+		description: "Give a non-{{RARITY:DETERMINATION}} enemy monster: \"{{KW:DUST}}: Summon a copy of this monster for your opponent with +1/+1\".",
+		extension: "BASE",
+		rarity: "RARE"
+	});
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|???|???s}}",
+		image: "Breeze_Of_Freedom",
+		cost: "?",
+		description: "",
+		extension: "DELTARUNE",
+		rarity: "RARE"
+	});
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Avenge|Avenges}}",
+		image: "Avenge",
+		cost: "3",
+		description: "Kill an ally monster and give all ally monsters +1/+1 for every 3 {{gold}} it costed.",
+		extension: "BASE",
+		rarity: "EPIC"
+	});
+
+	var numbing = c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Numbing|Numbings}}",
+		image: "Numbing",
 		cost: 2,
 		description: "",
 		extension: "BASE",
-		rarity: "RARE"
-	});
-
-	var life_drain = c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Life Drain|Life Drains}}",
-		image: "Life_Drain",
-		cost: 2,
-		description: "Give an enemy monster -2 {{HP}}. Give the monster in front of it +3 {{HP}}.",
-		extension: "BASE",
-		rarity: "TOKEN"
-	});
-
-	power_drain.setDescription(`Give an enemy monster -2 {{ATK}}. Give the monster in front of it +2 {{ATK}}. {{KW:DELAY}}: Add a ${life_drain.me()} to your hand.`);
-	*/
-
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Power Drain|Power Drains}}",
-		image: "Power_Drain",
-		cost: 3,
-		description: "Burn all the spells in your hand. {{KW:DELAY}}: Add exact copies of them back to your hand and give them -2 {{cost}}.",
-		extension: "BASE",
-		rarity: "RARE"
-	});
-
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Breeze of Freedom|Breezes of Freedom}}",
-		image: "Breeze_Of_Freedom",
-		cost: 3,
-		description: "Add a random {{TRIBE:CHAOS_WEAPON}} to your hand. Set its {{cost}} to 1.",
-		extension: "DELTARUNE",
-		rarity: "RARE"
-	});
-
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
-		image: "Triggers_Of_Lunacy",
-		cost: 17,
-		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
-		extension: "BASE",
 		rarity: "EPIC"
 	});
 
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Mew Mew's Special|Mew Mew's Specials}}",
-		image: "Mew_Mew_Special",
-		cost: 2,
-		description: "Select a non-{{RARITY:DETERMINATION}} monster in your hand. {{KW:DELAY}}: Add a copy of it to your hand.",
-		extension: "BASE",
-		rarity: "EPIC"
-	});
+    var aimless_vessel = c.newCard({
+        name: "{{PLURAL:$1|Aimless Vessel|Aimless Vessel}}",
+        image: "Aimless_Vessel",
+        cost: 0,
+        description: "",
+        atk: 0,
+        hp: 0,
+        extension: "BASE",
+        rarity: "TOKEN"
+    });
+
+    numbing.setDescription(`Kill a non-DT ally monster costing 3 or more and add an ${aimless_vessel.me()} to your hand with same stats.`)
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Royal Switch|Royal Switches}}",
-		image: "Royal_Switch",
-		cost: 4,
-		description: "Give all ally monsters +1/+1 for every 6 {{KW:GENERATED}} spells you've casted this game.",
+		name: "{{PLURAL:$1|Royal Hate|Royal Hates}}",
+		image: "Royal_Hate",
+		cost: "?",
+		description: "",
 		extension: "BASE",
 		tribes: ["ROYAL_INVENTION"],
 		rarity: "TOKEN"
