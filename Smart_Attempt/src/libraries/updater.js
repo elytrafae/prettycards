@@ -5,7 +5,12 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 // https://github.com/CMD-God/prettycards/releases/latest/download/prettycards.user.js
 // function Toast({title, text, footer, className, css={}, buttons, timeout, onClose}={}) {
 
-var options = ["All the time", "Hourly", "Daily", "Never"];
+var options = [
+	["All the time", 0], 
+	["Hourly", 1], 
+	["Daily", 2], 
+	["Never", 3]
+];
 var times = [0, 3600000, 3600000*24, 9007199254740991];
 
 settings.update_frequency = PrettyCards_plugin.settings().add({
@@ -28,7 +33,7 @@ function dayDifference(timestamp1, timestamp2) {
     return daysDifference;
 }
 
-var setting_time_id = options.indexOf(settings.update_frequency.value() || options[2]);
+var setting_time_id = options.indexOf(settings.update_frequency.value() || options[2]) || settings.update_frequency.value();
 
 if (now - lastChecked >= times[setting_time_id]) {
 	window.localStorage.setItem("PrettyCards_LastCheckedUpdate", now);
