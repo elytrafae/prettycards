@@ -13,13 +13,19 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
 		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
 		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
-		//universalCustomFont: "Aller",
 		note: `A HATE Soul concept we threw together to explore some game mechanics that went underutilised in the main game. Enjoy! ^^`
 	});
 	
+	var darkness = c.newArtifact({
+		name: "Darkness",
+		description: "Whenever an ally monster dies, spend a counter to give the lowest {{HP}} enemy monster -1/-1. {{KW:TURN-START}}: Gain 2 counters.",
+		image: "Darkness",
+		rarity: "TOKEN"
+	});
+
 	var soul = c.newSoul({
 		displayName: "HATE",
-		description: "Whenever an ally monster dies during your turn, spend a counter to give the lowest {{HP}} enemy monster -1/-1. {{KW:TURN-START}}: Set the counter to 3.",
+		description: `After the opponent played their third card this game, gain the ${darkness.me()} artifact.`,
 		image: "HATE",
 		name: "HATE",
 		note: "An idea for a soul that is oriented around killing its own minions and self damage."
@@ -41,10 +47,10 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|???|???s}}",
-		image: "Magic_Orbs_2",
-		cost: "?",
-		description: "",
+		name: "{{PLURAL:$1|Leeching|Leechings}}",
+		image: "Leeching",
+		cost: 2,
+		description: "Kill an ally monster to heal yourself by its {{ATK}} and max {{HP}}.",
 		extension: "BASE",
 		rarity: "BASE"
 	});
@@ -59,15 +65,27 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "COMMON"
 	});
 
-	c.newCard({
+	var dark_wand = c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|???|???s}}",
-		image: "Sabotage",
-		cost: "?",
+		name: "{{PLURAL:$1|Dark Wand|Dark Wands}}",
+		image: "Dark_Wand",
+		cost: 3,
 		description: "",
 		extension: "BASE",
 		rarity: "COMMON"
 	});
+
+	var arcane_choice = c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Arcane Choice|Arcane Choices}}",
+		image: "Arcane_Choice",
+		cost: 0,
+		description: "Look at all spells with a {{cost}} equal to the base {{cost}} of this card. Add one to your hand and halve its {{cost}}.",
+		extension: "BASE",
+		rarity: "TOKEN"
+	});
+
+	dark_wand.setDescription(`Kill an ally monster to add an ${arcane_choice.me()} to your hand. Set its base {{cost}} to the killed monster's {{cost}}, then set its {{cost}} to 0.`);
 
 	c.newCard({
 		soul: soul,
@@ -84,7 +102,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Magic Knife|Magic Knives}}",
 		image: "Magic_Knife",
 		cost: 3,
-		description: "Deal 3 DMG to a monster. If it survived, heal it by 3 and give it +2/+1.",
+		description: "Deal 3 {{DMG}} to a monster. If it survived, heal it by 3 and give it +2/+1.",
 		extension: "BASE",
 		rarity: "RARE"
 	});
@@ -143,7 +161,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         name: "{{PLURAL:$1|Aimless Vessel|Aimless Vessel}}",
         image: "Aimless_Vessel",
         cost: 0,
-        description: "",
+        description: "{{KW:HASTE}}. {{KW:DUST}}: Deal this card's {{cost}} as {{DMG}} to all monsters.",
         atk: 0,
         hp: 0,
         extension: "BASE",
