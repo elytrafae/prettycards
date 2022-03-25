@@ -40,3 +40,13 @@
 	flex: 0 1 auto;
 	height: 100%;
 }
+
+.PrettyCards_LookAt_CardContainer .card:hover .cardBackground{
+    box-shadow: 0 0 10px 5px fuchsia;
+    transform: translate3d(0, 0, 0);
+}
+
+.PrettyCards_LookAt_CardContainer .card:hover .cardFrame {
+	-webkit-filter: grayscale(100%) brightness(30%) sepia(100%) hue-rotate(250deg) saturate(500%) contrast(1.5);
+    filter: grayscale(100%) brightness(30%) sepia(100%) hue-rotate(250deg) saturate(500%) contrast(1.5);
+}
