@@ -180,6 +180,7 @@
 	cursor: pointer;
 	top: 0px;
 	left: 0px;
+	transform: scale(1.5);
 }
 
 .PrettyCards_CollectionNew_SoultifactName {

@@ -54,13 +54,13 @@ function appendSoulNew(soul, c, $parent) {
 	// 			<div class="${artifact.name} PrettyCards_CollectionNew_SoultifactRarity"></div>
 	var s = $(`
 	<div class="PrettyCards_CollectionNew_Soultifact">
-		<img class="PrettyCards_CollectionNew_SoultifactImage ${soul.name}" src="${c.soulImagePrefix + soul.image + ".png"}">
+		<div id="PrettyCards_CollectionNew_SoultifactImageContainer"></div>
 		<div>
 			<div class="${soul.name} PrettyCards_CollectionNew_SoultifactName">${window.$.i18n("soul-" + soul.name.toLowerCase())}</div>
 			<div>${window.$.i18n("soul-" + soul.name.toLowerCase() + "-desc")}</div>
 		</div>
 	<div>`);
-	//art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(c.soulImagePrefix + soul.image + ".png", "PrettyCards_CollectionNew_SoultifactImage", "PrettyCards_Artifact_" + artifact.rarity));
+	s.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(c.soulImagePrefix + soul.image + ".png", "PrettyCards_CollectionNew_SoultifactImage PrettyCards_DisplaySoul_" + soul.name, "", ""));
 	s.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.soulInfo(soul.name);
 	})
