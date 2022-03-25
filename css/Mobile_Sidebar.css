@@ -51,7 +51,7 @@
 }
 
 .PrettyCards_Hidden {
-	display: none;
+	display: none!important;
 }
 
 #PrettyCards_Mobile_NavBarBG {
