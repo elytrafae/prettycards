@@ -64,11 +64,16 @@ function ViewCollection(c) {
 		<div>${c.note}</div>
 	`);
 
-	$("#PrettyCards_CollectionViewButton").click(function() {
-
+	header.find("#PrettyCards_CollectionViewButton").click(function(e) {
+		console.log("SWAPPING VIEWS!");
+		$("#PrettyCards_SoulsShowcase").toggleClass("PrettyCards_Hidden");
+		$("#PrettyCards_NewSoulsShowcase").toggleClass("PrettyCards_Hidden");
+		$("#PrettyCards_ArtifactsShowcase").toggleClass("PrettyCards_Hidden");
+		$("#PrettyCards_NewArtifactsShowcase").toggleClass("PrettyCards_Hidden");
+		e.stopPropagation();
 	});
 	
-	header[0].onclick = ViewCollectionSelectScreen;
+	header.find(".PrettyCards_CollectionBackButton").click(ViewCollectionSelectScreen);
 	
 	showcase.append(header);
 	

@@ -167,14 +167,14 @@
 	justify-content: space-between;
 }
 
-#PrettyCards_CollectionNew_SoultifactImage {
+.PrettyCards_CollectionNew_SoultifactImage {
 	width: 5em;
 }
 
-#PrettyCards_CollectionNew_SoultifactName {
+.PrettyCards_CollectionNew_SoultifactName {
 	font-size: 2.5em;
 }
 
-#PrettyCards_CollectionNew_SoultifactRarity {
+.PrettyCards_CollectionNew_SoultifactRarity {
 	font-size: 1.2em;
 }
