@@ -32,7 +32,7 @@ function appendArtifactNew(artifact, c, $parent) {
 			<div>${window.$.i18n("artifact-" + artifact.id)}</div>
 		</div>
 	<div>`);
-	art.find("PrettyCards_CollectionNew_SoultifactImage").click(function () {
+	art.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.artifactInfo(artifact.id);
 	})
 	$parent.append(art);

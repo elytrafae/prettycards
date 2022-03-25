@@ -174,7 +174,9 @@
 }
 
 .PrettyCards_CollectionNew_SoultifactImage {
-	width: 5em;
+	width: 7em;
+	height: 7em;
+	margin-right: 1em;
 }
 
 .PrettyCards_CollectionNew_SoultifactName {
