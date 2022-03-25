@@ -22,6 +22,23 @@ function appendArtifact(artifact, c, $parent) {
 	return art;
 }
 
+function appendArtifactNew(artifact, c, $parent) {
+	var art = $(`
+	<div>
+		<img class="PrettyCards_CollectionNew_SoultifactImage PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">
+		<div>
+			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactName">${window.$.i18n("artifact-name-" + artifact.id)}</div>
+			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactRarity">${window.$.i18n(artifact.rarity)} Artifact</div>
+			<div>${window.$.i18n("artifact-" + artifact.id)}</div>
+		</div>
+	<div>`);
+	art.find("PrettyCards_CollectionNew_SoultifactImage").click(function () {
+		window.artifactInfo(artifact.id);
+	})
+	$parent.append(art);
+	return art;
+}
+
 function appendSoul(soul, c, $parent) {
 	var s = $(`<img class="PrettyCards_Soul" src="${c.soulImagePrefix + soul.image + ".png"}">`);
 	s.click(function () {
@@ -46,6 +63,10 @@ function ViewCollection(c) {
 		<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
 		<div>${c.note}</div>
 	`);
+
+	$("#PrettyCards_CollectionViewButton").click(function() {
+
+	});
 	
 	header[0].onclick = ViewCollectionSelectScreen;
 	
@@ -67,6 +88,12 @@ function ViewCollection(c) {
 			appendArtifact(c.artifacts[i], c, arts);
 		}
 		showcase.append(arts);
+		
+		var arts2 = $(`<div id="PrettyCards_NewArtifactsShowcase" class="PrettyCards_Hidden"></div>`);
+		for (var i=0; i < c.artifacts.length; i++) {
+			appendArtifactNew(c.artifacts[i], c, arts2);
+		}
+		showcase.append(arts2);
 	}
 	
 	if (c.cards.length > 0) {
