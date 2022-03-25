@@ -44,6 +44,7 @@ class CustomCardCollection {
 		this.artifacts = [];
 		this.souls = [];
 		this.keywords = [];
+		this.frames = [];
 		this.cardImagePrefix = settings.cardImagePrefix || "";
 		this.cardSongPrefix = settings.cardSongPrefix || "";
 		this.rarityImagePrefix = settings.rarityImagePrefix || settings.rarityIconPrefix || "images/rarity/";
@@ -88,6 +89,20 @@ class CustomCardCollection {
 		var kw = new Keyword(settings);
 		this.keywords.push(kw);
 		return kw;
+	}
+
+	newFrame(settings) {
+		var frame = new CardFrame(settings);
+		this.frames.push(frame);
+		return frame;
+	}
+
+	reloadFrames() {
+		var inner = "";
+		for (var i=0; i < this.frames.length; i++) {
+			inner += this.frames[i].returnCSSStyles();
+		}
+		$("#collectionCustomCSS").html(inner);
 	}
 	
 	loadFont(name, url) {
@@ -454,6 +469,78 @@ class Keyword {
 		return window.$.i18n("kw-" + this.id.toLowerCase() + "-desc");
 	}
 	
+}
+
+class CardFrame {
+
+	constructor(settings) {
+		this.id = settings.id.toLowerCase() || "unnamed";
+		this.monsterImage = settings.monsterImage;
+		this.spellImage = settings.spellImage;
+		this.shinyImage = settings.shinyImage || "/images/frameSkins/Undertale/frame_shiny.png";
+		this.animatedShinyImage = settings.animatedShinyImage || "/images/frameSkins/Undertale/frame_shiny_animated.png";
+		this.nameTop = this.makeIntoCSSMeasurement(settings.nameTop, "9px");
+		this.descTop = this.makeIntoCSSMeasurement(settings.descTop, "129px");
+		this.rarityTop = this.makeIntoCSSMeasurement(settings.rarityTop, "213px");
+		this.quantityTop = this.makeIntoCSSMeasurement(settings.quantityTop, "240px");
+	}
+
+	makeIntoCSSMeasurement(nr, def) {
+		if (typeof(nr) == "number") {
+			return nr + "px";
+		}
+		return nr || def;
+	}
+
+	returnCSSStyles() {
+		return `
+		.${this.id}-frame .shinySlot {
+			background-image: url(${this.shinyImage})
+		}
+		
+		.${this.id}-frame .shinySlot.animated {
+			background-image: url(${this.animatedShinyImage})
+		}
+		
+		.${this.id}-frame.spell .cardFrame {
+			background-image: url(${this.spellImage})
+		}
+		
+		.${this.id}-frame.monster .cardFrame {
+			background-image: url(${this.monsterImage})
+		}
+		
+		.${this.id}-frame .cardName,.${this.id}-frame .cardCost {
+			top: ${this.nameTop}
+		}
+		
+		.${this.id}-frame .cardDesc,.${this.id}-frame .cardSilence {
+			top: ${this.descTop}
+		}
+		
+		.${this.id}-frame .cardATK,.${this.id}-frame .cardHP,.${this.id}-frame .cardRarity {
+			top: ${this.rarityTop}
+		}
+		
+		.${this.id}-frame .cardQuantity,.${this.id}-frame .cardUCPCost {
+			top: ${this.quantityTop}
+		}
+
+		`;
+	}
+
+	toString() {
+		return this.id;
+	}
+
+	replace(a, b) {
+		return this.id.replace(a, b);
+	}
+
+	toJSON() {
+		return this.id;
+	}
+
 }
 
 prettycards.newCollection = newCollection;

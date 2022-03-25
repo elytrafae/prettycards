@@ -89,10 +89,10 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|???|???s}}",
-		image: "Chaotic_Powers",
-		cost: "?",
-		description: "",
+		name: "{{PLURAL:$1|Graveyard Rise|Graveyard Rises}}",
+		image: "Graveyard_Rise",
+		cost: 3,
+		description: "{{KW:DELAY}}: Add a copy of every different monster that died this turn to your hand.",
 		extension: "DELTARUNE",
 		rarity: "COMMON"
 	});
@@ -160,10 +160,10 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
     var aimless_vessel = c.newCard({
         name: "{{PLURAL:$1|Aimless Vessel|Aimless Vessel}}",
         image: "Aimless_Vessel",
-        cost: 0,
+        cost: 5,
         description: "{{KW:HASTE}}. {{KW:DUST}}: Deal this card's {{cost}} as {{DMG}} to all monsters.",
-        atk: 0,
-        hp: 0,
+        attack: 4,
+        hp: 4,
         extension: "BASE",
         rarity: "TOKEN"
     });

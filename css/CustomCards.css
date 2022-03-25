@@ -9,6 +9,7 @@
 	background-position: center!important;
 }
 
+/*
 .monster.ext_DDLC .cardFrame {
 	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_monster.png');
 }
@@ -16,6 +17,7 @@
 .spell.ext_DDLC .cardFrame {
 	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_spell.png');
 }
+*/
 
 .monster.ext_LUNA .cardFrame {
 	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/LUNA/frame_monster.png');
@@ -156,4 +158,10 @@
 
 #PrettyCards_CardsShowcase .card {
 	margin: 2px;
+}
+
+#PrettyCards_CollectionHeaderTop {
+	display:flex;
+	flex-direction:row;
+	flex-wrap:nowrap;
 }

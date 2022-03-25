@@ -11,6 +11,8 @@ import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_hate.js";
 
+import {html2canvas} from "/src/third_party/html2canvas.min.js";
+
 function appendArtifact(artifact, c, $parent) {
 	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
 	art.click(function () {
@@ -30,13 +32,16 @@ function appendSoul(soul, c, $parent) {
 }
 
 function ViewCollection(c) {
-	console.log("VIEW COLLECTION!", c);
+	//console.log("VIEW COLLECTION!", c);
 	var showcase = $("#PrettyCards_CustomCardShowcase");
 	$("#PrettyCards_CustomCardCategories").css("display", "none");
 	showcase.css("display", "block").html("");
 	
 	var header = $(`
-		<div class="PrettyCards_CollectionBackButton"><span class="glyphicon glyphicon-arrow-left"></span> Back to Collection Select Screen</div>
+		<div id="PrettyCards_CollectionHeaderTop">
+			<div class="PrettyCards_CollectionBackButton"><span class="glyphicon glyphicon-arrow-left"></span> Back to Collection Select Screen</div>
+			<button id="PrettyCards_CollectionViewButton" class="btn btn-primary">Toggle View</button>
+		</div>
 		<div class="PrettyCards_BigCollectionName">${c.name}</div>
 		<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
 		<div>${c.note}</div>
@@ -72,6 +77,18 @@ function ViewCollection(c) {
 		}
 		showcase.append(cards);
 	}
+
+	if ($('#collectionCustomCSS').length <= 0) {
+		$("head").append('<style id="collectionCustomCSS"></style>');
+	}
+	c.reloadFrames();
+
+	/*
+	html2canvas(showcase[0]).then((canvas) => {
+		const base64image = canvas.toDataURL("image/png");
+		window.location.href = base64image;
+	});
+	*/
 	
 }
 
@@ -111,7 +128,13 @@ function DoStuffWhenAllCardsAreReady() {
 }
 
 function InitCustomCards() {
-	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos PrettyCards:onArtifacts", function () {
+	console.log("ENTERED THING!");
+	PrettyCards_plugin.events.on(":GuestMode", function() {
+		console.log("I AM GUEST!");
+		window.location.href = "/SignIn";
+	});
+	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:onArtifacts", function () {
+		console.log("SHIT HAPPENED!");
 		window.$("title").html("PrettyCards - Custom Cards");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CustomCardCategories">Loading All Cards . . .</div>

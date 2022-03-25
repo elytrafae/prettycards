@@ -1,6 +1,7 @@
 
 import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
+import { PrettyCards_plugin } from "../libraries/underscript_checker";
 
 function appendCardCustomCardSkin(skin, container) {
 	
@@ -388,6 +389,11 @@ function GetCustomCardSkinsList() {
 var skins;
 var card_options;
 function InitCustomCardSkins() {
+	console.log("ENTERED THING!");
+	PrettyCards_plugin.events.on(":GuestMode", function() {
+		console.log("I AM GUEST!");
+		window.location.href = "/SignIn";
+	});
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
 		window.$("title").html("PrettyCards - Custom Card Skins");
 		utility.loadCSSFromGH("CustomCardSkins");

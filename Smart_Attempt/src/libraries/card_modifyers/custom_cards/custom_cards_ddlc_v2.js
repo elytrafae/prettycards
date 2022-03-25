@@ -21,6 +21,12 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var font_name = c.loadFont("Aller", "https://raw.githubusercontent.com/CMD-God/prettycards/master/fonts/Aller_Rg.ttf");
 	c.universalCustomFont = font_name;
+
+	var frame = c.newFrame({
+		id: "DDLC",
+		monsterImage: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_monster.png",
+		spellImage: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_spell.png"
+	});
 	
 	var doki = c.newTribe({
 		name: "{{PLURAL:$1|Doki|Dokis}}",
@@ -50,6 +56,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON",
+		frameSkinName: frame,
 		note: `One of the textbook examples of this tribe (or, at least, the old direction I wanted to take with it). <br><br>It has slightly better than average stats with an either negligable or useful side effect and a slightly weak ${fallen.me()} effect, which serves to make it easier for these monsters to trade. <br><br>I was thinking of modifying her slightly, but I am really unsure if I want that.`
 	});
 	
@@ -63,6 +70,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON",
+		frameSkinName: frame,
 		note: `Simple, effective, powerful. This is the main activator of the tribe. While it IS tribed old Politics Bear, this card fits here too perfectly to warrant changing it.`
 	});
 	
@@ -76,6 +84,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "COMMON",
+		frameSkinName: frame,
 		note: `Originally created around anti-ping and {{KW:PARALYZE}}, then {{KW:KR}}. Now I feel like she sits at a pretty good spot with a choice system built into her ${fallen.me()} effect.`
 	});
 	
@@ -90,6 +99,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "RARE",
+		frameSkinName: frame,
 		note: `The tribe's {{KW:TAUNT}}. I am unsure how well she would perform as I personally believe that {{KW:TAUNT}} and ${fallen.me()} don't synergize, but she's hardly a bad {{KW:TAUNT}} and the ${fallen.me()} effect is quite weak anyway, so she can offer protection to other ${fallen.me()} monsters with stronger effects.`
 	});
 	
@@ -105,6 +115,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "RARE",
+		frameSkinName: frame,
 		note: `One of the more complicated cards, but basically it's a double ${fallen.me()} trigger at the cost of your HP, and it can give you back copies of the cards. Pure value!`
 	});
 	
@@ -145,6 +156,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "EPIC",
+		frameSkinName: frame,
 		note: `Probably the hardest one to give a magic to for me. This card's original magic caused this card's text to be unreadable, so I made it a bit simpler.`
 	});
 	
@@ -159,6 +171,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "EPIC",
+		frameSkinName: frame,
 		note: `A ${fallen.me()} support card that doesn't actually HAVE a ${fallen.me()} keyword? Yes, and it can even singlehandedly take out some cards that couse you trouble if you play your cards right, such as a Mettaton NEO or Sans (if you really must).`
 	});
 	
@@ -175,6 +188,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "EPIC",
+		frameSkinName: frame,
 		note: `I wanted to mess around with things that can help one trigger ${fallen.me()} effects without the use of {{KW:Haste}}, bonus attacks or self damage . . . And the answer was {{KW:TRANSPARENCY}}!<br><br>I am unsure how cool the effect is, but I still think that something like this can be very useful in ${fallen.me()} decks.`
 	});
 
@@ -189,6 +203,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "LEGENDARY",
+		frameSkinName: frame,
 		note: `This is one card I am not all that happy with now, personally, but I admit it can have some very clever strategies to ensure that the {{KW:DELAY}} effect doesn't hit you, so I left it as-is.`
 	});
 
@@ -202,6 +217,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "LEGENDARY",
+		frameSkinName: frame,
 		note: `This card just screams "TRADES!". This one, just like Depressed Sayori, originally had a very long text, so I modified the effect a little, but the principle is the same.`
 	});
 
@@ -217,6 +233,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN",
+		frameSkinName: frame,
 		note: `Semi-targeted heals and second best card draw out of the ${chr_spells.me(2)}.`
 	});
 
@@ -232,6 +249,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN",
+		frameSkinName: frame,
 		note: `Card revive and best card draw out of the ${chr_spells.me(2)}.`
 	});
 
@@ -245,6 +263,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN",
+		frameSkinName: frame,
 		note: `Nerfs and either more nerfs or a conditional card draw if there was only one enemy monster.`
 	});
 
@@ -258,6 +277,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN",
+		frameSkinName: frame,
 		note: `Powerful effect at the downside of no card draws.`
 	});
 	
@@ -282,6 +302,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		extension: "DDLC",
 		typeSkin: 2,
 		rarity: "DETERMINATION",
+		frameSkinName: frame,
 		note: `The DT of the ${doki.me()} tribe. The most notable aspects of this card are noted with ${file_exp.me()}.`
 	});
 
