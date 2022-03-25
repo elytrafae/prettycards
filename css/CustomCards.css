@@ -167,6 +167,12 @@
 	justify-content: space-between;
 }
 
+.PrettyCards_CollectionNew_Soultifact {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+}
+
 .PrettyCards_CollectionNew_SoultifactImage {
 	width: 5em;
 }

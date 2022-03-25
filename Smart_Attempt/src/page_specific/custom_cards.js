@@ -24,7 +24,7 @@ function appendArtifact(artifact, c, $parent) {
 
 function appendArtifactNew(artifact, c, $parent) {
 	var art = $(`
-	<div>
+	<div class="PrettyCards_CollectionNew_Soultifact">
 		<img class="PrettyCards_CollectionNew_SoultifactImage PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">
 		<div>
 			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactName">${window.$.i18n("artifact-name-" + artifact.id)}</div>
