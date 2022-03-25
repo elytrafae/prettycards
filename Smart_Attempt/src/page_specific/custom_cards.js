@@ -12,6 +12,7 @@ import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.j
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_hate.js";
 
 import {html2canvas} from "/src/third_party/html2canvas.min.js";
+import { createFloatingSoul } from "../libraries/floating_souls";
 
 function appendArtifact(artifact, c, $parent) {
 	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
@@ -25,13 +26,14 @@ function appendArtifact(artifact, c, $parent) {
 function appendArtifactNew(artifact, c, $parent) {
 	var art = $(`
 	<div class="PrettyCards_CollectionNew_Soultifact">
-		<img class="PrettyCards_CollectionNew_SoultifactImage PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">
+		<div id="PrettyCards_CollectionNew_SoultifactImageContainer"></div>
 		<div>
 			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactName">${window.$.i18n("artifact-name-" + artifact.id)}</div>
-			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactRarity">${window.$.i18n(artifact.rarity)} Artifact</div>
+			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactRarity">${artifact.rarity} Artifact</div>
 			<div>${window.$.i18n("artifact-" + artifact.id)}</div>
 		</div>
 	<div>`);
+	art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(c.artifactImagePrefix + artifact.image + ".png", "PrettyCards_CollectionNew_SoultifactImage PrettyCards_Artifact_" + artifact.rarity, "", ""));
 	art.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.artifactInfo(artifact.id);
 	})
@@ -42,6 +44,24 @@ function appendArtifactNew(artifact, c, $parent) {
 function appendSoul(soul, c, $parent) {
 	var s = $(`<img class="PrettyCards_Soul" src="${c.soulImagePrefix + soul.image + ".png"}">`);
 	s.click(function () {
+		window.soulInfo(soul.name);
+	})
+	$parent.append(s);
+	return s;
+}
+
+function appendSoulNew(soul, c, $parent) {
+	// 			<div class="${artifact.name} PrettyCards_CollectionNew_SoultifactRarity"></div>
+	var s = $(`
+	<div class="PrettyCards_CollectionNew_Soultifact">
+		<img class="PrettyCards_CollectionNew_SoultifactImage ${soul.name}" src="${c.soulImagePrefix + soul.image + ".png"}">
+		<div>
+			<div class="${soul.name} PrettyCards_CollectionNew_SoultifactName">${window.$.i18n("soul-" + soul.name.toLowerCase())}</div>
+			<div>${window.$.i18n("soul-" + soul.name.toLowerCase() + "-desc")}</div>
+		</div>
+	<div>`);
+	//art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(c.soulImagePrefix + soul.image + ".png", "PrettyCards_CollectionNew_SoultifactImage", "PrettyCards_Artifact_" + artifact.rarity));
+	s.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.soulInfo(soul.name);
 	})
 	$parent.append(s);
@@ -84,6 +104,12 @@ function ViewCollection(c) {
 			appendSoul(c.souls[i], c, souls);
 		}
 		showcase.append(souls);
+
+		var souls2 = $(`<div id="PrettyCards_NewSoulsShowcase" class="PrettyCards_Hidden"></div>`);
+		for (var i=0; i < c.souls.length; i++) {
+			appendSoulNew(c.souls[i], c, souls2);
+		}
+		showcase.append(souls2);
 	}
 	
 	if (c.artifacts.length > 0) {

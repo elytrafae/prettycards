@@ -177,6 +177,9 @@
 	width: 7em;
 	height: 7em;
 	margin-right: 1em;
+	cursor: pointer;
+	top: 0px;
+	left: 0px;
 }
 
 .PrettyCards_CollectionNew_SoultifactName {
