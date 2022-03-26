@@ -19,6 +19,7 @@ var pageLoadEventFired = false;
 
 function SendOnPageLoadEvent() {
 	if (window.$ && !pageLoadEventFired) {
+		PrettyCards_plugin.events.emit.singleton(":loaded"); // Testing if this makes Underscript work on Custom Pages . . .
 		PrettyCards_plugin.events.emit.singleton("PrettyCards:onPageLoad");
 		pageLoadEventFired = true;
 	}

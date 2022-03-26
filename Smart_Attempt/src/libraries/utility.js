@@ -135,6 +135,13 @@ class Utility {
 	onTestServer() {
 		return !['www','undercards'].includes(window.location.hostname.split('.')[0]);
 	}
+
+	saveCanvasAsImage(canvas, filename) {
+		var link = document.createElement("A");
+		link.setAttribute("download", filename + ".png");
+		link.setAttribute("href", canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+		link.click();
+	}
 	
 }
 

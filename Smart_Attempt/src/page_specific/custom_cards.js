@@ -14,6 +14,25 @@ import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_hate.js"
 import {html2canvas} from "/src/third_party/html2canvas.min.js";
 import { createFloatingSoul } from "../libraries/floating_souls";
 
+function takeScreenshot(filename) {
+	if ($("#PrettyCards_CustomCardShowcase:visible").length == 0) {
+		return;
+	}
+	var alreadyInMode = true;
+	if ($("#PrettyCards_NewArtifactsShowcase").hasClass("PrettyCards_Hidden")) {
+		$("#PrettyCards_CollectionViewButton").click();
+		alreadyInMode = false;
+	}
+	var parent = $("#PrettyCards_CustomCardsShowcaseContent");
+	parent.addClass("PrettyCards_CustomCardsShowcaseScreenshot");
+	window.html2canvas(parent[0]).then((data) => {
+		utility.saveCanvasAsImage(data, filename);
+		if (!alreadyInMode) {
+			$("#PrettyCards_CollectionViewButton").click();
+		}
+	});
+}
+
 function appendArtifact(artifact, c, $parent) {
 	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
 	art.click(function () {
@@ -70,32 +89,39 @@ function appendSoulNew(soul, c, $parent) {
 
 function ViewCollection(c) {
 	//console.log("VIEW COLLECTION!", c);
-	var showcase = $("#PrettyCards_CustomCardShowcase");
+	var cont = $("#PrettyCards_CustomCardShowcase");
 	$("#PrettyCards_CustomCardCategories").css("display", "none");
-	showcase.css("display", "block").html("");
+	cont.css("display", "block").html("");
+
+	var showcase = $(`
+		<div id='PrettyCards_CustomCardsShowcaseContent'>
+			<div class="PrettyCards_BigCollectionName">${c.name}</div>
+			<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
+			<div>${c.note}</div>	
+		</div>
+	`);
 	
 	var header = $(`
 		<div id="PrettyCards_CollectionHeaderTop">
 			<div class="PrettyCards_CollectionBackButton"><span class="glyphicon glyphicon-arrow-left"></span> Back to Collection Select Screen</div>
+			<button id="PrettyCards_CollectionTakeScreenshot" class="btn btn-primary">Take Picture</button>
 			<button id="PrettyCards_CollectionViewButton" class="btn btn-primary">Toggle View</button>
 		</div>
-		<div class="PrettyCards_BigCollectionName">${c.name}</div>
-		<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
-		<div>${c.note}</div>
 	`);
 
 	header.find("#PrettyCards_CollectionViewButton").click(function(e) {
-		console.log("SWAPPING VIEWS!");
 		$("#PrettyCards_SoulsShowcase").toggleClass("PrettyCards_Hidden");
 		$("#PrettyCards_NewSoulsShowcase").toggleClass("PrettyCards_Hidden");
 		$("#PrettyCards_ArtifactsShowcase").toggleClass("PrettyCards_Hidden");
 		$("#PrettyCards_NewArtifactsShowcase").toggleClass("PrettyCards_Hidden");
 		e.stopPropagation();
 	});
-	
+	header.find("#PrettyCards_CollectionTakeScreenshot").click(takeScreenshot);
+
 	header.find(".PrettyCards_CollectionBackButton").click(ViewCollectionSelectScreen);
 	
-	showcase.append(header);
+	cont.append(header);
+	cont.append(showcase);
 	
 	if (c.souls.length > 0) {
 		showcase.append(`<h2>Souls</h2>`);
@@ -140,6 +166,10 @@ function ViewCollection(c) {
 		$("head").append('<style id="collectionCustomCSS"></style>');
 	}
 	c.reloadFrames();
+
+	if (c.souls.length + c.artifacts.length < 10) {
+		header.find("#PrettyCards_CollectionViewButton").click();
+	}
 
 	/*
 	html2canvas(showcase[0]).then((canvas) => {
@@ -186,13 +216,13 @@ function DoStuffWhenAllCardsAreReady() {
 }
 
 function InitCustomCards() {
-	console.log("ENTERED THING!");
+	//console.log("ENTERED THING!");
 	PrettyCards_plugin.events.on(":GuestMode", function() {
-		console.log("I AM GUEST!");
+		//console.log("I AM GUEST!");
 		window.location.href = "/SignIn";
 	});
 	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:onArtifacts", function () {
-		console.log("SHIT HAPPENED!");
+		//console.log("SHIT HAPPENED!");
 		window.$("title").html("PrettyCards - Custom Cards");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CustomCardCategories">Loading All Cards . . .</div>

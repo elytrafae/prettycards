@@ -18,7 +18,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var darkness = c.newArtifact({
 		name: "Darkness",
-		description: "Whenever an ally monster dies, spend a counter to give the lowest {{HP}} enemy monster -1/-1. {{KW:TURN-START}}: Gain 2 counters.",
+		description: "Whenever an ally monster dies, spend a counter to give the lowest {{HP}} enemy monster -1/-1. {{KW:TURN-START}}: Set the counters to 2.",
 		image: "Darkness",
 		rarity: "TOKEN"
 	});

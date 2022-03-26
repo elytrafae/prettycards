@@ -47,8 +47,53 @@ function RegexProcessor(full, stat1, stat2, stat3) {
 	return parts.join("/");
 }
 
+function processString(text) {
+	if (settings.card_number_colors.value()) {
+		text = text.replaceAll(card_numbers_regex, RegexProcessor);
+	}
+	if (settings.non_dt_inconsistency.value()) {
+		text = text.replaceAll(non_dt_regex, NonDTCorrector);
+	}
+	return text;
+}
+
+function isKeyEffectDesc(key) {
+	if (key.startsWith("card-")) {
+		return !key.startsWith("card-name-");
+	}
+	if (key.startsWith("artifact-")) {
+		return !key.startsWith("artifact-name-");
+	}
+	if (key.startsWith("kw-") || key.startsWith("soul-")) {
+		return key.endsWith("-desc");
+	}
+	return key.startsWith("status-");
+}
+
+function processLanguage(lan = "en") {
+	var messages = $.i18n.messageStore.messages[lan];
+	for (var key in messages) {
+		if (isKeyEffectDesc(key)) {
+			$.i18n.messageStore.set(lan, {[key]: processString(messages[key])});
+		}
+	}
+}
+
 if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()) {
 	
+	PrettyCards_plugin.events.on('translation:loaded', () => {
+		console.log("CARD CORRECTIONS LOADED!");
+		processLanguage('en');
+		var lan = window.localStorage.getItem("language");
+		if (!lan) { // Should never happen, but . . . 
+			lan = window.getLanguage();
+		}
+		if (lan != "en") {
+			processLanguage(lan);
+		}
+	});
+
+	/*
 	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
 		var html$ = data.element;
 		var card = data.card;
@@ -64,5 +109,6 @@ if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()
 		html$.find(".cardDesc div").html(text);
 		//console.log(html$.find(".cardDesc div"));
 	});
+	*/
 	
 }

@@ -190,3 +190,9 @@
 .PrettyCards_CollectionNew_SoultifactRarity {
 	font-size: 1.2em;
 }
+
+.PrettyCards_CustomCardsShowcaseScreenshot {
+	background-color: black;
+    padding: 1em;
+    border: 5px solid white;
+}
