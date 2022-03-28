@@ -102,14 +102,14 @@ class PacksPageTemplate {
 	onPackMouseOver(e) {
 		//debugger;
 		var code_id = e.currentTarget.getAttribute("data-packid");
-		if (!code_id) {console.log("Mouse Over Return", e);return;}
+		if (!code_id) {return;}
 		//console.log("Mouse Over", e, code_id);
 		//$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").stop().slideDown( 250, function() {});
 	}
 	
 	onPackMouseLeave(e) {
 		var code_id = e.currentTarget.getAttribute("data-packid");
-		if (!code_id) {console.log("Mouse Leave Return", e);return;}
+		if (!code_id) {return;}
 		//console.log("Mouse Leave", e, code_id);
 		//$(".PrettyCards_PackCell[data-packid="+ code_id +"] .PrettyCards_PackText").stop().slideUp( 250, function() {});
 	}
@@ -131,7 +131,7 @@ class PacksPageTemplate {
 		var id = data.code_id;
 		id = id.substring(0, id.length-4);
 		//console.log(data.g_buy_count, id);
-		console.log("Buying Packs! ", data, id);
+		//console.log("Buying Packs! ", data, id);
 		underscript.buyPacks(data.g_buy_count, {type : id, gold : true});
 		
 		data.amount += data.g_buy_count;

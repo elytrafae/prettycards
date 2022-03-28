@@ -52,7 +52,7 @@ function SetSelectedDeck(deck) {
 		var artifact = deck.artifacts[i];
 		arts += artifactDisplay.ReturnArtifactIcon(artifact);
 	}
-	console.log("Artifacts to display: ", arts, deck.artifacts);
+	//console.log("Artifacts to display: ", arts, deck.artifacts);
 	$('#PrettyCards_DeckArtifacts').html(arts);
 	$('#selectedDeck').html(`<span class="${deck.soul}">Selected Deck: ${deck.name}</span>`);
 	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckId"] = deck.id;
@@ -159,7 +159,7 @@ function InitPlay() {
 		deckSelector.callback = DeckSelectorCallback;
 		
 		deckSelector.AppendTo($("#deckSelectContainer")[0]);
-		console.log("All events matched!");
+		//console.log("All events matched!");
 		var deckId = Number(window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckId"]);
 		var deckSoul = window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckSoul"];
 		if (typeof(deckId) == "number" && typeof(deckSoul) == "string") {

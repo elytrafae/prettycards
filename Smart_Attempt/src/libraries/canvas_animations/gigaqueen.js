@@ -12,7 +12,7 @@ class GigaQueenBG {
 		this.oldlen = 0;
 				
 		this.image = canvas_drawer.register_image("https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/GigaQueen/bg_cityscape.png");
-		console.log("GIGA BG: ", this);
+		//console.log("GIGA BG: ", this);
 	}
 	
 	onupdate(ctx, canvas_drawer) {

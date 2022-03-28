@@ -6,7 +6,7 @@ import { PrettyCards_plugin } from "../libraries/underscript_checker";
 function appendCardCustomCardSkin(skin, container) {
 	
 	var card = utility.completeCopy(window.getCard(skin.cardId) || window.allCards[0]);
-	console.log("TYPE SKIN", skin.typeSkin, typeof(skin.typeSkin));
+	//console.log("TYPE SKIN", skin.typeSkin, typeof(skin.typeSkin));
 	card.typeSkin = skin.typeSkin;
 	var $card = window.appendCard(card, container);
 	
@@ -58,7 +58,7 @@ function uploadImageFile() {
 	reader.addEventListener("load", function () {
 		// convert image file to base64 string
 		//preview.src = reader.result;
-		console.log("RESULT: ", reader.result);
+		//console.log("RESULT: ", reader.result);
 		//window.open(reader.result);
 		//document.getElementById("PrettyCards_EditCardSkin_ImageInput").value = reader.result;
 		DeactivateInput(document.getElementById("PrettyCards_EditCardSkin_ImageInput"));
@@ -343,7 +343,7 @@ function DoCardClickAction(e) {
 	//console.log($card);
 	var index = Array.prototype.indexOf.call(document.getElementById("PrettyCards_CardListContainer").children, $card[0]);
 	var skin = skins[index];
-	console.log(skin);
+	//console.log(skin);
 	if (deleteModeOn) {
 		DeleteCardSkin(skin);
 	} else {
@@ -389,9 +389,9 @@ function GetCustomCardSkinsList() {
 var skins;
 var card_options;
 function InitCustomCardSkins() {
-	console.log("ENTERED THING!");
+	//console.log("ENTERED THING!");
 	PrettyCards_plugin.events.on(":GuestMode", function() {
-		console.log("I AM GUEST!");
+		//console.log("I AM GUEST!");
 		window.location.href = "/SignIn";
 	});
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
@@ -408,7 +408,7 @@ function InitCustomCardSkins() {
 		window.$("#PrettyCards_CreateCustomCardSkinButton").click(CreateNewSkin);
 		window.$("#PrettyCards_DeleteCustomCardSkinButton").click(ToggleDeleteMode);
 		skins = GetCustomCardSkinsList();
-		console.log("SKINS", skins);
+		//console.log("SKINS", skins);
 		
 		if (window.allCards && window.allCards.length > 0) {
 			DoStuffWhenAllCardsAreReady();

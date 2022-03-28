@@ -32,13 +32,13 @@ function kromerify(lan) {
 		var key = translationKeys[j];
 		obj[key] = toLocale(key, lan).replaceAll("UCP", "KROMER");
 	}
-	console.log("Translation changed!", obj, lan);
+	//console.log("Translation changed!", obj, lan);
 	window.$.i18n().load(obj, lan);
 }
 
 if (settings.kromer_test.value()) {
 	PrettyCards_plugin.events.on('translation:loaded', (data) => {
-		console.log("Translation Value", data);
+		//console.log("Translation Value", data);
 		/*
 		for (var i=0; i < window.availableLanguages.length; i++) {
 			var lan = window.availableLanguages[i];

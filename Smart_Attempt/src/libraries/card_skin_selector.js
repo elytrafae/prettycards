@@ -30,7 +30,7 @@ $.get("CardSkinsConfig?action=profile", {}, function(data) {
 	//console.log(data);
 	ownedCardSkins = JSON.parse(data.cardSkins);
 	ProcessNotOwnedSkins();
-	console.log("OWNED_CARD_SKINS:", ownedCardSkins);
+	//console.log("OWNED_CARD_SKINS:", ownedCardSkins);
 });
 */
 
@@ -131,7 +131,7 @@ class CardSkinSelector {
 		this.searchBar.className = "form-control";
 		this.searchBar.setAttribute("type", "text");
 		this.searchBar.placeholder = "Search . . .";
-		console.log(this);
+		//console.log(this);
 		$(this.searchBar).keyup(this.ApplyFilters.bind(this));
 		
 		var cont = document.createElement("DIV");

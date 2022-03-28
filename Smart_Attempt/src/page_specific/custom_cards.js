@@ -15,18 +15,19 @@ import {html2canvas} from "/src/third_party/html2canvas.min.js";
 import { createFloatingSoul } from "../libraries/floating_souls";
 
 function takeScreenshot(filename) {
-	if ($("#PrettyCards_CustomCardShowcase:visible").length == 0) {
+	if (window.$("#PrettyCards_CustomCardShowcase:visible").length == 0) {
 		return;
 	}
 	var alreadyInMode = true;
-	if ($("#PrettyCards_NewArtifactsShowcase").hasClass("PrettyCards_Hidden")) {
-		$("#PrettyCards_CollectionViewButton").click();
+	if (window.$("#PrettyCards_NewArtifactsShowcase").hasClass("PrettyCards_Hidden")) {
+		window.$("#PrettyCards_CollectionViewButton").click();
 		alreadyInMode = false;
 	}
-	var parent = $("#PrettyCards_CustomCardsShowcaseContent");
+	var parent = window.$("#PrettyCards_CustomCardsShowcaseContent");
 	parent.addClass("PrettyCards_CustomCardsShowcaseScreenshot");
 	window.html2canvas(parent[0]).then((data) => {
 		utility.saveCanvasAsImage(data, filename);
+		parent.removeClass("PrettyCards_CustomCardsShowcaseScreenshot");
 		if (!alreadyInMode) {
 			$("#PrettyCards_CollectionViewButton").click();
 		}
@@ -116,7 +117,7 @@ function ViewCollection(c) {
 		$("#PrettyCards_NewArtifactsShowcase").toggleClass("PrettyCards_Hidden");
 		e.stopPropagation();
 	});
-	header.find("#PrettyCards_CollectionTakeScreenshot").click(takeScreenshot);
+	header.find("#PrettyCards_CollectionTakeScreenshot").click(function () {takeScreenshot(c.name.toLowerCase())});
 
 	header.find(".PrettyCards_CollectionBackButton").click(ViewCollectionSelectScreen);
 	
@@ -209,8 +210,9 @@ function SetUpCollectionSelectionPage() {
 
 function DoStuffWhenAllCardsAreReady() {
 	$("#PrettyCards_CustomCardCategories").html("Loading Custom Cards . . .");
-	PrettyCards_plugin.events.emit("PrettyCards:customCards");
-	console.log(collections);
+	PrettyCards_plugin.events.emit.singleton("PrettyCards:customCards");
+	PrettyCards_plugin.events.emit.singleton("PrettyCards:customCardsAfter");
+	//console.log(collections);
 	$("#PrettyCards_CustomCardCategories").html("Loading Custom Fonts . . .");
 	ListenForWhenAllFontsAreLoaded(SetUpCollectionSelectionPage);
 }

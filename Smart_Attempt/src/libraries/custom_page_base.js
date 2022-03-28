@@ -3,7 +3,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
-var custom_pages = ["CustomCardSkins", "CustomCards"];
+var custom_pages = ["CustomCardSkins", "CustomCards", "SmashOrPass"];
 
 function IsOnCustomPage() {
 	for (var i = 0; i < custom_pages.length; i++) {
@@ -19,7 +19,8 @@ var pageLoadEventFired = false;
 
 function SendOnPageLoadEvent() {
 	if (window.$ && !pageLoadEventFired) {
-		PrettyCards_plugin.events.emit.singleton(":loaded"); // Testing if this makes Underscript work on Custom Pages . . .
+		console.log(PrettyCards_plugin.events.emit.singleton(":loaded").ran); // Testing if this makes Underscript work on Custom Pages . . .
+		console.log(PrettyCards_plugin.events.emit.singleton(":load").ran);
 		PrettyCards_plugin.events.emit.singleton("PrettyCards:onPageLoad");
 		pageLoadEventFired = true;
 	}
@@ -31,26 +32,7 @@ $(document).ready(function () {
 	SendOnPageLoadEvent();
 })
 
-function waitTillNextDocumentReady() {
-    return new Promise((resolve) => {
-        $(document).ready(function () {
-			resolve(console.log('Between'));
-		})
-    });
-}
-
 if (IsOnCustomPage()) {
-	//console.log("CUSTOM PAGE!");
-	
-	/*
-	$.get("https://raw.githubusercontent.com/CMD-God/prettycards/master/html_templates/undercards.html", function (data) {
-		console.log(data);
-		document.open();
-		document.write(data);
-		document.close();
-		$.cache = {};
-	}, "text");
-	*/
 	
 	//console.log("underscript", underscript);
 	$.ajax({

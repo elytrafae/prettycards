@@ -16,4 +16,6 @@ for (var i=0; i < extensions.length; i++) {
 	}
 }
 
+rarityIconsHTML["DELTARUNE"]["BASE"] = `<img src="/images/rarity/DELTARUNE.png" title="BASE">`;
+
 export {rarityIconsHTML, rarities};

@@ -68,7 +68,7 @@ if (updateToastData) {
 	);
 
 	if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
-		console.log("Update Successful Toast!");
+		//console.log("Update Successful Toast!");
 		PrettyCards_plugin.toast(
 			{
 				title: "Update Successful!<br>" + (data.name || "No name available"),

@@ -44,6 +44,7 @@ import {InitGame} from "/src/page_specific/game.js";
 import {InitCustomCardSkins} from "/src/page_specific/custom_card_skins.js";
 import {InitCustomCards} from "/src/page_specific/custom_cards.js";
 import {InitFriendship} from "/src/page_specific/friendship.js";
+import {InitSmashOrPass} from "/src/page_specific/smash_or_pass.js";
 
 if (settings.packs.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
@@ -58,6 +59,8 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 	InitCustomCards();
 } else if (underscript.onPage("Friendship")) {
 	InitFriendship();
+} else if (underscript.onPage("SmashOrPass")) {
+	InitSmashOrPass();
 }
 
 if (settings.override_decks.value()) {

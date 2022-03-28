@@ -38,7 +38,7 @@ function InitListeners() {
 		const e = eventsToListenFor[i];
 		eventsFired[e] = false;
 		PrettyCards_plugin.events.on(e, function(data) {
-			console.log(e + " event captured successfully! data: ", data);
+			//console.log(e + " event captured successfully! data: ", data);
 			eventsFired[e] = true;
 			eventsData[e] = data;
 			UpdateWaitingObjects(e);
@@ -91,7 +91,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 	}
 });
 
-console.log("EventEnsure initialized at " + document.readyState + " state!");
+//console.log("EventEnsure initialized at " + document.readyState + " state!");
 
 
 

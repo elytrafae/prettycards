@@ -46,7 +46,7 @@ function SetSelectedDeck(deck) {
 		var artifact = deck.artifacts[i];
 		arts += artifactDisplay.ReturnArtifactIcon(artifact);
 	}
-	console.log("Artifacts to display: ", arts, deck.artifacts);
+	//console.log("Artifacts to display: ", arts, deck.artifacts);
 	$('#PrettyCards_DeckArtifacts').html(arts);
 	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckId"] = deck.id;
 	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckSoul"] = deck.soul;
@@ -82,7 +82,7 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 			$('#customDecks').val(selectedDeck.soul);
 			gamemode_functions[game_mode](id);
 		} else {
-			console.log("DeckEditor.ImportDeck error!", data);
+			//console.log("DeckEditor.ImportDeck error!", data);
 		}
 	})
 }
@@ -90,7 +90,7 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 // Tournament mode element: <div id="tournament-mode" class="col-xs-4 game-mode"><h2 data-i18n="[html]game-type-tournament"></h2></div>
 
 function InitGameList() {
-	console.log("Init Play!");
+	//console.log("Init Play!");
 	utility.loadCSSFromGH("Play");
 	
 	$("#state1 > table").css("display", "none");
@@ -137,7 +137,7 @@ function InitGameList() {
 		deckSelector.callback = DeckSelectorCallback;
 		
 		deckSelector.AppendTo($("#deckSelectContainer")[0]);
-		console.log("All events matched!");
+		//console.log("All events matched!");
 		var deckId = Number(window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckId"]);
 		var deckSoul = window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckSoul"];
 		if (typeof(deckId) == "number" && typeof(deckSoul) == "string") {

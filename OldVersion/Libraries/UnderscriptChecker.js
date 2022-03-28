@@ -15,13 +15,11 @@ if (typeof(underscript) === "undefined") {
     });
     localStorage.setItem("PrettyCards_DependencyErrorMessageShown", true);
   };
-  return;
 } else {
   localStorage.setItem("PrettyCards_DependencyErrorMessageShown", false);
 }
 
 PrettyCards_plugin = underscript.plugin("PrettyCards");
-//console.log("Plugin: ", PrettyCards_plugin);
 
 settings = [];
 settings.packs = PrettyCards_plugin.settings().add({

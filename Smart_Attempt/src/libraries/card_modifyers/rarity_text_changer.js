@@ -17,11 +17,10 @@ settings.rarity_text_change = PrettyCards_plugin.settings().add({
     'options': optionList,
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': optionList[0], // default value
-    'disabled': function() {return !underscript.semver.atLeast('0.49.0')},
 });
 
 function DisplayToSystem(str) {
-    console.log("STR", str);
+    //console.log("STR", str);
     var ret = "WHY DOES THIS KEEP HAPPENING!?";
     switch (str) {
         case optionList[0]: ret = "TEXT"; break;
@@ -46,7 +45,6 @@ var mode = "TEXT";
                     if (mode == "TEXT") { 
                         return '<span class="' + rarity + '">' + text + '</span>';
                     }
-                    console.log(rarityIconsHTML, rarityIconsHTML[mode], mode, rarity);
                     var icon = rarityIconsHTML[mode][rarity];
                     icon = $(icon).css({height: "1.5em"})[0].outerHTML;
                     return icon;
@@ -64,7 +62,7 @@ var mode = "TEXT";
         } else { // If it's something else . . .
             mode = value === 'Adapt' ? "TEXT" : DisplayToSystem(value); 
         }
-        console.log("Translating something . . .", mode);
+        //console.log("Translating something . . .", mode);
     });
     PrettyCards_plugin.events.on('appendCard() viewArtifacts() viewArtifact() viewSoul()', () => {
         mode = "TEXT";

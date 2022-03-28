@@ -1,7 +1,7 @@
 import { PrettyCards_plugin, settings } from "../underscript_checker";
 
 const icon = "https://github.com/CMD-God/prettycards/raw/master/img/RarityIcons/ALL_RARITIES.png";
-const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput"];
+const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
 
 settings.za_filter = PrettyCards_plugin.settings().add({
 	'key': 'za_filter',
@@ -14,9 +14,7 @@ settings.za_filter = PrettyCards_plugin.settings().add({
 
 function allRarityUpdate(e) {
     var checked = $("#everyRarityInput").prop("checked");
-    for (var i=0; i < rarityInputList.length; i++) {
-        $("#" + rarityInputList[i]).prop("checked", checked);
-    }
+    $('#'+rarityInputList.join(', #')).prop("checked", checked); // Credit goes to Feildmaster for the optimized version.
     window.applyFilters();
     window.showPage(0);
 }

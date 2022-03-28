@@ -39,7 +39,7 @@ class ArtifactDisplay {
 	}
 
 	GetAllArtifacts() {
-		console.log("Getting Artifact Data!");
+		//console.log("Getting Artifact Data!");
 		$.get("/DecksConfig", {}, function(data) {
 			this.artifacts = JSON.parse(data.allArtifacts);
 

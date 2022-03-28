@@ -31,7 +31,7 @@ function HoverHelper() { // A huge part of the two Hover settings is the same, s
 				
 		var flavorText = window.$.i18n("card-flavor-" + card.id);
 		if (flavorText === ("card-flavor-" + card.id)) {
-			console.debug("This card doesn't have flavour!", card.name, card);
+			//console.debug("This card doesn't have flavour!", card.name, card);
 			//flavorText = window.$.i18n("card-" + card.id);
 			return;
 		}
@@ -63,7 +63,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				
 				var flavorText = window.$.i18n("card-flavor-" + card.id);
 				if (flavorText === ("card-flavor-" + card.id)) {
-					console.debug("This card doesn't have flavor!", card.name, card);
+					//console.debug("This card doesn't have flavor!", card.name, card);
 					return;
 				}
 				window.tippy(html$[0], {

@@ -9,7 +9,7 @@ var recipients = JSON.parse(sessionStorage.getItem("PrettyCards_PrivateGameRecip
 var soul = sessionStorage.getItem("PrettyCards_PrivateGameSoul") || localStorage.getItem("customDeck");
 
 function HostChallenge() {
-	console.log("Initiating as host!");
+	//console.log("Initiating as host!");
 	socket.send(JSON.stringify({action: "createGame", name: gameName, soul: soul}));
 	PrettyCards_plugin.events.on("preCustom:getPlayerJoined", OnSomeoneJoin); // This event should only fire if you are the host.
 }
@@ -25,14 +25,14 @@ function OnSomeoneJoin(data) {
 }
 
 function RecipientAcceptChallenge() {
-	console.log("Initiating as recipient!");
+	//console.log("Initiating as recipient!");
 	PrettyCards_plugin.events.on("preCustom:getGamesList", OnGameListLoad);
 }
 
 function OnGameListLoad(data) {
-	console.log("Game List Loaded!", data);
+	//console.log("Game List Loaded!", data);
 	var games = JSON.parse(data.games);
-	console.log(games);
+	//console.log(games);
 	for (var i=0; i < games.length; i++) {
 		var game = games[i];
 		//if (game.name == gameName) {
@@ -44,7 +44,7 @@ function OnGameListLoad(data) {
 }
 
 function SetUpSocket() {
-	console.log("Socket Setup!", window.socket);
+	//console.log("Socket Setup!", window.socket);
 	var socket = window.socket;
 	const oHandler = socket.onopen;
 	socket.onopen = function(event) {
@@ -54,7 +54,7 @@ function SetUpSocket() {
 }
 
 function InitiateChallengeIfThereIs() {
-	console.log("Private game: ", isHost, gameName, recipients, soul, gameCreator);
+	//console.log("Private game: ", isHost, gameName, recipients, soul, gameCreator);
 	if (!!gameName) {
 		if (isHost) {
 			HostChallenge();

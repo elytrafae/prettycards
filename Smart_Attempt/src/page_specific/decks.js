@@ -37,7 +37,7 @@ function ChangeDeckScreen() {
 
 function ChangeDeck(deck) {
 	currentDeck = deck;
-	console.log("Changing deck to", deck);
+	//console.log("Changing deck to", deck);
 	LoadDeck(deck);
 }
 
@@ -55,7 +55,7 @@ function ChangeDeckImageDialogue() {
 }
 
 function ChangeDeckImage(skin) {
-	console.log(skin);
+	//console.log(skin);
 	//changeDeckImage.style.backgroundImage = "url(/images/cards/" + skin.image + ".png)";
 	var key = "prettycards.deck." + selfId + "." + currentDeck.soul + "." + currentDeck.id + ".image";
 	currentDeck.image = skin;
@@ -145,7 +145,7 @@ function EditDeckScreenHTML() {
 }
 
 function ReloadDeckEditPreview() {
-	console.log("Reload deck edit preview");
+	//console.log("Reload deck edit preview");
 	col2.innerHTML = "";
 	deckSelector.appendCardDeck($(col2), currentDeck, true);
 }
@@ -361,7 +361,7 @@ function SaveDeck() { // This does NOT save deck images and names!
 	}
 	
 	window.localStorage[currentDeck.key] = JSON.stringify(deck);
-	console.log(currentDeck.key, window.localStorage[currentDeck.key]);
+	//console.log(currentDeck.key, window.localStorage[currentDeck.key]);
 }
 
 var oldShowDeckLoad = window.showDeckLoad;

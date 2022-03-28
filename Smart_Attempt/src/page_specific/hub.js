@@ -24,7 +24,7 @@ function ReturnNormalAndShinyCards(collection_copy, id) {
 
 function SaveDeck(deckCode, name, image, username) {
 	var jsonDeck = JSON.parse(atob(deckCode));
-	console.log("Save deck: ", jsonDeck, name, image, username);
+	//console.log("Save deck: ", jsonDeck, name, image, username);
 	var soul = jsonDeck.soul;
 
 	var collection_copy = window.cloneList(window.collection);
@@ -32,7 +32,7 @@ function SaveDeck(deckCode, name, image, username) {
 	for (var i=0; i < jsonDeck.cardIds.length; i++) {
 		var id = jsonDeck.cardIds[i];
 		var cards = ReturnNormalAndShinyCards(collection_copy, id);
-		console.log(cards);
+		//console.log(cards);
 		if (cards.shiny && cards.shiny.quantity > 0) {
 			underscript_deck.cards.push({id: id, shiny: true});
 			cards.shiny.quantity--;
@@ -63,7 +63,7 @@ function SaveDeck(deckCode, name, image, username) {
 			ucpCost: 222,
 			unavailable: false
 		}));
-		console.log("DECK SAVED!");
+		//console.log("DECK SAVED!");
 	} else { // Custom deck system turned off option comes here!
 		DeckEditor.ImportDeck({soul: soul, cards: underscript_deck.cards, artifacts: underscript_deck.artifacts}, function(status, data) {
 			if (status == "success") {

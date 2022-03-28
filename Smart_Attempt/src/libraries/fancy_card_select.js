@@ -12,7 +12,7 @@ var dummyDialogue = { // This is so Onu can properly close this thing.
 }
 
 function LookAtCards(selectCards) {
-    console.log(selectCards);
+    //console.log(selectCards);
     //if (background != null) {return;}
     window.selectCardDialog = dummyDialogue;
 

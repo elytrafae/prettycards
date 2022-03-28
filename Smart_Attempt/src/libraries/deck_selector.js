@@ -42,7 +42,7 @@ const onu_skin = {
 function GetAllDecks() {
 	var decks = [];
 	DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
-	console.log("Weird debug #1", window.localStorage.length);
+	//console.log("Weird debug #1", window.localStorage.length);
 	for (var i = 0; i < window.localStorage.length; i++){
 		var key = window.localStorage.key(i);
 		if (key.includes(DECK_STORAGE_PREFIX)) {
@@ -110,7 +110,7 @@ function CompareDecks(baseDeck, saveDeck) {
 
 function ProcessBaseDecks(organizedDecks) {
 	var baseDecks = SoulSelector.GetDecks();
-	console.log("baseDecks", baseDecks);
+	//console.log("baseDecks", baseDecks);
 	for (var soul in baseDecks) {
 		//console.log("Processing ", soul);
 		var found = false;

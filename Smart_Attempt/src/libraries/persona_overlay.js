@@ -49,9 +49,9 @@ function CreateOverlay(card, side) {
         duration: duration,
         easing: "linear",
         step : function(now, tween) {
-            console.log(now, tween);
+            //console.log(now, tween);
             var val = (start + Linearizer(now/duration*Math.PI)/2*(finish-start) );
-            console.log(val, Math.sin(now/duration*Math.PI));
+            //console.log(val, Math.sin(now/duration*Math.PI));
             image.css("left", val + "%" );
         },
         complete: function() {

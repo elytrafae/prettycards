@@ -101,7 +101,7 @@ function GetChallengeJQueryObject(user) {
 }
 
 function OnShow(dialog) {
-	console.log("Dialogue", latest_dial);
+	//console.log("Dialogue", latest_dial);
 	if (custom_deck_sys) {
 		SetInitialDeck();
 		deckSelector.closable = true;
@@ -134,7 +134,7 @@ function SetUpDeckOnServer(callback) {
 			//console.log("success");
 			callback();
 		} else {
-			console.log("DeckEditor.ImportDeck error!");
+			//console.log("DeckEditor.ImportDeck error!");
 		}
 	})
 }
@@ -182,17 +182,17 @@ function ChallengePlayerScreen(user, infos) {
 }
 
 function SendChallenge(gameName, recipients, soul) {
-	console.log("Sending challenge!", gameName, recipients, soul);
+	//console.log("Sending challenge!", gameName, recipients, soul);
 	sessionStorage.setItem("PrettyCards_PrivateGameIsHost", true);
 	sessionStorage.setItem("PrettyCards_PrivateGameName", gameName);
 	sessionStorage.setItem("PrettyCards_PrivateGameSoul", soul);
 	sessionStorage.setItem("PrettyCards_PrivateGameRecipients", JSON.stringify(recipients));
 	var message = "I challenge " + recipients.join(", ") + " to a CUSTOM game! via PrettyCards";
 	if (messageInfos.idRoom > 0) {
-		console.log("Public message: ", message, String(messageInfos.idRoom));
+		//console.log("Public message: ", message, String(messageInfos.idRoom));
 		window.sendMessage(message, String(messageInfos.idRoom));
 	} else {
-		console.log("Private message: ", message, String(messageInfos.user.id));
+		//console.log("Private message: ", message, String(messageInfos.user.id));
 		window.sendPrivateMessage(message, String(messageInfos.user.id));
 	}
 	shouldGoToGameList = true;

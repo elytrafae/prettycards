@@ -147,7 +147,7 @@ function InitPacks() {
 	
 	/*
 	if (settings.debug_mode.value) {
-		console.log("DEBUG mode activated!")
+		//console.log("DEBUG mode activated!")
 		var test_container = document.createElement("DIV");
 		test_container.style = "position: fixed; bottom: 0px; right: 0px;";
 		

@@ -25,7 +25,7 @@ var color_classes = ['cost-color', 'atk-color', 'hp-color'];
 var non_dt_regex = /non[-\s]dt/gmi;
 
 function NonDTCorrector(full) { // Why not throw this in here, too?
-	return 'non-' + window.$.i18n("{{RARITY:DETERMINATION}}");
+	return 'non-{{RARITY:DETERMINATION}}';
 }
 
 function RegexProcessor(full, stat1, stat2, stat3) {
@@ -81,8 +81,8 @@ function processLanguage(lan = "en") {
 
 if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()) {
 	
-	PrettyCards_plugin.events.on('translation:loaded', () => {
-		console.log("CARD CORRECTIONS LOADED!");
+	PrettyCards_plugin.events.on('translation:loaded PrettyCards:customCardsAfter', () => {
+		//console.log("CARD CORRECTIONS LOADED!");
 		processLanguage('en');
 		var lan = window.localStorage.getItem("language");
 		if (!lan) { // Should never happen, but . . . 

@@ -72,7 +72,7 @@ const orientationFunctions = {
 
 // Internal Function
 function CreateTooltip(data) {
-	console.log("Create Tooltip", data);
+	//console.log("Create Tooltip", data);
 	var tooltip = data.tooltipElement;
 	tooltip.style.top = "0px";
 	tooltip.style.left = "0px";
@@ -82,20 +82,20 @@ function CreateTooltip(data) {
 	var windowRect = window.document.body.getBoundingClientRect();
 	var tooltipRect = tooltip.getBoundingClientRect();
 	var elementRect = element.getBoundingClientRect();
-	console.log(windowRect, tooltipRect, elementRect);
+	//console.log(windowRect, tooltipRect, elementRect);
 	for (var i=0; i < data.settings.orientations.length; i++) {
 		var orientation = data.settings.orientations[i];
 		if (orientationFunctions[orientation](windowRect, tooltipRect, elementRect, data.settings.padding, tooltip)) {
-			console.log("Proper orientation found!", orientation);
+			//console.log("Proper orientation found!", orientation);
 			return;
 		}
 	}
-	console.log("No proper placement found!");
+	//console.log("No proper placement found!");
 	data.settings.onNoSpace(data);
 }
 
 function DestroyTooltip(data) {
-	console.log("Destroy Tooltip", data);
+	//console.log("Destroy Tooltip", data);
 	data.tooltipElement.remove();
 }
 
