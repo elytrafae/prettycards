@@ -1,7 +1,97 @@
+import { allCardSkins } from "../libraries/card_skin_selector";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 
+const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
+
 function initStuff() {
-    console.log("ALL CARDS: ", window.allCards);
+    //console.log("ALL CARDS: ", window.allCards);
+}
+
+function addButtonSettingItem(name, color, txtColor) {
+    var parent = $("#PrettyCards_SOP_ButtonSettingsContainer");
+    var item = window.$(`
+        <div style="padding: 5px;" class="PrettyCards_SOP_ButtonData">
+            <span class="handle glyphicon glyphicon-sort" style="cursor:grab;"></span> 
+            <label>
+                <span>Name: </span>
+                <input type="text" value="${name}" id="PrettyCards_SOP_ButtonNameInput"></input>
+            </label>
+            <label>
+                <span>Button Color: </span>
+                <input type="color" value="${color}" id="PrettyCards_SOP_ButtonColorInput"></input>
+            </label>
+            <label>
+                <span>Text Color: </span>
+                <input type="color" value="${txtColor}" id="PrettyCards_SOP_ButtonTextColorInput"></input>
+            </label>
+            <button class="btn btn-danger" onclick="this.parentElement.remove()">Remove</button>
+        </div>
+    `);
+    parent.append(item);
+    return item;
+}
+
+function refreshSortables() {
+    $("#PrettyCards_SOP_ButtonSettingsContainer").sortable( {
+        appendTo: parent,
+        axis: "y",
+        cursor: "grabbing",
+        placeholder: "sortable-placeholder",
+        forcePlaceholderSize: true,
+        handle: ".handle"
+    })
+}
+
+function getEligibleCardList() {
+    var rarities = $(".rarityInput:checked").map(function(){
+        return this.getAttribute('rarity');
+    }).get();
+    if (rarities.length == 0) {
+        rarities = ["COMMON", "RARE", "EPIC", "LEGENDARY", "DETERMINATION"]
+    }
+
+    var cardTypes = $(".typeCardInput:checked").map(function(){
+        return this.getAttribute('typeCard');
+    }).get();
+    if (cardTypes.length == 0) {
+        cardTypes = $(".typeCardInput").map(function(){
+            return this.getAttribute('typeCard');
+        }).get();
+    }
+    cardTypes.forEach((e, i) => {cardTypes[i] = Number(e);})
+
+    var extensions = $(".extensionInput:checked").map(function(){
+        return this.getAttribute('extension');
+    }).get();
+    if (extensions.length == 0) {
+        extensions = $(".extensionInput").map(function(){
+            return this.getAttribute('extension');
+        }).get();
+    }
+
+    var cards = [];
+    window.allCards.forEach(card => {
+        if (rarities.includes(card.rarity) && cardTypes.includes(card.typeCard) && extensions.includes(card.extension)) {
+            cards.push(card);
+        }
+    });
+    return cards;
+}
+
+function startPhase3() {
+    var buttonData = $(".PrettyCards_SOP_ButtonData");
+    if (buttonData.length == 0) {
+        return;
+    }
+    var cards = getEligibleCardList();
+    //allCardSkins
+    var p4 = "<h1>Results!</h1>";
+    buttonData.each((i, element) => {
+        var e = $(element);
+        var categoryId = e.find("#PrettyCards_SOP_ButtonNameInput").val().replace(/[^\w]/gi, '_');
+        p4 += `<h2>${e.find("#PrettyCards_SOP_ButtonNameInput").val()}</h2><div id="PrettyCards_SOP_Cards_${categoryId}"></div>`;
+    })
+    $("#PrettyCards_SOP_Phase4").html(p4);
 }
 
 function InitSmashOrPass() {
@@ -27,13 +117,88 @@ function InitSmashOrPass() {
                 <h2>Are you sick in the head?!</h2>
                 <p>Yes. :3</p>
                 <br>
-                <button class="btn btn-success">Onto the settings!</button>
-                <button class="btn btn-danger">I wanna chicken out!</button>
+                <button class="btn btn-success" id="PrettyCards_SOP_ToPhase2">Onto the settings!</button>
+                <button class="btn btn-danger" onclick="window.location.href = '/';">I wanna chicken out!</button>
             </div>
-            <div id="PrettyCards_SOP_Phase2"></div>
-            <div id="PrettyCards_SOP_Phase3"></div>
-            <div id="PrettyCards_SOP_Phase4"></div>
+            <div id="PrettyCards_SOP_Phase2" class="PrettyCards_Hidden">
+                <h1>Game Settings</h1>
+                <h2>Card Filters</h2>
+                <p style="font-size: 16px;">
+                    <label>
+                        <input type="checkbox" id="baseRarityInput" checked class="rarityInput customRarityInput" rarity="BASE"> <img src="images/rarity/BASE_BASE.png">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="commonRarityInput" checked class="rarityInput" rarity="COMMON"> <img src="images/rarity/BASE_COMMON.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="rareRarityInput" checked class="rarityInput" rarity="RARE"> <img src="images/rarity/BASE_RARE.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="epicRarityInput" checked class="rarityInput" rarity="EPIC"> <img src="images/rarity/BASE_EPIC.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="legendaryRarityInput" checked class="rarityInput" rarity="LEGENDARY"> <img src="images/rarity/BASE_LEGENDARY.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="determinationRarityInput" checked class="rarityInput" rarity="DETERMINATION"> <img src="images/rarity/BASE_DETERMINATION.png" alt="">
+                    </label>
+                </p>
+                <p style="font-size: 16px;">
+                    <label>
+                        <input type="checkbox" id="monsterInput" class="typeCardInput" checked typeCard="0"> <img src="images/souls/MONSTER.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="spellInput" class="typeCardInput" typeCard="1"> <img style="height: 24px;" src="images/artifacts/Arcane_Scepter.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="undertaleInput" class="extensionInput" extension="BASE" checked> <img src="images/rarity/BASE.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="deltaruneInput" class="extensionInput" extension="DELTARUNE" checked> <img src="images/rarity/DELTARUNE.png" alt="">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="tokenRarityInput" checked class="rarityInput customRarityInput" rarity="TOKEN"> <img src="images/rarity/BASE_TOKEN.png">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="everyRarityInput" checked> <img style="height: 24px;" src="https://github.com/CMD-God/prettycards/raw/master/img/RarityIcons/ALL_RARITIES.png" alt="Za Filter">
+                    </label>
+                </p>
+                <h2 style="display:inline-block;">Answer Options</h2>
+                <button class="btn btn-success" id="PrettyCards_SOP_AddButton">Add Button</button>
+                <div id="PrettyCards_SOP_ButtonSettingsContainer"></div>
+                <h2>Other Settings</h2>
+                <div style="margin-bottom: 1em;">
+                    <label><input type="checkbox" id="PrettyCards_SOP_ViewSkinsSetting" checked> <span>View other skins next to cards during game (will still count as one verdict)</span></label><br>
+                    <label><input type="checkbox" id="PrettyCards_SOP_BlindModeSetting"> <span>Activate blind mode</span></label><br>
+                </div>
+                <button class="btn btn-success" id="PrettyCards_SOP_ToPhase3">Let's Rock!</button>
+            </div>
+            <div id="PrettyCards_SOP_Phase3" class="PrettyCards_Hidden">
+                <div id="PrettyCards_SOP_Buttons"></div>
+            </div>
+            <div id="PrettyCards_SOP_Phase4" class="PrettyCards_Hidden"></div>
         `;
+
+        document.getElementById("PrettyCards_SOP_ToPhase2").onclick = function() {
+            window.$("#PrettyCards_SOP_Phase1").addClass("PrettyCards_Hidden");
+            window.$("#PrettyCards_SOP_Phase2").removeClass("PrettyCards_Hidden");
+        }
+
+        document.getElementById("everyRarityInput").onchange = function() {
+            var checked = $("#everyRarityInput").prop("checked");
+            $('#'+rarityInputList.join(', #')).prop("checked", checked); // Credit goes to Feildmaster for the optimized version.
+        }
+
+        addButtonSettingItem("SMASH", "#449D44", "#FFFFFF");
+        addButtonSettingItem("SMASH IN/ON/NEAR etc.", "#F0AD4E", "#FFFFFF");
+        addButtonSettingItem("PASS", "#C9302C", "#FFFFFF");
+        refreshSortables();
+
+        document.getElementById("PrettyCards_SOP_AddButton").onclick = function() {
+            addButtonSettingItem("", "#000000", "#FFFFFF");
+        }
+
+        document.getElementById("PrettyCards_SOP_ToPhase3").onclick = startPhase3;
     });
 }
 

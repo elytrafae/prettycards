@@ -1,4 +1,5 @@
 
+import { PrettyCards_plugin } from "./underscript_checker";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 
@@ -248,4 +249,4 @@ class CardSkinSelector {
 
 window.CardSkinSelector = CardSkinSelector;
 
-export {CardSkinSelector};
+export {CardSkinSelector, allCardSkins};

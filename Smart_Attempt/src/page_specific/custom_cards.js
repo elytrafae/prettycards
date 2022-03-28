@@ -117,7 +117,9 @@ function ViewCollection(c) {
 		$("#PrettyCards_NewArtifactsShowcase").toggleClass("PrettyCards_Hidden");
 		e.stopPropagation();
 	});
-	header.find("#PrettyCards_CollectionTakeScreenshot").click(function () {takeScreenshot(c.name.toLowerCase())});
+
+
+	header.find("#PrettyCards_CollectionTakeScreenshot").css("display", "none").click(function () {takeScreenshot(c.name.toLowerCase())});
 
 	header.find(".PrettyCards_CollectionBackButton").click(ViewCollectionSelectScreen);
 	
