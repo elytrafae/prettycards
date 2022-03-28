@@ -8,9 +8,6 @@ settings.rarity_text_change = PrettyCards_plugin.settings().add({
 	'key': 'rarity_text_change',
 	'name': 'Change Rarity Text', // Name in settings page
     'note': function() {
-        if (settings.rarity_text_change.disabled()) {
-            return "Feature disabled for this version of UnderScript";
-        } 
         return "Change every mention of a rarity into their respective icons.";
     },
 	'type': 'select',
@@ -54,6 +51,7 @@ var mode = "TEXT";
     })
 
     PrettyCards_plugin.events.on('pre:appendCard() pre:viewArtifacts() pre:viewArtifact() pre:viewSoul()', (card) => {
+        if (window.underscript.onPage("CustomCards")) {mode = "TEXT"; return;} // Feature currently disabled on the Custom Cards page due to technical issues.
         const value = settings.rarity_text_change.value();
         //console.log("Setting Value: ", value);
         if (value === 'Text') return;
