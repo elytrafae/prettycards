@@ -4,7 +4,7 @@ import {SetCosmeticsForCardData} from "./card_cosmetics_manager.js";
 
 class FlippableCard {
 	
-	constructor(card_data, hoverable, setCosmetics = true) {
+	constructor(card_data, hoverable, setCosmetics = true, addCounts = true) {
 		this.baseScale = 1;
 		this.container = document.createElement("DIV");
 		this.container.className = "PrettyCards_FlippableCardContainer";
@@ -21,10 +21,11 @@ class FlippableCard {
 		this.front = this.flipContainer.children[0];
 		this.front.className += " PrettyCards_CardFront";
 		
-		var appendText = `<div class="cardQuantity">${card_data.quantity > 0 ? '<span class="nb">x' + card_data.quantity + '</span>' : ""} ${card_data.quantityShiny > 0 ? '<span class="nb_shiny rainbowText">x' + card_data.quantityShiny + '</span>' : ""}</div>`;
-		
-		$(this.front).append(appendText);
-		$(this.front).css("height", "275px");
+		if (addCounts) {
+			var appendText = `<div class="cardQuantity">${card_data.quantity > 0 ? '<span class="nb">x' + card_data.quantity + '</span>' : ""} ${card_data.quantityShiny > 0 ? '<span class="nb_shiny rainbowText">x' + card_data.quantityShiny + '</span>' : ""}</div>`;
+			$(this.front).append(appendText);
+			$(this.front).css("height", "275px");
+		}
 		
 		const hovered_url = "url(/images/cardBacks/" + card_data.extension + "Card" + card_data.rarity + ".png)";
 		const normal_url = "url(/images/cardBacks/" + card_data.extension + "CardNORMAL.png)";

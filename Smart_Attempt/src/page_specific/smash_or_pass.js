@@ -82,7 +82,7 @@ function spawnNextCard() {
     cardIndex++;
     if (cardIndex >= cards.length) {return;}
     console.log("SPAWNING CARD: ", cards[cardIndex]);
-    currentFlipCard = new FlippableCard(cards[cardIndex], false, false);
+    currentFlipCard = new FlippableCard(cards[cardIndex], false, false, false);
     var cardSpace = document.getElementById("PrettyCards_SOP_Phase3_CardSpace");
     var spaceBoundingBox = cardSpace.getBoundingClientRect();
     currentFlipCard.appendTo(cardSpace);
@@ -93,10 +93,16 @@ function spawnNextCard() {
         currentFlipCard.back.style.backgroundImage = "https://github.com/CMD-God/prettycards/raw/master/img/CardBackMystery.png";
         var front = $(currentFlipCard.front);
         front.removeClass("monster").addClass("spell");
+        front.removeClass("full-skin").removeClass("breaking-skin").addClass("standard-skin");
         front.find(".cardATK").remove();
         front.find(".cardHP").remove();
         front.find(".cardName").html("???");
+        front.find(".cardTribes").html("");
+        front.find(".cardStatus").html("");
+        front.find(".cardCost").html("?");
+        front.find(".cardName")[0].className = "cardName";
         front.find(".cardDesc > div").html(utility.getRandomFromArray(mysteryDescriptions));
+        front.find(".cardImage").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryCard.png)")
 
         var cardNameDiv$ = front.find('.cardName div');
 		var cardDescDiv$ = front.find('.cardDesc div');
