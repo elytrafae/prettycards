@@ -28,12 +28,12 @@
     height: 100%;
 }
 
-#PrettyCards_SOP_CardResults {
+.PrettyCards_SOP_CardResults {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-#PrettyCards_SOP_CardResults card {
+.PrettyCards_SOP_CardResults card {
     margin: 2px;
 }
