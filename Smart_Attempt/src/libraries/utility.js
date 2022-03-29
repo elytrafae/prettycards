@@ -142,6 +142,10 @@ class Utility {
 		link.setAttribute("href", canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
 		link.click();
 	}
+
+	getRandomFromArray(array) {
+		return array[Math.floor(Math.random() * array.length)];
+	}
 	
 }
 

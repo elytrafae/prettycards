@@ -4,7 +4,7 @@ import {SetCosmeticsForCardData} from "./card_cosmetics_manager.js";
 
 class FlippableCard {
 	
-	constructor(card_data, hoverable) {
+	constructor(card_data, hoverable, setCosmetics = true) {
 		this.baseScale = 1;
 		this.container = document.createElement("DIV");
 		this.container.className = "PrettyCards_FlippableCardContainer";
@@ -14,7 +14,9 @@ class FlippableCard {
 		this.flipContainer.style = "transform: rotateY(180deg);";
 		this.container.appendChild(this.flipContainer);
 		
-		card_data = SetCosmeticsForCardData(card_data);
+		if (setCosmetics) {
+			card_data = SetCosmeticsForCardData(card_data);
+		}
 		window.appendCard(card_data, $(this.flipContainer));
 		this.front = this.flipContainer.children[0];
 		this.front.className += " PrettyCards_CardFront";
