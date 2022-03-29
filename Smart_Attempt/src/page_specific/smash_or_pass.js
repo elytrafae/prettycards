@@ -73,7 +73,8 @@ function populateSkins(card) {
         cardId: card.fixedId,
         name: card.name,
         id: -22,
-        image: card.image
+        image: card.image,
+        typeSkin: 0
     }];
     for (var i=0; i < allCardSkins.length; i++) {
         var skin = allCardSkins[i];
@@ -86,12 +87,24 @@ function populateSkins(card) {
     skinCont.html("");
     if (skins.length <= 1) {return};
     for (var i=0; i < skins.length; i++) {
-        var skin = skins[i];
+        const skin = skins[i];
         var elem = `
             <div class="PrettyCards_SOP_SkinDisplay">
                 <img src="/images/cards/${skin.image}.png">
             </div>
         `;
+        elem.click(function() {
+            var front = $(currentFlipCard.front);
+            front.removeClass("full-skin").removeClass("breaking-skin").removeClass("standard-skin");
+            if (skin.typeSkin == 0) {
+                front.addClass("standard-skin");
+            } else if (skin.typeSkin == 1) {
+                front.addClass("full-skin");
+            } else {
+                front.addClass("breaking-skin");
+            }
+            front.find(".cardImage").css("backgroundImage", "url(/images/cards/" + skin.image + ".png)");
+        });
         skinCont.append(elem);
     }
 }
