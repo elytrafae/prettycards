@@ -66,7 +66,35 @@ var mysteryDescriptions = [
     "I pity you . . . A little.",
     "Does it really matter at the end?",
     "I wish I could see your frustated expression~"
-]; 
+];
+
+function populateSkins(card) {
+    console.log(allCardSkins);
+    var skins = [{
+        cardId: card.fixedId,
+        name: card.name,
+        id: -22,
+        image: card.image
+    }];
+    for (var i=0; i < skins.length; i++) {
+        var skin = allCardSkins[i];
+        if (skin.cardId == card.fixedId) {
+            skins.push(skin);
+        }
+    }
+    var skinCont = $("#PrettyCards_SOP_Phase3_Skins");
+    skinCont.html("");
+    if (skins.length <= 1) {return};
+    for (var i=0; i < skins.length; i++) {
+        var skin = skins[i];
+        var elem = `
+            <div class="PrettyCards_SOP_SkinDisplay">
+                <img src="/images/cards/${skin.image}">
+            </div>
+        `;
+        skinCont.append(elem);
+    }
+}
 
 function spawnNextCard() {
     if (cardIndex >= cards.length) {return;}
@@ -81,7 +109,8 @@ function spawnNextCard() {
     }
     cardIndex++;
     if (cardIndex >= cards.length) {return;}
-    console.log("SPAWNING CARD: ", cards[cardIndex]);
+    //console.log("SPAWNING CARD: ", cards[cardIndex]);
+    populateSkins(cards[cardIndex]);
     currentFlipCard = new FlippableCard(cards[cardIndex], false, false, false);
     var cardSpace = document.getElementById("PrettyCards_SOP_Phase3_CardSpace");
     var spaceBoundingBox = cardSpace.getBoundingClientRect();
@@ -89,7 +118,7 @@ function spawnNextCard() {
     currentFlipCard.moveTo(-300, spaceBoundingBox.top + spaceBoundingBox.height/2);
     currentFlipCard.flipToFace(500);
     currentFlipCard.glideTo(window.innerWidth/2, spaceBoundingBox.top + spaceBoundingBox.height/2, 500, function() {});
-    if ($("#PrettyCards_SOP_BlindModeSetting").val()) {
+    if ($("#PrettyCards_SOP_BlindModeSetting").prop('checked')) {
         currentFlipCard.back.style.backgroundImage = "https://github.com/CMD-God/prettycards/raw/master/img/CardBackMystery.png";
         var front = $(currentFlipCard.front);
         front.removeClass("monster").addClass("spell");
@@ -176,7 +205,7 @@ function startPhase3() {
     if (cards.length <= 0) {
         return;
     }
-    if ($("#PrettyCards_SOP_RandomizeSetting").val() || $("#PrettyCards_SOP_BlindModeSetting").val()) {
+    if ($("#PrettyCards_SOP_RandomizeSetting").prop('checked') || $("#PrettyCards_SOP_BlindModeSetting").prop('checked')) {
         shuffleArray(cards);
     }
     //allCardSkins
@@ -208,6 +237,7 @@ function startPhase3() {
 
 function InitSmashOrPass() {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+        $("title").html("PrettyCards - Smash or Pass")
         utility.loadCSSFromGH("SmashOrPass");
 
         if (window.allCards && window.allCards.length > 0) {

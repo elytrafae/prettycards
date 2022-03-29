@@ -26,6 +26,8 @@
 #PrettyCards_SOP_Phase3_CardSkins {
     overflow-y: auto;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .PrettyCards_SOP_CardResults {
@@ -53,4 +55,11 @@
     background-color: black;
     padding: 5px;
     width: 910px;
+}
+
+.PrettyCards_SOP_SkinDisplay {
+    width: 160px;
+    height: 90px;
+    border: 1px solid white;
+    margin: 3px;
 }
