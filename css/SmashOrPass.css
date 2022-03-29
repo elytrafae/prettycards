@@ -12,6 +12,9 @@
 
 #PrettyCards_SOP_Phase3_Main {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     height: 300px;
 }
 
@@ -23,8 +26,6 @@
 #PrettyCards_SOP_Phase3_Skins {
     overflow-y: auto;
     height: 100%;
-    display: flex;
-    flex-direction: column;
     width: 170px;
 }
 
