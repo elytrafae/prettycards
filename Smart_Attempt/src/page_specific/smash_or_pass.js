@@ -65,7 +65,9 @@ var mysteryDescriptions = [
     "Life is simply a guessing game. Are you brave enough to roll the dice~?",
     "I pity you . . . A little.",
     "Does it really matter at the end?",
-    "I wish I could see your frustated expression~"
+    "I wish I could see your frustated expression~",
+    "I wonder what your friends will think of you . . .",
+    "Need a little hint? How cute~!"
 ];
 
 function populateSkins(card) {
@@ -88,11 +90,11 @@ function populateSkins(card) {
     if (skins.length <= 1) {return};
     for (var i=0; i < skins.length; i++) {
         const skin = skins[i];
-        var elem = `
+        var elem = $(`
             <div class="PrettyCards_SOP_SkinDisplay">
                 <img src="/images/cards/${skin.image}.png">
             </div>
-        `;
+        `);
         elem.click(function() {
             var front = $(currentFlipCard.front);
             front.removeClass("full-skin").removeClass("breaking-skin").removeClass("standard-skin");
@@ -123,7 +125,9 @@ function spawnNextCard() {
     cardIndex++;
     if (cardIndex >= cards.length) {return;}
     //console.log("SPAWNING CARD: ", cards[cardIndex]);
-    populateSkins(cards[cardIndex]);
+    if ( (!$("#PrettyCards_SOP_BlindModeSetting").prop('checked')) && $("#PrettyCards_SOP_ViewSkinsSetting").prop('checked')) {
+        populateSkins(cards[cardIndex]);
+    }
     currentFlipCard = new FlippableCard(cards[cardIndex], false, false, false);
     var cardSpace = document.getElementById("PrettyCards_SOP_Phase3_CardSpace");
     var spaceBoundingBox = cardSpace.getBoundingClientRect();
@@ -132,7 +136,7 @@ function spawnNextCard() {
     currentFlipCard.flipToFace(500);
     currentFlipCard.glideTo(window.innerWidth/2, spaceBoundingBox.top + spaceBoundingBox.height/2, 500, function() {});
     if ($("#PrettyCards_SOP_BlindModeSetting").prop('checked')) {
-        currentFlipCard.back.style.backgroundImage = "https://github.com/CMD-God/prettycards/raw/master/img/CardBackMystery.png";
+        currentFlipCard.back.style.backgroundImage = "url(https://github.com/CMD-God/prettycards/raw/master/img/CardBackMystery.png)";
         var front = $(currentFlipCard.front);
         front.removeClass("monster").addClass("spell");
         front.removeClass("full-skin").removeClass("breaking-skin").addClass("standard-skin");
@@ -145,7 +149,8 @@ function spawnNextCard() {
         front.find(".cardName")[0].className = "cardName";
         front.find(".cardDesc > div").html(utility.getRandomFromArray(mysteryDescriptions));
         front.find(".cardImage").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryCard.png)");
-        front.find(".cardRarity").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryRarity.png)")
+        front.find(".cardRarity").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryRarity.png)");
+        front.find(".PrettyCards_CardThemeSongPlayer").remove();
 
         var cardNameDiv$ = front.find('.cardName div');
 		var cardDescDiv$ = front.find('.cardDesc div');

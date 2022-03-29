@@ -1,4 +1,6 @@
 
+import { PrettyCards_plugin } from "./underscript_checker";
+import { utility } from "./utility";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 var credits = `
@@ -27,6 +29,22 @@ function showCredits() {
 		]
 	});
 }
+
+var aprilFools = {
+	month: 3,
+	date: 1
+}
+  
+function isItAprilFoolDay() {
+	var now = new Date();
+	return (now.getMonth() == aprilFools.month && now.getDate() == aprilFools.date);
+}
+
+function isItApril() {
+	var now = new Date();
+	return (now.getMonth() == aprilFools.month);
+}
+
 window.showPrettyCardsCredits = showCredits;
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	if (true) {	
@@ -40,6 +58,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
 				<a href="/CustomCardSkins"><p style="cursor: pointer;">Custom Card Skins</p></a>
 				<a href="/CustomCards"><p style="cursor: pointer;">Custom Cards</p></a>
+				${isItApril() ? ('<a href="/SmashOrPass"><p style="cursor: pointer;">Smash or Pass</p></a>') : ""}
 				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">API Docs</p></a>
 			</div>
 		</div>`)
@@ -63,3 +82,13 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		$("body").append(menuBase);
 	}
 });
+
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+	utility.loadCSSFromGH("Menu");
+})
+
+if ( (isItAprilFoolDay() || true ) && (!window.underscript.onPage("Game") && !window.underscript.onPage("SmashOrPass")) ) {
+	PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+		window.$("body").prepend(`<div id="PrettyCards_TopAdvert">New! Undercards Smash or Pass Game! <a href="/SmashOrPass">Are you brave enough~?</a></div>`)
+	})
+}
