@@ -69,19 +69,19 @@ var mysteryDescriptions = [
 ];
 
 function populateSkins(card) {
-    console.log(allCardSkins);
     var skins = [{
         cardId: card.fixedId,
         name: card.name,
         id: -22,
         image: card.image
     }];
-    for (var i=0; i < skins.length; i++) {
+    for (var i=0; i < allCardSkins.length; i++) {
         var skin = allCardSkins[i];
-        if (skin.cardId == card.fixedId) {
+        if (skin.cardId == card.id) {
             skins.push(skin);
         }
     }
+    console.log(card, skins);
     var skinCont = $("#PrettyCards_SOP_Phase3_Skins");
     skinCont.html("");
     if (skins.length <= 1) {return};
@@ -89,7 +89,7 @@ function populateSkins(card) {
         var skin = skins[i];
         var elem = `
             <div class="PrettyCards_SOP_SkinDisplay">
-                <img src="/images/cards/${skin.image}">
+                <img src="/images/cards/${skin.image}.png">
             </div>
         `;
         skinCont.append(elem);
@@ -100,7 +100,7 @@ function spawnNextCard() {
     if (cardIndex >= cards.length) {return;}
     if (cardIndex >= 0) {
         currentFlipCard.glideTo(window.innerWidth/2, window.innerHeight + 500, 500, function() {
-            console.log("Erasing card #", cardIndex, " out of ", cards.length);
+            //console.log("Erasing card #", cardIndex, " out of ", cards.length);
             if (cardIndex >= cards.length) {
                 startPhase4();
             }

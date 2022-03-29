@@ -58,8 +58,9 @@
 }
 
 .PrettyCards_SOP_SkinDisplay {
-    width: 160px;
-    height: 90px;
+    width: 162px;
+    height: 92px;
     border: 1px solid white;
     margin: 3px;
+    overflow: hidden;
 }
