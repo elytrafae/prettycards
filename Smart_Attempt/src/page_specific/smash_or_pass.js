@@ -131,7 +131,11 @@ function startPhase3() {
         return;
     }
     //allCardSkins
-    var p4 = "<h1 style='text-align:center;'>Your Smash or Pass Results!</h1>";
+    var ownerText = "Your";
+    if (window.selfUsername) {
+        ownerText = window.selfUsername + "'s";
+    }
+    var p4 = "<h1 style='text-align:center;'>" + ownerText + " Smash or Pass Results!</h1>";
     buttonContainer.html("");
     buttonData.each((i, element) => {
         var e = $(element);
