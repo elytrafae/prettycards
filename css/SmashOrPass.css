@@ -37,3 +37,13 @@
 .PrettyCards_SOP_CardResults .card {
     margin: 2px;
 }
+
+#PrettyCards_SOP_Phase4_ButtonContainer {
+    position: relative;
+}
+
+#PrettyCards_SOP_TakeScreenshot {
+    aspect-ratio: 1;
+    position: absolute;
+    left: 26px;
+}

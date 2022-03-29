@@ -7,6 +7,7 @@ const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInpu
 var cards = [];
 var cardIndex = -1;
 var currentFlipCard;
+var alreadyTakingScreenshot = false;
 
 function initStuff() {
     //console.log("ALL CARDS: ", window.allCards);
@@ -130,7 +131,7 @@ function startPhase3() {
         return;
     }
     //allCardSkins
-    var p4 = "<h1>Results!</h1>";
+    var p4 = "<h1 style='text-align:center;'>Your Smash or Pass Results!</h1>";
     buttonContainer.html("");
     buttonData.each((i, element) => {
         var e = $(element);
@@ -144,7 +145,7 @@ function startPhase3() {
         });
         buttonContainer.append(button);
     })
-    $("#PrettyCards_SOP_Phase4").html(p4);
+    $("#PrettyCards_SOP_Phase4_ScreenshotArea").html(p4);
 
     window.$("#PrettyCards_SOP_Phase2").addClass("PrettyCards_Hidden");
     window.$("#PrettyCards_SOP_Phase3").removeClass("PrettyCards_Hidden");
@@ -240,7 +241,12 @@ function InitSmashOrPass() {
                 </div>
                 <div id="PrettyCards_SOP_Buttons"></div>
             </div>
-            <div id="PrettyCards_SOP_Phase4" class="PrettyCards_Hidden"></div>
+            <div id="PrettyCards_SOP_Phase4" class="PrettyCards_Hidden">
+                <div id="PrettyCards_SOP_Phase4_ButtonContainer">
+                    <button class="btn btn-primary" id="PrettyCards_SOP_TakeScreenshot"><span class="glyphicon glyphicon-camera"></span></button>
+                </div>
+                <div id="PrettyCards_SOP_Phase4_ScreenshotArea"></div>
+            </div>
         `;
 
         document.getElementById("PrettyCards_SOP_ToPhase2").onclick = function() {
@@ -263,6 +269,18 @@ function InitSmashOrPass() {
         }
 
         document.getElementById("PrettyCards_SOP_ToPhase3").onclick = startPhase3;
+
+        document.getElementById("PrettyCards_SOP_TakeScreenshot").onclick = function() {
+            if (alreadyTakingScreenshot) {return;}
+            alreadyTakingScreenshot = true;
+            window.html2canvas(document.getElementById("PrettyCards_SOP_TakeScreenshot")).then((data) => {
+                alreadyTakingScreenshot = false;
+                utility.saveCanvasAsImage(data, "sop_results");
+                window.BootstrapDialog.addDialog({
+
+                });
+            });
+        }
     });
 }
 
