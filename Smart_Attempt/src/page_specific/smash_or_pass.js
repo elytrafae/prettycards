@@ -2,12 +2,13 @@ import { allCardSkins } from "../libraries/card_skin_selector";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 
 const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
+var cards = [];
 
 function initStuff() {
     //console.log("ALL CARDS: ", window.allCards);
 }
 
-function addButtonSettingItem(name, color, txtColor) {
+function addButtonSettingItem(name, style) {
     var parent = $("#PrettyCards_SOP_ButtonSettingsContainer");
     var item = window.$(`
         <div style="padding: 5px;" class="PrettyCards_SOP_ButtonData">
@@ -17,16 +18,19 @@ function addButtonSettingItem(name, color, txtColor) {
                 <input type="text" value="${name}" id="PrettyCards_SOP_ButtonNameInput"></input>
             </label>
             <label>
-                <span>Button Color: </span>
-                <input type="color" value="${color}" id="PrettyCards_SOP_ButtonColorInput"></input>
-            </label>
-            <label>
-                <span>Text Color: </span>
-                <input type="color" value="${txtColor}" id="PrettyCards_SOP_ButtonTextColorInput"></input>
+                <span>Button Style: </span>
+                <select id="PrettyCards_SOP_ButtonStyleInput">
+                    <option value="btn-primary" class="text-primary">Blue</option>
+                    <option value="btn-info" class="text-info">Light Blue</option>
+                    <option value="btn-success" class="text-success">Green</option>
+                    <option value="btn-danger" class="text-danger">Red</option>
+                    <option value="btn-warning" class="text-warning">Yellow</option>
+                </select>
             </label>
             <button class="btn btn-danger" onclick="this.parentElement.remove()">Remove</button>
         </div>
     `);
+    item.find("#PrettyCards_SOP_ButtonStyleInput").val(style);
     parent.append(item);
     return item;
 }
@@ -79,19 +83,31 @@ function getEligibleCardList() {
 }
 
 function startPhase3() {
+    var buttonContainer = $("#PrettyCards_SOP_Buttons");
     var buttonData = $(".PrettyCards_SOP_ButtonData");
     if (buttonData.length == 0) {
         return;
     }
-    var cards = getEligibleCardList();
+    cards = getEligibleCardList();
     //allCardSkins
     var p4 = "<h1>Results!</h1>";
+    buttonContainer.html("");
     buttonData.each((i, element) => {
         var e = $(element);
-        var categoryId = e.find("#PrettyCards_SOP_ButtonNameInput").val().replace(/[^\w]/gi, '_');
+        var name = e.find("#PrettyCards_SOP_ButtonNameInput").val();
+        var categoryId = name.replace(/[^\w]/gi, '_');
+        var style = e.find("#PrettyCards_SOP_ButtonStyleInput").val();
         p4 += `<h2>${e.find("#PrettyCards_SOP_ButtonNameInput").val()}</h2><div id="PrettyCards_SOP_Cards_${categoryId}"></div>`;
+        var button = $(`<button class="btn ${style}">${name}</button>`); // TODO: Add onclick event to this!
+        button.click(function() {
+
+        });
+        buttonContainer.append(button);
     })
     $("#PrettyCards_SOP_Phase4").html(p4);
+
+    window.$("#PrettyCards_SOP_Phase2").addClass("PrettyCards_Hidden");
+    window.$("#PrettyCards_SOP_Phase3").removeClass("PrettyCards_Hidden");
 }
 
 function InitSmashOrPass() {
@@ -189,9 +205,9 @@ function InitSmashOrPass() {
             $('#'+rarityInputList.join(', #')).prop("checked", checked); // Credit goes to Feildmaster for the optimized version.
         }
 
-        addButtonSettingItem("SMASH", "#449D44", "#FFFFFF");
-        addButtonSettingItem("SMASH IN/ON/NEAR etc.", "#F0AD4E", "#FFFFFF");
-        addButtonSettingItem("PASS", "#C9302C", "#FFFFFF");
+        addButtonSettingItem("SMASH", "btn-success");
+        addButtonSettingItem("SMASH IN/ON/NEAR etc.", "btn-warning");
+        addButtonSettingItem("PASS", "btn-danger");
         refreshSortables();
 
         document.getElementById("PrettyCards_SOP_AddButton").onclick = function() {

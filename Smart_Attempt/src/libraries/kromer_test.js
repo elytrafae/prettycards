@@ -38,12 +38,6 @@ function kromerify(lan) {
 
 if (settings.kromer_test.value()) {
 	PrettyCards_plugin.events.on('translation:loaded', (data) => {
-		//console.log("Translation Value", data);
-		/*
-		for (var i=0; i < window.availableLanguages.length; i++) {
-			var lan = window.availableLanguages[i];
-			kromerify(lan);
-		}*/
 		kromerify("en");
 		var lan = window.localStorage.getItem("language");
 		if (!lan) { // Should never happen, but . . . 
