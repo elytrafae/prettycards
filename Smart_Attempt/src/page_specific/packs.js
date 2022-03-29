@@ -133,6 +133,10 @@ function hideUglyPage() { // Nothing personal.
 	}
 }
 
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+	utility.loadCSSFromGH("Packs"); // Other pages might use flippable cards, so I am gonna load this every time.
+})
+
 function InitPacks() {
 	
 	ExecuteWhen("PrettyCards:onPageLoad", function () {
@@ -142,8 +146,6 @@ function InitPacks() {
 	});
 	
 	//PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
-	
-	utility.loadCSSFromGH("Packs");
 	
 	/*
 	if (settings.debug_mode.value) {

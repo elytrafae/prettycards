@@ -1,9 +1,12 @@
 import { allCardSkins } from "../libraries/card_skin_selector";
+import { FlippableCard } from "../libraries/flippable_card";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
 const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
 var cards = [];
+var cardIndex = -1;
+var currentFlipCard;
 
 function initStuff() {
     //console.log("ALL CARDS: ", window.allCards);
@@ -47,6 +50,34 @@ function refreshSortables() {
     })
 }
 
+function spawnNextCard() {
+    if (cardIndex >= cards.length) {return;}
+    if (cardIndex >= 0) {
+        currentFlipCard.glideTo(window.innerWidth/2, window.innerHeight + 500, 500, function() {
+            console.log("Erasing card #", cardIndex, " out of ", cards.length);
+            if (cardIndex >= cards.length) {
+                startPhase4();
+            }
+            this.remove();
+        })
+    }
+    cardIndex++;
+    if (cardIndex >= cards.length) {return;}
+    console.log("SPAWNING CARD: ", cards[cardIndex]);
+    currentFlipCard = new FlippableCard(cards[cardIndex], false);
+    var cardSpace = document.getElementById("PrettyCards_SOP_Phase3_CardSpace");
+    var spaceBoundingBox = cardSpace.getBoundingClientRect();
+    currentFlipCard.appendTo(cardSpace);
+    currentFlipCard.moveTo(-300, spaceBoundingBox.top + spaceBoundingBox.height/2);
+    currentFlipCard.flipToFace(500);
+    currentFlipCard.glideTo(window.innerWidth/2, spaceBoundingBox.top + spaceBoundingBox.height/2, 500, function() {});
+}
+
+function makeVerdict(verdict_id) {
+    window.appendCard(cards[cardIndex], $("#PrettyCards_SOP_Cards_" + verdict_id));
+    spawnNextCard();
+}
+
 function getEligibleCardList() {
     var rarities = $(".rarityInput:checked").map(function(){
         return this.getAttribute('rarity');
@@ -83,6 +114,11 @@ function getEligibleCardList() {
     return cards;
 }
 
+function startPhase4() {
+    window.$("#PrettyCards_SOP_Phase3").addClass("PrettyCards_Hidden");
+    window.$("#PrettyCards_SOP_Phase4").removeClass("PrettyCards_Hidden");
+}
+
 function startPhase3() {
     var buttonContainer = $("#PrettyCards_SOP_Buttons");
     var buttonData = $(".PrettyCards_SOP_ButtonData");
@@ -90,18 +126,21 @@ function startPhase3() {
         return;
     }
     cards = getEligibleCardList();
+    if (cards.length <= 0) {
+        return;
+    }
     //allCardSkins
     var p4 = "<h1>Results!</h1>";
     buttonContainer.html("");
     buttonData.each((i, element) => {
         var e = $(element);
         var name = e.find("#PrettyCards_SOP_ButtonNameInput").val();
-        var categoryId = name.replace(/[^\w]/gi, '_');
+        const categoryId = name.replace(/[^\w]/gi, '_');
         var style = e.find("#PrettyCards_SOP_ButtonStyleInput").val();
-        p4 += `<h2>${e.find("#PrettyCards_SOP_ButtonNameInput").val()}</h2><div id="PrettyCards_SOP_Cards_${categoryId}"></div>`;
+        p4 += `<h2>${e.find("#PrettyCards_SOP_ButtonNameInput").val()}</h2><div id="PrettyCards_SOP_Cards_${categoryId}" class="PrettyCards_SOP_CardResults"></div>`;
         var button = $(`<button class="btn ${style}">${name}</button>`); // TODO: Add onclick event to this!
         button.click(function() {
-
+            makeVerdict(categoryId);
         });
         buttonContainer.append(button);
     })
@@ -109,6 +148,8 @@ function startPhase3() {
 
     window.$("#PrettyCards_SOP_Phase2").addClass("PrettyCards_Hidden");
     window.$("#PrettyCards_SOP_Phase3").removeClass("PrettyCards_Hidden");
+
+    spawnNextCard();
 }
 
 function InitSmashOrPass() {
