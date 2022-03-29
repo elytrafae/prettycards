@@ -9,6 +9,13 @@ var cardIndex = -1;
 var currentFlipCard;
 var alreadyTakingScreenshot = false;
 
+function shuffleArray(array) { // From Stack Overflow: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 function initStuff() {
     //console.log("ALL CARDS: ", window.allCards);
 }
@@ -72,6 +79,9 @@ function spawnNextCard() {
     currentFlipCard.moveTo(-300, spaceBoundingBox.top + spaceBoundingBox.height/2);
     currentFlipCard.flipToFace(500);
     currentFlipCard.glideTo(window.innerWidth/2, spaceBoundingBox.top + spaceBoundingBox.height/2, 500, function() {});
+    if ($("#PrettyCards_SOP_BlindModeSetting").val()) {
+        currentFlipCard.back.style.backgroundImage = "";
+    }
 }
 
 function makeVerdict(verdict_id) {
@@ -129,6 +139,9 @@ function startPhase3() {
     cards = getEligibleCardList();
     if (cards.length <= 0) {
         return;
+    }
+    if ($("#PrettyCards_SOP_RandomizeSetting").val() || $("#PrettyCards_SOP_BlindModeSetting").val()) {
+        shuffleArray(cards);
     }
     //allCardSkins
     var ownerText = "Your";
@@ -234,7 +247,8 @@ function InitSmashOrPass() {
                 <h2>Other Settings</h2>
                 <div style="margin-bottom: 1em;">
                     <label><input type="checkbox" id="PrettyCards_SOP_ViewSkinsSetting" checked> <span>View other skins next to cards during game (will still count as one verdict)</span></label><br>
-                    <label><input type="checkbox" id="PrettyCards_SOP_BlindModeSetting"> <span>Activate blind mode</span></label><br>
+                    <label><input type="checkbox" id="PrettyCards_SOP_BlindModeSetting"> <span>Activate blind mode (Also randomizes order)</span></label><br>
+                    <label><input type="checkbox" id="PrettyCards_SOP_RandomizeSetting"> <span>Randomize card order</span></label><br>
                 </div>
                 <button class="btn btn-success" id="PrettyCards_SOP_ToPhase3">Let's Rock!</button>
             </div>
@@ -281,9 +295,21 @@ function InitSmashOrPass() {
             window.html2canvas(document.getElementById("PrettyCards_SOP_Phase4_ScreenshotArea")).then((data) => {
                 alreadyTakingScreenshot = false;
                 utility.saveCanvasAsImage(data, "sop_results");
+                var message = $(`<div><p>The screenshot should have started downloading! If not, you can save it from here!</p></div>`);
+                $(data).css("height", "");
+                $(data).css("width", "100%");
+                message.append(data);
                 $("#PrettyCards_SOP_Phase4_ScreenshotArea").removeClass("PrettyCards_SOP_Screenshot");
-                window.BootstrapDialog.addDialog({
-
+                window.BootstrapDialog.show({
+                    title: "Successful Screenshot!",
+                    message: message,
+                    buttons: [{
+                        label: 'Close',
+                        cssClass: 'btn-primary',
+                        action: function(dialog) {
+                            dialog.close();
+                        }
+                    }]
                 });
             });
         }
