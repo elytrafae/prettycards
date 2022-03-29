@@ -1,5 +1,6 @@
 import { allCardSkins } from "../libraries/card_skin_selector";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
+import { utility } from "../libraries/utility";
 
 const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
 var cards = [];
@@ -112,6 +113,8 @@ function startPhase3() {
 
 function InitSmashOrPass() {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+        utility.loadCSSFromGH("SmashOrPass");
+
         if (window.allCards && window.allCards.length > 0) {
             initStuff();
         } else {
@@ -190,6 +193,10 @@ function InitSmashOrPass() {
                 <button class="btn btn-success" id="PrettyCards_SOP_ToPhase3">Let's Rock!</button>
             </div>
             <div id="PrettyCards_SOP_Phase3" class="PrettyCards_Hidden">
+                <div id="PrettyCards_SOP_Phase3_Main">
+                    <div id="PrettyCards_SOP_Phase3_CardSpace"></div>
+                    <div id="PrettyCards_SOP_Phase3_Skins"></div>
+                </div>
                 <div id="PrettyCards_SOP_Buttons"></div>
             </div>
             <div id="PrettyCards_SOP_Phase4" class="PrettyCards_Hidden"></div>
