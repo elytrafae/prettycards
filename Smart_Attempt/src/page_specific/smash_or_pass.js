@@ -102,7 +102,8 @@ function spawnNextCard() {
         front.find(".cardCost").html("?");
         front.find(".cardName")[0].className = "cardName";
         front.find(".cardDesc > div").html(utility.getRandomFromArray(mysteryDescriptions));
-        front.find(".cardImage").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryCard.png)")
+        front.find(".cardImage").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryCard.png)");
+        front.find(".cardRarity").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryRarity.png)")
 
         var cardNameDiv$ = front.find('.cardName div');
 		var cardDescDiv$ = front.find('.cardDesc div');
