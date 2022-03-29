@@ -2,5 +2,7 @@
 #PrettyCards_TopAdvert {
     width: 100%;
     text-align: center;
-    background-color: #5bc0de;
+    background-color: #3192e7;
+    padding: 0.6em;
+    font-size: 1.6em;
 }
