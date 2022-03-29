@@ -273,9 +273,11 @@ function InitSmashOrPass() {
         document.getElementById("PrettyCards_SOP_TakeScreenshot").onclick = function() {
             if (alreadyTakingScreenshot) {return;}
             alreadyTakingScreenshot = true;
-            window.html2canvas(document.getElementById("PrettyCards_SOP_TakeScreenshot")).then((data) => {
+            $("#PrettyCards_SOP_Phase4_ScreenshotArea").addClass("PrettyCards_SOP_Screenshot");
+            window.html2canvas(document.getElementById("PrettyCards_SOP_Phase4_ScreenshotArea")).then((data) => {
                 alreadyTakingScreenshot = false;
                 utility.saveCanvasAsImage(data, "sop_results");
+                $("#PrettyCards_SOP_Phase4_ScreenshotArea").removeClass("PrettyCards_SOP_Screenshot");
                 window.BootstrapDialog.addDialog({
 
                 });

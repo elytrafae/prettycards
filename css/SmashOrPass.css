@@ -45,5 +45,12 @@
 #PrettyCards_SOP_TakeScreenshot {
     aspect-ratio: 1;
     position: absolute;
-    left: 26px;
+    left: -42px;
+}
+
+#PrettyCards_SOP_Phase4_ScreenshotArea {
+    border: 5px solid white;
+    background-color: black;
+    padding: 5px;
+    width: 910px;
 }
