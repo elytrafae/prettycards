@@ -87,8 +87,14 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromGH("Menu");
 })
 
-if ( (isItAprilFoolDay() || true ) && (!window.underscript.onPage("Game") && !window.underscript.onPage("SmashOrPass")) ) {
+var topAdvertClosed = localStorage["prettycards.top_advert_closed"] || false;
+
+if ( (!topAdvertClosed) || (isItAprilFoolDay() || true ) && (!window.underscript.onPage("Game") && !window.underscript.onPage("SmashOrPass")) ) {
 	PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-		window.$("body").prepend(`<div id="PrettyCards_TopAdvert">New! Undercards Smash or Pass Game! <a href="/SmashOrPass">Are you brave enough~?</a></div>`)
+		window.$("body").prepend(`<div id="PrettyCards_TopAdvert">New! Undercards Smash or Pass Game! <a href="/SmashOrPass">Are you brave enough~?</a> <div id="PrettyCards_TopAdvert_Close">X</div></div>`);
+		window.$("#PrettyCards_TopAdvert_Close").click(function() {
+			$("#PrettyCards_TopAdvert").remove();
+			localStorage["prettycards.top_advert_closed"] = true;
+		})
 	})
 }

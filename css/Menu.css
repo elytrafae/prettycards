@@ -5,4 +5,16 @@
     background-color: #3192e7;
     padding: 0.6em;
     font-size: 1.6em;
+    position: relative;
+}
+
+#PrettyCards_TopAdvert_Close {
+    color: white;
+    position: absolute;
+    right: 0.3em;
+    cursor: pointer;
+}
+
+#PrettyCards_TopAdvert_Close:hover {
+    color: #888888;
 }
