@@ -17,10 +17,12 @@
     flex-wrap: nowrap;
     position: absolute;
     color: white;
+    user-select: none;
 }
 
 #PrettyCards_TopAdvert_CloseButtons > div {
     margin: 0 0.2em;
+    cursor: pointer;
 }
 
 #PrettyCards_TopAdvert_CloseButtons > div:hover {
