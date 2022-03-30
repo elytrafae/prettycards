@@ -52,7 +52,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		var y = 300;
 		
 		//<p style="color: grey">More coming . . . Somewhen.</p>
-		var menuBase = window.$(`<div class="dropdown" style="position: absolute; top: 0px; right: 15px; display: none;">
+		var menuBase = window.$(`<div class="dropdown" style="position: absolute; top: 0px; right: 15px; display: none;" id="PrettyCards_MainMenu">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PrettyCards Menu</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 3px 5px;">
 				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
@@ -85,19 +85,24 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromGH("Menu");
-})
+	var topAdvertClosed = localStorage["prettycards.top_advert_closed"] || false;
 
-var topAdvertClosed = localStorage["prettycards.top_advert_closed"] || false;
-
-if ( (!topAdvertClosed) || (isItAprilFoolDay() || true ) && (!window.underscript.onPage("Game") && !window.underscript.onPage("SmashOrPass")) ) {
-	PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-		window.$("body").prepend(`<div id="PrettyCards_TopAdvert">New! Undercards Smash or Pass Game! <a href="/SmashOrPass">Are you brave enough~?</a> <span id="PrettyCards_TopAdvert_Close">X</span></div>`);
-		window.$("#PrettyCards_TopAdvert").click(function() {
-			$("#PrettyCards_TopAdvert").remove();
-		})
-		window.$("#PrettyCards_TopAdvert_Close").click(function() {
-			$("#PrettyCards_TopAdvert").remove();
+	function turnOffAdvert(forever = false) {
+		$("#PrettyCards_TopAdvert").remove();
+		$("#PrettyCards_MainMenu").css("top", "0px");
+		if (forever) {
 			localStorage["prettycards.top_advert_closed"] = true;
+		}
+	}
+
+	if ( (!topAdvertClosed) || (isItAprilFoolDay() || true ) && (!window.underscript.onPage("Game") && !window.underscript.onPage("SmashOrPass")) ) {
+		window.$("#PrettyCards_MainMenu").css("top", "2em");
+		PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+			window.$("body").prepend(`<div id="PrettyCards_TopAdvert">New! Undercards Smash or Pass Game! <a href="/SmashOrPass">Are you brave enough~?</a> <span id="PrettyCards_TopAdvert_Close">X</span></div>`);
+			window.$("#PrettyCards_TopAdvert").click(turnOffAdvert)
+			window.$("#PrettyCards_TopAdvert_Close").click(function() {
+				turnOffAdvert(true);
+			})
 		})
-	})
-}
+	}
+})

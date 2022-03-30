@@ -6,12 +6,13 @@
     padding: 0.3em;
     font-size: 1.2em;
     position: relative;
+    height: 2em;
 }
 
 #PrettyCards_TopAdvert_Close {
     color: white;
     position: absolute;
-    left: 0.3em;
+    right: 0.5em;
     cursor: pointer;
 }
 
