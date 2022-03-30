@@ -96,9 +96,17 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 	}
 
 	if ( (!topAdvertClosed) || (isItAprilFoolDay() || true ) && (!window.underscript.onPage("Game") && !window.underscript.onPage("SmashOrPass")) ) {
-		window.$("#PrettyCards_MainMenu").css("top", "2em");
+		window.$("#PrettyCards_MainMenu").css("top", "36px");
 		PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-			window.$("body").prepend(`<div id="PrettyCards_TopAdvert">New! Undercards Smash or Pass Game! <a href="/SmashOrPass">Are you brave enough~?</a> <span id="PrettyCards_TopAdvert_Close">X</span></div>`);
+			window.$("body").prepend(`
+				<div id="PrettyCards_TopAdvert">
+					<span>New! Undercards Smash or Pass Game!</span> <a href="/SmashOrPass">Are you brave enough~?</a>
+					<div id="PrettyCards_TopAdvert_CloseButtons">
+						<div id="PrettyCards_TopAdvert_CloseForever">Don't Remind Me!</div>
+						<div id="PrettyCards_TopAdvert_Close">X</div>
+					</div>
+				</div>
+			`);
 			window.$("#PrettyCards_TopAdvert").click(turnOffAdvert)
 			window.$("#PrettyCards_TopAdvert_Close").click(function() {
 				turnOffAdvert(true);

@@ -6,16 +6,23 @@
     padding: 0.3em;
     font-size: 1.2em;
     position: relative;
-    height: 2em;
+    height: 36px;
 }
 
-#PrettyCards_TopAdvert_Close {
-    color: white;
-    position: absolute;
+#PrettyCards_TopAdvert_CloseButtons {
+    top: 0.3em;
     right: 0.5em;
-    cursor: pointer;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: absolute;
+    color: white;
 }
 
-#PrettyCards_TopAdvert_Close:hover {
+#PrettyCards_TopAdvert_CloseButtons > div {
+    margin: 0 0.2em;
+}
+
+#PrettyCards_TopAdvert_CloseButtons > div:hover {
     color: #888888;
 }
