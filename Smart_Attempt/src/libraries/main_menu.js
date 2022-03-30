@@ -58,7 +58,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
 				<a href="/CustomCardSkins"><p style="cursor: pointer;">Custom Card Skins</p></a>
 				<a href="/CustomCards"><p style="cursor: pointer;">Custom Cards</p></a>
-				${isItApril() ? ('<a href="/SmashOrPass"><p style="cursor: pointer;">Smash or Pass</p></a>') : ""}
+				${isItApril() ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">Smash or Pass</p></a>') : ""}
 				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">API Docs</p></a>
 			</div>
 		</div>`)
@@ -85,7 +85,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromGH("Menu");
-	var topAdvertClosed = localStorage["prettycards.top_advert_closed"] || false;
+	var topAdvertClosed = (localStorage["prettycards.top_advert_closed"] === 'true');
 
 	function turnOffAdvert(forever = false) {
 		$("#PrettyCards_TopAdvert").remove();
@@ -95,7 +95,7 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 		}
 	}
 
-	if ( (!topAdvertClosed) || (isItAprilFoolDay() || true ) && (!window.underscript.onPage("Game") && !window.underscript.onPage("SmashOrPass")) ) {
+	if ( (!topAdvertClosed) && isItAprilFoolDay() && (!window.underscript.onPage("Game")) && (!window.underscript.onPage("SmashOrPass")) ) {
 		window.$("#PrettyCards_MainMenu").css("top", "36px");
 		PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 			window.$("body").prepend(`
@@ -107,10 +107,13 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 					</div>
 				</div>
 			`);
-			window.$("#PrettyCards_TopAdvert").click(turnOffAdvert)
 			window.$("#PrettyCards_TopAdvert_Close").click(function() {
+				turnOffAdvert(false);
+			})
+			window.$("#PrettyCards_TopAdvert_CloseForever").click(function() {
 				turnOffAdvert(true);
 			})
+			//window.scrollTo({ top: 0, behavior: 'smooth' });
 		})
 	}
 })

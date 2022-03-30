@@ -9,7 +9,7 @@ import {LoadFont, ListenForWhenAllFontsAreLoaded} from "/src/libraries/font_load
 
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.js";
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
-import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_hate.js";
+//import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_hate.js";
 
 import {html2canvas} from "/src/third_party/html2canvas.min.js";
 import { createFloatingSoul } from "../libraries/floating_souls";
