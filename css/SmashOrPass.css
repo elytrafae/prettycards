@@ -29,6 +29,8 @@
     overflow-y: auto;
     height: 100%;
     width: 230px;
+    position: relative;
+    z-index: 10;
 }
 
 .PrettyCards_SOP_CardResults {
@@ -64,6 +66,14 @@
     border: 1px solid white;
     margin: 3px;
     overflow: hidden;
+}
+
+.PrettyCards_SOP_SkinDisplay:hover {
+    border-color: cyan;
+}
+
+.PrettyCards_SOP_SkinDisplay.selected {
+    border-color: crimson;
 }
 
 #PrettyCards_SOP_Phase3_CardContainer {

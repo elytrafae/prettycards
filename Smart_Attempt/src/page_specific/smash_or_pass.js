@@ -91,7 +91,7 @@ function populateSkins(card) {
     for (var i=0; i < skins.length; i++) {
         const skin = skins[i];
         var elem = $(`
-            <div class="PrettyCards_SOP_SkinDisplay">
+            <div class="PrettyCards_SOP_SkinDisplay ${i==0 ? "selected" : ""}">
                 <img src="/images/cards/${skin.image}.png">
             </div>
         `);
@@ -106,6 +106,8 @@ function populateSkins(card) {
                 front.addClass("breaking-skin");
             }
             front.find(".cardImage").css("backgroundImage", "url(/images/cards/" + skin.image + ".png)");
+            $(".PrettyCards_SOP_SkinDisplay").removeClass("selected");
+            $(this).addClass("selected");
         });
         skinCont.append(elem);
     }
@@ -338,11 +340,11 @@ function InitSmashOrPass() {
                 <button class="btn btn-success" id="PrettyCards_SOP_ToPhase3">Let's Rock!</button>
             </div>
             <div id="PrettyCards_SOP_Phase3" class="PrettyCards_Hidden">
+                <div id="PrettyCards_SOP_Phase3_CardContainer"></div>
                 <div id="PrettyCards_SOP_Phase3_Main">
                     <div id="PrettyCards_SOP_Phase3_CardSpace"></div>
                     <div id="PrettyCards_SOP_Phase3_Skins"></div>
                 </div>
-                <div id="PrettyCards_SOP_Phase3_CardContainer"></div>
                 <div id="PrettyCards_SOP_Buttons"></div>
             </div>
             <div id="PrettyCards_SOP_Phase4" class="PrettyCards_Hidden">
