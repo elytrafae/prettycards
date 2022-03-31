@@ -58,7 +58,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
 				<a href="/CustomCardSkins"><p style="cursor: pointer;">Custom Card Skins</p></a>
 				<a href="/CustomCards"><p style="cursor: pointer;">Custom Cards</p></a>
-				${/*isItApril()*/ true ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">Smash or Pass</p></a>') : ""}
+				${isItApril() ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">Smash or Pass</p></a>') : ""}
 				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">API Docs</p></a>
 			</div>
 		</div>`)
@@ -95,7 +95,7 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 		}
 	}
 
-	if ( (!topAdvertClosed) && (isItAprilFoolDay() || true) && (!window.underscript.onPage("Game")) && (!window.underscript.onPage("SmashOrPass")) ) {
+	if ( (!topAdvertClosed) && isItAprilFoolDay() && (!window.underscript.onPage("Game")) && (!window.underscript.onPage("SmashOrPass")) ) {
 		window.$("#PrettyCards_MainMenu").css("top", "36px");
 		PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 			window.$("body").prepend(`
