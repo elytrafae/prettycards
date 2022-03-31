@@ -63,3 +63,13 @@
     margin: 3px;
     overflow: hidden;
 }
+
+#PrettyCards_SOP_Phase3_CardContainer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}

@@ -131,7 +131,7 @@ function spawnNextCard() {
     currentFlipCard = new FlippableCard(cards[cardIndex], false, false, false);
     var cardSpace = document.getElementById("PrettyCards_SOP_Phase3_CardSpace");
     var spaceBoundingBox = cardSpace.getBoundingClientRect();
-    currentFlipCard.appendTo(cardSpace);
+    currentFlipCard.appendTo(document.getElementById("PrettyCards_SOP_Phase3_CardContainer")); // This is an element specifically made to contain cards so that the scrollbar won't appear.
     currentFlipCard.moveTo(-300, spaceBoundingBox.top + spaceBoundingBox.height/2);
     currentFlipCard.flipToFace(500);
     currentFlipCard.glideTo(window.innerWidth/2, spaceBoundingBox.top + spaceBoundingBox.height/2, 500, function() {});
@@ -255,7 +255,8 @@ function startPhase3() {
 
 function InitSmashOrPass() {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-        $("title").html("PrettyCards - Smash or Pass")
+        $("title").html("PrettyCards - Smash or Pass");
+        localStorage["prettycards.top_advert_closed"] = true; // Makes the advert disappear now that the user visited this page.
         utility.loadCSSFromGH("SmashOrPass");
 
         if (window.allCards && window.allCards.length > 0) {
@@ -341,6 +342,7 @@ function InitSmashOrPass() {
                     <div id="PrettyCards_SOP_Phase3_CardSpace"></div>
                     <div id="PrettyCards_SOP_Phase3_Skins"></div>
                 </div>
+                <div id="PrettyCards_SOP_Phase3_CardContainer"></div>
                 <div id="PrettyCards_SOP_Buttons"></div>
             </div>
             <div id="PrettyCards_SOP_Phase4" class="PrettyCards_Hidden">

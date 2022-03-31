@@ -209,15 +209,20 @@ prettycards.openSettings = function() {
 	settings.packs.show(); // Temporary solution. Works with any setting.
 }
 
-if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
+ExecuteWhen("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromGH("Mobile_Sidebar");
-	ExecuteWhen("translation:loaded", function () {
-		packs = $(".nbPacksHeader").text();
-		quests = $("a[href=Quests]").text();
-		SetMobileView();
-		CreateSideNavMenu();
-		ExecuteWhen("Chat:Connected", function () {
+})
+
+if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
+	ExecuteWhen("PrettyCards:onPageLoad", function() {
+		ExecuteWhen("translation:loaded", function () {
+			packs = $(".nbPacksHeader").text();
+			quests = $("a[href=Quests]").text();
+			SetMobileView();
 			CreateSideNavMenu();
+			ExecuteWhen("Chat:Connected", function () {
+				CreateSideNavMenu();
+			});
 		});
-	});
+	})
 }
