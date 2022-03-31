@@ -74,4 +74,5 @@
     margin: 0px;
     padding: 0px;
     z-index: 1;
+    overflow: hidden;
 }
