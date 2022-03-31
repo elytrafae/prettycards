@@ -1,4 +1,12 @@
 
+#PrettyCards_MainMenu {
+    position: absolute; 
+    top: 0px; 
+    right: 15px; 
+    display: none; /*Manipulated by code*/
+    z-index: 12;
+}
+
 #PrettyCards_TopAdvert {
     width: 100%;
     text-align: center;
@@ -28,3 +36,4 @@
 #PrettyCards_TopAdvert_CloseButtons > div:hover {
     color: #888888;
 }
+

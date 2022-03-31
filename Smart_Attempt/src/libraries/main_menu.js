@@ -52,7 +52,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		var y = 300;
 		
 		//<p style="color: grey">More coming . . . Somewhen.</p>
-		var menuBase = window.$(`<div class="dropdown" style="position: absolute; top: 0px; right: 15px; display: none;" id="PrettyCards_MainMenu">
+		var menuBase = window.$(`<div class="dropdown" id="PrettyCards_MainMenu">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PrettyCards Menu</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 3px 5px;">
 				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
