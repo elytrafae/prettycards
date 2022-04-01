@@ -46,6 +46,8 @@ import {InitCustomCards} from "/src/page_specific/custom_cards.js";
 import {InitFriendship} from "/src/page_specific/friendship.js";
 import {InitSmashOrPass} from "/src/page_specific/smash_or_pass.js";
 
+import {} from "/src/libraries/april_fools_downloader.js";
+
 if (settings.packs.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
 	InitPacks();

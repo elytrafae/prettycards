@@ -9,17 +9,31 @@ if (!collectionPlace) {
 }
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
-	if ( (!window.sessionStorage["prettycards.sha"]) || GM_info.script.version == "local") {
+	if (GM_info.script.version == "local") {
 		window.$.get("https://api.github.com/repos/CMD-God/prettycards/commits", function(data) {
-			//console.log("REPOS", data);
-			window.sessionStorage["prettycards.sha"] = data[0].sha;
 			PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", data[0].sha);
 		});
 	} else {
 		//console.log("SESSION STORAGE!");
-		PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", window.sessionStorage["prettycards.sha"]);
+		PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", GM_info.script.version);
 	}
 });
+
+var season_number = -1;
+
+PrettyCards_plugin.events.on("translation:loaded", function(data) {
+	var messages = $.i18n.messageStore.messages.en;
+    for (var key in messages) {
+        if (key.startsWith("quest-s") && key.endsWith("-start-1")) {
+			console.log(key);
+			console.log(key.replace(/\D/g, ''));
+            season_number = Number(key.replace(/\D/g, ''));
+			break;
+        }
+    }
+	console.log("SEASON NUMBER", season_number);
+})
+
 
 if (String.prototype.splice === undefined) {
 	/**
@@ -145,6 +159,10 @@ class Utility {
 
 	getRandomFromArray(array) {
 		return array[Math.floor(Math.random() * array.length)];
+	}
+
+	getSeasonNumber() {
+		return season_number;
 	}
 	
 }
