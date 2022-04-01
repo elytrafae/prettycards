@@ -8,11 +8,12 @@ var ownedCardSkins = [];
 var notOwnedCardSkins = [];
 var defaultCardSkins = [];
 var customCardSkins = [];
+var aprilFools2022 = [];
 
 var bonusBaseCards = ["Heal Delivery", "Explosion", "Sacrifice", "Same Fate", "Onutrem"];
 
-var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCardSkins];
-var listNames = ["Custom Card Skins", "Default Card Skins", "Owned Card Skins", "Not Owned Card Skins"]
+var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCardSkins, aprilFools2022];
+var listNames = ["Custom Card Skins", "Default Card Skins", "Owned Card Skins", "Not Owned Card Skins", "April Fools 2022 (Season 69)"]
 
 ExecuteWhen("PrettyCards:onPageLoad", function () {
 	$.get("/CardSkinsConfig?action=shop", {}, function(data) {
@@ -24,6 +25,9 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 	ExecuteWhen("Chat:Connected", function() {
 		ProcessCustomCardSkins();
 	});
+	$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/50f69f27a249d843792aedc5139d60fc9b178b23/json/aprilFools2022.json", {}, function(data) {
+		ProcessAprilFools2022Skins(data);
+	})
 });
 
 /*
@@ -34,6 +38,29 @@ $.get("CardSkinsConfig?action=profile", {}, function(data) {
 	//console.log("OWNED_CARD_SKINS:", ownedCardSkins);
 });
 */
+
+function ProcessAprilFools2022Skins(data) {
+	console.log(window.allCards);
+	for (var i=0; i < data.length; i++) {
+		var id = data[i];
+		var card = window.getCard(id);
+		console.log(i, id, card);
+		aprilFools2022.push({
+			active: false,
+			authorName: "???",
+			cardId: card.id,
+			cardName: card.name,
+			id: -69,
+			image: `https://github.com/CMD-God/prettycards/raw/50f69f27a249d843792aedc5139d60fc9b178b23/img/Cards/April_Fools_2022/${card.image}.png`,
+			name: `April Fools 2022 ${card.name}`,
+			owned: true,
+			typeSkin: 0,
+			ucpCost: 69420,
+			unavailable: false,
+			isCustom: true
+		});
+	}
+}
 
 function ProcessCustomCardSkins() {
 	var skin = window.localStorage["prettycards.custom_card_skin." + window.selfId + ".0"];

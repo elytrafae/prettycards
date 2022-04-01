@@ -25,7 +25,7 @@ function downloadAprilFoolsImageForCard(card) {
                     console.log("DIFFERENT IMAGES FOUND!");
                     card_id_list.push(card.fixedId || card.id);
                     var a = document.createElement("A");
-                    a.download = card.name + ".png";
+                    a.download = card.image + ".png";
                     a.href = april_url;
                     document.body.appendChild(a);
                     a.click();
