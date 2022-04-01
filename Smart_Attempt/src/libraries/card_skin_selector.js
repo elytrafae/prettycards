@@ -40,18 +40,16 @@ $.get("CardSkinsConfig?action=profile", {}, function(data) {
 */
 
 function ProcessAprilFools2022Skins(data) {
-	console.log(window.allCards);
 	for (var i=0; i < data.length; i++) {
 		var id = data[i];
 		var card = window.getCard(id);
-		console.log(i, id, card);
 		aprilFools2022.push({
 			active: false,
 			authorName: "???",
 			cardId: card.id,
 			cardName: card.name,
 			id: -69,
-			image: `https://github.com/CMD-God/prettycards/raw/50f69f27a249d843792aedc5139d60fc9b178b23/img/Cards/April_Fools_2022/${card.image}.png`,
+			image: `https://github.com/CMD-God/prettycards/raw/929d2639066df8441e6e2cb97f3353374a35513e/img/Cards/April_Fools_2022/${card.image}.png`,
 			name: `April Fools 2022 ${card.name}`,
 			owned: true,
 			typeSkin: 0,
