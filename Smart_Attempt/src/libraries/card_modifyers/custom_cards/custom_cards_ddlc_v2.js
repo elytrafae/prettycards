@@ -14,6 +14,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
 		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
 		aprilCardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/aprilFools/",
+		aprilArtifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/aprilFools/",
 		//universalCustomFont: "Aller",
 		note: `This is a Doki Doki Literature Club themed card set I wanted to make for the longest time. I wanted it to be perfect, so I often modified it, asked for feedback and even the custom cards idea was born because of this set. So, please enjoy and don't be afraid to give me feedback! ^^
 		<br><br>
@@ -290,6 +291,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	var file_exp = c.newArtifact({
 		name: "Character Folder", 
 		image: "File_Explorer",
+		aprilImage: "File_Explorer",
 		rarity: "DETERMINATION",
 		description: `{{KW:TURN-END}}: If an ally monster died this turn, add the next ${chr_spells.me()} to the top of your deck. Whenever you summon a ${fallen.me()} monster, if it's on the right, give it -2/-1 and trigger its ${fallen.me()} effect. 
 		Order of ${chr_spells.me(2)}: ${sayori_chr.me()} > ${natsuki_chr.me()} > ${yuri_chr.me()} > ${monika_chr.me()} > Start over.`,

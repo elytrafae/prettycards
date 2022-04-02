@@ -68,7 +68,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				var bg = $('<div class="breakingSkinBackground"></div>');
 				var b_image = collection.cardImagePrefix + card.background;
 				if (utility.getSeasonMonth() == 3 && card.aprilBackground) {
-					image = collection.aprilCardImagePrefix + card.aprilBackground;
+					b_image = collection.aprilCardImagePrefix + card.aprilBackground;
 				}
 				bg.css('background', "url('" + b_image + ".png') no-repeat");
 				bg.css("background-size", "contain");

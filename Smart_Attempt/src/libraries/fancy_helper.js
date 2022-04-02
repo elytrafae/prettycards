@@ -123,6 +123,9 @@ class FancyDisplay {
 		var image_src = utility.getArtifactImageLink(artifact.image);
 		if (artifact.collection) {
 			image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
+			if (utility.getSeasonMonth() == 3 && artifact.aprilImage) {
+				image_src = artifact.collection.aprilArtifactImagePrefix + artifact.aprilImage + ".png";
+			}
 		}
 		var data = {
 			name: $.i18n("artifact-name-" + artifact.id),
@@ -151,8 +154,10 @@ class FancyDisplay {
 		}
 		var image_src = "https://github.com/CMD-God/prettycards/raw/master/img/Souls/" + id + ".png";
 		if (customObj) {
-			
 			image_src = customObj.collection.soulImagePrefix + customObj.image + ".png";
+			if (utility.getSeasonMonth() == 3 && customObj.aprilImage) {
+				image_src = customObj.collection.aprilSoulImagePrefix + customObj.aprilImage + ".png";
+			}
 		}
 		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
 		
@@ -195,6 +200,9 @@ class FancyDisplay {
 				var image_src = utility.getArtifactImageLink(artifact.image);
 				if (artifact.collection) {
 					image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
+					if (utility.getSeasonMonth() == 3 && artifact.aprilImage) {
+						image_src = artifact.collection.aprilArtifactImagePrefix + artifact.aprilImage + ".png";
+					}
 				}
 				datas.push({
 					name: $.i18n("artifact-name-" + artifact.id),
