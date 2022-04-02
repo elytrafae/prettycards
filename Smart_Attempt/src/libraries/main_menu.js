@@ -58,7 +58,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
 				<a href="/CustomCardSkins"><p style="cursor: pointer;">Custom Card Skins</p></a>
 				<a href="/CustomCards"><p style="cursor: pointer;">Custom Cards</p></a>
-				${isItApril() ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">Smash or Pass</p></a>') : ""}
+				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">Smash or Pass</p></a>') : ""}
 				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">API Docs</p></a>
 			</div>
 		</div>`)

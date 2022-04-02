@@ -55,8 +55,6 @@ function ChangeDeckImageDialogue() {
 }
 
 function ChangeDeckImage(skin) {
-	//console.log(skin);
-	//changeDeckImage.style.backgroundImage = "url(/images/cards/" + skin.image + ".png)";
 	var key = "prettycards.deck." + selfId + "." + currentDeck.soul + "." + currentDeck.id + ".image";
 	currentDeck.image = skin;
 	window.localStorage[key] = JSON.stringify(skin);
@@ -339,10 +337,6 @@ function LoadDeck(deck) {
 	
 	checkCompletion();
 	refreshDeckList();
-	
-	//deckName.value = deck.name;
-	//deckName.className = "form-control " + deck.soul;
-	//changeDeckImage.style.backgroundImage = "url(/images/cards/" + deck.image.image + ".png)";
 }
 
 function SaveDeck() { // This does NOT save deck images and names!
@@ -435,7 +429,6 @@ function InitDecks() {
 	changeDeckButton.onclick = ChangeDeckScreen.bind(this);
 	
 	newDeckButtons.append(editDeckButton);
-	//editDeckButton.style = "width: 50%; margin: 0; background-image: url(/images/cards/Dummy.png); background-size: cover; background-position: center; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 	editDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 	editDeckButton.className = "btn btn-primary";
 	editDeckButton.innerHTML = "Edit<br>Deck";

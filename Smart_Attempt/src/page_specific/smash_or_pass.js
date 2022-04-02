@@ -92,7 +92,7 @@ function populateSkins(card) {
         const skin = skins[i];
         var elem = $(`
             <div class="PrettyCards_SOP_SkinDisplay ${i==0 ? "selected" : ""}">
-                <img src="/images/cards/${skin.image}.png">
+                <img src="${utility.getCardImageLink(skin.image)}">
             </div>
         `);
         elem.click(function() {
@@ -105,7 +105,7 @@ function populateSkins(card) {
             } else {
                 front.addClass("breaking-skin");
             }
-            front.find(".cardImage").css("backgroundImage", "url(/images/cards/" + skin.image + ".png)");
+            front.find(".cardImage").css("backgroundImage", "url("+ utility.getCardImageLink(skin.image) + ")");
             $(".PrettyCards_SOP_SkinDisplay").removeClass("selected");
             $(this).addClass("selected");
         });

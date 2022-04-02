@@ -37,7 +37,7 @@ function CreateOverlay(card, side) {
     var border = $('<div class="PrettyCards_PersonaBorder"></div>');
     var back = $('<div class="PrettyCards_PersonaBack"></div>');
     border.append(back);
-    var image = $(`<img src="images/cards/${card.image}.png" class="PrettyCards_PersonaImage">`);
+    var image = $(`<img src="${utility.getCardImageLink(card.image)}" class="PrettyCards_PersonaImage">`);
     back.append(image);
 
     const start = 200;

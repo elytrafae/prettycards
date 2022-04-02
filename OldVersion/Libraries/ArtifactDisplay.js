@@ -1,3 +1,6 @@
+import { utility } from "../../Smart_Attempt/src/libraries/utility";
+
+
 
 GM_addStyle(".PrettyCards_ArtifactHover {background-color: black; border: white solid 4px; width: 25em; text-align: justify;}");
 GM_addStyle(".PrettyCards_ArtifactHover_Desc {color: white; padding: 0.3em;}");
@@ -29,7 +32,7 @@ function CreateArtifactImage(name, src, is_legend, art_id) {
     var div = document.createElement("DIV");
     div.className = "PrettyCards_ArtifactContainer";
 	var img = document.createElement("IMG");
-	img.src = "images/artifacts/" + src + ".png";
+	img.src = utility.getArtifactImageLink(src);
 	img.className = "PrettyCards_Artifact";
 	div.setAttribute("legendary", is_legend || false);
 	div.setAttribute("name", name);

@@ -45,8 +45,13 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			}
 			
 			element.addClass("ext_" + card.extension);
+
+			var image = collection.cardImagePrefix + card.image;
+			if (utility.getSeasonMonth() == 3 && card.aprilImage) {
+				image = collection.aprilCardImagePrefix + card.aprilImage;
+			}
 			
-			element.find(".cardImage").css("background-image", 'url("' + collection.cardImagePrefix + card.image + '.png")');
+			element.find(".cardImage").css("background-image", 'url("' + image + '.png")');
 			element.find(".cardRarity").css("background-image", 'url("' + collection.rarityImagePrefix + card.extension + '_' + card.rarity + '.png")');
 			
 			var tribes = element.find(".cardTribes .tribe");

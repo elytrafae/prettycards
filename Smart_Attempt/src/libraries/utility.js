@@ -20,18 +20,29 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
 });
 
 var season_number = -1;
+const seasonKeyStart = "quest-s";
+const seasonKeyEnd = "-start-1";
 
 PrettyCards_plugin.events.on("translation:loaded", function(data) {
 	var messages = $.i18n.messageStore.messages.en;
+	var list = Object.keys(messages);
+	/*
     for (var key in messages) {
-        if (key.startsWith("quest-s") && key.endsWith("-start-1")) {
-			console.log(key);
-			console.log(key.replace(/\D/g, ''));
-            season_number = Number(key.replace(/\D/g, ''));
-			break;
+        if (key.startsWith(seasonKeyStart) && key.endsWith(seasonKeyEnd)) {
+			var portion = key.substring(seasonKeyStart.length, key.length-seasonKeyEnd.length);
+            season_number = Math.max(season_number, Number(portion));
         }
     }
-	console.log("SEASON NUMBER", season_number);
+	*/
+	for (var i=list.length-1; i >= 0; i--) {
+		var key = list[i];
+		if (key.startsWith(seasonKeyStart) && key.endsWith(seasonKeyEnd)) {
+			var portion = key.substring(seasonKeyStart.length, key.length-seasonKeyEnd.length);
+            season_number = Number(portion);
+			break;
+        }
+	}
+	PrettyCards_plugin.events.emit.singleton("PrettyCards:seasonNumber", season_number);
 })
 
 
@@ -161,8 +172,30 @@ class Utility {
 		return array[Math.floor(Math.random() * array.length)];
 	}
 
+	/**
+	 * Returns the season number relative to the new year.
+	 * @returns {number} A number from 0 to 11, where 0 is January and 11 is December.
+	 */
+	getSeasonMonth() {
+		return (season_number - 66)%12; // Season 66 was January 2022.
+	}
+
 	getSeasonNumber() {
 		return season_number;
+	}
+
+	getCardImageLink(image) {
+		if (this.getSeasonMonth() == 3) { // Is it an April Season?
+			return `/images/aprilFools/cards/${image}.png`;
+		}
+		return `/images/cards/${image}.png`;
+	}
+
+	getArtifactImageLink(image) {
+		if (this.getSeasonMonth() == 3) { // Is it an April Season?
+			return `/images/aprilFools/artifacts/${image}.png`;
+		}
+		return `/images/artifacts/${image}.png`;
 	}
 	
 }

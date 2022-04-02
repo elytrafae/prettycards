@@ -120,7 +120,7 @@ class FancyDisplay {
 	static ViewArtifactInfo(id) {
 		var artifact = artifactDisplay.GetArtifactById(id);
 		PrettyCards_plugin.events.emit("pre:viewArtifact()", artifact);
-		var image_src = "images/artifacts/" + artifact.image + ".png";
+		var image_src = utility.getArtifactImageLink(artifact.image);
 		if (artifact.collection) {
 			image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
 		}
@@ -192,7 +192,7 @@ class FancyDisplay {
 				var isDisabled = $(this).hasClass("artifact-disabled");
 				var artifact = artifactDisplay.GetArtifactById(artifactId);
 				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
-				var image_src = "images/artifacts/" + artifact.image + ".png";
+				var image_src = utility.getArtifactImageLink(artifact.image);
 				if (artifact.collection) {
 					image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
 				}

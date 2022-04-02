@@ -51,6 +51,10 @@ class CustomCardCollection {
 		this.tribeImagePrefix = settings.tribeImagePrefix || "";
 		this.artifactImagePrefix = settings.artifactImagePrefix || "";
 		this.soulImagePrefix = settings.soulImagePrefix || "";
+
+		this.aprilCardImagePrefix = settings.aprilCardImagePrefix || "";
+		this.aprilArtifactImagePrefix = settings.aprilArtifactImagePrefix || "";
+		this.aprilSoulImagePrefix = settings.aprilSoulImagePrefix || "";
 		
 		this.name = settings.name || "UNNAMED CATEGORY";
 		this.author = settings.author || "";
@@ -306,6 +310,7 @@ class Artifact {
 		this.name = settings.name || "UNNAMED ARTIFACT";
 		this.description = settings.description || "NO EFFECT";
 		this.image = settings.image || "NO_IMAGE";
+		this.aprilImage = settings.aprilImage;
 		this.rarity = settings.rarity || "COMMON";
 		this.note = settings.note || "";
 		Object.defineProperty(this, "id", {
@@ -370,6 +375,7 @@ class Soul {
 		});
 		this.displayName = settings.displayName || "NoName";
 		this.image = settings.image || "NO_IMAGE";
+		this.aprilImage = settings.aprilImage;
 		this.description = settings.description || "No description";
 		this.note = settings.note || "";
 		

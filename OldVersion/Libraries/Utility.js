@@ -154,7 +154,7 @@ window.artifactsInfo = function (box) {
                     name = '<span class="yellow">' + name + '</span>';
                 }
 
-                text = text + '<p><img style="height:32px;" src="images/artifacts/' + image + '.png"> ' + name + ' : ' + $.i18n('artifact-' + artifactId) + '</p>';
+                text = text + '<p><img style="height:32px;" src="'+ utility.getArtifactImageLink(image) +'"> ' + name + ' : ' + $.i18n('artifact-' + artifactId) + '</p>';
             }
         });
         BootstrapDialog.show({

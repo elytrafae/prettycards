@@ -22,7 +22,7 @@ class ArtifactDisplay {
 	ReturnArtifactIcon(artifact_id) {
 		var artifact = this.GetArtifactById(artifact_id);
 		//console.log(this.artifacts, artifact);
-		return `<img class="pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.legendary.toString()}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="images/artifacts/${artifact.image}.png"> `;
+		return `<img class="pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.legendary.toString()}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="${utility.getArtifactImageLink(artifact.image)}"> `;
 	}
 	
 	SetRarityForArtifact(artifact) {

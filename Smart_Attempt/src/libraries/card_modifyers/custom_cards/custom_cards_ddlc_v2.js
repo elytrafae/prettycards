@@ -13,6 +13,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
 		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
 		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
+		aprilCardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/aprilFools/",
 		//universalCustomFont: "Aller",
 		note: `This is a Doki Doki Literature Club themed card set I wanted to make for the longest time. I wanted it to be perfect, so I often modified it, asked for feedback and even the custom cards idea was born because of this set. So, please enjoy and don't be afraid to give me feedback! ^^
 		<br><br>
@@ -77,6 +78,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		name: "{{PLURAL:$1|Yuri|Yuris}}",
 		image: "Yuri",
+		aprilImage: "Yuri",
 		cost: 3,
 		attack: 3,
 		hp: 2,

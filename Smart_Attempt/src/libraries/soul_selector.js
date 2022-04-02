@@ -68,7 +68,7 @@ class SoulSelector {
 		var html = '<div class="PrettyCards_ArtifactContainer">';
 		for (var i = 0; i < artifacts.length; i++) {
 			var artifact = artifacts[i];
-			html += `<span class="${artifact.legendary ? 'yellow' : ''}"><img style="height: 16px;" src="images/artifacts/${artifact.image}.png" /> ${artifact.name}</span>${(i < artifacts.length-1) ? "<br>" : ""}`;
+			html += `<span class="${artifact.legendary ? 'yellow' : ''}"><img style="height: 16px;" src="${utility.getArtifactImageLink(artifact.image)}" /> ${artifact.name}</span>${(i < artifacts.length-1) ? "<br>" : ""}`;
 		}
 		html += '</div>'
 		return html;
