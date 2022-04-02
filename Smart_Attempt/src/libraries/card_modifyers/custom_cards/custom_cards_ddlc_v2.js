@@ -50,6 +50,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		name: "{{PLURAL:$1|Sayori|Sayoris}}",
 		image: "Sayori",
+		aprilImage: "Sayori",
 		cost: 4,
 		attack: 5,
 		hp: 4,
@@ -64,6 +65,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		name: "{{PLURAL:$1|Natsuki|Natsukis}}",
 		image: "Natsuki",
+		aprilImage: "Natsuki",
 		cost: 3,
 		attack: 3,
 		hp: 3,
@@ -93,6 +95,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		name: "{{PLURAL:$1|Monika|Monikas}}",
 		image: "Monika",
+		aprilImage: "Monika",
 		cost: 7,
 		attack: 4,
 		hp: 6,
@@ -109,6 +112,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		name: "{{PLURAL:$1|Amy|Amys}}",
 		image: "Amy",
+		aprilImage: "Amy",
 		cost: 4,
 		attack: 5,
 		hp: 2,
@@ -295,7 +299,9 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		name: "{{PLURAL:$1|Just Monika|Just Monikas}}",
 		image: "Just_Monika_Breaking",
+		aprilImage: "Just_Monika",
 		background: "Just_Monika_Breaking_BG",
+		aprilBackground: "Just_Monika_Back",
 		cost: 11,
 		attack: 6,
 		hp: 9,
