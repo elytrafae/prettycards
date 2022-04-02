@@ -49,7 +49,7 @@ function ProcessAprilFools2022Skins(data) {
 			cardId: card.id,
 			cardName: card.name,
 			id: -69,
-			image: `https://github.com/CMD-God/prettycards/raw/929d2639066df8441e6e2cb97f3353374a35513e/img/Cards/April_Fools_2022/${card.image}.png`,
+			image: `https://github.com/CMD-God/prettycards/raw/856f490c607fdd90d54e82143d0b696da6e27bde/img/Cards/April_Fools_2022/${card.image}.png`,
 			name: `April Fools 2022 ${card.name}`,
 			owned: true,
 			typeSkin: 0,
