@@ -29,12 +29,13 @@ import { prettycards, PrettyCards_plugin } from "../underscript_checker";
 //  }
 */
 prettycards.displayMediaGallery = function(data) {
+	var items = data.items;
 	var container = $(`
 		<div id="PrettyCards_Media_Content">
 			<div id="PrettyCards_Media_ContentTopRow">
-				<div></div>
+				${items.length > 1 ? `<div class="PrettyCards_Media_ContentNavArrow"></div>` : ""}
 				<div id="PrettyCards_Media_ItemDisplay"></div>
-				<div></div>
+				${items.length > 1 ? `<div class="PrettyCards_Media_ContentNavArrow"></div>` : ""}
 			</div>
 			<div id="PrettyCards_Media_ContentBottomRow"></div>
 		</div>

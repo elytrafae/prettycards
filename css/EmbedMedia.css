@@ -35,6 +35,17 @@
 	flex-wrap: nowrap;
 	align-content: center;
 	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.PrettyCards_Media_ContentNavArrow {
+	width: 5em;
+	height: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: center;
 }
 
 #PrettyCards_Media_ContentBottomRow {
