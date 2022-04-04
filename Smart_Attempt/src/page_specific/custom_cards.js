@@ -35,7 +35,11 @@ function takeScreenshot(filename) {
 }
 
 function appendArtifact(artifact, c, $parent) {
-	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${c.artifactImagePrefix + artifact.image + ".png"}">`);
+	var image_src = c.artifactImagePrefix + artifact.image + ".png";
+	if (utility.getSeasonMonth() == 3 && artifact.aprilImage) {
+		image_src = c.aprilArtifactImagePrefix + artifact.aprilImage + ".png";
+	}
+	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${image_src}">`);
 	art.click(function () {
 		window.artifactInfo(artifact.id);
 	})
@@ -44,6 +48,10 @@ function appendArtifact(artifact, c, $parent) {
 }
 
 function appendArtifactNew(artifact, c, $parent) {
+	var image_src = c.artifactImagePrefix + artifact.image + ".png";
+	if (utility.getSeasonMonth() == 3 && artifact.aprilImage) {
+		image_src = c.aprilArtifactImagePrefix + artifact.aprilImage + ".png";
+	}
 	var art = $(`
 	<div class="PrettyCards_CollectionNew_Soultifact">
 		<div id="PrettyCards_CollectionNew_SoultifactImageContainer"></div>
@@ -53,7 +61,7 @@ function appendArtifactNew(artifact, c, $parent) {
 			<div>${window.$.i18n("artifact-" + artifact.id)}</div>
 		</div>
 	<div>`);
-	art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(c.artifactImagePrefix + artifact.image + ".png", "PrettyCards_CollectionNew_SoultifactImage PrettyCards_Artifact_" + artifact.rarity, "", ""));
+	art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image_src, "PrettyCards_CollectionNew_SoultifactImage PrettyCards_Artifact_" + artifact.rarity, "", ""));
 	art.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.artifactInfo(artifact.id);
 	})
@@ -62,7 +70,11 @@ function appendArtifactNew(artifact, c, $parent) {
 }
 
 function appendSoul(soul, c, $parent) {
-	var s = $(`<img class="PrettyCards_Soul" src="${c.soulImagePrefix + soul.image + ".png"}">`);
+	var image_src = c.soulImagePrefix + soul.image + ".png";
+	if (utility.getSeasonMonth() == 3 && soul.aprilImage) {
+		image_src = c.aprilSoulImagePrefix + soul.aprilImage + ".png";
+	}
+	var s = $(`<img class="PrettyCards_Soul" src="${image_src}">`);
 	s.click(function () {
 		window.soulInfo(soul.name);
 	})
@@ -71,7 +83,10 @@ function appendSoul(soul, c, $parent) {
 }
 
 function appendSoulNew(soul, c, $parent) {
-	// 			<div class="${artifact.name} PrettyCards_CollectionNew_SoultifactRarity"></div>
+	var image_src = c.soulImagePrefix + soul.image + ".png";
+	if (utility.getSeasonMonth() == 3 && soul.aprilImage) {
+		image_src = c.aprilSoulImagePrefix + soul.aprilImage + ".png";
+	}
 	var s = $(`
 	<div class="PrettyCards_CollectionNew_Soultifact">
 		<div id="PrettyCards_CollectionNew_SoultifactImageContainer"></div>
@@ -80,7 +95,7 @@ function appendSoulNew(soul, c, $parent) {
 			<div>${window.$.i18n("soul-" + soul.name.toLowerCase() + "-desc")}</div>
 		</div>
 	<div>`);
-	s.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(c.soulImagePrefix + soul.image + ".png", "PrettyCards_CollectionNew_SoultifactImage PrettyCards_DisplaySoul_" + soul.name, "", ""));
+	s.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image_src, "PrettyCards_CollectionNew_SoultifactImage PrettyCards_DisplaySoul_" + soul.name, "", ""));
 	s.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.soulInfo(soul.name);
 	})

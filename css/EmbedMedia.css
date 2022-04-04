@@ -1,0 +1,43 @@
+
+/*
+#PrettyCards_Media_Back {
+    position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 149;
+	opacity: 0.5;
+	background-color: black;
+}
+*/
+
+#PrettyCards_Media_Content {
+    position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 150;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#PrettyCards_Media_ContentTopRow {
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: space-between;
+	height: calc(100% - 3em);
+	width: 100%;
+}
+
+#PrettyCards_Media_ItemDisplay {
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: center;
+}
+
+#PrettyCards_Media_ContentBottomRow {
+	height: 3em;
+	width: 100%;
+}

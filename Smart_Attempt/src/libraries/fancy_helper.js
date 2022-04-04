@@ -9,6 +9,8 @@ import { createFloatingSoul } from "./floating_souls";
 
 const disabledText = "<span class='gray'>(Disabled)</span>";
 
+
+
 class FancyListDisplay {
 	
 	constructor(datas) {
