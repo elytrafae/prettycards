@@ -143,16 +143,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
-		image: "Triggers_Of_Lunacy",
-		cost: 17,
-		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
-		extension: "BASE",
-		rarity: "EPIC"
-	});
-
-	c.newCard({
-		soul: soul,
 		name: "{{PLURAL:$1|Mew Mew's Special|Mew Mew's Specials}}",
 		image: "Mew_Mew_Special",
 		cost: 2,
@@ -160,6 +150,55 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		extension: "BASE",
 		rarity: "EPIC"
 	});
+
+	var food_fight = c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Food Fight|Food Fights}}",
+		image: "Food_Fight",
+		cost: 6,
+		loop: 1,
+		description: "",
+		extension: "BASE",
+		rarity: "EPIC"
+	});
+
+	food_fight.setDescription(`{{KW:LOOP}} (1). Summon a {{CARD:431}}, send the copy to the top of the enemy's deck with -1 {{cost}} and draw a card.`);
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
+		image: "Triggers_Of_Lunacy",
+		cost: 17,
+		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
+		extension: "DELTARUNE",
+		rarity: "EPIC"
+	});
+
+	/*
+	var sleep_mist = c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Sleep Mist|Sleep Mists}}",
+		image: "Sleep_Mist",
+		cost: 0,
+		description: "",
+		extension: "DELTARUNE",
+		rarity: "EPIC"
+	});
+
+	sleep_mist.setDescription(`{{KW:PARALYZE}} an enemy monster. If this isnt {{KW:GENERATED}} by ${sleep_mist.me()}, add one to your opponent’s hand and draw a card.`);
+	*/
+
+	/*
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Cakesplosion|Cakesplosions}}",
+		image: "Cakesplosion",
+		cost: 7,
+		description: "Summon a 10/10/10 {{CARD:306}} with {{KW:HASTE}}. {{KW:DELAY}}: If it didn't attack, kill it to give yourself +8 {{HP}} and give all other ally monsters +2/+2 and {{KW:TAUNT}}.",
+		extension: "DELTARUNE",
+		rarity: "EPIC"
+	});
+	*/
 
 	c.newCard({
 		soul: soul,

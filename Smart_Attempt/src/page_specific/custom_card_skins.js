@@ -398,10 +398,11 @@ function InitCustomCardSkins() {
 		window.$("title").html("PrettyCards - Custom Card Skins");
 		utility.loadCSSFromGH("CustomCardSkins");
 		window.$(".mainContent").html(`
-			<div id="PrettyCards_CardSkinsTab" style="font-size: 2em; margin-bottom: 1em;">
+			<div id="PrettyCards_CardSkinsTab" style="font-size: 2em; margin-bottom: 0.1em;">
 				<button id="PrettyCards_CreateCustomCardSkinButton" class="brn btn-success">Create New</button>
 				<button id="PrettyCards_DeleteCustomCardSkinButton" class="brn btn-danger">Delete</button>
 			</div>
+			<div class="gray" style="margin-bottom: 1em;">NOTE: These card skins cannot be used on cards themselves, but they can be used for deck images in my custom deck system.</div>
 			<div id="PrettyCards_CardListContainer"></div>
 		`);
 		

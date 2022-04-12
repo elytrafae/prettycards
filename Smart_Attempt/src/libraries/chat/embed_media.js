@@ -28,7 +28,7 @@ import { prettycards, PrettyCards_plugin } from "../underscript_checker";
 //      ]
 //  }
 */
-prettycards.displayMediaGallery = function(data) {
+prettycards.displayMediaGallery = function(data = {items:[], original_url: ""}) {
 	var items = data.items;
 	var container = $(`
 		<div id="PrettyCards_Media_Content">
@@ -37,9 +37,12 @@ prettycards.displayMediaGallery = function(data) {
 				<div id="PrettyCards_Media_ItemDisplay"></div>
 				${items.length > 1 ? `<div class="PrettyCards_Media_ContentNavArrow"></div>` : ""}
 			</div>
-			<div id="PrettyCards_Media_ContentBottomRow"></div>
+			${(data.original_url && data.original_url.length > 0) ? `<div id="PrettyCards_Media_ContentBottomRow">Original Link: <a href="${data.original_url}">${data.original_url}</a></div>` : ""}
 		</div>
 	`);
+
+
+
 	$("body").append(container);
 }
 
