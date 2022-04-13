@@ -151,6 +151,16 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "EPIC"
 	});
 
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
+		image: "Triggers_Of_Lunacy",
+		cost: 17,
+		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
+		extension: "UNDERTALE",
+		rarity: "EPIC"
+	});
+
 	var food_fight = c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Food Fight|Food Fights}}",
@@ -158,21 +168,12 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		loop: 1,
 		description: "",
-		extension: "BASE",
+		extension: "DELTARUNE",
 		rarity: "EPIC"
 	});
 
 	food_fight.setDescription(`{{KW:LOOP}} (1). Summon a {{CARD:431}}, send the copy to the top of the enemy's deck with -1 {{cost}} and draw a card.`);
 
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
-		image: "Triggers_Of_Lunacy",
-		cost: 17,
-		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
-		extension: "DELTARUNE",
-		rarity: "EPIC"
-	});
 
 	/*
 	var sleep_mist = c.newCard({
