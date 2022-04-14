@@ -30,7 +30,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Spellbook|Spellbooks}}",
 		image: "Spellbook",
 		cost: 0,
-		description: `Look at 3 random ${soul.me()} spells (rarity <= {{RARITY:EPIC}}). Choose one to add to your hand. If your opponent has more monsters on the board than you, give it -1 {{cost}}.`,
+		description: `Look at 3 random ${soul.me()} spells (rarity <= {{RARITY:RARE}}). Add one to your hand. If your opponent has more monsters than you, give it -1 {{cost}}.`,
 		extension: "BASE",
 		rarity: "TOKEN"
 	});
@@ -52,7 +52,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Sacrificial Lamb|Sacrificial Lambs}}",
 		image: "Sacrificial_Lamb",
 		cost: 5,
-		description: "Burn a random {{KW:GENERATED}} spell in your hand to kill an enemy monster.",
+		description: "Burn the most expensive {{KW:GENERATED}} spell in your hand to kill an enemy monster.",
 		extension: "BASE",
 		rarity: "COMMON"
 	});
@@ -61,8 +61,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Sabotage|Sabotages}}",
 		image: "Sabotage",
-		cost: 2,
-		description: "Add 2 copies of the enemy's soul's {{RARITY:BASE}} spell to your hand.",
+		cost: 1,
+		description: "Look at 3 random different {{RARITY:BASE}} spells. Choose one. Add the other two to your hand.",
 		extension: "BASE",
 		rarity: "COMMON"
 	});
@@ -135,18 +135,30 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Breeze of Freedom|Breezes of Freedom}}",
 		image: "Breeze_Of_Freedom",
-		cost: 3,
-		description: "Add a random {{TRIBE:CHAOS_WEAPON}} to your hand. Set its {{cost}} to 1.",
+		cost: 0,
+		description: "Cast a {{TRIBE:BARGAIN}} of your choice to add a 0-{{cost}} {{CARD:586}} to your hand.",
 		extension: "DELTARUNE",
 		rarity: "RARE"
 	});
 
+	/*
 	c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Mew Mew's Special|Mew Mew's Specials}}",
 		image: "Mew_Mew_Special",
 		cost: 2,
 		description: "Select a non-{{RARITY:DETERMINATION}} monster in your hand. {{KW:DELAY}}: Add a copy of it to your hand.",
+		extension: "BASE",
+		rarity: "EPIC"
+	});
+	*/
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Evolutionary Leap|Evolutionary Leaps}}",
+		image: "Mew_Mew_Special",
+		cost: 1,
+		description: `Transform a monster in your hand into a random monster with 1 more base {{cost}} and give it -1 {{cost}}. It keeps its buffs.`,
 		extension: "BASE",
 		rarity: "EPIC"
 	});
@@ -157,10 +169,21 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		image: "Triggers_Of_Lunacy",
 		cost: 17,
 		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
-		extension: "UNDERTALE",
+		extension: "BASE",
 		rarity: "EPIC"
 	});
 
+	var food_fight = c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Food Fight|Food Fights}}",
+		image: "Food_Fight",
+		cost: 6,
+		description: `Summon a {{CARD:431}}. Shuffle 6 {{CARD:596}} into the top 10 cards of the enemy's deck.`,
+		extension: "DELTARUNE",
+		rarity: "EPIC"
+	});
+
+	/*
 	var food_fight = c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Food Fight|Food Fights}}",
@@ -173,6 +196,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	});
 
 	food_fight.setDescription(`{{KW:LOOP}} (1). Summon a {{CARD:431}}, send the copy to the top of the enemy's deck with -1 {{cost}} and draw a card.`);
+	*/
 
 
 	/*
@@ -206,7 +230,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Royal Switch|Royal Switches}}",
 		image: "Royal_Switch",
 		cost: 4,
-		description: "Give all ally monsters +1/+1 for every 6 {{KW:GENERATED}} spells you've casted this game.",
+		// description: "Give all ally monsters +1/+1 for every 6 {{KW:GENERATED}} spells you've casted this game.",
+		description: `Send your hand to the top of your deck and fill your hand with -1 {{cost}} ${soul.me()} spells from highest to lowest rarity.`,
 		extension: "BASE",
 		tribes: ["ROYAL_INVENTION"],
 		rarity: "TOKEN"

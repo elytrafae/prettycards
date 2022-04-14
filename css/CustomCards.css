@@ -65,7 +65,7 @@
 }
 
 .cardName.SWITCH div,.SWITCH {
-	background: linear-gradient(to right, #ff0000 50%, #42FCFF 50%);
+	background: linear-gradient(to right, #42FCFF 50%, #FF0000 50%);
 	text-shadow: none;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -185,6 +185,7 @@
 
 .PrettyCards_CollectionNew_SoultifactName {
 	font-size: 2.5em;
+	width: fit-content;
 }
 
 .PrettyCards_CollectionNew_SoultifactRarity {
