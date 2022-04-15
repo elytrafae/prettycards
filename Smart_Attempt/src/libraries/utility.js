@@ -19,6 +19,10 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
 	}
 });
 
+var season_number = 69;
+
+/*
+
 var season_number = -1;
 const seasonKeyStart = "quest-s";
 const seasonKeyEnd = "-start-1";
@@ -26,14 +30,14 @@ const seasonKeyEnd = "-start-1";
 PrettyCards_plugin.events.on("translation:loaded", function(data) {
 	var messages = $.i18n.messageStore.messages.en;
 	var list = Object.keys(messages);
-	/*
-    for (var key in messages) {
-        if (key.startsWith(seasonKeyStart) && key.endsWith(seasonKeyEnd)) {
-			var portion = key.substring(seasonKeyStart.length, key.length-seasonKeyEnd.length);
-            season_number = Math.max(season_number, Number(portion));
-        }
-    }
-	*/
+	
+    //for (var key in messages) {
+    //    if (key.startsWith(seasonKeyStart) && key.endsWith(seasonKeyEnd)) {
+	//		var portion = key.substring(seasonKeyStart.length, key.length-seasonKeyEnd.length);
+    //        season_number = Math.max(season_number, Number(portion));
+    //    }
+    //}
+
 	for (var i=list.length-1; i >= 0; i--) {
 		var key = list[i];
 		if (key.startsWith(seasonKeyStart) && key.endsWith(seasonKeyEnd)) {
@@ -44,7 +48,7 @@ PrettyCards_plugin.events.on("translation:loaded", function(data) {
 	}
 	PrettyCards_plugin.events.emit.singleton("PrettyCards:seasonNumber", season_number);
 })
-
+*/
 
 if (String.prototype.splice === undefined) {
 	/**

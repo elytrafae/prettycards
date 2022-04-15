@@ -72,7 +72,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Chaotic Powers|Chaotic Powers}}",
 		image: "Chaotic_Powers",
 		cost: 4,
-		description: "Add 3 random other spells ({{cost}} <= 4) to your hand which you didn't cast this game.",
+		description: "Add 3 random other spells ({{cost}} <= 4) to your hand which you didn't cast this game with -1 {{cost}}.",
 		extension: "DELTARUNE",
 		rarity: "COMMON"
 	});
@@ -83,16 +83,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		image: "Even_Necromancy",
 		cost: 3,
 		description: "For ever 3 different spells you've cast this game, burn a random monster in your dustpile and add it to your hand (max: 3).",
-		extension: "BASE",
-		rarity: "RARE"
-	});
-
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Slice of Temptation|Slices of Temptation}}",
-		image: "An_Honest_Heal",
-		cost: 2,
-		description: "Both players draw a card. If their hand is already full, deal fatigue {{DMG}} to them twice instead.",
 		extension: "BASE",
 		rarity: "RARE"
 	});
@@ -123,10 +113,20 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Power Drain|Power Drains}}",
-		image: "Power_Drain",
-		cost: 3,
-		description: "Burn all the spells in your hand. {{KW:DELAY}}: Add exact copies of them back to your hand and give them -2 {{cost}}.",
+		name: "{{PLURAL:$1|Evolutionary Leap|Evolutionary Leaps}}",
+		image: "Mew_Mew_Special",
+		cost: 2,
+		description: `Turn a monster in your hand into a random monster with +1 base {{cost}}, then give it -1 {{cost}} (keep base buffs). Draw a card.`,
+		extension: "BASE",
+		rarity: "RARE"
+	});
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Hysteria|Hysterias}}",
+		image: "Evolutionary_Leap",
+		cost: 1,
+		description: `Burn the 2 cheapest {{KW:GENERATED}} spells in your hand to draw 2 cards. Reduce their {{cost}} by the average of the burned cards' costs.`,
 		extension: "BASE",
 		rarity: "RARE"
 	});
@@ -155,10 +155,10 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	c.newCard({
 		soul: soul,
-		name: "{{PLURAL:$1|Evolutionary Leap|Evolutionary Leaps}}",
-		image: "Mew_Mew_Special",
-		cost: 1,
-		description: `Transform a monster in your hand into a random monster with 1 more base {{cost}} and give it -1 {{cost}}. It keeps its buffs.`,
+		name: "{{PLURAL:$1|Power Drain|Power Drains}}",
+		image: "Power_Drain",
+		cost: 3,
+		description: `Set a monster’s {{ATK}} and {{HP}} to the {{ATK}} and {{HP}} of the monster in front of it. If it has {{KW:CHARGE}}, replace it with {{KW:HASTE}}.`,
 		extension: "BASE",
 		rarity: "EPIC"
 	});
@@ -167,7 +167,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
 		image: "Triggers_Of_Lunacy",
-		cost: 17,
+		cost: 16,
 		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
 		extension: "BASE",
 		rarity: "EPIC"
@@ -177,8 +177,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Food Fight|Food Fights}}",
 		image: "Food_Fight",
-		cost: 6,
-		description: `Summon a {{CARD:431}}. Shuffle 6 {{CARD:596}} into the top 10 cards of the enemy's deck.`,
+		cost: 7,
+		description: `Summon a {{CARD:431}}. Shuffle 5 {{CARD:596|2}} into the top 10 cards of the enemy's deck.`,
 		extension: "DELTARUNE",
 		rarity: "EPIC"
 	});
@@ -231,7 +231,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		image: "Royal_Switch",
 		cost: 4,
 		// description: "Give all ally monsters +1/+1 for every 6 {{KW:GENERATED}} spells you've casted this game.",
-		description: `Send your hand to the top of your deck and fill your hand with -1 {{cost}} ${soul.me()} spells from highest to lowest rarity.`,
+		description: `Send your hand to the top of your deck and fill your hand with -1 {{cost}} non-{{RARITY:TOKEN}} ${soul.me()} spells from highest to lowest rarity.`,
 		extension: "BASE",
 		tribes: ["ROYAL_INVENTION"],
 		rarity: "TOKEN"
