@@ -30,7 +30,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Spellbook|Spellbooks}}",
 		image: "Spellbook",
 		cost: 0,
-		description: `Look at 3 random ${soul.me()} spells (rarity <= {{RARITY:RARE}}). Add one to your hand. If your opponent has more monsters than you, give it -1 {{cost}}.`,
+		description: `Look at 3 random ${soul.me()} spells (<= {{RARITY:RARE}}). Add one to your hand. If your opponent has more monsters than you, give it -1 {{cost}}.`,
 		extension: "BASE",
 		rarity: "TOKEN"
 	});
@@ -114,7 +114,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Evolutionary Leap|Evolutionary Leaps}}",
-		image: "Mew_Mew_Special",
+		image: "Evolutionary_Leap",
 		cost: 2,
 		description: `Turn a monster in your hand into a random monster with +1 base {{cost}}, then give it -1 {{cost}} (keep base buffs). Draw a card.`,
 		extension: "BASE",
@@ -124,9 +124,9 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Hysteria|Hysterias}}",
-		image: "Evolutionary_Leap",
+		image: "Mew_Mew_Special",
 		cost: 1,
-		description: `Burn the 2 cheapest {{KW:GENERATED}} spells in your hand to draw 2 cards. Reduce their {{cost}} by the average of the burned cards' costs.`,
+		description: `Burn the 2 cheapest {{KW:GENERATED}} cards in your hand to draw 2 cards. Reduce their {{cost}} by the average of the burned cards' costs.`,
 		extension: "BASE",
 		rarity: "RARE"
 	});
@@ -135,8 +135,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Breeze of Freedom|Breezes of Freedom}}",
 		image: "Breeze_Of_Freedom",
-		cost: 0,
-		description: "Cast a {{TRIBE:BARGAIN}} of your choice to add a 0-{{cost}} {{CARD:586}} to your hand.",
+		cost: 2,
+		description: "Deal 1 {{DMG}} to all enemies and heal 1 {{HP}} to you for each {{DMG}} dealt.",
 		extension: "DELTARUNE",
 		rarity: "RARE"
 	});
@@ -167,7 +167,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		soul: soul,
 		name: "{{PLURAL:$1|Triggers of Lunacy|Triggers of Lunacy}}",
 		image: "Triggers_Of_Lunacy",
-		cost: 16,
+		cost: 15,
 		description: "In hand, this has -1 {{cost}} for each unique {{KW:GENERATED}} card you played this game. Deal 7 {{DMG}} to all enemy monsters.",
 		extension: "BASE",
 		rarity: "EPIC"

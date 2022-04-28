@@ -148,8 +148,7 @@ function InitPacks() {
 	
 	//PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	
-	if (/*settings.debug_mode.value*/ false) {
+	/*
 		console.log("DEBUG mode activated!")
 		var test_container = document.createElement("DIV");
 		test_container.id = "PrettyCards_PacksDebug";
@@ -176,9 +175,7 @@ function InitPacks() {
 		test_container.appendChild(test_button3);
 		
 		document.querySelector(".mainContent").appendChild(test_container);
-		
-		//setTimeout( function() {StartOpenPackAnimation(packs_data2.Pack);}, 1000);
-	}
+	*/
 	
 }
 
