@@ -26,6 +26,8 @@ class PackOpenAnimationTemplate {
 		this.AnalyzeCards(card_data); // refreshes and initializes this.cards
 		this.flipCards = [];
 		this.current_click = 0;
+		this.cardsSpawned = false;
+		this.glideTimeouts = [];
 		var cont = $("#PrettyCards_PackOpenContent");
 		cont.css("display", "block");
 		
@@ -35,14 +37,14 @@ class PackOpenAnimationTemplate {
 		$(".PrettyCards_AnimationPack").animate({top: (moveto_y + "px"), left: (moveto_x + "px")}, 1000, "swing", this.OnPackMoveFinish.bind(this));
 
 		if (this.hasSkipButton) {
-			var button = $(`<button class="btn btn-primary PrettyCards_PacksSkipButton">Skip!</button>`);
-			cont.append(button);
-			button.click(function(e) {
+			this.button = $(`<button class="btn btn-primary PrettyCards_PacksSkipButton">Skip!</button>`);
+			cont.append(this.button);
+			this.button.click(function(e) {
 				e.stopPropagation();
 				//button.unbind("click");
-				button.remove();
-				onSkipButtonPressed(e);
-			});
+				this.button.remove();
+				this.onSkipButtonPressed(e);
+			}.bind(this));
 		}
 	}
 	
@@ -84,8 +86,14 @@ class PackOpenAnimationTemplate {
 		const glide_callback = this.OnCardFinishedGliding.bind(this);
 		for (var i=0; i < this.flipCards.length; i++) {
 			const flipcard = this.flipCards[i];
-			setTimeout(function() {flipcard.glideTo(200, window.innerHeight/2, 500, glide_callback)}, (i+1)*time_between_glides);
+			this.glideTimeouts.push(setTimeout(function() {flipcard.glideTo(200, window.innerHeight/2, 500, glide_callback)}, (i+1)*time_between_glides));
 		}
+	}
+
+	cancelGlideTimeouts() {
+		this.glideTimeouts.forEach(function(e) {
+			clearTimeout(e);
+		})
 	}
 	
 	OnCardFinishedGliding() {
@@ -133,6 +141,9 @@ class PackOpenAnimationTemplate {
 	}
 	
 	OnCardSummary() {
+		if (this.button) {
+			this.button.remove();
+		}
 		const self = this;
 		const container = document.createElement("DIV");
 		container.className = "PrettyCards_CardSummary";
@@ -268,6 +279,7 @@ class PackOpenAnimationTemplate {
 	}
 	
 	SpawnCards() {
+		this.cardsSpawned = true;
 		for (var i=this.cards.length-1; i >= 0; i--) {
 			var flipcard = new FlippableCard(this.cards[i], false);
 			flipcard.appendTo(document.getElementById("PrettyCards_PackOpenContent"));

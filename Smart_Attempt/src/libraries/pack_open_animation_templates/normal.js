@@ -10,7 +10,18 @@ class NormalPackOpenAnimationTemplate extends PackOpenAnimationTemplate {
 		this.hasSkipButton = true;
 	}
 	
-	
+	onSkipButtonPressed(e) {
+		$(".PrettyCards_AnimationPack").stop().remove();
+		if (this.up) {
+			this.up.remove();
+			this.down.remove();
+		}
+		if (!this.cardsSpawned) {
+			this.SpawnCards();
+		}
+		this.cancelGlideTimeouts();
+		this.OnCardViewFinish();
+	}
 	
 }
 
