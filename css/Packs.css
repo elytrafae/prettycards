@@ -201,6 +201,13 @@
 	background-position: center;
 }
 
+.PrettyCards_PacksSkipButton {
+	position: absolute;
+	bottom: 0.5em;
+	right: 0.5em;
+	font-size: 4em;
+}
+
 .PrettyCards_RippedPack_Up {
 	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_HorizontalRip_Top.svg);
 	-webkit-mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_HorizontalRip_Top.svg);

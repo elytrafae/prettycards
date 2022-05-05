@@ -3,7 +3,6 @@ import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {utility} from "/src/libraries/utility.js";
 import {rarityIconsHTML, rarities} from "./../rarity_icons.js";
 import {FlippableCard} from "/src/libraries/flippable_card.js";
-//import $ from "/src/third_party/jquery-2.2.4.min.js";
 
 class PackOpenAnimationTemplate {
 	
@@ -16,6 +15,7 @@ class PackOpenAnimationTemplate {
 		this.flipCards = [];
 		this.displayName = "Base";
 		this.description = "You shouldn't be able to see this!";
+		this.hasSkipButton = false;
 		this.audio = new Audio();
 	}
 	
@@ -26,12 +26,24 @@ class PackOpenAnimationTemplate {
 		this.AnalyzeCards(card_data); // refreshes and initializes this.cards
 		this.flipCards = [];
 		this.current_click = 0;
-		$("#PrettyCards_PackOpenContent").css("display", "block");
+		var cont = $("#PrettyCards_PackOpenContent");
+		cont.css("display", "block");
 		
-		$("#PrettyCards_PackOpenContent").css("backgroundColor", 'rgba(0,0,0,0)');
+		cont.css("backgroundColor", 'rgba(0,0,0,0)');
 		window.$("#PrettyCards_PackOpenContent").animate({backgroundColor: 'rgba(0,0,0,1)'}, 1000, "swing", function() {}); // This is because the page has Jquery UI installed, something I am personally too lazy to do :P
 		
 		$(".PrettyCards_AnimationPack").animate({top: (moveto_y + "px"), left: (moveto_x + "px")}, 1000, "swing", this.OnPackMoveFinish.bind(this));
+
+		if (this.hasSkipButton) {
+			var button = $(`<button class="btn btn-primary PrettyCards_PacksSkipButton">Skip!</button>`);
+			cont.append(button);
+			button.click(function(e) {
+				e.stopPropagation();
+				//button.unbind("click");
+				button.remove();
+				onSkipButtonPressed(e);
+			});
+		}
 	}
 	
 	OnPackMoveFinish() {
@@ -263,6 +275,10 @@ class PackOpenAnimationTemplate {
 			this.flipCards.unshift(flipcard);
 		}
 		//console.log("flipCards initialized! ", this.flipCards);
+	}
+
+	onSkipButtonPressed(event) {
+		// An event that is fired whenever the skip button is pressed.
 	}
 	
 }

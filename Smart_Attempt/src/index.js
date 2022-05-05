@@ -3,7 +3,7 @@ import {} from "./libraries/jquery_additions.js";
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {} from "/src/libraries/custom_page_base.js";
-import {} from "/src/libraries/updater.js";
+//import {} from "/src/libraries/updater.js";
 
 // The Event ensurer MUST be required AFTER underscript stuff, but BEFORE anything else that might require it!
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
@@ -47,7 +47,7 @@ import {InitCustomCards} from "/src/page_specific/custom_cards.js";
 import {InitFriendship} from "/src/page_specific/friendship.js";
 import {InitSmashOrPass} from "/src/page_specific/smash_or_pass.js";
 
-import {} from "/src/libraries/april_fools_downloader.js";
+//import {} from "/src/libraries/april_fools_downloader.js"; // Keeping this here for next year!
 
 if (settings.packs.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);

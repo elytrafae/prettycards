@@ -7,6 +7,7 @@ class NormalPackOpenAnimationTemplate extends PackOpenAnimationTemplate {
 		super();
 		this.displayName = "Default";
 		this.description = "The default pack open animation. It is very much similar to the one in the previous version.";
+		this.hasSkipButton = true;
 	}
 	
 	

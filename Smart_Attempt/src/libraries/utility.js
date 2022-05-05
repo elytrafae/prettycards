@@ -19,9 +19,6 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
 	}
 });
 
-var season_number = 69;
-
-/*
 
 var season_number = -1;
 const seasonKeyStart = "quest-s";
@@ -48,7 +45,7 @@ PrettyCards_plugin.events.on("translation:loaded", function(data) {
 	}
 	PrettyCards_plugin.events.emit.singleton("PrettyCards:seasonNumber", season_number);
 })
-*/
+
 
 if (String.prototype.splice === undefined) {
 	/**
