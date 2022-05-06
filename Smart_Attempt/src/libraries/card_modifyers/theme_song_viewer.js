@@ -61,7 +61,7 @@ function createComplexButton(settings) {
 	});
 	var button = $(`
 	<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="event.stopPropagation();">
-		<span class="PrettyCards_TransparentText">SPACE</span>
+		<span class="PrettyCards_TransparentText">S</span>
 		<span class="PrettyCards_CardThemeSongList">
 			${options}
 		</span>
