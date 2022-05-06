@@ -402,37 +402,40 @@ function InitDecks() {
 	
 	SilenceDeckFunctions();
 	
-	var oldDeckButtons = $(".btn-storage").first().parent(); //document.querySelector(".btn-storage").parentElement;
-	oldDeckButtons.css("display", "none");
-	document.getElementById("selectSouls").style.display = "none";
+	ExecuteWhen("PrettyCards:onPageLoad", function() {
+		var oldDeckButtons = $(".btn-storage").first().parent(); //document.querySelector(".btn-storage").parentElement;
+		oldDeckButtons.css("display", "none");
+		document.getElementById("selectSouls").style.display = "none";
+		
+		var newDeckButtons = $("<div style='margin-bottom: 5px;' class='PrettyCards_DeckButtons'></div>");
+		//document.querySelector("#yourCardList").insertBefore(newDeckButtons, oldDeckButtons);
+		newDeckButtons.insertBefore(oldDeckButtons);
+		
+		/*
+		newDeckButtons.appendChild(deckName);
+		//deckName.style = "text-align: center";
+		deckName.value = "Placeholder Deck";
+		deckName.className = "form-control";
+		//deckName.setAttribute("type", "text");
+		deckName.style = "background: rgba(0,0,0,.5);";
+		deckName.placeholder = "Deck Name";
+		$(deckName).keyup(ChangeDeckName.bind(this));
+		*/
+		
+		var changeDeckButton = document.createElement("BUTTON");
+		newDeckButtons.append(changeDeckButton);
+		changeDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
+		changeDeckButton.className = "btn btn-primary";
+		changeDeckButton.innerHTML = "Change<br>Deck";
+		changeDeckButton.onclick = ChangeDeckScreen.bind(this);
+		
+		newDeckButtons.append(editDeckButton);
+		editDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
+		editDeckButton.className = "btn btn-primary";
+		editDeckButton.innerHTML = "Edit<br>Deck";
+		editDeckButton.onclick = EditDeckScreen.bind(this);
+	});
 	
-	var newDeckButtons = $("<div style='margin-bottom: 5px;' class='PrettyCards_DeckButtons'></div>");
-	//document.querySelector("#yourCardList").insertBefore(newDeckButtons, oldDeckButtons);
-	newDeckButtons.insertBefore(oldDeckButtons);
-	
-	/*
-	newDeckButtons.appendChild(deckName);
-	//deckName.style = "text-align: center";
-	deckName.value = "Placeholder Deck";
-	deckName.className = "form-control";
-	//deckName.setAttribute("type", "text");
-	deckName.style = "background: rgba(0,0,0,.5);";
-	deckName.placeholder = "Deck Name";
-	$(deckName).keyup(ChangeDeckName.bind(this));
-	*/
-	
-	var changeDeckButton = document.createElement("BUTTON");
-	newDeckButtons.append(changeDeckButton);
-	changeDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
-	changeDeckButton.className = "btn btn-primary";
-	changeDeckButton.innerHTML = "Change<br>Deck";
-	changeDeckButton.onclick = ChangeDeckScreen.bind(this);
-	
-	newDeckButtons.append(editDeckButton);
-	editDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
-	editDeckButton.className = "btn btn-primary";
-	editDeckButton.innerHTML = "Edit<br>Deck";
-	editDeckButton.onclick = EditDeckScreen.bind(this);
 }
 
 export {InitDecks};

@@ -28,6 +28,7 @@ var menu_data = {
 		"header-packs ({packs})" : "Packs",
 		"header-artifacts": "Artifacts",
 		"header-card-skins": "CardSkinsShop",
+		"header-your-shop": '/CardSkinsShop?&discount',
 		"header-cosmetics": "CosmeticsShop",
 		"item-ucp": "Shop"
 	},
