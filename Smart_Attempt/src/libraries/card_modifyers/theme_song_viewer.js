@@ -83,15 +83,17 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 		}
 		
 		if (doesCardHaveTheme) {
-			var button;
-			var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
-			if (themeSongSettings) {
-				button = createComplexButton(themeSongSettings);
-			} else {
-				button = createSimpleButton(card);
-			}
-			
-			html$.append(button);
+			PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
+				var button;
+				var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
+				if (themeSongSettings) {
+					button = createComplexButton(themeSongSettings);
+				} else {
+					button = createSimpleButton(card);
+				}
+				
+				html$.append(button);
+			})
 		}
 	});
 	

@@ -81,11 +81,11 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady", function() {
             for (var i=1; i <= baseThemeSongData[key]; i++) {
                 s.addFile(`https://github.com/CMD-God/prettycards/raw/master/audio/cards/${card.name.replaceAll(" ", "_")}/intro_${i}.ogg`);
             }
-        } else {
-            console.warn(key, " does NOT have a card?");
         }
     }
-    console.log(options);
+    PrettyCards_plugin.events.emit.singleton("PrettyCards:customCardsSongsAppend");
+    PrettyCards_plugin.events.emit.singleton("PrettyCards:themeSongsReady");
+    //console.log(options);
 });
 
 var originalAudio;
