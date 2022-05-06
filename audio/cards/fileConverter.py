@@ -7,6 +7,7 @@ data = {}
 for file in glob.glob("input/*.ogg"):
     # print(file)
     folderName = file[6:-5:1]
+    cardName = folderName.replace("_", " ")
     number = file[-5:-4:1]
     if (not os.path.isdir(folderName)):
         os.mkdir(folderName)
@@ -15,10 +16,10 @@ for file in glob.glob("input/*.ogg"):
     for line in fin:
         fout.write(line)
 
-    if (folderName in data):
-        data[folderName] = max(data[folderName], int(number))
+    if (cardName in data):
+        data[cardName] = max(data[cardName], int(number))
     else:
-        data[folderName] = int(number)
+        data[cardName] = int(number)
 
 stringData = json.dumps(data)
 print(stringData)
