@@ -100,10 +100,17 @@
 	background-color: rgb(230, 230, 230);
 	font-family: DTM-Mono;
 	display: none;
+	position: absolute;
+    width: 120px;
+	z-index: 10;
+}
+
+.PrettyCards_CardThemeSongList .btn {
+	margin: 1px;
 }
 
 .PrettyCards_CardThemeSongPlayer:hover .PrettyCards_CardThemeSongList,.PrettyCards_CardThemeSongList:hover {
-	display: block;
+	display: inline;
 }
 
 #PrettyCards_CustomCardCategories {
