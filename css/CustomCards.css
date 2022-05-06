@@ -101,7 +101,8 @@
 	font-family: DTM-Mono;
 	display: none;
 	position: absolute;
-    width: 116px;
+    max-width: 116px;
+	width: max-content;
 	top: 0;
     left: 32px;
 }
