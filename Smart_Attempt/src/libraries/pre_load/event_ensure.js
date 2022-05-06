@@ -1,7 +1,17 @@
 
 // This is a script that should help with calling things AFTER certain one-time events have been fired.
 
-var eventsToListenFor = ["PrettyCards:onLoad", "PrettyCards:onPageLoad","SoulSelector:decksLoaded", "Chat:Connected", "PrettyCards:onArtifacts", "translation:loaded", "PC_Chat:getSelfInfos"];
+var eventsToListenFor = [
+	"PrettyCards:onLoad", 
+	"PrettyCards:onPageLoad",
+	"SoulSelector:decksLoaded", 
+	"Chat:Connected", 
+	"PrettyCards:onArtifacts", 
+	"translation:loaded", 
+	"PC_Chat:getSelfInfos",
+	"allCardsReady",
+	"PrettyCards:baseThemeSongDataReady"
+];
 var eventsFired = {};
 var eventsData = {};
 
