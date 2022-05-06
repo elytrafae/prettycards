@@ -87,8 +87,8 @@
 	position: absolute;
 	top: 40px;
 	left: 14px;
-	z-index: 7;
 	cursor: pointer;
+	z-index: 10;
 }
 
 .glyphicon.PrettyCards_CardThemeSongPlayer:hover {
@@ -97,12 +97,13 @@
 
 .PrettyCards_CardThemeSongList {
 	line-height: normal;
-	background-color: rgb(230, 230, 230);
+	background-color: rgb(230, 230, 230, 0.7);
 	font-family: DTM-Mono;
 	display: none;
 	position: absolute;
-    width: 120px;
-	z-index: 10;
+    width: 116px;
+	top: 0;
+    left: 32px;
 }
 
 .PrettyCards_CardThemeSongList .btn {
