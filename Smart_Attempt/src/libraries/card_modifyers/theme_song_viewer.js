@@ -5,6 +5,7 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
 import { prettycards } from "../underscript_checker";
+import {getThemeSongSettingByCardId} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 
 settings.theme_song_preview = PrettyCards_plugin.settings().add({
 	'key': 'theme_song_preview',
@@ -30,6 +31,43 @@ window.prettycards.playThemeSongPreviewEvent = function(SRC, e) {
 	e.stopPropagation();
 }
 
+function createSimpleButton(card) {
+	var collection = card.collection;
+	if (typeof(collection) == "number") {
+		collection = collections[collection];
+		card.collection = collection;
+	}
+
+	var _SRC = "";
+	if (card.isCustom) {
+		_SRC = collection.cardSongPrefix + card.name.split(' ').join('_') + '.ogg';
+		//console.log(card, card.id, $.i18n('card-name-' + card.id, 1), _SRC);
+	} else {
+		if (card.id in cardExceptions) {
+			_SRC = cardExceptions[card.id];
+		} else {
+			_SRC = "/musics/cards/" + card.name.split(' ').join('_') + ".ogg";
+		}
+	}
+	const SRC = _SRC;
+	var button = $('<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="prettycards.playThemeSongPreviewEvent(\'' + SRC + '\', event)"></span>');
+	return button;
+}
+
+function createComplexButton(settings) {
+	var options = "";
+	settings.replacements.forEach( (url, i) => {
+		options = `${options}<button class="btn btn-primary">${i}</button>`
+	});
+	var button = $(`
+	<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer">
+		<span class="PrettyCards_CardThemeSongList">
+			${options}
+		</span>
+	</span>`);
+	return button;
+} 
+
 if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 
 	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
@@ -44,24 +82,13 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 		}
 		
 		if (doesCardHaveTheme) {
-			var collection = card.collection;
-			if (typeof(collection) == "number") {
-				collection = collections[collection];
-				card.collection = collection;
-			}
-			var _SRC = "";
-			if (collection) {
-				_SRC = collection.cardSongPrefix + card.name.split(' ').join('_') + '.ogg';
-				//console.log(card, card.id, $.i18n('card-name-' + card.id, 1), _SRC);
+			var button;
+			var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
+			if (themeSongSettings) {
+				button = createComplexButton(themeSongSettings);
 			} else {
-				if (card.id in cardExceptions) {
-					_SRC = cardExceptions[card.id];
-				} else {
-					_SRC = "/musics/cards/" + card.name.split(' ').join('_') + ".ogg";
-				}
+				button = createSimpleButton(card);
 			}
-			const SRC = _SRC;
-			var button = $('<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="prettycards.playThemeSongPreviewEvent(\'' + SRC + '\', event)"></span>');
 			
 			html$.append(button);
 		}

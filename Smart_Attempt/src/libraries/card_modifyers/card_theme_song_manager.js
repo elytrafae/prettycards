@@ -78,7 +78,7 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady", function() {
             }
         }
     }
-    console.log(options);
+    //console.log(options);
 });
 
 var originalAudio;
@@ -97,7 +97,7 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
                     name = setting.getRandomReplacement();
                 }
             }
-            console.log("NAME", name);
+            //console.log("NAME", name);
             super(name);
         }
     }
@@ -105,3 +105,4 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
     window.Audio = AudioSpoofed;
 })
 
+export {getThemeSongSettingByCardId};

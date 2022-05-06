@@ -95,6 +95,17 @@
 	color:#41fcff;
 }
 
+.PrettyCards_CardThemeSongList {
+	line-height: normal;
+	background-color: rgb(230, 230, 230);
+	font-family: DTM-Mono;
+	display: none;
+}
+
+.PrettyCards_CardThemeSongPlayer:hover .PrettyCards_CardThemeSongList,.PrettyCards_CardThemeSongList:hover {
+	display: block;
+}
+
 #PrettyCards_CustomCardCategories {
 	/*display: flex;
 	flex-direction: row;

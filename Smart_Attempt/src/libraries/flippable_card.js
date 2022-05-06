@@ -116,7 +116,7 @@ class FlippableCard {
 			return;
 		}
 		var soundPath = '/musics/cards/' + this.card_data.name.split(' ').join('_') + '.ogg';
-		var audio = new Audio(soundPath);
+		var audio = new window.Audio(soundPath);
 		audio.volume = 0.4;
 		audio.play();
 		this.silent = true;
