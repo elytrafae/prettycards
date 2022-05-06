@@ -198,6 +198,14 @@ class Utility {
 		}
 		return `/images/artifacts/${image}.png`;
 	}
+
+	preloadAudio(url) {
+		var audio = new Audio();
+		// once this file loads, it will call loadedAudio()
+		// the file will be kept by the browser as cache
+		//audio.addEventListener('canplaythrough', loadedAudio, false);
+		audio.src = url;
+	}
 	
 }
 

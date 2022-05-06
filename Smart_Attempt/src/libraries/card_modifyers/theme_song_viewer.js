@@ -57,10 +57,11 @@ function createSimpleButton(card) {
 function createComplexButton(settings) {
 	var options = "";
 	settings.replacements.forEach( (url, i) => {
-		options = `${options}<button class="btn btn-primary">${i}</button>`
+		options = `${options}<button class="btn btn-primary" onclick="prettycards.playThemeSongPreviewEvent('${url}', event)">${i+1}</button>`
 	});
 	var button = $(`
-	<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer">
+	<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="event.stopPropagation();">
+		<span class="PrettyCards_TransparentText">SPACE</span>
 		<span class="PrettyCards_CardThemeSongList">
 			${options}
 		</span>

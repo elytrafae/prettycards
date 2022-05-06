@@ -1,4 +1,5 @@
 import { PrettyCards_plugin, settings } from "../underscript_checker";
+import { utility } from "../utility";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
@@ -23,6 +24,7 @@ class ThemeSongSetting {
     }
 
     addFile(path) {
+        utility.preloadAudio(path);
         this.replacements.push(path);
     }
 
@@ -32,6 +34,9 @@ var options = [];
 var baseThemeSongData = {};
 
 function getThemeSongSettingByOriginalUrl(url) {
+    if (!url) {
+        return null;
+    }
     for (var i=0; i < options.length; i++) {
         var e = options[i];
         //console.log(e, url, e.originalUrl, url.includes(e.originalUrl));

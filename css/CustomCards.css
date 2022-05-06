@@ -114,6 +114,10 @@
 	display: inline;
 }
 
+.PrettyCards_TransparentText {
+	color: rgba(1, 1, 1, 0);
+}
+
 #PrettyCards_CustomCardCategories {
 	/*display: flex;
 	flex-direction: row;
