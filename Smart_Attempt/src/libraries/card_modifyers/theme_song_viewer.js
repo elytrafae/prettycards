@@ -31,6 +31,10 @@ window.prettycards.playThemeSongPreviewEvent = function(SRC, e) {
 	e.stopPropagation();
 }
 
+function returnSimpleButtonHTML(SRC) {
+	return '<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="prettycards.playThemeSongPreviewEvent(\'' + SRC + '\', event)"></span>';
+}
+
 function createSimpleButton(card) {
 	var collection = card.collection;
 	if (typeof(collection) == "number") {
@@ -50,11 +54,17 @@ function createSimpleButton(card) {
 		}
 	}
 	const SRC = _SRC;
-	var button = $('<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="prettycards.playThemeSongPreviewEvent(\'' + SRC + '\', event)"></span>');
+	var button = $(returnSimpleButtonHTML(SRC));
 	return button;
 }
 
 function createComplexButton(settings) {
+	if (settings.replacements.length == 0) {
+		return "";
+	}
+	if (settings.replacements.length == 1) {
+		return returnSimpleButtonHTML(settings.replacements[0]);
+	}
 	var options = "";
 	settings.replacements.forEach( (url, i) => {
 		options = `${options}<button class="btn btn-primary" onclick="prettycards.playThemeSongPreviewEvent('${url}', event)">${i+1}</button>`
@@ -74,24 +84,25 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
 		var html$ = data.element;
 		var card = data.card;
+		var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
 		var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
 		if (card.id in cardExceptions) { // Load and Gaster Blaster respectively.
 			//console.log(card, "This is a Gaster Blaster or a Load!");
 			doesCardHaveTheme = true;
 		} else if ("hasThemeSong" in card) {
 			doesCardHaveTheme = card.hasThemeSong;
+		} else if (themeSongSettings) {
+			doesCardHaveTheme = true;
 		}
 		
 		if (doesCardHaveTheme) {
 			PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
 				var button;
-				var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
 				if (themeSongSettings) {
 					button = createComplexButton(themeSongSettings);
 				} else {
 					button = createSimpleButton(card);
 				}
-				
 				html$.append(button);
 			})
 		}
