@@ -3,6 +3,10 @@ import { utility } from "../utility";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
+const FLOWEY_BASE_ATK = 4;
+const HEROINE_BASE_ATK = 8;
+const HEROINE_ATK_STEP = 2;
+
 class ThemeSongSetting {
 
     constructor(card, minPitch = 1, maxPitch = 1) {
@@ -21,6 +25,10 @@ class ThemeSongSetting {
 
     getRandomReplacement() {
         return this.replacements[Math.floor(Math.random() * this.replacements.length)];
+    }
+
+    getReplacementOnCardData(card) {
+        return null;
     }
 
     addFile(path) {
@@ -83,33 +91,87 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady", function() {
             }
         }
     }
+    hardCodedCardInteractions();
     PrettyCards_plugin.events.emit.singleton("PrettyCards:customCardsSongsAppend");
     PrettyCards_plugin.events.emit.singleton("PrettyCards:themeSongsReady");
     //console.log(options);
 });
 
-var originalAudio;
-
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    originalAudio = window.Audio;
-
-    class AudioSpoofed extends Audio{
-        constructor(name) {
-            var setting = getThemeSongSettingByOriginalUrl(name);
-            //console.log(name, setting);
-            if (setting) {
-                if (window.underscript.onPage("Game")) {
-                    name = setting.getNextReplacement();
-                } else {
-                    name = setting.getRandomReplacement();
-                }
+function hardCodedCardInteractions() {
+    var snoelle = getThemeSongSettingByCardId(710);
+    if (snoelle) {
+        snoelle.getReplacementOnCardData = function(card) {
+            if (card.originalAttack < 1) {
+                return null;
             }
-            //console.log("NAME", name);
-            super(name);
+            return this.replacements[card.originalAttack - 1];
         }
     }
 
-    window.Audio = AudioSpoofed;
+    var flowey = getThemeSongSettingByCardId(54);
+    if (flowey) {
+        flowey.getReplacementOnCardData = function(card) {
+            if (card.originalAttack < 1) {
+                return null;
+            }
+            return this.replacements[(FLOWEY_BASE_ATK - card.originalAttack) % this.replacements.length];
+        }
+    }
+
+    var heroine = getThemeSongSettingByCardId(106);
+    if (heroine) {
+        heroine.getReplacementOnCardData = function(card) {
+            if (card.originalAttack < 1) {
+                return null;
+            }
+            return this.replacements[(HEROINE_BASE_ATK - card.originalAttack)/HEROINE_ATK_STEP];
+        }
+    }
+}
+
+var originalAudio;
+var cardSoundFX;
+
+function playSoundFX(address) {
+    cardSoundFX = new Audio(address);
+    cardSoundFX.volume = 0.2;
+    cardSoundFX.play();
+}
+
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+
+    if (window.underscript.onPage("Game")) {
+        cardSoundFX = new Audio();
+        PrettyCards_plugin.events.on("getMonsterPlayed getSpellPlayed", function(data) {
+            var card = JSON.parse(data.card);
+            var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
+            if (setting) {
+                var name = setting.getReplacementOnCardData(card) || setting.getNextReplacement();
+                if (card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION") {
+                    window.jingle.src = name;
+                    window.jingle.play();
+                } else {
+                    playSoundFX(name);
+                }
+            }
+        }) 
+    } else {
+        originalAudio = window.Audio;
+        class AudioSpoofed extends Audio{
+            constructor(name) {
+                var setting = getThemeSongSettingByOriginalUrl(name);
+                //console.log(name, setting);
+                if (setting) {
+                    name = setting.getRandomReplacement();
+                }
+                //console.log("NAME", name);
+                super(name);
+            }
+        }
+        window.Audio = AudioSpoofed;
+    }
+
+    
 })
 
 export {getThemeSongSettingByCardId};

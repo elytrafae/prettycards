@@ -6,9 +6,13 @@ import json
 data = {}
 for file in glob.glob("input/*.ogg"):
     # print(file)
-    folderName = file[6:-5:1]
-    cardName = folderName.replace("_", " ")
     number = file[-5:-4:1]
+    folderName = file[6:-5:1]
+    if (not number.isdigit()):
+        number = "1"
+        folderName = file[6:-4:1]
+
+    cardName = folderName.replace("_", " ")
     if (not os.path.isdir(folderName)):
         os.mkdir(folderName)
     fin = open(file, "rb")
