@@ -9,13 +9,12 @@ const HEROINE_ATK_STEP = 2;
 
 class ThemeSongSetting {
 
-    constructor(card, minPitch = 1, maxPitch = 1) {
+    constructor(card) {
         this.cardId = card.fixedId || card.id;
-        this.originalUrl = `${card.name.replaceAll(" ", "_")}.ogg`;
-        this.minPitch = minPitch;
-        this.maxPitch = maxPitch;
+        this.originalUrl = `musics/cards/${card.name.replaceAll(" ", "_")}.ogg`;
         this.replacements = [];
         this.playedBefore = 0; // Only counts at times when it goes in order.
+        this.playAsJingle = true;
     }
 
     getNextReplacement() {
@@ -47,7 +46,6 @@ function getThemeSongSettingByOriginalUrl(url) {
     }
     for (var i=0; i < options.length; i++) {
         var e = options[i];
-        //console.log(e, url, e.originalUrl, url.includes(e.originalUrl));
         if (url.includes(e.originalUrl)) {
             return e;
         }
@@ -86,6 +84,7 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady", function() {
         var card = window.getCardWithName(key);
         if (card) {
             var s = registerCard(card);
+            s.playAsJingle = card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION" || card.tribes.includes("ROYAL_INVENTION");
             for (var i=1; i <= baseThemeSongData[key]; i++) {
                 s.addFile(`https://github.com/CMD-God/prettycards/raw/master/audio/cards/${card.name.replaceAll(" ", "_")}/intro_${i}.ogg`);
             }
@@ -147,7 +146,8 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
             var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
             if (setting) {
                 var name = setting.getReplacementOnCardData(card) || setting.getNextReplacement();
-                if (card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION") {
+                if (setting.playAsJingle) {
+                    window.playJingle("NON EXISTENT CARD");
                     window.jingle.src = name;
                     window.jingle.play();
                 } else {
