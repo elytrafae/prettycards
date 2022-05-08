@@ -7,6 +7,15 @@ const FLOWEY_BASE_ATK = 4;
 const HEROINE_BASE_ATK = 8;
 const HEROINE_ATK_STEP = 2;
 
+settings.multi_theme_songs = PrettyCards_plugin.settings().add({
+	'key': 'multi_theme_songs',
+	'name': 'Enable Multiple Card Jingles', // Name in settings page
+    'note': 'Also adds some sound effects to certaion token cards.',
+	'type': 'boolean',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	'default': true, // default value
+});
+
 class ThemeSongSetting {
 
     constructor(card) {
@@ -73,12 +82,6 @@ function registerCard(card) {
     return s;
 }
 
-window.$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
-    //console.log(data);
-    baseThemeSongData = data;
-    PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);
-});
-
 ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady", function() {
     for (var key in baseThemeSongData) {
         var card = window.getCardWithName(key);
@@ -137,41 +140,54 @@ function playSoundFX(address) {
     cardSoundFX.play();
 }
 
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 
-    if (window.underscript.onPage("Game")) {
-        cardSoundFX = new Audio();
-        PrettyCards_plugin.events.on("getMonsterPlayed getSpellPlayed", function(data) {
-            var card = JSON.parse(data.card);
-            var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
-            if (setting) {
-                var name = setting.getReplacementOnCardData(card) || setting.getNextReplacement();
-                if (setting.playAsJingle) {
-                    window.playJingle("NON EXISTENT CARD");
-                    window.jingle.src = name;
-                    window.jingle.play();
-                } else {
-                    playSoundFX(name);
-                }
-            }
-        }) 
-    } else {
-        originalAudio = window.Audio;
-        class AudioSpoofed extends Audio{
-            constructor(name) {
-                var setting = getThemeSongSettingByOriginalUrl(name);
-                //console.log(name, setting);
+if (settings.multi_theme_songs.value()) {
+
+    window.$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
+        //console.log(data);
+        baseThemeSongData = data;
+        PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);
+    });
+
+    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+
+        if (window.underscript.onPage("Game")) {
+            cardSoundFX = new Audio();
+            PrettyCards_plugin.events.on("getMonsterPlayed getSpellPlayed", function(data) {
+                var card = JSON.parse(data.card);
+                var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
                 if (setting) {
-                    name = setting.getRandomReplacement();
+                    var name = setting.getReplacementOnCardData(card) || setting.getNextReplacement();
+                    if (setting.playAsJingle) {
+                        window.playJingle("NON EXISTENT CARD");
+                        window.jingle.src = name;
+                        window.jingle.play();
+                    } else {
+                        playSoundFX(name);
+                    }
                 }
-                //console.log("NAME", name);
-                super(name);
+            }) 
+        } else {
+            originalAudio = window.Audio;
+            class AudioSpoofed extends Audio{
+                constructor(name) {
+                    var setting = getThemeSongSettingByOriginalUrl(name);
+                    //console.log(name, setting);
+                    if (setting) {
+                        name = setting.getRandomReplacement();
+                    }
+                    //console.log("NAME", name);
+                    super(name);
+                }
             }
+            window.Audio = AudioSpoofed;
         }
-        window.Audio = AudioSpoofed;
-    }
 
-    
-})
+        
+    })
+
+} else {
+    PrettyCards_plugin.events.emit.singleton("PrettyCards:themeSongsReady"); // Required for the normal song previews to still appear.
+}
 
 export {getThemeSongSettingByCardId};
