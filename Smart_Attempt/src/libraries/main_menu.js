@@ -6,6 +6,10 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 var credits = `
 	<span style="font-size: 2em;">General</span>
 	<span>Uses Underscript's API.</span>
+
+	<span style="font-size: 2em;">Card Theme Songs</span>
+	<span>MysteryHD is the one who makes the audio files, I just paste them in and run a script. <img style="height:3em;" src="images/emotes/Hue.png"></span>
+	<span>I could not have pulled this off without the help of HeavenlyFlower, who suggested a genious solution for non-Game pages.</span>
 	
 	<span style="font-size: 2em;">Custom Cards</span>
 	<span>Doki Doki Literature Club by <a href="http://teamsalvato.com/" target="_blank">Team Salvato</a></span>
