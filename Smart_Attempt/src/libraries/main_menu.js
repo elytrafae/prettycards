@@ -6,6 +6,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 var credits = `
 	<span style="font-size: 2em;">General</span>
 	<span>Uses Underscript's API.</span>
+	<span>Feildmaster has been a MASSIVE help over the years and I cannot thank him enough! ^^</span>
 
 	<span style="font-size: 2em;">Card Theme Songs</span>
 	<span>MysteryHD is the one who makes the audio files, I just paste them in and run a script. <img style="height:3em;" src="images/emotes/Hue.png"></span>

@@ -143,18 +143,23 @@ function playSoundFX(address) {
 
 if (settings.multi_theme_songs.value()) {
 
-    window.$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
-        //console.log(data);
-        baseThemeSongData = data;
-        PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);
-    });
-
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+
+        window.$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
+            //console.log(data);
+            baseThemeSongData = data;
+            PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);
+        });
 
         if (window.underscript.onPage("Game")) {
             cardSoundFX = new Audio();
             PrettyCards_plugin.events.on("getMonsterPlayed getSpellPlayed", function(data) {
                 var card = JSON.parse(data.card);
+                // Will trigger when a monster's Dust effect triggers.
+                // Why would that happen? Well, apparently, for Onu Dust effect = Spell.
+                if (card.typeCard == 0 && data.action == "getSpellPlayed") { 
+                    return;
+                }
                 var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
                 if (setting) {
                     var name = setting.getReplacementOnCardData(card) || setting.getNextReplacement();
