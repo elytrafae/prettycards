@@ -110,8 +110,19 @@
 }
 
 .PrettyCards_CardThemeSongList .btn {
-	margin: 0.5px;
+	margin: 1px;
+}
+
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(1),
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(1) ~  .btn,
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(2),
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(2) ~ .btn,
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(3),
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(3) ~ .btn,
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(4),
+.PrettyCards_CardThemeSongList .btn:first-child:nth-last-child(4) ~ .btn {
 	padding: 4px 8px;
+	margin: 0.5px;
 }
 
 .PrettyCards_CardThemeSongPlayer:hover .PrettyCards_CardThemeSongList,.PrettyCards_CardThemeSongList:hover {
