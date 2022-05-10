@@ -101,14 +101,15 @@
 	font-family: DTM-Mono;
 	display: none;
 	position: absolute;
-    max-width: 116px;
+    max-width: 118px;
 	width: max-content;
 	top: 0;
     left: 32px;
 }
 
 .PrettyCards_CardThemeSongList .btn {
-	margin: 1px;
+	margin: 0.5px;
+	padding: 4px 8px;
 }
 
 .PrettyCards_CardThemeSongPlayer:hover .PrettyCards_CardThemeSongList,.PrettyCards_CardThemeSongList:hover {
