@@ -113,7 +113,7 @@
 }
 
 .PrettyCards_CardThemeSongPlayer:hover .PrettyCards_CardThemeSongList,.PrettyCards_CardThemeSongList:hover {
-	display: inline;
+	display: flex;
 }
 
 .PrettyCards_TransparentText {
