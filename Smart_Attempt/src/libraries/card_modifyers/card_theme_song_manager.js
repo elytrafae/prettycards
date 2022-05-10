@@ -129,6 +129,14 @@ function hardCodedCardInteractions() {
             return this.replacements[(HEROINE_BASE_ATK - card.originalAttack)/HEROINE_ATK_STEP];
         }
     }
+
+    var mtt_neo = getThemeSongSettingByCardId(110);
+    if (mtt_neo) {
+        mtt_neo.getReplacementOnCardData = function(card) {
+            this.playedBefore++;
+            return this.replacements[Math.min(this.playedBefore-1, this.replacements.length-1)]; // Have to reduce it by one because we increase the "playedBefore" counter before getting this, skipping the first one.
+        }
+    }
 }
 
 var originalAudio;
