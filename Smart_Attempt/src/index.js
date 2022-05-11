@@ -13,7 +13,7 @@ import {} from "/src/libraries/kromer_test.js";
 import {} from "./libraries/mobile/navigation.js";
 
 import {} from "./libraries/chat/user_info.js";
-import {} from "./libraries/chat/embed_media.js";
+// import {} from "./libraries/chat/embed_media.js";
 import {} from "./libraries/private_games/private_game_host.js";
 import {} from "./libraries/private_games/private_game_recipient.js";
 
@@ -23,12 +23,12 @@ import {} from "/src/libraries/card_modifyers/theme_song_viewer.js";
 import {} from "/src/libraries/card_modifyers/card_flavor.js";
 import {} from "/src/libraries/card_modifyers/card_description_corrections.js";
 import {} from "/src/libraries/card_modifyers/rarity_text_changer.js";
-import {} from "/src/libraries/card_modifyers/switch_highlight.js";
+// import {} from "/src/libraries/card_modifyers/switch_highlight.js";
 // import {} from "/src/libraries/card_modifyers/card_helper_hover.js";
 import {} from "/src/libraries/card_modifyers/za_filter.js";
 import {} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 
-import {} from "/src/libraries/persona_overlay.js";
+// import {} from "/src/libraries/persona_overlay.js";
 
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {} from "/src/libraries/fancy_card_select.js";
@@ -42,7 +42,7 @@ import {InitDecks} from "/src/page_specific/decks.js";
 import {InitPlay} from "/src/page_specific/play.js";
 import {InitGameList} from "/src/page_specific/game_list.js";
 import {InitHub} from "/src/page_specific/hub.js";
-import {InitGame} from "/src/page_specific/game.js";
+// import {InitGame} from "/src/page_specific/game.js";
 import {InitCustomCardSkins} from "/src/page_specific/custom_card_skins.js";
 import {InitCustomCards} from "/src/page_specific/custom_cards.js";
 import {InitFriendship} from "/src/page_specific/friendship.js";
@@ -55,8 +55,6 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 	InitPacks();
 } else if (underscript.onPage("Hub")) {
 	InitHub();
-} else if (underscript.onPage("Game")) {
-	InitGame();
 } else if (underscript.onPage("CustomCardSkins")) {
 	InitCustomCardSkins();
 } else if (underscript.onPage("CustomCards")) {
