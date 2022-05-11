@@ -254,6 +254,7 @@ class SavedDeckSelector {
 		var soulSelectToggle = document.createElement("DIV");
 		soulSelectToggle.className = "PrettyCards_SoulSelect_Soul";
 		soulSelectToggle.style = "background-image: url('https://github.com/CMD-God/prettycards/raw/master/img/Souls/SOUL_SELECT.png')";
+		soulSelectToggle.innerHTML = `<div class="PrettyCards_SoulSelect_Rainbow"></div>`;
 		header.appendChild(soulSelectToggle);
 		//PrettyCards_SoulSelect_Rainbow
 
