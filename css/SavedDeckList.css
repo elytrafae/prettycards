@@ -111,3 +111,9 @@
 .card.PrettyCards_BaseDeckCard .cardBackground {
 	box-shadow: gold 0px 0px 5px 5px;
 }
+
+.PrettyCards_DeckListHeader {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
