@@ -247,9 +247,19 @@ class SavedDeckSelector {
 		var container = document.createElement("DIV");
 		container.className = "PrettyCards_ChooseDeckScreenContainer";
 		
+		var header = document.createElement("DIV");
+		header.className = "PrettyCards_DeckListHeader";
+		container.appendChild(header);
+
+		var soulSelectToggle = document.createElement("DIV");
+		soulSelectToggle.class = "PrettyCards_SoulSelect_Soul";
+		soulSelectToggle.style = "background-image: url('https://github.com/CMD-God/prettycards/raw/master/img/Souls/SOUL_SELECT.png')";
+		header.appendChild(soulSelectToggle);
+		//PrettyCards_SoulSelect_Rainbow
+
 		var soulContainer = document.createElement("DIV");
 		soulContainer.className = "PrettyCards_DecklistSoulsContainer";
-		container.appendChild(soulContainer);
+		header.appendChild(soulContainer);
 		
 		this.soulSelector = new SoulSelector();
 		this.soulSelector.changeSoulCallback = function(clickedSoul) {
