@@ -1,5 +1,5 @@
 
-import {CardSkinSelector} from "/src/libraries/card_skin_selector.js";
+import {CardSkinSelector, loadAllCardSkins} from "/src/libraries/card_skin_selector.js";
 import {SavedDeckSelector} from "/src/libraries/deck_selector.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
@@ -383,6 +383,9 @@ function ModifiedShowDeckLoad(jsonDeck) {
 }
 
 function InitDecks() {
+	
+	loadAllCardSkins();
+
 	//PrettyCards_plugin.events.on("SoulSelector:decksLoaded", function(data) {
 	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts", function() {
 		deckSelector.callback = function(deck) {

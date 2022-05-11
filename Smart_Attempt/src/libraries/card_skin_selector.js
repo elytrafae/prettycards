@@ -15,21 +15,6 @@ var bonusBaseCards = ["Heal Delivery", "Explosion", "Sacrifice", "Same Fate", "O
 var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCardSkins, aprilFools2022];
 var listNames = ["Custom Card Skins", "Default Card Skins", "Owned Card Skins", "Not Owned Card Skins", "April Fools 2022 (Season 69)"]
 
-ExecuteWhen("PrettyCards:onPageLoad", function () {
-	$.get("/CardSkinsConfig?action=shop", {}, function(data) {
-		//console.log(data);
-		allCardSkins = JSON.parse(data.cardSkins);
-		ProcessCardSkinLists();
-		//console.log(allCardSkins);
-	});
-	ExecuteWhen("Chat:Connected", function() {
-		ProcessCustomCardSkins();
-	});
-	$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/50f69f27a249d843792aedc5139d60fc9b178b23/json/aprilFools2022.json", {}, function(data) {
-		ProcessAprilFools2022Skins(data);
-	})
-});
-
 /*
 $.get("CardSkinsConfig?action=profile", {}, function(data) {
 	//console.log(data);
@@ -87,14 +72,6 @@ function ProcessCardSkinLists() {
 	//console.log("Not owned card skins: ", notOwnedCardSkins);
 }
 
-if (!window.allCards || window.allCards.length == 0) {
-	window.document.addEventListener("allCardsReady", function() {
-		ProcessDefaultSkins();
-	});
-} else {
-	ProcessDefaultSkins();
-}
-
 utility.loadCSSFromGH("CardSkinSelector");
 
 function ProcessDefaultSkins() {
@@ -131,6 +108,28 @@ function ProcessDefaultSkins() {
 		});
 	}
 	//console.log(defaultCardSkins);
+}
+
+var alreadyLoading = false;
+function loadAllCardSkins() { // This function is called whenever a feature requests this, so it doesn't load on pages it doesn't need to.
+	if (alreadyLoading) {return;}
+	alreadyLoading = true;
+	ExecuteWhen("PrettyCards:onPageLoad", function () {
+		$.get("/CardSkinsConfig?action=shop", {}, function(data) {
+			//console.log(data);
+			allCardSkins = JSON.parse(data.cardSkins);
+			ProcessCardSkinLists();
+			//console.log(allCardSkins);
+		});
+		ExecuteWhen("Chat:Connected", function() {
+			ProcessCustomCardSkins();
+		});
+		$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/50f69f27a249d843792aedc5139d60fc9b178b23/json/aprilFools2022.json", {}, function(data) {
+			ProcessAprilFools2022Skins(data);
+		})
+	});
+
+	PrettyCards_plugin.events.on("allCardsReady", ProcessDefaultSkins);
 }
 
 class CardSkinSelector {
@@ -274,4 +273,4 @@ class CardSkinSelector {
 
 window.CardSkinSelector = CardSkinSelector;
 
-export {CardSkinSelector, allCardSkins};
+export {CardSkinSelector, allCardSkins, loadAllCardSkins};
