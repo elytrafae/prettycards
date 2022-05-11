@@ -82,8 +82,8 @@
 }
 
 @keyframes PrettyCards_SoulSelect_Rainbow {
-	to {background-position:0 -200%}
-  }
+	to {background-position:-200% -200%}
+}
 
 @keyframes SoulFloatNormal {
 	to { transform: translatey(-15px);}
