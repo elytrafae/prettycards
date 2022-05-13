@@ -259,8 +259,20 @@ class SavedDeckSelector {
 		//PrettyCards_SoulSelect_Rainbow
 
 		var soulContainer = document.createElement("DIV");
-		soulContainer.className = "PrettyCards_DecklistSoulsContainer";
+		soulContainer.className = "PrettyCards_DecklistSoulsContainer PrettyCards_DeckHeader_Active";
 		header.appendChild(soulContainer);
+
+		var buttonContainer = document.createElement("DIV");
+		buttonContainer.className = "PrettyCards_DecklistButtonContainer PrettyCards_DeckHeader_Inactive";
+		header.appendChild(buttonContainer);
+
+		soulSelectToggle.onclick = function() {
+			var active = window.$(".PrettyCards_DeckHeader_Active");
+			var inactive = window.$(".PrettyCards_DeckHeader_Inactive");
+
+			active.removeClass("PrettyCards_DeckHeader_Active").addClass("PrettyCards_DeckHeader_Inactive");
+			inactive.removeClass("PrettyCards_DeckHeader_Inactive").addClass("PrettyCards_DeckHeader_Active");
+		}
 		
 		this.soulSelector = new SoulSelector();
 		this.soulSelector.changeSoulCallback = function(clickedSoul) {
