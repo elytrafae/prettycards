@@ -247,6 +247,9 @@ class SavedDeckSelector {
 		//buttonContainer.innerHTML = "<h1>MORE BUTTONS HERE!</h1>"
 
 		var purgeAutogenButton = document.createElement("BUTTON");
+		purgeAutogenButton.className = "btn btn-danger PrettyCards_DeckListHeaderButton";
+		purgeAutogenButton.innerHTML = "Purge Autogens";
+		buttonContainer.appendChild(purgeAutogenButton);
 		
 	}
 	
@@ -258,33 +261,38 @@ class SavedDeckSelector {
 		header.className = "PrettyCards_DeckListHeader";
 		container.appendChild(header);
 
-		var soulSelectToggle = document.createElement("DIV");
-		soulSelectToggle.className = "PrettyCards_SoulSelect_Soul";
-		soulSelectToggle.style = "background-image: url('https://github.com/CMD-God/prettycards/raw/master/img/Souls/SOUL_SELECT.png')";
-		soulSelectToggle.innerHTML = `<div class="PrettyCards_SoulSelect_Rainbow"></div>`;
-		header.appendChild(soulSelectToggle);
-		//PrettyCards_SoulSelect_Rainbow
+		var soulSelectToggle;
+		if (this.canEditDecks) {
+			soulSelectToggle = document.createElement("DIV");
+			soulSelectToggle.className = "PrettyCards_SoulSelect_Soul";
+			soulSelectToggle.style = "background-image: url('https://github.com/CMD-God/prettycards/raw/master/img/Souls/SOUL_SELECT.png')";
+			soulSelectToggle.innerHTML = `<div class="PrettyCards_SoulSelect_Rainbow"></div>`;
+			header.appendChild(soulSelectToggle);
+			//PrettyCards_SoulSelect_Rainbow
+		}
 
-		var soulContainer = document.createElement("DIV");
-		soulContainer.className = "PrettyCards_DecklistSoulsContainer"; //PrettyCards_DeckHeader_Active";
-		header.appendChild(soulContainer);
+			var soulContainer = document.createElement("DIV");
+			soulContainer.className = "PrettyCards_DecklistSoulsContainer"; //PrettyCards_DeckHeader_Active";
+			header.appendChild(soulContainer);
 
-		var buttonContainer = document.createElement("DIV");
-		buttonContainer.className = "PrettyCards_DecklistButtonContainer PrettyCards_Hidden"; //PrettyCards_DeckHeader_Inactive";
-		header.appendChild(buttonContainer);
+		if (this.canEditDecks) {
+			var buttonContainer = document.createElement("DIV");
+			buttonContainer.className = "PrettyCards_DecklistButtonContainer PrettyCards_Hidden"; //PrettyCards_DeckHeader_Inactive";
+			header.appendChild(buttonContainer);
 
-		this.SetUpButtons(buttonContainer);
+			this.SetUpButtons(buttonContainer);
 
-		soulSelectToggle.onclick = function() {
-			window.$(soulContainer).toggleClass("PrettyCards_Hidden");
-			window.$(buttonContainer).toggleClass("PrettyCards_Hidden");
-			/*
-			var active = window.$(".PrettyCards_DeckHeader_Active");
-			var inactive = window.$(".PrettyCards_DeckHeader_Inactive");
+			soulSelectToggle.onclick = function() {
+				window.$(soulContainer).toggleClass("PrettyCards_Hidden");
+				window.$(buttonContainer).toggleClass("PrettyCards_Hidden");
+				/*
+				var active = window.$(".PrettyCards_DeckHeader_Active");
+				var inactive = window.$(".PrettyCards_DeckHeader_Inactive");
 
-			active.removeClass("PrettyCards_DeckHeader_Active").addClass("PrettyCards_DeckHeader_Inactive");
-			inactive.removeClass("PrettyCards_DeckHeader_Inactive").addClass("PrettyCards_DeckHeader_Active");
-			*/
+				active.removeClass("PrettyCards_DeckHeader_Active").addClass("PrettyCards_DeckHeader_Inactive");
+				inactive.removeClass("PrettyCards_DeckHeader_Inactive").addClass("PrettyCards_DeckHeader_Active");
+				*/
+			}
 		}
 		
 		this.soulSelector = new SoulSelector();
@@ -305,7 +313,7 @@ class SavedDeckSelector {
 		if (this.closable) {
 			var closeButtonContainer = document.createElement("DIV");
 			var closeButton = document.createElement("BUTTON");
-			closeButton.className = "btn btn-primary PrettyCards_DeckListCloseButton";
+			closeButton.className = "btn btn-primary PrettyCards_DeckListHeaderButton";
 			closeButton.innerHTML = demonEasterEgg ? "<span class='red'>LATER</span>" : "Nevermind";
 			closeButton.onclick = this.closeCallback;
 			closeButtonContainer.appendChild(closeButton);
