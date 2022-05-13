@@ -6,7 +6,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
 		name: "Hate Soul Set",
-		author: "MysteryHD, Bantikat and CMD_God",
+		author: "MysteryHD, bantikat and CMD_God",
 		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/Hate_Soul/",
 		//cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/DDLC/",
 		//rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
@@ -60,8 +60,29 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Desparation|Desparations}}",
 		image: "Desparation",
 		cost: 1,
-		description: "Kill a 1+ base {{cost}} ally monster to draw 2 cards. If it has 5+ base {{cost}}, give them -1 {{cost}}, too.",
+		description: "Kill a 1+ base {{cost}} ally monster to draw 2 cards. If it has 4+ base {{cost}}, give them -1 {{cost}}, too.",
 		extension: "BASE",
+		rarity: "COMMON"
+	});
+
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Magic Knife|Magic Knives}}",
+		image: "Magic_Knife",
+		cost: 3,
+		description: "Deal 3 {{DMG}} to a monster. If it survived, heal it by 3 and give it +2/+1.",
+		extension: "BASE",
+		rarity: "COMMON"
+	});
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Graveyard Rise|Graveyard Rises}}",
+		image: "Graveyard_Rise",
+		cost: 3,
+		description: "{{KW:DELAY}}: Add a copy of every different monster that died this turn to your hand.",
+		extension: "DELTARUNE",
 		rarity: "COMMON"
 	});
 
@@ -72,7 +93,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 3,
 		description: "",
 		extension: "BASE",
-		rarity: "COMMON"
+		rarity: "RARE"
 	});
 
 	var arcane_choice = c.newCard({
@@ -86,26 +107,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	});
 
 	dark_wand.setDescription(`Kill an ally monster to add an ${arcane_choice.me()} to your hand. Set its base {{cost}} to the killed monster's {{cost}}, then set its {{cost}} to 0.`);
-
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Graveyard Rise|Graveyard Rises}}",
-		image: "Graveyard_Rise",
-		cost: 3,
-		description: "{{KW:DELAY}}: Add a copy of every different monster that died this turn to your hand.",
-		extension: "DELTARUNE",
-		rarity: "COMMON"
-	});
-
-	c.newCard({
-		soul: soul,
-		name: "{{PLURAL:$1|Magic Knife|Magic Knives}}",
-		image: "Magic_Knife",
-		cost: 3,
-		description: "Deal 3 {{DMG}} to a monster. If it survived, heal it by 3 and give it +2/+1.",
-		extension: "BASE",
-		rarity: "RARE"
-	});
 
 	c.newCard({
 		soul: soul,
@@ -168,14 +169,31 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         rarity: "TOKEN"
     });
 
-    numbing.setDescription(`Kill a non-DT ally monster costing 3 or more and add an ${aimless_vessel.me()} to your hand with same stats.`)
+    numbing.setDescription(`Kill a non-DT ally monster costing 3 or more and add an ${aimless_vessel.me()} to your hand with same stats.`);
+
+	c.newCard({
+		soul: soul,
+		name: "{{PLURAL:$1|Death Sentence|Death Sentences}}",
+		image: "Death_Sentence",
+		cost: 5,
+		description: `Give all ally monsters "{{KW:DUST}}: Deal half of this monster’s {{ATK}} (rounded up) randomly split as {{DMG}} to enemy monsters.”. {{KW:Delay}} (1): Kill all ally monsters.`,
+		extension: "DELTARUNE",
+		rarity: "EPIC"
+	});
+
+	var finale = c.newArtifact({
+		name: "Finale",
+		description: "{{KW:TURN_START}}: Gain -1 Max {{HP}} for each ally monster to give them all +1/+1.",
+		image: "Finale",
+		rarity: "TOKEN"
+	});
 
 	c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Royal Hate|Royal Hates}}",
 		image: "Royal_Hate",
-		cost: "?",
-		description: "",
+		cost: 2,
+		description: `Gain the ${finale.me()} artifact. Trigger its effect 3 times instantly.`,
 		extension: "BASE",
 		tribes: ["ROYAL_INVENTION"],
 		rarity: "TOKEN"
