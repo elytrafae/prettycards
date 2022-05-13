@@ -1,5 +1,5 @@
 
-.PrettyCards_DecklistSoulsContainer {
+.PrettyCards_DecklistSoulsContainer,.PrettyCards_DecklistButtonContainer {
 	text-align:center;
 	width: 100%;
 }
@@ -114,9 +114,11 @@
 .PrettyCards_DeckListHeader {
 	display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
+/* A failed attempt at an animated menu. */
+/*
 .PrettyCards_DeckHeader_Inactive {
 	animation: PrettyCards_DeckHeader_Inactive 1s;
 	width: 0px;
@@ -138,3 +140,4 @@
 .PrettyCards_DeckHeader_Active,.PrettyCards_DeckHeader_Inactive {
 	overflow-x: hidden;
 }
+*/

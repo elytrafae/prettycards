@@ -242,6 +242,10 @@ class SavedDeckSelector {
 		}
 		return !art1.legendary && !art2.legendary;
 	}
+
+	SetUpButtons(buttonContainer) {
+		buttonContainer.innerHTML = "<h1>MORE BUTTONS HERE!</h1>"
+	}
 	
 	GetHTML(decks) {
 		var container = document.createElement("DIV");
@@ -259,19 +263,25 @@ class SavedDeckSelector {
 		//PrettyCards_SoulSelect_Rainbow
 
 		var soulContainer = document.createElement("DIV");
-		soulContainer.className = "PrettyCards_DecklistSoulsContainer PrettyCards_DeckHeader_Active";
+		soulContainer.className = "PrettyCards_DecklistSoulsContainer"; //PrettyCards_DeckHeader_Active";
 		header.appendChild(soulContainer);
 
 		var buttonContainer = document.createElement("DIV");
-		buttonContainer.className = "PrettyCards_DecklistButtonContainer PrettyCards_DeckHeader_Inactive";
+		buttonContainer.className = "PrettyCards_DecklistButtonContainer PrettyCards_Hidden"; //PrettyCards_DeckHeader_Inactive";
 		header.appendChild(buttonContainer);
 
+		this.SetUpButtons(buttonContainer);
+
 		soulSelectToggle.onclick = function() {
+			window.$(soulContainer).toggleClass("PrettyCards_Hidden");
+			window.$(buttonContainer).toggleClass("PrettyCards_Hidden");
+			/*
 			var active = window.$(".PrettyCards_DeckHeader_Active");
 			var inactive = window.$(".PrettyCards_DeckHeader_Inactive");
 
 			active.removeClass("PrettyCards_DeckHeader_Active").addClass("PrettyCards_DeckHeader_Inactive");
 			inactive.removeClass("PrettyCards_DeckHeader_Inactive").addClass("PrettyCards_DeckHeader_Active");
+			*/
 		}
 		
 		this.soulSelector = new SoulSelector();
