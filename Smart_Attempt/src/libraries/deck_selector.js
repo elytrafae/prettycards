@@ -278,11 +278,13 @@ class SavedDeckSelector {
 		container.appendChild(decksContainer);
 		
 		if (this.closable) {
+			var closeButtonContainer = document.createElement("DIV");
 			var closeButton = document.createElement("BUTTON");
 			closeButton.className = "btn btn-primary PrettyCards_DeckListCloseButton";
 			closeButton.innerHTML = demonEasterEgg ? "<span class='red'>LATER</span>" : "Nevermind";
 			closeButton.onclick = this.closeCallback;
-			container.appendChild(closeButton);
+			closeButtonContainer.appendChild(closeButton);
+			header.appendChild(closeButtonContainer);
 		}
 		
 		this.deckSouls = {};

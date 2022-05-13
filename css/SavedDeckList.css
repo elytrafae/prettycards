@@ -1,6 +1,7 @@
 
 .PrettyCards_DecklistSoulsContainer {
 	text-align:center;
+	width: 100%;
 }
 
 .PrettyCards_DeckListContainer {
@@ -102,10 +103,8 @@
 }
 
 .PrettyCards_DeckListCloseButton {
-	position: absolute;
-	top: 5px;
-	right: 8px;
 	font-size: 25px;
+	margin: 8px 5px;
 }
 
 .card.PrettyCards_BaseDeckCard .cardBackground {
