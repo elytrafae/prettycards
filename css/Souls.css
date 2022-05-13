@@ -64,6 +64,7 @@
 	background-size: contain;
 	height: 64px;
 	width: 64px;
+	min-width: 64px;
 	margin: 2px;
 }
 
