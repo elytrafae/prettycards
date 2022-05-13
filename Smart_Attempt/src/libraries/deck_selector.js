@@ -244,7 +244,10 @@ class SavedDeckSelector {
 	}
 
 	SetUpButtons(buttonContainer) {
-		buttonContainer.innerHTML = "<h1>MORE BUTTONS HERE!</h1>"
+		//buttonContainer.innerHTML = "<h1>MORE BUTTONS HERE!</h1>"
+
+		var purgeAutogenButton = document.createElement("BUTTON");
+		
 	}
 	
 	GetHTML(decks) {
