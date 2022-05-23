@@ -7,6 +7,6 @@
     text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
 }
 
-*:hover .PrettyCards_CosmeticsStar {
+*:hover > .PrettyCards_CosmeticsStar {
     color: yellow;
 }
