@@ -1,8 +1,12 @@
 
 
-.glyphicon.glyphicon-star-empty.PrettyCards_CosmeticsStar {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    color: white;
+.avatarGroup .PrettyCards_CosmeticsStar {
+    position: relative;
+    right: -49px;
+    top: -64px;
+    text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+}
+
+*:hover .PrettyCards_CosmeticsStar {
+    color: yellow;
 }
