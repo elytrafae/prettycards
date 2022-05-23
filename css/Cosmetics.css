@@ -1,12 +1,19 @@
 
-
-.avatarGroup .PrettyCards_CosmeticsStar {
+.PrettyCards_CosmeticsStar {
+    display: none;
     position: relative;
-    right: -49px;
-    top: -64px;
     text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
 }
 
+.avatarGroup .PrettyCards_CosmeticsStar {
+    right: -49px;
+    top: -64px;
+}
+
 *:hover > .PrettyCards_CosmeticsStar {
+    display: inline;
+}
+
+.PrettyCards_CosmeticsStar:hover {
     color: yellow;
 }
