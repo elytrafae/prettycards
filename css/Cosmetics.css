@@ -1,9 +1,11 @@
 
+/*
 .mainContent .avatarGroup {
     display: inline;
     position: relative;
     top: 15px;
 }
+*/
 
 .PrettyCards_CosmeticsStar {
     display: none;
@@ -18,7 +20,7 @@
 }
 
 *:hover > .PrettyCards_CosmeticsStar {
-    display: inline;
+    display: block;
 }
 
 .PrettyCards_CosmeticsStar:hover {
