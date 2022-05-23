@@ -33,6 +33,8 @@ import {} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {} from "/src/libraries/fancy_card_select.js";
 
+import {} from "/src/libraries/cosmetic_wishlist.js";
+
 import {} from "./libraries/main_menu.js";
 
 import {} from "/src/libraries/background/background_manager.js";

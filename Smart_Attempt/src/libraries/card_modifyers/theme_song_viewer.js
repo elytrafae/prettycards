@@ -84,19 +84,19 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
 		var html$ = data.element;
 		var card = data.card;
-		var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
-		var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
-		if (card.id in cardExceptions) { // Load and Gaster Blaster respectively.
-			//console.log(card, "This is a Gaster Blaster or a Load!");
-			doesCardHaveTheme = true;
-		} else if ("hasThemeSong" in card) {
-			doesCardHaveTheme = card.hasThemeSong;
-		} else if (themeSongSettings) {
-			doesCardHaveTheme = true;
-		}
-		
-		if (doesCardHaveTheme) {
-			PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
+		PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
+			var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
+			var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
+			if (card.id in cardExceptions) { // Load and Gaster Blaster respectively.
+				//console.log(card, "This is a Gaster Blaster or a Load!");
+				doesCardHaveTheme = true;
+			} else if ("hasThemeSong" in card) {
+				doesCardHaveTheme = card.hasThemeSong;
+			} else if (themeSongSettings) {
+				doesCardHaveTheme = true;
+			}
+			
+			if (doesCardHaveTheme) {
 				var button;
 				if (themeSongSettings) {
 					button = createComplexButton(themeSongSettings);
@@ -104,8 +104,8 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
 					button = createSimpleButton(card);
 				}
 				html$.append(button);
-			})
-		}
+			}
+		});
 	});
 	
 }

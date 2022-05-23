@@ -11,18 +11,64 @@ var deckSelectLocked = true;
 var selectedDeck = {};
 var deckSelector = new SavedDeckSelector();
 
+var selfDivision = "";
+var selfElo = 0;
+var alreadyAgreedToRanked = false;
+
 var $ = window.$;
+
+function ReloadPage() {
+	window.location.reload();
+}
+
+PrettyCards_plugin.events.on("Chat:getSelfInfos", function(data) {
+	var me = JSON.parse(data.me);
+	selfDivision = me.division;
+	selfElo = me.eloRanked;
+	//console.log("CHAT JOINED!", JSON.parse(data.me));
+})
+
+function askRanked() {
+	if (alreadyAgreedToRanked) {
+		return true;
+	}
+	if (selfDivision == "LEGEND" && selfElo <= 2000) {
+		window.BootstrapDialog.show({
+            title: "Are you sure?",
+			type: window.BootstrapDialog.TYPE_DANGER,
+            message: "Are you sure you want to play ranked? One loss and it will be hell coming back into <span class='LEGEND_NEON'>LEGEND</span>.",
+			//onshow: this.OnShow
+			buttons: [
+				{
+					label: "Yeah, better not!",
+					cssClass: 'btn-primary',
+					action: function(dialog) {
+						dialog.close();
+					}
+				},
+				{
+					label: "Take me to battle!",
+					cssClass: 'btn-danger',
+					action: function(dialog) {
+						alreadyAgreedToRanked = true;
+						StartJoiningQueue("ranked");
+						dialog.close();
+					}
+				}
+			]
+        });
+		return false;
+	}
+	return true;
+}
 
 var gamemode_functions = {
 	standard: window.sendJoinQueue,
 	ranked: window.sendJoinRankedQueue,
+	//ranked: askRanked,
 	event: window.sendJoinEventQueue,
 	boss: window.sendJoinBossQueue,
 	reload: ReloadPage
-}
-
-function ReloadPage() {
-	window.location.reload();
 }
 
 function OpenDeckSelector() {
@@ -67,6 +113,9 @@ function SetSelectedDeck(deck) {
 
 function StartJoiningQueue(game_mode) {
 	if (playLocked) {
+		return;
+	}
+	if (game_mode == "ranked" && !askRanked()) {
 		return;
 	}
 	//console.log("Joining Queue Button Pressed!");
