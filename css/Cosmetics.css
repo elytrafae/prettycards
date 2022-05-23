@@ -1,4 +1,10 @@
 
+.mainContent .avatarGroup {
+    display: inline;
+    position: relative;
+    top: 15px;
+}
+
 .PrettyCards_CosmeticsStar {
     display: none;
     position: relative;
