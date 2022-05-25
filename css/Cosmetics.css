@@ -9,7 +9,7 @@
 
 .PrettyCards_CosmeticsStar {
     display: none;
-    position: relative;
+    position: absolute;
     text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
     font-size: 1.5em;
 }
@@ -19,9 +19,11 @@
     top: -62px;
 }
 
+/*
 *:hover > .PrettyCards_CosmeticsStar {
     display: block;
 }
+*/
 
 .PrettyCards_CosmeticsStar:hover {
     color: yellow;

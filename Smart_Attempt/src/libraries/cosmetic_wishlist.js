@@ -6,7 +6,13 @@ function SetUpCosmeticsShopPage() {
     var imgs = $(".mainContent img:not(nav *):not(footer *)");
     console.log("IMGS", imgs);
     imgs.each(function(i, e) {
-        $(e).parent().append(`<span class="glyphicon glyphicon-star-empty PrettyCards_CosmeticsStar"></span>`);
+        var rect = e.getBoundingClientRect();
+        console.log(rect);
+        var left = rect.left + rect.width;
+        var top = rect.top;
+        var html = `<div class="glyphicon glyphicon-star-empty PrettyCards_CosmeticsStar" style="left: ${left}px; top: ${top}px"></div>`;
+        $("body").append(html);
+        //$(e).parent().append(`<div class="glyphicon glyphicon-star-empty PrettyCards_CosmeticsStar"></div>`);
     })
 }
 
