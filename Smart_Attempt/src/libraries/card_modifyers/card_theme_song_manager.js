@@ -1,6 +1,6 @@
 import { PrettyCards_plugin, settings } from "../underscript_checker";
 import { utility } from "../utility";
-import {$} from "/src/third_party/jquery-3.6.0.min.js";
+import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
