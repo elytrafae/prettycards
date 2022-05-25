@@ -1,5 +1,6 @@
 import { PrettyCards_plugin, settings } from "../underscript_checker";
 import { utility } from "../utility";
+import {$} from "/src/third_party/jquery-3.6.0.min.js";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
@@ -153,7 +154,7 @@ if (settings.multi_theme_songs.value()) {
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 
-        window.$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
+        $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
             //console.log(data);
             baseThemeSongData = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);
