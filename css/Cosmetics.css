@@ -19,11 +19,9 @@
     top: -62px;
 }
 
-/*
 *:hover > .PrettyCards_CosmeticsStar {
     display: block;
 }
-*/
 
 .PrettyCards_CosmeticsStar:hover {
     color: yellow;
