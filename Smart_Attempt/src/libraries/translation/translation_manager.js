@@ -1,11 +1,26 @@
 
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
+var allValuesLists = {};
+
 function processJSON(lan, data) {
     //$.i18n.messageStore.set(lan, {[key]: processString(messages[key])});
     for (var key in data) {
+        var entry = data[key];
         if (typeof(data[key]) == "string") {
-            window.$.i18n.messageStore.set(lan, {[key]: data[key]});
+            window.$.i18n.messageStore.set(lan, {[key]: entry});
+        } else {
+            if (entry.ifEqual && window.$.i18n.messageStore.get(lan, key) != entry.ifEqual) {
+                continue;
+            }
+            if (entry.valuesList) {
+                allValuesLists[key] = entry.valuesList.length;
+                for (var i=0; i < entry.valuesList.length; i++) {
+                    window.$.i18n.messageStore.set(lan, {[key + "-" + i]: entry.valuesList[i]});
+                }
+            } else {
+                window.$.i18n.messageStore.set(lan, {[key]: entry.value});
+            }
         }
     }
 }
@@ -15,6 +30,20 @@ function loadLanguage(lan = 'en') {
         PrettyCards_plugin.events.on('translation:loaded', () => {
             processJSON(lan, data);
         })
+    })
+}
+
+function registerCustomExtensions() {
+    window.$.extend(window.$.i18n.parser.emitter, {
+        pcartifacts: function(nodes) {
+            var text = nodes[0];
+            var idArray = [];
+            for (var i=1; i < nodes.length; i++) {
+                idArray.push(Number(nodes[i]));
+            }
+            //prettycards.viewArtifactsInfoForIdArray
+            return `<span class="helpPointer underlined" oncontextmenu="prettycards.viewArtifactsInfoForIdArray([${idArray.join(",")}]);">${text}</span>`
+        }
     })
 }
 

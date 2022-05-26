@@ -4,7 +4,7 @@
 import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
-import { PrettyCards_plugin } from "./underscript_checker";
+import { prettycards, PrettyCards_plugin } from "./underscript_checker";
 import { createFloatingSoul } from "./floating_souls";
 
 const disabledText = "<span class='gray'>(Disabled)</span>";
@@ -187,16 +187,37 @@ class FancyDisplay {
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewSoul()", {id: id, helper: helper});
 	}
-	
-	static ViewArtifactsInfo(box) {
-		PrettyCards_plugin.events.emit("pre:viewArtifacts", box);
-		//console.log(box);
-		 if (window.$(box).find('.artifact-img').length > 0) {
+
+	static ViewArtifactsInfoBox(box) {
+		if (window.$(box).find('.artifact-img').length > 0) {
 			var datas = [];
 			$(box).find('.artifact-img').each(function() {
 				var artifactId = Number($(this).attr("artifactId"));
 				var artifactCounter = Number($(this).next(".artifact-custom").html());
 				var isDisabled = $(this).hasClass("artifact-disabled");
+				datas.push({id: artifactId, counter: artifactCounter, disabled: isDisabled});
+			});
+			FancyDisplay.ViewArtifactsInfo(datas);
+		}
+	}
+
+	static ViewArtifactsInfoForIdArray(arr) {
+		var datas = [];
+		arr.forEach(id => {
+			datas.push({id : id});
+		})
+		ViewArtifactsInfo(datas);
+	}
+	
+	static ViewArtifactsInfo(artDatas) {
+		PrettyCards_plugin.events.emit("pre:viewArtifacts", artDatas);
+		//console.log(box);
+		if (artDatas.length > 0) {
+			var datas = [];
+			artDatas.forEach(artData => {
+				var artifactId = artData.id;
+				var artifactCounter = artData.counter;
+				var isDisabled = artData.disabled;
 				var artifact = artifactDisplay.GetArtifactById(artifactId);
 				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
 				var image_src = utility.getArtifactImageLink(artifact.image);
@@ -218,8 +239,8 @@ class FancyDisplay {
 				});
 			});
 			var helper = new FancyListDisplay(datas);
-			PrettyCards_plugin.events.emit("viewArtifacts()", {box: box, helper: helper});
-		 }
+			PrettyCards_plugin.events.emit("viewArtifacts()", {artDatas: artDatas, helper: helper});
+		}
 	}
 	
 	static TestArtifactsInfo() {
@@ -243,8 +264,10 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.showArtifactDescBox = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);
-	window.artifactsInfo = FancyDisplay.ViewArtifactsInfo.bind(this);
+	window.artifactsInfo = FancyDisplay.ViewArtifactsInfoBox.bind(this);
 	
+	prettycards.viewArtifactsInfoForIdArray = FancyDisplay.ViewArtifactsInfoForIdArray.bind(this);
+
 	// Test functions
 	window.testArtifactsInfo = FancyDisplay.TestArtifactsInfo.bind(this);
 	//
