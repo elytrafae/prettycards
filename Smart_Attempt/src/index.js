@@ -28,6 +28,8 @@ import {} from "/src/libraries/card_modifyers/rarity_text_changer.js";
 import {} from "/src/libraries/card_modifyers/za_filter.js";
 import {} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 
+import {} from "/src/libraries/translation/translation_manager.js";
+
 // import {} from "/src/libraries/persona_overlay.js";
 
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
