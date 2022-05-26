@@ -13,7 +13,7 @@ const disabledText = "<span class='gray'>(Disabled)</span>";
 
 class FancyListDisplay {
 	
-	constructor(datas) {
+	constructor(datas, title) {
 		var container = window.$(`<div class="PrettyCards_ArtifactListContainer"></div>`);
 		
 		for (var i=0; i < datas.length; i++) {
@@ -37,7 +37,7 @@ class FancyListDisplay {
 		}
 		
 		window.BootstrapDialog.show({
-            title: window.$.i18n("artifacts-title"),
+            title: title || window.$.i18n("artifacts-title"),
             message: container,
 			//onshow: this.OnShow
 			buttons: [
@@ -201,15 +201,15 @@ class FancyDisplay {
 		}
 	}
 
-	static ViewArtifactsInfoForIdArray(arr) {
+	static ViewArtifactsInfoForIdArray(arr, title) {
 		var datas = [];
 		arr.forEach(id => {
 			datas.push({id : id});
 		})
-		ViewArtifactsInfo(datas);
+		FancyDisplay.ViewArtifactsInfo(datas, title);
 	}
 	
-	static ViewArtifactsInfo(artDatas) {
+	static ViewArtifactsInfo(artDatas, title) {
 		PrettyCards_plugin.events.emit("pre:viewArtifacts", artDatas);
 		//console.log(box);
 		if (artDatas.length > 0) {
@@ -238,7 +238,7 @@ class FancyDisplay {
 					counter: artifactCounter || artifact.counter
 				});
 			});
-			var helper = new FancyListDisplay(datas);
+			var helper = new FancyListDisplay(datas, title);
 			PrettyCards_plugin.events.emit("viewArtifacts()", {artDatas: artDatas, helper: helper});
 		}
 	}

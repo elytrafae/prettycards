@@ -1,8 +1,14 @@
 {
-    "test-message" : "Hello, world!",
-    "card-717" : "\\[{{KW:MAGIC|override=Magic Moment}}\\]: GIVE THE \\[top person\\] A \\[one of a kind\\] DEAL WITH THIS \\[\\[{{ARTIFACT:46}}\\]\\]!!1!",
+    "card-717" : {
+        "ifEqual" : "{{KW:MAGIC}}: Give your opponent {{ARTIFACT:46}}.",
+        "value":"\\[{{KW:MAGIC|override=Magic Moment}}\\]: GIVE THE \\[top person\\] A \\[one of a kind\\] DEAL WITH THIS \\[\\[{{ARTIFACT:46}}\\]\\]!!1!"
+    },
     "card-219" : {
         "ifEqual" : "{{KW:ARMOR}}. {{KW:MAGIC}}: Add a random different {{CARD:219|1}}'s artifact.",
         "value" : "{{KW:ARMOR}}. {{KW:MAGIC}}: Add a random different {{PCARTIFACTS:Gerson's artifact|21|22|23|24}}."
+    },
+    "card-664" : {
+        "ifEqual" : "{{KW:MAGIC}}, {{KW:DUST}}, {{KW:SHOCK}}, {{KW:SUPPORT}} and {{KW:TURN_END}}: Shuffle a {{CARD:665|1}} into the opponent's deck.",
+        "value" : "\\[{{KW:MAGIC|override=Magical Girl}}\\], \\[{{KW:DUST|override=Dusty Shelves}}\\], \\[{{KW:SHOCK|override=Shocking!}}\\], \\[{{KW:SUPPORT|override=Send Your Support}}\\] and \\[{{KW:TURN_END}}\\]: GIVE THE ENEMY \\[Hoochi Mama\\] A HAND WITH A NEW AND IMPROVED \\[{{CARD:665|1}}\\] IN THEIR \\[25 Card Deck\\]!"
     }
 }

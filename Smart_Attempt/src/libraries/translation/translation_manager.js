@@ -56,6 +56,9 @@ function prePageLoadStuff() {
     if (lan != "en") {
         loadLanguage(lan);
     }
+    PrettyCards_plugin.events.on('translation:loaded', () => {
+        registerCustomExtensions();
+    })
 }
 
 prePageLoadStuff();
