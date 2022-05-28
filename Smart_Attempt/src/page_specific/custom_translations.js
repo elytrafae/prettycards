@@ -15,12 +15,17 @@ function InitCustomTranslations() {
                 <h1>Please select a language!</h1>
                 <div id="PrettyCards_CT_Phase1_LangaugeSelect"></div>
             </div>
+            <div id="PrettyCards_CT_Phase2">
+                
+            </div>
         `);
-        for (var i=0; i < window.availableLanguages.length; i++) {
-            var lan = window.availableLanguages[i];
-            var line = $(`<div>${window.$.i18n("chat-" + lan)}</div>`);
-            $("#PrettyCards_CT_Phase1_LangaugeSelect").append(line);
-        }
+        PrettyCards_plugin.events.on("translation:loaded", function() {
+            for (var i=0; i < window.availableLanguages.length; i++) {
+                var lan = window.availableLanguages[i];
+                var line = $(`<div>${window.$.i18n("chat-" + lan)}</div>`);
+                $("#PrettyCards_CT_Phase1_LangaugeSelect").append(line);
+            }
+        })
     })
 }
 
