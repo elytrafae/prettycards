@@ -25,3 +25,7 @@
     flex-wrap: nowrap;
     justify-content: space-between;
 }
+
+.mainContent.PrettyCards_FullWidthMainContent {
+    width: 100%;
+}

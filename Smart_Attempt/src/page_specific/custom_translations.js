@@ -34,7 +34,7 @@ function InitCustomTranslations() {
                             </select>
                         </div>
                         <div>
-                            <button class="btn btn-primary">Quick Ref</button>
+                            <button class="btn btn-primary" id="PrettyCards_CT_Phase2_QuickRefBtn">Quick Ref</button>
                             <p><span id="currentPage">1</span><select id="selectPage"></select></p>
                         </div>
                         <div>
@@ -43,9 +43,14 @@ function InitCustomTranslations() {
                         </div>
                     </div>
                 </div>
-                <div id="PrettyCards_CT_Phase2_QuickRef"></div>
+                <div id="PrettyCards_CT_Phase2_QuickRef" class="PrettyCards_Hidden"></div>
             </div>
         `);
+
+        $("PrettyCards_CT_Phase2_QuickRefBtn").click(function() {
+            $(".mainContent").toggleClass("PrettyCards_FullWidthMainContent");
+            $("#PrettyCards_CT_Phase2_QuickRef").toggleClass("PrettyCards_Hidden");
+        })
         PrettyCards_plugin.events.on("translation:loaded", function() {
             for (var i=0; i < window.availableLanguages.length; i++) {
                 var lan = window.availableLanguages[i];
