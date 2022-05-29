@@ -33,3 +33,9 @@
 .mainContent.PrettyCards_WiderMainContent {
     width: 1500;
 }
+
+#PrettyCards_CT_Phase2_QuickRef {
+    width: 600px;
+    border: 5px solid white;
+    background-color: black;
+}
