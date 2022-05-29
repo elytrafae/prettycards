@@ -47,8 +47,9 @@ function InitCustomTranslations() {
             </div>
         `);
 
-        $("PrettyCards_CT_Phase2_QuickRefBtn").click(function() {
-            $(".mainContent").toggleClass("PrettyCards_FullWidthMainContent");
+        $("#PrettyCards_CT_Phase2_QuickRefBtn").click(function() {
+            console.log("CLICK!");
+            $(".mainContent").toggleClass("PrettyCards_WiderMainContent");
             $("#PrettyCards_CT_Phase2_QuickRef").toggleClass("PrettyCards_Hidden");
         })
         PrettyCards_plugin.events.on("translation:loaded", function() {

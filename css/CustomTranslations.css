@@ -29,3 +29,7 @@
 .mainContent.PrettyCards_FullWidthMainContent {
     width: 100%;
 }
+
+.mainContent.PrettyCards_WiderMainContent {
+    width: 1500;
+}
