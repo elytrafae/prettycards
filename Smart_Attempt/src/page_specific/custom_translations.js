@@ -42,13 +42,33 @@ function InitCustomTranslations() {
                             <button id="btnNext" onclick="nextPage();" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-chevron-right"></span></button>
                         </div>
                     </div>
+
+                    <table id="PrettyCards_CT_Phase2_Table" class="translation table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>translation-key-here</td>
+                                <td style="width:50px; text-align: center;">
+                                    <button class="btn btn-sm btn-success" onclick="checkCreate(1493);" disabled="">
+                                        <span class="glyphicon glyphicon-send"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">ENGLISH TEXT</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <textarea maxlength="500" class="form-control"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div id="PrettyCards_CT_Phase2_QuickRef" class="PrettyCards_Hidden"></div>
             </div>
         `);
 
         $("#PrettyCards_CT_Phase2_QuickRefBtn").click(function() {
-            console.log("CLICK!");
             $(".mainContent").toggleClass("PrettyCards_WiderMainContent");
             $("#PrettyCards_CT_Phase2_QuickRef").toggleClass("PrettyCards_Hidden");
         })
