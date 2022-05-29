@@ -35,7 +35,7 @@ function loadLanguage(lan = 'en') {
 
 function registerCustomExtensions() {
     window.$.extend(window.$.i18n.parser.emitter, {
-        pcartifacts: function(nodes) {
+        pc_artifacts: function(nodes) {
             var text = nodes[0];
             var idArray = [];
             for (var i=1; i < nodes.length; i++) {

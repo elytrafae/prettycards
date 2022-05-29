@@ -2,11 +2,20 @@ import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "/src/libraries/utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
+var englishOriginal; // Onu's English File
+var englishCustom; // My English File
+var editedTag; // The initials (aka ID) of the currently edited language
+var editedOriginal; // The currently edited language's File from Onu
+var editedCustom; // The currently edited language's File from Me
 
+var pages = []; // The list of entry IDs that conform to the current filters.
+var currentPage = 0;
 
 function InitCustomTranslations() {
     
     // TODO: Load the always necessary files here.
+
+    loadEnglish();
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
         utility.loadCSSFromGH("CustomTranslations");
@@ -15,7 +24,7 @@ function InitCustomTranslations() {
                 <h1>Please select a language!</h1>
                 <div id="PrettyCards_CT_Phase1_LangaugeSelect"></div>
             </div>
-            <div id="PrettyCards_CT_Phase2">
+            <div id="PrettyCards_CT_Phase2" class="PrettyCards_Hidden">
                 <div id="PrettyCards_CT_Phase2_MainContent">
                     <div id="PrettyCards_CT_Phase2_FilterRow">
                         <div>
@@ -24,13 +33,18 @@ function InitCustomTranslations() {
                         </div>
                         <div>
                             <p>Category</p>
-                            <select id="selectCategory" class="form-control" style="width: 160px; color: white;" onchange="applyFilters(); showPage(0);"><option value=""></option></select>
+                            <select id="selectCategory" class="form-control" style="width: 160px; color: white;" onchange="applyFilters(); showPage(0);">
+                                <option value=""></option>
+                            </select>
                         </div>
                         <div>
                             <p>Status</p>
                             <select id="selectStatus" class="form-control" style="width: 170px; color: white;" onchange="applyFilters(); showPage(0);">
-                                <option value="NOT_TRANSLATED">Not translated</option>
+                                <option value="ALL">All Entries</option>
                                 <option value="DONE">Translated</option>
+                                <option value="NEW">New</option>
+                                <option value="EXPIRED">Expired</option>
+                                <option value="NEEDS_CHANGE">Needs Changes</option>
                             </select>
                         </div>
                         <div>
@@ -46,19 +60,25 @@ function InitCustomTranslations() {
                     <table id="PrettyCards_CT_Phase2_Table" class="translation table table-bordered">
                         <tbody>
                             <tr>
-                                <td>translation-key-here</td>
+                                <td id="PrettyCards_CT_Phase2_TranslationKey">translation-key-here</td>
                                 <td style="width:50px; text-align: center;">
-                                    <button class="btn btn-sm btn-success" onclick="checkCreate(1493);" disabled="">
+                                    <button class="btn btn-sm btn-success" onclick="ADD SHIT HERE" disabled="">
                                         <span class="glyphicon glyphicon-send"></span>
                                     </button>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">ENGLISH TEXT</td>
+                                <td colspan="2" id="PrettyCards_CT_Phase2_OGEnglishText">ENGLISH TEXT</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" id="PrettyCards_CT_Phase2_EnglishText">ENGLISH TEXT</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" id="PrettyCards_CT_Phase2_OGTranslatedText">ENGLISH TEXT</td>
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <textarea maxlength="500" class="form-control"></textarea>
+                                    <textarea maxlength="500" class="form-control" id="PrettyCards_CT_Phase2_TranslationArea"></textarea>
                                 </td>
                             </tr>
                         </tbody>
@@ -73,13 +93,179 @@ function InitCustomTranslations() {
             $("#PrettyCards_CT_Phase2_QuickRef").toggleClass("PrettyCards_Hidden");
         })
         PrettyCards_plugin.events.on("translation:loaded", function() {
-            for (var i=0; i < window.availableLanguages.length; i++) {
-                var lan = window.availableLanguages[i];
+            for (var i=1; i < window.availableLanguages.length; i++) {
+                const lan = window.availableLanguages[i];
                 var line = $(`<div>${window.$.i18n("chat-" + lan)}</div>`);
+                line.click(function() {
+                    setLanguage(lan);
+                })
                 $("#PrettyCards_CT_Phase1_LangaugeSelect").append(line);
             }
         })
     })
+
+    window.applyFilters = applyFilters;
+    window.showPage = showPage;
+    window.nextPage = nextPage;
+    window.previousPage = previousPage;
+}
+
+function loadEnglish() {
+    $.getJSON(`/translation/en.json`, {}, function(data) {
+        englishOriginal = data;
+        goToPhase2();
+    });
+    $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/en.json`, {}, function(data) {
+        englishCustom = data;
+        goToPhase2();
+    })
+}
+
+function setLanguage(lan) {
+    editedTag = lan;
+    $.getJSON(`/translation/${lan}.json`, {}, function(data) {
+        editedOriginal = data;
+        goToPhase2();
+    });
+    var call = $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`, {}, function(data) {
+        editedCustom = data;
+        goToPhase2();
+    });
+    call.fail(function() {
+        editedCustom = {};
+        goToPhase2();
+    })
+}
+
+function goToPhase2() {
+    if (!(englishOriginal && englishCustom && editedOriginal && editedCustom)) {
+        return;
+    }
+    $("#PrettyCards_CT_Phase1").addClass("PrettyCards_Hidden");
+    $("#PrettyCards_CT_Phase2").removeClass("PrettyCards_Hidden");
+    console.log("SUCCESS", englishOriginal, englishCustom, editedOriginal, editedCustom);
+    applyFilters();
+    showPage(0);
+}
+
+function isEntryExpired(key) {
+    var entry = editedCustom[key];
+    return entry && entry.ifEqual && entry.ifEqual != editedOriginal.ifEqual;
+}
+
+function isRemoved(key) {
+
+    var categoryVal = $("#selectCategory").val();
+    var statusVal = $("#selectStatus").val();
+    var entry = editedCustom[key];
+    var expired = isEntryExpired(key);
+
+    if (categoryVal != "" && !key.startsWith(categoryVal)) {
+        return true;
+    }
+
+    if (statusVal == "DONE" && (!entry || expired)) {
+        return true;
+    } else if (statusVal == "NEW" && entry) {
+        return true;
+    } else if (statusVal == "EXPIRED" && !expired) {
+        return true;
+    } else if (statusVal == "NEEDS_CHANGE" && (entry && !expired)) {
+        return true;
+    }
+
+    return false;
+}
+
+function applyFilters() {
+
+    pages = [];
+
+    for (var key in englishCustom) {
+        if (!isRemoved(key)) {
+            pages.push(key);
+        }
+    }
+
+}
+
+function nextPage() {
+
+    if (currentPage < pages.length - 1) {
+        showPage(currentPage + 1);
+
+        
+
+        showPage(currentPage);
+        $('#currentPage').html(currentPage + 1);
+    }
+}
+
+function previousPage() {
+
+    if (currentPage > 0) {
+        currentPage--;
+
+        if (currentPage === 0) {
+            $('#btnPrevious').prop('disabled', true);
+        }
+
+        $('#btnNext').prop('disabled', false);
+
+        showPage(currentPage);
+        $('#currentPage').html(currentPage + 1);
+    }
+
+}
+
+function showPage(nr) {
+    currentPage = nr;
+
+    $('#btnNext').prop('disabled', currentPage + 1 >= pages.length);
+    $('#btnPrevious').prop('disabled', currentPage <= 0);
+
+    displayEntry(pages[currentPage]);
+}
+
+function returnNewEntryBasedOnEnglish(key) {
+    var enEntry = englishCustom[key];
+    if (typeof(enEntry) == "string") {
+        return "";
+    }
+    var entry = {};
+    if (enEntry.ifEqual) {
+        entry.ifEqual = editedOriginal[key] || "";
+    }
+    if (enEntry.values) {
+        entry.values = [];
+        for (var i=0; i < enEntry.values.length; i++) {
+            entry.values[i] = "";
+        }
+    } else {
+        entry.value = "";
+    }
+    return entry;
+}
+
+function displayEntry(key) {
+    var entry = editedCustom[key];
+    $("#PrettyCards_CT_Phase2_TranslationKey").html(key);
+    if (!entry) {
+        entry = returnNewEntryBasedOnEnglish(key);
+        editedCustom[key] = entry;
+    }
+    var englishEntry = englishCustom[key]
+    var englishText = englishEntry;
+    if (englishEntry.value) {
+        englishText = englishEntry.value;
+    }
+    $("#PrettyCards_CT_Phase2_EnglishText").html(englishText);
+    $("#PrettyCards_CT_Phase2_OGEnglishText").parent().toggleClass("PrettyCards_Hidden", !entry.ifEqual);
+    $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().toggleClass("PrettyCards_Hidden", !entry.ifEqual);
+    if (entry.ifEqual) {
+        $("#PrettyCards_CT_Phase2_OGEnglishText").html(englishOriginal[key]);
+        $("#PrettyCards_CT_Phase2_OGTranslatedText").html(editedOriginal[key]);
+    }
 }
 
 export {InitCustomTranslations};
