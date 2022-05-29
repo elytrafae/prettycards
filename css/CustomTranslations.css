@@ -7,3 +7,10 @@
     font-size: 2em;
     margin: 0.5em;
 }
+
+#PrettyCards_CT_Phase2_FilterRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}

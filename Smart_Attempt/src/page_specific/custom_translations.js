@@ -16,7 +16,27 @@ function InitCustomTranslations() {
                 <div id="PrettyCards_CT_Phase1_LangaugeSelect"></div>
             </div>
             <div id="PrettyCards_CT_Phase2">
-                
+                <div id="PrettyCards_CT_Phase2_FilterRow">
+                    <div>
+                        <p>Search</p>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search..." style="width: 180px;" data-lpignore="true">
+                    </div>
+                    <div>
+                        <p>Category</p>
+                        <select id="selectCategory" class="form-control" style="width: 160px; color: white;" onchange="applyFilters(); showPage(0);"><option value=""></option></select>
+                    </div>
+                    <div>
+                        <p>Status</p>
+                        <select id="selectStatus" class="form-control" style="width: 170px; color: white;" onchange="applyFilters(); showPage(0);">
+                            <option value="NOT_TRANSLATED">Not translated</option>
+                            <option value="DONE">Translated</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Quick Ref</button>
+                        <p><span id="currentPage">1</span><select id="selectPage"></select></p>
+                    </div>
+                </div>
             </div>
         `);
         PrettyCards_plugin.events.on("translation:loaded", function() {
