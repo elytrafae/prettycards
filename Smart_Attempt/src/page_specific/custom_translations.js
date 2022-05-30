@@ -49,7 +49,7 @@ function InitCustomTranslations() {
                         </div>
                         <div>
                             <button class="btn btn-primary" id="PrettyCards_CT_Phase2_QuickRefBtn">Quick Ref</button>
-                            <p><span id="currentPage">1</span><select id="selectPage"></select></p>
+                            <p><select id="selectPage"></select> / <span id="maxPages"></span></p>
                         </div>
                         <div>
                             <button id="btnPrevious" onclick="previousPage();" class="btn btn-lg btn-primary" disabled=""><span class="glyphicon glyphicon-chevron-left"></span></button>
@@ -68,13 +68,13 @@ function InitCustomTranslations() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" id="PrettyCards_CT_Phase2_OGEnglishText">ENGLISH TEXT</td>
+                                <td colspan="2" id="PrettyCards_CT_Phase2_OGEnglishText">OG ENGLISH TEXT</td>
                             </tr>
                             <tr>
                                 <td colspan="2" id="PrettyCards_CT_Phase2_EnglishText">ENGLISH TEXT</td>
                             </tr>
                             <tr>
-                                <td colspan="2" id="PrettyCards_CT_Phase2_OGTranslatedText">ENGLISH TEXT</td>
+                                <td colspan="2" id="PrettyCards_CT_Phase2_OGTranslatedText">OG TRANSLATED TEXT</td>
                             </tr>
                             <tr>
                                 <td colspan="2">
@@ -187,39 +187,31 @@ function applyFilters() {
         }
     }
 
+    $("#maxPages").html(pages.length);
+
+    var select = $("#selectPage");
+    select.html("");
+    for (var i=0; i < pages.length; i++) {
+        select.append(`<option value="${i}">${i+1}</option>`);
+    }
+
 }
 
 function nextPage() {
-
     if (currentPage < pages.length - 1) {
         showPage(currentPage + 1);
-
-        
-
-        showPage(currentPage);
-        $('#currentPage').html(currentPage + 1);
     }
 }
 
 function previousPage() {
-
     if (currentPage > 0) {
-        currentPage--;
-
-        if (currentPage === 0) {
-            $('#btnPrevious').prop('disabled', true);
-        }
-
-        $('#btnNext').prop('disabled', false);
-
-        showPage(currentPage);
-        $('#currentPage').html(currentPage + 1);
+        showPage(currentPage - 1);
     }
-
 }
 
 function showPage(nr) {
     currentPage = nr;
+    $("#selectPage").val(currentPage);
 
     $('#btnNext').prop('disabled', currentPage + 1 >= pages.length);
     $('#btnPrevious').prop('disabled', currentPage <= 0);
@@ -247,6 +239,14 @@ function returnNewEntryBasedOnEnglish(key) {
     return entry;
 }
 
+function getSingleTextFromEntry(entry) {
+    var text = entry;
+    if (entry.value || entry.value == "") {
+        text = entry.value;
+    }
+    return text;
+}
+
 function displayEntry(key) {
     var entry = editedCustom[key];
     $("#PrettyCards_CT_Phase2_TranslationKey").html(key);
@@ -254,18 +254,21 @@ function displayEntry(key) {
         entry = returnNewEntryBasedOnEnglish(key);
         editedCustom[key] = entry;
     }
-    var englishEntry = englishCustom[key]
-    var englishText = englishEntry;
-    if (englishEntry.value) {
-        englishText = englishEntry.value;
-    }
+
+    var englishText = getSingleTextFromEntry(englishCustom[key]);
+    
     $("#PrettyCards_CT_Phase2_EnglishText").html(englishText);
-    $("#PrettyCards_CT_Phase2_OGEnglishText").parent().toggleClass("PrettyCards_Hidden", !entry.ifEqual);
-    $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().toggleClass("PrettyCards_Hidden", !entry.ifEqual);
     if (entry.ifEqual) {
+        $("#PrettyCards_CT_Phase2_OGEnglishText").parent().removeClass("PrettyCards_Hidden");
+        $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().removeClass("PrettyCards_Hidden");
         $("#PrettyCards_CT_Phase2_OGEnglishText").html(englishOriginal[key]);
         $("#PrettyCards_CT_Phase2_OGTranslatedText").html(editedOriginal[key]);
+    } else {
+        $("#PrettyCards_CT_Phase2_OGEnglishText").parent().addClass("PrettyCards_Hidden");
+        $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().addClass("PrettyCards_Hidden");
     }
+    console.log(entry, getSingleTextFromEntry(entry));
+    $("#PrettyCards_CT_Phase2_TranslationArea").val(getSingleTextFromEntry(entry));
 }
 
 export {InitCustomTranslations};

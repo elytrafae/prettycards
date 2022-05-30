@@ -10,5 +10,19 @@
     "card-664" : {
         "ifEqual" : "{{KW:MAGIC}}, {{KW:DUST}}, {{KW:SHOCK}}, {{KW:SUPPORT}} and {{KW:TURN_END}}: Shuffle a {{CARD:665|1}} into the opponent's deck.",
         "value" : "\\[{{KW:MAGIC|override=Magical Girl}}\\], \\[{{KW:DUST|override=Dusty Shelves}}\\], \\[{{KW:SHOCK|override=Shocking!}}\\], \\[{{KW:SUPPORT|override=Send Your Support}}\\] and \\[{{KW:TURN_END}}\\]: GIVE THE ENEMY \\[Hoochi Mama\\] A HAND WITH A NEW AND IMPROVED \\[{{CARD:665|1}}\\] IN THEIR \\[25 Card Deck\\]!"
+    },
+    "pc-navigate-goback" : "Go Back!",
+    "pc-sop-mysterydescriptions" : {
+        "values" : [
+            "ERROR: Not Enough Clues",
+            "Good luck with this one~!",
+            "Hopefully this one doesn't make you look too bad.",
+            "Life is simply a guessing game. Are you brave enough to roll the dice~?",
+            "I pity you . . . A little.",
+            "Does it really matter at the end?",
+            "I wish I could see your frustated expression~",
+            "I wonder what your friends will think of you . . .",
+            "Need a little hint? How cute~!"
+        ]
     }
 }
