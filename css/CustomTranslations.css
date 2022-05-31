@@ -30,6 +30,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    margin-bottom: 1em;
 }
 
 .mainContent.PrettyCards_FullWidthMainContent {
@@ -48,7 +49,7 @@
 }
 
 #PrettyCards_CT_Phase2_Table {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .PrettyCards_CT_Phase2_ListEntryRow > td {

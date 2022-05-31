@@ -12,8 +12,18 @@ var pages = []; // The list of entry IDs that conform to the current filters.
 var currentPage = 0;
 
 function InitCustomTranslations() {
-    
-    // TODO: Load the always necessary files here.
+
+    PrettyCards_plugin.events.on("PC_Chat:getSelfInfos", function() {
+        if (utility.translatorFeaturesAccess()) {
+            StartVerified();
+        } else {
+            $(".mainContent").html("<h1 class='red'>You don't have access to this page!</h1>");
+        }
+    })
+
+}
+
+function StartVerified() {
 
     loadEnglish();
 
@@ -56,6 +66,8 @@ function InitCustomTranslations() {
                             <button id="btnNext" onclick="nextPage();" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-chevron-right"></span></button>
                         </div>
                     </div>
+
+                    <p id="PrettyCards_CT_Phase2_Preview"><span id="PrettyCards_CT_Phase2_PreviewName"></span><span id="PrettyCards_CT_Phase2_Preview"></span></p>
 
                     <table id="PrettyCards_CT_Phase2_Table" class="translation table table-bordered">
                         <tbody>
@@ -331,7 +343,9 @@ function displayEntry(key) {
     $("#PrettyCards_CT_Phase2_TranslationArea").val(getSingleTextFromEntry(entry));
     const constKey = key;
     $("#PrettyCards_CT_Phase2_TranslationArea").unbind("keyup").keyup(function () {
-        setSingleTextToKey(constKey, $("#PrettyCards_CT_Phase2_TranslationArea").val());
+        var txt = $("#PrettyCards_CT_Phase2_TranslationArea").val();
+        setSingleTextToKey(constKey, txt);
+        setPreviewTo(txt);
     });
 }
 
@@ -357,7 +371,9 @@ function displayListEntry(key, entry) {
         </tr>`);
         row.find("textarea").val(val || "");
         row.find("textarea").keyup(function () {
-            editedCustom[constKey].values[index] = $(this).val();
+            var txt = $(this).val();
+            editedCustom[constKey].values[index] = txt;
+            setPreviewTo(txt);
         });
         parent.append(row);
     }
@@ -401,6 +417,14 @@ function getColoredStringReference(stringReference) {
     });
 
     return coloredString;
+}
+
+function setPreviewTo(txt = "") {
+    if (txt == "") {
+        $("#PrettyCards_CT_Phase2_Preview").html("");
+        return;
+    }
+    $("#PrettyCards_CT_Phase2_Preview").html(`<span>${utility.toLocale("decks-preview", editedTag)}: </span><span>${utility.toLocale(txt, editedTag)}</span>`)
 }
 
 export {InitCustomTranslations};

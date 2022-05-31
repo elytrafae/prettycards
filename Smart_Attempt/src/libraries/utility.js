@@ -24,6 +24,8 @@ var season_number = -1;
 const seasonKeyStart = "quest-s";
 const seasonKeyEnd = "-start-1";
 
+const accessExceptions = ["CMD_God", "Jazmin290"]; // Usernames to let use Translator features for obvious reasons. Might use this for other types of permissions as well later? IDK.
+
 PrettyCards_plugin.events.on("translation:loaded", function(data) {
 	var messages = $.i18n.messageStore.messages.en;
 	var list = Object.keys(messages);
@@ -214,6 +216,32 @@ class Utility {
 		// the file will be kept by the browser as cache
 		//audio.addEventListener('canplaythrough', loadedAudio, false);
 		audio.src = url;
+	}
+
+	translatorFeaturesAccess() {
+		if (accessExceptions.includes(window.selfUsername)) {
+			return true;
+		}
+		for (var i=0; i < window.selfGroups.length; i++) {
+			var group = window.selfGroups[i];
+			if (group.name === "Translator") {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	toLocale(key, locale, data = []) {
+		const l = window.$.i18n().locale;
+		window.$.i18n().locale = locale;
+		let text;
+		try {
+			text = window.$.i18n(key, ...data);
+		} catch (e) {
+			text = 'ERROR';
+		}
+		window.$.i18n().locale = l;
+		return text;
 	}
 	
 }

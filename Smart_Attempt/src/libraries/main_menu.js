@@ -64,9 +64,16 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				<a href="/CustomCardSkins"><p style="cursor: pointer;">Custom Card Skins</p></a>
 				<a href="/CustomCards"><p style="cursor: pointer;">Custom Cards</p></a>
 				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">Smash or Pass</p></a>') : ""}
+				<a href="/CustomTranslations" class="PrettyCards_Hidden Translator"><p style="cursor: pointer;">Custom Translate</p></a>
 				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">API Docs</p></a>
 			</div>
 		</div>`)
+
+		PrettyCards_plugin.events.on("PC_Chat:getSelfInfos Chat:Connected", function() {
+			if (utility.translatorFeaturesAccess()) {
+				$("#PrettyCards_MainMenu .Translator").removeClass("PrettyCards_Hidden");
+			}
+		})
 		
 		var isfadedIn = false;
 		$("body").mousemove(function (e) {

@@ -1,4 +1,5 @@
 
+import { utility } from "./utility";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 settings.kromer_test = PrettyCards_plugin.settings().add({
@@ -13,24 +14,11 @@ settings.kromer_test = PrettyCards_plugin.settings().add({
 
 var translationKeys = ["item-ucp", "header-free-ucp", "shop-title", "quests-ucp", "settings-username-ucp", "packs-error-add", "reward-ucp", "cardskins-shop-confirm"];
 
-function toLocale(key, locale, data = []) {
-	const l = window.$.i18n().locale;
-	window.$.i18n().locale = locale;
-	let text;
-	try {
-		text = window.$.i18n(key, ...data);
-	} catch (e) {
-		text = 'ERROR';
-	}
-	window.$.i18n().locale = l;
-	return text;
-}
-
 function kromerify(lan) {
 	var obj = {};
 	for (var j=0; j < translationKeys.length; j++) {
 		var key = translationKeys[j];
-		obj[key] = toLocale(key, lan).replaceAll("UCP", "KROMER");
+		obj[key] = utility.toLocale(key, lan).replaceAll("UCP", "KROMER");
 	}
 	//console.log("Translation changed!", obj, lan);
 	window.$.i18n().load(obj, lan);
