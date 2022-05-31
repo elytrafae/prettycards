@@ -116,14 +116,15 @@ function InitCustomTranslations() {
     window.PrettyCards_CT_downloadJSON = downloadJSON;
 }
 
+const openCloseFunction = "$(this).parent().toggleClass('PrettyCards_CT_Phase2_QuickRefEntryOpen')"
 function setUpQuickRef() {
     $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translationQuickRef.json`, {}, function(data) {
         var parent = $("#PrettyCards_CT_Phase2_QuickRef");
         for (var i=0; i < data.length; i++) {
             var entry = data[i];
             var row = $(`
-                <div class="PrettyCards_CT_Phase2_QuickRefEntry" onclick="$(this).toggleClass('PrettyCards_CT_Phase2_QuickRefEntryOpen')">
-                    <h2 class="PrettyCards_CT_Phase2_QuickRefEntryTitle">${entry.title}</h2>
+                <div class="PrettyCards_CT_Phase2_QuickRefEntry">
+                    <h2 class="PrettyCards_CT_Phase2_QuickRefEntryTitle" onclick="${openCloseFunction}">${entry.title}</h2>
                     <p>${entry.description}</p>
                     <p>Syntax: <code class="PrettyCards_DarkThemeCode">${entry.syntax}</code></p>
                     <p>Example: <code class="PrettyCards_DarkThemeCode">${entry.example}</code></p>

@@ -101,3 +101,7 @@
 .PrettyCards_CT_Phase2_QuickRefEntry.PrettyCards_CT_Phase2_QuickRefEntryOpen > * {
     display: block;
 }
+
+.PrettyCards_CT_Phase2_QuickRefEntryTitle {
+    cursor: pointer;
+}
