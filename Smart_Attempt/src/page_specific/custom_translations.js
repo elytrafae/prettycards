@@ -60,7 +60,7 @@ function InitCustomTranslations() {
                     <table id="PrettyCards_CT_Phase2_Table" class="translation table table-bordered">
                         <tbody>
                             <tr>
-                                <td id="PrettyCards_CT_Phase2_TranslationKey">translation-key-here</td>
+                                <td id="PrettyCards_CT_Phase2_TranslationKey" colspan="2">translation-key-here</td>
                                 <td style="width:50px; text-align: center;">
                                     <button class="btn btn-sm btn-success" onclick="ADD SHIT HERE" disabled="">
                                         <span class="glyphicon glyphicon-send"></span>
@@ -68,16 +68,16 @@ function InitCustomTranslations() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" id="PrettyCards_CT_Phase2_OGEnglishText">OG ENGLISH TEXT</td>
+                                <td colspan="3" id="PrettyCards_CT_Phase2_OGEnglishText">OG ENGLISH TEXT</td>
                             </tr>
                             <tr>
-                                <td colspan="2" id="PrettyCards_CT_Phase2_EnglishText">ENGLISH TEXT</td>
+                                <td colspan="3" id="PrettyCards_CT_Phase2_EnglishText">ENGLISH TEXT</td>
                             </tr>
                             <tr>
-                                <td colspan="2" id="PrettyCards_CT_Phase2_OGTranslatedText">OG TRANSLATED TEXT</td>
+                                <td colspan="3" id="PrettyCards_CT_Phase2_OGTranslatedText">OG TRANSLATED TEXT</td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td colspan="3">
                                     <textarea maxlength="500" class="form-control" id="PrettyCards_CT_Phase2_TranslationArea"></textarea>
                                 </td>
                             </tr>
@@ -153,12 +153,28 @@ function isEntryExpired(key) {
     return entry && entry.ifEqual && entry.ifEqual != editedOriginal.ifEqual;
 }
 
+function isEntryFull(key) {
+    var entry = editedCustom[key];
+    if (!entry) {return false;}
+    if (typeof(entry) == "string" && entry != "") {return true;}
+    if (entry.value && entry.value != "") {return true;}
+    if (entry.values) {
+        for (var i=0; i < entry.values.length; i++) {
+            if (!entry.values[i] || entry.values[i] == "") {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 function isRemoved(key) {
 
     var categoryVal = $("#selectCategory").val();
     var statusVal = $("#selectStatus").val();
     var entry = editedCustom[key];
     var expired = isEntryExpired(key);
+    var isFull = isEntryFull(key);
 
     if (categoryVal != "" && !key.startsWith(categoryVal)) {
         return true;
@@ -170,7 +186,7 @@ function isRemoved(key) {
         return true;
     } else if (statusVal == "EXPIRED" && !expired) {
         return true;
-    } else if (statusVal == "NEEDS_CHANGE" && (entry && !expired)) {
+    } else if (statusVal == "NEEDS_CHANGE" && (entry && !expired && isFull)) {
         return true;
     }
 
@@ -255,8 +271,15 @@ function displayEntry(key) {
         editedCustom[key] = entry;
     }
 
+    // With this I'll assume that there will never be conditional list entries.
+    if (entry.values) {
+        displayListEntry(key, entry);
+        return;
+    }
+
     var englishText = getSingleTextFromEntry(englishCustom[key]);
     
+    $("#PrettyCards_CT_Phase2_EnglishText").removeClass("PrettyCards_Hidden");
     $("#PrettyCards_CT_Phase2_EnglishText").html(englishText);
     if (entry.ifEqual) {
         $("#PrettyCards_CT_Phase2_OGEnglishText").parent().removeClass("PrettyCards_Hidden");
@@ -268,7 +291,25 @@ function displayEntry(key) {
         $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().addClass("PrettyCards_Hidden");
     }
     console.log(entry, getSingleTextFromEntry(entry));
+    $("#PrettyCards_CT_Phase2_TranslationArea").parent().removeClass("PrettyCards_Hidden");
     $("#PrettyCards_CT_Phase2_TranslationArea").val(getSingleTextFromEntry(entry));
+}
+
+function displayListEntry(key, entry) {
+    $("#PrettyCards_CT_Phase2_EnglishText").addClass("PrettyCards_Hidden");
+    $("#PrettyCards_CT_Phase2_OGEnglishText").parent().addClass("PrettyCards_Hidden");
+    $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().addClass("PrettyCards_Hidden");
+    $("#PrettyCards_CT_Phase2_TranslationArea").parent().addClass("PrettyCards_Hidden");
+
+    var parent = $("#PrettyCards_CT_Phase2_Table > tbody");
+    for (var i=0; i < entry.values.length; i++) {
+        var row = $(`
+        <tr class="PrettyCards_CT_Phase2_ListEntryRow">
+            <td colspan="1"></td>
+            <td colspan="2"></td>
+        </tr>`);
+        parent.append(row);
+    }
 }
 
 export {InitCustomTranslations};

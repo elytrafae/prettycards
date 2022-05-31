@@ -48,3 +48,7 @@
 #PrettyCards_CT_Phase2_Table {
     margin-top: 2em;
 }
+
+.PrettyCards_CT_Phase2_ListEntryRow > td {
+    width: 50%;
+}
