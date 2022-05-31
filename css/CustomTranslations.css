@@ -84,3 +84,7 @@
     color: #CCCCCC;
     background-color: #222222;
 }
+
+#PrettyCards_CT_Phase2_Table tr {
+    user-select: text;
+}
