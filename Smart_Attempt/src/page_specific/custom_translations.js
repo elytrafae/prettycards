@@ -305,13 +305,14 @@ function displayListEntry(key, entry) {
     $("#PrettyCards_CT_Phase2_TranslationArea").parent().addClass("PrettyCards_Hidden");
 
     var parent = $("#PrettyCards_CT_Phase2_Table > tbody");
-    for (var i=0; i < entry.values.length; i++) {
+    // I'll go after the English entry because that should always be the official one.
+    for (var i=0; i < englishEntry.values.length; i++) {
         var val = entry.values[i];
         var row = $(`
         <tr class="PrettyCards_CT_Phase2_ListEntryRow">
             <td colspan="1">${englishEntry.values[i]}</td>
             <td colspan="2">
-                <textarea maxlength="500" class="form-control" class="PrettyCards_CT_Phase2_ListTranslationArea" value="${val}"></textarea>
+                <textarea maxlength="500" class="form-control" class="PrettyCards_CT_Phase2_ListTranslationArea" value="${val || ""}"></textarea>
             </td>
         </tr>`);
         parent.append(row);

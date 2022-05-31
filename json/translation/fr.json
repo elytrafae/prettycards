@@ -2,5 +2,18 @@
     "card-219" : {
         "ifEqual" : "{{KW:ARMOR}}. {{KW:MAGIC}}: Add a random different {{CARD:219|1}}'s artifact.",
         "value" : "INSERT FRENCH TEXT HERE :hue:"
+    },
+    "pc-sop-mysterydescriptions" : {
+        "values" : [
+            "French Stuff",
+            "",
+            "Even MORE french stuff!",
+            "",
+            "",
+            "FREEEEEENCH",
+            "No French?",
+            "",
+            "As you can see, I don't know french :>"
+        ]
     }
 }
