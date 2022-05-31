@@ -1,0 +1,10 @@
+{
+    "card-219": {
+        "ifEqual": "{{KW:ARMOR}}. {{KW:MAGIC}}: Recibe un artefacto de {{CARD:219|1}} aleatorio y diferente.",
+        "value": "{{KW:ARMOR}}. {{KW:MAGIC}}: Añade un {{PC_ARTIFACTS:Artefacto de Gerson|21|22|23|24}} aleatorio y diferente."
+    },
+    "pc-navigate-goback": "¡Atrás!",
+    "pc-sop-mysterydescriptions": {
+        "values": ["ERROR: No hay pistas suficientes.", "¡Buena suerte con este~!", "Ojalá este no te haga ver muy mal...", "La vida es simplemente un juego de acertijos. ¿Eres lo suficientemente valiente como para tirar el dado~?", "Te compadezco... Sólo un poco.", "¿De verdad importa al fin y al cabo?", "Ojalá pudiera ver tu expresión de frustración~", "Me pregunto qué pensarán tus amigos de tí...", "¿Necesitas una pista? ¡Qué adorable~!"]
+    }
+}

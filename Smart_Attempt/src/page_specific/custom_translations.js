@@ -28,6 +28,7 @@ function StartVerified() {
     loadEnglish();
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+        window.$("title").html("PrettyCards - Custom Translations");
         utility.loadCSSFromGH("CustomTranslations");
         $(".mainContent").html(`
             <div id="PrettyCards_CT_Phase1">
