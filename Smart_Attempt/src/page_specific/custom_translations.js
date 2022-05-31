@@ -162,6 +162,7 @@ function setLanguage(lan) {
     editedTag = lan;
     $.getJSON(`/translation/${lan}.json`, {}, function(data) {
         editedOriginal = data;
+        window.$.i18n().load({[lan]: data})
         goToPhase2();
     });
     var call = $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`, {}, function(data) {
@@ -174,20 +175,35 @@ function setLanguage(lan) {
     })
 }
 
+function isEntryExpired(key) {
+    var entry = editedCustom[key];
+    return entry && entry.ifEqual && entry.ifEqual != editedOriginal[key];
+}
+
+function verifyExpired() {
+    for (var key in editedCustom) {
+        var entry = editedCustom[key];
+        var englishEntry = englishCustom[key];
+        if (isEntryExpired(key)) {
+            if (!englishEntry) {
+                editedCustom[key] = undefined;
+            } else {
+                entry.ifEqual = editedOriginal[key];
+            }
+        }
+    }
+}
+
 function goToPhase2() {
     if (!(englishOriginal && englishCustom && editedOriginal && editedCustom)) {
         return;
     }
+    verifyExpired();
     $("#PrettyCards_CT_Phase1").addClass("PrettyCards_Hidden");
     $("#PrettyCards_CT_Phase2").removeClass("PrettyCards_Hidden");
     console.log("SUCCESS", englishOriginal, englishCustom, editedOriginal, editedCustom);
     applyFilters();
     showPage(0);
-}
-
-function isEntryExpired(key) {
-    var entry = editedCustom[key];
-    return entry && entry.ifEqual && entry.ifEqual != editedOriginal[key];
 }
 
 function isEntryFull(key) {
@@ -310,6 +326,7 @@ function setSingleTextToKey(key, str) {
 }
 
 function displayEntry(key) {
+    $("#PrettyCards_CT_Phase2_Preview").html("");
     var entry = editedCustom[key];
     $("#PrettyCards_CT_Phase2_TranslationKey").html(key);
     if (!entry) {
@@ -340,7 +357,10 @@ function displayEntry(key) {
     }
     console.log(entry, getSingleTextFromEntry(entry));
     $("#PrettyCards_CT_Phase2_TranslationArea").parent().removeClass("PrettyCards_Hidden");
-    $("#PrettyCards_CT_Phase2_TranslationArea").val(getSingleTextFromEntry(entry));
+    var entryText = getSingleTextFromEntry(entry)
+    $("#PrettyCards_CT_Phase2_TranslationArea").val(entryText);
+    setPreviewTo(entryText);
+
     const constKey = key;
     $("#PrettyCards_CT_Phase2_TranslationArea").unbind("keyup").keyup(function () {
         var txt = $("#PrettyCards_CT_Phase2_TranslationArea").val();
