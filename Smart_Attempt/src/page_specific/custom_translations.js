@@ -271,6 +271,8 @@ function displayEntry(key) {
         editedCustom[key] = entry;
     }
 
+    $(".PrettyCards_CT_Phase2_ListEntryRow").remove();
+
     // With this I'll assume that there will never be conditional list entries.
     if (entry.values) {
         displayListEntry(key, entry);
@@ -296,6 +298,7 @@ function displayEntry(key) {
 }
 
 function displayListEntry(key, entry) {
+    var englishEntry = englishCustom[key];
     $("#PrettyCards_CT_Phase2_EnglishText").addClass("PrettyCards_Hidden");
     $("#PrettyCards_CT_Phase2_OGEnglishText").parent().addClass("PrettyCards_Hidden");
     $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().addClass("PrettyCards_Hidden");
@@ -303,10 +306,13 @@ function displayListEntry(key, entry) {
 
     var parent = $("#PrettyCards_CT_Phase2_Table > tbody");
     for (var i=0; i < entry.values.length; i++) {
+        var val = entry.values[i];
         var row = $(`
         <tr class="PrettyCards_CT_Phase2_ListEntryRow">
-            <td colspan="1"></td>
-            <td colspan="2"></td>
+            <td colspan="1">${englishEntry.values[i]}</td>
+            <td colspan="2">
+                <textarea maxlength="500" class="form-control" class="PrettyCards_CT_Phase2_ListTranslationArea"></textarea>
+            </td>
         </tr>`);
         parent.append(row);
     }
