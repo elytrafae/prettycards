@@ -105,3 +105,7 @@
 .PrettyCards_CT_Phase2_QuickRefEntryTitle {
     cursor: pointer;
 }
+
+.PrettyCards_CT_Phase2_QuickRefEntryTitle:hover {
+    color: #BBBBBB;
+}
