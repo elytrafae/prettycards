@@ -311,7 +311,7 @@ function displayListEntry(key, entry) {
         <tr class="PrettyCards_CT_Phase2_ListEntryRow">
             <td colspan="1">${englishEntry.values[i]}</td>
             <td colspan="2">
-                <textarea maxlength="500" class="form-control" class="PrettyCards_CT_Phase2_ListTranslationArea"></textarea>
+                <textarea maxlength="500" class="form-control" class="PrettyCards_CT_Phase2_ListTranslationArea" value="${val}"></textarea>
             </td>
         </tr>`);
         parent.append(row);
