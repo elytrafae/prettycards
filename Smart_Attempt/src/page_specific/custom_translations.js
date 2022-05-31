@@ -150,7 +150,7 @@ function goToPhase2() {
 
 function isEntryExpired(key) {
     var entry = editedCustom[key];
-    return entry && entry.ifEqual && entry.ifEqual != editedOriginal.ifEqual;
+    return entry && entry.ifEqual && entry.ifEqual != editedOriginal[key];
 }
 
 function isEntryFull(key) {
@@ -257,10 +257,19 @@ function returnNewEntryBasedOnEnglish(key) {
 
 function getSingleTextFromEntry(entry) {
     var text = entry;
-    if (entry.value || entry.value == "") {
+    if (entry.value || entry.value === "") {
         text = entry.value;
     }
     return text;
+}
+
+function setSingleTextToKey(key, str) {
+    var entry = editedCustom[key];
+    if (entry.value || entry.value === "") {
+        entry.value = str;
+        return;
+    }
+    editedCustom[key] = str;
 }
 
 function displayEntry(key) {
@@ -282,12 +291,12 @@ function displayEntry(key) {
     var englishText = getSingleTextFromEntry(englishCustom[key]);
     
     $("#PrettyCards_CT_Phase2_EnglishText").removeClass("PrettyCards_Hidden");
-    $("#PrettyCards_CT_Phase2_EnglishText").html(englishText);
+    $("#PrettyCards_CT_Phase2_EnglishText").html(getColoredStringReference(englishText));
     if (entry.ifEqual) {
         $("#PrettyCards_CT_Phase2_OGEnglishText").parent().removeClass("PrettyCards_Hidden");
         $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().removeClass("PrettyCards_Hidden");
-        $("#PrettyCards_CT_Phase2_OGEnglishText").html(englishOriginal[key]);
-        $("#PrettyCards_CT_Phase2_OGTranslatedText").html(editedOriginal[key]);
+        $("#PrettyCards_CT_Phase2_OGEnglishText").html(getColoredStringReference(englishOriginal[key]));
+        $("#PrettyCards_CT_Phase2_OGTranslatedText").html(getColoredStringReference(editedOriginal[key]));
     } else {
         $("#PrettyCards_CT_Phase2_OGEnglishText").parent().addClass("PrettyCards_Hidden");
         $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().addClass("PrettyCards_Hidden");
@@ -295,6 +304,10 @@ function displayEntry(key) {
     console.log(entry, getSingleTextFromEntry(entry));
     $("#PrettyCards_CT_Phase2_TranslationArea").parent().removeClass("PrettyCards_Hidden");
     $("#PrettyCards_CT_Phase2_TranslationArea").val(getSingleTextFromEntry(entry));
+    const constKey = key;
+    $("#PrettyCards_CT_Phase2_TranslationArea").unbind("keyup").keyup(function () {
+        setSingleTextToKey(constKey, $("#PrettyCards_CT_Phase2_TranslationArea").val());
+    });
 }
 
 function displayListEntry(key, entry) {
@@ -305,18 +318,43 @@ function displayListEntry(key, entry) {
     $("#PrettyCards_CT_Phase2_TranslationArea").parent().addClass("PrettyCards_Hidden");
 
     var parent = $("#PrettyCards_CT_Phase2_Table > tbody");
+    const constKey = key; // Just to make sure . . .
     // I'll go after the English entry because that should always be the official one.
     for (var i=0; i < englishEntry.values.length; i++) {
         var val = entry.values[i];
-        var row = $(`
+        const index = i;
+        const row = $(`
         <tr class="PrettyCards_CT_Phase2_ListEntryRow">
-            <td colspan="1">${englishEntry.values[i]}</td>
+            <td colspan="1">${getColoredStringReference(englishEntry.values[i])}</td>
             <td colspan="2">
-                <textarea maxlength="500" class="form-control" class="PrettyCards_CT_Phase2_ListTranslationArea" value="${val || ""}"></textarea>
+                <textarea maxlength="500" class="form-control" class="PrettyCards_CT_Phase2_ListTranslationArea"></textarea>
             </td>
         </tr>`);
+        row.find("textarea").val(val || "");
+        row.find("textarea").keyup(function () {
+            editedCustom[constKey].values[index] = $(this).val();
+        });
         parent.append(row);
     }
+}
+
+// Ok, I have to admit, I could not do this better than Onu. If I wanted to, it would be the exact same result, sooooo . . .
+function getColoredStringReference(stringReference) {
+
+    var colors = ['#00ff06', '#fc00ff', '#00d6ff', '#ff5300',
+        '#0074ff', '#ff0030', '#ffa400'];
+
+    var coloredString = stringReference.replace(/({{[^{}]*?}})/g, function (m) {
+        return '<span class="JUSTICE">' + m + '</span>';
+    });
+
+    coloredString = coloredString.replace(/(\$[1-9]+)/g, function (m) {
+        var number = parseInt(m.replace('$', '')) - 1;
+        var color = colors[number % colors.length];
+        return '<span style="color: ' + color + '">' + m + '</span>';
+    });
+
+    return coloredString;
 }
 
 export {InitCustomTranslations};

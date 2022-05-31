@@ -1,6 +1,6 @@
 {
     "card-219" : {
-        "ifEqual" : "{{KW:ARMOR}}. {{KW:MAGIC}}: Add a random different {{CARD:219|1}}'s artifact.",
+        "ifEqual" : "{{KW:ARMOR}}. {{KW:MAGIC}}: Ajoute un autre artefact de {{CARD:219|1}} aléatoire.",
         "value" : "INSERT FRENCH TEXT HERE :hue:"
     },
     "pc-sop-mysterydescriptions" : {
@@ -17,3 +17,4 @@
         ]
     }
 }
+
