@@ -62,7 +62,7 @@ function InitCustomTranslations() {
                             <tr>
                                 <td id="PrettyCards_CT_Phase2_TranslationKey" colspan="2">translation-key-here</td>
                                 <td style="width:50px; text-align: center;">
-                                    <button class="btn btn-sm btn-success" onclick="PrettyCards_CT_downloadJSON()" disabled="">
+                                    <button class="btn btn-sm btn-success" onclick="PrettyCards_CT_downloadJSON()">
                                         <span class="glyphicon glyphicon-send"></span>
                                     </button>
                                 </td>
@@ -347,7 +347,7 @@ function downloadJSON() {
         title: "Thank you for your collaboration! ^^",
         size: BootstrapDialog.SIZE_WIDE,
         message: `<p>The language JSON file should be downloading now! Please send it to me through Discord to the <span class="PrettyCards_DiscordMention">#translation-files-go-here</span> channel!</p><p>is the file didn't download, you can copy-paste its contents below!</p>
-            <code>${save}</code>
+            <code class="PrettyCards_CT_Phase2_OutputCode" onclick="navigator.clipboard.writeText(this.innerText)">${save}</code>
         `,
         buttons: [{
                 label: "Alright!",

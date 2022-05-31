@@ -73,4 +73,14 @@
     color: white;
     font-family: WhitneyMedium;
     border-radius: 3px;
+    font-size: 1.1em;
+    padding: 1px 2px;
+}
+
+.PrettyCards_CT_Phase2_OutputCode {
+    user-select: all;
+    display: block;
+    padding: 4px 8px;
+    color: #CCCCCC;
+    background-color: #222222;
 }
