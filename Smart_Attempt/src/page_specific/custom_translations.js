@@ -338,6 +338,26 @@ function displayListEntry(key, entry) {
     }
 }
 
+function downloadJSON() {
+    var save = JSON.stringify(editedCustom);
+    utility.downloadFile(save, editedTag + ".json", "text/plain");
+
+    BootstrapDialog.show({
+        title: "Thank you for your collaboration! ^^",
+        size: BootstrapDialog.SIZE_WIDE,
+        message: `<p>The language JSON file should be downloading now! Please send it to me through Discord to the <span class="PrettyCards_DiscordMention">#translation-files-go-here</span> channel!</p><p>is the file didn't download, you can copy-paste its contents below!</p>`,
+        closable: this.closable,
+        buttons: [{
+                label: "Nevermind!",
+                cssClass: 'btn-primary us-normal',
+                action(dialog) {
+                    dialog.close();
+                }
+            }
+        ]
+    });
+}
+
 // Ok, I have to admit, I could not do this better than Onu. If I wanted to, it would be the exact same result, sooooo . . .
 function getColoredStringReference(stringReference) {
 

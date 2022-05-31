@@ -169,6 +169,15 @@ class Utility {
 		link.click();
 	}
 
+	// Yes, this one is from Stackoverflow.
+	downloadFile(content, fileName, contentType) {
+		var a = document.createElement("a");
+		var file = new Blob([content], {type: contentType});
+		a.href = URL.createObjectURL(file);
+		a.download = fileName;
+		a.click();
+	}
+
 	getRandomFromArray(array) {
 		return array[Math.floor(Math.random() * array.length)];
 	}

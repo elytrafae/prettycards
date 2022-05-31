@@ -57,3 +57,14 @@
     max-width: 100%;
     min-width: 100%;
 }
+
+@font-face {
+    font-family: UniSansHeavy;
+    src: url(fonts/Uni\ Sans\ Heavy.otf);
+  }
+
+.PrettyCards_DiscordMention {
+    background-color: #5B6DED;
+    color: white;
+    font-family: UniSansHeavy;
+}
