@@ -91,6 +91,8 @@ function InitCustomTranslations() {
             </div>
         `);
 
+        setUpQuickRef();
+
         $("#PrettyCards_CT_Phase2_QuickRefBtn").click(function() {
             $(".mainContent").toggleClass("PrettyCards_WiderMainContent");
             $("#PrettyCards_CT_Phase2_QuickRef").toggleClass("PrettyCards_Hidden");
@@ -115,17 +117,19 @@ function InitCustomTranslations() {
 }
 
 function setUpQuickRef() {
-    $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translationQuickref.json`, {}, function(data) {
+    $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translationQuickRef.json`, {}, function(data) {
+        var parent = $("#PrettyCards_CT_Phase2_QuickRef");
         for (var i=0; i < data.length; i++) {
             var entry = data[i];
             var row = $(`
                 <div class="PrettyCards_CT_Phase2_QuickRefEntry">
                     <h2 class="PrettyCards_CT_Phase2_QuickRefEntryTitle">${entry.title}</h2>
                     <p>${entry.description}</p>
-                    <p>Syntax: <code>${entry.syntax}</code></p>
-                    <p>Example: <code>${entry.example}</code></p>
+                    <p>Syntax: <code class="PrettyCards_DarkThemeCode">${entry.syntax}</code></p>
+                    <p>Example: <code class="PrettyCards_DarkThemeCode">${entry.example}</code></p>
                 </div>
             `)
+            parent.append(row);
         }
     });
 }
@@ -366,7 +370,7 @@ function downloadJSON() {
         title: "Thank you for your collaboration! ^^",
         size: BootstrapDialog.SIZE_WIDE,
         message: `<p>The language JSON file should be downloading now! Please send it to me through Discord to the <span class="PrettyCards_DiscordMention">#translation-files-go-here</span> channel!</p><p>is the file didn't download, you can copy-paste its contents below!</p>
-            <code class="PrettyCards_CT_Phase2_OutputCode" onclick="navigator.clipboard.writeText(this.innerText)">${save}</code>
+            <code class="PrettyCards_DarkThemeCode PrettyCards_BlockCode" onclick="navigator.clipboard.writeText(this.innerText)">${save}</code>
         `,
         buttons: [{
                 label: "Alright!",

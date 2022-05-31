@@ -1,7 +1,7 @@
 [
     {
         "title" : "PC ARTIFACTS",
-        "syntax" : "{{PS_ARTIFACTS:string|number...}}",
+        "syntax" : "{{PC_ARTIFACTS:string|number...}}",
         "description" : "A helper line that can display multiple artifacts at once.",
         "example": "{{PC_ARTIFACTS:Gerson's artifact|21|22|23|24}}"
     }
