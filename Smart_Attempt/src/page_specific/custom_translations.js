@@ -122,7 +122,7 @@ function setUpQuickRef() {
         for (var i=0; i < data.length; i++) {
             var entry = data[i];
             var row = $(`
-                <div class="PrettyCards_CT_Phase2_QuickRefEntry">
+                <div class="PrettyCards_CT_Phase2_QuickRefEntry" onclick="$(this).toggleClass('PrettyCards_CT_Phase2_QuickRefEntryOpen')">
                     <h2 class="PrettyCards_CT_Phase2_QuickRefEntryTitle">${entry.title}</h2>
                     <p>${entry.description}</p>
                     <p>Syntax: <code class="PrettyCards_DarkThemeCode">${entry.syntax}</code></p>

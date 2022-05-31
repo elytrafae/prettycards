@@ -98,6 +98,6 @@
     display: none;
 }
 
-.PrettyCards_CT_Phase2_QuickRefEntry:focus-within > * {
+.PrettyCards_CT_Phase2_QuickRefEntry.PrettyCards_CT_Phase2_QuickRefEntryOpen > * {
     display: block;
 }
