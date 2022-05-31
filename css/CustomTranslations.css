@@ -21,6 +21,7 @@
 }
 
 #PrettyCards_CT_Phase2_MainContent {
+    max-width: 900px;
     min-width: 900px;
 }
 
