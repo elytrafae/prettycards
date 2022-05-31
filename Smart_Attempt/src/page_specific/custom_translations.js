@@ -84,7 +84,10 @@ function InitCustomTranslations() {
                         </tbody>
                     </table>
                 </div>
-                <div id="PrettyCards_CT_Phase2_QuickRef" class="PrettyCards_Hidden"></div>
+                <div id="PrettyCards_CT_Phase2_QuickRef" class="PrettyCards_Hidden">
+                    <h1>Quick Reference Guide!</h1>
+                    <h3><a href="/translateManual.jsp" target="_blank">Onutrem's Guide</a></h3>
+                </div>
             </div>
         `);
 
@@ -109,6 +112,22 @@ function InitCustomTranslations() {
     window.nextPage = nextPage;
     window.previousPage = previousPage;
     window.PrettyCards_CT_downloadJSON = downloadJSON;
+}
+
+function setUpQuickRef() {
+    $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translationQuickref.json`, {}, function(data) {
+        for (var i=0; i < data.length; i++) {
+            var entry = data[i];
+            var row = $(`
+                <div class="PrettyCards_CT_Phase2_QuickRefEntry">
+                    <h2 class="PrettyCards_CT_Phase2_QuickRefEntryTitle">${entry.title}</h2>
+                    <p>${entry.description}</p>
+                    <p>Syntax: <code>${entry.syntax}</code></p>
+                    <p>Example: <code>${entry.example}</code></p>
+                </div>
+            `)
+        }
+    });
 }
 
 function loadEnglish() {

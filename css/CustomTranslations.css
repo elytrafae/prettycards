@@ -44,6 +44,7 @@
     width: 600px;
     border: 5px solid white;
     background-color: black;
+    padding: 0px 8px;
 }
 
 #PrettyCards_CT_Phase2_Table {
@@ -88,4 +89,12 @@
 
 #PrettyCards_CT_Phase2_Table tr {
     user-select: text;
+}
+
+.PrettyCards_CT_Phase2_QuickRefEntry > *:not(.PrettyCards_CT_Phase2_QuickRefEntryTitle) {
+    display: none;
+}
+
+.PrettyCards_CT_Phase2_QuickRefEntry:focus-within > * {
+    display: block;
 }
