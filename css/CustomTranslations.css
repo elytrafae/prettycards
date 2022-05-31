@@ -6,6 +6,11 @@
 #PrettyCards_CT_Phase1_LangaugeSelect > div {
     font-size: 2em;
     margin: 0.5em;
+    cursor: pointer;
+}
+
+#PrettyCards_CT_Phase1_LangaugeSelect > div:hover {
+    color: green;
 }
 
 #PrettyCards_CT_Phase2 {
