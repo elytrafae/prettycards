@@ -13,10 +13,10 @@ function processJSON(lan, data) {
             if (entry.ifEqual && window.$.i18n.messageStore.get(lan, key) != entry.ifEqual) {
                 continue;
             }
-            if (entry.valuesList) {
-                allValuesLists[key] = entry.valuesList.length;
-                for (var i=0; i < entry.valuesList.length; i++) {
-                    window.$.i18n.messageStore.set(lan, {[key + "-" + i]: entry.valuesList[i]});
+            if (entry.values) {
+                allValuesLists[key] = entry.values.length;
+                for (var i=0; i < entry.values.length; i++) {
+                    window.$.i18n.messageStore.set(lan, {[(key + "-" + i)]: entry.values[i]});
                 }
             } else {
                 window.$.i18n.messageStore.set(lan, {[key]: entry.value});
