@@ -34,6 +34,16 @@ if (settings.kromer_test.value()) {
 		if (lan != "en") {
 			kromerify(lan);
 		}
-		$('.ucp').parent().each((_, e) => e.innerHTML = e.innerHTML.replace('UCP', 'KROMER'));
+		//$('[data-i18n="[html]item-ucp"]').parent().each((_, e) => e.innerHTML = e.innerHTML.replace('UCP', 'KROMER'));
+		$('body').i18n();
+		$('[data-i18n-custom],[data-i18n-value],[data-i18n-title],[data-i18n-placeholder]').each(function () {translateElement($(this))});
+
+		if (window.underscript.onPage("CosmeticsShop")) {
+			$('.ucp').parent().each(function() {
+				[...this.childNodes]
+					.filter(el => el.nodeType === 3) // Text nodes
+					.each((el) => el.textContent = el.textContent.replace(ucp, kromer))
+			});
+		}
 	});
 }
