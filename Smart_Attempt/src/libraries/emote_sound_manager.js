@@ -46,3 +46,7 @@ if (window.underscript.onPage("CosmeticsShop")) {
         });
     })
 }
+
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+    utility.loadCSSFromGH("Cosmetics");
+})

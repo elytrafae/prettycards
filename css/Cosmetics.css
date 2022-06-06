@@ -45,7 +45,6 @@
     display: block;
 }
 
-.PrettyCards_EmoteSoundPlayer:hover {
-    color: rgb(0, 146, 237);
-    display: block;
+.PrettyCards_EmoteSoundPlayer:active {
+    color: rgb(175, 175, 175);
 }

@@ -17,7 +17,6 @@ function SetUpCosmeticsShopPage() {
 }
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    utility.loadCSSFromGH("Cosmetics");
     if (window.underscript.onPage("CosmeticsShop")) {
         SetUpCosmeticsShopPage();
     }
