@@ -13,9 +13,10 @@ settings.emote_sounds = PrettyCards_plugin.settings().add({
 var emoteAudio = new Audio();
 emoteAudio.volume = 0.7;
 
-function playEmoteSound(emote) {
+function playEmoteSound(emote, onerror = function() {}) {
     emoteAudio.pause();
     emoteAudio.src = `https://github.com/CMD-God/prettycards/raw/master/audio/emotes/${emote}.ogg`;
+    emoteAudio.onerror = onerror;
     emoteAudio.play();
 }
 
@@ -35,12 +36,16 @@ if (window.underscript.onPage("Game") || window.underscript.onPage("Spectate")) 
 
 if (window.underscript.onPage("CosmeticsShop")) {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-        $(".emote-bordered").each(function(i, e) {
+        document.querySelectorAll(".emote-bordered").forEach(function(e) {
             var url = new URL(e.src).pathname;
-            const emote = url.substring(15, url.length - 4); // Crops the image name from the src\
-            var speaker = $(`<div class="glyphicon glyphicon-volume-up PrettyCards_EmoteSoundPlayer"></div>`)[0];
+            const emote = url.substring(url.lastIndexOf('/'), url.lastIndexOf('.'));; // Crops the image name from the src.
+            const speaker = $(`<div class="glyphicon glyphicon-volume-up PrettyCards_EmoteSoundPlayer"></div>`)[0];
+            console.log(e, emote, speaker);
             speaker.onclick = onclick = function() {
-                playEmoteSound(emote);
+                playEmoteSound(emote, function() {
+                    speaker.style.color = "red";
+                    speaker.onclick = function() {};
+                });
             }
             e.parentElement.appendChild(speaker);
         });
