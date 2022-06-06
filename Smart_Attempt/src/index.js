@@ -34,6 +34,7 @@ import {} from "/src/libraries/translation/translation_manager.js";
 
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {} from "/src/libraries/fancy_card_select.js";
+import {} from "/src/libraries/emote_sound_manager.js";
 
 // import {} from "/src/libraries/cosmetic_wishlist.js"; // Temporarily Removed!
 
