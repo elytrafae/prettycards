@@ -38,10 +38,10 @@ if (window.underscript.onPage("CosmeticsShop")) {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
         document.querySelectorAll(".emote-bordered").forEach(function(e) {
             var url = new URL(e.src).pathname;
-            const emote = url.substring(url.lastIndexOf('/'), url.lastIndexOf('.'));; // Crops the image name from the src.
+            const emote = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.'));; // Crops the image name from the src.
             const speaker = $(`<div class="glyphicon glyphicon-volume-up PrettyCards_EmoteSoundPlayer"></div>`)[0];
             console.log(e, emote, speaker);
-            speaker.onclick = onclick = function() {
+            speaker.onclick = function() {
                 playEmoteSound(emote, function() {
                     speaker.style.color = "red";
                     speaker.onclick = function() {};
