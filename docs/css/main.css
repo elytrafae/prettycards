@@ -1,5 +1,35 @@
 
+@font-face {
+    font-family: DTM-Mono;
+    src: url(./../fonts/DTM-Mono.otf);
+}
+
 body {
     background-color: black;
     color: white;
+    font-family: DTM-Mono;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 1em;
+}
+
+#mainContent {
+    width: 1200px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mainTitle {
+    text-align: center;
+    font-size: 60px;
+    margin: 0.1em;
+}
+
+.mainSubtitle {
+    text-align: center;
+}
+
+.chapterTitle {
+    font-size: 48px;
+    text-align: center;
 }
