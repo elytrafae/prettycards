@@ -44,7 +44,7 @@
                 if (emotesWithSounds.length == 0 && allEmotes.length == 0) {
                     return;
                 }
-                var $table = $("#mainTable");
+                var $table = $("#mainTable tbody");
                 allEmotes.forEach(function(emote) {
                     var isPresent = emotesWithSounds.includes(emote.image);
                     $table.append(`
