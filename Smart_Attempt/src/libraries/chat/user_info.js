@@ -466,11 +466,16 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	friendshipContainer.className = "PrettyCards_ChatFriendshipContainer";
 	friendshipContainer.innerHTML = "<h2 class='gray'>Fetching data . . .</h2>";
 
-	column3.innerHTML = "<h2>Favorite Cards</h2>";
+	var titleCont = document.createElement("DIV");
+	titleCont.id = "PrettyCards_UserInfo_FriendshipTitleContainer";
+	titleCont.innerHTML = "<h2>Favorite Cards</h2>";
+
+	column3.appendChild(titleCont);
 	column3.appendChild(friendshipContainer);
 
 	utility.getFriendshipInfo(user.id, function(data) {
 		friendshipContainer.innerHTML = "";
+		/*
 		var topXpCard = data.scores[0];
 		var topRankCard = data.scores[0];
 		for (var i=1; i < data.scores.length; i++) {
@@ -489,6 +494,17 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 			appendFriendshipCard(topXpCard, $(friendshipContainer), 1);
 			appendFriendshipCard(topRankCard, $(friendshipContainer), 2);
 		}
+		*/
+
+		$(titleCont).append(`<button class="btn btn-primary" id="PrettyCards_UserInfo_SwapSortBtn"></button>`);
+		
+		$("#PrettyCards_UserInfo_SwapSortBtn").click(function() {
+			toggleSortAndDisplay(data.scores, $(friendshipContainer));
+			console.log("BUTTON PRESSED");
+		})
+
+		var isXpSort = false;
+		toggleSortAndDisplay(data.scores, $(friendshipContainer));
 
 		var lastFetched = document.createElement("P");
 		lastFetched.className = "gray";
@@ -505,6 +521,29 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	
 });
 
+var isXpSort = false;
+var xpSort = function(a, b) {return b.xp - a.xp};
+var rankSort = function(a, b) {return a.rank - b.rank};
+function toggleSortAndDisplay(scores, parent) {
+	isXpSort = !isXpSort;
+	if (isXpSort) {
+		sortAndDisplay(scores, parent, xpSort);
+		$("#PrettyCards_UserInfo_SwapSortBtn").html("TOP XP");
+	} else {
+		sortAndDisplay(scores, parent, rankSort);
+		$("#PrettyCards_UserInfo_SwapSortBtn").html("TOP RANK");
+	}
+}
+
+function sortAndDisplay(scores, parent, sort) {
+	scores.sort(sort);
+	parent.empty();
+	for (var i=0; i < Math.min(8, scores.length); i++) {
+		var score = scores[i];
+		appendFriendshipCard(score, parent, 0);
+	}
+}
+
 function appendFriendshipCard(score, container, topType = 1) {
 	
 	var topTxt;
@@ -516,7 +555,9 @@ function appendFriendshipCard(score, container, topType = 1) {
 	
 	var level = window.getLevel(score.xp);
 	var card = utility.appendCardFriendship(window.getCard(score.cardId), container, level, score.xp - utility.getXpForLevel(level - 1), window.distanceNextLevel(level));
-	card.append('<div class="PrettyCards_FriendshipTop">' + topTxt + '</div>');
+	if (topTxt) {
+		card.append('<div class="PrettyCards_FriendshipTop">' + topTxt + '</div>');
+	}
 	card.append(`<div class="PrettyCards_FriendshipRank"${score.rank <= 5 ? ' top' : ''} val="${score.rank}"></div>`);
 	/*
 	if (topType == 1 || topType == 3) {
