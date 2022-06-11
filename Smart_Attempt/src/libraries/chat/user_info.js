@@ -449,12 +449,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	row2.className = "row";
 	
 	var column3 = document.createElement("DIV");
-	column3.className = "column PrettyCards_UserColumn";
+	column3.className = "double_column PrettyCards_UserColumn";
 	row2.appendChild(column3);
 	
+	/*
 	var column4 = document.createElement("DIV");
 	column4.className = "column PrettyCards_UserColumn";
 	row2.appendChild(column4);
+	*/
 	
 	message.appendChild(row2);
 	//////////////////////

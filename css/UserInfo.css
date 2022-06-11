@@ -30,6 +30,12 @@
 	padding: 10px;
 }
 
+.double_column {
+	float: left;
+	width: 100%;
+	padding: 10px;
+}
+
 .row:after {
 	content: "";
 	display: table;
