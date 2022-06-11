@@ -498,9 +498,13 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		*/
 
 		//var $swapSortBtn = $(`<button class="btn btn-primary" id="PrettyCards_UserInfo_SwapSortBtn"></button>`);
-		var $swapSortBtn = $(`<div class="form-check form-switch">
+		var $swapSortBtn = $(`
+		<div style="display:flex;" id="PrettyCards_UserInfo_SwapSortArea">
 			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">TOP XP</label>
-			<input class="form-check-input" type="checkbox" role="switch" id="PrettyCards_UserInfo_SwapSortBtn">
+			<label class="switch">
+				<input type="checkbox" id="PrettyCards_UserInfo_SwapSortBtn">
+				<span class="slider round"></span>
+			</label>
 			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">TOP RANK</label>
 		</div>`);
 		$(titleCont).append($swapSortBtn);

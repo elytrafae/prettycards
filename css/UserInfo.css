@@ -94,3 +94,14 @@
 	justify-content: space-between;
 	flex-direction: row;
 }
+
+#PrettyCards_UserInfo_SwapSortArea {
+	display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+#PrettyCards_UserInfo_SwapSortArea label {
+	margin: 3px;
+}
