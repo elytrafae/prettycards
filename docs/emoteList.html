@@ -32,8 +32,8 @@
                             <td>${emote.id}</td>
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
-                            <td><img src="https://undercards.net/images/emotes/${emote.image}.png"></td>
-                            <td>${emotesWithSounds.includes(emote.image) ? '<audio controls src="../audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
+                            <td><iframe href="https://undercards.net/images/emotes/${emote.image}.png"></iframe></td>
+                            <td>${emotesWithSounds.includes(emote.image) ? '<audio controls src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
                         </tr>
                     `);
                 })
