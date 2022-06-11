@@ -3,11 +3,30 @@
 
     <head>
         <title>Emote List</title>
+        <style>
+            #mainTable {
+                margin: 10px auto;
+                font-size: 24px;
+            }
+
+            #mainTable .header {
+                font-weight: bold;
+                background-color: #BBBBBB;
+            }
+
+            .withSong {
+                background-color: rgb(14, 205, 14);
+            }
+
+            .noSong {
+                background-color: #FF4444;
+            }
+        </style>
     </head>
 
     <body>
         <table id="mainTable">
-            <tr style="font-weight: bold;">
+            <tr class="header">
                 <td>Id</td>
                 <td>Name</td>
                 <td>Code Name</td>
@@ -27,13 +46,14 @@
                 }
                 var $table = $("#mainTable");
                 allEmotes.forEach(function(emote) {
+                    var isPresent = emotesWithSounds.includes(emote.image);
                     $table.append(`
-                        <tr>
+                        <tr class="${isPresent ? "withSong" : "noSong"}">
                             <td>${emote.id}</td>
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td>${emotesWithSounds.includes(emote.image) ? '<audio controls src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
+                            <td>${isPresent ? '<audio controls src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
                         </tr>
                     `);
                 })
