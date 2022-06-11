@@ -55,6 +55,7 @@ function onPageLoaded() {
 	
 	utility.loadCSSFromGH("UserInfo");
 	utility.loadCSSFromGH("CustomFriendship");
+	utility.loadCSSFromGH("FormExtensions");
 	utility.loadCSSFromLink("/css/meters.css");
 }
 
@@ -496,15 +497,23 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		}
 		*/
 
-		$(titleCont).append(`<button class="btn btn-primary" id="PrettyCards_UserInfo_SwapSortBtn"></button>`);
+		//var $swapSortBtn = $(`<button class="btn btn-primary" id="PrettyCards_UserInfo_SwapSortBtn"></button>`);
+		var $swapSortBtn = $(`<div class="form-check form-switch">
+			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">TOP XP</label>
+			<input class="form-check-input" type="checkbox" role="switch" id="PrettyCards_UserInfo_SwapSortBtn">
+			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">TOP RANK</label>
+		</div>`);
+		$(titleCont).append($swapSortBtn);
 		
-		$("#PrettyCards_UserInfo_SwapSortBtn").click(function() {
-			toggleSortAndDisplay(data.scores, $(friendshipContainer));
+		/*
+		$swapSortBtn.click(function() {
+			toggleSortAndDisplay(data.scores, $(friendshipContainer), $swapSortBtn);
 			console.log("BUTTON PRESSED");
 		})
 
-		var isXpSort = false;
-		toggleSortAndDisplay(data.scores, $(friendshipContainer));
+		isXpSort = false;
+		toggleSortAndDisplay(data.scores, $(friendshipContainer), $swapSortBtn);
+		*/
 
 		var lastFetched = document.createElement("P");
 		lastFetched.className = "gray";
@@ -524,14 +533,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 var isXpSort = false;
 var xpSort = function(a, b) {return b.xp - a.xp};
 var rankSort = function(a, b) {return a.rank - b.rank};
-function toggleSortAndDisplay(scores, parent) {
+function toggleSortAndDisplay(scores, parent, $button) {
 	isXpSort = !isXpSort;
 	if (isXpSort) {
 		sortAndDisplay(scores, parent, xpSort);
-		$("#PrettyCards_UserInfo_SwapSortBtn").html("TOP XP");
+		$button.html("TOP XP");
 	} else {
 		sortAndDisplay(scores, parent, rankSort);
-		$("#PrettyCards_UserInfo_SwapSortBtn").html("TOP RANK");
+		$button.html("TOP RANK");
 	}
 }
 
