@@ -509,15 +509,13 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		</div>`);
 		$(titleCont).append($swapSortBtn);
 		
-		/*
-		$swapSortBtn.click(function() {
-			toggleSortAndDisplay(data.scores, $(friendshipContainer), $swapSortBtn);
+		var $input = $swapSortBtn.find("#PrettyCards_UserInfo_SwapSortBtn");
+		$input.change(function() {
+			updateSortAndDisplay(data.scores, $(friendshipContainer), $input);
 			console.log("BUTTON PRESSED");
 		})
 
-		isXpSort = false;
-		toggleSortAndDisplay(data.scores, $(friendshipContainer), $swapSortBtn);
-		*/
+		updateSortAndDisplay(data.scores, $(friendshipContainer), $input);
 
 		var lastFetched = document.createElement("P");
 		lastFetched.className = "gray";
@@ -534,17 +532,13 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	
 });
 
-var isXpSort = false;
 var xpSort = function(a, b) {return b.xp - a.xp};
 var rankSort = function(a, b) {return a.rank - b.rank};
-function toggleSortAndDisplay(scores, parent, $button) {
-	isXpSort = !isXpSort;
-	if (isXpSort) {
+function updateSortAndDisplay(scores, parent, $input) {
+	if (!$input.prop("checked")) {
 		sortAndDisplay(scores, parent, xpSort);
-		$button.html("TOP XP");
 	} else {
 		sortAndDisplay(scores, parent, rankSort);
-		$button.html("TOP RANK");
 	}
 }
 

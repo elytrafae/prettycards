@@ -1,0 +1,54 @@
+
+<html>
+
+    <head>
+        <title>Emote List</title>
+    </head>
+
+    <body>
+        <table id="mainTable">
+            <tr style="font-weight: bold;">
+                <td>Id</td>
+                <td>Name</td>
+                <td>Code Name</td>
+                <td>Image</td>
+                <td>Audio</td>
+            </tr>
+        </table>
+
+        <script src="../Smart_Attempt/src/third_party/jquery-3.6.0.min.js"></script>
+        <script>
+            var emotesWithSounds = [];
+            var allEmotes = [];
+
+            function fillTable() {
+                if (emotesWithSounds.length == 0 && allEmotes.length == 0) {
+                    return;
+                }
+                var $table = $("#mainTable");
+                allEmotes.forEach(function(emote) {
+                    $table.append(`
+                        <tr>
+                            <td>${emote.id}</td>
+                            <td>${emote.name}</td>
+                            <td>${emote.image}</td>
+                            <td><img src="https://undercards.net/images/emotes/${emote.image}.png"></td>
+                            <td>${emotesWithSounds.includes(emote.image) ? '<audio controls src="../audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
+                        </tr>
+                    `);
+                })
+            }
+
+            $.getJSON("https://api.github.com/repos/cmd-god/prettycards/contents/audio/emotes", {}, function(data) {
+                data.forEach(function(d) {
+                    emotesWithSounds.push(d.name.substring(0, d.name.length-4));
+                })
+                console.log(emotesWithSounds);
+            })
+            $.getJSON("every_undercards_emote.json", {}, function(data) {
+                allEmotes = data;
+            })
+        </script>
+    </body>
+
+</html>
