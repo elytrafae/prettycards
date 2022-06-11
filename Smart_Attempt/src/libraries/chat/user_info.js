@@ -501,7 +501,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		var $swapSortBtn = $(`
 		<div style="display:flex;" id="PrettyCards_UserInfo_SwapSortArea">
 			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">TOP XP</label>
-			<label class="switch">
+			<label class="switch friendshipSortSwitch">
 				<input type="checkbox" id="PrettyCards_UserInfo_SwapSortBtn">
 				<span class="slider round"></span>
 			</label>
