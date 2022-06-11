@@ -43,10 +43,11 @@
                 data.forEach(function(d) {
                     emotesWithSounds.push(d.name.substring(0, d.name.length-4));
                 })
-                console.log(emotesWithSounds);
+                fillTable();
             })
             $.getJSON("every_undercards_emote.json", {}, function(data) {
                 allEmotes = data;
+                fillTable();
             })
         </script>
     </body>
