@@ -47,6 +47,10 @@
                 content: '\25BA';
             }
 
+            .audioPlayer.playing:before {
+                content: '\23F8';
+            }
+
             .audioPlayer {
                 background-color: #2885ff;
                 color: white;
@@ -81,9 +85,11 @@
                 var audio = e.firstChild;
                 if (audio.paused) {
                     audio.play();
+                    $(e).addClass("playing");
                 } else {
                     audio.pause();
-                    audio.currentTime = 0
+                    audio.currentTime = 0;
+                    $(e).removeClass("playing");
                 }
             }
 
@@ -108,7 +114,7 @@
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td>${emote.isPresent ? '<span class="audioPlayer" onclick="play(this);"><audio src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
+                            <td>${emote.isPresent ? '<span class="audioPlayer" onclick="play(this);"><audio onended="$(this.parentElement).removeClass(\'playing\')" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
                         </tr>
                     `);
                 })
