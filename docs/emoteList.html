@@ -118,7 +118,7 @@
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td>${emote.isPresent ? '<span class="audioPlayer material-icons" onclick="play(this);"><audio onended="$(this.parentElement).removeClass(\'playing\')" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
+                            <td style="text-align: center;">${emote.isPresent ? '<span class="audioPlayer material-icons" onclick="play(this);"><audio onended="$(this.parentElement).removeClass(\'playing\')" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
                         </tr>
                     `);
                 })
