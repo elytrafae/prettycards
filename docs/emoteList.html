@@ -53,6 +53,11 @@
                 border-radius: 3px;
                 padding: 3px;
             }
+
+            .audioPlayer:hover {
+                background-color: #2264bb;
+                color: #CCCCCC;
+            }
         </style>
     </head>
 
@@ -71,6 +76,16 @@
         <script>
             var emotesWithSounds = [];
             var allEmotes = [];
+
+            function play(e) {
+                var audio = e.firstChild;
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                    audio.currentTime = 0
+                }
+            }
 
             function fillTable() {
                 if (emotesWithSounds.length == 0 || allEmotes.length == 0) {
@@ -93,7 +108,7 @@
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td>${emote.isPresent ? '<span class="audioPlayer"><audio src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
+                            <td>${emote.isPresent ? '<span class="audioPlayer" onclick="play(this);"><audio src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
                         </tr>
                     `);
                 })
