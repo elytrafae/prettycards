@@ -42,6 +42,17 @@
             a:hover {
                 color: #0000BB!important;
             }
+
+            .audioPlayer:before {
+                content: '\25BA';
+            }
+
+            .audioPlayer {
+                background-color: #2885ff;
+                color: white;
+                border-radius: 3px;
+                padding: 3px;
+            }
         </style>
     </head>
 
@@ -69,8 +80,12 @@
                 allEmotes.forEach(function(emote) {
                     emote.isPresent = emotesWithSounds.includes(emote.image);
                 });
-                allEmotes.sort(function(a, b) {return a.isPresent - b.isPresent});
-                console.log("SORTED LIST", allEmotes);
+                allEmotes.sort(function(a, b) {
+                    if (a.isPresent == b.isPresent) {
+                        return a.id - b.id;
+                    }
+                    return a.isPresent - b.isPresent;
+                });
                 allEmotes.forEach(function(emote) {
                     $table.append(`
                         <tr class="${emote.isPresent ? "withSong" : "noSong"}">
@@ -78,7 +93,7 @@
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td>${emote.isPresent ? '<audio controls src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
+                            <td>${emote.isPresent ? '<span class="audioPlayer"><audio src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
                         </tr>
                     `);
                 })
