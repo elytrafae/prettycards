@@ -67,14 +67,17 @@
                 }
                 var $table = $("#mainTable tbody");
                 allEmotes.forEach(function(emote) {
-                    var isPresent = emotesWithSounds.includes(emote.image);
+                    emote.isPresent = emotesWithSounds.includes(emote.image);
+                });
+                allEmotes.sort(function(a, b) {return a.isPresent - b.isPresent});
+                allEmotes.forEach(function(emote) {
                     $table.append(`
-                        <tr class="${isPresent ? "withSong" : "noSong"}">
+                        <tr class="${emote.isPresent ? "withSong" : "noSong"}">
                             <td>${emote.id}</td>
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td>${isPresent ? '<audio controls src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
+                            <td>${emote.isPresent ? '<audio controls src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio>' : "NONE"}</td>
                         </tr>
                     `);
                 })
