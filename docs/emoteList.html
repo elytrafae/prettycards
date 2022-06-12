@@ -70,6 +70,7 @@
                     emote.isPresent = emotesWithSounds.includes(emote.image);
                 });
                 allEmotes.sort(function(a, b) {return a.isPresent - b.isPresent});
+                console.log("SORTED LIST", allEmotes);
                 allEmotes.forEach(function(emote) {
                     $table.append(`
                         <tr class="${emote.isPresent ? "withSong" : "noSong"}">
