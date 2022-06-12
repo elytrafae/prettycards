@@ -2,11 +2,14 @@
 <html>
 
     <head>
+        <meta charset="utf-8"/>
         <title>Emote List</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style>
             body {
                 background-color: #222222;
                 color: #b1b1b1;
+                font-family: sans-serif;
             }
 
             #mainTable {
@@ -44,11 +47,12 @@
             }
 
             .audioPlayer:before {
-                content: '\25BA';
+                /*content: '\25BA';*/
+                content: 'play_arrow';
             }
 
             .audioPlayer.playing:before {
-                content: '\23F8';
+                content: 'pause';
             }
 
             .audioPlayer {
@@ -114,7 +118,7 @@
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td>${emote.isPresent ? '<span class="audioPlayer" onclick="play(this);"><audio onended="$(this.parentElement).removeClass(\'playing\')" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
+                            <td>${emote.isPresent ? '<span class="audioPlayer material-icons" onclick="play(this);"><audio onended="$(this.parentElement).removeClass(\'playing\')" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
                         </tr>
                     `);
                 })
