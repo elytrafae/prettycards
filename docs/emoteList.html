@@ -73,7 +73,7 @@
             var allEmotes = [];
 
             function fillTable() {
-                if (emotesWithSounds.length == 0 && allEmotes.length == 0) {
+                if (emotesWithSounds.length == 0 || allEmotes.length == 0) {
                     return;
                 }
                 var $table = $("#mainTable tbody");
