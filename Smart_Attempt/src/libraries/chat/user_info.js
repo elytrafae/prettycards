@@ -57,6 +57,8 @@ function onPageLoaded() {
 	utility.loadCSSFromGH("CustomFriendship");
 	utility.loadCSSFromGH("FormExtensions");
 	utility.loadCSSFromLink("/css/meters.css");
+	utility.loadCSSFromLink("/css/cards.css");
+	utility.loadCSSFromLink("/css/frames.css");
 }
 
 ExecuteWhen("PrettyCards:onPageLoad", onPageLoaded);

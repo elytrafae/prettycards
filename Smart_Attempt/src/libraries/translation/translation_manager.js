@@ -1,7 +1,36 @@
 
+import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
-var allValuesLists = {};
+class TranslationManager {
+
+    constructor() {
+        this.allValuesLists = {};
+    }
+
+    getTranslatedValueList(key) {
+        var list = [];
+        for (var i=0; i < this.allValuesLists[key]; i++) {
+            list.push(this.getFromValueList(key, i));
+        }
+        return list;
+    }
+
+    getFromValueList(key, index) {
+        return window.$.i18n(this.getListKeyIndex(key, index));
+    }
+
+    getRandomFromValueList(key) {
+        return this.getFromValueList(key, utility.randomInt(0, this.allValuesLists[key]));
+    }
+
+    getListKeyIndex(key, i) {
+        return key + "-" + i;
+    }
+
+}
+
+var translationManager = new TranslationManager();
 
 function processJSON(lan, data) {
     //$.i18n.messageStore.set(lan, {[key]: processString(messages[key])});
@@ -14,9 +43,9 @@ function processJSON(lan, data) {
                 continue;
             }
             if (entry.values) {
-                allValuesLists[key] = entry.values.length;
+                translationManager.allValuesLists[key] = entry.values.length;
                 for (var i=0; i < entry.values.length; i++) {
-                    window.$.i18n.messageStore.set(lan, {[(key + "-" + i)]: entry.values[i]});
+                    window.$.i18n.messageStore.set(lan, {[translationManager.getListKeyIndex(key, i)]: entry.values[i]});
                 }
             } else {
                 window.$.i18n.messageStore.set(lan, {[key]: entry.value});
@@ -62,3 +91,5 @@ function prePageLoadStuff() {
 }
 
 prePageLoadStuff();
+
+export {translationManager};

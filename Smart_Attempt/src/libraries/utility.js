@@ -180,8 +180,12 @@ class Utility {
 		a.click();
 	}
 
+	randomInt(min=0, max=1) { // WILL ALWAYS BE SMALLER THAN THE MAX VALUE!
+		return min + Math.floor(Math.random() * (max-min));
+	}
+
 	getRandomFromArray(array) {
-		return array[Math.floor(Math.random() * array.length)];
+		return array[this.randomInt(0, array.length)];
 	}
 
 	/**

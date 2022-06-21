@@ -79,7 +79,7 @@ function createComplexButton(settings) {
 	return button;
 } 
 
-if (settings.theme_song_preview.value() && !underscript.onPage("Game")) {
+if (settings.theme_song_preview.value() && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
 
 	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
 		var html$ = data.element;

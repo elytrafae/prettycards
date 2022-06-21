@@ -1,5 +1,6 @@
 import { allCardSkins } from "../libraries/card_skin_selector";
 import { FlippableCard } from "../libraries/flippable_card";
+import { translationManager } from "../libraries/translation/translation_manager";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
@@ -149,7 +150,8 @@ function spawnNextCard() {
         front.find(".cardStatus").html("");
         front.find(".cardCost").html("?");
         front.find(".cardName")[0].className = "cardName";
-        front.find(".cardDesc > div").html(utility.getRandomFromArray(mysteryDescriptions));
+        // utility.getRandomFromArray(mysteryDescriptions)
+        front.find(".cardDesc > div").html(translationManager.getRandomFromValueList("pc-sop-mysterydescriptions"));
         front.find(".cardImage").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryCard.png)");
         front.find(".cardRarity").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryRarity.png)");
         front.find(".PrettyCards_CardThemeSongPlayer").remove();
