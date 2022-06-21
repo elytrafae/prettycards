@@ -22,6 +22,9 @@ function SendOnPageLoadEvent() {
 		console.log(PrettyCards_plugin.events.emit.singleton(":loaded").ran); // Testing if this makes Underscript work on Custom Pages . . .
 		console.log(PrettyCards_plugin.events.emit.singleton(":load").ran);
 		PrettyCards_plugin.events.emit.singleton("PrettyCards:onPageLoad");
+		PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
+			$("#PrettyCards_GoBack").html(window.$.i18n("pc-navigate-goback"));l
+		})
 		pageLoadEventFired = true;
 	}
 }

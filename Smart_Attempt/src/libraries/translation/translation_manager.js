@@ -1,4 +1,5 @@
 
+import { PrettyCards_plugin } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
@@ -52,6 +53,7 @@ function processJSON(lan, data) {
             }
         }
     }
+    PrettyCards_plugin.events.emit("PrettyCards:TranslationExtReady", {language: lan});
 }
 
 function loadLanguage(lan = 'en') {
