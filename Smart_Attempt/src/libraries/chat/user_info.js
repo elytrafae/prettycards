@@ -473,7 +473,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		column3.appendChild(lastFetched);
 
 	}).fail(function() {
-		friendshipContainer.innerHTML = `<p class='red'>${window.$.i18n("pc-chat-friendship-fail")}</p>`;
+		friendshipContainer.innerHTML = `<p class='red'>${window.$.i18n("pc-chat-friendship-fail")}</p>`; 
 	});
 
 
