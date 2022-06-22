@@ -10,7 +10,8 @@ var eventsToListenFor = [
 	"translation:loaded", 
 	"PC_Chat:getSelfInfos",
 	"allCardsReady",
-	"PrettyCards:baseThemeSongDataReady"
+	"PrettyCards:baseThemeSongDataReady",
+	"PrettyCards:TranslationExtReady"
 ];
 var eventsFired = {};
 var eventsData = {};

@@ -18,6 +18,30 @@
     "pc-sop-a3-p1" : "Yes. :3",
     "pc-sop-onwards" : "Onto the settings!",
     "pc-sop-retreat" : "I wanna chicken out!",
+    "pc-sop-settings" : "Game Settings",
+    "pc-sop-filters" : "Card Filters",
+    "pc-sop-answers" : "Answer Options",
+    "pc-sop-add" : "Add Button",
+    "pc-sop-remove" : "Remove",
+    "pc-sop-name" : "Name",
+    "pc-sop-style" : "Button Style",
+    "pc-sop-stylelist" : {
+        "values" : [
+            "Blue",
+            "Light Blue",
+            "Green",
+            "Red",
+            "Yellow"
+        ]
+    },
+    "pc-sop-other" : "Other Options",
+    "pc-sop-skins" : "View other skins next to cards during game (will still count as one verdict)",
+    "pc-sop-blind" : "Activate blind mode (Also randomizes order)",
+    "pc-sop-random" : "Randomize card order",
+    "pc-sop-start" : "Let's Rock!",
+    "pc-sop-smash" : "SMASH",
+    "pc-sop-smashobj" : "SMASH IN/ON/NEAR etc.",
+    "pc-sop-pass" : "PASS",
     "pc-sop-mysterydescriptions" : {
         "values" : [
             "ERROR: Not Enough Clues",

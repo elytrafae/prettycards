@@ -28,20 +28,20 @@ function addButtonSettingItem(name, style) {
         <div style="padding: 5px;" class="PrettyCards_SOP_ButtonData">
             <span class="handle glyphicon glyphicon-sort" style="cursor:grab;"></span> 
             <label>
-                <span>Name: </span>
+                <span>${window.$.i18n("pc-sop-name")}: </span>
                 <input type="text" value="${name}" id="PrettyCards_SOP_ButtonNameInput"></input>
             </label>
             <label>
-                <span>Button Style: </span>
+                <span>${window.$.i18n("pc-sop-style")}: </span>
                 <select id="PrettyCards_SOP_ButtonStyleInput">
-                    <option value="btn-primary" class="text-primary">Blue</option>
-                    <option value="btn-info" class="text-info">Light Blue</option>
-                    <option value="btn-success" class="text-success">Green</option>
-                    <option value="btn-danger" class="text-danger">Red</option>
-                    <option value="btn-warning" class="text-warning">Yellow</option>
+                    <option value="btn-primary" class="text-primary">${window.$.i18n("pc-sop-stylelist-0")}</option>
+                    <option value="btn-info" class="text-info">${window.$.i18n("pc-sop-stylelist-1")}</option>
+                    <option value="btn-success" class="text-success">${window.$.i18n("pc-sop-stylelist-2")}</option>
+                    <option value="btn-danger" class="text-danger">${window.$.i18n("pc-sop-stylelist-3")}</option>
+                    <option value="btn-warning" class="text-warning">${window.$.i18n("pc-sop-stylelist-4")}</option>
                 </select>
             </label>
-            <button class="btn btn-danger" onclick="this.parentElement.remove()">Remove</button>
+            <button class="btn btn-danger" onclick="this.parentElement.remove()">${window.$.i18n("pc-sop-remove")}</button>
         </div>
     `);
     item.find("#PrettyCards_SOP_ButtonStyleInput").val(style);
@@ -289,8 +289,8 @@ function InitSmashOrPass() {
                 <button class="btn btn-danger" onclick="window.location.href = '/';">${window.$.i18n("pc-sop-retreat")}</button>
             </div>
             <div id="PrettyCards_SOP_Phase2" class="PrettyCards_Hidden">
-                <h1>Game Settings</h1>
-                <h2>Card Filters</h2>
+                <h1>${window.$.i18n("pc-sop-settings")}</h1>
+                <h2>${window.$.i18n("pc-sop-filters")}</h2>
                 <p style="font-size: 16px;">
                     <label>
                         <input type="checkbox" id="baseRarityInput" checked class="rarityInput customRarityInput" rarity="BASE"> <img src="images/rarity/BASE_BASE.png">
@@ -331,16 +331,16 @@ function InitSmashOrPass() {
                         <input type="checkbox" id="everyRarityInput" checked> <img style="height: 24px;" src="https://github.com/CMD-God/prettycards/raw/master/img/RarityIcons/ALL_RARITIES.png" alt="Za Filter">
                     </label>
                 </p>
-                <h2 style="display:inline-block;">Answer Options</h2>
-                <button class="btn btn-success" id="PrettyCards_SOP_AddButton">Add Button</button>
+                <h2 style="display:inline-block;">${window.$.i18n("pc-sop-answers")}</h2>
+                <button class="btn btn-success" id="PrettyCards_SOP_AddButton">${window.$.i18n("pc-sop-add")}</button>
                 <div id="PrettyCards_SOP_ButtonSettingsContainer"></div>
-                <h2>Other Settings</h2>
+                <h2>${window.$.i18n("pc-sop-other")}</h2>
                 <div style="margin-bottom: 1em;">
-                    <label><input type="checkbox" id="PrettyCards_SOP_ViewSkinsSetting" checked> <span>View other skins next to cards during game (will still count as one verdict)</span></label><br>
-                    <label><input type="checkbox" id="PrettyCards_SOP_BlindModeSetting"> <span>Activate blind mode (Also randomizes order)</span></label><br>
-                    <label><input type="checkbox" id="PrettyCards_SOP_RandomizeSetting"> <span>Randomize card order</span></label><br>
+                    <label><input type="checkbox" id="PrettyCards_SOP_ViewSkinsSetting" checked> <span>${window.$.i18n("pc-sop-skins")}</span></label><br>
+                    <label><input type="checkbox" id="PrettyCards_SOP_BlindModeSetting"> <span>${window.$.i18n("pc-sop-blind")}</span></label><br>
+                    <label><input type="checkbox" id="PrettyCards_SOP_RandomizeSetting"> <span>${window.$.i18n("pc-sop-random")}</span></label><br>
                 </div>
-                <button class="btn btn-success" id="PrettyCards_SOP_ToPhase3">Let's Rock!</button>
+                <button class="btn btn-success" id="PrettyCards_SOP_ToPhase3">${window.$.i18n("pc-sop-start")}</button>
             </div>
             <div id="PrettyCards_SOP_Phase3" class="PrettyCards_Hidden">
                 <div id="PrettyCards_SOP_Phase3_CardContainer"></div>
@@ -368,13 +368,13 @@ function InitSmashOrPass() {
             $('#'+rarityInputList.join(', #')).prop("checked", checked); // Credit goes to Feildmaster for the optimized version.
         }
 
-        addButtonSettingItem("SMASH", "btn-success");
-        addButtonSettingItem("SMASH IN/ON/NEAR etc.", "btn-warning");
-        addButtonSettingItem("PASS", "btn-danger");
+        addButtonSettingItem(window.$.i18n("pc-sop-smash"), "btn-success");
+        addButtonSettingItem(window.$.i18n("pc-sop-smashobj"), "btn-warning");
+        addButtonSettingItem(window.$.i18n("pc-sop-pass"), "btn-danger");
         refreshSortables();
 
         document.getElementById("PrettyCards_SOP_AddButton").onclick = function() {
-            addButtonSettingItem("", "#000000", "#FFFFFF");
+            addButtonSettingItem("", "btn-success");
         }
 
         document.getElementById("PrettyCards_SOP_ToPhase3").onclick = startPhase3;
