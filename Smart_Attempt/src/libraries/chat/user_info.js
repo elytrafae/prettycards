@@ -183,7 +183,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 			friendButton.innerHTML = '<span class="glyphicon glyphicon-user gray"></span> ' + + window.$.i18n("pc-chat-friend-you");
 			return;
 		}
-		friendButton.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-user"></span> ' + translationManager.getRandomFromValueList("pc-chat-mysteryfriends") + "</span>";
+		friendButton.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-user"></span> ' + translationManager.getRandomFromValueList("pc-chat-friend-mystery") + "</span>";
 	}
 	
 	function friendButtonFriend() {
@@ -226,7 +226,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	column1.appendChild(ignoreContainer);
 	
 	function UpdateIgnoreText() {
-		ignoreContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off red"></span> ' + (underscript.user.isIgnored(user) ? "Unignore" : "Ignore");
+		ignoreContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off red"></span> ' + (underscript.user.isIgnored(user) ? window.$.i18n("pc-chat-ignore-remove") : window.$.i18n("pc-chat-ignore-add"));
 	}
 	
 	if (!pagegetters.IsMyself(user.id)) {
@@ -243,14 +243,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		}
 	} else {
 		if (!demoniocEasterEgg) {
-			ignoreContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off gray"></span> Can\'t ignore yourself!';
+			ignoreContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off gray"></span> ' + window.$.i18n("pc-chat-ignore-self");
 		} else {
 			var ignoreButtonMessages = [
 				"Believe me, I tried doing this a lot . . .",
 				"You don't even like yourself, huh?",
 				"You will always find a way to harrass yourself anyway."
 			];
-			ignoreContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-volume-off"></span> ' + ignoreButtonMessages[Math.floor(Math.random() * ignoreButtonMessages.length)] + "</span>";
+			ignoreContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-volume-off"></span> ' + translationManager.getRandomFromValueList("pc-chat-ignore-mystery") + "</span>";
 		}
 	}
 	

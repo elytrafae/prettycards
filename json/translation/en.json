@@ -24,7 +24,7 @@
     "pc-chat-friend-you" : "Can't friend yourself.",
     "pc-chat-unfriend-confirm-title" : "Unfriend $1?",
     "pc-chat-unfriend-confirm" : "Do you really wish to unfriend $1?",
-    "pc-chat-mysteryfriends" : {
+    "pc-chat-friend-mystery" : {
         "values" : [
             "It's you.",
             "Aren't you your own best friend~?",
@@ -34,14 +34,16 @@
             "I wonder if you can friend your imaginary friends . . ."
         ]
     },
-    "pc-chat-mysteryignores" : {
+    "pc-chat-ignore-add" : "Ignore",
+    "pc-chat-ignore-remove" : "Unignore",
+    "pc-chat-ignore-self" : "Can't ignore yourself!",
+    "pc-chat-ignore-mystery" : {
         "values" : [
-            "It's you.",
-            "Aren't you your own best friend~?",
-            "I wonder if one betrays themself before their friends do . . .",
-            "Do you even trust youself as much as your friends?",
-            "Having only yourself by your side is possibly one of the worst prisons.",
-            "I wonder if you can friend your imaginary friends . . ."
+            "Believe me, I tried doing this a lot . . .",
+			"You don't even like yourself, huh?",
+			"You will always find a way to harrass yourself anyway.",
+            "Ignoring your problems will not solve them.",
+            "Ignoring your needs is a huge source of frustration."
         ]
     }
 }
