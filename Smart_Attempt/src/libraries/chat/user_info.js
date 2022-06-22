@@ -133,7 +133,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	message.appendChild(row);
 	/////////////
 	
-	var demoniocEasterEgg = true;//Math.random() <= 0.022;
+	var demoniocEasterEgg = Math.random() <= 0.022;
 	
 	// Column 1
 	var groups = document.createElement("DIV");
@@ -165,8 +165,6 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	lv.innerHTML = window.$.i18n("stat-lv") + " " + user.level;
 	lv.className = "PrettyCards_UserLV";
 	column1.appendChild(lv);
-	
-	var ignoreButton = document.createElement("DIV");
 	
 	var friendButton = document.createElement("DIV");
 	column1.appendChild(friendButton);
