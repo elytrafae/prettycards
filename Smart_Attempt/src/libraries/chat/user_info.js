@@ -180,14 +180,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	
 	function friendButtonYou() {
 		if (!demoniocEasterEgg) {
-			friendButton.innerHTML = '<span class="glyphicon glyphicon-user gray"></span> Can\'t friend yourself.';
+			friendButton.innerHTML = '<span class="glyphicon glyphicon-user gray"></span> ' + + window.$.i18n("pc-chat-friend-you");
 			return;
 		}
 		friendButton.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-user"></span> ' + translationManager.getRandomFromValueList("pc-chat-mysteryfriends") + "</span>";
 	}
 	
 	function friendButtonFriend() {
-		friendButton.innerHTML = '<span class="glyphicon glyphicon-user green"></span> Add Friend!';
+		friendButton.innerHTML = '<span class="glyphicon glyphicon-user green"></span> ' + window.$.i18n("pc-chat-friend-add");
 		friendButton.style.cursor = "pointer";
 		friendButton.onclick = function() {
 			$.post("/Friends", {username: user.username, addFriend: "Add friend"}, friendButtonUnfriend);
@@ -195,23 +195,23 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	}
 	
 	function friendButtonUnfriend() {
-		friendButton.innerHTML = '<span class="glyphicon glyphicon-user red"></span> Unfriend';
+		friendButton.innerHTML = '<span class="glyphicon glyphicon-user red"></span> ' + window.$.i18n("pc-chat-friend-remove");
 		friendButton.style.cursor = "pointer";
 		friendButton.onclick = unfriendConfirmation;
 	}
 	
 	function unfriendConfirmation() {
 		BootstrapDialog.show({
-			title: "Unfriend " + user.username + "?",
-			message: "Do you really wish to unfriend " + user.username + "?",
+			title: window.$.i18n("pc-chat-unfriend-confirm-title", user.username),
+			message: window.$.i18n("pc-chat-unfriend-confirm", user.username),
 			buttons: [{
-					label: "No!",
+					label: window.$.i18n("pc-navigate-no"),
 					cssClass: 'btn-primary us-normal',
 					action(dialog) {
 						dialog.close();
 					}
 				}, {
-					label: "Yes!",
+					label: window.$.i18n("pc-navigate-yes"),
 					cssClass: 'btn-danger us-normal',
 					action(dialog) {
 						$.get("/Friends?delete=" + user.id, {}, friendButtonFriend());
