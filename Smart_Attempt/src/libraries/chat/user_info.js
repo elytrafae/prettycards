@@ -257,22 +257,17 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	var privateMessageContainer = document.createElement("DIV");
 	column1.appendChild(privateMessageContainer);
 	if (!pagegetters.IsMyself(user.id) && (pagegetters.IsSelfMod() || pagegetters.IsMyFriend(user.id))) {
-		privateMessageContainer.innerHTML = '<span class="glyphicon glyphicon-envelope yellow"></span> Private Message';
+		privateMessageContainer.innerHTML = '<span class="glyphicon glyphicon-envelope yellow"></span> ' + window.$.i18n("pc-chat-pm-allowed");
 		privateMessageContainer.style.cursor = "pointer";
 		privateMessageContainer.onclick = function() {openPrivateRoom(user.id, user.username);}
 	} else if (pagegetters.IsMyself(user.id)) {
 		if (!demoniocEasterEgg) {
-			privateMessageContainer.innerHTML = '<span class="glyphicon glyphicon-envelope gray"></span> Can\'t private message yourself!';
+			privateMessageContainer.innerHTML = '<span class="glyphicon glyphicon-envelope gray"></span> ' + window.$.i18n("pc-chat-pm-self");
 		} else {
-			var privateMessageButtonMessages = [
-				"Your internal monologue should probably stay in your head.",
-				"A notebook would be a better place to keep your thoughts.",
-				"Messaging yourself would be pointless, wouldn't it?"
-			];
-			privateMessageContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-envelope"></span> ' + privateMessageButtonMessages[Math.floor(Math.random() * privateMessageButtonMessages.length)] + "</span>";
+			privateMessageContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-envelope"></span> ' + translationManager.getRandomFromValueList("pc-chat-pm-mystery") + "</span>";
 		}
 	} else {
-		privateMessageContainer.innerHTML = '<span class="glyphicon glyphicon-envelope gray"></span> Can\'t private message this user!';
+		privateMessageContainer.innerHTML = '<span class="glyphicon glyphicon-envelope gray"></span> ' + window.$.i18n("pc-chat-pm-denied");
 	}
 	
 	const spectateContainer = document.createElement("DIV");
@@ -284,37 +279,37 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 				game.player1 = game.player2;
 				game.player2 = p1;
 			}
-			spectateContainer.innerHTML = `<span class="glyphicon glyphicon-eye-open green"></span> Now in a match:<br><a href="${game.player1.spectateLink}"><img src="images/souls/${game.player1.soul}.png"></img><span class="${game.player1.soul}"> ${game.player1.name}</span></a> VS 
+			spectateContainer.innerHTML = `<span class="glyphicon glyphicon-eye-open green"></span> ${window.$.i18n("pc-chat-spectate-match")}<br><a href="${game.player1.spectateLink}"><img src="images/souls/${game.player1.soul}.png"></img><span class="${game.player1.soul}"> ${game.player1.name}</span></a> ${window.$.i18n("pc-chat-spectate-separator")} 
 <a href="${game.player2.spectateLink}"><img src="images/souls/${game.player2.soul}.png"></img><span class="${game.player2.soul}"> ${game.player2.name}</span></a>`;
 		});
 	} else if (pagegetters.IsMyself(user.id) && user.gameId > -1) {	
 		if (!demoniocEasterEgg) {
-			spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> Can\'t spectate yourself!';
+			spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> ' + window.$.i18n("pc-chat-spectate-self");
 		} else {
 			var spectateButtonMessages = [
 				"You shouldn't spectate yourself.",
 				"You should pay attention to the game instead of looking at yourself.",
 				"Don't just sit by looking at yourself! Play the game!"
 			];
-			spectateContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-eye-open"></span> ' + spectateButtonMessages[Math.floor(Math.random() * spectateButtonMessages.length)] + "</span>";
+			spectateContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-eye-open"></span> ' + translationManager.getRandomFromValueList("pc-chat-spectate-mystery-match") + "</span>";
 		}
 	} else if (pagegetters.IsMyself(user.id)) {
 		if (!demoniocEasterEgg) {
-			spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> Can\'t spectate yourself.';
+			spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> ' + window.$.i18n("pc-chat-spectate-self");
 		} else {
 			var spectateButtonMessages = [
 				"You shouldn't spectate yourself, anyway.",
 				"Spectate others, not yourself."
 			];
-			spectateContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-eye-open"></span> ' + spectateButtonMessages[Math.floor(Math.random() * spectateButtonMessages.length)] + "</span>";
+			spectateContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-eye-open"></span> ' + translationManager.getRandomFromValueList("pc-chat-spectate-mystery-idle") + "</span>";
 		}
 	} else {
-		spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> This player is not in a match.';
+		spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> ' + window.$.i18n("pc-chat-spectate-idle");
 	}
 	
 	if (!pagegetters.IsMyself(user.id) && user.gameId <= -1) {
 		var challengeContainer = document.createElement("DIV");
-		challengeContainer.innerHTML = '<span class="glyphicon glyphicon-flash red"></span> Challenge!';
+		challengeContainer.innerHTML = '<span class="glyphicon glyphicon-flash red"></span> ' + window.$.i18n("pc-chat-challenge-create");
 		challengeContainer.style.cursor = "pointer";
 		challengeContainer.onclick = function() {
 			ChallengePlayerScreen(user, data.infos);
@@ -325,14 +320,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	var modContainer = document.createElement("DIV");
 	if (pagegetters.IsSelfMod() && !pagegetters.IsMyself(user.id)) {
 		var times = {
-			1 : '1 sec',
-			30 : '30 sec',
-			60 : '1 min',
-			600 : '10 min',
-			3600 : '1 hour',
-			21600 : '6 hours',
-			43200 : '12 hours',
-			43200 : '1 day'
+			1 : '1 ' + window.$.i18n("pc-smalltime-sec", 1),
+			30 : '30 ' + window.$.i18n("pc-smalltime-sec", 2),
+			60 : '1 ' + window.$.i18n("pc-smalltime-min", 1),
+			600 : '10 ' + window.$.i18n("pc-smalltime-min", 2),
+			3600 : '1 ' + window.$.i18n("pc-smalltime-hour", 1),
+			21600 : '6 ' + window.$.i18n("pc-smalltime-hour", 2),
+			43200 : '12 ' + window.$.i18n("pc-smalltime-hour", 2),
+			43200 : '1 day' + window.$.i18n("pc-smalltime-day", 1)
 		}
 		modContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off gray"></span> ' + window.$.i18n('chat-time-out-user') + ' ';
 		
@@ -356,20 +351,10 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		for (var sec in times) {
 			dataList.innerHTML += '<option value="' + times[sec] + '"></option>';
 		}
-		//dataList.innerHTML += '<option value="-1"><input type="number"></input></option>';
 		
-		/*
-		var select = document.createElement("SELECT");
-		select.id = "PrettyCards_Timeout";
-		for (var sec in times) {
-			select.innerHTML += '<option value="' + sec + '">' + times[sec] + '</option>';
-		}
-		select.innerHTML += '<option value="-1"><input type="number"></input></option>';
-		*/
-		
-		var button = document.createElement("BUTTON"); //<button class="btn btn-primary" onclick="">Timeout!</button>
+		var button = document.createElement("BUTTON");
 		button.className = "btn btn-primary";
-		button.innerHTML = "Timeout!";
+		button.innerHTML = window.$.i18n("pc-chat-mod-timeout");
 		button.onclick = function() {
 			var val = $('#PrettyCards_Timeout').val();
 			for (var sec in times) {
@@ -399,13 +384,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	var rankNr = getRankedPosition(user);
 	var rank = "";
 	if (rankNr > -1) {
-		rank = "<div>Rank: " + getRankedPositionHTML(rankNr) + "</div>";
+		rank = "<div>" + window.$.i18n("pc-chat-ranked-rank") + ": " + getRankedPositionHTML(rankNr) + "</div>";
 	}
 	
-	var wins = "<div>Wins: " + user.winsRanked + "</div>";
-	var losses = "<div>Losses: " + user.lossesRanked + "</div>";
-	var winrate = "<div>Win/Loss Ratio: " + (Math.floor((user.winsRanked / user.lossesRanked)*100) / 100) + "</div>";
-	var winstreak = "<div>Winstreak: " + user.winStreak + "</div>";
+	console.log("USER", user);
+	var wins = "<div>" + window.$.i18n("pc-chat-ranked-wins") + ": " + user.winsRanked + "</div>";
+	var losses = "<div>" + window.$.i18n("pc-chat-ranked-losses") + ": " + user.lossesRanked + "</div>";
+	var winrate = "<div>" + window.$.i18n("pc-chat-ranked-winrate") + ": " + (Math.floor((user.winsRanked / (user.winsRanked + user.lossesRanked))*10000) / 100) + "%</div>";
+	var winstreak = "<div>" + window.$.i18n("pc-chat-ranked-winstreak") + ": " + user.winStreak + "</div>";
 	column2.innerHTML += rank + wins + losses + winrate + winstreak;
 	/////////////
 
@@ -429,11 +415,11 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	// Friendship Stuff
 	var friendshipContainer = document.createElement("DIV");
 	friendshipContainer.className = "PrettyCards_ChatFriendshipContainer";
-	friendshipContainer.innerHTML = "<h2 class='gray'>Fetching data . . .</h2>";
+	friendshipContainer.innerHTML = `<h2 class='gray'>${window.$.i18n("pc-chat-friendship-fetching")}</h2>`;
 
 	var titleCont = document.createElement("DIV");
 	titleCont.id = "PrettyCards_UserInfo_FriendshipTitleContainer";
-	titleCont.innerHTML = "<h2>Favorite Cards</h2>";
+	titleCont.innerHTML = `<h2>${window.$.i18n("pc-chat-friendship-title")}</h2>`;
 
 	column3.appendChild(titleCont);
 	column3.appendChild(friendshipContainer);
@@ -464,19 +450,18 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		//var $swapSortBtn = $(`<button class="btn btn-primary" id="PrettyCards_UserInfo_SwapSortBtn"></button>`);
 		var $swapSortBtn = $(`
 		<div style="display:flex;" id="PrettyCards_UserInfo_SwapSortArea">
-			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">TOP XP</label>
+			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">${window.$.i18n("pc-chat-friendship-sortxp")}</label>
 			<label class="switch friendshipSortSwitch">
 				<input type="checkbox" id="PrettyCards_UserInfo_SwapSortBtn">
 				<span class="slider round"></span>
 			</label>
-			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">TOP RANK</label>
+			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">${window.$.i18n("pc-chat-friendship-sortrank")}</label>
 		</div>`);
 		$(titleCont).append($swapSortBtn);
 		
 		var $input = $swapSortBtn.find("#PrettyCards_UserInfo_SwapSortBtn");
 		$input.change(function() {
 			updateSortAndDisplay(data.scores, $(friendshipContainer), $input);
-			console.log("BUTTON PRESSED");
 		})
 
 		updateSortAndDisplay(data.scores, $(friendshipContainer), $input);
@@ -484,11 +469,11 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		var lastFetched = document.createElement("P");
 		lastFetched.className = "gray";
 		var date = new Date(data.lastUpdated);
-		lastFetched.innerHTML = "Last fetched: " + date.toUTCString();
+		lastFetched.innerHTML = `${window.$.i18n("pc-chat-friendship-fetchedat")}: ${date.toUTCString()}`;
 		column3.appendChild(lastFetched);
 
 	}).fail(function() {
-		friendshipContainer.innerHTML = "<p class='red'>This user has no friendship leaderboard data.</p>";
+		friendshipContainer.innerHTML = `<p class='red'>${window.$.i18n("pc-chat-friendship-fail")}</p>`;
 	});
 
 

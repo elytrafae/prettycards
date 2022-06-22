@@ -45,5 +45,50 @@
             "Ignoring your problems will not solve them.",
             "Ignoring your needs is a huge source of frustration."
         ]
-    }
+    },
+    "pc-chat-pm-allowed" : "Private Message",
+    "pc-chat-pm-self" : "Can't private message yourself!",
+    "pc-chat-pm-denied" : "Can't private message this user!",
+    "pc-chat-pm-mystery" : {
+        "values" : [
+            "Your internal monologue should probably stay in your head.",
+			"A notebook would be a better place to keep your thoughts.",
+			"Messaging yourself would be pointless, wouldn't it?",
+            "Desparate to talk to someone? I feel you."
+        ]
+    },
+    "pc-chat-spectate-match" : "Now in a match:",
+    "pc-chat-spectate-separator" : "VS",
+    "pc-chat-spectate-self" : "Can't spectate yourself!",
+    "pc-chat-spectate-idle" : "This player is not in a match.",
+    "pc-chat-spectate-mystery-idle" : {
+        "values" : [
+            "You shouldn't spectate yourself, anyway.",
+			"Spectate others, not yourself."
+        ]
+    },
+    "pc-chat-spectate-mystery-match" : {
+        "values" : [
+            "You shouldn't spectate yourself.",
+			"You should pay attention to the game instead of looking at yourself.",
+			"Don't just sit by looking at yourself! Play the game!"
+        ]
+    },
+    "pc-chat-challenge-create" : "Challenge!",
+    "pc-chat-mod-timeout" : "Timeout!",
+    "pc-smalltime-sec" : "{{PLURAL:$1|sec|sec}}",
+    "pc-smalltime-min" : "{{PLURAL:$1|min|min}}",
+    "pc-smalltime-hour" : "{{PLURAL:$1|hour|hours}}",
+    "pc-smalltime-day" : "{{PLURAL:$1|day|days}}",
+    "pc-chat-ranked-rank" : "Rank",
+    "pc-chat-ranked-wins" : "Wins",
+    "pc-chat-ranked-losses" : "Losses",
+    "pc-chat-ranked-winrate" : "Winrate",
+    "pc-chat-ranked-winstreak" : "Winstreak",
+    "pc-chat-friendship-title" : "Favorite Cards",
+    "pc-chat-friendship-fetching" : "Fetching data . . .",
+    "pc-chat-friendship-fail" : "This user has no friendship leaderboard data.",
+    "pc-chat-friendship-fetchedat" : "Last fetched",
+    "pc-chat-friendship-sortxp" : "TOP XP",
+    "pc-xhat-friendship-sortrank" : "TOP RANK"
 }
