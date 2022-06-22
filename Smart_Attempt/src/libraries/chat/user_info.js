@@ -211,7 +211,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 						dialog.close();
 					}
 				}, {
-					label: window.$.i18n("pc-navigate-yes"),
+					label: window.$.i18n("pc-navigate-yes"), 
 					cssClass: 'btn-danger us-normal',
 					action(dialog) {
 						$.get("/Friends?delete=" + user.id, {}, friendButtonFriend());
