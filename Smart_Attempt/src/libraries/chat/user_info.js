@@ -540,19 +540,19 @@ function getRankedPosition(user) {
 
 function getRankedPositionHTML(rankNr) {
 	if (rankNr == 1) {
-		return rarityIconsHTML.DELTARUNE.DETERMINATION + " First Place!";
+		return rarityIconsHTML.DELTARUNE.DETERMINATION + " " + window.$.i18n("pc-chat-ranked-first");
 	}
 	if (rankNr == 2) {
-		return rarityIconsHTML.DELTARUNE.LEGENDARY + " Second Place!";
+		return rarityIconsHTML.DELTARUNE.LEGENDARY + " " + window.$.i18n("pc-chat-ranked-second");
 	}
 	if (rankNr == 3) {
-		return rarityIconsHTML.DELTARUNE.EPIC + " Third Place!";
+		return rarityIconsHTML.DELTARUNE.EPIC + " " + window.$.i18n("pc-chat-ranked-third");
 	}
 	if (rankNr == 4) {
-		return rarityIconsHTML.DELTARUNE.RARE + " Fourth Place!";
+		return rarityIconsHTML.DELTARUNE.RARE + " " + window.$.i18n("pc-chat-ranked-fourth");
 	}
 	if (rankNr == 5) {
-		return rarityIconsHTML.DELTARUNE.COMMON + " Fifth Place!";
+		return rarityIconsHTML.DELTARUNE.COMMON + " " + window.$.i18n("pc-chat-ranked-fifth");
 	}
 	return rankNr;
 }
