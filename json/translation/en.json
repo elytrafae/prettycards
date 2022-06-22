@@ -16,5 +16,25 @@
             "I wonder what your friends will think of you . . .",
             "Need a little hint? How cute~!"
         ]
+    },
+    "pc-chat-mysteryfriends" : {
+        "values" : [
+            "It's you.",
+            "Aren't you your own best friend~?",
+            "I wonder if one betrays themself before their friends do . . .",
+            "Do you even trust youself as much as your friends?",
+            "Having only yourself by your side is possibly one of the worst prisons.",
+            "I wonder if you can friend your imaginary friends . . ."
+        ]
+    },
+    "pc-chat-mysteryignores" : {
+        "values" : [
+            "It's you.",
+            "Aren't you your own best friend~?",
+            "I wonder if one betrays themself before their friends do . . .",
+            "Do you even trust youself as much as your friends?",
+            "Having only yourself by your side is possibly one of the worst prisons.",
+            "I wonder if you can friend your imaginary friends . . ."
+        ]
     }
 }

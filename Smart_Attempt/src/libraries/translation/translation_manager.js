@@ -29,6 +29,14 @@ class TranslationManager {
         return key + "-" + i;
     }
 
+    getWithFallback(key, fb) {
+        var t = window.$.i18n(key);
+        if (t == key) {
+            return fb;
+        }
+        return t;
+    }
+
 }
 
 var translationManager = new TranslationManager();

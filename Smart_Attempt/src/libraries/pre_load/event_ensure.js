@@ -92,12 +92,12 @@ if ('loading' == document.readyState) {
 
 ExecuteWhen("PrettyCards:onPageLoad", function () {
 	if (!window.allCards) {
-		window.$("body").append('<script src="js/card.js?v=063001" type="text/javascript"></script>');
-		window.$("head").append('<link href="css/cards.css?v=063001" rel="stylesheet" type="text/css">');
-		window.$("head").append('<link href="css/frames.css?v=063001" rel="stylesheet" type="text/css">');
+		window.$("body").append('<script src="js/card.js" type="text/javascript"></script>');
+		window.$("head").append('<link href="css/cards.css" rel="stylesheet" type="text/css">');
+		window.$("head").append('<link href="css/frames.css" rel="stylesheet" type="text/css">');
 	}
 	if (!window.underscript.onPage("Friendship")) {
-		window.$("body").append('<script src="js/friendshipUtils.js?v=068003" type="text/javascript"></script>');
+		window.$("body").append('<script src="js/friendshipUtils.js" type="text/javascript"></script>');
 	}
 });
 

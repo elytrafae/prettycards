@@ -6,6 +6,7 @@ import {pagegetters} from "/src/libraries/page_getters.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 import {ChallengePlayerScreen} from "/src/libraries/private_games/private_game_screen.js";
+import { translationManager } from "../translation/translation_manager";
 
 window.PrettyCards_plugin = PrettyCards_plugin;
 
@@ -57,8 +58,8 @@ function onPageLoaded() {
 	utility.loadCSSFromGH("CustomFriendship");
 	utility.loadCSSFromGH("FormExtensions");
 	utility.loadCSSFromLink("/css/meters.css");
-	utility.loadCSSFromLink("/css/cards.css");
-	utility.loadCSSFromLink("/css/frames.css");
+	//utility.loadCSSFromLink("/css/cards.css");
+	//utility.loadCSSFromLink("/css/frames.css");
 }
 
 ExecuteWhen("PrettyCards:onPageLoad", onPageLoaded);
@@ -76,37 +77,6 @@ function sendUserInfoEvent(ele) {
 		PrettyCards_plugin.events.emit("Chat:getInfo", {popup : popup, popupElement : popup.$modalDialog[0], infos : infos, user : user});
 	}
 }
-
-/*
-// The User Info itself is redirected to overriding the getInfo function. This section is for noting which chat is every message in.
-function processChatMessageHTML(ele, msg) {
-	console.log("HTML Chat message: ", ele, msg);
-	if (!ele) {
-		console.log("Message received in a chat room you are not currently in. Returning.");
-		return;
-	}
-}
-
-function processChatMessageEvent(data) {
-	console.log("New chat message: ", data);
-	processChatMessageHTML(document.querySelector("#" + data.room + " .message-group:last-of-type"), JSON.parse(data.chatMessage));
-}
-
-function processChatHistoryEvent(data) {
-	console.log("Chat History: ", data);
-	var messages = JSON.parse(data.history);
-	var elements = document.querySelectorAll("#" + data.room + " .message-group");
-	for (var i=0; i < messages.length; i++) {
-		processChatMessageHTML(elements[i], messages[i]);
-	}
-}
-
-PrettyCards_plugin.events.on("Chat:getHistory", processChatHistoryEvent);
-PrettyCards_plugin.events.on("Chat:getMessage", processChatMessageEvent);
-PrettyCards_plugin.events.on("Chat:getPrivateHistory", processChatHistoryEvent);
-PrettyCards_plugin.events.on("Chat:getPrivateMessage", processChatMessageEvent);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*/
 
 PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	if (!settings.user_info.value()) {return;}
@@ -163,7 +133,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	message.appendChild(row);
 	/////////////
 	
-	var demoniocEasterEgg = Math.random() <= 0.022;
+	var demoniocEasterEgg = true;//Math.random() <= 0.022;
 	
 	// Column 1
 	var groups = document.createElement("DIV");
@@ -184,7 +154,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		}
 		
 		var text = document.createElement("SPAN");
-		text.innerHTML = group.name;
+		text.innerHTML = translationManager.getWithFallback("group-" + group.name.replace(" ", "_").toLowerCase(), group.name);
 		text.className = group.name.replace(" ", "_");
 		text.style.paddingRight = "15px";
 		cont.appendChild(text);
@@ -213,15 +183,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 			friendButton.innerHTML = '<span class="glyphicon glyphicon-user gray"></span> Can\'t friend yourself.';
 			return;
 		}
-		var friendButtonMessages = [
-			"It's you.",
-			"Aren't you your own best friend~?",
-			"I wonder if one betrays themself before their friends do . . .",
-			"Do you even trust youself as much as your friends?",
-			"Having only yourself by your side is possibly one of the worst prisons.",
-			"I wonder if you can friend your imaginary friends . . ."
-		];
-		friendButton.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-user"></span> ' + friendButtonMessages[Math.floor(Math.random() * friendButtonMessages.length)] + "</span>";
+		friendButton.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-user"></span> ' + translationManager.getRandomFromValueList("pc-chat-mysteryfriends") + "</span>";
 	}
 	
 	function friendButtonFriend() {

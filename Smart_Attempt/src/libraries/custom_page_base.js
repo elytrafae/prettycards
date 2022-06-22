@@ -23,7 +23,7 @@ function SendOnPageLoadEvent() {
 		console.log(PrettyCards_plugin.events.emit.singleton(":load").ran);
 		PrettyCards_plugin.events.emit.singleton("PrettyCards:onPageLoad");
 		PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
-			$("#PrettyCards_GoBack").html(window.$.i18n("pc-navigate-goback"));l
+			$("#PrettyCards_GoBack").html(window.$.i18n("pc-navigate-goback"));
 		})
 		pageLoadEventFired = true;
 	}
