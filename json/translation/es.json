@@ -6,5 +6,28 @@
     "pc-navigate-goback": "¡Atrás!",
     "pc-sop-mysterydescriptions": {
         "values": ["ERROR: No hay pistas suficientes.", "¡Buena suerte con este~!", "Ojalá este no te haga ver muy mal...", "La vida es simplemente un juego de acertijos. ¿Eres lo suficientemente valiente como para tirar el dado~?", "Te compadezco... Sólo un poco.", "¿De verdad importa al fin y al cabo?", "Ojalá pudiera ver tu expresión de frustración~", "Me pregunto qué pensarán tus amigos de tí...", "¿Necesitas una pista? ¡Qué adorable~!"]
-    }
+    },
+    "pc-navigate-yes": "¡Si!",
+    "pc-navigate-no": "¡No!",
+    "pc-chat-friend-add": "¡Añadir Amigo!",
+    "pc-chat-friend-remove": "Eliminar Amigo",
+    "pc-chat-friend-you": "No puedes ser amigo de ti mismo.",
+    "pc-chat-unfriend-confirm-title": "¿Eliminar $1 de tu lista de amigos?",
+    "pc-chat-unfriend-confirm": "¿Realmente quieres eliminar $1 de tu lista de amigos?",
+    "pc-chat-friend-mystery": {
+        "values": ["Eres tú.", "¿No eres tú tu propio mejor amigo~?", "Me pregunto si uno se traiciona a si mismo antes que a sus amigos...", "Incluso confías en ti mismo tanto como a tus amigos?", "Teniendo solo a ti mismo a tu lado es posiblemente una de las peores prisiones.", "Espero que puedas ser amigo de amigos imaginarios..."]
+    },
+    "pc-chat-ignore-add": "Ignorar",
+    "pc-chat-ignore-remove": "Designorar",
+    "pc-chat-ignore-self": "¡No puedes ignorarte a ti mismo!",
+    "pc-chat-ignore-mystery": {
+        "values": ["Cree en mí, he intentado hacer esto mucho.", "Ni siquiera te gustas a ti mismo, ¿eh?", "Encontraras siempre el camino para acosarte a ti mismo, de todos modos.", "Ignorando tus problemas no los solucionas.", "Ignorando tus necesidades es un abrazo de la fuente de frustración."]
+    },
+    "pc-chat-pm-allowed": "Mensaje Privado",
+    "pc-chat-pm-self": "¡No puedes hablar contigo mismo!",
+    "pc-chat-pm-denied": "¡No puedes mandar un mensaje privado a este jugador!",
+    "pc-chat-pm-mystery": {
+        "values": ["Tu monologo interno debería probablemente seguir en tu cabeza.", "Un bloc de notas debería ser una mejor parte para mantener tus pensamientos.", "Hablando contigo mismo sería un poco inútil, ¿cierto?", "¿Desesperado por hablar con alguien? Lo comprendo."]
+    },
+    "pc-chat-spectate-match": ""
 }
