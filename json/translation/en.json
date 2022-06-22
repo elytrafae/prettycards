@@ -6,6 +6,18 @@
     "pc-navigate-goback" : "Go Back!",
     "pc-navigate-yes" : "Yes!",
     "pc-navigate-no" : "No!",
+    "pc-sop-welcome" : "Welcome to Undercards Smash or Pass!",
+    "pc-sop-q1" : "What is Smash or Pass?",
+    "pc-sop-a1-p1" : "In case you have been living under a rock, Smash or Pass is a game where characters from a certain media are presented, one by one, and the player has to decide whether or not they would \"smash\" it. Interpret that as you will.",
+    "pc-sop-a1-p2" : "Newer variations of the game can also include other categories, such as \"befriend\", but the main concept is this.",
+    "pc-sop-a1-p3" : "After all the characters have been given a verdict, statistics follow, which can be analized, shared with friends or just posted online for the whole world to judge you!",
+    "pc-sop-q2" : "Why do this with Undercards?",
+    "pc-sop-a2-p1" : "Because it's fun, and certain cards can spark interesting discussions in a civil and understanding environment.",
+    "pc-sop-a2-p2" : "I recommend everyone take this in a light-hearted, fun way.",
+    "pc-sop-q3" : "Are you sick in the head?!",
+    "pc-sop-a3-p1" : "Yes. :3",
+    "pc-sop-onwards" : "Onto the settings!",
+    "pc-sop-retreat" : "I wanna chicken out!",
     "pc-sop-mysterydescriptions" : {
         "values" : [
             "ERROR: Not Enough Clues",

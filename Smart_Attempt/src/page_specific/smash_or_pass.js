@@ -3,6 +3,7 @@ import { FlippableCard } from "../libraries/flippable_card";
 import { translationManager } from "../libraries/translation/translation_manager";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
+import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
 var cards = [];
@@ -258,7 +259,7 @@ function startPhase3() {
 }
 
 function InitSmashOrPass() {
-    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+    ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {
         $("title").html("PrettyCards - Smash or Pass");
         localStorage["prettycards.top_advert_closed"] = true; // Makes the advert disappear now that the user visited this page.
         utility.loadCSSFromGH("SmashOrPass");
@@ -273,19 +274,19 @@ function InitSmashOrPass() {
 
         document.getElementsByClassName("mainContent")[0].innerHTML = `
             <div id="PrettyCards_SOP_Phase1">
-                <h1>Welcome to Undercards Smash or Pass!</h1>
-                <h2>What is Smash or Pass?</h2>
-                <p>In case you have been living under a rock, Smash or Pass is a game where characters from a certain media are presented, one by one, and the player has to decide whether or not they would "smash" it. Interpret that as you will.</p>
-                <p>Newer variations of the game can also include other categories, such as "befriend", but the main concept is this.</p>
-                <p>After all the characters have been given a verdict, statistics follow, which can be analized, shared with friends or just posted online for the whole world to judge you!</p>
-                <h2>Why do this with Undercards?</h2>
-                <p>Because it's fun, and certain cards can spark interesting discussions in a civil and understanding environment.</p>
-                <p>I recommend everyone take this in a light-hearted, fun way.</p>
-                <h2>Are you sick in the head?!</h2>
-                <p>Yes. :3</p>
+                <h1>${window.$.i18n("pc-sop-welcome")}</h1>
+                <h2>${window.$.i18n("pc-sop-q1")}</h2>
+                <p>${window.$.i18n("pc-sop-a1-p1")}</p>
+                <p>${window.$.i18n("pc-sop-a1-p2")}</p>
+                <p>${window.$.i18n("pc-sop-a1-p3")}</p>
+                <h2>${window.$.i18n("pc-sop-q2")}</h2>
+                <p>${window.$.i18n("pc-sop-a2-p1")}</p>
+                <p>${window.$.i18n("pc-sop-a2-p2")}</p>
+                <h2>${window.$.i18n("pc-sop-q3")}</h2>
+                <p>${window.$.i18n("pc-sop-a3-p1")}</p>
                 <br>
-                <button class="btn btn-success" id="PrettyCards_SOP_ToPhase2">Onto the settings!</button>
-                <button class="btn btn-danger" onclick="window.location.href = '/';">I wanna chicken out!</button>
+                <button class="btn btn-success" id="PrettyCards_SOP_ToPhase2">${window.$.i18n("pc-sop-onwards")}</button>
+                <button class="btn btn-danger" onclick="window.location.href = '/';">${window.$.i18n("pc-sop-retreat")}</button>
             </div>
             <div id="PrettyCards_SOP_Phase2" class="PrettyCards_Hidden">
                 <h1>Game Settings</h1>

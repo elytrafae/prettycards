@@ -38,25 +38,6 @@ settings.packs = PrettyCards_plugin.settings().add({
         'default': true, // default value
     });
 
-settings.easter_egg_cards = PrettyCards_plugin.settings().add({
-        'key': 'enable_easter_egg_cards',
-        'name': 'Enable Custom Cards', // Name in settings page
-        'note': 'Crossover cards created by me.<p class="red">Contains spoilers from Doki Doki Literature Club!</p>These custom cards are not functional in any way. They are simply there to look at.',
-        'type': 'boolean',
-        'refresh': true, // true to add note "Will require you to refresh the page"
-        'default': false, // default value
-    });
-
-/*
-settings.debug_mode = PrettyCards_plugin.settings().add({
-        'key': 'debug_mode',
-        'name': 'Enable Debug Mode', // Name in settings page
-        'type': 'boolean',
-        'refresh': true, // true to add note "Will require you to refresh the page"
-        'default': false, // default value
-    });
-*/
-
 settings.override_decks = PrettyCards_plugin.settings().add({
         'key': 'override_decks',
         'name': 'Override Deck System', // Name in settings page
