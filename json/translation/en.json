@@ -42,6 +42,8 @@
     "pc-sop-smash" : "SMASH",
     "pc-sop-smashobj" : "SMASH IN/ON/NEAR etc.",
     "pc-sop-pass" : "PASS",
+    "pc-sop-results-title" : "$1's Smash or Pass Results!",
+    "pc-sop-results-title-nouser" : "Your Smash or Pass Results!",
     "pc-sop-mysterydescriptions" : {
         "values" : [
             "ERROR: Not Enough Clues",

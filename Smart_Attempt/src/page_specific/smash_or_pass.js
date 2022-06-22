@@ -232,11 +232,11 @@ function startPhase3() {
         shuffleArray(cards);
     }
     //allCardSkins
-    var ownerText = "Your";
+    var ownerText = window.$.i18n("pc-sop-results-title-nouser");
     if (window.selfUsername) {
-        ownerText = window.selfUsername + "'s";
+        ownerText = window.$.i18n("pc-sop-results-title", window.selfUsername);
     }
-    var p4 = "<h1 style='text-align:center;'>" + ownerText + " Smash or Pass Results!</h1>";
+    var p4 = "<h1 style='text-align:center;'>" + ownerText + "</h1>";
     buttonContainer.html("");
     buttonData.each((i, element) => {
         var e = $(element);
