@@ -56,7 +56,7 @@ function StartVerified() {
                         </div>
                         <div>
                             <button class="btn btn-primary" id="PrettyCards_CT_Phase2_QuickRefBtn">Quick Ref</button>
-                            <p><select id="selectPage"></select> / <span id="maxPages"></span></p>
+                            <p><select id="selectPage" onchange="showPage(this.value)"></select> / <span id="maxPages"></span></p>
                         </div>
                         <div>
                             <button id="btnPrevious" onclick="previousPage();" class="btn btn-lg btn-primary" disabled=""><span class="glyphicon glyphicon-chevron-left"></span></button>

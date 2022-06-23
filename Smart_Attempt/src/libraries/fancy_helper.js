@@ -7,13 +7,11 @@ import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import { prettycards, PrettyCards_plugin } from "./underscript_checker";
 import { createFloatingSoul } from "./floating_souls";
 
-const disabledText = "<span class='gray'>(Disabled)</span>";
-
-
-
 class FancyListDisplay {
 	
 	constructor(datas, title) {
+		const disabledText = `<span class='gray'>(${window.$.i18n("pc-fd-disabled")})</span>`;
+
 		var container = window.$(`<div class="PrettyCards_ArtifactListContainer"></div>`);
 		
 		for (var i=0; i < datas.length; i++) {
@@ -84,14 +82,14 @@ class FancyDisplay {
 		this.box.append(this.rarity);
 
 		if (data.disabled) {
-			this.disabled = window.$(`<div class="PrettyCards_ArtifactDisplayDisabled gray">(Disabled)</div>`);
+			this.disabled = window.$(`<div class="PrettyCards_ArtifactDisplayDisabled gray">(${window.$.i18n("pc-fd-disabled")})</div>`);
 			this.box.append(this.disabled);
 		}
 
 		this.box.append(this.description);
 		
 		if (data.note && data.note.length > 0) {
-			this.noteTitle = window.$(`<div class="PrettyCards_ArtifactDisplayNoteTitle">Author's Note</div>`);
+			this.noteTitle = window.$(`<div class="PrettyCards_ArtifactDisplayNoteTitle">${window.$.i18n("pc-fd-authornote")}</div>`);
 			this.note = window.$(`<div class="PrettyCards_ArtifactDisplayNote">${data.note}</div>`);
 			
 			this.box.append(this.noteTitle);
@@ -133,8 +131,8 @@ class FancyDisplay {
 			name: $.i18n("artifact-name-" + artifact.id),
 			image: image_src,
 			text_class: artifact.rarity || "COMMON",
-			rarity_text: artifact.rarity + " Artifact",
-			description: $.i18n("artifact-" + artifact.id),
+			rarity_text: window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase())),
+			description: window.$.i18n("artifact-" + artifact.id),
 			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
 			note: window.$.i18n(artifact.note || ""),
 			disabled: artifact.disabled,
@@ -163,7 +161,9 @@ class FancyDisplay {
 		}
 		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
 		
-		var desc = window.$(`<div><div>${window.$.i18n("soul-" + id.toLowerCase() + "-desc")}</div><div class="PrettyCards_SoulDisplay_SpellsHeader">${id} Spells:</div></div>`);
+		var transName = window.$.i18n("soul-" + id.toLowerCase() + "-desc");
+
+		var desc = window.$(`<div><div>${transName}</div><div class="PrettyCards_SoulDisplay_SpellsHeader">${window.$.i18n("pc-fd-soulspells", transName)}:</div></div>`);
 		var cards = window.$(`<div class="PrettyCards_SoulDisplay_Spells"></div>`);
 		for (var i=0; i < window.allCards.length; i++) {
 			var card = window.allCards[i];
@@ -177,7 +177,7 @@ class FancyDisplay {
 		var data = {
 			name: window.$.i18n("soul-" + id.toLowerCase()),
 			text_class: id,
-			rarity_text: "Soul",
+			rarity_text: window.$.i18n("pc-fd-soul"),
 			description: desc,
 			image: image_src,
 			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id,
@@ -231,8 +231,8 @@ class FancyDisplay {
 					name: $.i18n("artifact-name-" + artifact.id),
 					image: image_src,
 					text_class: artifact.rarity || "COMMON",
-					rarity_text: artifact.rarity + " Artifact",
-					description: $.i18n("artifact-" + artifact.id),
+					rarity_text: window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase())),
+					description: window.$.i18n("artifact-" + artifact.id),
 					image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
 					disabled: isDisabled, // || artifact.disabled,
 					counter: artifactCounter || artifact.counter

@@ -133,5 +133,10 @@
     "pc-chat-friendship-fail" : "This user has no friendship leaderboard data.",
     "pc-chat-friendship-fetchedat" : "Last fetched",
     "pc-chat-friendship-sortxp" : "TOP XP",
-    "pc-chat-friendship-sortrank" : "TOP RANK"
+    "pc-chat-friendship-sortrank" : "TOP RANK",
+    "pc-fd-artifactwithrarity" : "$1 Artifact",
+    "pc-fd-soul" : "Soul",
+    "pc-fd-disabled" : "Disabled",
+    "pc-fd-soulspells" : "$1 Spells",
+    "pc-fd-authornote" : "Author's Note"
 }
