@@ -89,8 +89,20 @@ function registerCustomExtensions() {
             if (overrideText) {
                 text = overrideText;
             }
-            text.replaceAll("SWITCH", window.$.i18n("{{KW:SWITCH}}"));
-            return text;
+            text = text.replaceAll("SWITCH", window.$.i18n("{{KW:SWITCH}}"));
+            return `<span class="PrettyCards_SwitchHighlight_Start">${text}</span>`;
+        },
+        pc_switch_cyan: function(nodes) {
+            var text = nodes[0];
+            return `<span class="PrettyCards_SwitchHighlight_Cyan">${text}</span>`;
+        },
+        pc_switch_middle: function(nodes) {
+            var text = nodes[0];
+            return `<span class="PrettyCards_SwitchHighlight_Middle">${text}</span>`;
+        },
+        pc_switch_red: function(nodes) {
+            var text = nodes[0];
+            return `<span class="PrettyCards_SwitchHighlight_Red">${text}</span>`;
         }
     })
 }
