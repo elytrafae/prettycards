@@ -161,9 +161,10 @@ class FancyDisplay {
 		}
 		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
 		
-		var transName = window.$.i18n("soul-" + id.toLowerCase() + "-desc");
+		var transDesc = window.$.i18n("soul-" + id.toLowerCase() + "-desc");
+		var transName = window.$.i18n("soul-" + id.toLowerCase());
 
-		var desc = window.$(`<div><div>${transName}</div><div class="PrettyCards_SoulDisplay_SpellsHeader">${window.$.i18n("pc-fd-soulspells", transName)}:</div></div>`);
+		var desc = window.$(`<div><div>${transDesc}</div><div class="PrettyCards_SoulDisplay_SpellsHeader">${window.$.i18n("pc-fd-soulspells", transName)}:</div></div>`);
 		var cards = window.$(`<div class="PrettyCards_SoulDisplay_Spells"></div>`);
 		for (var i=0; i < window.allCards.length; i++) {
 			var card = window.allCards[i];
@@ -175,7 +176,7 @@ class FancyDisplay {
 		desc.append(cards);
 		
 		var data = {
-			name: window.$.i18n("soul-" + id.toLowerCase()),
+			name: transName,
 			text_class: id,
 			rarity_text: window.$.i18n("pc-fd-soul"),
 			description: desc,
