@@ -138,5 +138,10 @@
     "pc-fd-soul" : "Soul",
     "pc-fd-disabled" : "Disabled",
     "pc-fd-soulspells" : "$1 Spells",
-    "pc-fd-authornote" : "Author's Note"
+    "pc-fd-authornote" : "Author's Note",
+    "pc-switch-start" : "SWITCH: ",
+    "card-312" : {
+        "ifEqual" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Gain +2 {{HP}} or heal 1 {{HP}} to you.",
+        "value" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{PC_SWITCH_START}}Gain +2 {{HP}} or heal 1 {{HP}} to you."
+    }
 }

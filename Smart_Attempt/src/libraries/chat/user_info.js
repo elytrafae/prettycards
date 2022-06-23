@@ -178,7 +178,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	
 	function friendButtonYou() {
 		if (!demoniocEasterEgg) {
-			friendButton.innerHTML = '<span class="glyphicon glyphicon-user gray"></span> ' + + window.$.i18n("pc-chat-friend-you");
+			friendButton.innerHTML = '<span class="glyphicon glyphicon-user gray"></span> ' + window.$.i18n("pc-chat-friend-you");
 			return;
 		}
 		friendButton.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-user"></span> ' + translationManager.getRandomFromValueList("pc-chat-friend-mystery") + "</span>";

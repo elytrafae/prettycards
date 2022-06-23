@@ -82,6 +82,15 @@ function registerCustomExtensions() {
             }
             //prettycards.viewArtifactsInfoForIdArray
             return `<span class="helpPointer underlined" oncontextmenu="prettycards.viewArtifactsInfoForIdArray([${idArray.join(",")}]);">${text}</span>`
+        },
+        pc_switch_start: function(nodes) {
+            var text = window.$.i18n("pc-switch-start");
+            var overrideText = window.checkOverride(nodes);
+            if (overrideText) {
+                text = overrideText;
+            }
+            text.replaceAll("SWITCH", window.$.i18n("{{KW:SWITCH}}"));
+            return text;
         }
     })
 }
