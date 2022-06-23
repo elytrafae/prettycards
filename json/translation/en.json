@@ -142,6 +142,6 @@
     "pc-switch-start" : "SWITCH: ",
     "card-312" : {
         "ifEqual" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Gain +2 {{HP}} or heal 1 {{HP}} to you.",
-        "value" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{PC_SWITCH_START}}{{PC_SWITCH_CYAN:Gain +2 {{HP}}}}{{PC_SWITCH_MIDDLE: or }}{{PC_SWITCH_RED:heal 1 {{HP}} to you}}."
+        "value" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{PC_SWITCH_START}}{{PC_SWITCH_CYAN:Gain +2 HP}}{{PC_SWITCH_MIDDLE: or }}{{PC_SWITCH_RED:heal 1 HP to you}}."
     }
 }
