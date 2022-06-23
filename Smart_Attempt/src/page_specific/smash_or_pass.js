@@ -60,18 +60,6 @@ function refreshSortables() {
     })
 }
 
-var mysteryDescriptions = [
-    "ERROR: Not Enough Clues",
-    "Good luck with this one~!",
-    "Hopefully this one doesn't make you look too bad.",
-    "Life is simply a guessing game. Are you brave enough to roll the dice~?",
-    "I pity you . . . A little.",
-    "Does it really matter at the end?",
-    "I wish I could see your frustated expression~",
-    "I wonder what your friends will think of you . . .",
-    "Need a little hint? How cute~!"
-];
-
 function populateSkins(card) {
     var skins = [{
         cardId: card.fixedId,

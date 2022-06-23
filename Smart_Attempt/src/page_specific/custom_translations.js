@@ -40,13 +40,11 @@ function StartVerified() {
                     <div id="PrettyCards_CT_Phase2_FilterRow">
                         <div>
                             <p>Search</p>
-                            <input type="text" class="form-control" id="searchInput" placeholder="Search..." style="width: 180px;" data-lpignore="true">
+                            <input type="text" class="form-control" id="searchInput" onkeyup="applyFilters(); showPage(0);" placeholder="Search..." style="width: 180px;" data-lpignore="true">
                         </div>
                         <div>
                             <p>Category</p>
-                            <select id="selectCategory" class="form-control" style="width: 160px; color: white;" onchange="applyFilters(); showPage(0);">
-                                <option value=""></option>
-                            </select>
+                            <select id="selectCategory" class="form-control" style="width: 160px; color: white;" onchange="applyFilters(); showPage(0);"></select>
                         </div>
                         <div>
                             <p>Status</p>
@@ -54,8 +52,6 @@ function StartVerified() {
                                 <option value="ALL">All Entries</option>
                                 <option value="DONE">Translated</option>
                                 <option value="NEW">New</option>
-                                <option value="EXPIRED">Expired</option>
-                                <option value="NEEDS_CHANGE">Needs Changes</option>
                             </select>
                         </div>
                         <div>
@@ -176,6 +172,27 @@ function setLanguage(lan) {
     })
 }
 
+function setUpCategorySelect() {
+    var categories = [""];
+    for (var key in englishCustom) {
+        var pos = key.indexOf("-");
+        var pref = key.substring(0, pos);
+        if (pref === "pc") {
+            pos = key.indexOf("-", pos+1);
+            pref = key.substring(0, pos);
+        }
+        if (!categories.includes(pref)) {
+            categories.push(pref);
+        }
+    }
+    var inner = "";
+    categories.forEach((e) => {
+        inner += `<option value="${e}">${e}</option>`;
+        
+    })
+    document.getElementById("selectCategory").innerHTML = inner;
+}
+
 function isEntryExpired(key) {
     var entry = editedCustom[key];
     return entry && entry.ifEqual && entry.ifEqual != editedOriginal[key];
@@ -203,6 +220,7 @@ function goToPhase2() {
     $("#PrettyCards_CT_Phase1").addClass("PrettyCards_Hidden");
     $("#PrettyCards_CT_Phase2").removeClass("PrettyCards_Hidden");
     console.log("SUCCESS", englishOriginal, englishCustom, editedOriginal, editedCustom);
+    setUpCategorySelect();
     applyFilters();
     showPage(0);
 }
@@ -222,25 +240,70 @@ function isEntryFull(key) {
     return true;
 }
 
+function isEntryEmpty(key) {
+    var entry = editedCustom[key];
+    if (!entry) {return true;}
+    if (typeof(entry) == "string" && entry == "") {return true;}
+    if (entry.value && entry.value == "") {return true;}
+    if (entry.values) {
+        for (var i=0; i < entry.values.length; i++) {
+            if (entry.values[i] && entry.values[i].length > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
+function matchesSearch(key, search) {
+    if (search === "") {return true;}
+    if (isEntryEmpty(key)) {return false;}
+    var entry = editedCustom[key];
+    var searchStrings = [key];
+    if (typeof(entry) == "string") {
+        searchStrings.push(entry);
+    }
+    if (entry.value) {
+        searchStrings.push(entry.value);
+    }
+    if (entry.values) {
+        searchStrings = searchStrings.concat(entry.values);
+    }
+    for (var i=0; i < searchStrings.length; i++) {
+        if (searchStrings[i].includes(search)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function isRemoved(key) {
 
     var categoryVal = $("#selectCategory").val();
     var statusVal = $("#selectStatus").val();
+    var searchVal = $("#searchInput").val();
     var entry = editedCustom[key];
-    var expired = isEntryExpired(key);
-    var isFull = isEntryFull(key);
+    //var isFull = isEntryFull(key);
+    var isEmpty = isEntryEmpty(key);
 
     if (categoryVal != "" && !key.startsWith(categoryVal)) {
         return true;
     }
 
-    if (statusVal == "DONE" && (!entry || expired)) {
+    if (statusVal == "DONE" && isEmpty) {
         return true;
-    } else if (statusVal == "NEW" && entry) {
+    } else if (statusVal == "NEW" && !isEmpty) {
         return true;
-    } else if (statusVal == "EXPIRED" && !expired) {
+    }/* else if (statusVal == "NEEDS_CHANGE" && isFull) {
         return true;
-    } else if (statusVal == "NEEDS_CHANGE" && (entry && !expired && isFull)) {
+    }*/
+
+    if (!key.startsWith(categoryVal)) {
+        return true;
+    }
+
+    if (!matchesSearch(key, searchVal)) {
         return true;
     }
 
