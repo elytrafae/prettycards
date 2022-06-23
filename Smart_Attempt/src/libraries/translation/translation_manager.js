@@ -103,6 +103,17 @@ function registerCustomExtensions() {
         pc_switch_red: function(nodes) {
             var text = nodes[0];
             return `<span class="PrettyCards_SwitchHighlight_Red">${text}</span>`;
+        },
+        pc_switch: function(nodes) {
+            var text = window.$.i18n("pc-switch-start");
+            var overrideText = window.checkOverride(nodes);
+            if (overrideText) {
+                text = overrideText;
+            }
+            text = text.replaceAll("SWITCH", window.$.i18n("{{KW:SWITCH}}"));
+            text = `<span class="PrettyCards_SwitchHighlight_Start">${text}</span>`;
+            text += window.i18n(`<span class="PrettyCards_SwitchHighlight_Middle">${nodes[0]}</span>`, `<span class="PrettyCards_SwitchHighlight_Cyan">${nodes[1]}</span>`, `<span class="PrettyCards_SwitchHighlight_Red">${nodes[2]}</span>`);
+            return text;
         }
     })
 }
