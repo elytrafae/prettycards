@@ -83,10 +83,12 @@ if (settings.override_decks.value()) {
 	}
 }
 
+/*
 var trans_array = [];
 for (var key in settings) {
 	console.log(settings[key]);
 }
+*/
 
 // ! Deck and Play Page modifications are disabled for now !
 

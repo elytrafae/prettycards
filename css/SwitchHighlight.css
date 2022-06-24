@@ -7,6 +7,9 @@
     padding: 0px 0.2em;
     border-radius: 0.3em;
     background-color: rgba(0, 255, 255, 0.4);
+    -webkit-box-decoration-break: clone;
+    -o-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 .PrettyCards_SwitchHighlight_Red {
@@ -17,4 +20,7 @@
     padding: 0px 0.2em;
     border-radius: 0.3em;
     background-color: rgba(255, 0, 0, 0.4);
+    -webkit-box-decoration-break: clone;
+    -o-box-decoration-break: clone;
+    box-decoration-break: clone;
 }

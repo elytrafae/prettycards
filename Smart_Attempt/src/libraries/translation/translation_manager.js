@@ -116,6 +116,10 @@ function registerCustomExtensions() {
     })
 }
 
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() { // Here temporarily! Move it when you decide to work more on the Switch Highlight feature!
+    utility.loadCSSFromGH("SwitchHighlight");
+})
+
 function prePageLoadStuff() {
     loadLanguage('en');
     var lan = window.localStorage.getItem("language");
