@@ -139,9 +139,16 @@
     "pc-fd-disabled" : "Disabled",
     "pc-fd-soulspells" : "$1 Spells",
     "pc-fd-authornote" : "Author's Note",
-    "pc-switch-start" : "SWITCH: ",
+    "card-12" : {
+        "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Draw a monster or draw a spell from your deck.",
+        "value" : "{{KW:MAGIC}}: {{PC_SWITCH:SWITCH: |Draw a monster| or |draw a spell}} from your deck."
+    },
+    "card-275" : {
+        "ifEqual" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. {{KW:SWITCH}}: Add a copy of it into your hand or add 2 in your deck.",
+        "value" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. {{PC_SWITCH:SWITCH: |Add a copy of it into your hand| or |add 2 in your deck}}."
+    },
     "card-312" : {
         "ifEqual" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Gain +2 {{HP}} or heal 1 {{HP}} to you.",
-        "value" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{PC_SWITCH:$1 or $2|Gain +2 {{HP}}|heal 1 {{HP}} to you}}."
+        "value" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{PC_SWITCH:SWITCH: |Gain +2 {{HP}}| or |heal 1 {{HP}} to you}}."
     }
 }
