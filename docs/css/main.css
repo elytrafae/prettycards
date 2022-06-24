@@ -27,9 +27,57 @@ body {
 
 .mainSubtitle {
     text-align: center;
+    font-size: 1.4em;
 }
 
 .chapterTitle {
     font-size: 48px;
     text-align: center;
+}
+
+#undertaleContainer {
+    height: 750px;
+    margin: auto;
+    aspect-ratio: 640/480;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-wrap: nowrap;
+}
+
+#undertaleBox {
+    border: 5px solid white;
+    background-color: black;
+    margin-bottom: 40px;
+    padding: 25px;
+    flex: 1 1 auto;
+}
+
+#undertaleButtonRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 1 70px;
+}
+
+.undertaleButton {
+    height: 70px;
+}
+
+#sectionRadios {
+    position: absolute;
+    left: -200vw;
+}
+
+#undertaleBox .tab {
+    display: none;
+}
+
+#sectionRadios > input:first-child:checked ~ #undertaleBox > .tab:first-child,
+#sectionRadios > input:nth-child(2):checked ~ #undertaleBox > .tab:nth-child(2),
+#sectionRadios > input:nth-child(3):checked ~ #undertaleBox > .tab:nth-child(3),
+#sectionRadios > input:nth-child(4):checked ~ #undertaleBox > .tab:nth-child(4) {
+  display: block;
 }

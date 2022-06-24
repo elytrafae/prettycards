@@ -9,11 +9,29 @@
     <body>
 
         <div id="mainContent">
-            <h1 class="mainTitle">PrettyCards</h1>
-            <h2 class="mainSubtitle">A userscript to make Undercards <s>pretty</s> somewhat tolerable to play!</h2>
-
-            <div id="download">
-                <h1 class="chapterTitle">Download and Install</h1>
+            <div id="undertaleContainer">
+                <div id="sectionRadios">
+                    <input type="radio" name="tabset" id="tab1" aria-controls="about" checked>
+                    <input type="radio" name="tabset" id="tab2" aria-controls="install">
+                    <input type="radio" name="tabset" id="tab3" aria-controls="features">
+                    <input type="radio" name="tabset" id="tab4" aria-controls="call">
+                </div>
+                <div id="undertaleBox">
+                    <div id="about" class="tab">
+                        <h1 class="mainTitle">PrettyCards</h1>
+                        <h2 class="mainSubtitle">A userscript to make Undercards <s>pretty</s> somewhat tolerable to play!</h2>
+                    </div>
+                    <div id="install" class="tab">
+                        <h1 class="chapterTitle">Download and Install</h1>
+                    </div>
+                    <div id="features" class="tab"></div>
+                    <div id="call" class="tab"></div>
+                </div>
+                <div id="undertaleButtonRow">
+                    <label for="tab1"><img class="undertaleButton" src="img/buttons/about_big_0.png"></label>
+                    <label for="tab2"><img class="undertaleButton" src="img/buttons/install_big_0.png"></label>
+                    <label for="tab4"><img class="undertaleButton" src="img/buttons/call_big_0.png"></label>
+                </div>
             </div>
         </div>
 
