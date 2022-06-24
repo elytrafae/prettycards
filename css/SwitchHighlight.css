@@ -1,5 +1,5 @@
 
-.PrettyCards_SwitchLeft {
+.PrettyCards_SwitchHighlight_Cyan {
     /*
     text-shadow: -1px -1px rgb(0, 255, 255), 1px 1px cyan, -1px 1px cyan, 1px -1px cyan;
     color:rgb(0, 255, 255);
@@ -9,7 +9,7 @@
     background-color: rgba(0, 255, 255, 0.4);
 }
 
-.PrettyCards_SwitchRight {
+.PrettyCards_SwitchHighlight_Red {
     /*
     text-shadow: -1px -1px red, 1px 1px red, -1px 1px red, 1px -1px red;
     color: red;
