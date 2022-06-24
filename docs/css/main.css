@@ -53,17 +53,62 @@ body {
     flex: 1 1 auto;
 }
 
+#undertaleBox:focus-within {
+    border-color: yellow;
+}
+
 #undertaleButtonRow {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    flex: 0 1 70px;
+    flex: 0 1 84px;
 }
 
 .undertaleButton {
-    height: 70px;
+    height: 63px;
+    width: 165px;
+    background-image: url("../img/Hue.png");
+    background-position: center;
+    background-size: contain;
+    position: relative;
+}
+
+.undertaleButton[btn="about_big"] {
+    background-image: url("../img/buttons/about_0.png");
+}
+
+.undertaleButton:hover[btn="about_big"] {
+    background-image: url("../img/buttons/about_1.png");
+}
+
+.undertaleButton[btn="install_big"] {
+    background-image: url("../img/buttons/install_big_0.png");
+}
+
+.undertaleButton:hover[btn="install_big"] {
+    background-image: url("../img/buttons/install_big_1.png");
+}
+
+.undertaleButton[btn="call_big"] {
+    background-image: url("../img/buttons/call_big_0.png");
+}
+
+.undertaleButton:hover[btn="call_big"] {
+    background-image: url("../img/buttons/call_big_1.png");
+}
+
+.undertaleButton:hover::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-image: url("../img/red_heart.png");
+    position: absolute;
+    background-position: center;
+    background-size: contain;
+    top: 20px;
+    left: 12px;
 }
 
 #sectionRadios {

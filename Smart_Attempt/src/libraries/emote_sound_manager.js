@@ -22,6 +22,7 @@ function playEmoteSound(emote, onerror = function() {}) {
 
 if (window.underscript.onPage("Game") || window.underscript.onPage("Spectate")) {
     PrettyCards_plugin.events.on("getEmote:before", function(data) {
+        if (!settings.emote_sounds.value()) {return;}
         var isYou = window.userId == data.idUser;
         var image = data.emoteImage;
         if (window.gameEmotesEnabled) { // This if chain is the same as Onu's, for the sake of integrity.
@@ -34,7 +35,7 @@ if (window.underscript.onPage("Game") || window.underscript.onPage("Spectate")) 
     })
 }
 
-if (window.underscript.onPage("CosmeticsShop")) {
+if (settings.emote_sounds.value() && window.underscript.onPage("CosmeticsShop")) {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
         document.querySelectorAll(".emote-bordered").forEach(function(e) {
             var url = new URL(e.src).pathname;
