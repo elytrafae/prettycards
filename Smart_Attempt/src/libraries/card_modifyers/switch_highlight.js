@@ -72,6 +72,7 @@ function gameSetup() {
                     var position = Number(event.target.getAttribute("x"));
                     if (isNaN(position)) {return;}
                     //console.log("DROPOVER", $card, position);
+                    console.log("SO I HAVE ENDGAME", doYouHaveEndgame());
                     if (doYouHaveEndgame()) {
                         setSwitchAreaAndCard($card, 3);
                     } else {

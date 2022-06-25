@@ -30,6 +30,14 @@
     transition: .3s;
 }
 
+#yourBoard.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
+    box-shadow: none;
+}
+
+#yourBoard.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard {
+    box-shadow: inset 0 0 20px 1px rgb(156, 26, 156);
+}
+
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard {
     box-shadow: none;
 }
@@ -48,12 +56,4 @@
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard_Red > td[x="0"], #yourSide.PrettyCards_SwitchHighlight_SwitchBoard_Red > td[x="1"] {
     box-shadow: inset 0 0 5px 1px rgba(0, 255, 255, 0.5);
-}
-
-#yourBoard.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
-    box-shadow: none;
-}
-
-#yourBoard.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard {
-    box-shadow: inset 0 0 20px 1px rgb(156, 26, 156);
 }
