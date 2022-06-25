@@ -49,6 +49,12 @@ function gameSetup() {
                             $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Cyan");
                         }
                     });
+
+                    $('.droppableMonster:not(:has(.monster))').on("dropout", function( event, ui ) { // I hate how this reminded me of my childhood . . .
+                        $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Red");
+                        $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Cyan");
+                        console.log("DROPOUT", event, ui);
+                    });
                 }
                 // So far, there are no Switch Spells. I'll worry about this later.
             }

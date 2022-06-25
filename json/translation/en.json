@@ -147,7 +147,7 @@
     "card-12-red" : "{{KW:MAGIC}}: Draw {{PC_SWITCH_RED:1|a spell}} from your deck.",
     "card-275" : {
         "ifEqual" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. {{KW:SWITCH}}: Add a copy of it into your hand or add 2 in your deck.",
-        "value" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Add a copy of it into your hand}} or {{PC:_SWITCH_RED:1|add 2 in your deck}}."
+        "value" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Add a copy of it into your hand}} or {{PC_SWITCH_RED:1|add 2 in your deck}}."
     },
     "card-275-cyan" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. Add a copy of it into your hand.",
     "card-275-red" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. Add 2 copies of it into your deck.",
