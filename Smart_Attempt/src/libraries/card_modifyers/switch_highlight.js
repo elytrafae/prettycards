@@ -16,8 +16,8 @@ function doYouHaveEndgame() {
     return art.length > 0;
 }
 
-function isCardElementAPiece() {
-    var tribe = $(`.cardTribes img[src=images/tribes/PIECE.png]`);
+function isCardElementAPiece(ele) {
+    var tribe = ele.find(`.cardTribes img[src="images/tribes/PIECE.png"]`);
     return tribe.length > 0;
 }
 
@@ -52,7 +52,7 @@ function gameSetup() {
             $e.on("dragstart", function() {
                 if (!isElementSwitchCard($e)) {return;}
                 $("#yourSide").addClass("PrettyCards_SwitchHighlight_SwitchBoard");
-                if (doYouHaveEndgame()) {
+                if (doYouHaveEndgame() && isCardElementAPiece($e)) {
                     setSwitchAreaAndCard($e, 3);
                 }
             });
@@ -76,9 +76,9 @@ function gameSetup() {
                     if (isNaN(position)) {return;}
                     //console.log("DROPOVER", $card, position);
                     console.log("SO I HAVE ENDGAME", doYouHaveEndgame());
-                    if (doYouHaveEndgame()) {
+                    if (doYouHaveEndgame() && isCardElementAPiece($card)) {
                         setSwitchAreaAndCard($card, 3);
-                    } else {
+                     } else {
                         setSwitchAreaAndCard($card, (position < 2) ? 1 : 2);
                     }
                 });
@@ -86,7 +86,7 @@ function gameSetup() {
                 $('.droppableMonster:not(:has(.monster))').on("dropout", function( event, ui ) { // I hate how this reminded me of my childhood . . .
                     var $card = ui.draggable;
                     if (!isElementSwitchCard($card)) {return;}
-                    if (doYouHaveEndgame()) {
+                    if (doYouHaveEndgame() && isCardElementAPiece($card)) {
                         setSwitchAreaAndCard($card, 3);
                     } else {
                         setSwitchAreaAndCard($card, 0);
