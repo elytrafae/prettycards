@@ -25,7 +25,7 @@
     box-decoration-break: clone;
 }
 
-#yourSide {
+#yourSide, #yourSide > td {
     -webkit-transition: .3s;
     transition: .3s;
 }
