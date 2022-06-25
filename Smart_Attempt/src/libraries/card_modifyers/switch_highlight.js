@@ -52,6 +52,9 @@ function gameSetup() {
             $e.on("dragstart", function() {
                 if (!isElementSwitchCard($e)) {return;}
                 $("#yourSide").addClass("PrettyCards_SwitchHighlight_SwitchBoard");
+                if (doYouHaveEndgame()) {
+                    setSwitchAreaAndCard($e, 3);
+                }
             });
             $e.on("dragstop", function() {
                 $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard");
@@ -82,7 +85,11 @@ function gameSetup() {
 
                 $('.droppableMonster:not(:has(.monster))').on("dropout", function( event, ui ) { // I hate how this reminded me of my childhood . . .
                     var $card = ui.draggable;
-                    setSwitchAreaAndCard($card, 0);
+                    if (doYouHaveEndgame()) {
+                        setSwitchAreaAndCard($card, 3);
+                    } else {
+                        setSwitchAreaAndCard($card, 0);
+                    }
                     //console.log("DROPOUT", event, ui);
                 });
 
