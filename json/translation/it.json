@@ -1,1 +1,101 @@
-{"card-219":{"ifEqual":"{{KW:ARMOR}}. {{KW:MAGIC}}: Aggiungi un artefatto di {{CARD:219|1}} casuale.","value":"{{KW:ARMOR}}. {{KW:MAGIC}}: Aggiungi un {{PC_ARTIFACTS:artefatto di Gerson|21|22|23|24}} casuale."},"pc-navigate-goback":"Pagina Precedente.","pc-sop-mysterydescriptions":{"values":["ERRORE: Indizi Insufficienti","Buona fortuna con questo qua~!","Speriamo che questo non ti faccia sembrare troppo male.","La vita è come un indovinello. Sei abbastanza coraggioso da tirare i dadi~?","Vi compatisco . . . un pochino.","Ha davvero importanza alla fine?","Vorrei poter vedere la tua espressione frustrata~","Mi chiedo di cosa penseranno di te i tuoi amici . . .","Bisogno di un aiutino? Carino~!"]},"pc-navigate-yes":"Si!","pc-navigate-no":"No!","pc-chat-friend-add":"Aggiungi un Amico!","pc-chat-friend-remove":"Rimuovi amico","pc-chat-friend-you":"Non puoi aggiungerti come Amico.","pc-chat-unfriend-confirm-title":"Rimuovere $1 come Amico?","pc-chat-unfriend-confirm":"Vuoi veramente rimuovere $1 dagli Amici?","pc-chat-friend-mystery":{"values":["Sei tu.","Non sei tu il tuo migliore amico~?","Mi chiedo se uno tradisca se stesso prima che lo facciano i suoi amici . . .","Ti fidi di te stesso quanto dei tuoi amici?","Avere solo te stesso al tuo fianco è forse una delle peggiori prigioni.","Mi chiedo se puoi fare amicizia con i tuoi amici immaginari . . ."]},"pc-chat-ignore-add":"Ignora","pc-chat-ignore-remove":"Rimuovi Ignora","pc-chat-ignore-self":"Non puoi Ignorare te stesso!","pc-chat-ignore-mystery":{"values":["Credimi, ho provato a farlo molto . . .","Non ti piaci nemmeno, eh?","Troverai sempre un modo di infastidirti comunque.","Ignorando i tuoi problemi non li risolverà.","Ignorando i tuoi bisogni è una grande fonte di frustrazioni."]},"pc-chat-pm-allowed":"Messaggio Privato","pc-chat-pm-self":"Non puoi inviarti messaggi privati!","pc-chat-pm-denied":"Non puoi inviare messaggi privati a questo utente!","pc-chat-pm-mystery":{"values":["I tuoi monologhi interni dovrebbero probabilmente rimanere nella tua zucca.","Un taccuino sarebbe un posto migliore per conservare i tuoi pensieri.","Messaggiarti da solo sarebbe inutile, vero?","Disperato di parlare con qualcuno? Ti capisco."]},"pc-chat-spectate-match":"In una partita:","pc-chat-spectate-separator":"Contro","pc-chat-spectate-self":"Non puoi guardare te stesso!","pc-chat-spectate-idle":"Questo giocatore non è in una partita.","pc-chat-spectate-mystery-idle":{"values":["Non dovresti guardare le tue partite, comunque.","Osserva gli altri, non te stesso."]},"pc-chat-spectate-mystery-match":{"values":["Non dovresti guardare le tue partite.","Dovresti mostrare attenzione al gioco piuttosto che guardare a te stesso.","Non rimanere li impalato a guardare te stesso! Vai a giocare!"]},"pc-chat-challenge-create":"Sfida!","pc-chat-mod-timeout":"Timeout!","pc-smalltime-sec":"{{PLURAL:$1|sec|sec}}","pc-smalltime-min":"{{PLURAL:$1|min|min}}","pc-smalltime-hour":"{{PLURAL:$1|ora|ore}}\n","pc-smalltime-day":"{{PLURAL:$1|giorno|giorni}}","pc-chat-ranked-rank":"Rango","pc-chat-ranked-wins":"Vittorie","pc-chat-ranked-losses":"Sconfitte","pc-chat-ranked-winrate":"Tasso Vittorie","pc-chat-ranked-winstreak":"Vittorie in Serie","pc-chat-ranked-first":"Primo Posto!","pc-chat-ranked-second":"Secondo Posto!","pc-chat-ranked-third":"Terzo Posto!","pc-chat-ranked-fourth":"Quarto Posto!","pc-chat-ranked-fifth":"Quinto Posto!","pc-chat-friendship-title":"Carte Favorite","pc-chat-friendship-fetching":"Recupero dati . . .","pc-chat-friendship-fail":"Questo utente non ha informazioni nella classifica amicizie.","pc-chat-friendship-fetchedat":"Ultimo recupero","pc-chat-friendship-sortxp":"TOP XP","pc-chat-friendship-sortrank":"TOP RANGO","pc-sop-welcome":"Benvenuto a Undercards Spacca o Passa!","pc-sop-q1":"Che cosa è Spacca o Passa?","pc-sop-a1-p1":"Nel caso in cui siete vissuti sotto un macigno, Spacca o Passa è un gioco in cui i personaggi di un determinato media sono presentati, uno dopo l'altro, e il giocatore deve decidere il caso in cui lui vorrebbe \"spaccare\" esso. Interpretalo come ti pare.","pc-sop-a1-p2":"Nuove variazioni del gioco possono anche includere altre categorie, quali \"amicizie\", ma il concetto generale è questo.","pc-sop-a1-p3":"Dopo che è stato dato un verdetto a tutti i personaggi, seguono le statistiche, le quali possono essere analizzate, condivise tra amici o semplicemente postate online cosi che l'intero mondo vi possa giudicare!","pc-sop-q2":"Perché fare questo con Undercards?","pc-sop-a2-p1":"Perché è divertente, e alcune carte possono causare interessanti discussioni in un luogo civile e comprensivo.","pc-sop-a2-p2":"Raccomando a tutti di prendere questo gioco in un modo sereno e divertente.","pc-sop-q3":"Ma sei matto di testa?!","pc-sop-a3-p1":"Si. ඞ","pc-sop-onwards":"Allora alle impostazioni!","pc-sop-retreat":"Me la svigno!","pc-sop-settings":"Impostazioni Gioco","pc-sop-filters":"Filtri carte","pc-sop-answers":"Opzioni Risposta","pc-sop-add":"Aggiungi","pc-sop-remove":"Rimuovi","pc-sop-name":"Nome","pc-sop-style":"Stile","pc-sop-stylelist":{"values":["Blu","Blu Chiaro","Verde","Rosso","Bianco"]},"pc-sop-other":"Altre Opzioni","pc-sop-skins":"Vedi le skin alternative delle carte accanto ad esse durante il gioco (conterà sempre come un singolo verdetto)","pc-sop-blind":"Attiva modalità Cieca (E randomizza l'ordine)","pc-sop-random":"Randomizza l'ordine carte","pc-sop-start":"Iniziamo!","pc-sop-smash":"SPACCA","pc-sop-smashobj":"SPACCA DENTRO/SU/FUORI etc.","pc-sop-pass":"PASSA","pc-sop-results-title":"Risultati Spacca o Passa di $1!","pc-sop-results-title-nouser":"I tuoi risultati Spacca o Passa!","pc-fd-artifactwithrarity":"Artefatto $1","pc-fd-soul":"Anima","pc-fd-disabled":"Disattivato","pc-fd-soulspells":"Incantesimi $1","pc-fd-authornote":"Note dell'Autore","card-12":{"ifEqual":"{{KW:MAGIC}}: {{KW:SWITCH}}: Pesca un mostro oppure pesca un incantesimo dal mazzo.","value":"{{KW:MAGIC}}: {{PC_SWITCH:SWITCH: |Pesca un mostro| oppure |Pesca un incantesimo}} dal mazzo."},"card-275":{"ifEqual":"{{KW:MAGIC}}: Scegli un altro {{TRIBE:PIECE|1}} non-{{RARITY:TOKEN}} nella mano. {{KW:SWITCH}}: Aggiungine una copia alla mano oppure aggiungine 2 al mazzo.","value":"{{KW:MAGIC}}: Scegli un altro {{TRIBE:PIECE|1}} non-{{RARITY:TOKEN}} nella mano. {{PC_SWITCH:SWITCH: |Aggiungine una copia alla mano| oppure |Aggiungine 2 al mazzo}}."},"card-312":{"ifEqual":"{{KW:HASTE}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Guadagna +2 {{HP}} oppure cura 1 {{HP}} al giocatore.","value":"{{KW:HASTE}}. {{KW:MAGIC}}: {{PC_SWITCH:SWITCH: |Guadagna +2 {{HP}}| oppure |cura 1 {{HP}} al giocatore}}."}}
+{
+    "card-219": {
+        "ifEqual": "{{KW:ARMOR}}. {{KW:MAGIC}}: Aggiungi un artefatto di {{CARD:219|1}} casuale.",
+        "value": "{{KW:ARMOR}}. {{KW:MAGIC}}: Aggiungi un {{PC_ARTIFACTS:artefatto di Gerson|21|22|23|24}} casuale."
+    },
+    "pc-navigate-goback": "Pagina Precedente.",
+    "pc-sop-mysterydescriptions": {
+        "values": ["ERRORE: Indizi Insufficienti", "Buona fortuna con questo qua~!", "Speriamo che questo non ti faccia sembrare troppo male.", "La vita è come un indovinello. Sei abbastanza coraggioso da tirare i dadi~?", "Vi compatisco . . . un pochino.", "Ha davvero importanza alla fine?", "Vorrei poter vedere la tua espressione frustrata~", "Mi chiedo di cosa penseranno di te i tuoi amici . . .", "Bisogno di un aiutino? Carino~!"]
+    },
+    "pc-navigate-yes": "Si!",
+    "pc-navigate-no": "No!",
+    "pc-chat-friend-add": "Aggiungi un Amico!",
+    "pc-chat-friend-remove": "Rimuovi amico",
+    "pc-chat-friend-you": "Non puoi aggiungerti come Amico.",
+    "pc-chat-unfriend-confirm-title": "Rimuovere $1 come Amico?",
+    "pc-chat-unfriend-confirm": "Vuoi veramente rimuovere $1 dagli Amici?",
+    "pc-chat-friend-mystery": {
+        "values": ["Sei tu.", "Non sei tu il tuo migliore amico~?", "Mi chiedo se uno tradisca se stesso prima che lo facciano i suoi amici . . .", "Ti fidi di te stesso quanto dei tuoi amici?", "Avere solo te stesso al tuo fianco è forse una delle peggiori prigioni.", "Mi chiedo se puoi fare amicizia con i tuoi amici immaginari . . ."]
+    },
+    "pc-chat-ignore-add": "Ignora",
+    "pc-chat-ignore-remove": "Rimuovi Ignora",
+    "pc-chat-ignore-self": "Non puoi Ignorare te stesso!",
+    "pc-chat-ignore-mystery": {
+        "values": ["Credimi, ho provato a farlo molto . . .", "Non ti piaci nemmeno, eh?", "Troverai sempre un modo di infastidirti comunque.", "Ignorando i tuoi problemi non li risolverà.", "Ignorando i tuoi bisogni è una grande fonte di frustrazioni."]
+    },
+    "pc-chat-pm-allowed": "Messaggio Privato",
+    "pc-chat-pm-self": "Non puoi inviarti messaggi privati!",
+    "pc-chat-pm-denied": "Non puoi inviare messaggi privati a questo utente!",
+    "pc-chat-pm-mystery": {
+        "values": ["I tuoi monologhi interni dovrebbero probabilmente rimanere nella tua zucca.", "Un taccuino sarebbe un posto migliore per conservare i tuoi pensieri.", "Messaggiarti da solo sarebbe inutile, vero?", "Disperato di parlare con qualcuno? Ti capisco."]
+    },
+    "pc-chat-spectate-match": "In una partita:",
+    "pc-chat-spectate-separator": "Contro",
+    "pc-chat-spectate-self": "Non puoi guardare te stesso!",
+    "pc-chat-spectate-idle": "Questo giocatore non è in una partita.",
+    "pc-chat-spectate-mystery-idle": {
+        "values": ["Non dovresti guardare le tue partite, comunque.", "Osserva gli altri, non te stesso."]
+    },
+    "pc-chat-spectate-mystery-match": {
+        "values": ["Non dovresti guardare le tue partite.", "Dovresti mostrare attenzione al gioco piuttosto che guardare a te stesso.", "Non rimanere li impalato a guardare te stesso! Vai a giocare!"]
+    },
+    "pc-chat-challenge-create": "Sfida!",
+    "pc-chat-mod-timeout": "Timeout!",
+    "pc-smalltime-sec": "{{PLURAL:$1|sec|sec}}",
+    "pc-smalltime-min": "{{PLURAL:$1|min|min}}",
+    "pc-smalltime-hour": "{{PLURAL:$1|ora|ore}}\n",
+    "pc-smalltime-day": "{{PLURAL:$1|giorno|giorni}}",
+    "pc-chat-ranked-rank": "Rango",
+    "pc-chat-ranked-wins": "Vittorie",
+    "pc-chat-ranked-losses": "Sconfitte",
+    "pc-chat-ranked-winrate": "Tasso Vittorie",
+    "pc-chat-ranked-winstreak": "Vittorie in Serie",
+    "pc-chat-ranked-first": "Primo Posto!",
+    "pc-chat-ranked-second": "Secondo Posto!",
+    "pc-chat-ranked-third": "Terzo Posto!",
+    "pc-chat-ranked-fourth": "Quarto Posto!",
+    "pc-chat-ranked-fifth": "Quinto Posto!",
+    "pc-chat-friendship-title": "Carte Favorite",
+    "pc-chat-friendship-fetching": "Recupero dati . . .",
+    "pc-chat-friendship-fail": "Questo utente non ha informazioni nella classifica amicizie.",
+    "pc-chat-friendship-fetchedat": "Ultimo recupero",
+    "pc-chat-friendship-sortxp": "TOP XP",
+    "pc-chat-friendship-sortrank": "TOP RANGO",
+    "pc-sop-welcome": "Benvenuto a Undercards Spacca o Passa!",
+    "pc-sop-q1": "Che cosa è Spacca o Passa?",
+    "pc-sop-a1-p1": "Nel caso in cui siete vissuti sotto un macigno, Spacca o Passa è un gioco in cui i personaggi di un determinato media sono presentati, uno dopo l'altro, e il giocatore deve decidere il caso in cui lui vorrebbe \"spaccare\" esso. Interpretalo come ti pare.",
+    "pc-sop-a1-p2": "Nuove variazioni del gioco possono anche includere altre categorie, quali \"amicizie\", ma il concetto generale è questo.",
+    "pc-sop-a1-p3": "Dopo che è stato dato un verdetto a tutti i personaggi, seguono le statistiche, le quali possono essere analizzate, condivise tra amici o semplicemente postate online cosi che l'intero mondo vi possa giudicare!",
+    "pc-sop-q2": "Perché fare questo con Undercards?",
+    "pc-sop-a2-p1": "Perché è divertente, e alcune carte possono causare interessanti discussioni in un luogo civile e comprensivo.",
+    "pc-sop-a2-p2": "Raccomando a tutti di prendere questo gioco in un modo sereno e divertente.",
+    "pc-sop-q3": "Ma sei matto di testa?!",
+    "pc-sop-a3-p1": "Si. ඞ",
+    "pc-sop-onwards": "Allora alle impostazioni!",
+    "pc-sop-retreat": "Me la svigno!",
+    "pc-sop-settings": "Impostazioni Gioco",
+    "pc-sop-filters": "Filtri carte",
+    "pc-sop-answers": "Opzioni Risposta",
+    "pc-sop-add": "Aggiungi",
+    "pc-sop-remove": "Rimuovi",
+    "pc-sop-name": "Nome",
+    "pc-sop-style": "Stile",
+    "pc-sop-stylelist": {
+        "values": ["Blu", "Blu Chiaro", "Verde", "Rosso", "Bianco"]
+    },
+    "pc-sop-other": "Altre Opzioni",
+    "pc-sop-skins": "Vedi le skin alternative delle carte accanto ad esse durante il gioco (conterà sempre come un singolo verdetto)",
+    "pc-sop-blind": "Attiva modalità Cieca (E randomizza l'ordine)",
+    "pc-sop-random": "Randomizza l'ordine carte",
+    "pc-sop-start": "Iniziamo!",
+    "pc-sop-smash": "SPACCA",
+    "pc-sop-smashobj": "SPACCA DENTRO/SU/FUORI etc.",
+    "pc-sop-pass": "PASSA",
+    "pc-sop-results-title": "Risultati Spacca o Passa di $1!",
+    "pc-sop-results-title-nouser": "I tuoi risultati Spacca o Passa!",
+    "pc-fd-artifactwithrarity": "Artefatto $1",
+    "pc-fd-soul": "Anima",
+    "pc-fd-disabled": "Disattivato",
+    "pc-fd-soulspells": "Incantesimi $1",
+    "pc-fd-authornote": "Note dell'Autore"
+}
