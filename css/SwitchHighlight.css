@@ -30,11 +30,6 @@
     transition: .3s;
 }
 
-#yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
-    box-shadow: none;
-    animation: none;
-}
-
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard > td[x="0"], #yourSide.PrettyCards_SwitchHighlight_SwitchBoard > td[x="1"] {
     box-shadow: inset 0 0 20px 1px cyan;
 }
@@ -56,6 +51,11 @@
 }
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard {
+    box-shadow: none;
+    animation: none;
+}
+
+#yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
     box-shadow: none;
     animation: none;
 }
