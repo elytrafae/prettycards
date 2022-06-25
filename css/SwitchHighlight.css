@@ -32,6 +32,7 @@
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
     box-shadow: none;
+    animation: none;
 }
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard {
@@ -40,6 +41,7 @@
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard {
     box-shadow: none;
+    animation: none;
 }
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard > td[x="0"], #yourSide.PrettyCards_SwitchHighlight_SwitchBoard > td[x="1"] {
