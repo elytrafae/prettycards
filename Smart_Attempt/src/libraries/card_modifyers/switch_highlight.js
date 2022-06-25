@@ -85,6 +85,7 @@ function gameSetup() {
 
                 $('.droppableMonster:not(:has(.monster))').on("dropout", function( event, ui ) { // I hate how this reminded me of my childhood . . .
                     var $card = ui.draggable;
+                    if (!isElementSwitchCard($card)) {return;}
                     if (doYouHaveEndgame()) {
                         setSwitchAreaAndCard($card, 3);
                     } else {
