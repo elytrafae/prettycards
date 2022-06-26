@@ -81,7 +81,7 @@ function processLanguage(lan = "en") {
 
 if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()) {
 	
-	PrettyCards_plugin.events.on('translation:loaded PrettyCards:customCardsAfter', () => {
+	PrettyCards_plugin.events.on('PrettyCards:TranslationExtReady PrettyCards:customCardsAfter', () => {
 		//console.log("CARD CORRECTIONS LOADED!");
 		processLanguage('en');
 		var lan = window.localStorage.getItem("language");
