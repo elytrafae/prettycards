@@ -162,13 +162,37 @@
     "card-312-both" : "{{KW:HASTE}}. {{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +2 {{HP}}}} and {{PC_SWITCH_RED:1|heal 1 {{HP}} to you}}.",
     "card-350" : {
         "ifEqual" : "{{KW:LOOP}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: Gain +2 {{HP}} or +2 {{ATK}}.",
-        "value" : "{{KW:LOOP}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Gain +2 {{HP}}}} or {{PC_SWITCH_RED:1|+2 {{ATK}}}}."
+        "value" : "{{KW:LOOP}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Gain +2 {{HP}}}} or {{PC_SWITCH_RED:1|gain +2 {{ATK}}}}."
     },
     "card-350-cyan" : "{{KW:LOOP}} (1). {{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +2 {{HP}}}}.",
     "card-350-red" : "{{KW:LOOP}} (1). {{KW:MAGIC}}: {{PC_SWITCH_RED:1|Gain +2 {{ATK}}}}.",
-    "card-350-both" : "{KW:LOOP}} (1). {{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +2 {{HP}}}} and {{PC_SWITCH_RED:1|+2 {{ATK}}}}.",
+    "card-350-both" : "{KW:LOOP}} (1). {{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +2 {{HP}}}} and {{PC_SWITCH_RED:1|gain +2 {{ATK}}}}.",
     "card-434" : {
         "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Draw a Piece with +1/+1 or add 3 {{CARD:312|3}} to your hand.",
         "value" : "{{KW:MAGIC}}: {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Draw a Piece with +1/+1}} or {{PC_SWITCH_RED:1|add 3 {{CARD:312|3}} to your hand}}."
-    }
+    },
+    "card-434-cyan" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Draw a Piece with +1/+1}}.",
+    "card-434-red" : "{{KW:MAGIC}}: {{PC_SWITCH_RED:1|Add 3 {{CARD:312|3}} to your hand}}.",
+    "card-434-both" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Draw a Piece with +1/+1}} and {{PC_SWITCH_RED:1|add 3 {{CARD:312|3}} to your hand}}.",
+    "card-679" : {
+        "ifEqual" : "{{KW:HASTE}}. {{KW:TAUNT}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Give a {{TRIBE:PLUG|1}} in your hand {{KW:HASTE}} or give it {{KW:TAUNT}}.",
+        "value" : "{{KW:HASTE}}. {{KW:TAUNT}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Give a {{TRIBE:PLUG|1}} in your hand {{PC_SWITCH_CYAN:1|{{KW:HASTE}}}} or {{PC_SWITCH_RED:1|{{KW:TAUNT}}}}."
+    },
+    "card-679-cyan" : "{{KW:HASTE}}. {{KW:TAUNT}}. {{KW:MAGIC}}: Give a {{TRIBE:PLUG|1}} in your hand {{PC_SWITCH_CYAN:1|{{KW:HASTE}}}}.",
+    "card-679-red" : "{{KW:HASTE}}. {{KW:TAUNT}}. {{KW:MAGIC}}: Give a {{TRIBE:PLUG|1}} in your hand {{PC_SWITCH_RED:1|{{KW:TAUNT}}}}.",
+    "card-679-both" : "{{KW:HASTE}}. {{KW:TAUNT}}. {{KW:MAGIC}}: Give a {{TRIBE:PLUG|1}} in your hand {{PC_SWITCH_CYAN:1|{{KW:HASTE}}}} and {{PC_SWITCH_RED:1|{{KW:TAUNT}}}}.",
+    "card-607" : {
+        "ifEqual" : "{{KW:TAUNT}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Give -1 {{COST}} to cards with 9 or more base {{COST}} in your deck or hand. {{KW:DELAY}}: Draw a card.",
+        "value" : "{{KW:TAUNT}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Give -1 {{COST}} to cards with 9 or more base {{COST}} in your {{PC_SWITCH_CYAN:1|deck}} or {{PC_SWITCH_RED:1|hand}}. {{KW:DELAY}}: Draw a card."
+    },
+    "card-607-cyan" : "{{KW:TAUNT}}. {{KW:MAGIC}}: Give -1 {{COST}} to cards with 9 or more base {{COST}} in your {{PC_SWITCH_CYAN:1|deck}}. {{KW:DELAY}}: Draw a card.",
+    "card-607-red" : "{{KW:TAUNT}}. {{KW:MAGIC}}: Give -1 {{COST}} to cards with 9 or more base {{COST}} in your {{PC_SWITCH_RED:1|hand}}. {{KW:DELAY}}: Draw a card.",
+    "card-607-both" : "{{KW:TAUNT}}. {{KW:MAGIC}}: Give -1 {{COST}} to cards with 9 or more base {{COST}} in your {{PC_SWITCH_CYAN:1|deck}} and {{PC_SWITCH_RED:1|hand}}. {{KW:DELAY}}: Draw a card.",
+    "card-394" : {
+        "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Gain +1/+1 and {{KW:ARMOR}} or summon a copy of this.",
+        "value" : "{{KW:MAGIC}}: {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}} or {{PC_SWITCH_RED:1|summon a copy of this}}."
+    },
+    "card-394-cyan" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}}.",
+    "card-394-red" : "{{KW:MAGIC}}: {{PC_SWITCH_RED:1|Summon a copy of this}}.",
+    "card-394-both" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}} and {{PC_SWITCH_RED:1|summon a copy of this}}.",
 }
