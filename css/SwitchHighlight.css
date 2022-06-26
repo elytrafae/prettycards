@@ -47,11 +47,15 @@
 }
 
 @keyframes EndgameBoard {
-    from {
+    0% {
         -webkit-box-shadow: inset 0px 0px 15px 2px #00FFFF, inset 0px 0px 15px 2px #FF0000; 
         box-shadow: inset 0px 0px 15px 2px #00FFFF, inset 0px 0px 15px 2px #FF0000;
     }
-    to {
+    50% {
+        -webkit-box-shadow: inset 0px 0px 15px 2px #FF00FF, inset 0px 0px 15px 2px #00FFFF; 
+        box-shadow: inset 0px 0px 15px 2px #FF0000, inset 0px 0px 15px 2px #00FFFF;
+    }
+    100% {
         -webkit-box-shadow: inset 0px 0px 15px 2px #FF0000, inset 0px 0px 15px 2px #00FFFF; 
         box-shadow: inset 0px 0px 15px 2px #FF0000, inset 0px 0px 15px 2px #00FFFF;
     }
@@ -76,9 +80,32 @@
     }
 }
 
+@keyframes EndgameBoard3 {
+    0% {
+        -webkit-box-shadow: inset 0px 0px 15px 2px #00FFFF; 
+        box-shadow: inset 0px 0px 15px 2px #00FFFF;
+    }
+    40% {
+        -webkit-box-shadow: inset 0px 0px 15px 2px #00FFFF; 
+        box-shadow: inset 0px 0px 15px 2px #00FFFF;
+    }
+    50% {
+        -webkit-box-shadow: inset 0px 0px 15px 2px #FF00FF; 
+        box-shadow: inset 0px 0px 15px 2px #FF00FF;
+    }
+    60% {
+        -webkit-box-shadow: inset 0px 0px 15px 2px #FF0000; 
+        box-shadow: inset 0px 0px 15px 2px #FF0000;
+    }
+    100% {
+        -webkit-box-shadow: inset 0px 0px 15px 2px #FF0000; 
+        box-shadow: inset 0px 0px 15px 2px #FF0000;
+    }
+}
+
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard {
-    animation-name: EndgameBoard;
+    animation-name: EndgameBoard3;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-direction: alternate;

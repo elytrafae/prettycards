@@ -22,9 +22,9 @@ function isCardElementAPiece(ele) {
 }
 
 function setSwitchAreaAndCard(ele, state = 0) {
+    console.log(state, new Error().stack);
     $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Cyan");
     $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Red");
-    $("#yourSide").removeClass("PrettyCards_SwitchHighlight_EndgameBoard");
     var descDiv = ele.find(".cardDesc > div");
     var id = ele.attr("fixedId");
     if (state == 1) {
@@ -38,7 +38,10 @@ function setSwitchAreaAndCard(ele, state = 0) {
         descDiv.html($.i18n(`card-${id}-both`));
     } else {
         descDiv.html($.i18n(`card-${id}`));
-    }                
+    }
+    if (state != 3) {
+        $("#yourSide").removeClass("PrettyCards_SwitchHighlight_EndgameBoard"); // Added this separately because of the animations!
+    }
 }
 
 function gameSetup() {
