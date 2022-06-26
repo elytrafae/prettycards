@@ -194,5 +194,6 @@
     },
     "card-394-cyan" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}}.",
     "card-394-red" : "{{KW:MAGIC}}: {{PC_SWITCH_RED:1|Summon a copy of this}}.",
-    "card-394-both" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}} and {{PC_SWITCH_RED:1|summon a copy of this}}.",
+    "card-394-both" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}} and {{PC_SWITCH_RED:1|summon a copy of this}}."
+
 }
