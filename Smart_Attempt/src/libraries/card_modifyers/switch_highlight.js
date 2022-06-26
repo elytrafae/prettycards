@@ -42,7 +42,6 @@ function setSwitchAreaAndCard(ele, state = 0) {
 }
 
 function gameSetup() {
-    console.log("GAME SETUP!");
     var oldMakeDraggable = window.makeDraggable;
     window.makeDraggable = function() {
         oldMakeDraggable();
@@ -74,8 +73,6 @@ function gameSetup() {
                     if (!isElementSwitchCard($card)) {return;}
                     var position = Number(event.target.getAttribute("x"));
                     if (isNaN(position)) {return;}
-                    //console.log("DROPOVER", $card, position);
-                    console.log("SO I HAVE ENDGAME", doYouHaveEndgame());
                     if (doYouHaveEndgame() && isCardElementAPiece($card)) {
                         setSwitchAreaAndCard($card, 3);
                      } else {
