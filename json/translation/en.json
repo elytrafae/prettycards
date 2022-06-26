@@ -225,10 +225,10 @@
     "card-587-both" : "Whenever you spend {{GOLD}} on spells, gain +1 {{ATK}}. {{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Swap its stats}}.",
     "card-407" : {
         "ifEqual" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. If played on the left, send it to your deck and draw a card.",
-        "value" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{KW:SWITCH}}: {{PC_SWITCH_CYAN:Send it to your deck and draw a card}} or {{PC_SWITCH_RED:1|do nothing}}."
+        "value" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}} or {{PC_SWITCH_RED:1|do nothing}}."
     },
-    "card-407-cyan" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:Send it to your deck and draw a card}}.",
+    "card-407-cyan" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}.",
     "card-407-red" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{KW_SWITCH_RED:0|Do nothing.}}",
-    "card-407-both" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:Send it to your deck and draw a card}}."
+    "card-407-both" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}."
 
 }
