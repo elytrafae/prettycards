@@ -194,6 +194,27 @@
     },
     "card-394-cyan" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}}.",
     "card-394-red" : "{{KW:MAGIC}}: {{PC_SWITCH_RED:1|Summon a copy of this}}.",
-    "card-394-both" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}} and {{PC_SWITCH_RED:1|summon a copy of this}}."
+    "card-394-both" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain +1/+1 and {{KW:ARMOR}}}} and {{PC_SWITCH_RED:1|summon a copy of this}}.",
+    "card-411" : {
+        "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Gain {{KW:HASTE}} or give the next 2 monsters in your deck +1/+1.",
+        "value" : "{{KW:MAGIC}}: {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Gain {{KW:HASTE}}}} or {{PC_SWITCH_RED:1|give the next 2 monsters in your deck +1/+1}}."
+    },
+    "card-411-cyan" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain {{KW:HASTE}}}}.",
+    "card-411-red" : "{{KW:MAGIC}}: {{PC_SWITCH_RED:1|Give the next 2 monsters in your deck +1/+1}}.",
+    "card-411-both" : "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Gain {{KW:HASTE}}}} and {{PC_SWITCH_RED:1|give the next 2 monsters in your deck +1/+1}}.",
+    "card-441" : {
+        "ifEqual" : "Whenever this takes {{DMG}}, {{KW:SWITCH}}: Gain +1 {{KW:DODGE}} or {{KW:TRANSPARENCY}}.",
+        "value" : "Whenever this takes {{DMG}}, {{KW:SWITCH}}: Gain {{PC_SWITCH_CYAN:1|+1 {{KW:DODGE}}}} or {{PC_SWITCH_RED:1|{{KW:TRANSPARENCY}}}}."
+    },
+    "card-441-cyan" : "Whenever this takes {{DMG}}, gain {{PC_SWITCH_CYAN:1|+1 {{KW:DODGE}}}}.",
+    "card-441-red" : "Whenever this takes {{DMG}}, gain {{PC_SWITCH_RED:1|{{KW:TRANSPARENCY}}}}.",
+    "card-441-both" : "Whenever this takes {{DMG}}, gain {{PC_SWITCH_CYAN:1|+1 {{KW:DODGE}}}} and {{PC_SWITCH_RED:1|{{KW:TRANSPARENCY}}}}.",
+    "card-727" : {
+        "ifEqual" : "{{KW:TAUNT}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Set a monster's stats to 3/3 or deal 3 {{DMG}} to it.",
+        "value" : "{{KW:TAUNT}}. {{KW:MAGIC}}: {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Set a monster's stats to 3/3}} or {{PC_SWITCH_RED:1|deal 3 {{DMG}} to it}}."
+    },
+    "card-727-cyan" : "{{KW:TAUNT}}. {{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Set a monster's stats to 3/3}}.",
+    "card-727-red" : "{{KW:TAUNT}}. {{KW:MAGIC}}: {{PC_SWITCH_RED:1|Deal 3 {{DMG}} to a monster}}.",
+    "card-727-both" : "{{KW:TAUNT}}. {{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Set a monster's stats to 3/3}} and {{PC_SWITCH_RED:1|deal 3 {{DMG}} to it}}."
 
 }
