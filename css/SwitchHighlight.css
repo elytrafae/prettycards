@@ -85,7 +85,7 @@
         -webkit-box-shadow: inset 0px 0px 15px 2px #00FFFF; 
         box-shadow: inset 0px 0px 15px 2px #00FFFF;
     }
-    40% {
+    20% {
         -webkit-box-shadow: inset 0px 0px 15px 2px #00FFFF; 
         box-shadow: inset 0px 0px 15px 2px #00FFFF;
     }
@@ -93,7 +93,7 @@
         -webkit-box-shadow: inset 0px 0px 15px 2px #FF00FF; 
         box-shadow: inset 0px 0px 15px 2px #FF00FF;
     }
-    60% {
+    80% {
         -webkit-box-shadow: inset 0px 0px 15px 2px #FF0000; 
         box-shadow: inset 0px 0px 15px 2px #FF0000;
     }
