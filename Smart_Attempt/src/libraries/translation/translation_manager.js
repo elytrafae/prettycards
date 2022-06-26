@@ -83,7 +83,7 @@ function switchPartHelper(nodes, className) {
         opacity = 1;
     }
     var text = nodes[1];
-    return `<span class="PrettyCards_SwitchHighlight_${className}" style="opacity:${opacity};">${text}</span>`;
+    return `<span class="PrettyCards_SwitchHighlight_${className}" style="opacity:${opacity}; ${opacity <= 0 ? "display:none;" : ""}">${text}</span>`;
 }
 
 function registerCustomExtensions() {

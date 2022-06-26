@@ -46,8 +46,23 @@
     box-shadow: inset 0 0 5px 1px rgba(0, 255, 255, 0.5);
 }
 
+@keyframes EndgameBoard {
+    from {
+        -webkit-box-shadow: inset 0px 0px 2px 15px #00FFFF, inset 0px 0px 2px 30px #FF0000; 
+        box-shadow: inset 0px 0px 2px 15px #00FFFF, inset 0px 0px 2px 30px #FF0000;
+    }
+    to {
+        -webkit-box-shadow: inset 0px 0px 2px 15px #FF0000, inset 0px 0px 2px 30px #00FFFF; 
+        box-shadow: inset 0px 0px 2px 15px #FF0000, inset 0px 0px 2px 30px #00FFFF;
+    }
+}
+
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard {
-    box-shadow: inset 0 0 30px 2px rgb(156, 26, 156);
+    /*box-shadow: inset 0 0 30px 2px rgb(156, 26, 156);*/
+    animation-name: EndgameBoard;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard {
