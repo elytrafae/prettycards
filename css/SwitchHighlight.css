@@ -91,6 +91,11 @@
     animation: none;
 }
 
+#yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
+    box-shadow: none;
+    animation: none;
+}
+
 /*
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
     animation-name: EndgameBoard2;
