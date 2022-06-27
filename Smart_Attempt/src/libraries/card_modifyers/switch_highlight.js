@@ -71,7 +71,21 @@ function gameSetup() {
         oldUpdateDroppables($card);
         if ($card.hasClass('canPlay')) {
             if ($card.hasClass('monster')) { //&& $card.find(".PrettyCards_SwitchLeft").length > 0) { // Check disabled for testing purposes.
-                $('.droppableMonster:not(:has(.monster))').on( "dropover", function( event, ui ) {
+
+                var selectoredCard = $('.droppableMonster:not(:has(.monster))');
+
+                selectoredCard.on("dropout", function( event, ui ) { // I hate how this reminded me of my childhood . . .
+                    var $card = ui.draggable;
+                    if (!isElementSwitchCard($card)) {return;}
+                    if (doYouHaveEndgame() && isCardElementAPiece($card)) {
+                        setSwitchAreaAndCard($card, 3);
+                    } else {
+                        setSwitchAreaAndCard($card, 0);
+                    }
+                    //console.log("DROPOUT", event, ui);
+                });
+
+                selectoredCard.on( "dropover", function( event, ui ) {
                     var $card = ui.draggable;
                     if (!isElementSwitchCard($card)) {return;}
                     var position = Number(event.target.getAttribute("x"));
@@ -83,18 +97,7 @@ function gameSetup() {
                     }
                 });
 
-                $('.droppableMonster:not(:has(.monster))').on("dropout", function( event, ui ) { // I hate how this reminded me of my childhood . . .
-                    var $card = ui.draggable;
-                    if (!isElementSwitchCard($card)) {return;}
-                    if (doYouHaveEndgame() && isCardElementAPiece($card)) {
-                        setSwitchAreaAndCard($card, 3);
-                    } else {
-                        setSwitchAreaAndCard($card, 0);
-                    }
-                    //console.log("DROPOUT", event, ui);
-                });
-
-                $('.droppableMonster:not(:has(.monster))').on("drop", function(event, ui) {
+                selectoredCard.on("drop", function(event, ui) {
                     var $card = ui.draggable;
                     $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard");
                     setSwitchAreaAndCard($card, 0);

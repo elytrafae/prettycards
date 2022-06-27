@@ -103,7 +103,7 @@
     }
 }
 
-
+/*
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard {
     animation-name: EndgameBoard3;
     animation-duration: 2s;
@@ -111,6 +111,7 @@
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
 }
+*/
 
 
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard {
@@ -118,21 +119,23 @@
     animation: none;
 }
 
+/*
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
     box-shadow: none;
     animation: none;
 }
+*/
 
-/*
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td {
-    animation-name: EndgameBoard2;
+    animation-name: EndgameBoard3;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
 }
-*/
 
+/*
 #yourSide.PrettyCards_SwitchHighlight_SwitchBoard.PrettyCards_SwitchHighlight_EndgameBoard > td:nth-child(2n) {
     animation-direction: alternate-reverse;
 }
+*/
