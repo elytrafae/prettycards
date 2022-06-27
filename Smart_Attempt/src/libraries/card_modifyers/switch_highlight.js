@@ -21,6 +21,13 @@ function isCardElementAPiece(ele) {
     return tribe.length > 0;
 }
 
+var didAlreadyUpdateThisFrame = false;
+function onUpdate() {
+    didAlreadyUpdateThisFrame = false;
+    window.requestAnimationFrame(onUpdate);
+}
+window.requestAnimationFrame(onUpdate);
+
 function setSwitchAreaAndCard(ele, state = 0) {
     console.log(state, new Error().stack);
     $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Cyan");
@@ -70,12 +77,13 @@ function gameSetup() {
     window.updateDroppables = function($card) {
         oldUpdateDroppables($card);
         if ($card.hasClass('canPlay')) {
-            if ($card.hasClass('monster')) { //&& $card.find(".PrettyCards_SwitchLeft").length > 0) { // Check disabled for testing purposes.
+            if ($card.hasClass('monster')) {
 
                 var selectoredCard = $('.droppableMonster:not(:has(.monster))');
 
                 selectoredCard.on("dropout", function( event, ui ) { // I hate how this reminded me of my childhood . . .
                     var $card = ui.draggable;
+                    if (didAlreadyUpdateThisFrame) {return;}
                     if (!isElementSwitchCard($card)) {return;}
                     if (doYouHaveEndgame() && isCardElementAPiece($card)) {
                         setSwitchAreaAndCard($card, 3);
@@ -95,6 +103,7 @@ function gameSetup() {
                      } else {
                         setSwitchAreaAndCard($card, (position < 2) ? 1 : 2);
                     }
+                    didAlreadyUpdateThisFrame = true;
                 });
 
                 selectoredCard.on("drop", function(event, ui) {
