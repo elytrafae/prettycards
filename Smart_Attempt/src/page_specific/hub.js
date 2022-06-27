@@ -95,7 +95,7 @@ function InitHub() {
 			return;
 		}
 		var footer = dial.$modalFooter.find(".bootstrap-dialog-footer-buttons");
-		var button = $('<button class="btn btn-success">Save Deck!</button>');
+		var button = $(`<button class="btn btn-success">${window.$.i18n("pc-hub-savedeck")}</button>`);
 		button.click(function () {
 			SaveDeck(deckCode, name, image, username);
 			this.setAttribute("disabled", true);

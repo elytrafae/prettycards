@@ -1,5 +1,15 @@
-import { PrettyCards_plugin } from "../underscript_checker";
+import { PrettyCards_plugin, settings } from "../underscript_checker";
 import { utility } from "../utility";
+
+settings.switch_highlight = PrettyCards_plugin.settings().add({
+	'key': 'switch_highlight',
+	'name': 'Switch Highlight', // Name in settings page
+	'note': 'Adds some handy highlighting to Switch cards while theyr are being hovered over the arena mid-game.',
+	'type': 'boolean',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	'disabled': false,
+	'default': true // default value
+});
 
 function isElementSwitchCard(ele) {
     if (ele.hasClass("PrettyCards_SwitchHighlight_Cyan")) {
@@ -151,7 +161,7 @@ function gameSetup() {
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
     utility.loadCSSFromGH("SwitchHighlight");
-    if (underscript.onPage("Game")) {
+    if (underscript.onPage("Game") && settings.switch_highlight.value()) {
         gameSetup();
     }
 })

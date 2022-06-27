@@ -320,7 +320,7 @@ class SavedDeckSelector {
 		
 		this.deckSouls = {};
 		for (var soul in decks) {
-			var $deck = $('<div><div class="PrettyCards_DeckHeader ' + soul + '">' + soul + '</div></div>');
+			var $deck = $('<div><div class="PrettyCards_DeckHeader ' + soul + '">' + window.$.i18n("soul-" + soul.toLowerCase()) + '</div></div>');
 			
 			for (var i=0; i < decks[soul].length; i++) {
 				const deck = decks[soul][i];
@@ -329,7 +329,7 @@ class SavedDeckSelector {
 					var card = this.appendCardDeck($deck, deck);
 									
 					if (this.canEditDecks) {
-						card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? "ERASE" : "DELETE") + '</div>');
+						card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? window.$.i18n("pc-decks-delete") : window.$.i18n("pc-decks-delete-mystery")) + '</div>');
 						card.find(".PrettyCards_DeckCardErase").click(function(e) {
 							this.DeleteDeckDialogue(deck);
 							e.stopPropagation();
@@ -383,10 +383,10 @@ class SavedDeckSelector {
 	}
 	
 	DeleteDeckDialogue(deck) {
-		var title = demonEasterEgg ? "ERASE deck?" : "Delete deck?";
-		var text = demonEasterEgg ? "<span class='red'>Shall we erase this pointless deck?</span>" : "Are you sure you want to delete this deck?";
-		var yes_option = demonEasterEgg ? "ERASE" : "Delete";
-		var no_option = demonEasterEgg ? "DO NOT." : "Cancel";
+		var title = demonEasterEgg ? window.$.i18n("pc-decks-askdelete-title-mystery") : window.$.i18n("pc-decks-askdelete-title");
+		var text = demonEasterEgg ? `<span class='red'>${window.$.i18n("pc-decks-askdelete-text-mystery")}</span>` : window.$.i18n("pc-decks-askdelete-text");
+		var yes_option = demonEasterEgg ? window.$.i18n("pc-decks-askdelete-yes-mystery") : window.$.i18n("pc-decks-askdelete-yes");
+		var no_option = demonEasterEgg ? window.$.i18n("pc-decks-askdelete-no-mystery") : window.$.i18n("pc-decks-askdelete-no");
 		
 		const self = this;
 		BootstrapDialog.show({

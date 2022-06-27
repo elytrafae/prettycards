@@ -229,6 +229,16 @@
     },
     "card-407-cyan" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}.",
     "card-407-red" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_RED:0|Do nothing.}}",
-    "card-407-both" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}."
-
+    "card-407-both" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}.",
+    "pc-hub-savedeck" : "Save Deck!",
+    "pc-decks-delete" : "DELETE",
+    "pc-decks-delete-mystery" : "ERASE",
+    "pc-decks-askdelete-title" : "Delete deck?",
+    "pc-decks-askdelete-title-mystery" : "ERASE deck?",
+    "pc-decks-askdelete-text" : "Are you sure you want to delete this deck?",
+    "pc-decks-askdelete-text-mystery" : "Shall we erase this pointless deck?",
+    "pc-decks-askdelete-yes" : "Delete",
+    "pc-decks-askdelete-yes-mystery" : "ERASE",
+    "pc-decks-askdelete-no" : "Cancel",
+    "pc-decks-askdelete-no-mystery" : "DO NOT."
 }
