@@ -39,7 +39,6 @@ function onUpdate() {
 window.requestAnimationFrame(onUpdate);
 
 function setSwitchAreaAndCard(ele, state = 0) {
-    console.log(state, new Error().stack);
     $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Cyan");
     $("#yourSide").removeClass("PrettyCards_SwitchHighlight_SwitchBoard_Red");
     var descDiv = ele.find(".cardDesc > div");
