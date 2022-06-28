@@ -65,10 +65,11 @@ function GetAllDecks() {
 			}
 			//console.log(skin);
 			//console.log("Key: ", key);
+			var soul = rest_sliced[0];
 			var deck = {
-				soul : rest_sliced[0],
+				soul : soul,
 				id : Number(rest_sliced[1]),
-				name : (window.localStorage[key + ".name"] || ("Unnamed " + rest_sliced[0] + " Deck")),
+				name : (window.localStorage[key + ".name"] || window.$.i18n("pc-decks-unnamed", window.$.i18n("soul-" + soul.toLowerCase())) ),
 				cards : parsedDeck.cards,
 				artifacts : parsedDeck.artifacts,
 				image : skin,
@@ -131,7 +132,7 @@ function ProcessBaseDecks(organizedDecks) {
 			var cards = [];
 			var artifacts = [];
 			var key = DECK_STORAGE_PREFIX + soul + "." + id;
-			var name = ("Autogen " + soul + " Deck");
+			var name = window.$.i18n("pc-decks-autogen", window.$.i18n("soul-" + soul.toLowerCase()));
 			for (var i=0; i < baseDeck.cards.length; i++) {
 				var card = {id: baseDeck.cards[i].id};
 				if (baseDeck.cards[i].shiny) {
@@ -348,7 +349,7 @@ class SavedDeckSelector {
 				const newCardDeck = {
 					image: demonEasterEgg ? onu_skin : dummy_skin,
 					soul: soul,
-					name: ("New " + soul + " Deck"),
+					name: window.$.i18n("pc-decks-new", window.$.i18n("soul-" + soul.toLowerCase())),
 					description: "",
 					cards: [],
 					artifacts: [],

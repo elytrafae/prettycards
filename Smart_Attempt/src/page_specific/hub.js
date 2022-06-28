@@ -1,6 +1,7 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {DeckEditor} from "/src/libraries/deck_editor.js";
+import { translationManager } from "../libraries/translation/translation_manager";
 
 var custom_deck_sys = settings.override_decks.value();
 
@@ -49,7 +50,7 @@ function SaveDeck(deckCode, name, image, username) {
 		while (window.localStorage.getItem(DECK_STORAGE_PREFIX + id)) {id++;}
 		window.localStorage.setItem(DECK_STORAGE_PREFIX + id, JSON.stringify(underscript_deck));
 		window.localStorage.setItem(DECK_STORAGE_PREFIX + id + ".name", name);
-		window.localStorage.setItem(PC_DECK_STORAGE_PREFIX + id + ".description", "by " + username);
+		window.localStorage.setItem(PC_DECK_STORAGE_PREFIX + id + ".description", translationManager.getWithFallback("pc-hub-deckby", "by " + username, username));
 		window.localStorage.setItem(PC_DECK_STORAGE_PREFIX + id + ".image", JSON.stringify({
 			id: -2,
 			authorName: "",

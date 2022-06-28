@@ -29,8 +29,8 @@ class TranslationManager {
         return key + "-" + i;
     }
 
-    getWithFallback(key, fb) {
-        var t = window.$.i18n(key);
+    getWithFallback(key, fb, param) {
+        var t = window.$.i18n(key, param);
         if (t == key) {
             return fb;
         }
