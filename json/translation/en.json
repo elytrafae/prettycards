@@ -278,5 +278,9 @@
     "pc-skinselect-skinname-april" : "April Fools $1 $2",
     "pc-navbar-home" : "Home",
     "pc-navbar-dc": "Disconnect",
-    "pc-navbar-pcsettings" : "PrettyCards Settings"
+    "pc-navbar-pcsettings" : "PrettyCards Settings",
+    "pc-updater-new-title" : "New PrettyCards version!",
+    "pc-updater-new-text" : "There is a new version of PrettyCards available for download!",
+    "pc-updater-new-footer" : "Click here to update!",
+    "pc-updater-success" : "Update Successful!"
 }
