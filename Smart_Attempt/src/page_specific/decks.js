@@ -150,14 +150,14 @@ function ReloadDeckEditPreview() {
 
 function EditDeckScreen() {
 	BootstrapDialog.show({
-		title: "Edit deck!",
+		title: window.$.i18n("pc-decks-editor-title"),
 		size: BootstrapDialog.SIZE_NORMAL,
 		closable: true,
 		closeByBackdrop: false,
 		message: EditDeckScreenHTML(),
 		buttons: [
 			{
-				label: "Ok!",
+				label: window.$.i18n("pc-navigate-ok"),
 				cssClass: 'btn-primary us-normal',
 				action(dialog) {
 					dialog.close();

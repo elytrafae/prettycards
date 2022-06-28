@@ -70,15 +70,15 @@ function SaveDeck(deckCode, name, image, username) {
 			if (status == "success") {
 				var toast = PrettyCards_plugin.toast(
 					{
-						title: "Deck uploaded Successfully!"
+						title: window.$.i18n("pc-hub-upload-success")
 					}
 				);
 			} else {
 				console.log("DeckEditor.ImportDeck error!", data);
 				var toast = PrettyCards_plugin.toast(
 					{
-						title: "There was an error trying to upload that deck!",
-						text: "There was most likely something you don't have in your collection . . .",
+						title: window.$.i18n("pc-hub-upload-error1"),
+						text: window.$.i18n("pc-hub-upload-error2"),
 					}
 				);
 			}

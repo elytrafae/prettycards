@@ -65,7 +65,7 @@ function processJSON(lan, data) {
     }
     languagesToLoad--;
     if (languagesToLoad <= 0) {
-        PrettyCards_plugin.events.emit("PrettyCards:TranslationExtReady", {language: lan});
+        PrettyCards_plugin.events.emit.singleton("PrettyCards:TranslationExtReady", {language: lan});
     }
 }
 

@@ -313,7 +313,7 @@ class SavedDeckSelector {
 			var closeButtonContainer = document.createElement("DIV");
 			var closeButton = document.createElement("BUTTON");
 			closeButton.className = "btn btn-primary PrettyCards_DeckListHeaderButton";
-			closeButton.innerHTML = demonEasterEgg ? "<span class='red'>LATER</span>" : "Nevermind";
+			closeButton.innerHTML = demonEasterEgg ? "<span class='red'>" + window.$.i18n("pc-navigate-later") + "</span>" : window.$.i18n("pc-navigate-nevermind");
 			closeButton.onclick = this.closeCallback;
 			closeButtonContainer.appendChild(closeButton);
 			header.appendChild(closeButtonContainer);

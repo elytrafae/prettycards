@@ -13,7 +13,17 @@ var aprilFools2022 = [];
 var bonusBaseCards = ["Heal Delivery", "Explosion", "Sacrifice", "Same Fate", "Onutrem"];
 
 var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCardSkins, aprilFools2022];
-var listNames = ["Custom Card Skins", "Default Card Skins", "Owned Card Skins", "Not Owned Card Skins", "April Fools 2022 (Season 69)"]
+var listNames = ["pc-skinselect-header-custom", "pc-skinselect-header-default", "pc-skinselect-header-owned", "pc-skinselect-header-notowned", ["pc-skinselect-header-april", 2022, 69]]
+
+function processHeaderTranslations() {
+	listNames.forEach((e) => {
+		if (typeof(e, i) == "string") {
+			listNames[i] = window.$.i18n(e);
+		} else {
+			listNames[i] = window.$.i18n(e[0], e[1], e[2]);
+		}
+	})
+} 
 
 /*
 $.get("CardSkinsConfig?action=profile", {}, function(data) {
@@ -114,7 +124,7 @@ var alreadyLoading = false;
 function loadAllCardSkins() { // This function is called whenever a feature requests this, so it doesn't load on pages it doesn't need to.
 	if (alreadyLoading) {return;}
 	alreadyLoading = true;
-	ExecuteWhen("PrettyCards:onPageLoad", function () {
+	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function () {
 		$.get("/CardSkinsConfig?action=shop", {}, function(data) {
 			//console.log(data);
 			allCardSkins = JSON.parse(data.cardSkins);
@@ -127,6 +137,8 @@ function loadAllCardSkins() { // This function is called whenever a feature requ
 		$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/50f69f27a249d843792aedc5139d60fc9b178b23/json/aprilFools2022.json", {}, function(data) {
 			ProcessAprilFools2022Skins(data);
 		})
+
+		processHeaderTranslations();
 	});
 
 	PrettyCards_plugin.events.on("allCardsReady", ProcessDefaultSkins);
@@ -155,7 +167,7 @@ class CardSkinSelector {
 		this.searchBar = document.createElement("INPUT");
 		this.searchBar.className = "form-control";
 		this.searchBar.setAttribute("type", "text");
-		this.searchBar.placeholder = "Search . . .";
+		this.searchBar.placeholder = window.$.i18n("pc-skinselect-search");
 		//console.log(this);
 		$(this.searchBar).keyup(this.ApplyFilters.bind(this));
 		
@@ -221,13 +233,13 @@ class CardSkinSelector {
 		this.skins = this.GetSkinsToDisplay();
 		var html = this.GetHTML();
 		this.dial = BootstrapDialog.show({
-			title: "Select a card skin!",
+			title: window.$.i18n("pc-skinselect-title"),
 			size: BootstrapDialog.SIZE_WIDE,
 			closable: true,
             closeByBackdrop: false,
 			message: html,
 			buttons: [{
-					label: "Nevermind!",
+					label: window.$.i18n("pc-navigate-nevermind"),
 					cssClass: 'btn-primary us-normal',
 					action(dialog) {
 						dialog.close();
