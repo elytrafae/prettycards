@@ -16,8 +16,8 @@ var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCard
 var listNames = ["pc-skinselect-header-custom", "pc-skinselect-header-default", "pc-skinselect-header-owned", "pc-skinselect-header-notowned", ["pc-skinselect-header-april", 2022, 69]]
 
 function processHeaderTranslations() {
-	listNames.forEach((e) => {
-		if (typeof(e, i) == "string") {
+	listNames.forEach((e, i) => {
+		if (typeof(e) == "string") {
 			listNames[i] = window.$.i18n(e);
 		} else {
 			listNames[i] = window.$.i18n(e[0], e[1], e[2]);
@@ -45,7 +45,7 @@ function ProcessAprilFools2022Skins(data) {
 			cardName: card.name,
 			id: -69,
 			image: `https://github.com/CMD-God/prettycards/raw/856f490c607fdd90d54e82143d0b696da6e27bde/img/Cards/April_Fools_2022/${card.image}.png`,
-			name: `April Fools 2022 ${card.name}`,
+			name: window.$.i18n("pc-skinselect-skinname-april", 2022, window.$.i18n(`card-name-${card.id}`)),
 			owned: true,
 			typeSkin: 0,
 			ucpCost: 69420,
@@ -94,7 +94,7 @@ function ProcessDefaultSkins() {
 			cardName: card.name,
 			id: -1,
 			image: card.image,
-			name: card.name,
+			name: window.$.i18n(`card-name-${card.id}`),
 			owned: true,
 			typeSkin: 0,
 			ucpCost: 0,

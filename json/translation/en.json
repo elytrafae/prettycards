@@ -270,10 +270,10 @@
     "pc-menu-wyr" : "Would You Rather",
     "pc-skinselect-title": "Select a card skin!",
     "pc-skinselect-search": "Search . . .",
-    "pc-skinselect-default": "Default",
     "pc-skinselect-header-custom" : "Custom Card Skins",
     "pc-skinselect-header-default" : "Default Card Skins",
     "pc-skinselect-header-owned" : "Owned Card Skins",
     "pc-skinselect-header-notowned" : "Not Owned Card Skins",
-    "pc-skinselect-header-april" : "April Fools $1 (Season $2)"
+    "pc-skinselect-header-april" : "April Fools $1 (Season $2)",
+    "pc-skinselect-skinname-april" : "April Fools $1 $2"
 }
