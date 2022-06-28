@@ -58,14 +58,14 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		
 		//<p style="color: grey">More coming . . . Somewhen.</p>
 		var menuBase = window.$(`<div class="dropdown" id="PrettyCards_MainMenu">
-			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PrettyCards Menu</button>
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${window.$.i18n("pc-menu-title")}</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 3px 5px;">
-				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">Credits</p></a>
-				<a href="/CustomCardSkins"><p style="cursor: pointer;">Custom Card Skins</p></a>
-				<a href="/CustomCards"><p style="cursor: pointer;">Custom Cards</p></a>
-				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">Smash or Pass</p></a>') : ""}
-				<a href="/CustomTranslations" class="PrettyCards_Hidden Translator"><p style="cursor: pointer;">Custom Translate</p></a>
-				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">API Docs</p></a>
+				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">${window.$.i18n("pc-menu-credits")}</p></a>
+				<a href="/CustomCardSkins"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcardskins")}</p></a>
+				<a href="/CustomCards"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcards")}</p></a>
+				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">' + window.$.i18n("pc-menu-sop") + '</p></a>') : ""}
+				<a href="/CustomTranslations" class="PrettyCards_Hidden Translator"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customtranslate")}</p></a>
+				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">${window.$.i18n("pc-menu-apidocs")}</p></a>
 			</div>
 		</div>`)
 

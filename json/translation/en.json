@@ -240,5 +240,13 @@
     "pc-decks-askdelete-yes" : "Delete",
     "pc-decks-askdelete-yes-mystery" : "ERASE",
     "pc-decks-askdelete-no" : "Cancel",
-    "pc-decks-askdelete-no-mystery" : "DO NOT."
+    "pc-decks-askdelete-no-mystery" : "DO NOT.",
+    "pc-menu-title" : "PrettyCards Menu",
+    "pc-menu-credits" : "Credits",
+    "pc-menu-customcardskins" : "Custom Card Skins",
+    "pc-menu-customcards" : "Custom Cards",
+    "pc-menu-sop" : "Smash Or Pass",
+    "pc-menu-customtranslate" : "Custom Translate",
+    "pc-menu-apidocs" : "Api Docs",
+    "pc-menu-wyr" : "Would You Rather"
 }

@@ -2,7 +2,7 @@
 #PrettyCards_MainMenu {
     position: absolute; 
     top: 0px; 
-    right: 15px; 
+    right: 20px; 
     display: none; /*Manipulated by code*/
     z-index: 12;
 }
