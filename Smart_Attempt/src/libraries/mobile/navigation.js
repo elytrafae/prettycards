@@ -10,13 +10,13 @@ ExecuteWhen("translation:loaded", function () {
 });
 
 var menu_data_nologin = {
-	"Home" : "/",
+	"pc-navbar-home" : "/",
 	"header-sign-in" : "SignIn",
 	"header-register" : "SignUp"
 }
 
 var menu_data = {
-	"Home" : "/",
+	"pc-navbar-home" : "/",
 	"header-play" : "Play",
 	"header-cards" : {
 		"header-decks" : "Decks",
@@ -43,9 +43,9 @@ var user_menu_data = {
 	"header-profile-skins" : "ProfileSkins",
 	"header-frame-skins" : "FrameSkins",
 	"header-settings" : "Settings",
-	"PrettyCards Settings": "js:prettycards.openSettings()",
+	"pc-navbar-pcsettings": "js:prettycards.openSettings()",
 	"header-translate" : "Translate",
-	"Disconnect" : "Disconnect"
+	"pc-navbar-dc" : "Disconnect"
 }
 
 var footer_data = {
@@ -215,15 +215,13 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 })
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
-	ExecuteWhen("PrettyCards:onPageLoad", function() {
-		ExecuteWhen("translation:loaded", function () {
-			packs = $(".nbPacksHeader").text();
-			quests = $("a[href=Quests]").text();
-			SetMobileView();
+	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {
+		packs = $(".nbPacksHeader").text();
+		quests = $("a[href=Quests]").text();
+		SetMobileView();
+		CreateSideNavMenu();
+		ExecuteWhen("Chat:Connected", function () {
 			CreateSideNavMenu();
-			ExecuteWhen("Chat:Connected", function () {
-				CreateSideNavMenu();
-			});
 		});
 	})
 }

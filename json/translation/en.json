@@ -275,5 +275,8 @@
     "pc-skinselect-header-owned" : "Owned Card Skins",
     "pc-skinselect-header-notowned" : "Not Owned Card Skins",
     "pc-skinselect-header-april" : "April Fools $1 (Season $2)",
-    "pc-skinselect-skinname-april" : "April Fools $1 $2"
+    "pc-skinselect-skinname-april" : "April Fools $1 $2",
+    "pc-navbar-home" : "Home",
+    "pc-navbar-dc": "Disconnect",
+    "pc-navbar-pcsettings" : "PrettyCards Settings"
 }

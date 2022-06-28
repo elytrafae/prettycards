@@ -405,7 +405,7 @@ function InitDecks() {
 	
 	SilenceDeckFunctions();
 	
-	ExecuteWhen("PrettyCards:onPageLoad", function() {
+	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {
 		var oldDeckButtons = $(".btn-storage").first().parent(); //document.querySelector(".btn-storage").parentElement;
 		oldDeckButtons.css("display", "none");
 		document.getElementById("selectSouls").style.display = "none";
