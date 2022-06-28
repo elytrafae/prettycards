@@ -1,6 +1,7 @@
 
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import { ExecuteWhen } from "./pre_load/event_ensure";
 
 // https://github.com/CMD-God/prettycards/releases/latest/download/prettycards.user.js
 // function Toast({title, text, footer, className, css={}, buttons, timeout, onClose}={}) {
@@ -56,31 +57,33 @@ if (now - lastChecked >= times[setting_time_id]) {
 
 var updateToastData = window.localStorage.getItem("prettycards.update.toastdata");
 
-if (updateToastData) {
-	var data = JSON.parse(updateToastData);
-	PrettyCards_plugin.toast(
-		{
-			title: "New PrettyCards version!",
-			text: "There is a new version of PrettyCards available for download!<br>" + data.name,
-			footer: "Click here to update!",
-			onClose() {
-				localStorage.setItem("PrettyCards_UpdateToVersion", data.tag_name);
-				window.open(data.download_url, '_blank').focus();
-			}
-		}
-	);
-
-	if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
-		//console.log("Update Successful Toast!");
+ExecuteWhen("PrettyCards:TranslationExtReady", function() {
+	if (updateToastData) {
+		var data = JSON.parse(updateToastData);
 		PrettyCards_plugin.toast(
 			{
-				title: "Update Successful!<br>" + (data.name || "No name available"),
-				text: (data.body || "No patch notes attached")
+				title: window.$.i18n("pc-updater-new-title"),
+				text: window.$.i18n("pc-updater-new-text") + "<br>" + data.name,
+				footer: window.$.i18n("pc-updater-new-footer"),
+				onClose() {
+					localStorage.setItem("PrettyCards_UpdateToVersion", data.tag_name);
+					window.open(data.download_url, '_blank').focus();
+				}
 			}
 		);
-		localStorage.removeItem("prettycards.update.toastdata");
-		localStorage.removeItem("PrettyCards_UpdateToVersion");
+
+		if (localStorage.getItem("PrettyCards_UpdateToVersion") == version) {
+			//console.log("Update Successful Toast!");
+			PrettyCards_plugin.toast(
+				{
+					title: window.$.i18n("pc-updater-success-title") + "<br>" + (data.name || "No name available"),
+					text: (data.body || "No patch notes attached")
+				}
+			);
+			localStorage.removeItem("prettycards.update.toastdata");
+			localStorage.removeItem("PrettyCards_UpdateToVersion");
+		}
 	}
-}
+});
 
 export {};

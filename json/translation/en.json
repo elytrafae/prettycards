@@ -282,5 +282,5 @@
     "pc-updater-new-title" : "New PrettyCards version!",
     "pc-updater-new-text" : "There is a new version of PrettyCards available for download!",
     "pc-updater-new-footer" : "Click here to update!",
-    "pc-updater-success" : "Update Successful!"
+    "pc-updater-success-title" : "Update Successful!"
 }
