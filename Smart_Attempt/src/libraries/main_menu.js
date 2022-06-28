@@ -51,7 +51,7 @@ function isItApril() {
 }
 
 window.showPrettyCardsCredits = showCredits;
-ExecuteWhen("PrettyCards:onPageLoad", function() {
+ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {
 	if (true) {	
 		var x = $(document).width() - 450;
 		var y = 300;

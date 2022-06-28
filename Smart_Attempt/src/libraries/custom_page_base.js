@@ -61,7 +61,11 @@ if (IsOnCustomPage()) {
 			window.onMessageChat(event);
 			var data = JSON.parse(event.data);
 			//console.log(data);
-			PrettyCards_plugin.events.emit("PC_Chat:" + data.action, data); 
+			if (data.action == "getSelfInfos") {
+				PrettyCards_plugin.events.emit.singleton("PC_Chat:" + data.action, data); 
+			} else {
+				PrettyCards_plugin.events.emit("PC_Chat:" + data.action, data); 
+			}
 		};
 	});
 }
