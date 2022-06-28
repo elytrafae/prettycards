@@ -94,17 +94,17 @@ function EditDeckScreenHTML() {
 	col2.style = "display: inline-block; margin: 0; width: 235px; display: flex; justify-content: space-evenly;";
 	cont.appendChild(col2);
 	
-	col1.innerHTML = "<span>Deck Name: </span>";
+	col1.innerHTML = "<span>" + window.$.i18n("pc-decks-editor-name") + "</span>";
 	
 	col1.appendChild(deckName);
 	deckName.value = currentDeck.name;
 	deckName.className = "form-control " + currentDeck.soul;
 	deckName.style = "background: rgba(0,0,0,.5);";
-	deckName.placeholder = "Deck Name";
+	deckName.placeholder = window.$.i18n("pc-decks-editor-name2");
 	$(deckName).unbind("keyup").keyup(ChangeDeckName.bind(this)); // I dunno why I did this, but it shouldn't be a biggie :3
 	
 	var deckDescSpan = document.createElement("SPAN");
-	deckDescSpan.innerHTML = "<br>Deck Description:<br>";
+	deckDescSpan.innerHTML = "<br>" + window.$.i18n("pc-decks-editor-desc") + "<br>";
 	col1.appendChild(deckDescSpan);
 	
 	col1.appendChild(deckDesc);
@@ -114,14 +114,14 @@ function EditDeckScreenHTML() {
 	$(deckDesc).unbind("keyup").keyup(ChangeDeckDescription.bind(this));
 	
 	var changeImage = document.createElement("BUTTON");
-	changeImage.innerHTML = "Change Deck Image";
+	changeImage.innerHTML = window.$.i18n("pc-decks-editor-image");
 	changeImage.className = "btn btn-primary";
 	changeImage.style = "display: block; margin-top: 10px;"
 	changeImage.onclick = ChangeDeckImageDialogue.bind(this);
 	col1.appendChild(changeImage);
 	
 	var emergencyLoad = document.createElement("BUTTON");
-	emergencyLoad.innerHTML = "Emergency Load Deck";
+	emergencyLoad.innerHTML = window.$.i18n("pc-decks-editor-emergency");
 	emergencyLoad.className = "btn btn-danger";
 	emergencyLoad.style = "display: block; margin-top: 10px;"
 	emergencyLoad.onclick = function () {
@@ -132,7 +132,7 @@ function EditDeckScreenHTML() {
 	var note = document.createElement("P");
 	note.className = "gray";
 	note.style = "margin-top: 15px;";
-	note.innerHTML = "NOTE: The Emergency Load Deck immediately uploads the selected deck to the server. It is not an intended feature for my deck system, but one that should be used if the system breaks again.";
+	note.innerHTML = window.$.i18n("pc-decks-editor-emergencynote");
 	cont_cont.appendChild(note);
 	
 	ReloadDeckEditPreview();
@@ -429,13 +429,13 @@ function InitDecks() {
 		newDeckButtons.append(changeDeckButton);
 		changeDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 		changeDeckButton.className = "btn btn-primary";
-		changeDeckButton.innerHTML = "Change<br>Deck";
+		changeDeckButton.innerHTML = window.$.i18n("pc-decks-change");
 		changeDeckButton.onclick = ChangeDeckScreen.bind(this);
 		
 		newDeckButtons.append(editDeckButton);
 		editDeckButton.style = "width: 50%; margin: 0; text-shadow: -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;";
 		editDeckButton.className = "btn btn-primary";
-		editDeckButton.innerHTML = "Edit<br>Deck";
+		editDeckButton.innerHTML = window.$.i18n("pc-decks-edit");
 		editDeckButton.onclick = EditDeckScreen.bind(this);
 	});
 	
