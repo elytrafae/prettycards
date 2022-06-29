@@ -17,8 +17,8 @@ function InitFriendshipSort() {
     filterTable.find("td:nth-child(2)").css("width", "300px");
     filterTable.find("td:nth-child(2)").after('<td><select id="PrettyCards_FriendshipSort" class="form-control" style="color:white;" onchange="applyFilters();showPage(0);"><option value="0">Waiting . . .</option></select></td>');
 
-    PrettyCards_plugin.events.on("translation:loaded", function () {
-        var optionList = ["Highest XP", "Highest Position", "Closest to Level Up", "Closest to " + window.$.i18n("item-ucp") + " Reward"];
+    PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function () {
+        var optionList = [window.$.i18n("pc-friendship-sort-xp"), window.$.i18n("pc-friendship-sort-rank"), window.$.i18n("pc-friendship-sort-levelup"), window.$.i18n("pc-friendship-sort-reward", window.$.i18n("item-ucp"))];
         
         var optionsString = "";
         for (var i=0; i < optionList.length; i++) {

@@ -65,8 +65,8 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 	//console.log("Joining Queue Button Pressed!");
 	var toast = PrettyCards_plugin.toast(
 		{
-			title: "Please wait!",
-			text: "Setting up the deck on the server . . .",
+			title: window.$.i18n("pc-play-decksetup-title"),
+			text: window.$.i18n("pc-play-decksetup-text"),
 		}
 	);
 	deckSelectLocked = true;
@@ -131,7 +131,7 @@ function InitGameList() {
 	
 	$("#PrettyCards_JoinCreate button")[0].onclick = function() {window.PrettyCards_StartJoiningQueue(null, 'create')}
 	
-	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts", function () {
+	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts PrettyCards:TranslationExtReady", function () {
 		deckSelector.closable = true;
 		deckSelector.closeCallback = CloseDeckSelector;
 		deckSelector.callback = DeckSelectorCallback;
@@ -147,11 +147,11 @@ function InitGameList() {
 				var error_deck = {
 					soul : "DETERMINATION",
 					id : -1,
-					name : "ERROR!",
+					name : window.$.i18n("pc-play-error"),
 					cards : [],
 					artifacts : [],
 					image : onu_skin,
-					description: "Selected deck not found! It must have been deleted!<br>Please choose another!"
+					description: window.$.i18n("pc-play-deckerror")
 				}
 				SetSelectedDeck(error_deck);
 				playLocked = true;
@@ -162,11 +162,11 @@ function InitGameList() {
 			var error_deck = {
 				soul : "UNIVERSAL",
 				id : -1,
-				name : "ERROR!",
+				name : window.$.i18n("pc-play-error"),
 				cards : [],
 				artifacts : [],
 				image : dummy_skin,
-				description: "No deck selected!"
+				description: window.$.i18n("pc-play-nodeck")
 			}
 			SetSelectedDeck(error_deck);
 			playLocked = true;

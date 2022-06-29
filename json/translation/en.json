@@ -282,5 +282,18 @@
     "pc-updater-new-title" : "New PrettyCards version!",
     "pc-updater-new-text" : "There is a new version of PrettyCards available for download!",
     "pc-updater-new-footer" : "Click here to update!",
-    "pc-updater-success-title" : "Update Successful!"
+    "pc-updater-success-title" : "Update Successful!",
+    "pc-friendship-sort-xp" : "Highest XP",
+    "pc-friendship-sort-rank" : "Highest Position",
+    "pc-friendship-sort-levelup" : "Closest To Level Up",
+    "pc-friendship-sort-reward" : "Closest To $1 Reward",
+    "pc-play-ranked-warning-title" : "Are you sure?",
+    "pc-play-ranked-warning-body" : "Are you sure you want to play ranked? One loss and it will be hell coming back into {{DIVISION:LEGEND}}.",
+    "pc-play-ranked-warning-smart" : "Yeah, better not!",
+    "pc-play-ranked-warning-dumbass" : "Take me to battle!",
+    "pc-play-decksetup-title" : "Please wait!",
+    "pc-play-decksetup-text" : "Setting up the deck on the server . . .",
+    "pc-play-error" : "ERROR!",
+    "pc-play-nodeck" : "No deck selected!",
+    "pc-play-deckerror" : "Selected deck not found! It must have been deleted!<br>Please choose another!"
 }

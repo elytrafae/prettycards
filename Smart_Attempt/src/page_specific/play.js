@@ -34,20 +34,20 @@ function askRanked() {
 	}
 	if (selfDivision == "LEGEND" && selfElo <= 2000) {
 		window.BootstrapDialog.show({
-            title: "Are you sure?",
+            title: window.$.i18n("pc-play-ranked-warning-title"),
 			type: window.BootstrapDialog.TYPE_DANGER,
-            message: "Are you sure you want to play ranked? One loss and it will be hell coming back into <span class='LEGEND_NEON'>LEGEND</span>.",
+            message: window.$.i18n("pc-play-ranked-warning-body"),
 			//onshow: this.OnShow
 			buttons: [
 				{
-					label: "Yeah, better not!",
+					label: window.$.i18n("pc-play-ranked-warning-smart"),
 					cssClass: 'btn-primary',
 					action: function(dialog) {
 						dialog.close();
 					}
 				},
 				{
-					label: "Take me to battle!",
+					label: window.$.i18n("pc-play-ranked-warning-dumbass"),
 					cssClass: 'btn-danger',
 					action: function(dialog) {
 						alreadyAgreedToRanked = true;
@@ -100,7 +100,6 @@ function SetSelectedDeck(deck) {
 	}
 	//console.log("Artifacts to display: ", arts, deck.artifacts);
 	$('#PrettyCards_DeckArtifacts').html(arts);
-	$('#selectedDeck').html(`<span class="${deck.soul}">Selected Deck: ${deck.name}</span>`);
 	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckId"] = deck.id;
 	window.localStorage["prettycards." + window.selfId + ".selectedPlayDeckSoul"] = deck.soul;
 	playLocked = false;
@@ -121,8 +120,8 @@ function StartJoiningQueue(game_mode) {
 	//console.log("Joining Queue Button Pressed!");
 	var toast = PrettyCards_plugin.toast(
 		{
-			title: "Please wait!",
-			text: "Setting up the deck on the server . . .",
+			title: window.$.i18n("pc-play-decksetup-title"),
+			text: window.$.i18n("pc-play-decksetup-text"),
 		}
 	);
 	deckSelectLocked = true;
@@ -202,7 +201,7 @@ function InitPlay() {
 	$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
 	$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
 	
-	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts", function () {
+	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts PrettyCards:TranslationExtReady", function () {
 		deckSelector.closable = true;
 		deckSelector.closeCallback = CloseDeckSelector;
 		deckSelector.callback = DeckSelectorCallback;
@@ -218,11 +217,11 @@ function InitPlay() {
 				var error_deck = {
 					soul : "DETERMINATION",
 					id : -1,
-					name : "ERROR!",
+					name : window.$.i18n("pc-play-error"),
 					cards : [],
 					artifacts : [],
 					image : onu_skin,
-					description: "Selected deck not found! It must have been deleted!<br>Please choose another!"
+					description: window.$.i18n("pc-play-deckerror")
 				}
 				SetSelectedDeck(error_deck);
 				playLocked = true;
@@ -233,11 +232,11 @@ function InitPlay() {
 			var error_deck = {
 				soul : "UNIVERSAL",
 				id : -1,
-				name : "ERROR!",
+				name : window.$.i18n("pc-play-error"),
 				cards : [],
 				artifacts : [],
 				image : dummy_skin,
-				description: "No deck selected!"
+				description: window.$.i18n("pc-play-nodeck")
 			}
 			SetSelectedDeck(error_deck);
 			playLocked = true;
