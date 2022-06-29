@@ -37,7 +37,7 @@ class PackOpenAnimationTemplate {
 		$(".PrettyCards_AnimationPack").animate({top: (moveto_y + "px"), left: (moveto_x + "px")}, 1000, "swing", this.OnPackMoveFinish.bind(this));
 
 		if (this.hasSkipButton) {
-			this.button = $(`<button class="btn btn-primary PrettyCards_PacksSkipButton">Skip!</button>`);
+			this.button = $(`<button class="btn btn-primary PrettyCards_PacksSkipButton">${window.$.i18n("pc-navigate-skip")}</button>`);
 			cont.append(this.button);
 			this.button.click(function(e) {
 				e.stopPropagation();
@@ -149,7 +149,7 @@ class PackOpenAnimationTemplate {
 		container.className = "PrettyCards_CardSummary";
 		
 		var containerTitle = document.createElement("P");
-		containerTitle.innerHTML = "Card Summary";
+		containerTitle.innerHTML = window.$.i18n("pc-packs-summary");
 		containerTitle.className = "PrettyCards_CardSummaryTitle";
 		container.appendChild(containerTitle);
 		

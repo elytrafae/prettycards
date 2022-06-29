@@ -30,21 +30,21 @@ class PacksPageTemplate {
 	generateBuyRow(pack_data) { // Required?
 		return `
 			<input type="number" class="PrettyCards_PackBuyCount" data-packid="${pack_data.code_id}" value="1" min="1" pattern="[0-9]">
-			x <button class="PrettyCards_PackGBuy btn-primary" data-packid="${pack_data.code_id}">Buy (<span class="PrettyCards_PackGPrice" data-packid="${pack_data.code_id}">100</span> <img src="images/icons/gold.png" class="height-16">)</button>
-			<button class="PrettyCards_PackUcpBuy btn-primary" data-packid="${pack_data.code_id}">Buy (<span class="ucp PrettyCards_PackUcpPrice" data-packid="${pack_data.code_id}">10</span> UCP)</button>
+			x <button class="PrettyCards_PackGBuy btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-buy")} (<span class="PrettyCards_PackGPrice" data-packid="${pack_data.code_id}">100</span> <img src="images/icons/gold.png" class="height-16">)</button>
+			<button class="PrettyCards_PackUcpBuy btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-buy")} (<span class="ucp PrettyCards_PackUcpPrice" data-packid="${pack_data.code_id}">10</span> UCP)</button>
 		`;
 	}
 	
 	generateOpenRow(pack_data) { // Required?
 		return `
 			<input type="number" class="PrettyCards_PackOpenCount" data-packid="${pack_data.code_id}" value="1" min="1" pattern="[0-9]">
-			x <button class="PrettyCards_PackOpen btn-primary" data-packid="${pack_data.code_id}">Open <span class="PrettyCards_PackOpenCountButton" data-packid="${pack_data.code_id}">1</span></button>
+			x <button class="PrettyCards_PackOpen btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-open")} <span class="PrettyCards_PackOpenCountButton" data-packid="${pack_data.code_id}">1</span></button>
 		`;
 	}
 	
 	generatePack(pack_data) { // Required
-		var buystr = (pack_data.does_exist && (pack_data.g_cost > -1)) ? this.generateBuyRow(pack_data) : "This pack cannot be bought.";
-		var openstr = pack_data.does_exist ? this.generateOpenRow(pack_data) : "This pack cannot be opened.";
+		var buystr = (pack_data.does_exist && (pack_data.g_cost > -1)) ? this.generateBuyRow(pack_data) : window.$.i18n("pc-packs-cannotbuy");
+		var openstr = pack_data.does_exist ? this.generateOpenRow(pack_data) : window.$.i18n("pc-packs-cannotopen");
 		return `
 		<div class="PrettyCards_PackContainer">
 			<div class="PrettyCards_FloatingPack">
@@ -54,8 +54,8 @@ class PacksPageTemplate {
 				</div>
 			</div>
 			<div class="PrettyCards_PackText">
-				<div class="PrettyCards_PackName">${pack_data.name}</div>
-				<div class="PrettyCards_PackDescription">${pack_data.description}</div>
+				<div class="PrettyCards_PackName">${window.$.i18n(pack_data.name)}</div>
+				<div class="PrettyCards_PackDescription">${window.$.i18n(pack_data.description)}</div>
 				<div class="PrettyCards_PackBuy">${buystr}</div>
 				<div class="PrettyCards_PackOpen">${openstr}</div>
 			</div>
