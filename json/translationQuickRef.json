@@ -16,5 +16,11 @@
         "syntax" : "{{PC_SWITCH_RED:opacity|text_to_display...}}",
         "description" : "Highlights the SECOND part of a Switch effect, colored in a red background. Has a functional role as well, so it should always be used properly! If the card is a Switch card, but one of its descriptions has no visible mentions of a Switch effect taking place (\"Do nothing\"), most likely one of these is used with an opacity of 0.<br><b>OTHERWISE, ALWAYS USE AN OPACITY OF 1!</b>",
         "example": "{{PC_SWITCH_RED:1|Deal 3 {{DMG}} to a monster}}"
+    },
+    {
+        "title" : "PC RARITY ICON",
+        "syntax" : "{{PC_RARICON:extension|rarity}}",
+        "description" : "Places a rarity icon of the specified extension and rarity. The extension can be BASE or DELTARUNE, and the rarity goes just like in Onu's RARITY command.",
+        "example": "{{PC_RARICON:BASE|RARE}}, {{PC_RARICON:DELTARUNE|LEGENDARY}}"
     }
 ]
