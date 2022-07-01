@@ -247,6 +247,20 @@ class Utility {
 		window.$.i18n().locale = l;
 		return text;
 	}
+
+	constructURL(prefix, filename, defExt, oldLogic = false) {
+		if (oldLogic) {
+			return prefix + filename + "." + defExt;
+		}
+		if (prefix.length > 0 && !prefix.endsWith("/")) {
+			prefix = prefix + "/";
+		}
+		var splitFileName = filename.split(".");
+		if (splitFileName.length < 2) {
+			filename = filename + "." + defExt;
+		}
+		return prefix + filename;
+	}
 	
 }
 

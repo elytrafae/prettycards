@@ -122,10 +122,12 @@ class FancyDisplay {
 		PrettyCards_plugin.events.emit("pre:viewArtifact()", artifact);
 		var image_src = utility.getArtifactImageLink(artifact.image);
 		if (artifact.collection) {
-			image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
-			if (utility.getSeasonMonth() == 3 && artifact.aprilImage) {
-				image_src = artifact.collection.aprilArtifactImagePrefix + artifact.aprilImage + ".png";
-			}
+			var c = artifact.collection;
+			var isAprilFools = utility.getSeasonMonth() == 3 && artifact.aprilImage;
+			var prefix = isAprilFools ? c.aprilArtifactImagePrefix  : c.artifactImagePrefix;
+			var imageName = isAprilFools ? artifact.aprilImage : artifact.image;
+
+			image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 		}
 		var data = {
 			name: $.i18n("artifact-name-" + artifact.id),
@@ -154,10 +156,12 @@ class FancyDisplay {
 		}
 		var image_src = "https://github.com/CMD-God/prettycards/raw/master/img/Souls/" + id + ".png";
 		if (customObj) {
-			image_src = customObj.collection.soulImagePrefix + customObj.image + ".png";
-			if (utility.getSeasonMonth() == 3 && customObj.aprilImage) {
-				image_src = customObj.collection.aprilSoulImagePrefix + customObj.aprilImage + ".png";
-			}
+			var c = customObj.collection;
+			var isAprilFools = utility.getSeasonMonth() == 3 && customObj.aprilImage;
+			var prefix = isAprilFools ? c.aprilSoulImagePrefix  : c.soulImagePrefix;
+			var imageName = isAprilFools ? customObj.aprilImage : customObj.image;
+
+			image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 		}
 		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
 		
@@ -223,10 +227,12 @@ class FancyDisplay {
 				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
 				var image_src = utility.getArtifactImageLink(artifact.image);
 				if (artifact.collection) {
-					image_src = artifact.collection.artifactImagePrefix + artifact.image + ".png";
-					if (utility.getSeasonMonth() == 3 && artifact.aprilImage) {
-						image_src = artifact.collection.aprilArtifactImagePrefix + artifact.aprilImage + ".png";
-					}
+					var c = artifact.collection;
+					var isAprilFools = utility.getSeasonMonth() == 3 && artifact.aprilImage;
+					var prefix = isAprilFools ? c.aprilArtifactImagePrefix  : c.artifactImagePrefix;
+					var imageName = isAprilFools ? artifact.aprilImage : artifact.image;
+
+					image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 				}
 				datas.push({
 					name: $.i18n("artifact-name-" + artifact.id),

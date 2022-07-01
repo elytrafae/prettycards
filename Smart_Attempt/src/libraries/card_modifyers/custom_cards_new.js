@@ -46,13 +46,14 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			
 			element.addClass("ext_" + card.extension);
 
-			var image = collection.cardImagePrefix + card.image;
-			if (utility.getSeasonMonth() == 3 && card.aprilImage) {
-				image = collection.aprilCardImagePrefix + card.aprilImage;
-			}
+			var isAprilFools = utility.getSeasonMonth() == 3 && card.aprilImage;
+			var prefix = isAprilFools ? collection.aprilCardImagePrefix : collection.cardImagePrefix;
+			var imageName = isAprilFools ? card.aprilImage : card.image;
+
+			var image = utility.constructURL(prefix, imageName, "png", collection.oldPrefixBehavior);
 			
-			element.find(".cardImage").css("background-image", 'url("' + image + '.png")');
-			element.find(".cardRarity").css("background-image", 'url("' + collection.rarityImagePrefix + card.extension + '_' + card.rarity + '.png")');
+			element.find(".cardImage").css("background-image", 'url("' + image + '")');
+			element.find(".cardRarity").css("background-image", 'url("' + utility.constructURL(collection.rarityImagePrefix, card.extension + '_' + card.rarity, "png", collection.oldPrefixBehavior) + '")');
 			
 			var tribes = element.find(".cardTribes .tribe");
 			for (var i=0; i < card.tribes.length; i++) {
@@ -60,17 +61,17 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				var tribe = collection.getTribeById(tribe_string);
 				if (tribe) {
 					//console.log("CUSTOM TRIBE!", tribe, tribes, tribes[i]);
-					tribes[i].src = collection.tribeImagePrefix + tribe.image + '.png';
+					tribes[i].src = utility.constructURL(collection.tribeImagePrefix, tribe.image, "png", collection.oldPrefixBehavior);
 				}
 			}
 			
 			if (card.background) {
 				var bg = $('<div class="breakingSkinBackground"></div>');
-				var b_image = collection.cardImagePrefix + card.background;
-				if (utility.getSeasonMonth() == 3 && card.aprilBackground) {
-					b_image = collection.aprilCardImagePrefix + card.aprilBackground;
-				}
-				bg.css('background', "url('" + b_image + ".png') no-repeat");
+				var isAprilFools = utility.getSeasonMonth() == 3 && card.aprilBackground;
+				var prefix = isAprilFools ? collection.aprilCardImagePrefix : collection.cardImagePrefix;
+				var imageName = isAprilFools ? card.aprilBackground : card.background;
+				var b_image = utility.constructURL(prefix, imageName, "png", collection.oldPrefixBehavior);
+				bg.css('background', "url('" + b_image + "') no-repeat");
 				bg.css("background-size", "contain");
 				bg.css("background-position", "center");
 				element.prepend(bg);

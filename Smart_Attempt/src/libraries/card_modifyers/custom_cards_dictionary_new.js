@@ -60,6 +60,7 @@ class CustomCardCollection {
 		this.author = settings.author || "";
 		this.note = settings.note || "";
 		this.universalCustomFont = settings.universalCustomFont || "";
+		this.oldPrefixBehavior = false;
 	}
 	
 	newCard(settings) {
