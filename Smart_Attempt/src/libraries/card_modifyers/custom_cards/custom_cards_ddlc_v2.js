@@ -337,6 +337,11 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		aprilImage: "Just_Monika",
 		background: "Just_Monika_Breaking_BG",
 		aprilBackground: "Just_Monika_Back",
+		themeSongs: [
+			"Just_Monika",
+			"Just_Monika_2",
+			"Just_Monika_3"
+		],
 		cost: 11,
 		attack: 6,
 		hp: 9,

@@ -3,6 +3,8 @@ import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
 import {LoadFont, ListenForWhenAllFontsAreLoaded} from "/src/libraries/font_loader.js";
+import { registerCard } from "./card_theme_song_manager";
+import { utility } from "../utility";
 
 var customCardsStart = 2000;
 var nextCustomCardId = customCardsStart;
@@ -64,7 +66,7 @@ class CustomCardCollection {
 	}
 	
 	newCard(settings) {
-		var card = new Card(settings);
+		var card = new Card(settings, this);
 		card.collection = this;
 		this.cards.push(card);
 		return card;
@@ -133,7 +135,7 @@ class CustomCardCollection {
 
 class Card {
 	
-	constructor(settings) {
+	constructor(settings, collection) {
 		this.armor = false;
 		//this.attack = 1;
 		this.burn = 0;
@@ -230,6 +232,13 @@ class Card {
 		*/
 		this.name = window.$.i18n("card-name-" + this.id, 1);
 		this.description = undefined;
+
+		if (this.themeSongs) {
+			var s = registerCard(this);
+			for (var i=0; i < this.themeSongs.length; i++) {
+				s.addFile(utility.constructURL(collection.cardSongPrefix, this.themeSongs[i], "ogg", collection.oldPrefixBehavior));
+			}
+		}
 		
 		window.allCards.push(this);
 	}

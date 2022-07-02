@@ -204,4 +204,4 @@ if (settings.multi_theme_songs.value()) {
     PrettyCards_plugin.events.emit.singleton("PrettyCards:themeSongsReady"); // Required for the normal song previews to still appear.
 }
 
-export {getThemeSongSettingByCardId};
+export {getThemeSongSettingByCardId, registerCard};
