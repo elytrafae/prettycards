@@ -1,8 +1,9 @@
-import { PrettyCards_plugin, settings } from "../underscript_checker";
+import { prettycards, PrettyCards_plugin, settings } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 var hd_card_skins = [];
+var debugList = [];
 
 settings.hd_card_skins = PrettyCards_plugin.settings().add({
 	'key': 'hd_card_skins',
@@ -12,6 +13,17 @@ settings.hd_card_skins = PrettyCards_plugin.settings().add({
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': true, // default value
 });
+
+function returnHDImageIfThereIs(image, forceNormal = false) {
+    if (hd_card_skins.includes(image)) {
+        return `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/HDCardSkins/${image}.png`;
+    }
+    if (forceNormal) {
+        return `/images/cards/${image}.png`;
+    }
+    return utility.getCardImageLink(image);
+}
+
 
 if (settings.hd_card_skins.value()) {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
@@ -33,7 +45,7 @@ if (settings.hd_card_skins.value()) {
         var element = data.element;
         PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function() { // Race conditions bad
             if (hd_card_skins.includes(card.image)) {
-                element.find(".cardImage").css("backgroundImage", `url("https://raw.githubusercontent.com/CMD-God/prettycards/master/img/HDCardSkins/${card.image}.png")`);
+                element.find(".cardImage").css("backgroundImage", `url("${returnHDImageIfThereIs(card.image)}")`);
             }
         })
     })
@@ -43,10 +55,26 @@ if (settings.hd_card_skins.value()) {
         var element = data.element;
         var image = skin.image;
         PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function() { // Race conditions bad
-            if (hd_card_skins.includes(image)) {
-                element.find(".cardImage").css("backgroundImage", `url("https://raw.githubusercontent.com/CMD-God/prettycards/master/img/HDCardSkins/${image}.png")`);
+            if (hd_card_skins.includes(image)) { // This condition is for debug purposes. It can be completely removed in production!
+                element.find(".cardImage").css("backgroundImage", `url("${returnHDImageIfThereIs(image)}")`);
+            } else {
+                debugList.push(image);
             }
         })
     })
     
 }
+
+prettycards.emptySkinDebugList = function() {
+    debugList = [];
+}
+
+prettycards.printSkinDebugList = function() {
+    var txt = "";
+    debugList.forEach((e) => {
+        txt += `- ${e}\n`;
+    })
+    console.log(txt);
+}
+
+export {hd_card_skins, returnHDImageIfThereIs}

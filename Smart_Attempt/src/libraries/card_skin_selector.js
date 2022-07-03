@@ -2,6 +2,7 @@
 import { PrettyCards_plugin } from "./underscript_checker";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
+import {returnHDImageIfThereIs} from "/src/libraries/card_modifyers/hd_card_skins.js";
 
 var allCardSkins = [];
 var ownedCardSkins = [];
@@ -190,7 +191,7 @@ class CardSkinSelector {
 			const category_container = document.createElement("DIV");
 			for (var j=0; j < list.length; j++) {
 				const skin = list[j];
-				var image = "images/cards/" + skin.image + ".png";
+				var image = returnHDImageIfThereIs(skin.image);
 				if (skin.isCustom) {
 					image = skin.image;
 				}
