@@ -135,7 +135,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		hp: 5,
 		taunt: true,
 		//description: "Whenever you summon an {{KW:ARACHNID}} give it +1/+1. {{KW:DUST}}: Fill your board with {{CARD:115|2}} and give them +1/+1.",
-		description: `{{KW:TAUNT}}. {{KW:MAGIC}}: If this has 3- {{HP}}, lose {{KW:TAUNT}} to gain {{KW:HASTE}}. {{KW:DELAY}} and ${fallen.me()}: Send the last other ${doki.me()} from your dustpile to your deck with {{KW:HASTE}}.`,
+		description: `{{KW:TAUNT}}. {{KW:MAGIC}}: If this has 3- {{HP}}, lose {{KW:TAUNT}} to gain {{KW:HASTE}}. {{KW:DELAY}} and ${fallen.me()}: Burn the last other ${doki.me()} from your dustpile to add it your deck with {{KW:HASTE}}.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "RARE",
@@ -149,7 +149,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		attack: 5,
 		hp: 7,
-		description: `{{KW:MAGIC}}: Look at 3 random non-{{RARITY:DETERMINATION}} {{TRIBE:DOKI|2}} you didn't start in your deck with and catch one. {{KW:DUST}}: Release it into your hand.`,
+		description: `{{KW:MAGIC}}: Look at 3 random {{TRIBE:DOKI|2}} you didn't start in your deck with and catch one. {{KW:DUST}}: Release it into your hand.`,
 		extension: "BASE",
 		rarity: "RARE",
 		customFont: "DTM-Mono",
@@ -175,7 +175,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 4,
 		attack: 3,
 		hp: 2,
-		description: `{{KW:MAGIC}}: Heal 2 {{HP}} for each ally ${doki.me()}. ${fallen.me()}: Trigger the effect of the highest {{HP}} ${fallen.me()} monster in your hand and give it +1/-1.`,
+		description: `{{KW:MAGIC}}: Heal 1 {{HP}} for each ${doki.me()} in your dustpile (max: 12). ${fallen.me()}: Trigger the effect of the highest {{HP}} other ${fallen.me()} monster in your hand and give it +1/-1.`,
 		//description: `{{KW:MAGIC}}: Give an ally ${fallen.me()} monster in your hand +1/+2. ${fallen.me()}: Trigger the effect of a random ${fallen.me()} monster in your hand and return it to your deck with +1/-1.`,
 		tribes: [doki],
 		extension: "DDLC",
@@ -191,12 +191,12 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		attack: 5,
 		hp: 5,
 		//armor: true,
-		description: `{{KW:MAGIC}}: Target an ally monster. {{KW:DELAY}}: If it's dead, {{KW:SILENCE}} and deal 3 {{DMG}} and give -2 {{ATK}} to the monster in front of it.`,
+		description: `{{KW:MAGIC}}: Target an ally monster. {{KW:DELAY}}: If it's dead, {{KW:SILENCE}} and deal 5 {{DMG}} to the monster in front of it. Otherwise, give all ${doki.me(2)} in your hand +3/-2.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "EPIC",
 		frameSkinName: frame,
-		note: `A ${fallen.me()} support card that doesn't actually HAVE a ${fallen.me()} keyword? Yes, and it can even singlehandedly take out some cards that couse you trouble if you play your cards right, such as a Mettaton NEO or Sans (if you really must).`
+		note: `A ${fallen.me()} support card that doesn't actually HAVE a ${fallen.me()} keyword? Yes, and it can even singlehandedly take out some cards that could cause you trouble if you play your cards right, such as a Mettaton NEO or Sans (if you really must). Its secondary effect can also bring advantages that could be considered.`
 	});
 	
 	c.newCard({
@@ -238,7 +238,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		attack: 4,
 		hp: 3,
-		description: `{{KW:SUPPORT}}: Catch a copy of a non-{{RARITY:DETERMINATION}} attacker. {{KW:DUST}}: Release it with 3/3. If it's a ${fallen.me()} ${doki.me()} monster, trigger its ${fallen.me()} effect and kill it.`,
+		description: `{{KW:TURN-START}}: Burn the first ${doki.me()} from your dustpile to add it to your hand with +2/-1. {{KW:MAGIC}}: Trigger the {{KW:TURN-START}} effect twice.`,
+		// description: `{{KW:SUPPORT}}: Catch a copy of a non-{{RARITY:DETERMINATION}} attacker. {{KW:DUST}}: Release it with 3/3. If it's a ${fallen.me()} ${doki.me()} monster, trigger its ${fallen.me()} effect and kill it.`,
 		//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} ${fallen.me()} monsters from your dustpile. Trigger their ${fallen.me()} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
 		tribes: [doki],
 		extension: "DDLC",
@@ -250,10 +251,10 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	c.newCard({
 		name: "{{PLURAL:$1|Club President Sayori|Club President Sayoris}}",
 		image: "Club_President_Sayori",
-		cost: 7,
-		attack: 7,
+		cost: 6,
+		attack: 6,
 		hp: 4,
-		description: `{{KW:FALLEN}} and {{KW:DELAY}}: Force all ally monsters to attack enemy monsters in front of them.`,
+		description: `{{KW:DELAY}}: Force all ally monsters to attack enemy monsters in front of them. {{KW:FALLEN}}: Add an {{CARD:131}} to your deck.`,
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "LEGENDARY",
@@ -269,7 +270,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 0,
 		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, apply them to the monsters in front of them, burn this and draw a card.",
 		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, burn this and draw a card.",
-		description: `Heal 5 {{HP}} split among all damaged ally monsters. Excess healing is healed to you. Draw a card.`,
+		description: `Heal 5 {{HP}} to yourself or give a monster -1/-1 and {{KW:HASTE}}. Draw a card.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN",
@@ -285,7 +286,8 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		//description: "{{KW:TURBO}}: Burn a random 4 or 5 {{COST}} monster in your dustpile (prefer {{TRIBE:DOKI|2}}), add it to your hand, give it -2 {{COST}}, burn this and draw a card.",
 		//description: "Look at all {{TRIBE:DOKI|2}} in your dustpile and choose one. Add it to your hand. Give it -2 {{COST}}. Draw a card.",
 		//description: "Look at 3 random 4-{{COST}} cards in your dustpile and burn one. Add it to your hand. Give it -1 {{COST}}. Draw a card.",
-		description: `Look at 3 random non-{{RARITY:DETERMINATION}} ${doki.me(3)} in your dustpile and choose one to add to the top of your deck with -1 {{cost}}. {{KW:DELAY}}: Draw 2 cards.`,
+		// description: `Look at 3 random non-{{RARITY:DETERMINATION}} ${doki.me(3)} in your dustpile and choose one to add to your hand with -1 {{cost}}.`,
+		description: `Look at 4 different random 3-5 {{cost}} cards in your dustpile. Add one to your hand with +2/-1.`,
 		tribes: [chr_spells],
 		extension: "DDLC",
 		rarity: "TOKEN",
@@ -321,6 +323,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		note: `Powerful effect at the downside of no card draws.`
 	});
 	
+	/*
 	var file_exp = c.newArtifact({
 		name: "Character Folder", 
 		image: "File_Explorer",
@@ -330,6 +333,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		Order of ${chr_spells.me(2)}: ${sayori_chr.me()} > ${natsuki_chr.me()} > ${yuri_chr.me()} > ${monika_chr.me()} > Start over.`,
 		note: `Basically, this is where the majority of Just Monika's power lies. While this artifact encourages this to be used in combination with the ${doki.me(2)}, the first effect can prove useful in other tribes, or even in a regular match as well, as most players often trade their cards anyway, so it isn't a dead weight if it ends up in the wrong deck, either.`
 	});
+	*/
 	
 	c.newCard({
 		name: "{{PLURAL:$1|Just Monika|Just Monikas}}",
@@ -342,16 +346,18 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 			"Just_Monika_2",
 			"Just_Monika_3"
 		],
-		cost: 11,
+		cost: 8,
 		attack: 6,
-		hp: 9,
-		description: `{{KW:MAGIC}}: Add the ${file_exp.me()} artifact. {{KW:DELAY}}: Add the next ${chr_spells.me()} to your hand if an ally ${fallen.me()} monster died this turn.`,
+		hp: 7,
+		// description: `{{KW:MAGIC}}: Add the ${file_exp.me()} artifact. {{KW:DELAY}}: Add the next ${chr_spells.me()} to your hand if an ally ${fallen.me()} monster died this turn.`,
+		// description: `{{KW:MAGIC}}: Fill your hand with ${chr_spells.me(2)}. {{KW:DELAY}}: Add all of the ${chr_spells.me(2)} to your deck for each 15 {{gold}} the monsters in your dustpile {{cost}} combined.`,
+		description: `{{KW:MAGIC}}: Fill your hand with ${chr_spells.me(2)}. ${fallen.me()}: Add 2 random different ${chr_spells.me(2)} to your deck and draw a card.`,
 		tribes: [doki],
 		extension: "DDLC",
 		typeSkin: 2,
-		rarity: "DETERMINATION",
+		rarity: "LEGENDARY",
 		frameSkinName: frame,
-		note: `The DT of the ${doki.me()} tribe. The most notable aspects of this card are noted with ${file_exp.me()}.`
+		//note: `The DT of the ${doki.me()} tribe. The most notable aspects of this card are noted with ${file_exp.me()}.`
 	});
 
 	prettycards.ddlc_collection = c;
