@@ -27,6 +27,7 @@ import {} from "/src/libraries/card_modifyers/switch_highlight.js";
 // import {} from "/src/libraries/card_modifyers/card_helper_hover.js";
 import {} from "/src/libraries/card_modifyers/za_filter.js";
 import {} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
+import {} from "/src/libraries/card_modifyers/hd_card_skins.js";
 
 import {} from "/src/libraries/translation/translation_manager.js";
 
