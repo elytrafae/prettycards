@@ -7,6 +7,7 @@ var credits = `
 	<span style="font-size: 2em;">General</span>
 	<span>Uses Underscript's API.</span>
 	<span>Feildmaster has been a MASSIVE help over the years and I cannot thank him enough! ^^</span>
+	<span>Also huge thanks to the <span class="Translator">Translator</span> and <span class="Artist">Artist</span> teams for helping me out with certain features!</span>
 
 	<span style="font-size: 2em;">Card Theme Songs</span>
 	<span>MysteryHD is the one who makes the audio files, I just paste them in and run a script. <img style="height:3em;" src="images/emotes/Hue.png"></span>

@@ -191,7 +191,7 @@ class CardSkinSelector {
 			const category_container = document.createElement("DIV");
 			for (var j=0; j < list.length; j++) {
 				const skin = list[j];
-				var image = returnHDImageIfThereIs(skin.image);
+				var image = returnHDImageIfThereIs(skin.image, true);
 				if (skin.isCustom) {
 					image = skin.image;
 				}

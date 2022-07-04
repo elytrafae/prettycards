@@ -1,4 +1,5 @@
 
+import { returnHDImageIfThereIs } from "./card_modifyers/hd_card_skins";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 var cardSkins = [];
@@ -33,7 +34,7 @@ function SetCosmeticsForCardData(card_data) {
 }
 
 function SetDeckSkin(card, card_skin) {
-	var image = "/images/cards/" + card_skin.image + ".png";
+	var image = returnHDImageIfThereIs(card_skin.image, true);
 	if (card_skin.isCustom) {
 		image = card_skin.image;
 	}
