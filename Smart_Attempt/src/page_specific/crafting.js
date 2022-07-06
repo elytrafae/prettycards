@@ -8,6 +8,69 @@ var prevDial;
 
 // Test Deck Code: eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsNzQsMTgyLDI2MCw3MzcsNTUwLDcyLDE0NCw3NSw1NCwxNDcsMTg1LDUwMyw1MDMsNjk4LDI3OSw1Miw1ODQsNDMsMjAxLDIyNywyNjUsNTQ4LDUwNSw2M10sImFydGlmYWN0SWRzIjpbOSwxN119
 
+function convertCollection() {
+    var convColl = {};
+    window.collection.forEach((card) => {
+        if (!convColl[card.id]) {
+            convColl[card.id] = {normal: 0, shiny: 0};
+        }
+        convColl[card.id][(card.shiny ? "shiny" : "normal")] = card.quantity;
+    })
+    return convColl;
+}
+
+/* MODES:
+    0 - Normal Only
+    1 - Shiny Only
+    2 - Mixed (Normal)
+    3 - Mixed (Shiny)
+*/
+
+function generateCardsSection(cardIds, mode = 0) {
+    var convColl = convertCollection();
+    var parent = $(`<div id="PrettyCards_MassCraft_CardContainer"></div>`);
+
+    function appendNormal(id, doHave = true) {
+        var card = window.getCard(id);
+        var $card = window.appendCard(card, parent);
+        if (doHave) {
+            convColl[id].normal--;
+        } else {
+            $card.addClass("PrettyCards_MassCraft_NotHave");
+        }
+    }
+    function appendShiny(id, doHave = true) {
+        var card = { ...window.getCard(id) };
+        card.shiny = true;
+        var $card = window.appendCard(card, parent);
+        if (doHave) {
+            convColl[id].shiny--;
+        } else {
+            $card.addClass("PrettyCards_MassCraft_NotHave");
+        }
+    }
+
+    cardIds.forEach((id) => {
+        var counts = convColl[id] || {normal: 0, shiny: 0};
+        if ((mode == 0 || mode == 2) && counts.normal > 0) {
+            appendNormal(id);
+        } else if ((mode == 1 || mode == 3) && counts.shiny > 0) {
+            appendShiny(id);
+        } else if (mode == 2 && counts.shiny > 0) {
+            appendShiny(id);
+        } else if (mode == 3 && counts.normal > 0) {
+            appendNormal(id);
+        } else {
+            if (mode == 0 || mode == 2) {
+                appendNormal(id, false);
+            } else {
+                appendShiny(id, false);
+            }
+        }
+    })
+    return parent;
+}
+
 function generateContent(jsonDeck) {
     var soulName = jsonDeck.soul;
 
@@ -37,8 +100,12 @@ function generateContent(jsonDeck) {
         </div>
     `);
 
+    var cardSlot = $(`<div id="PrettyCards_MassCraft_CardSlot"></div>`)
+    cardSlot.append(generateCardsSection(jsonDeck.cardIds, 0))
+
     cont.append(row1);
     cont.append(row2);
+    cont.append(cardSlot);
 
     return cont;
 }
@@ -64,7 +131,7 @@ function displayDeck(e) {
     }
     e.value = "";
     prevDial = window.BootstrapDialog.show({
-        title: "TEST",
+        title: "Mass Crafting",
         message: generateContent(jsonDeck),
         //onshow: this.OnShow
         buttons: [
