@@ -102,8 +102,14 @@ function generateContent(jsonDeck) {
 
     var cardSlot = $(`<div id="PrettyCards_MassCraft_CardSlot"></div>`);
 
-    function refreshCards(mode = 0) {
-        console.log("SWITCHING MODE", mode);
+    function refreshCards(mode = 0, force = false) {
+        //console.log("SWITCHING MODE", mode);
+        if ($(`.PrettyCards_MassCraft_ModeSelectBtn:nth-child(${mode+1})`).hasClass("PrettyCards_MassCraft_ModeSelected") && !force) {
+            console.log("MODE ALREADY SELECTED");
+            return;
+        }
+        $(`.PrettyCards_MassCraft_ModeSelectBtn`).removeClass("PrettyCards_MassCraft_ModeSelected");
+        $(`.PrettyCards_MassCraft_ModeSelectBtn:nth-child(${mode+1})`).addClass("PrettyCards_MassCraft_ModeSelected");
         cardSlot.empty().append(generateCardsSection(jsonDeck.cardIds, mode));
     }
     refreshCards();
@@ -146,11 +152,11 @@ function displayDeck(e) {
     prevDial = window.BootstrapDialog.show({
         title: "Mass Crafting",
         message: generateContent(jsonDeck),
-        size: window.BootstrapDialog.SIZE_LARGE || "modal-lg",
+        size: window.BootstrapDialog.SIZE_WIDE || "modal-lg",
         // modal-lg
         onshow: function(dial) {
             //console.log(dial);
-            dial.$modalDialog.addClass("modal-lg");
+            //dial.$modalDialog.addClass("modal-lg");
         },
         buttons: [
             {
