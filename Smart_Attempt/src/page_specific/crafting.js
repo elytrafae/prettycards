@@ -100,8 +100,21 @@ function generateContent(jsonDeck) {
         </div>
     `);
 
-    var cardSlot = $(`<div id="PrettyCards_MassCraft_CardSlot"></div>`)
-    cardSlot.append(generateCardsSection(jsonDeck.cardIds, 0))
+    var cardSlot = $(`<div id="PrettyCards_MassCraft_CardSlot"></div>`);
+
+    function refreshCards(mode = 0) {
+        console.log("SWITCHING MODE", mode);
+        cardSlot.empty().append(generateCardsSection(jsonDeck.cardIds, mode));
+    }
+    refreshCards();
+
+    var buttons = row2.find(".PrettyCards_MassCraft_ModeSelectBtn");
+    for (var i=0; i < buttons.length; i++) {
+        const index = i;
+        const func = function() {refreshCards(index);}
+        buttons[i].onclick = func;
+        console.log(buttons[i], index, func);
+    }
 
     cont.append(row1);
     cont.append(row2);

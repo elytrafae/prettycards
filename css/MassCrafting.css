@@ -57,6 +57,10 @@
     height: 100%;
 }
 
+.PrettyCards_MassCraft_ModeSelectBtn:hover {
+    background-color: #333333;
+}
+
 .PrettyCards_MassCraft_NotHave .cardFrame {
     -webkit-filter: grayscale(100%) brightness(30%) sepia(100%) hue-rotate(310deg) saturate(500%) contrast(1.5);
     filter: grayscale(100%) brightness(30%) sepia(100%) hue-rotate(310deg) saturate(500%) contrast(1.5);
