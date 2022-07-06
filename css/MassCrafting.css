@@ -70,4 +70,5 @@
     justify-content: space-between;
     max-height: 600px;
     overflow-y: auto;
+    padding: 20px;
 }

@@ -133,7 +133,12 @@ function displayDeck(e) {
     prevDial = window.BootstrapDialog.show({
         title: "Mass Crafting",
         message: generateContent(jsonDeck),
-        //onshow: this.OnShow
+        size: window.BootstrapDialog.SIZE_LARGE || "modal-lg",
+        // modal-lg
+        onshow: function(dial) {
+            //console.log(dial);
+            dial.$modalDialog.addClass("modal-lg");
+        },
         buttons: [
             {
                 label: window.$.i18n("dialog-ok"),
