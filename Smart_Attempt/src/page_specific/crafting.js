@@ -23,6 +23,7 @@ function convertCollection() {
 }
 
 PrettyCards_plugin.events.on("craftcard", function(data) {
+    console.log("craftcard event procced", data);
     $(`#PrettyCards_MassCraft_CardContainer #${data.id}${data.shiny ? ".shiny" : ""}.PrettyCards_MassCraft_NotHave:first-of-type`).removeClass("PrettyCards_MassCraft_NotHave");
     for (var i=0; i < whatToBuy.length; i++) {
         var buy = whatToBuy[i];
@@ -33,6 +34,12 @@ PrettyCards_plugin.events.on("craftcard", function(data) {
         }
     }
 })
+
+function buyAll() {
+    whatToBuy.forEach( (e) => {
+        window.craft(e.id, e.shiny);
+    })
+}
 
 /* MODES:
     0 - Normal Only
@@ -190,7 +197,7 @@ function generateContent(jsonDeck) {
         <div id="PrettyCards_MassCraft_BuyRow">
             <div>
                 <img src="images/icons/dust.png" class="height-32">
-                <span id="PrettyCards_MassCraft_DustCount">[A SHIT TON!]</span>
+                <span id="PrettyCards_MassCraft_DustCount">[A LOT!]</span>
             </div>
             <div>
                 <span id="PrettyCards_MassCraft_Cost"></span> <button class="btn btn-success" id="PrettyCards_MassCraft_BuyAllBtn">Buy All!</button>
@@ -200,6 +207,8 @@ function generateContent(jsonDeck) {
 
     refreshCards(0, true);
     $(buttons[0]).addClass("PrettyCards_MassCraft_ModeSelected"); // This is done because the buttons are not yet part of the page itself.
+
+    row4.find("#PrettyCards_MassCraft_BuyAllBtn").click(buyAll);
 
     cont.append(row1);
     cont.append(row2);
@@ -233,7 +242,7 @@ function displayDeck(e) {
         title: "Mass Crafting",
         message: generateContent(jsonDeck),
         size: window.BootstrapDialog.SIZE_WIDE,
-        onshow: function(dial) {
+        onshown: function(dial) {
             refreshDustCost()
         },
         buttons: [
