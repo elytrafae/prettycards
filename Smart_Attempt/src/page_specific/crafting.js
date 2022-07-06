@@ -5,6 +5,7 @@ import { utility } from "../libraries/utility";
 const minDeckCodeLength = 120; // Original result was 132, but I decided to not have that many bugs today . . .
 
 var prevDial;
+var whatToBuy = []; 
 
 // Test Deck Code: eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsNzQsMTgyLDI2MCw3MzcsNTUwLDcyLDE0NCw3NSw1NCwxNDcsMTg1LDUwMyw1MDMsNjk4LDI3OSw1Miw1ODQsNDMsMjAxLDIyNywyNjUsNTQ4LDUwNSw2M10sImFydGlmYWN0SWRzIjpbOSwxN119
 
@@ -19,6 +20,18 @@ function convertCollection() {
     return convColl;
 }
 
+PrettyCards_plugin.events.on("craftcard", function(data) {
+    $(`#PrettyCards_MassCraft_CardContainer #${data.id}${data.shiny ? ".shiny" : ""}.PrettyCards_MassCraft_NotHave:first-of-type`).removeClass("PrettyCards_MassCraft_NotHave");
+    for (var i=0; i < whatToBuy.length; i++) {
+        var buy = whatToBuy[i];
+        if (buy.id == data.id && buy.shiny == data.shiny) {
+            whatToBuy.splice(i, 1);
+            refreshDustCost();
+            break;
+        }
+    }
+})
+
 /* MODES:
     0 - Normal Only
     1 - Shiny Only
@@ -29,25 +42,30 @@ function convertCollection() {
 function generateCardsSection(cardIds, mode = 0) {
     var convColl = convertCollection();
     var parent = $(`<div id="PrettyCards_MassCraft_CardContainer"></div>`);
+    whatToBuy = [];
 
-    function appendNormal(id, doHave = true) {
-        var card = window.getCard(id);
+    function appendCard(id, shiny, doHave) {
+        var card = { ...window.getCard(id) };
+        card.shiny = shiny;
         var $card = window.appendCard(card, parent);
         if (doHave) {
-            convColl[id].normal--;
+            convColl[id][(shiny ? "shiny" : "normal")]--;
         } else {
             $card.addClass("PrettyCards_MassCraft_NotHave");
+            if (card.rarity !== "DETERMINATION") {
+                whatToBuy.push({id : id, shiny : shiny, cost: window.underscript.utils.rarity.cost(card.rarity, shiny)});
+                $card.click(function() {window.craft(id, shiny)});
+            } else {
+                $card.addClass("transparent");
+            }
         }
     }
+
+    function appendNormal(id, doHave = true) {
+        appendCard(id, false, doHave);
+    }
     function appendShiny(id, doHave = true) {
-        var card = { ...window.getCard(id) };
-        card.shiny = true;
-        var $card = window.appendCard(card, parent);
-        if (doHave) {
-            convColl[id].shiny--;
-        } else {
-            $card.addClass("PrettyCards_MassCraft_NotHave");
-        }
+        appendCard(id, true, doHave);
     }
 
     cardIds.forEach((id) => {
@@ -69,6 +87,15 @@ function generateCardsSection(cardIds, mode = 0) {
         }
     })
     return parent;
+}
+
+function refreshDustCost() {
+    var totalCost = 0;
+    whatToBuy.forEach( (e) => {
+        totalCost += e.cost;
+    })
+    var costText = totalCost > 0 ? `${totalCost} <img src="images/icons/dust.png" class="height-16">` : "";
+    $("#PrettyCards_MassCraft_Cost").html(`Buy All (${costText})`);
 }
 
 function generateContent(jsonDeck) {
@@ -104,15 +131,16 @@ function generateContent(jsonDeck) {
 
     function refreshCards(mode = 0, force = false) {
         //console.log("SWITCHING MODE", mode);
-        if ($(`.PrettyCards_MassCraft_ModeSelectBtn:nth-child(${mode+1})`).hasClass("PrettyCards_MassCraft_ModeSelected") && !force) {
+        var currBtn = $(`.PrettyCards_MassCraft_ModeSelectBtn:nth-child(${mode+1})`);
+        if (currBtn.hasClass("PrettyCards_MassCraft_ModeSelected") && !force) {
             console.log("MODE ALREADY SELECTED");
             return;
         }
         $(`.PrettyCards_MassCraft_ModeSelectBtn`).removeClass("PrettyCards_MassCraft_ModeSelected");
-        $(`.PrettyCards_MassCraft_ModeSelectBtn:nth-child(${mode+1})`).addClass("PrettyCards_MassCraft_ModeSelected");
+        currBtn.addClass("PrettyCards_MassCraft_ModeSelected");
         cardSlot.empty().append(generateCardsSection(jsonDeck.cardIds, mode));
+        refreshDustCost();
     }
-    refreshCards();
 
     var buttons = row2.find(".PrettyCards_MassCraft_ModeSelectBtn");
     for (var i=0; i < buttons.length; i++) {
@@ -122,9 +150,25 @@ function generateContent(jsonDeck) {
         console.log(buttons[i], index, func);
     }
 
+    var row4 = $(`
+        <div id="PrettyCards_MassCraft_BuyRow">
+            <div>
+                <img src="images/icons/dust.png" class="height-32">
+                <span id="PrettyCards_MassCraft_DustCount">[A SHIT TON!]</span>
+            </div>
+            <div>
+                <span id="PrettyCards_MassCraft_Cost"></span> <button class="btn btn-success" id="PrettyCards_MassCraft_BuyAllBtn">Buy All!</button>
+            </div>
+        </div>
+    `);
+
+    refreshCards(0, true);
+    $(buttons[0]).addClass("PrettyCards_MassCraft_ModeSelected"); // This is done because the buttons are not yet part of the page itself.
+
     cont.append(row1);
     cont.append(row2);
     cont.append(cardSlot);
+    cont.append(row4);
 
     return cont;
 }
@@ -152,11 +196,9 @@ function displayDeck(e) {
     prevDial = window.BootstrapDialog.show({
         title: "Mass Crafting",
         message: generateContent(jsonDeck),
-        size: window.BootstrapDialog.SIZE_WIDE || "modal-lg",
-        // modal-lg
+        size: window.BootstrapDialog.SIZE_WIDE,
         onshow: function(dial) {
-            //console.log(dial);
-            //dial.$modalDialog.addClass("modal-lg");
+            refreshDustCost()
         },
         buttons: [
             {

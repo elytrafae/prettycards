@@ -80,3 +80,14 @@
     overflow-y: auto;
     padding: 20px;
 }
+
+#PrettyCards_MassCraft_BuyRow {
+    margin-top: 1em;
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
