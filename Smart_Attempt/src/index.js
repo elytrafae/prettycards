@@ -50,6 +50,7 @@ import {InitDecks} from "/src/page_specific/decks.js";
 import {InitPlay} from "/src/page_specific/play.js";
 import {InitGameList} from "/src/page_specific/game_list.js";
 import {InitHub} from "/src/page_specific/hub.js";
+import {InitCrafting} from "/src/page_specific/crafting.js";
 // import {InitGame} from "/src/page_specific/game.js";
 import {InitCustomCardSkins} from "/src/page_specific/custom_card_skins.js";
 import {InitCustomCards} from "/src/page_specific/custom_cards.js";
@@ -64,6 +65,8 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 	InitPacks();
 } else if (underscript.onPage("Hub")) {
 	InitHub();
+} else if (underscript.onPage("Crafting")) {
+	InitCrafting();
 } else if (underscript.onPage("CustomCardSkins")) {
 	InitCustomCardSkins();
 } else if (underscript.onPage("CustomCards")) {
