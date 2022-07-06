@@ -42,11 +42,18 @@ class ArtifactDisplay {
 		//console.log("Getting Artifact Data!");
 		$.get("/DecksConfig", {}, function(data) {
 			this.artifacts = JSON.parse(data.allArtifacts);
+			var ownedArtifacts = JSON.parse(data.artifacts);
 
-			// Setting artifact rarities for my system.
+			// Setting artifact rarities and ownership for my system.
 			for (var i=0; i < this.artifacts.length; i++) {
 				var artifact = this.artifacts[i];
 				this.SetRarityForArtifact(artifact);
+				// A little school-like code :hue:
+				artifact.owned = false;
+			}
+
+			for (var i=0; i < ownedArtifacts.length; i++) {
+				this.GetArtifactById(ownedArtifacts[i].id).owned = true;
 			}
 			PrettyCards_plugin.events.emit("PrettyCards:onArtifacts", this.artifacts);
 		}.bind(this));

@@ -14,12 +14,15 @@ function generateContent(jsonDeck) {
     var cont = $(`<div id="PrettyCards_MassCraft_Preview"></div>`);
     var row1 = $(`<div id="PrettyCards_MassCraft_SoulDeckRow"></div>`);
 
-    var soul = $(`<div class="${soulName}" onclick="soulInfo('${soulName}')"><img style="width: 32px;" src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${soulName}.png"> ${$.i18n("soul-" + soulName.toLowerCase())}</div>`);
+    var soul = $(`<div class="${soulName}" onclick="soulInfo('${soulName}')"><img src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${soulName}.png"> ${$.i18n("soul-" + soulName.toLowerCase())}</div>`);
 
     var artifacts = $(`<div id="PrettyCards_MassCraft_Artifacts"></div>`);
     jsonDeck.artifactIds.forEach((artId) => {
         var artifact = artifactDisplay.GetArtifactById(artId);
-        artifacts.append(`<div><img style="width: 32px;" src="${utility.getArtifactImageLink(artifact.image)}"> ${$.i18n("artifact-name-" + artId)}</div>`);
+        var ownedClass = artifact.owned ? "" : "PrettyCards_MassCraft_MissingArtifact";
+        var rarityClass = artifact.rarity == "COMMON" ? "normalArtifact" : "legendaryArtifact";
+        console.log(artifact);
+        artifacts.append(`<div class="PrettyCards_MassCraft_ArtifactSlot ${ownedClass} ${artifact.rarity}" onclick="artifactInfo(${artId})"><img class="${rarityClass} ${ownedClass}" src="${utility.getArtifactImageLink(artifact.image)}"> ${$.i18n("artifact-name-" + artId)}</div>`);
     })
 
     row1.append(soul);

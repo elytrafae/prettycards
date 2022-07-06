@@ -9,6 +9,10 @@
     align-content: center;
 }
 
+#PrettyCards_MassCraft_SoulDeckRow img {
+    width: 32px;
+}
+
 #PrettyCards_MassCraft_Artifacts {
     display: flex;
     flex-direction: row;
@@ -16,4 +20,20 @@
     justify-content: flex-end;
     align-items: center;
     align-content: center;
+}
+
+.PrettyCards_MassCraft_ArtifactSlot {
+    margin-left: 10px;
+}
+
+@keyframes PrettyCards_MassCraft_MissingArtifact {
+    to {
+        color: red;
+        border-color: red;
+    }
+}
+
+.PrettyCards_MassCraft_MissingArtifact {
+    animation: PrettyCards_MassCraft_MissingArtifact alternate 2s infinite;
+    animation-timing-function: ease-in-out;
 }
