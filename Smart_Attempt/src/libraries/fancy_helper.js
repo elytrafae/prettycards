@@ -87,6 +87,11 @@ class FancyDisplay {
 		}
 
 		this.box.append(this.description);
+
+		if (data.shopInfo) {
+			this.shop = window.$(`<div class="PrettyCards_ArtifactDisplayShop">${data.shopInfo.topLine}<br>Would you like to buy it for <span class="yellow">${data.shopInfo.price}</span> <img src="images/icons/gold.png" class="height-16">? <button class="btn btn-success">Buy!</button></div>`);
+			this.box.append(this.shop);
+		}
 		
 		if (data.note && data.note.length > 0) {
 			this.noteTitle = window.$(`<div class="PrettyCards_ArtifactDisplayNoteTitle">${window.$.i18n("pc-fd-authornote")}</div>`);
@@ -129,6 +134,13 @@ class FancyDisplay {
 
 			image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 		}
+		var shopInfo;
+		if (!artifact.collection && !artifact.owned && !artifact.unavailable) {
+			shopInfo = {
+				price: artifact.cost,
+				topLine: "You don't own this artifact!"
+			}
+		}
 		var data = {
 			name: $.i18n("artifact-name-" + artifact.id),
 			image: image_src,
@@ -138,7 +150,8 @@ class FancyDisplay {
 			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
 			note: window.$.i18n(artifact.note || ""),
 			disabled: artifact.disabled,
-			counter: artifact.counter
+			counter: artifact.counter,
+			shopInfo: shopInfo
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewArtifact()", {artifact: artifact, helper: helper});
