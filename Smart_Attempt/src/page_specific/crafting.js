@@ -30,10 +30,10 @@ function generateContent(jsonDeck) {
 
     var row2 = $(`
         <div id="PrettyCards_MassCraft_ModeSelectRow">
-            <div id="PrettyCards_MassCraft_ModeSelectBtn">Normal Only</div>
-            <div id="PrettyCards_MassCraft_ModeSelectBtn"><span class="rainbowText">Shiny</span> Only</div>
-            <div id="PrettyCards_MassCraft_ModeSelectBtn">Mixed (Normal)</div>
-            <div id="PrettyCards_MassCraft_ModeSelectBtn">Mixed <span class="rainbowText">(Shiny)</span></div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn">Normal Only</div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn"><span class="rainbowText">Shiny</span> Only</div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn">Mixed (Normal)</div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn">Mixed <span class="rainbowText">(Shiny)</span></div>
         </div>
     `);
 
