@@ -6,6 +6,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import { prettycards, PrettyCards_plugin } from "./underscript_checker";
 import { createFloatingSoul } from "./floating_souls";
+import { pagegetters } from "./page_getters";
 
 class FancyListDisplay {
 	
@@ -89,7 +90,13 @@ class FancyDisplay {
 		this.box.append(this.description);
 
 		if (data.shopInfo) {
-			this.shop = window.$(`<div class="PrettyCards_ArtifactDisplayShop">${data.shopInfo.topLine}<br>Would you like to buy it for <span class="yellow">${data.shopInfo.price}</span> <img src="images/icons/gold.png" class="height-16">? <button class="btn btn-success">Buy!</button></div>`);
+			var priceText = `<span class="yellow">${data.shopInfo.price}</span> <img src="images/icons/gold.png" class="height-16">`;
+			var bottomText = `Sadly, you don't have ${priceText} to pay for it.`;
+			if (data.shopInfo.hasEnough) {
+				bottomText = `Would you like to buy it for ${priceText}? <button class="btn btn-success">Buy!</button>`;
+			}
+			this.shop = window.$(`<div class="PrettyCards_ArtifactDisplayShop">${data.shopInfo.topLine}<br>${bottomText}</div>`);
+			this.shop.find("button").click(data.shopInfo.action);
 			this.box.append(this.shop);
 		}
 		
@@ -135,10 +142,12 @@ class FancyDisplay {
 			image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 		}
 		var shopInfo;
-		if (!artifact.collection && !artifact.owned && !artifact.unavailable) {
+		if (!artifact.collection && !artifact.owned && !artifact.unavailable && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
 			shopInfo = {
 				price: artifact.cost,
-				topLine: "You don't own this artifact!"
+				topLine: "You don't own this artifact!",
+				hasEnough: artifact.cost <= pagegetters.gold,
+				action: function() {console.log("I WANT TO BUY THIS THING!");}
 			}
 		}
 		var data = {

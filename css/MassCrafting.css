@@ -37,3 +37,20 @@
     animation: PrettyCards_MassCraft_MissingArtifact alternate 2s infinite;
     animation-timing-function: ease-in-out;
 }
+
+#PrettyCards_MassCraft_ModeSelectRow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+}
+
+.PrettyCards_MassCraft_ModeSelectBtn {
+    border: 1px solid #222222;
+    padding: 0.5em 0.6em;
+}

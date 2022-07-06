@@ -28,12 +28,23 @@ function generateContent(jsonDeck) {
     row1.append(soul);
     row1.append(artifacts);
 
+    var row2 = $(`
+        <div id="PrettyCards_MassCraft_ModeSelectRow">
+            <div id="PrettyCards_MassCraft_ModeSelectBtn">Normal Only</div>
+            <div id="PrettyCards_MassCraft_ModeSelectBtn"><span class="rainbowText">Shiny</span> Only</div>
+            <div id="PrettyCards_MassCraft_ModeSelectBtn">Mixed (Normal)</div>
+            <div id="PrettyCards_MassCraft_ModeSelectBtn">Mixed <span class="rainbowText">(Shiny)</span></div>
+        </div>
+    `);
+
     cont.append(row1);
+    cont.append(row2);
 
     return cont;
 }
 
-function displayDeck(string) {
+function displayDeck(e) {
+    var string = e.value;
     if (string.length <= minDeckCodeLength) {
         return;
     }
@@ -47,10 +58,11 @@ function displayDeck(string) {
         console.warn("DECK CODE ERROR", e);
         return;
     }
-    console.log(jsonDeck);
+    //console.log(jsonDeck);
     if ((typeof(jsonDeck.soul) != "string") || (typeof(jsonDeck.cardIds) != "object" || jsonDeck.cardIds.length != 25) || (typeof(jsonDeck.artifactIds) != "object" || jsonDeck.artifactIds.length > 2) ) {
         return;
     }
+    e.value = "";
     prevDial = window.BootstrapDialog.show({
         title: "TEST",
         message: generateContent(jsonDeck),
@@ -83,7 +95,7 @@ function InitCrafting() {
         });
         td.closest("table").css("width", "100%");
         myTD.find("input").keyup(function() {
-            displayDeck(this.value);
+            displayDeck(this);
         })
     })
 }
