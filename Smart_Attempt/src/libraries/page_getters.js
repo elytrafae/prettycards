@@ -20,6 +20,10 @@ class pagegetters {
 		}
 		return Number(document.getElementById("nb" + code_id + "s").innerHTML);
 	}
+
+	static get dust() {
+		return Number($("#dust").html());
+	}
 	
 	static GetActiveMatchesData(cb) {
 		const callback = cb || function() {};

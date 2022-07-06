@@ -1,11 +1,13 @@
 import { artifactDisplay } from "../libraries/artifact_display";
+import { pagegetters } from "../libraries/page_getters";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
 const minDeckCodeLength = 120; // Original result was 132, but I decided to not have that many bugs today . . .
 
 var prevDial;
-var whatToBuy = []; 
+var whatToBuy = [];
+var missingArtifacts = [];
 
 // Test Deck Code: eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsNzQsMTgyLDI2MCw3MzcsNTUwLDcyLDE0NCw3NSw1NCwxNDcsMTg1LDUwMyw1MDMsNjk4LDI3OSw1Miw1ODQsNDMsMjAxLDIyNywyNjUsNTQ4LDUwNSw2M10sImFydGlmYWN0SWRzIjpbOSwxN119
 
@@ -90,12 +92,42 @@ function generateCardsSection(cardIds, mode = 0) {
 }
 
 function refreshDustCost() {
+    $("#PrettyCards_MassCraft_DustCount").html(pagegetters.dust);
     var totalCost = 0;
     whatToBuy.forEach( (e) => {
         totalCost += e.cost;
     })
-    var costText = totalCost > 0 ? `${totalCost} <img src="images/icons/dust.png" class="height-16">` : "";
-    $("#PrettyCards_MassCraft_Cost").html(`Buy All (${costText})`);
+    var totalGold = 0;
+    missingArtifacts.forEach( (a) => {
+        totalGold += a.cost;
+    })
+    var costText = totalCost > 0 ? `${totalCost} <img src="images/icons/dust.png" class="height-32">` : "";
+    var goldText = totalCost > 0 ? `<span class="yellow">${totalGold}</span> <img src="images/icons/gold.png" class="height-32">` : "";
+    var combinedText = "";
+    if (totalCost > 0) {
+        combinedText += costText;
+    }
+    if (totalGold > 0) {
+        if (totalCost > 0) {
+            combinedText += " and ";
+        }
+        combinedText += goldText;
+    }
+    var totalText = `Buy All (${combinedText})`;
+    $("#PrettyCards_MassCraft_BuyAllBtn").removeClass("PrettyCards_Hidden");
+    $("#PrettyCards_MassCraft_BuyAllBtn").addClass("btn-success");
+    $("#PrettyCards_MassCraft_BuyAllBtn").removeClass("btn-danger");
+    $("#PrettyCards_MassCraft_BuyAllBtn").attr("disabled", false);
+    if (totalCost == 0 && totalGold == 0) {
+        totalText = "<span class='green'>You have everything buyable in this deck!</span>";
+        $("#PrettyCards_MassCraft_BuyAllBtn").addClass("PrettyCards_Hidden");
+    }
+    if (totalCost > pagegetters.dust || totalGold > pagegetters.gold) {
+        $("#PrettyCards_MassCraft_BuyAllBtn").addClass("btn-danger");
+        $("#PrettyCards_MassCraft_BuyAllBtn").removeClass("btn-success");
+        $("#PrettyCards_MassCraft_BuyAllBtn").attr("disabled", true);
+    }
+    $("#PrettyCards_MassCraft_Cost").html(totalText);
 }
 
 function generateContent(jsonDeck) {
@@ -107,12 +139,16 @@ function generateContent(jsonDeck) {
     var soul = $(`<div class="${soulName}" onclick="soulInfo('${soulName}')"><img src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${soulName}.png"> ${$.i18n("soul-" + soulName.toLowerCase())}</div>`);
 
     var artifacts = $(`<div id="PrettyCards_MassCraft_Artifacts"></div>`);
+    missingArtifacts = [];
     jsonDeck.artifactIds.forEach((artId) => {
         var artifact = artifactDisplay.GetArtifactById(artId);
         var ownedClass = artifact.owned ? "" : "PrettyCards_MassCraft_MissingArtifact";
         var rarityClass = artifact.rarity == "COMMON" ? "normalArtifact" : "legendaryArtifact";
-        console.log(artifact);
+        //console.log(artifact);
         artifacts.append(`<div class="PrettyCards_MassCraft_ArtifactSlot ${ownedClass} ${artifact.rarity}" onclick="artifactInfo(${artId})"><img class="${rarityClass} ${ownedClass}" src="${utility.getArtifactImageLink(artifact.image)}"> ${$.i18n("artifact-name-" + artId)}</div>`);
+        if (!artifact.owned) {
+            missingArtifacts.push(artifact);
+        }
     })
 
     row1.append(soul);
