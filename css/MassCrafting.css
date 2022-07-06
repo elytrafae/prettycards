@@ -58,7 +58,8 @@
 }
 
 .PrettyCards_MassCraft_NotHave .cardFrame {
-    filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(1000%) contrast(0.8);
+    -webkit-filter: grayscale(100%) brightness(30%) sepia(100%) hue-rotate(310deg) saturate(500%) contrast(1.5);
+    filter: grayscale(100%) brightness(30%) sepia(100%) hue-rotate(310deg) saturate(500%) contrast(1.5);
 }
 
 #PrettyCards_MassCraft_CardContainer {
