@@ -321,5 +321,8 @@
     "pc-masscraft-menu-nonly" : "Normal Only",
     "pc-masscraft-menu-sonly" : "{{PC_SHINY:Shiny}} Only",
     "pc-masscraft-menu-nmixed" : "Mixed (Normal)",
-    "pc-masscraft-menu-smixed" : "Mixed {{PC_SHINY:(Shiny)}}"
+    "pc-masscraft-menu-smixed" : "Mixed {{PC_SHINY:(Shiny)}}",
+    "pc-buyart-nomuns" : "Sadly, you don't have $1 to pay for it.",
+    "pc-buyart-willyoubuy" : "Would you like to unlock it for $1?",
+    "pc-buyart-youdonthave" : "You don't own this artifact!"
 }

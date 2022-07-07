@@ -91,9 +91,9 @@ class FancyDisplay {
 
 		if (data.shopInfo) {
 			var priceText = `<span class="yellow">${data.shopInfo.price}</span> <img src="images/icons/gold.png" class="height-16">`;
-			var bottomText = `Sadly, you don't have ${priceText} to pay for it.`;
+			var bottomText = window.$.i18n("pc-buyart-nomuns", priceText);
 			if (data.shopInfo.hasEnough) {
-				bottomText = `Would you like to unlock it for ${priceText}? <button class="btn btn-success">${$.i18n("artifacts-unlock")}</button>`;
+				bottomText = window.$.i18n("pc-buyart-willyoubuy", priceText) + ` <button class="btn btn-success">${$.i18n("artifacts-unlock")}</button>`;
 			}
 			this.shop = window.$(`<div class="PrettyCards_ArtifactDisplayShop">${data.shopInfo.topLine}<br>${bottomText}</div>`);
 			this.shop.find("button").click(function() {data.shopInfo.action(this)}.bind(this));
@@ -146,7 +146,7 @@ class FancyDisplay {
 			const artId = id;
 			shopInfo = {
 				price: artifact.cost,
-				topLine: "You don't own this artifact!",
+				topLine: window.$.i18n("pc-buyart-youdonthave"),
 				hasEnough: artifact.cost <= pagegetters.gold,
 				action: function(helper) {
 					PrettyCards_plugin.events.on("PrettyCards:artBuySuccess", function() {
