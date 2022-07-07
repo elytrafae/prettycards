@@ -311,5 +311,15 @@
     "pc-packs-cannotopen" : "This pack cannot be opened.",
     "pc-packs-open" : "Open",
     "pc-packs-buy" : "Buy",
-    "pc-packs-summary" : "Card Summary"
+    "pc-packs-summary" : "Card Summary",
+    "pc-masscraft-buyall" : "Buy All ($1)",
+    "pc-masscraft-allgood" : "You have everything in this deck!",
+    "pc-masscraft-allgood-nodt" : "You have everything buyable in this deck except {{RARITY:DETERMINATION}} card(s)!",
+    "pc-masscraft-title" : "Mass Crafting",
+    "pc-masscraft-buyallbtn" : "Buy All!",
+    "pc-masscraft-inserthere" : "Insert Deck Code Here!",
+    "pc-masscraft-menu-nonly" : "Normal Only",
+    "pc-masscraft-menu-sonly" : "{{PC_SHINY:Shiny}} Only",
+    "pc-masscraft-menu-nmixed" : "Mixed (Normal)",
+    "pc-masscraft-menu-smixed" : "Mixed {{PC_SHINY:(Shiny)}}"
 }

@@ -1,4 +1,5 @@
 
+import { pagegetters } from "./page_getters";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
@@ -56,6 +57,19 @@ class ArtifactDisplay {
 				this.GetArtifactById(ownedArtifacts[i].id).owned = true;
 			}
 			PrettyCards_plugin.events.emit("PrettyCards:onArtifacts", this.artifacts);
+		}.bind(this));
+	}
+
+	BuyArtifact(artifactId) {
+		window.$.post("/Artifacts", {idArtifact : artifactId, unlock: "Unlock"}, function(data) {
+			if (data.includes("artifact-name-" + artifactId) || data.includes("error")) {
+				PrettyCards_plugin.events.emit("PrettyCards:artBuyError");
+				return;
+			}
+			var artifact = this.GetArtifactById(artifactId);
+			artifact.owned = true;
+			pagegetters.gold = pagegetters.gold - artifact.cost;
+			PrettyCards_plugin.events.emit("PrettyCards:artBuySuccess", {idArtifact: artifactId, artifact: artifact});
 		}.bind(this));
 	}
 	

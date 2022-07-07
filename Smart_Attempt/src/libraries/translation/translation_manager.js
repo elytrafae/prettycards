@@ -118,6 +118,10 @@ function registerCustomExtensions() {
             var ext = nodes[0];
             var rarity = nodes[1];
             return rarityIconsHTML[ext][rarity];
+        },
+        pc_shiny: function(nodes) {
+            var text = nodes[0];
+            return `<span class="rainbowText">${text}</span>`;
         }
     })
 }

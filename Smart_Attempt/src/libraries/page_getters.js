@@ -9,6 +9,10 @@ class pagegetters {
 	static get gold() {
 		return Number(document.getElementById("golds").innerHTML);
 	}
+
+	static set gold(v) {
+		document.getElementById("golds").innerHTML = Number(v);
+	}
 	
 	static get ucp() {
 		return Number(document.getElementById("ucp").innerHTML);

@@ -3,13 +3,16 @@ import { pagegetters } from "../libraries/page_getters";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
-const minDeckCodeLength = 120; // Original result was 132, but I decided to not have that many bugs today . . .
+const minDeckCodeLength = 50; // Original result was 132, but I decided to not have that many bugs today . . .
 
 var prevDial;
 var whatToBuy = [];
 var missingArtifacts = [];
+var hasMissingDT = false;
+var lastArtifactIds = [];
 
 // Test Deck Code: eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsNzQsMTgyLDI2MCw3MzcsNTUwLDcyLDE0NCw3NSw1NCwxNDcsMTg1LDUwMyw1MDMsNjk4LDI3OSw1Miw1ODQsNDMsMjAxLDIyNywyNjUsNTQ4LDUwNSw2M10sImFydGlmYWN0SWRzIjpbOSwxN119
+// eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsMTgyLDI2MCwzMDksMjg1LDMwLDc1LDcxMCw2NTYsMjQ2LDE4NSwxODUsNjk4LDU5Miw1MiwyMDIsNTE3LDQ3Miw1MDUsNTUsOCwyNTQsNDQ0LDU4MSw2M10sImFydGlmYWN0SWRzIjpbMjAsMTRdfQ==
 
 function convertCollection() {
     var convColl = {};
@@ -23,7 +26,7 @@ function convertCollection() {
 }
 
 PrettyCards_plugin.events.on("craftcard", function(data) {
-    console.log("craftcard event procced", data);
+    //console.log("craftcard event procced", data);
     $(`#PrettyCards_MassCraft_CardContainer #${data.id}${data.shiny ? ".shiny" : ""}.PrettyCards_MassCraft_NotHave:first-of-type`).removeClass("PrettyCards_MassCraft_NotHave");
     for (var i=0; i < whatToBuy.length; i++) {
         var buy = whatToBuy[i];
@@ -35,9 +38,17 @@ PrettyCards_plugin.events.on("craftcard", function(data) {
     }
 })
 
+PrettyCards_plugin.events.on("PrettyCards:artBuySuccess", function(data) {
+    generateArtifactsSection($("#PrettyCards_MassCraft_Artifacts"), lastArtifactIds);
+    refreshDustCost();
+})
+
 function buyAll() {
     whatToBuy.forEach( (e) => {
         window.craft(e.id, e.shiny);
+    });
+    missingArtifacts.forEach( (e) => {
+        artifactDisplay.BuyArtifact(e.id);
     })
 }
 
@@ -52,6 +63,7 @@ function generateCardsSection(cardIds, mode = 0) {
     var convColl = convertCollection();
     var parent = $(`<div id="PrettyCards_MassCraft_CardContainer"></div>`);
     whatToBuy = [];
+    hasMissingDT = false;
 
     function appendCard(id, shiny, doHave) {
         var card = { ...window.getCard(id) };
@@ -65,6 +77,7 @@ function generateCardsSection(cardIds, mode = 0) {
                 whatToBuy.push({id : id, shiny : shiny, cost: window.underscript.utils.rarity.cost(card.rarity, shiny)});
                 $card.click(function() {window.craft(id, shiny)});
             } else {
+                hasMissingDT = true;
                 $card.addClass("transparent");
             }
         }
@@ -98,6 +111,21 @@ function generateCardsSection(cardIds, mode = 0) {
     return parent;
 }
 
+function generateArtifactsSection(artifacts, artifactIds) {
+    missingArtifacts = [];
+    artifacts.empty();
+    artifactIds.forEach((artId) => {
+        var artifact = artifactDisplay.GetArtifactById(artId);
+        var ownedClass = artifact.owned ? "" : "PrettyCards_MassCraft_MissingArtifact";
+        var rarityClass = artifact.rarity == "COMMON" ? "normalArtifact" : "legendaryArtifact";
+        //console.log(artifact);
+        artifacts.append(`<div class="PrettyCards_MassCraft_ArtifactSlot pointer ${ownedClass} ${artifact.rarity}" onclick="artifactInfo(${artId})"><img class="${rarityClass} ${ownedClass}" src="${utility.getArtifactImageLink(artifact.image)}"> ${$.i18n("artifact-name-" + artId)}</div>`);
+        if (!artifact.owned) {
+            missingArtifacts.push(artifact);
+        }
+    })
+}
+
 function refreshDustCost() {
     $("#PrettyCards_MassCraft_DustCount").html(pagegetters.dust);
     var totalCost = 0;
@@ -116,18 +144,21 @@ function refreshDustCost() {
     }
     if (totalGold > 0) {
         if (totalCost > 0) {
-            combinedText += " and ";
+            combinedText += " ";
         }
         combinedText += goldText;
     }
-    var totalText = `Buy All (${combinedText})`;
+    var totalText = window.$.i18n("pc-masscraft-buyall", combinedText);
     $("#PrettyCards_MassCraft_BuyAllBtn").removeClass("PrettyCards_Hidden");
     $("#PrettyCards_MassCraft_BuyAllBtn").addClass("btn-success");
     $("#PrettyCards_MassCraft_BuyAllBtn").removeClass("btn-danger");
     $("#PrettyCards_MassCraft_BuyAllBtn").attr("disabled", false);
     if (totalCost == 0 && totalGold == 0) {
-        totalText = "<span class='green'>You have everything buyable in this deck!</span>";
+        totalText = `<span class='green'>${window.$.i18n("pc-masscraft-allgood")}</span>`;
         $("#PrettyCards_MassCraft_BuyAllBtn").addClass("PrettyCards_Hidden");
+        if (hasMissingDT) {
+            totalText = `<span class='yellow'>${window.$.i18n("pc-masscraft-allgood-nodt")}</yellow>`;
+        }
     }
     if (totalCost > pagegetters.dust || totalGold > pagegetters.gold) {
         $("#PrettyCards_MassCraft_BuyAllBtn").addClass("btn-danger");
@@ -143,30 +174,21 @@ function generateContent(jsonDeck) {
     var cont = $(`<div id="PrettyCards_MassCraft_Preview"></div>`);
     var row1 = $(`<div id="PrettyCards_MassCraft_SoulDeckRow"></div>`);
 
-    var soul = $(`<div class="${soulName}" onclick="soulInfo('${soulName}')"><img src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${soulName}.png"> ${$.i18n("soul-" + soulName.toLowerCase())}</div>`);
+    var soul = $(`<div class="${soulName} pointer" onclick="soulInfo('${soulName}')"><img src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${soulName}.png"> ${$.i18n("soul-" + soulName.toLowerCase())}</div>`);
 
+    lastArtifactIds = jsonDeck.artifactIds;
     var artifacts = $(`<div id="PrettyCards_MassCraft_Artifacts"></div>`);
-    missingArtifacts = [];
-    jsonDeck.artifactIds.forEach((artId) => {
-        var artifact = artifactDisplay.GetArtifactById(artId);
-        var ownedClass = artifact.owned ? "" : "PrettyCards_MassCraft_MissingArtifact";
-        var rarityClass = artifact.rarity == "COMMON" ? "normalArtifact" : "legendaryArtifact";
-        //console.log(artifact);
-        artifacts.append(`<div class="PrettyCards_MassCraft_ArtifactSlot ${ownedClass} ${artifact.rarity}" onclick="artifactInfo(${artId})"><img class="${rarityClass} ${ownedClass}" src="${utility.getArtifactImageLink(artifact.image)}"> ${$.i18n("artifact-name-" + artId)}</div>`);
-        if (!artifact.owned) {
-            missingArtifacts.push(artifact);
-        }
-    })
+    generateArtifactsSection(artifacts, lastArtifactIds);
 
     row1.append(soul);
     row1.append(artifacts);
 
     var row2 = $(`
         <div id="PrettyCards_MassCraft_ModeSelectRow">
-            <div class="PrettyCards_MassCraft_ModeSelectBtn">Normal Only</div>
-            <div class="PrettyCards_MassCraft_ModeSelectBtn"><span class="rainbowText">Shiny</span> Only</div>
-            <div class="PrettyCards_MassCraft_ModeSelectBtn">Mixed (Normal)</div>
-            <div class="PrettyCards_MassCraft_ModeSelectBtn">Mixed <span class="rainbowText">(Shiny)</span></div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn">${window.$.i18n("pc-masscraft-menu-nonly")}</div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn">${window.$.i18n("pc-masscraft-menu-sonly")}</div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn">${window.$.i18n("pc-masscraft-menu-nmixed")}</div>
+            <div class="PrettyCards_MassCraft_ModeSelectBtn">${window.$.i18n("pc-masscraft-menu-smixed")}</div>
         </div>
     `);
 
@@ -176,7 +198,7 @@ function generateContent(jsonDeck) {
         //console.log("SWITCHING MODE", mode);
         var currBtn = $(`.PrettyCards_MassCraft_ModeSelectBtn:nth-child(${mode+1})`);
         if (currBtn.hasClass("PrettyCards_MassCraft_ModeSelected") && !force) {
-            console.log("MODE ALREADY SELECTED");
+            //console.log("MODE ALREADY SELECTED");
             return;
         }
         $(`.PrettyCards_MassCraft_ModeSelectBtn`).removeClass("PrettyCards_MassCraft_ModeSelected");
@@ -200,7 +222,7 @@ function generateContent(jsonDeck) {
                 <span id="PrettyCards_MassCraft_DustCount">[A LOT!]</span>
             </div>
             <div>
-                <span id="PrettyCards_MassCraft_Cost"></span> <button class="btn btn-success" id="PrettyCards_MassCraft_BuyAllBtn">Buy All!</button>
+                <span id="PrettyCards_MassCraft_Cost"></span> <button class="btn btn-success" id="PrettyCards_MassCraft_BuyAllBtn">${window.$.i18n("pc-masscraft-buyallbtn")}</button>
             </div>
         </div>
     `);
@@ -239,7 +261,7 @@ function displayDeck(e) {
     }
     e.value = "";
     prevDial = window.BootstrapDialog.show({
-        title: "Mass Crafting",
+        title: window.$.i18n("pc-masscraft-title"),
         message: generateContent(jsonDeck),
         size: window.BootstrapDialog.SIZE_WIDE,
         onshown: function(dial) {
@@ -255,14 +277,14 @@ function displayDeck(e) {
             }
         ]
     });
-    console.log(jsonDeck);
+    //console.log(jsonDeck);
 }
 
 
 function InitCrafting() {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
         utility.loadCSSFromGH("MassCrafting");
-        var myTD = $(`<td><input type="text" class="form-control" placeholder="Insert Deck Code Here!"></input></td>`);
+        var myTD = $(`<td><input type="text" class="form-control" placeholder=". . ."></input></td>`);
         var td = $("#dust").closest("td");
         td.css("width", "unset").after(myTD);
         td.closest("tr").css({
@@ -274,6 +296,10 @@ function InitCrafting() {
         td.closest("table").css("width", "100%");
         myTD.find("input").keyup(function() {
             displayDeck(this);
+        })
+
+        PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
+            myTD.find("input").attr("placeholder", window.$.i18n("pc-masscraft-inserthere"));
         })
     })
 }
