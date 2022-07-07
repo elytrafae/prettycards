@@ -1,1 +1,20 @@
-{"card-219":{"ifEqual":"{{KW:ARMOR}}. {{KW:MAGIC}}: Daj se losowy artefakt {{CARD:219|1}}a.","value":"{{KW:ARMOR}}. {{KW:MAGIC}}: Dodaj losowy {{PC_ARTIFACTS:artefakt Gersona|21|22|23|24}}."},"pc-navigate-goback":"Wróć!","pc-sop-mysterydescriptions":{"values":["BŁĄD: Zabrakło wskazówek.","Powodzenia z tym wyborem~!","Oby tylko to nie wyglądało głupio.","Życie to tylko gra wyborów. Tylko czy masz na tyle odwagi aby rzucić kostką~?","Żal mi cię... Ale tylko trochę.","Czy to wszystko, ta cała gra ma wogóle jakieś znaczenie?","Kurczę, żebym tylko widział twą sfrustrowaną twarz~","Ciekawe co twoi przyjaciele o tobie pomyślą...","Potrzebujesz wskazówki? Jakże uroczo~!"]}}
+{
+    "card-219": {
+        "ifEqual": "{{KW:ARMOR}}. {{KW:MAGIC}}: Daj se losowy artefakt {{CARD:219|1}}a.",
+        "value": "{{KW:ARMOR}}. {{KW:MAGIC}}: Dodaj losowy {{PC_ARTIFACTS:artefakt Gersona|21|22|23|24}}."
+    },
+    "pc-navigate-goback": "Wróć!",
+    "pc-sop-mysterydescriptions": {
+        "values": [
+            "BŁĄD: Zabrakło wskazówek.",
+            "Powodzenia z tym wyborem~!",
+            "Oby tylko to nie wyglądało głupio.",
+            "Życie to tylko gra wyborów. Tylko czy masz na tyle odwagi aby rzucić kostką~?",
+            "Żal mi cię... Ale tylko trochę.",
+            "Czy to wszystko, ta cała gra ma wogóle jakieś znaczenie?",
+            "Kurczę, żebym tylko widział twą sfrustrowaną twarz~",
+            "Ciekawe co twoi przyjaciele o tobie pomyślą...",
+            "Potrzebujesz wskazówki? Jakże uroczo~!"
+        ]
+    }
+}
