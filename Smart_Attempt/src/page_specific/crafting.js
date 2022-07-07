@@ -8,7 +8,7 @@ const minDeckCodeLength = 50; // Original result was 132, but I decided to not h
 var prevDial;
 var whatToBuy = [];
 var missingArtifacts = [];
-var hasMissingDT = false;
+var missingDTCount = 0;
 var lastArtifactIds = [];
 
 // Test Deck Code: eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsNzQsMTgyLDI2MCw3MzcsNTUwLDcyLDE0NCw3NSw1NCwxNDcsMTg1LDUwMyw1MDMsNjk4LDI3OSw1Miw1ODQsNDMsMjAxLDIyNywyNjUsNTQ4LDUwNSw2M10sImFydGlmYWN0SWRzIjpbOSwxN119
@@ -63,7 +63,7 @@ function generateCardsSection(cardIds, mode = 0) {
     var convColl = convertCollection();
     var parent = $(`<div id="PrettyCards_MassCraft_CardContainer"></div>`);
     whatToBuy = [];
-    hasMissingDT = false;
+    missingDTCount = 0;
 
     function appendCard(id, shiny, doHave) {
         var card = { ...window.getCard(id) };
@@ -77,7 +77,7 @@ function generateCardsSection(cardIds, mode = 0) {
                 whatToBuy.push({id : id, shiny : shiny, cost: window.underscript.utils.rarity.cost(card.rarity, shiny)});
                 $card.click(function() {window.craft(id, shiny)});
             } else {
-                hasMissingDT = true;
+                missingDTCount++;
                 $card.addClass("transparent");
             }
         }
@@ -156,8 +156,8 @@ function refreshDustCost() {
     if (totalCost == 0 && totalGold == 0) {
         totalText = `<span class='green'>${window.$.i18n("pc-masscraft-allgood")}</span>`;
         $("#PrettyCards_MassCraft_BuyAllBtn").addClass("PrettyCards_Hidden");
-        if (hasMissingDT) {
-            totalText = `<span class='yellow'>${window.$.i18n("pc-masscraft-allgood-nodt")}</yellow>`;
+        if (missingDTCount > 0) {
+            totalText = `<span class='yellow'>${window.$.i18n("pc-masscraft-allgood-nodt", missingDTCount)}</yellow>`;
         }
     }
     if (totalCost > pagegetters.dust || totalGold > pagegetters.gold) {

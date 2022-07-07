@@ -316,7 +316,7 @@
     "pc-packs-summary" : "Card Summary",
     "pc-masscraft-buyall" : "Buy All ($1)",
     "pc-masscraft-allgood" : "You have everything in this deck!",
-    "pc-masscraft-allgood-nodt" : "You have everything buyable in this deck except {{RARITY:DETERMINATION}} card(s)!",
+    "pc-masscraft-allgood-nodt" : "You have everything buyable in this deck except {{PLURAL:$1|a|$1}} {{RARITY:DETERMINATION}} {{PLURAL:$1|card|cards}}!",
     "pc-masscraft-title" : "Mass Crafting",
     "pc-masscraft-buyallbtn" : "Buy All!",
     "pc-masscraft-inserthere" : "Insert Deck Code Here!",
