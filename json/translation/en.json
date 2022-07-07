@@ -12,6 +12,7 @@
     "pc-navigate-skip" : "Skip!",
     "pc-navigate-accept" : "Accept!",
     "pc-navigate-cancel" : "Cancel!",
+    "pc-navigate-send" : "Send!",
     "pc-sop-welcome" : "Welcome to Undercards Smash or Pass!",
     "pc-sop-q1" : "What is Smash or Pass?",
     "pc-sop-a1-p1" : "In case you have been living under a rock, Smash or Pass is a game where characters from a certain media are presented, one by one, and the player has to decide whether or not they would \"smash\" it. Interpret that as you will.",
@@ -331,6 +332,10 @@
     "pc-customgame-invite" : "invited you to a CUSTOM game.",
     "pc-customgame-selfinvite" : "* You sent an invitation to $1!",
     "pc-customgame-cuckinvite" : "* Sent an invitation you cannot answer.",
-    "pc-customgame-choosedeck" : "Choose a deck!"
+    "pc-customgame-choosedeck" : "Choose a deck!",
+    "pc-customgame-options-name" : "Game Name",
+    "pc-customgame-options-recipients" : "Invitees (separate names with \",\")",
+    "pc-customgame-options-everyone" : "Challenge Everyone?",
+    "pc-customgame-options-soul" : "Soul"
 }
 

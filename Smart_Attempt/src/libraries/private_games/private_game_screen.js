@@ -45,11 +45,11 @@ function SetInitialDeck() {
 			var error_deck = {
 				soul : "DETERMINATION",
 				id : -1,
-				name : "ERROR!",
+				name : window.$.i18n("pc-play-error"),
 				cards : [],
 				artifacts : [],
 				image : onu_skin,
-				description: "Selected deck not found! It must have been deleted!<br>Please choose another!"
+				description: window.$.i18n("pc-play-deckerror")
 			}
 			SetSelectedDeck(error_deck);
 			playLocked = true;
@@ -60,11 +60,11 @@ function SetInitialDeck() {
 		var error_deck = {
 			soul : "UNIVERSAL",
 			id : -1,
-			name : "ERROR!",
+			name : window.$.i18n("pc-play-error"),
 			cards : [],
 			artifacts : [],
 			image : dummy_skin,
-			description: "No deck selected!"
+			description: window.$.i18n("pc-play-nodeck")
 		}
 		SetSelectedDeck(error_deck);
 		playLocked = true;
@@ -85,11 +85,11 @@ function SetSelectedDeck(deck) {
 function GetChallengeJQueryObject(user) {
 	var html = $(`
 		<div id="PrettyCards_PrivateGameChallengeForm">
-			<p>Game Name: </p><input id="PrettyCards_PrivateGameName" type="text" class="form-control" value="${"PrettyCardsCustom" + Math.floor(Math.random()*100)}"></input>
-			<p>Invitees (separate names with ","): </p><input id="PrettyCards_PrivateGameRecipients" type="text" class="form-control" value="${ (!!user) ? user.username : ""}"></input>
+			<p>${window.$.i18n("pc-customgame-options-name")}: </p><input id="PrettyCards_PrivateGameName" type="text" class="form-control" value="${"PrettyCardsCustom" + Math.floor(Math.random()*100)}"></input>
+			<p>${window.$.i18n("pc-customgame-options-recipients")}: </p><input id="PrettyCards_PrivateGameRecipients" type="text" class="form-control" value="${ (!!user) ? user.username : ""}"></input>
 			<br>
-			<label class="form-check-label"><input id="PrettyCards_PrivateGameEveryone" type="checkbox" class="form-check-input" ${(!user) ? "checked" : ""}></input> Challenge Everyone?</label>
-			<p ${custom_deck_sys ? "hidden" : ""}>Soul: ${soulSelector.SetUp("PrettyCards_ChallengeSoul_", "Normal")}</p>
+			<label class="form-check-label"><input id="PrettyCards_PrivateGameEveryone" type="checkbox" class="form-check-input" ${(!user) ? "checked" : ""}></input> ${window.$.i18n("pc-customgame-options-everyone")}</label>
+			<p ${custom_deck_sys ? "hidden" : ""}>${window.$.i18n("pc-customgame-options-soul")}: ${soulSelector.SetUp("PrettyCards_ChallengeSoul_", "Normal")}</p>
 			<div id="PrettyCards_PrivateGameChallengeDeckCard"></div>
 		</div>
 		<div id="PrettyCards_PrivateGameChallengeDeckSelector" hidden></div>
@@ -146,13 +146,13 @@ function ChallengePlayerScreen(user, infos) {
 		message: GetChallengeJQueryObject(user),
 		onshown: OnShow.bind(this),
 		buttons: [{
-				label: "Cancel Challenge!",
+				label: window.$.i18n("pc-navigate-cancel"),
 				cssClass: 'btn-primary us-normal',
 				action(dialog) {
 					dialog.close();
 				}
 			}, {
-				label: "Send Challenge!",
+				label: window.$.i18n("pc-navigate-send"),
 				cssClass: 'btn-primary us-normal',
 				action(dialog) {
 					if (playLocked) {

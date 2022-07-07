@@ -25,13 +25,14 @@ function processChatMessageHTML(ele, msg) {
 				//console.log($(ele).find(".chat-message"));
 				
 				if (msg.user.id === window.selfId) {
-					var recipientCopy = { ...recipients };
+					var recipientCopy = [ ...recipients ];
+					console.log(recipientCopy);
 					var index = recipientCopy.indexOf("everyone");
 					if (index > -1) {
 						recipientCopy[index] = window.$.i18n("pc-customgame-everyone");
 					}
 					var recipientText = recipientCopy.join(", ");
-					$(ele).find(".chat-message").html('<span class="gray">' + window.$.i18n("pc-customgame-selfinvite", recipientText) + '!</span>');
+					$(ele).find(".chat-message").html('<span class="gray">' + window.$.i18n("pc-customgame-selfinvite", recipientText) + '</span>');
 				} else if (recipients.includes("everyone") || recipients.includes(window.selfUsername)) {
 					SoulSelector.ExecuteOnDeckLoad(function () {
 						ele.style.backgroundColor = "black";
@@ -123,8 +124,8 @@ function AcceptChallengeCustomDeck(safeUserName) {
 	deckSelector.callback = DeckSelectorCallback;
 	
 	latest_dial = window.BootstrapDialog.show({
-		title: window.$.i18n("pc-customgame-cuckinvite"),
-		size: window.BootstrapDialog.SIZE_LARGE,
+		title: window.$.i18n("pc-customgame-choosedeck"),
+		size: window.BootstrapDialog.SIZE_WIDE,
 		message: "",
 		onshown: OnShow.bind(this),
 		buttons: [{
