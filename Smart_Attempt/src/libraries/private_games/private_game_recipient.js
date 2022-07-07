@@ -17,45 +17,53 @@ function processChatMessageHTML(ele, msg) {
 		return;
 	}
 	if (msg.message.startsWith('I challenge') && msg.message.endsWith("via PrettyCards")) {
-		try {
-			//var recipients = msg.message.split("I challenge ")[1].split(" to a CUSTOM game! via PrettyCards")[0].split(",");
-			var recipients = msg.message.substring(12, msg.message.length - 34).split(", ");
-			//console.log("Invitation!", recipients);
-			//console.log($(ele).find(".chat-message"));
-			
-			if (msg.user.id === window.selfId) {
-				$(ele).find(".chat-message").html('<span class="gray">* You sent an invitation to ' + recipients.join(', ') + '!</span>');
-			} else if (recipients.includes("everyone") || recipients.includes(window.selfUsername)) {
-				SoulSelector.ExecuteOnDeckLoad(function () {
-					ele.style.backgroundColor = "black";
-					$(ele).find(".chat-message").html("invited you to a CUSTOM game.");
+		PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
+			try {
+				//var recipients = msg.message.split("I challenge ")[1].split(" to a CUSTOM game! via PrettyCards")[0].split(",");
+				var recipients = msg.message.substring(12, msg.message.length - 34).split(", ");
+				//console.log("Invitation!", recipients);
+				//console.log($(ele).find(".chat-message"));
 				
-					if (!custom_deck_sys) {
-						var soulSelector = new SoulSelector();
-						var soulContainer = document.createElement("SPAN");
-						soulContainer.style = "white-space: nowrap;";
-						soulContainer.innerHTML = soulSelector.SetUp("PrettyCards_ChallengeMessage_" + msg.id + "_", "Small");
-						ele.appendChild(soulContainer);
-						soulSelector.AddDeckTooltips();
+				if (msg.user.id === window.selfId) {
+					var recipientCopy = { ...recipients };
+					var index = recipientCopy.indexOf("everyone");
+					if (index > -1) {
+						recipientCopy[index] = window.$.i18n("pc-customgame-everyone");
 					}
+					var recipientText = recipientCopy.join(", ");
+					$(ele).find(".chat-message").html('<span class="gray">' + window.$.i18n("pc-customgame-selfinvite", recipientText) + '!</span>');
+				} else if (recipients.includes("everyone") || recipients.includes(window.selfUsername)) {
+					SoulSelector.ExecuteOnDeckLoad(function () {
+						ele.style.backgroundColor = "black";
+						$(ele).find(".chat-message").html(window.$.i18n("pc-customgame-invite"));
 					
-					var acceptButton = document.createElement("BUTTON");
-					acceptButton.innerHTML = "Accept!";
-					acceptButton.className = "btn btn-success PrettyCards_ChallengeMessageButton";
-					if (custom_deck_sys) {
-						acceptButton.onclick = function() {AcceptChallengeCustomDeck(msg.user.usernameSafe)};
-					} else {
-						acceptButton.onclick = function() {AcceptChallenge(msg.user.usernameSafe, soulSelector.selectedSoul)};
-					}
-					ele.appendChild(acceptButton);
-				})
-			} else {
-				$(ele).find(".chat-message").html('<span class="gray">* Sent an invitation you cannot answer.</span>');
-			}
-		} catch (e) {
-			// Do nothing.
-			console.log("Error! ¯\_(ツ)_/¯", e);
-		}
+						if (!custom_deck_sys) {
+							var soulSelector = new SoulSelector();
+							var soulContainer = document.createElement("SPAN");
+							soulContainer.style = "white-space: nowrap;";
+							soulContainer.innerHTML = soulSelector.SetUp("PrettyCards_ChallengeMessage_" + msg.id + "_", "Small");
+							ele.appendChild(soulContainer);
+							soulSelector.AddDeckTooltips();
+						}
+						
+						var acceptButton = document.createElement("BUTTON");
+						acceptButton.innerHTML = window.$.i18n("pc-navigate-accept");
+						acceptButton.className = "btn btn-success PrettyCards_ChallengeMessageButton";
+						if (custom_deck_sys) {
+							acceptButton.onclick = function() {AcceptChallengeCustomDeck(msg.user.usernameSafe)};
+						} else {
+							acceptButton.onclick = function() {AcceptChallenge(msg.user.usernameSafe, soulSelector.selectedSoul)};
+						}
+						ele.appendChild(acceptButton);
+					})
+				} else {
+					$(ele).find(".chat-message").html('<span class="gray">' + window.$.i18n("pc-customgame-cuckinvite") + '</span>');
+				}
+			} catch (e) {
+				// Do nothing.
+				console.log("Error! ¯\_(ツ)_/¯", e);
+			}			
+		})
 	}
 }
 
@@ -78,8 +86,8 @@ var latest_dial;
 function SetUpDeckOnServer(deck, callback) {
 	var toast = PrettyCards_plugin.toast(
 		{
-			title: "Please wait!",
-			text: "Setting up the deck on the server . . .",
+			title: window.$.i18n("pc-play-decksetup-title"),
+			text: window.$.i18n("pc-play-decksetup-text"),
 		}
 	);
 	DeckEditor.OptimalImportDeck(deck, function(status) {
@@ -115,12 +123,12 @@ function AcceptChallengeCustomDeck(safeUserName) {
 	deckSelector.callback = DeckSelectorCallback;
 	
 	latest_dial = window.BootstrapDialog.show({
-		title: "Choose a deck!",
+		title: window.$.i18n("pc-customgame-cuckinvite"),
 		size: window.BootstrapDialog.SIZE_LARGE,
 		message: "",
 		onshown: OnShow.bind(this),
 		buttons: [{
-				label: "Cancel!",
+				label: window.$.i18n("pc-navigate-cancel"),
 				cssClass: 'btn-primary us-normal',
 				action(dialog) {
 					dialog.close();

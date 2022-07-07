@@ -10,6 +10,8 @@
     "pc-navigate-later" : "LATER",
     "pc-navigate-ok" : "Ok!",
     "pc-navigate-skip" : "Skip!",
+    "pc-navigate-accept" : "Accept!",
+    "pc-navigate-cancel" : "Cancel!",
     "pc-sop-welcome" : "Welcome to Undercards Smash or Pass!",
     "pc-sop-q1" : "What is Smash or Pass?",
     "pc-sop-a1-p1" : "In case you have been living under a rock, Smash or Pass is a game where characters from a certain media are presented, one by one, and the player has to decide whether or not they would \"smash\" it. Interpret that as you will.",
@@ -324,5 +326,11 @@
     "pc-masscraft-menu-smixed" : "Mixed {{PC_SHINY:(Shiny)}}",
     "pc-buyart-nomuns" : "Sadly, you don't have $1 to pay for it.",
     "pc-buyart-willyoubuy" : "Would you like to unlock it for $1?",
-    "pc-buyart-youdonthave" : "You don't own this artifact!"
+    "pc-buyart-youdonthave" : "You don't own this artifact!",
+    "pc-customgame-everyone" : "everyone",
+    "pc-customgame-invite" : "invited you to a CUSTOM game.",
+    "pc-customgame-selfinvite" : "* You sent an invitation to $1!",
+    "pc-customgame-cuckinvite" : "* Sent an invitation you cannot answer.",
+    "pc-customgame-choosedeck" : "Choose a deck!"
 }
+
