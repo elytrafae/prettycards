@@ -22,5 +22,11 @@
         "syntax" : "{{PC_RARICON:extension|rarity}}",
         "description" : "Places a rarity icon of the specified extension and rarity. The extension can be BASE or DELTARUNE, and the rarity goes just like in Onu's RARITY command.",
         "example": "{{PC_RARICON:BASE|RARE}}, {{PC_RARICON:DELTARUNE|LEGENDARY}}"
+    },
+    {
+        "title" : "PC SHINY",
+        "syntax" : "{{PC_SHINY:text}}",
+        "description" : "Displays the text inside with the rainbowText class. Self-explanatory.",
+        "example": "{{PC_SHINY:This text is shiny, wooooo!}}"
     }
 ]
