@@ -11,6 +11,10 @@ var editedCustom; // The currently edited language's File from Me
 var pages = []; // The list of entry IDs that conform to the current filters.
 var currentPage = 0;
 
+function toEncodedHTML(input) {
+    return $('<span>').text(input).html();
+}
+
 function InitCustomTranslations() {
 
     PrettyCards_plugin.events.on("PC_Chat:getSelfInfos", function() {
@@ -485,10 +489,14 @@ function downloadJSON() {
 }
 
 // Ok, I have to admit, I could not do this better than Onu. If I wanted to, it would be the exact same result, sooooo . . .
-function getColoredStringReference(stringReference) {
+function getColoredStringReference(stringReference, encodeInput = true) {
 
     var colors = ['#00ff06', '#fc00ff', '#00d6ff', '#ff5300',
         '#0074ff', '#ff0030', '#ffa400'];
+
+    if (encodeInput) {
+        stringReference = toEncodedHTML(stringReference);
+    }
 
     var coloredString = stringReference.replace(/({{[^{}]*?}})/g, function (m) {
         return '<span class="JUSTICE">' + m + '</span>';
