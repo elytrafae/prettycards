@@ -62,7 +62,7 @@ class ArtifactDisplay {
 
 	BuyArtifact(artifactId) {
 		window.$.post("/Artifacts", {idArtifact : artifactId, unlock: "Unlock"}, function(data) {
-			if (data.includes("artifact-name-" + artifactId) || data.includes("error")) {
+			if (data.includes("artifact-name-" + artifactId)) {
 				PrettyCards_plugin.events.emit("PrettyCards:artBuyError");
 				return;
 			}

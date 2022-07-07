@@ -28,6 +28,7 @@ function returnHDImageIfThereIs(image, forceNormal = false) {
 if (settings.hd_card_skins.value()) {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
         $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/hdCardSkins.json", {}, function(data) {
+            console.log("HD Card Skin Data", data);
             hd_card_skins = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", data);
         })

@@ -30,23 +30,36 @@ window.PrettyCards_plugin = PrettyCards_plugin;
 
 var settings = {};
 window.PrettyCards_settings = settings;
+
+settings.turn_off = PrettyCards_plugin.settings().add({
+    'key': 'turn_off',
+    'name': 'Turn Off PrettyCards', // Name in settings page
+    'type': 'boolean',
+    'refresh': true, // true to add note "Will require you to refresh the page"
+    'default': false, // default value
+});
+
+if (settings.turn_off.value()) {
+    throw "PrettyCards is stopped!";
+}
+
 settings.packs = PrettyCards_plugin.settings().add({
-        'key': 'packs_page',
-        'name': 'Enable Fancy Packs Page', // Name in settings page
-        'type': 'boolean',
-        'refresh': true, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
-    });
+    'key': 'packs_page',
+    'name': 'Enable Fancy Packs Page', // Name in settings page
+    'type': 'boolean',
+    'refresh': true, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+});
 
 settings.override_decks = PrettyCards_plugin.settings().add({
-        'key': 'override_decks',
-        'name': 'Override Deck System', // Name in settings page
-        'note': 'Overrides the current deck system locally with a more flexible one. This inludes the Decks page, Play page, Custom page and the Custom Challenge system.',
-        'type': 'boolean',
-		//'disabled': true,
-        'refresh': true, // true to add note "Will require you to refresh the page"
-        'default': true, // default value
-    });
+    'key': 'override_decks',
+    'name': 'Override Deck System', // Name in settings page
+    'note': 'Overrides the current deck system locally with a more flexible one. This inludes the Decks page, Play page, Custom page and the Custom Challenge system.',
+    'type': 'boolean',
+    //'disabled': true,
+    'refresh': true, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+});
 
 //console.log(settings);
 

@@ -26,7 +26,6 @@ function processChatMessageHTML(ele, msg) {
 				
 				if (msg.user.id === window.selfId) {
 					var recipientCopy = [ ...recipients ];
-					console.log(recipientCopy);
 					var index = recipientCopy.indexOf("everyone");
 					if (index > -1) {
 						recipientCopy[index] = window.$.i18n("pc-customgame-everyone");
