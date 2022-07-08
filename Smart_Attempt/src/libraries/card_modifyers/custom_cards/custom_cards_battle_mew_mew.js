@@ -154,7 +154,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
     var pit = c.newCard({
         name: "{{PLURAL:$1|Broken Locket|Broken Lockets}}",
 		image: "Broken_Locket",
-		aprilImage: "Broken Locket",
+		aprilImage: "Broken_Locket",
 		cost: 2,
 		attack: 1,
 		hp: 2,
