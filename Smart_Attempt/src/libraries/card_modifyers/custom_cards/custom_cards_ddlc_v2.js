@@ -232,13 +232,26 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		note: `Does anyone even read these?`
 	});
 
+	var desparation = c.newCard({
+		name: "{{PLURAL:$1|Desparation|Desparations}}",
+		image: "Desparation",
+		cost: 0,
+		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, apply them to the monsters in front of them, burn this and draw a card.",
+		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, burn this and draw a card.",
+		description: `Give an ally monster {{KW:HASTE}}. {{KW:DELAY}}: If it's alive, {{KW:SILENCE}} and kill it. Draw a card.`,
+		extension: "DDLC",
+		rarity: "TOKEN",
+		frameSkinName: frame,
+		note: `Giving Haste in this tribe is very controversial, so I kept it to a conditionally bad(?) card.`
+	});
+
 	c.newCard({
 		name: "{{PLURAL:$1|Club President Monika|Club President Monikas}}",
 		image: "Club_President_Monika",
 		cost: 6,
 		attack: 4,
 		hp: 3,
-		description: `{{KW:TURN-START}}: Burn the first ${doki.me()} from your dustpile to add it to your hand with +2/-1. {{KW:MAGIC}}: Trigger the {{KW:TURN-START}} effect twice.`,
+		description: `{{KW:DELAY}}: Force all ally monsters to attack enemy monsters in front of them. {{KW:FALLEN}}: Add an ${desparation.me()} to your deck.`,
 		// description: `{{KW:SUPPORT}}: Catch a copy of a non-{{RARITY:DETERMINATION}} attacker. {{KW:DUST}}: Release it with 3/3. If it's a ${fallen.me()} ${doki.me()} monster, trigger its ${fallen.me()} effect and kill it.`,
 		//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} ${fallen.me()} monsters from your dustpile. Trigger their ${fallen.me()} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
 		tribes: [doki],
@@ -254,7 +267,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		attack: 6,
 		hp: 4,
-		description: `{{KW:DELAY}}: Force all ally monsters to attack enemy monsters in front of them. {{KW:FALLEN}}: Add an {{CARD:131}} to your deck.`,
+		description: `{{KW:TURN-START}}: Burn the first ${doki.me()} from your dustpile to add it to your hand with +2/-1. {{KW:MAGIC}}: Trigger the {{KW:TURN-START}} effect twice.`, // {{CARD:131}}
 		tribes: [doki],
 		extension: "DDLC",
 		rarity: "LEGENDARY",

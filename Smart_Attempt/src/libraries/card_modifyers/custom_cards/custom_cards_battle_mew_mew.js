@@ -7,7 +7,8 @@ const BATTLE_MEW_MEW_BASE = {
 	image: "Battle_Mew_Mew",
 	aprilImage: "Battle_Mew_Mew",
 	extension: "BASE",
-	rarity: "LEGENDARY"
+	rarity: "LEGENDARY",
+    hasThemeSong: false
 }
 
 function returnBattleMewMew(settings) {
@@ -57,7 +58,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         cost: 8,
         attack: 5,
         hp: 5,
-        description: `{{KW:HASTE}}. {{KW:HASTE}}: Deal 3 {{DMG}} to all enemy monsters. {{KW:DELAY}}: Summon 1/1 copies of all monsters killed this turn.`
+        description: `{{KW:HASTE}}. {{KW:MAGIC}}: Deal 3 {{DMG}} to all enemy monsters. {{KW:DELAY}}: Summon 1/1 copies of all monsters killed this turn.`
     }))
 
     c.newCard(returnBattleMewMew({
@@ -72,13 +73,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         attack: 4,
         hp: 2,
         description: `{{KW:HASTE}}. {{KW:MAGIC}} and ${murder.me()}: Summon a {{CARD:1}}. {{KW:DUST}}: Burn an ally {{CARD:1}} to summon a copy of this.`
-    }))
-
-    c.newCard(returnBattleMewMew({
-        cost: 8,
-        attack: 7,
-        hp: 3,
-        description: `{{KW:HASTE}}. {{KW:MAGIC}}: Kill an enemy non-{{RARITY:DETERMINATION}} monster. {{KW:DELAY}}: Add a copy with halved {{ATK}}, {{HP}} and {{cost}} (rounded up) to your hand.`
     }))
 
     c.newCard(returnBattleMewMew({
