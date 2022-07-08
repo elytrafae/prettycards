@@ -330,7 +330,7 @@ class SavedDeckSelector {
 					var card = this.appendCardDeck($deck, deck);
 									
 					if (this.canEditDecks) {
-						card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? window.$.i18n("pc-decks-delete") : window.$.i18n("pc-decks-delete-mystery")) + '</div>');
+						card.append('<div class="PrettyCards_DeckCardErase">' + (demonEasterEgg ? window.$.i18n("pc-decks-delete-mystery") : window.$.i18n("pc-decks-delete")) + '</div>');
 						card.find(".PrettyCards_DeckCardErase").click(function(e) {
 							this.DeleteDeckDialogue(deck);
 							e.stopPropagation();
