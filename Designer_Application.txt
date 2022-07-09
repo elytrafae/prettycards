@@ -1,0 +1,63 @@
+
+
+New Cards
+
+Madjick Head   3G
+Taunt. Dust: Swap the ATK and HP of the killer.
+2   RARE   3
+
+Commentary: To start off, a simple idea. A defensive tool that uses a mechanic most often used for offensive purposes nowadays, even though swapping ATK and HP can just as well work for defense, especially if an enemy is forced to trade with the card, effectively always giving it -2 ATK. The opponent can also just as easily choose a suitable monster to trade this into, but I think this would be an interesting early game taunt card that could see use in the late game phase as well. I was originally considering giving it Haste instead of Taunt, but I think that would just make it a cheaper Madjick, so I left it on Taunt instead.
+
+Waitress Lion   4G
+Magic: Gain Taunt and -1/-1.
+5   COMMON   5
+
+Commentary: Let me explain. Self Silence decks have been a part of Undercards for a long time now. There are multiple cards that support this kind of deck, such as Napstablook, Diamond Boy 2, Susie Statue, Ball Person, Action Figures etc. However, all of these cards have one thing in common: Their only use is in Self Silence decks, and getting them randomly from any source would be a detriment in most cases. So, this is my attempt at making a card that can be played both with and without the Silence. The reason why the card gains Taunt on Magic is because if this were to have base Taunt and get summoned by something, not activating the Magic ability, then that could be a major problem.
+
+Blue Ears   3G
+Magic: Give an ally monster +2/+1. If it has more ATK than HP, give it +1/+2 instead.
+2   RARE   2
+
+Commentary: As stated above, I like choice effects that work off of variables in the game. In this example, I took the concept of a buff card, and made it into a card that specializes in "completing" a monster, in some sense, as it always buffs the weaker stat more. Although the other way around would be much stronger, especially for aggro, I would still like to give this a shot.
+
+Fommt   6G
+Magic: Kill an ally monster (cost <= 10). Delay: Add 2 other different non-DT monsters of the same cost to your deck and 1 to your hand. All of them get -2 cost.
+6   EPIC   6
+
+Commentary: Personally, this might be the most out-there card on this list, but I personally want to explore some more Red Bird-like mechanics in this game, especially with the controlled randomness element of it. Even though the 2 antifatigue might be too much, especially with the direction today's meta is headed, I think sacrificing a card for three more might be an interesting mechanic, especially because with this card the higher the cost of the sacrificed card is, the more value you get back as well, mostly. The card can always be just made so it adds all three of them to hand instead, maybe.
+
+Commander Undyne   7G
+Delay: Force all ally monsters to attack enemy monsters in front of them.
+6   LEGENDARY   7
+
+Commentary: Although this idea makes a little more sense in a hypothetical set I made with similar mechanics in mind, I still think a card like this could be useful as a relatively cheap removal/boardwipe card, but one that takes planning, matching up favorable trades in front and potentially emptying your board. Even now I am unsure if it should be Magic or Delay, but I think Delay is much less annoying, as the user can't just fill up their own board again if they lose it.
+
+
+Cards whose design I Like:
+
+Stuffed Doll
+Current Stuffed Doll, in my opinion, has an interesting design. It gives the same card to both players, but unlike TV (which isn't a badly designed card, btw) it lets you choose the card you give both yourself and the opponent, making it less of an RNG card and more of a strategy disruptor. True, this one can be used for mill, but the user can't just choose any card, as the card they give the opponent can help them win the game if they choose something too good. So, the user instead has to resist the temptation and choose the card that is least beneficial to their opponent and most beneficial to themselves. The first aspect is also often the most important one, as the opponent can play the powerful card first. Overall interesting design and this actually reminds me that I could try making a deck with it, even though it doesn't have much synergy currently with many of the other cards in the game. (PS: Its stats and the fact that it has Taunt is also really cool.)
+
+Collection
+Collection is an artifact that adds Trashing Machines to your hand whenever you play a monster with a unique Tribe. Now, why would I choose this one particular legendary artifact? The reason behind my choice is that Collection is both similar to Librarian in its positives, while it being unique and interesting still, establishing its own identity. Although, I do personally think that the artifact is a tiny bit underwhelming as it is currently, the design of giving all-tribe monsters for, once again, clever deck building, is something that I really like in its design, especially because there are a lot of opportunities with bodies that listen to every single tribe at once, effectively being buffed by all of them. Or, one can pick up the pace and just play a bunch of very cheap tribe monsters and then flood the opponent with Trashing Machines. The speed/value ratio of this artifact can be almost anything you want it to be.
+
+Librarian
+This card has been the single most influential card, throughout the game's history, when it comes to strict deckbuilding restrictions being rewarded, and rightfully so. Personally, Librarian represents a fresh new mindset when it comes to both playing with and against a deck that has it. 
+For the person playing Librarian, deckbuilding and improvisation are equally important. Since you can only have one of each card in your deck, making sure that you can make the most out of every single card is important. As for improvisation, since Librarian gives random cards, one must make the most out of thse cards it gives, which can make every single match unique, even if the same deck is used over and over again.
+As for the person playing against it, the signs of a Librarian deck can be seen really early on, without it being blurted out directly, due to its deckbuilding restriction. And after the opponent figures out that the Librarian user only has one of each card in their deck, their strategy can adapt to play against it, which can also bring improvisation into the mix, as Librarian decks, despite the restriction, can be very diverse and different.
+Overall, no matter what version of Librarian we are talking about, it is an absolutely phenomenally designed card that brings both fun and competitiveness together.
+
+
+Cards whose design I Dislike:
+
+Self Reflection (and True Self)
+There are two layers to this card, both of which are bad in their own way. 
+First off, no matter how you spin it, casting this on allies is ALWAYS worse than casting this on enemies. +1/+1 and Candy, alongside Paralyzing your own card, is not enough of a gain to justify Paralyzing an enemy card AND getting a card that can completely demolish most wincons in the game by erasing a monster they play and every copy of it they have anywhere. 
+Second of all, True Self has, what is in my opinion, a very toxic design. First of all, it not only tampers with the board, but with the hand and deck as well. Barely any cards disrupt the opponent's hand, and none of them are this intrucive. And there is no other card in the game that can disrupt the cards in the opponent's deck, either.
+Hand and Deck, in my opinion, at least, should be a safe haven for your cards. Especially the deck. Disruptions that directly affect the opponent's hand should be kept to a minimal, non-hard-removal, and not at all for the deck. Teacher Toriel and Mio Mio San, for example, are absolutely fine in my opinion while accomplishing similar goals.
+
+The Reflection (revise before publish)
+This is essentially a "No comeback for you!" card. Its often gamechanging effect, coupled with the excellent body it has for the cost, make this a card that is hard to play around. Not to mention, its Need condition just requires you to play it in the lategame, where the card is most effective, anyway. Now, for the actual effect, it's clearly a card that was made to combat the rapidly increasing sources of bonus health, with healing taking a hit as a consequence as well. Personally, the card could have been something else and bonus health/healing being nerfed if that is such an issue. And, personally, the OTK this opened up for Ultima was also a sign that maybe some changes, or a complete rework, should be done with this card. Either that, or it being reverted to the version it first came out with, maybe?
+
+Business Dude
+This card has not seen any play, throughout its history, aside from either being randomly obtained and being almost useless or being the engine of some exploity deck that is unfun for both parties (notable examples would be cloning old Chara, Angel of Death, or the PKris clone deck in our current times). While, admittedly, previous versions that allowed the cloning of DTs were a lot worse, I think the card still needs some sort of other effect that could put him into a reasonable spot without exploits or tricks, even though I like some unusual synergies in card games from time to time.

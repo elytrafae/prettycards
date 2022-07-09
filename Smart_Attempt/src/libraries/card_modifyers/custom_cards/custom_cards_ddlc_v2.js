@@ -251,7 +251,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 6,
 		attack: 4,
 		hp: 3,
-		description: `{{KW:DELAY}}: Force all ally monsters to attack enemy monsters in front of them. {{KW:FALLEN}}: Add an ${desparation.me()} to your deck.`,
+		description: `{{KW:DELAY}}: Force all ally monsters to attack enemy monsters in front of them. {{KW:FALLEN}}: Add a ${desparation.me()} to your deck.`,
 		// description: `{{KW:SUPPORT}}: Catch a copy of a non-{{RARITY:DETERMINATION}} attacker. {{KW:DUST}}: Release it with 3/3. If it's a ${fallen.me()} ${doki.me()} monster, trigger its ${fallen.me()} effect and kill it.`,
 		//description: "{{KW:MAGIC}}: Burn 3 {{RARITY:EPIC}} ${fallen.me()} monsters from your dustpile. Trigger their ${fallen.me()} effects. {{KW:DUST}}: Add a random {{TRIBE:CHRSPELL}} to the bottom of your deck for each monster burned.",
 		tribes: [doki],
