@@ -222,17 +222,24 @@ class Utility {
 		audio.src = url;
 	}
 
-	translatorFeaturesAccess() {
+	featuresAccessForGroupOnly(groups) {
 		if (accessExceptions.includes(window.selfUsername)) {
 			return true;
 		}
+		if (typeof(groups) == "string") {
+			groups = [groups];
+		}
 		for (var i=0; i < window.selfGroups.length; i++) {
 			var group = window.selfGroups[i];
-			if (group.name === "Translator") {
+			if (groups.includes(group.name)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	translatorFeaturesAccess() {
+		return this.featuresAccessForGroupOnly("Translator");
 	}
 
 	toLocale(key, locale, data = []) {

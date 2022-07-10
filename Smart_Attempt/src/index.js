@@ -58,6 +58,7 @@ import {InitCustomCards} from "/src/page_specific/custom_cards.js";
 import {InitFriendship} from "/src/page_specific/friendship.js";
 import {InitSmashOrPass} from "/src/page_specific/smash_or_pass.js";
 import {InitCustomTranslations} from "/src/page_specific/custom_translations.js";
+import {InitCustomArtistConsole} from "/src/page_specific/custom_artist_console.js";
 
 //import {} from "/src/libraries/april_fools_downloader.js"; // Keeping this here for next year!
 
@@ -78,6 +79,8 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 	InitSmashOrPass();
 } else if (underscript.onPage("CustomTranslations")) {
 	InitCustomTranslations();
+} else if (underscript.onPage("CustomArtistConsole")) {
+	InitCustomArtistConsole();
 }
 
 if (settings.override_decks.value()) {

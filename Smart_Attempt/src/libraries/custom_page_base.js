@@ -3,7 +3,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
-var custom_pages = ["CustomCardSkins", "CustomCards", "SmashOrPass", "CustomTranslations"];
+var custom_pages = ["CustomCardSkins", "CustomCards", "SmashOrPass", "CustomTranslations", "CustomArtistConsole"];
 
 function IsOnCustomPage() {
 	for (var i = 0; i < custom_pages.length; i++) {

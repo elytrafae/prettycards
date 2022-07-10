@@ -41,7 +41,9 @@ class ThemeSongSetting {
     }
 
     addFile(path) {
-        utility.preloadAudio(path);
+        if (underscript.onPage("Game") || underscript.onPage("Spectate")) {
+            utility.preloadAudio(path); // Moving it to whenever a card is rendered, except during Games and Spectating.
+        }
         this.replacements.push(path);
     }
 
@@ -197,6 +199,25 @@ if (settings.multi_theme_songs.value()) {
             window.Audio = AudioSpoofed;
         }
 
+        // Caching system for non-game pages so that it doesn't load everything at once unnecessarily.
+        var cards_preloaded = [];
+        PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
+            //var html$ = data.element;
+            var card = data.card;
+            PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
+                var id = card.fixedId || card.id;
+                if (!cards_preloaded.includes(id)) {
+                    cards_preloaded.push(id);
+                    var setting = getThemeSongSettingByCardId(id);
+                    if (setting) {
+                        setting.replacements.forEach( (url) => {
+                            utility.preloadAudio(url);
+                        })
+                    }
+                }
+            })
+
+        })
         
     })
 
