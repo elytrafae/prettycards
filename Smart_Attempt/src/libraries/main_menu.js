@@ -19,6 +19,8 @@ var credits = `
 	<span>MC SpriteSheet by <a href="https://www.deviantart.com/childish-n/art/DDLC-Protagonist-Sprite-715239172" target="_blank">Childish-N on Deviantart</a></span>
 	<span>Amy Sprite Sheet by <a href="https://www.reddit.com/r/DDLC/comments/7qlzao/amy_sprite_sheet_for_those_who_wanted_it/" target="_blank">Meddy-sin on Reddit</a></span>
 	<span>File Explorer/Character Folder artifact transparency fixed by @🌸bantikat🌸#6321 on Discord.</span>
+	<br>
+	<span>Battle Mew Mew theme by <a href="https://www.youtube.com/channel/UChAHYPBvyaQIpjyTSdQhOMQ" target="_blank">FalKKonE</a>. <a href="https://www.youtube.com/watch?v=jSozDtrESQE" target="_blank">Listen to the full remix here</a>.
 `
 
 function showCredits() {

@@ -4,7 +4,7 @@ import { utility } from "../utility";
 settings.switch_highlight = PrettyCards_plugin.settings().add({
 	'key': 'switch_highlight',
 	'name': 'Switch Highlight', // Name in settings page
-	'note': 'Adds some handy highlighting to Switch cards while theyr are being hovered over the arena mid-game.',
+	'note': 'Adds some handy highlighting to Switch cards while they are being hovered over the arena mid-game.',
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'disabled': false,

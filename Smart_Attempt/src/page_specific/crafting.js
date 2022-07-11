@@ -1,6 +1,6 @@
 import { artifactDisplay } from "../libraries/artifact_display";
 import { pagegetters } from "../libraries/page_getters";
-import { PrettyCards_plugin } from "../libraries/underscript_checker";
+import { PrettyCards_plugin, settings } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
 const minDeckCodeLength = 50; // Original result was 132, but I decided to not have that many bugs today . . .
@@ -10,6 +10,15 @@ var whatToBuy = [];
 var missingArtifacts = [];
 var missingDTCount = 0;
 var lastArtifactIds = [];
+
+settings.sktimacraft = PrettyCards_plugin.settings().add({
+	'key': 'sktimacraft',
+	'name': 'Enable Mass Crafting input', // Name in settings page
+	'note': "Also known as \"Sktimacraft\".",
+	'type': 'boolean',
+	'refresh': false, // true to add note "Will require you to refresh the page"
+	'default': true, // default value
+});
 
 // Test Deck Code: eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsNzQsMTgyLDI2MCw3MzcsNTUwLDcyLDE0NCw3NSw1NCwxNDcsMTg1LDUwMyw1MDMsNjk4LDI3OSw1Miw1ODQsNDMsMjAxLDIyNywyNjUsNTQ4LDUwNSw2M10sImFydGlmYWN0SWRzIjpbOSwxN119
 // eyJzb3VsIjoiUEFUSUVOQ0UiLCJjYXJkSWRzIjpbNzMsMTgyLDI2MCwzMDksMjg1LDMwLDc1LDcxMCw2NTYsMjQ2LDE4NSwxODUsNjk4LDU5Miw1MiwyMDIsNTE3LDQ3Miw1MDUsNTUsOCwyNTQsNDQ0LDU4MSw2M10sImFydGlmYWN0SWRzIjpbMjAsMTRdfQ==
@@ -27,6 +36,9 @@ function convertCollection() {
 
 PrettyCards_plugin.events.on("craftcard", function(data) {
     //console.log("craftcard event procced", data);
+    if (!prevDial || !prevDial.opened) {
+        return;
+    }
     $(`#PrettyCards_MassCraft_CardContainer #${data.id}${data.shiny ? ".shiny" : ""}.PrettyCards_MassCraft_NotHave:first-of-type`).removeClass("PrettyCards_MassCraft_NotHave");
     for (var i=0; i < whatToBuy.length; i++) {
         var buy = whatToBuy[i];
@@ -39,6 +51,9 @@ PrettyCards_plugin.events.on("craftcard", function(data) {
 })
 
 PrettyCards_plugin.events.on("PrettyCards:artBuySuccess", function(data) {
+    if (!prevDial || !prevDial.opened) {
+        return;
+    }
     generateArtifactsSection($("#PrettyCards_MassCraft_Artifacts"), lastArtifactIds);
     refreshDustCost();
 })
@@ -112,6 +127,9 @@ function generateCardsSection(cardIds, mode = 0) {
 }
 
 function generateArtifactsSection(artifacts, artifactIds) {
+    if (!artifacts || artifactIds.length <= 0) {
+        return;
+    }
     missingArtifacts = [];
     artifacts.empty();
     artifactIds.forEach((artId) => {
@@ -282,26 +300,28 @@ function displayDeck(e) {
 
 
 function InitCrafting() {
-    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-        utility.loadCSSFromGH("MassCrafting");
-        var myTD = $(`<td><input type="text" class="form-control" placeholder=". . ."></input></td>`);
-        var td = $("#dust").closest("td");
-        td.css("width", "unset").after(myTD);
-        td.closest("tr").css({
-            display: "flex",
-            ["flex-wrap"]: "nowrap", 
-            ["justify-content"]: "space-between",
-            width: "100%"
-        });
-        td.closest("table").css("width", "100%");
-        myTD.find("input").keyup(function() {
-            displayDeck(this);
-        })
+    if (settings.sktimacraft.value()) {
+        PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+            utility.loadCSSFromGH("MassCrafting");
+            var myTD = $(`<td><input type="text" class="form-control" placeholder=". . ."></input></td>`);
+            var td = $("#dust").closest("td");
+            td.css("width", "unset").after(myTD);
+            td.closest("tr").css({
+                display: "flex",
+                ["flex-wrap"]: "nowrap", 
+                ["justify-content"]: "space-between",
+                width: "100%"
+            });
+            td.closest("table").css("width", "100%");
+            myTD.find("input").keyup(function() {
+                displayDeck(this);
+            })
 
-        PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
-            myTD.find("input").attr("placeholder", window.$.i18n("pc-masscraft-inserthere"));
+            PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
+                myTD.find("input").attr("placeholder", window.$.i18n("pc-masscraft-inserthere"));
+            })
         })
-    })
+    }
 }
 
 export {InitCrafting};
