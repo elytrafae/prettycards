@@ -83,7 +83,6 @@ function processSkins() {
     //console.log("PROCESSING SKINS", artist);
     PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function(data) {
         var skins = data[0].skins;
-        console.log("SKINS", data, skins);
         var unlistedSkins = [];
         allCardSkins.forEach((skin) => {
             if (artist == "" || skin.authorName == artist) {
@@ -98,7 +97,7 @@ function processSkins() {
             var text = "<li>" + unlistedSkins.map((e) => {return e.image;}).join("</li><li>") + "</li>";
             $("#PrettyCards_AC_IdChecker").html(`<div id="PrettyCards_AC_MissingSkinList"><ul>${text}</ul></div>`)
         }
-        console.log("PROCESSING SKINS", artist, unlistedSkins);
+        // console.log("PROCESSING SKINS", artist, unlistedSkins);
     })
 }
 
