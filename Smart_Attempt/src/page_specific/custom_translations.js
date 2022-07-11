@@ -17,12 +17,15 @@ function toEncodedHTML(input) {
 
 function InitCustomTranslations() {
 
-    PrettyCards_plugin.events.on("PC_Chat:getSelfInfos", function() {
-        if (utility.translatorFeaturesAccess()) {
-            StartVerified();
-        } else {
-            $(".mainContent").html("<h1 class='red'>You don't have access to this page!</h1>");
-        }
+    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+        $(".mainContent").html("<h1>Please wait until you're logged into chat . . .</h1>");
+        PrettyCards_plugin.events.on("PC_Chat:getSelfInfos", function() {
+            if (utility.translatorFeaturesAccess()) {
+                StartVerified();
+            } else {
+                $(".mainContent").html("<h1 class='red'>You don't have access to this page!</h1>");
+            }
+        })
     })
 
 }
