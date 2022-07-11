@@ -222,6 +222,11 @@ class Utility {
 		audio.src = url;
 	}
 
+	preloadImage(url) {
+		var image = new Image();
+		image.src = url;
+	}
+
 	featuresAccessForGroupOnly(groups) {
 		if (accessExceptions.includes(window.selfUsername)) {
 			return true;

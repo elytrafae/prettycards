@@ -30,7 +30,7 @@ if (settings.hd_card_skins.value()) {
         $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/hdCardSkins.json", {}, function(data) {
             //console.log("HD Card Skin Data", data);
             hd_card_skins = data;
-            PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", data);
+            PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", {skins: data});
         })
 
         var originalAppendCardCardSkinShop = window.appendCardCardSkinShop;
@@ -58,24 +58,11 @@ if (settings.hd_card_skins.value()) {
         PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function() { // Race conditions bad
             if (hd_card_skins.includes(image)) { // This condition is for debug purposes. It can be completely removed in production!
                 element.find(".cardImage").css("backgroundImage", `url("${returnHDImageIfThereIs(image)}")`);
-            } else {
-                debugList.push(image);
             }
         })
     })
     
 }
 
-prettycards.emptySkinDebugList = function() {
-    debugList = [];
-}
-
-prettycards.printSkinDebugList = function() {
-    var txt = "";
-    debugList.forEach((e) => {
-        txt += `- ${e}\n`;
-    })
-    console.log(txt);
-}
 
 export {hd_card_skins, returnHDImageIfThereIs}

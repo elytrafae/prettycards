@@ -1,10 +1,16 @@
+import { utility } from "./utility";
+import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 var rarityIconsHTML = {};
 var rarities = ["BASE", "COMMON", "RARE", "EPIC", "LEGENDARY", "DETERMINATION", "TOKEN"];
 var extensions = ["BASE", "DELTARUNE"];
 
+function getUrlForIcon(extension, rarity) {
+	return `/images/rarity/${extension}_${rarity}.png`;
+}
+
 function GenerateRarityIconHTML(extension, rarity) {
-	return `<img src="/images/rarity/${extension}_${rarity}.png" title="${rarity}">`;
+	return `<img src="${getUrlForIcon(extension, rarity)}" title="${rarity}">`;
 }
 
 for (var i=0; i < extensions.length; i++) {
@@ -17,5 +23,22 @@ for (var i=0; i < extensions.length; i++) {
 }
 
 rarityIconsHTML["DELTARUNE"]["BASE"] = `<img src="/images/rarity/DELTARUNE.png" title="BASE">`;
+
+function preLoadIcons() {
+	var element = document.createElement("DIV");
+	element.style = "display: none;";
+	document.body.appendChild(element);
+	for (var ext in rarityIconsHTML) {
+		var icons = rarityIconsHTML[ext];
+		for (var rarity in icons) {
+			var img = $(icons[rarity]);
+			element.appendChild(img[0]);
+			//utility.preloadImage(getUrlForIcon(ext, rarity));
+		}
+	}
+	setTimeout(function() {element.remove()}, 1000);
+}
+
+preLoadIcons();
 
 export {rarityIconsHTML, rarities};

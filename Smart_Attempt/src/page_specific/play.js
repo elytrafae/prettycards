@@ -202,6 +202,8 @@ function InitPlay() {
 	$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
 	
 	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts PrettyCards:TranslationExtReady", function () {
+		window.$("#PrettyCards_SeasonRewards a").html(window.$.i18n("play-rewards"));
+
 		deckSelector.closable = true;
 		deckSelector.closeCallback = CloseDeckSelector;
 		deckSelector.callback = DeckSelectorCallback;

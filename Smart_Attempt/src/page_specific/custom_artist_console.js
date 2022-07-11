@@ -26,11 +26,16 @@ function InitCustomArtistConsole() {
 function StartVerified() {
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+        utility.loadCSSFromGH("ArtistConsole");
         window.$("title").html("PrettyCards - Custom Artist Console");
         //utility.loadCSSFromGH("CustomTranslations");
         $(".mainContent").html(`
             <h1>PrettyCards Artist Console</h1>
+            <select id="PrettyCards_AC_ArtistSelector" class="form-control Artist"></select>
+            <div id="PrettyCards_AC_IdChecker"></div>
         `);
+
+        $("#PrettyCards_AC_ArtistSelector").change(processSkins);
 
     })
 
@@ -39,11 +44,12 @@ function StartVerified() {
 
 function fetchSkins() {
     $.get("/CardSkinsConfig?action=shop", {}, function(data) {
-        console.log(data);
+        //console.log(data);
         allCardSkins = JSON.parse(data.cardSkins);
         allArtists = getListOfArtists();
+        processArtistSelect();
         processSkins();
-        console.log(allCardSkins, allArtists);
+        //console.log(allCardSkins, allArtists);
     });
 }
 
@@ -58,8 +64,39 @@ function getListOfArtists() {
     return artists.sort();
 }
 
-function processSkins() {
+function processArtistSelect() {
+    var txt = `<option value=""></option>`;
+    allArtists.forEach((artist) => {
+        txt += `<option value="${artist}">${artist}</option>`
+    })
+    $("#PrettyCards_AC_ArtistSelector").html(txt);
+    if (allArtists.includes(window.selfUsername)) {
+        $("#PrettyCards_AC_ArtistSelector").val(window.selfUsername);
+    }
+}
 
+function processSkins() {
+    var artist = $("#PrettyCards_AC_ArtistSelector").val();
+    //console.log("PROCESSING SKINS", artist);
+    PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function(data) {
+        var skins = data[0].skins;
+        console.log("SKINS", data, skins);
+        var unlistedSkins = [];
+        allCardSkins.forEach((skin) => {
+            if (artist == "" || skin.authorName == artist) {
+                if (!skins.includes(skin.image)) {
+                    unlistedSkins.push(skin);
+                }
+            }
+        })
+        if (unlistedSkins.length == 0) {
+            $("#PrettyCards_AC_IdChecker").html(`<h2 class="KINDNESS">All of this artist's skins are registered!</h2>`);
+        } else {
+            var text = "<li>" + unlistedSkins.map((e) => {return e.image;}).join("</li><li>") + "</li>";
+            $("#PrettyCards_AC_IdChecker").html(`<div id="PrettyCards_AC_MissingSkinList"><ul>${text}</ul></div>`)
+        }
+        console.log("PROCESSING SKINS", artist, unlistedSkins);
+    })
 }
 
 export {InitCustomArtistConsole};

@@ -7,6 +7,7 @@
 - Emotes now have Sound Effects when used during a game! Thanks go out to MysteryHD for the sound effects.
 
 - Improved the caching algorythm for the Multiple Theme Song system (unless in the Game or Spectator pages) so that it doesn't load everything if it doesn't have to.
+- Default Rarity Icons are now pre-loaded.
 - Improved the Favorite Cards UI for the User Profile viewer. Now, it can show the top 8 cards for a person, instead of 2, and the type of ranking can be toggled.
 - Major balance changes for my DDLC set.
 - Added Battle Mew Mew set because IDK.
