@@ -32,4 +32,8 @@ for file in glob.glob("HDCardSkins/*.png"):
 	'''
 
 stringData = json.dumps(data)
-print(stringData)
+f = open("../json/hdCardSkins.json", "w")
+f.write(stringData)
+f.close()
+print("All Done!")
+# print(stringData)
