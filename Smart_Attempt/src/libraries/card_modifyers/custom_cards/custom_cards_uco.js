@@ -23,7 +23,7 @@ function returnBattleMewMew(settings) {
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
-		name: "Battle Mew Mew Set",
+		name: "UCO Ideas Set",
 		author: "CMD_God",
 		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/UCO_Ideas/",
 		cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/UCO_Ideas/",
@@ -34,7 +34,9 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		aprilCardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/UCO_Ideas/aprilFools/",
 		aprilArtifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/aprilFools/",
 		//universalCustomFont: "Aller",
-		note: `This is the place where I shall document my descent into madness as I try to make an actually good idea for a Battle Mew Mew card. This, of course, only includes the ones that still have the slightest chance of holding up. Purely stat change variations are also not included.
+		note: `Here are some of my UCO ideas.
+        <br>
+        This is also the place where I shall document my descent into madness as I try to make an actually good idea for a Battle Mew Mew card. This, of course, only includes the ones that still have the slightest chance of holding up. Purely stat change variations are also not included.
         
         <p style="color:red;font-size:1.2em;">I know these cards aren't perfectly balanced, and are subject to changes. I just want a general idea going on.</p>`
 	});
