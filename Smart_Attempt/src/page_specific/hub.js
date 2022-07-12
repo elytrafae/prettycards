@@ -107,14 +107,19 @@ function InitHub() {
 	var oldAppendHubDeck = window.appendHubDeck;
 	window.appendHubDeck = function(container, hubDeck) {
 		var $html = oldAppendHubDeck(container, hubDeck);
+		PrettyCards_plugin.events.emit("appendHubDeck()", {container: container, deck: hubDeck, element: $html});
 		//console.log("HUB DECK: ", hubDeck);
+		return $html;
+	}
+	PrettyCards_plugin.events.on("appendHubDeck()", function(data) {
+		var hubDeck = data.deck;
+		var element = data.element;
 		var func = function() {
 			window.showDeckLoadHub(hubDeck.code, hubDeck.date, hubDeck.name, hubDeck.image, hubDeck.owner.username);
 		};
 		//console.log("FUNCTION: ", func);
-		$html.find(".hubDeckShow .show-button")[0].onclick = func;
-		return $html;
-	}
+		element.find(".hubDeckShow .show-button")[0].onclick = func;
+	})
 }
 
 export {InitHub}

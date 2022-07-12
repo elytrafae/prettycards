@@ -58,6 +58,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         cost: 6,
         attack: 6,
         hp: 5,
+        haste: true,
         description: `{{KW:HASTE}}. {{KW:MAGIC}}: Summon an exact copy of an enemy monster for the enemy and halve both monsters' stats (rounded down).`
     }))
 

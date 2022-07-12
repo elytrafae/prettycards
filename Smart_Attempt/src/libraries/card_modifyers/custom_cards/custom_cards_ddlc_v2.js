@@ -238,7 +238,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		cost: 0,
 		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, apply them to the monsters in front of them, burn this and draw a card.",
 		//description: "{{KW:TURBO}}: Remove all negative effects from ally monsters, burn this and draw a card.",
-		description: `Give an ally monster {{KW:HASTE}}. {{KW:DELAY}}: If it's alive, {{KW:SILENCE}} and kill it. Draw a card.`,
+		description: `Give an ally monster {{KW:HASTE}} and +2/-1. {{KW:DELAY}}: If it's alive, {{KW:SILENCE}} and kill it. Draw a card.`,
 		extension: "DDLC",
 		rarity: "TOKEN",
 		frameSkinName: frame,

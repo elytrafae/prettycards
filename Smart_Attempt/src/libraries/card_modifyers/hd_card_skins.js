@@ -56,11 +56,22 @@ if (settings.hd_card_skins.value()) {
         var element = data.element;
         var image = skin.image;
         PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function() { // Race conditions bad
-            if (hd_card_skins.includes(image)) { // This condition is for debug purposes. It can be completely removed in production!
+            if (hd_card_skins.includes(image)) {
                 element.find(".cardImage").css("backgroundImage", `url("${returnHDImageIfThereIs(image)}")`);
             }
         })
     })
+
+    PrettyCards_plugin.events.on("appendHubDeck()", function(data) {
+		var deck = data.deck;
+		var element = data.element;
+        var image = deck.image;
+        PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function() { // Race conditions bad
+            if (hd_card_skins.includes(image)) {
+                element.find(".hubDeckImage img").attr("src", returnHDImageIfThereIs(image));
+            }
+        })
+    });
     
 }
 
