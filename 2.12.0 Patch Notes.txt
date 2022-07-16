@@ -10,7 +10,7 @@
 - Default Rarity Icons are now pre-loaded.
 - Improved the Favorite Cards UI for the User Profile viewer. Now, it can show the top 8 cards for a person, instead of 2, and the type of ranking can be toggled.
 - Major balance changes for my DDLC set.
-- Added Battle Mew Mew set because IDK.
+- Added UCO Ideas set because IDK.
 - Fixed the "End of season rewards" text on the play page not rendering properly for everyone due to race conditions.
 - Numerous minor bug fixes.
 - IDK, some things I probably forgot. This has been MONTHS in the making!

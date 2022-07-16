@@ -188,6 +188,50 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         hp: 3,
         description: `{{KW:MAGIC}}: Summon an exact copy of a non-{{RARITY:DETERMINATION}} ally monster and {{KW:Switch}}: Halve their {{PC_SWITCH_CYAN:1|{{ATK}}}} or {{PC_SWITCH_RED:1|{{HP}}}}.`
     }))
+
+    c.newCard({
+        name: "{{PLURAL:$1|NEO Combo|NEO Combos}}",
+        image: "NEO_Combo",
+        aprilImage: "NEO_Combo",
+        extension: "BASE",
+        rarity: "LEGENDARY",
+        cost: 7,
+        attack: 10,
+        hp: 1,
+        description: `{{KW:MAGIC}}: Choose a {{TRIBE:BARGAIN}} to cast to gain {{KW:CHARGE}}.`
+        //hasThemeSong: false
+        /*
+        themeSongs: [
+            "Battle_Mew_Mew_1",
+            "Battle_Mew_Mew_2",
+            "Battle_Mew_Mew_3"
+        ]
+        */
+    })
+
+    c.newCard({
+        name: "{{PLURAL:$1|Gothelle|Gothelles}}",
+        image: "Gothelle",
+        aprilImage: "Gothelle",
+        extension: "DELTARUNE",
+        rarity: "EPIC",
+        cost: 7,
+        attack: 7,
+        hp: 7,
+        description: `Whenever an enemy monster deals {{DMG}} to an ally, this deals 2 {{DMG}} back.`
+    })
+
+    c.newCard({
+        name: "{{PLURAL:$1|Gothelle|Gothelles}}",
+        image: "Gothelle",
+        aprilImage: "Gothelle",
+        extension: "DELTARUNE",
+        rarity: "EPIC",
+        cost: 7,
+        attack: 7,
+        hp: 7,
+        description: `Whenever an enemy monster deals {{DMG}} to you, this deals 3 {{DMG}} back.`
+    })
 	
 })
 
