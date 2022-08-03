@@ -16,6 +16,14 @@
     padding: 3px 0px;
 }
 
+#PrettyCards_AC_ZipMakerTable {
+    width: 100%;
+}
+
+#PrettyCards_AC_ZipMakerTable .td {
+    width: 50%;
+}
+
 .PrettyCards_AC_ImageUploadLabel:empty {
     display: block;
     width: 160px;

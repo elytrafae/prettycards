@@ -117,7 +117,7 @@ function processZipMaker(artist, skins) {
     unlistedSkins.forEach((skin) => {
         selectHTML += `<option value="${skin.image}">${skin.name}</option>`;
     })
-    $("#PrettyCards_AC_ZipMaker").html(`<table><tbody></tbody></table>`);
+    $("#PrettyCards_AC_ZipMaker").html(`<table id="PrettyCards_AC_ZipMakerTable"><tbody></tbody></table>`);
     var tBody = $("#PrettyCards_AC_ZipMaker").find("tbody");
     function addRow() {
         tBody.append(`
