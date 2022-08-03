@@ -18,10 +18,12 @@
 
 #PrettyCards_AC_ZipMakerTable {
     width: 100%;
+    border: 3px solid white;
 }
 
 #PrettyCards_AC_ZipMakerTable td {
     width: 50%;
+    border: 1px solid white;
 }
 
 .PrettyCards_AC_ImageUploadLabel,.PrettyCards_AC_ImageUploadSelect {

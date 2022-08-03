@@ -82,8 +82,8 @@ function processArtistSelect() {
 function onArtistChange() {
     var artist = $("#PrettyCards_AC_ArtistSelector").val();
     PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function(data) {
-        var skins = data;
-        console.log(data);
+        var skins = data[0].skins;
+        console.log(skins);
         processSkins(artist, skins);
         processZipMaker(artist, skins);
     });
@@ -124,7 +124,7 @@ function processZipMaker(artist, skins) {
         tBody.append(`
             <tr>
                 <td><label class="PrettyCards_AC_ImageUploadLabel" for="${uploaderId}"></label><input type="file" class="PrettyCards_Hidden" id="${uploaderId}"></td>
-                <td><select class="PrettyCards_AC_ImageUploadSelect">${selectHTML}</select></td>
+                <td><select class="PrettyCards_AC_ImageUploadSelect form-control white">${selectHTML}</select></td>
             </tr>
         `);
     }
