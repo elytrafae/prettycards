@@ -15,7 +15,7 @@
         "dist/*.js"
     ],
     "keywords": [
-		"prettycards",
+        "prettycards",
         "underscript",
         "plugin"
     ],
@@ -25,5 +25,8 @@
         "webpack": "^4.41.6",
         "webpack-cli": "^3.3.11",
         "webpack-userscript": "^2.5.1"
+    },
+    "dependencies": {
+        "gif-to-apng": "^0.1.2"
     }
 }

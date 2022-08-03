@@ -122,24 +122,38 @@ function processZipMaker(artist, skins) {
     function imageUploadEvent(e) {
         var element = e.currentTarget;
         var file = element.files[0];
+        console.log(file);
         var label = document.querySelector("label[for=" + element.id + "]");
-        console.log(label);
         if (label.innerHTML === "") {
             addRow(tBody.find("tr").length);
         }
         label.innerHTML = `<img src="${URL.createObjectURL(file)}">`;
+        imageToPng(label.firstChild.src); // This is only for debugging!
     }
     function addRow(rowNr) {
         var uploaderId = `PrettyCards_AC_ImageUpload_${rowNr}`;
         tBody.append(`
             <tr>
-                <td><label class="PrettyCards_AC_ImageUploadLabel" for="${uploaderId}"></label><input type="file" class="PrettyCards_Hidden" id="${uploaderId}" accept="image/*"></td>
+                <td><div style="display:flex;"><label class="PrettyCards_AC_ImageUploadLabel" for="${uploaderId}"></label></div><input type="file" class="PrettyCards_Hidden" id="${uploaderId}" accept="image/*"></td>
                 <td><select class="PrettyCards_AC_ImageUploadSelect form-control white">${selectHTML}</select></td>
             </tr>
         `);
         tBody.find(`#${uploaderId}`).change(imageUploadEvent);
     }
     addRow(0);
+}
+
+function imageToPng(src) {
+    var imageElement = document.createElement("IMG");
+    imageElement.onload = function() {
+        var canvas = document.createElement("CANVAS");
+        canvas.setAttribute("height", imageElement.height);
+        canvas.setAttribute("width", imageElement.width);
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(imageElement, 0, 0, imageElement.width, imageElement.height);
+        $(".mainContent").append(canvas);
+    }
+    imageElement.src = src;
 }
 
 export {InitCustomArtistConsole};
