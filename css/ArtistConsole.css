@@ -24,6 +24,10 @@
     width: 50%;
 }
 
+.PrettyCards_AC_ImageUploadLabel,.PrettyCards_AC_ImageUploadSelect {
+    margin: auto;
+}
+
 .PrettyCards_AC_ImageUploadLabel:empty {
     display: block;
     width: 160px;

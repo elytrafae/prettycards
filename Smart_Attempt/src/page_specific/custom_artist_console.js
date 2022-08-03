@@ -119,15 +119,16 @@ function processZipMaker(artist, skins) {
     })
     $("#PrettyCards_AC_ZipMaker").html(`<table id="PrettyCards_AC_ZipMakerTable"><tbody></tbody></table>`);
     var tBody = $("#PrettyCards_AC_ZipMaker").find("tbody");
-    function addRow() {
+    function addRow(rowNr) {
+        var uploaderId = `PrettyCards_AC_ImageUpload_${rowNr}`;
         tBody.append(`
             <tr>
-                <td><label class="PrettyCards_AC_ImageUploadLabel"></label><input type="file" class="PrettyCards_Hidden"></td>
-                <td><select>${selectHTML}</select></td>
+                <td><label class="PrettyCards_AC_ImageUploadLabel" for="${uploaderId}"></label><input type="file" class="PrettyCards_Hidden" id="${uploaderId}"></td>
+                <td><select class="PrettyCards_AC_ImageUploadSelect">${selectHTML}</select></td>
             </tr>
         `);
     }
-    addRow();
+    addRow(0);
 }
 
 export {InitCustomArtistConsole};
