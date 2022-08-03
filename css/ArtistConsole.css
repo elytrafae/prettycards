@@ -24,6 +24,7 @@
 #PrettyCards_AC_ZipMakerTable td {
     width: 50%;
     border: 1px solid white;
+    padding: 0.5em;
 }
 
 .PrettyCards_AC_ImageUploadLabel,.PrettyCards_AC_ImageUploadSelect {
@@ -35,4 +36,8 @@
     width: 160px;
     height: 90px;
     border: 2px dashed #555555;
+}
+
+.PrettyCards_AC_ImageUploadLabel img {
+    width: 160px;
 }
