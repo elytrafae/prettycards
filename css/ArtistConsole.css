@@ -16,3 +16,9 @@
     padding: 3px 0px;
 }
 
+.PrettyCards_AC_ImageUploadLabel:empty {
+    display: block;
+    width: 160px;
+    height: 90px;
+    border: 2px dashed #555555;
+}
