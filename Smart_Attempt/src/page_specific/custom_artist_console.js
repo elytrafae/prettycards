@@ -1,6 +1,7 @@
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "/src/libraries/utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
+//import gify from "/src/third_party/gify.min.js";
 
 var allCardSkins = [];
 var allArtists = [];
@@ -10,6 +11,10 @@ function toEncodedHTML(input) {
     return $('<span>').text(input).html();
 }
 */
+
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+    window.$("body").append(`<script src=""></script>`);
+})
 
 function InitCustomArtistConsole() {
 
@@ -128,7 +133,11 @@ function processZipMaker(artist, skins) {
             addRow(tBody.find("tr").length);
         }
         label.innerHTML = `<img src="${URL.createObjectURL(file)}">`;
-        imageToPng(label.firstChild.src); // This is only for debugging!
+        if (file.type == "image/gif") {
+            gifToFrames(file);
+        } else {
+            imageToPng(label.firstChild.src); // This is only for debugging!
+        }
     }
     function addRow(rowNr) {
         var uploaderId = `PrettyCards_AC_ImageUpload_${rowNr}`;
@@ -155,5 +164,18 @@ function imageToPng(src) {
     }
     imageElement.src = src;
 }
+
+function gifToFrames(file) {
+    console.log(gify);
+    if (gify.isAnimated(file)) {
+        var gif = new GIF(file);
+        framesArray = gif.decompressFrames(true);
+        totalFrames = framesArray.length;
+        console.log("GIF", gif);
+    } else {
+        console.error("THIS IS NOT AN ANIMATED GIF!");
+    }
+}
+
 
 export {InitCustomArtistConsole};
