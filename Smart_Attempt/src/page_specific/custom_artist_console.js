@@ -13,7 +13,7 @@ function toEncodedHTML(input) {
 */
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    window.$("body").append(`<script src=""></script>`);
+    window.$("body").append(`<script src="https://raw.githubusercontent.com/CMD-God/prettycards/master/Smart_Attempt/src/third_party/gify.min.js"></script>`);
 })
 
 function InitCustomArtistConsole() {
