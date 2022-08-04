@@ -7,6 +7,10 @@ import {UPNG} from "upng-js";
 var allCardSkins = [];
 var allArtists = [];
 
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+    
+})
+
 function InitCustomArtistConsole() {
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
