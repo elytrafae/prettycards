@@ -1,21 +1,11 @@
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "/src/libraries/utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
-//import gify from "/src/third_party/gify.min.js";
+import { parseGIF, decompressFrames } from 'gifuct-js';
+import {UPNG} from "upng-js";
 
 var allCardSkins = [];
 var allArtists = [];
-
-/*
-function toEncodedHTML(input) {
-    return $('<span>').text(input).html();
-}
-*/
-
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    // https://github.com/CMD-God/prettycards/tree/f659e3ff41c7e05e54c420d8c9822c9633f9bec9/Smart_Attempt/src/third_party/gify.min.js
-    window.$("body").append(`<script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@f659e3ff41c7e05e54c420d8c9822c9633f9bec9/Smart_Attempt/src/third_party/gify.min.js"></script>`);
-})
 
 function InitCustomArtistConsole() {
 
@@ -167,16 +157,15 @@ function imageToPng(src) {
 }
 
 function gifToFrames(file) {
-    console.log(gify);
-    if (gify.isAnimated(file)) {
-        var gif = new GIF(file);
-        framesArray = gif.decompressFrames(true);
-        totalFrames = framesArray.length;
-        console.log("GIF", gif);
-    } else {
-        console.error("THIS IS NOT AN ANIMATED GIF!");
-    }
+    console.log(UPNG);
+    file.arrayBuffer().then( (arrayBuffer) => {
+        var gif = parseGIF(arrayBuffer);
+        frames = decompressFrames(gif, true);
+        console.log("GIF", frames);
+    });
 }
+
+
 
 
 export {InitCustomArtistConsole};
