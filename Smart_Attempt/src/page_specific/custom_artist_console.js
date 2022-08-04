@@ -13,7 +13,8 @@ function toEncodedHTML(input) {
 */
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    window.$("body").append(`<script src="https://raw.githubusercontent.com/CMD-God/prettycards/master/Smart_Attempt/src/third_party/gify.min.js"></script>`);
+    // https://github.com/CMD-God/prettycards/tree/f659e3ff41c7e05e54c420d8c9822c9633f9bec9/Smart_Attempt/src/third_party/gify.min.js
+    window.$("body").append(`<script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@f659e3ff41c7e05e54c420d8c9822c9633f9bec9/Smart_Attempt/src/third_party/gify.min.js"></script>`);
 })
 
 function InitCustomArtistConsole() {
