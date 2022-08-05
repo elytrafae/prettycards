@@ -2,14 +2,34 @@ import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "/src/libraries/utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 import { parseGIF, decompressFrames } from 'gifuct-js';
-import {UPNG} from "upng-js";
 
 var allCardSkins = [];
 var allArtists = [];
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    
+    window.$("body").append(`
+        <script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c21e2752003c48dd20b097ffb97c577ef5677f47/put_on_page_libs/pako.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c21e2752003c48dd20b097ffb97c577ef5677f47/put_on_page_libs/UPNG.js"></script>
+    `);
 })
+
+function getCheckableName(file) {
+    var name = file.name.replace(/\.[^/.]+$/, "");
+    name = name.replaceAll(" ", "_").toUpperCase();
+    return name;
+}
+
+function returnmatchedValue(file, selectElement) {
+    var name = getCheckableName(file);
+    var options = selectElement.children;
+    for (var i=0; i < options.length; i++) {
+        var option = options[i];
+        if (option.value.toUpperCase() === name) {
+            return option.value;
+        }
+    }
+    return null;
+}
 
 function InitCustomArtistConsole() {
 
@@ -128,8 +148,13 @@ function processZipMaker(artist, skins) {
             addRow(tBody.find("tr").length);
         }
         label.innerHTML = `<img src="${URL.createObjectURL(file)}">`;
+        var selectElement = element.parentElement.parentElement.children[1].firstChild; // I feel disgusted, but I am making this in a hurry anyway.
+        var value = returnmatchedValue(file, selectElement); 
+        if (value != null) {
+            selectElement.value = value;
+        }
         if (file.type == "image/gif") {
-            gifToFrames(file);
+            gifToApng(file);
         } else {
             imageToPng(label.firstChild.src); // This is only for debugging!
         }
@@ -147,29 +172,48 @@ function processZipMaker(artist, skins) {
     addRow(0);
 }
 
-function imageToPng(src) {
+function getImageAndSize(src, cb) {
     var imageElement = document.createElement("IMG");
     imageElement.onload = function() {
-        var canvas = document.createElement("CANVAS");
-        canvas.setAttribute("height", imageElement.height);
-        canvas.setAttribute("width", imageElement.width);
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(imageElement, 0, 0, imageElement.width, imageElement.height);
-        $(".mainContent").append(canvas);
+        cb(imageElement.width, imageElement.height, imageElement);
     }
     imageElement.src = src;
 }
 
-function gifToFrames(file) {
-    console.log(UPNG);
-    file.arrayBuffer().then( (arrayBuffer) => {
-        var gif = parseGIF(arrayBuffer);
-        frames = decompressFrames(gif, true);
-        console.log("GIF", frames);
-    });
+function imageToPng(src) {
+    getImageAndSize(src, (width, height, element) => {
+        var canvas = document.createElement("CANVAS");
+        canvas.setAttribute("height", height);
+        canvas.setAttribute("width", width);
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(element, 0, 0, width, height);
+        $(".mainContent").append(canvas);
+    })
 }
 
-
+function gifToApng(file) {
+    getImageAndSize(URL.createObjectURL(file), (width, height, element) => {
+        file.arrayBuffer().then( (arrayBuffer) => {
+            var gif = parseGIF(arrayBuffer);
+            frames = decompressFrames(gif, true);
+            console.log("GIF", frames);
+            var framePixels = frames.map((e) => {return new Uint8Array(e.pixels);});
+            var dels = frames.map((e) => {return e.delay;});
+            console.log(framePixels);
+            console.log(dels);
+            var png = window.UPNG.encode(framePixels, width, height, 0, dels);
+            var pngArray = new Uint8Array(png);
+            var blobUrl = URL.createObjectURL(new Blob([pngArray], {type: "image/png"}));
+            console.log(png);
+            console.log(pngArray);
+            console.log(blobUrl);
+            utility.downloadFile(pngArray, "test.png", "image/png");
+            //const decoder = new TextDecoder('utf8');
+            //const b64encoded = btoa(decoder.decode(png));
+            $(".mainContent").append(`<img src="${blobUrl}">`);
+        });
+    })
+}
 
 
 export {InitCustomArtistConsole};

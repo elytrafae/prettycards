@@ -28,7 +28,6 @@
     },
     "dependencies": {
         "gifuct-js": "^2.1.2",
-        "pako": "^2.0.4",
-        "upng-js": "github:photopea/UPNG.js#a4eafb5"
+        "pako": "^2.0.4"
     }
 }
