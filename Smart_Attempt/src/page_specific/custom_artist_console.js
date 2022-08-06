@@ -192,27 +192,40 @@ function imageToPng(src) {
 }
 
 function gifToApng(file) {
-    getImageAndSize(URL.createObjectURL(file), (width, height, element) => {
-        file.arrayBuffer().then( (arrayBuffer) => {
-            var gif = parseGIF(arrayBuffer);
-            frames = decompressFrames(gif, true);
-            console.log("GIF", frames);
-            var framePixels = frames.map((e) => {return new Uint8Array(e.pixels);});
-            var dels = frames.map((e) => {return e.delay;});
-            console.log(framePixels);
-            console.log(dels);
-            var png = window.UPNG.encode(framePixels, width, height, 0, dels);
-            var pngArray = new Uint8Array(png);
-            var blobUrl = URL.createObjectURL(new Blob([pngArray], {type: "image/png"}));
-            console.log(png);
-            console.log(pngArray);
-            console.log(blobUrl);
-            utility.downloadFile(pngArray, "test.png", "image/png");
-            //const decoder = new TextDecoder('utf8');
-            //const b64encoded = btoa(decoder.decode(png));
-            $(".mainContent").append(`<img src="${blobUrl}">`);
+    file.arrayBuffer().then( (arrayBuffer) => {
+        var gif = parseGIF(arrayBuffer);
+        frames = decompressFrames(gif, true);
+        console.log("GIF", frames);
+        var width = frames.dims.width;
+        var height = frames.dims.height;
+        frames.forEach((frame) => {
+            var canvas = document.createElement("CANVAS");
+            canvas.setAttribute("height", height);
+            canvas.setAttribute("width", width);
+            var ctx = canvas.getContext("2d");
+            var imageData = ctx.createImageData(width, height);
+            frame.patch.forEach((p, i) => {
+                imageData.data[i] = p;
+            })
+            console.log(imageData);
+            ctx.putImageData(imageData, 0, 0);
+            $(".mainContent").append(canvas);
         });
-    })
+        var framePixels = frames.map((e) => {return new Uint8Array(e.pixels);});
+        var dels = frames.map((e) => {return e.delay;});
+        console.log(framePixels);
+        console.log(dels);
+        var png = window.UPNG.encode(framePixels, width, height, 0, dels);
+        var pngArray = new Uint8Array(png);
+        var blobUrl = URL.createObjectURL(new Blob([pngArray], {type: "image/png"}));
+        console.log(png);
+        console.log(pngArray);
+        console.log(blobUrl);
+        utility.downloadFile(pngArray, "test.png", "image/png");
+        //const decoder = new TextDecoder('utf8');
+        //const b64encoded = btoa(decoder.decode(png));
+        $(".mainContent").append(`<img src="${blobUrl}">`);
+    });
 }
 
 
