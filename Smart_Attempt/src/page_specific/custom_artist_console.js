@@ -147,6 +147,15 @@ function processZipMaker(artist, skins) {
     `);
     var tBody = $("#PrettyCards_AC_ZipMaker").find("tbody");
 
+    function removeRow(id) {
+        console.log("REMOVING!", id);
+        var rows = document.querySelectorAll("#PrettyCards_AC_ZipMakerTable tr");
+        if (id < rows.length - 1) { // CANNOT DELETE THE LAST ROW!
+            rows[id].remove();
+            zipMakerFiles.splice(id, 1);
+        }
+    }
+
     function multipleImageUploadEvent(e) {
         var element = e.currentTarget;
         var files = element.files;
@@ -213,6 +222,11 @@ function processZipMaker(artist, skins) {
         </tr>
         `);
         ele.find(`#${uploaderId}`).change(imageUploadEvent);
+        ele.find(`.PrettyCards_AC_ImageUploadRemove`).click(function(e) {
+            var element = e.currentTarget;
+            var index = [].slice.call(document.querySelectorAll(".PrettyCards_AC_ImageUploadRemove")).indexOf(element);
+            removeRow(index);
+        })
         tBody.append(ele);
         return ele;
     }
