@@ -193,19 +193,23 @@ function processZipMaker(artist, skins) {
         var index = [].slice.call(document.querySelectorAll(".PrettyCards_AC_ImageUploadLabel")).indexOf(label);
         zipMakerFiles[index] = file;
         updateLabel(index);
+
         // This is only for debugging!
         if (file.type == "image/gif") {
             gifToApng(file);
+        } else if (file.type != "image/png") {
+            imageToPng(label.firstChild.src);
         } else {
-            imageToPng(label.firstChild.src); // This is only for debugging!
+            console.log("THIS IS ALREADY A PNG! ^^");
         }
+        ///////////////////////////////
     }
     function addRow(rowNr) {
         var uploaderId = `PrettyCards_AC_ImageUpload_${rowNr}`;
         var ele = $(`
         <tr>
             <td><div style="display:flex;"><label class="PrettyCards_AC_ImageUploadLabel" for="${uploaderId}"></label></div><input type="file" class="PrettyCards_Hidden" id="${uploaderId}" accept="image/*"></td>
-            <td><select class="PrettyCards_AC_ImageUploadSelect form-control white">${selectHTML}</select></td>
+            <td><div style="display:flex;"><select class="PrettyCards_AC_ImageUploadSelect form-control white">${selectHTML}</select><button class="PrettyCards_AC_ImageUploadRemove btn btn-danger">Remove!</button></div></td>
         </tr>
         `);
         ele.find(`#${uploaderId}`).change(imageUploadEvent);
@@ -240,36 +244,12 @@ function gifToApng(file) {
         frames = decompressFrames(gif, true);
         var width = gif.lsd.width;
         var height = gif.lsd.height;
-        //var framePixels = [];
-        /*
-        frames.forEach((frame) => {
-            var canvas = document.createElement("CANVAS");
-            canvas.setAttribute("height", height);
-            canvas.setAttribute("width", width);
-            var ctx = canvas.getContext("2d");
-            var imageData = ctx.createImageData(width, height);
-            frame.patch.forEach((p, i) => {
-                imageData.data[i] = p;
-            })
-            console.log(imageData);
-            ctx.putImageData(imageData, 0, 0);
-            //framePixels.push(ctx.getImageData(0,0,width,height).data.buffer);
-            $(".mainContent").append(canvas);
-        });
-        */
         var framePixels = frames.map((e) => {return new Uint8Array(e.patch);});
         var dels = frames.map((e) => {return e.delay;});
-        //console.log(framePixels);
-        //console.log(dels);
         var png = window.UPNG.encode(framePixels, width, height, 0, dels);
         var pngArray = new Uint8Array(png);
         const blobUrl = URL.createObjectURL(new Blob([pngArray], {type: "image/png"}));
-        //console.log(png);
-        //console.log(pngArray);
-        //console.log(blobUrl);
         utility.downloadFile(pngArray, "test.png", "image/png");
-        //const decoder = new TextDecoder('utf8');
-        //const b64encoded = btoa(decoder.decode(png));
         var debugImage = document.createElement("IMG");
         debugImage.src = blobUrl;
         debugImage.onload = function() {

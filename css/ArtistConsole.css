@@ -51,3 +51,7 @@
 .PrettyCards_AC_ImageUploadLabel img {
     width: 160px;
 }
+
+.PrettyCards_AC_ImageUploadRemove {
+    margin-left: 5px;
+}
