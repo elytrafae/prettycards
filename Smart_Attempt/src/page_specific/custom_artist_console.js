@@ -131,28 +131,69 @@ function processSkins(artist, skins) {
     }
 }
 
+var zipMakerFiles = [];
+
 function processZipMaker(artist, skins) {
+    zipMakerFiles = [];
     var unlistedSkins = getUnlistedSkins(artist, skins);
     var selectHTML = "";
     unlistedSkins.forEach((skin) => {
         selectHTML += `<option value="${skin.image}">${skin.name}</option>`;
     })
-    $("#PrettyCards_AC_ZipMaker").html(`<table id="PrettyCards_AC_ZipMakerTable"><tbody></tbody></table>`);
+    $("#PrettyCards_AC_ZipMaker").html(`
+        <label id="PrettyCards_AC_UploadMultiple" for="PrettyCards_AC_ImageUpload_Multiple" class="btn btn-primary">Upload Multiple Files</label>
+        <input type="file" class="PrettyCards_Hidden" id="PrettyCards_AC_ImageUpload_Multiple" accept="image/*" multiple>
+        <table id="PrettyCards_AC_ZipMakerTable"><tbody></tbody></table>
+    `);
     var tBody = $("#PrettyCards_AC_ZipMaker").find("tbody");
-    function imageUploadEvent(e) {
+
+    function multipleImageUploadEvent(e) {
         var element = e.currentTarget;
-        var file = element.files[0];
-        console.log(file);
-        var label = document.querySelector("label[for=" + element.id + "]");
-        if (label.innerHTML === "") {
-            addRow(tBody.find("tr").length);
+        var files = element.files;
+        var trs = $("#PrettyCards_AC_ZipMakerTable tr");
+        trs[trs.length-1].remove();
+        var len = tBody.find("tr").length;
+        for (var i=0; i < files.length; i++) {
+            var file = files[i];
+            var ele = addRow(len+i);
+            zipMakerFiles.push(file);
+            updateLabel(len+i);
         }
-        label.innerHTML = `<img src="${URL.createObjectURL(file)}">`;
-        var selectElement = element.parentElement.parentElement.children[1].firstChild; // I feel disgusted, but I am making this in a hurry anyway.
+        addRow(len+i);
+    }
+
+    $("#PrettyCards_AC_ZipMaker").find("#PrettyCards_AC_ImageUpload_Multiple").change(multipleImageUploadEvent);
+
+    function updateLabel(i) {
+        var file = zipMakerFiles[i];
+        const url = URL.createObjectURL(file);
+        var image = new Image();
+        image.onload = function() {
+            URL.revokeObjectURL(url);
+        }
+        var label = $(".PrettyCards_AC_ImageUploadLabel")[i];
+        label.innerHTML = "";
+        label.appendChild(image);
+        image.setAttribute("src", url);
+        var selectElement = $(".PrettyCards_AC_ImageUploadSelect")[i];
         var value = returnmatchedValue(file, selectElement); 
         if (value != null) {
             selectElement.value = value;
         }
+    }
+
+    function imageUploadEvent(e) {
+        var element = e.currentTarget;
+        var file = element.files[0];
+        //console.log(file);
+        var label = document.querySelector("label[for=" + element.id + "]");
+        if (label.innerHTML === "") {
+            addRow(tBody.find("tr").length);
+        }
+        var index = [].slice.call(document.querySelectorAll(".PrettyCards_AC_ImageUploadLabel")).indexOf(label);
+        zipMakerFiles[index] = file;
+        updateLabel(index);
+        // This is only for debugging!
         if (file.type == "image/gif") {
             gifToApng(file);
         } else {
@@ -161,13 +202,15 @@ function processZipMaker(artist, skins) {
     }
     function addRow(rowNr) {
         var uploaderId = `PrettyCards_AC_ImageUpload_${rowNr}`;
-        tBody.append(`
-            <tr>
-                <td><div style="display:flex;"><label class="PrettyCards_AC_ImageUploadLabel" for="${uploaderId}"></label></div><input type="file" class="PrettyCards_Hidden" id="${uploaderId}" accept="image/*"></td>
-                <td><select class="PrettyCards_AC_ImageUploadSelect form-control white">${selectHTML}</select></td>
-            </tr>
+        var ele = $(`
+        <tr>
+            <td><div style="display:flex;"><label class="PrettyCards_AC_ImageUploadLabel" for="${uploaderId}"></label></div><input type="file" class="PrettyCards_Hidden" id="${uploaderId}" accept="image/*"></td>
+            <td><select class="PrettyCards_AC_ImageUploadSelect form-control white">${selectHTML}</select></td>
+        </tr>
         `);
-        tBody.find(`#${uploaderId}`).change(imageUploadEvent);
+        ele.find(`#${uploaderId}`).change(imageUploadEvent);
+        tBody.append(ele);
+        return ele;
     }
     addRow(0);
 }
@@ -195,9 +238,10 @@ function gifToApng(file) {
     file.arrayBuffer().then( (arrayBuffer) => {
         var gif = parseGIF(arrayBuffer);
         frames = decompressFrames(gif, true);
-        console.log("GIF", frames);
-        var width = frames.dims.width;
-        var height = frames.dims.height;
+        var width = gif.lsd.width;
+        var height = gif.lsd.height;
+        //var framePixels = [];
+        /*
         frames.forEach((frame) => {
             var canvas = document.createElement("CANVAS");
             canvas.setAttribute("height", height);
@@ -209,22 +253,29 @@ function gifToApng(file) {
             })
             console.log(imageData);
             ctx.putImageData(imageData, 0, 0);
+            //framePixels.push(ctx.getImageData(0,0,width,height).data.buffer);
             $(".mainContent").append(canvas);
         });
-        var framePixels = frames.map((e) => {return new Uint8Array(e.pixels);});
+        */
+        var framePixels = frames.map((e) => {return new Uint8Array(e.patch);});
         var dels = frames.map((e) => {return e.delay;});
-        console.log(framePixels);
-        console.log(dels);
+        //console.log(framePixels);
+        //console.log(dels);
         var png = window.UPNG.encode(framePixels, width, height, 0, dels);
         var pngArray = new Uint8Array(png);
-        var blobUrl = URL.createObjectURL(new Blob([pngArray], {type: "image/png"}));
-        console.log(png);
-        console.log(pngArray);
-        console.log(blobUrl);
+        const blobUrl = URL.createObjectURL(new Blob([pngArray], {type: "image/png"}));
+        //console.log(png);
+        //console.log(pngArray);
+        //console.log(blobUrl);
         utility.downloadFile(pngArray, "test.png", "image/png");
         //const decoder = new TextDecoder('utf8');
         //const b64encoded = btoa(decoder.decode(png));
-        $(".mainContent").append(`<img src="${blobUrl}">`);
+        var debugImage = document.createElement("IMG");
+        debugImage.src = blobUrl;
+        debugImage.onload = function() {
+            URL.revokeObjectURL(blobUrl);
+        }
+        $(".mainContent").append(debugImage);
     });
 }
 

@@ -38,6 +38,16 @@
     border: 2px dashed #555555;
 }
 
+.PrettyCards_AC_ImageUploadLabel:empty::after {
+    display: block;
+    content: "Click to Upload Image";
+    color: #555555;
+    width: 120px;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px; /*Sorry, perfectionism, I cannot center this :/ */
+}
+
 .PrettyCards_AC_ImageUploadLabel img {
     width: 160px;
 }
