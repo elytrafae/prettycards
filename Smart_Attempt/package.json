@@ -27,7 +27,9 @@
         "webpack-userscript": "^2.5.1"
     },
     "dependencies": {
+        "file-saver": "^2.0.5",
         "gifuct-js": "^2.1.2",
+        "jszip": "^3.10.1",
         "pako": "^2.0.4"
     }
 }
