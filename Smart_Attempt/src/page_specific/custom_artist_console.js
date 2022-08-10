@@ -213,27 +213,28 @@ function processZipMaker(artist, skins) {
         var filesDone = 0;
 
         // DEBUG AREA
-        var testZip = new JSZip();
-        testZip.file("file.txt", "content");
-        testZip.generateAsync({
-            type:"blob", 
-            compression: "DEFLATE", 
-            compressionOptions: {
-                level: 3
-            }}, (a, b, c) => {console.log(a, b, c); updateNr++; displayMessage(`Generating ZIP file . . . ` + updateNr, "yellow");})
-            .then(function(content) {
-                console.log(content);
-                displayMessage(`The ZIP file should download now. Thank you for your help! You can send that to me over Discord.`, "green");
-                saveAs(content, "hd_art.zip");
-        });
-
+        console.log("RIGHT BEFORE TEST ZIP!");
+        try {
+            var testZip = new JSZip();
+            testZip.file("file.txt", "content");
+            console.log("TEST ZIP LOG", testZip);
+            testZip.generateAsync({type:"blob"}, (a, b, c) => {console.log(a, b, c); updateNr++; console.log(`Generating ZIP file . . . ` + updateNr);})
+                .then(function(content) {
+                    console.log("TEST ZIP CONTENT", content);
+                    saveAs(content, "test.zip");
+                }).catch(function(e) {
+                    console.error(e);
+                });
+        } catch (e) {
+            console.error(e);
+        }
         /////////////
 
         var zip = new JSZip();
         //console.log(JSZip.support);
 
         function cb(blob, filename) {
-            zip.file(filename + ".png", blob);
+            zip.file(filename + ".png", blob, {blob: true});
             filesDone++;
             if (filesDone >= zipMakerFiles.length) {
                 console.log(zip);
@@ -250,7 +251,9 @@ function processZipMaker(artist, skins) {
                             console.log(content);
                             displayMessage(`The ZIP file should download now. Thank you for your help! You can send that to me over Discord.`, "green");
                             saveAs(content, "hd_art.zip");
-                    });
+                        }).catch(function(e) {
+                            console.error(e);
+                        });;
                 } catch (e) {
                     displayMessage(`An unexpected error occured while generating the zip file. I'm sorry for the inconvenience.`, "red");
                     console.error(e);
