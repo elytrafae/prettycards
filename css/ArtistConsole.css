@@ -23,6 +23,10 @@
 
 #PrettyCards_AC_ZipMakerTable td {
     width: 50%;
+}
+
+#PrettyCards_AC_ZipMakerTable td {
+    width: 50%;
     border: 1px solid white;
     padding: 0.5em;
 }
