@@ -10,8 +10,9 @@ var allArtists = [];
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
     window.$("body").append(`
-        <script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c21e2752003c48dd20b097ffb97c577ef5677f47/put_on_page_libs/pako.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@c21e2752003c48dd20b097ffb97c577ef5677f47/put_on_page_libs/UPNG.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@114693a052f101f568e32c07980625bf92cb9dee/put_on_page_libs/pako.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@114693a052f101f568e32c07980625bf92cb9dee/put_on_page_libs/UPNG.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/CMD-God/prettycards@114693a052f101f568e32c07980625bf92cb9dee/put_on_page_libs/jszip.min.js"></script>
     `);
 })
 
