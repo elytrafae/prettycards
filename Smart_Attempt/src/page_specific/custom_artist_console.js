@@ -108,7 +108,7 @@ function onArtistChange() {
         var skins = data[0].skins;
         //console.log(skins);
         processSkins(artist, skins);
-        processZipMaker(artist, skins);
+        //processZipMaker(artist, skins);
     });
 }
 
