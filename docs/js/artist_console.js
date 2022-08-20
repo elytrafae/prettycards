@@ -4,6 +4,26 @@ console.log("ARTIST CONSOLE JS LOADED!")
 var allCardSkins = [];
 var allArtists = [];
 
+var hdSkins = [];
+var hdSkinListeners = [];
+
+function onHdSkinFetched(cb) {
+    if (hdSkins.length > 0) {
+        cb(hdSkins);
+        return;
+    }
+    hdSkinListeners.push(cb);
+}
+
+function fetchHdSkins() {
+    $.get("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/hdCardSkins.json", {}, function(data) {
+        hdSkins = data;
+        hdSkinListeners.forEach(cb => {cb(hdSkins)});
+    })
+}
+
+fetchHdSkins();
+
 function getCheckableName(file) {
     var name = file.name.replace(/\.[^/.]+$/, "");
     name = name.replaceAll(" ", "_").toUpperCase();
@@ -57,11 +77,8 @@ function processArtistSelect() {
 
 function onArtistChange() {
     var artist = $("#PrettyCards_AC_ArtistSelector").val();
-    PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function(data) {
-        var skins = data[0].skins;
-        //console.log(skins);
-        processSkins(artist, skins);
-        //processZipMaker(artist, skins);
+    onHdSkinFetched(function(data) {
+        processSkins(artist, data);
     });
 }
 
