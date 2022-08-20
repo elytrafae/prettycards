@@ -7,3 +7,7 @@
 html {
     font-family: DTM-Mono;
 }
+
+.PrettyCards_Hidden {
+    display: none!important;
+}

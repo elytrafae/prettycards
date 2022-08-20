@@ -1,0 +1,61 @@
+
+#PrettyCards_AC_MissingSkinList {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    border-radius: 4px;
+    font-size: 1.1em;
+    padding: 4px 8px;
+    background-color: #222222;
+    user-select: text;
+}
+
+#PrettyCards_AC_MissingSkinList ul {
+    list-style-type: "- ";
+}
+
+#PrettyCards_AC_MissingSkinList ul li {
+    padding: 3px 0px;
+}
+
+#PrettyCards_AC_ZipMakerTable {
+    width: 100%;
+    border: 3px solid white;
+}
+
+#PrettyCards_AC_ZipMakerTable td {
+    width: 50%;
+}
+
+#PrettyCards_AC_ZipMakerTable td {
+    width: 50%;
+    border: 1px solid white;
+    padding: 0.5em;
+}
+
+.PrettyCards_AC_ImageUploadLabel,.PrettyCards_AC_ImageUploadSelect {
+    margin: auto;
+}
+
+.PrettyCards_AC_ImageUploadLabel:empty {
+    display: block;
+    width: 160px;
+    height: 90px;
+    border: 2px dashed #555555;
+}
+
+.PrettyCards_AC_ImageUploadLabel:empty::after {
+    display: block;
+    content: "Click to Upload Image";
+    color: #555555;
+    width: 120px;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px; /*Sorry, perfectionism, I cannot center this :/ */
+}
+
+.PrettyCards_AC_ImageUploadLabel img {
+    width: 160px;
+}
+
+.PrettyCards_AC_ImageUploadRemove {
+    margin-left: 5px;
+}

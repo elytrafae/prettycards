@@ -79,6 +79,7 @@ function onArtistChange() {
     var artist = $("#PrettyCards_AC_ArtistSelector").val();
     onHdSkinFetched(function(data) {
         processSkins(artist, data);
+        processZipMaker(artist, data);
     });
 }
 
