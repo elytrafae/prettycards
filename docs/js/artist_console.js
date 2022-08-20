@@ -1,6 +1,4 @@
 
-console.log("ARTIST CONSOLE JS LOADED!")
-
 var allCardSkins = [];
 var allArtists = [];
 
@@ -19,6 +17,7 @@ function fetchHdSkins() {
     $.get("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/hdCardSkins.json", {}, function(data) {
         hdSkins = data;
         hdSkinListeners.forEach(cb => {cb(hdSkins)});
+        hdSkinListeners = [];
     })
 }
 
