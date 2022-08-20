@@ -183,24 +183,6 @@ function processZipMaker(artist, skins) {
         console.log("ZIP MAKER FILE NAMES", fileNames);
         var filesDone = 0;
 
-        // DEBUG AREA
-        console.log("RIGHT BEFORE TEST ZIP!");
-        try {
-            var testZip = new JSZip();
-            testZip.file("file.txt", "content");
-            console.log("TEST ZIP LOG", testZip);
-            testZip.generateAsync({type:"blob"}, (a, b, c) => {console.log(a, b, c); updateNr++; console.log(`Generating ZIP file . . . ` + updateNr);})
-                .then(function(content) {
-                    console.log("TEST ZIP CONTENT", content);
-                    saveAs(content, "test.zip");
-                }).catch(function(e) {
-                    console.error(e);
-                });
-        } catch (e) {
-            console.error(e);
-        }
-        /////////////
-
         var zip = new JSZip();
         //console.log(JSZip.support);
 
@@ -210,14 +192,13 @@ function processZipMaker(artist, skins) {
             if (filesDone >= zipMakerFiles.length) {
                 console.log(zip);
                 displayMessage(`Generating ZIP file . . .`, "yellow");
-                var updateNr = 0;
                 try {
                     zip.generateAsync({
                         type:"blob", 
                         compression: "DEFLATE", 
                         compressionOptions: {
                             level: 3
-                        }}, (a, b, c) => {console.log(a, b, c); updateNr++; displayMessage(`Generating ZIP file . . . ` + updateNr, "yellow");})
+                        }}, (a) => {displayMessage(`Generating ZIP file . . . ` + a.percent + '%', "yellow");})
                         .then(function(content) {
                             console.log(content);
                             displayMessage(`The ZIP file should download now. Thank you for your help! You can send that to me over Discord.`, "green");
