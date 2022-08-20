@@ -1,4 +1,6 @@
 
+console.log("ARTIST CONSOLE JS LOADED!")
+
 var allCardSkins = [];
 var allArtists = [];
 
@@ -21,7 +23,7 @@ function returnmatchedValue(file, selectElement) {
 }
 
 function fetchSkins() {
-    $.get("https://github.com/PrettyCards/daily-collector/raw/main/allSkins.json", {}, function(data) {
+    $.get("https://raw.githubusercontent.com/PrettyCards/daily-collector/main/allSkins.json", {}, function(data) {
         //console.log(data);
         allCardSkins = JSON.parse(data);
         allArtists = getListOfArtists();
