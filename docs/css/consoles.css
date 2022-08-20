@@ -1,0 +1,9 @@
+
+@font-face {
+    font-family: DTM-Mono;
+    src: url("../fonts/DTM-Mono.otf");
+}
+
+html {
+    font-family: DTM-Mono;
+}
