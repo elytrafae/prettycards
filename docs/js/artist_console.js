@@ -187,12 +187,7 @@ function processZipMaker(artist, skins) {
             if (filesDone >= zipMakerFiles.length) {
                 displayMessage(`Generating ZIP file . . .`, "yellow");
                 try {
-                    zip.generateAsync({
-                        type:"blob", 
-                        compression: "DEFLATE", 
-                        compressionOptions: {
-                            level: 3
-                        }}, (a) => {displayMessage(`Generating ZIP file . . . ` + a.percent + '%', "yellow");})
+                    zip.generateAsync({type:"blob"}, (a) => {displayMessage(`Generating ZIP file . . . ` + a.percent + '%', "yellow");})
                         .then(function(content) {
                             displayMessage(`The ZIP file should download now. Thank you for your help! You can send that to me over Discord.`, "green");
                             saveAs(content, "hd_art.zip");
