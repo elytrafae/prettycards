@@ -43,12 +43,10 @@ function returnmatchedValue(file, selectElement) {
 
 function fetchSkins() {
     $.get("https://raw.githubusercontent.com/PrettyCards/daily-collector/main/allSkins.json", {}, function(data) {
-        //console.log(data);
         allCardSkins = JSON.parse(data);
         allArtists = getListOfArtists();
         processArtistSelect();
         onArtistChange();
-        //console.log(allCardSkins, allArtists);
     });
 }
 
@@ -169,7 +167,6 @@ function processZipMaker(artist, skins) {
             return;
         }
         displayMessage(`Making ZIP in progress!`, "white");
-        console.log("ZIP MAKER FILES", zipMakerFiles);
         var selects = document.getElementsByClassName("PrettyCards_AC_ImageUploadSelect");
         var fileNames = [];
         for (var i=0; i < zipMakerFiles.length; i++) { // Only check as many selects as there are files uploaded!
@@ -180,17 +177,14 @@ function processZipMaker(artist, skins) {
             }
             fileNames.push(selects[i].value);
         }
-        console.log("ZIP MAKER FILE NAMES", fileNames);
         var filesDone = 0;
 
         var zip = new JSZip();
-        //console.log(JSZip.support);
 
         function cb(blob, filename) {
             zip.file(filename + ".png", blob, {blob: true});
             filesDone++;
             if (filesDone >= zipMakerFiles.length) {
-                console.log(zip);
                 displayMessage(`Generating ZIP file . . .`, "yellow");
                 try {
                     zip.generateAsync({
@@ -200,7 +194,6 @@ function processZipMaker(artist, skins) {
                             level: 3
                         }}, (a) => {displayMessage(`Generating ZIP file . . . ` + a.percent + '%', "yellow");})
                         .then(function(content) {
-                            console.log(content);
                             displayMessage(`The ZIP file should download now. Thank you for your help! You can send that to me over Discord.`, "green");
                             saveAs(content, "hd_art.zip");
                         }).catch(function(e) {
@@ -233,7 +226,6 @@ function processZipMaker(artist, skins) {
     $("#PrettyCards_AC_ZipMaker").find("#PrettyCards_AC_MakeZipBtn").click(downloadZip);
 
     function removeRow(id) {
-        //console.log("REMOVING!", id);
         var rows = document.querySelectorAll("#PrettyCards_AC_ZipMakerTable tr");
         if (id < rows.length - 1) { // CANNOT DELETE THE LAST ROW!
             rows[id].remove();
@@ -279,7 +271,6 @@ function processZipMaker(artist, skins) {
     function imageUploadEvent(e) {
         var element = e.currentTarget;
         var file = element.files[0];
-        //console.log(file);
         var label = document.querySelector("label[for=" + element.id + "]");
         if (label.innerHTML === "") {
             addRow(tBody.find("tr").length);
@@ -337,8 +328,8 @@ function imageToPng(src, cb) {
 
 function gifToApng(file, cb) {
     file.arrayBuffer().then( (arrayBuffer) => {
-        var gif = parseGIF(arrayBuffer);
-        frames = decompressFrames(gif, true);
+        var gif = gifuct.parseGIF(arrayBuffer);
+        frames = gifuct.decompressFrames(gif, true);
         var width = gif.lsd.width;
         var height = gif.lsd.height;
         var framePixels = frames.map((e) => {return new Uint8Array(e.patch);});
