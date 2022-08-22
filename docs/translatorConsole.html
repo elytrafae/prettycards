@@ -1,0 +1,90 @@
+
+<html>
+
+    <head>
+        <title>Artist Console</title>
+        <link href="css/consoles.css" rel="stylesheet" type="text/css" />
+        <link href="https://undercards.net/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://undercards.net/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://undercards.net/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/translator_console.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div class="mainContent">
+            <div id="PrettyCards_CT_Phase1">
+                <h1>Please select a language!</h1>
+                <div id="PrettyCards_CT_Phase1_LangaugeSelect"></div>
+            </div>
+            <div id="PrettyCards_CT_Phase2" class="PrettyCards_Hidden">
+                <div id="PrettyCards_CT_Phase2_MainContent">
+                    <div id="PrettyCards_CT_Phase2_FilterRow">
+                        <div>
+                            <p>Search</p>
+                            <input type="text" class="form-control" id="searchInput" onkeyup="applyFilters(); showPage(0);" placeholder="Search..." style="width: 180px;" data-lpignore="true">
+                        </div>
+                        <div>
+                            <p>Category</p>
+                            <select id="selectCategory" class="form-control" style="width: 160px; color: white;" onchange="applyFilters(); showPage(0);"></select>
+                        </div>
+                        <div>
+                            <p>Status</p>
+                            <select id="selectStatus" class="form-control" style="width: 170px; color: white;" onchange="applyFilters(); showPage(0);">
+                                <option value="ALL">All Entries</option>
+                                <option value="DONE">Translated</option>
+                                <option value="NEW">New</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" id="PrettyCards_CT_Phase2_QuickRefBtn">Quick Ref</button>
+                            <p><select id="selectPage" onchange="showPage(this.value)"></select> / <span id="maxPages"></span></p>
+                        </div>
+                        <div>
+                            <button id="btnPrevious" onclick="previousPage();" class="btn btn-lg btn-primary" disabled=""><span class="glyphicon glyphicon-chevron-left"></span></button>
+                            <button id="btnNext" onclick="nextPage();" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                        </div>
+                    </div>
+
+                    <p id="PrettyCards_CT_Phase2_Preview"><span id="PrettyCards_CT_Phase2_PreviewName"></span><span id="PrettyCards_CT_Phase2_Preview"></span></p>
+
+                    <table id="PrettyCards_CT_Phase2_Table" class="translation table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td id="PrettyCards_CT_Phase2_TranslationKey" colspan="2">translation-key-here</td>
+                                <td style="width:50px; text-align: center;">
+                                    <button class="btn btn-sm btn-success" onclick="PrettyCards_CT_downloadJSON()">
+                                        <span class="glyphicon glyphicon-send"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" id="PrettyCards_CT_Phase2_OGEnglishText">OG ENGLISH TEXT</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" id="PrettyCards_CT_Phase2_EnglishText">ENGLISH TEXT</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" id="PrettyCards_CT_Phase2_OGTranslatedText">OG TRANSLATED TEXT</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <textarea maxlength="500" class="form-control" id="PrettyCards_CT_Phase2_TranslationArea"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="PrettyCards_CT_Phase2_QuickRef" class="PrettyCards_Hidden">
+                    <h1>Quick Reference Guide!</h1>
+                    <h3><a href="/translateManual.jsp" target="_blank">Onutrem's Guide</a></h3>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/translator_console.js"></script>
+        
+
+    </body>
+
+</html>

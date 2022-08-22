@@ -36,6 +36,22 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 			.card.breaking-skin:hover .cardHP {
 				z-index: 7;
 			}
+
+			.card.breaking-skin .cardStatus {
+				z-index: 5;
+			}
+
+			.card.breaking-skin .cardTribes {
+				z-index: 5;
+			}
+
+			.card.breaking-skin:hover .cardStatus {
+				z-index: 8;
+			}
+
+			.card.breaking-skin:hover .cardTribes {
+				z-index: 8;
+			}
 		</style>`);
 	}
 	

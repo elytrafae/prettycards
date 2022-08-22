@@ -68,7 +68,7 @@ ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function()
 				<a href="/CustomCards"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcards")}</p></a>
 				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">' + window.$.i18n("pc-menu-sop") + '</p></a>') : ""}
 				<a href="/CustomTranslations" class="PrettyCards_Hidden Translator"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customtranslate")}</p></a>
-				<a href="/CustomArtistConsole" class="PrettyCards_Hidden Artist"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customartistconsole")}</p></a>
+				<a href="https://cmd-god.github.io/prettycards/artistConsole.html" class="PrettyCards_Hidden Artist"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customartistconsole")}</p></a>
 				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">${window.$.i18n("pc-menu-apidocs")}</p></a>
 			</div>
 		</div>`)

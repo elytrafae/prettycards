@@ -1,0 +1,112 @@
+
+#PrettyCards_CT_Phase1_LangaugeSelect {
+
+}
+
+#PrettyCards_CT_Phase1_LangaugeSelect > div {
+    font-size: 2em;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+#PrettyCards_CT_Phase1_LangaugeSelect > div:hover {
+    color: green;
+}
+
+#PrettyCards_CT_Phase2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+#PrettyCards_CT_Phase2_MainContent {
+    max-width: 900px;
+    min-width: 900px;
+}
+
+#PrettyCards_CT_Phase2_FilterRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.mainContent.PrettyCards_FullWidthMainContent {
+    width: 100%;
+}
+
+.mainContent.PrettyCards_WiderMainContent {
+    width: 1500;
+}
+
+#PrettyCards_CT_Phase2_QuickRef {
+    width: 600px;
+    border: 5px solid white;
+    background-color: black;
+    padding: 0px 8px;
+}
+
+#PrettyCards_CT_Phase2_Table {
+    margin-top: 1em;
+}
+
+.PrettyCards_CT_Phase2_ListEntryRow > td {
+    width: 50%;
+}
+
+.PrettyCards_CT_Phase2_ListEntryRow textarea {
+    max-width: 100%;
+    min-width: 100%;
+}
+
+@font-face {
+    font-family: UniSansHeavy;
+    src: url(fonts/Uni\ Sans\ Heavy.otf);
+}
+
+@font-face {
+    font-family: WhitneyMedium;
+    src: url(fonts/Whitney-Medium.ttf);
+}
+
+.PrettyCards_DiscordMention {
+    background-color: #5B6DED;
+    color: white;
+    font-family: WhitneyMedium;
+    border-radius: 3px;
+    font-size: 1.1em;
+    padding: 1px 2px;
+}
+
+.PrettyCards_BlockCode {
+    display: block;
+    padding: 4px 8px;
+}
+
+.PrettyCards_DarkThemeCode {
+    user-select: all;
+    color: #CCCCCC;
+    background-color: #222222;
+}
+
+#PrettyCards_CT_Phase2_Table tr {
+    user-select: text;
+}
+
+.PrettyCards_CT_Phase2_QuickRefEntry > *:not(.PrettyCards_CT_Phase2_QuickRefEntryTitle) {
+    display: none;
+}
+
+.PrettyCards_CT_Phase2_QuickRefEntry.PrettyCards_CT_Phase2_QuickRefEntryOpen > * {
+    display: block;
+}
+
+.PrettyCards_CT_Phase2_QuickRefEntryTitle {
+    cursor: pointer;
+}
+
+.PrettyCards_CT_Phase2_QuickRefEntryTitle:hover {
+    color: #BBBBBB;
+}
