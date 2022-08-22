@@ -58,8 +58,8 @@ function StartOpenPackAnimation(pack_data, open_data) {
 	pack_image.className = "PrettyCards_AnimationPack";
 	pack_image.src = pack_data.image;
 	
-	console.log(open_data);
-	console.log(JSON.stringify(open_data));
+	//console.log(open_data);
+	//console.log(JSON.stringify(open_data));
 	
 	var viewportOffset = document.querySelector(".PrettyCards_PackCell[data-packid="+ pack_data.code_id +"] .PrettyCards_InvisiblePack").getBoundingClientRect();
 	//console.log("viewportOffset", viewportOffset);

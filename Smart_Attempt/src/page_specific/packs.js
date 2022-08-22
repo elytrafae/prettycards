@@ -103,7 +103,7 @@ var packs_data = [
 		g_cost : -1,
 		ucp_cost : -1,
 		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/FinalPack",
-		image_extension: ".png",
+		image_extension: ".gif",
 		name: "pc-packs-final-name",
 		description: "pc-packs-final-desc",
 		code_id: "FinalPack",
