@@ -78,43 +78,46 @@ function createComplexButton(settings) {
 	</span>`);
 	return button;
 } 
+function processCard(data) {
+	var html$ = data.element;
+	var card = data.card;
+	console.log("appendCard() event fired on " + card.name);
+	PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
+		console.log("Theme Song Data Ready for " + card.name);
+		var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
+		var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
+		if (card.id in cardExceptions) { // Load and Gaster Blaster respectively.
+			//console.log(card, "This is a Gaster Blaster or a Load!");
+			doesCardHaveTheme = true;
+		} else if ("hasThemeSong" in card) {
+			doesCardHaveTheme = card.hasThemeSong;
+		} else if (themeSongSettings) {
+			doesCardHaveTheme = true;
+		}
+		
+		if (doesCardHaveTheme) {
+			console.log(card.name + " has theme songs!");
+			var button;
+			if (themeSongSettings) {
+				console.log(card.name + " has complex buttons!");
+				button = createComplexButton(themeSongSettings);
+			} else {
+				console.log(card.name + " has a simple button!");
+				button = createSimpleButton(card);
+			}
+			console.log(card.name + "'s button: " + button);
+			html$.append(button);
+		}
+	});
+} 
+
 
 if (settings.theme_song_preview.value() && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
 
-	console.log("Theme Song Preview is turned on, and it's not the Game or Spectator page!");
+	console.log("Theme Song Preview is turned on, and it's not the Game or Spectator page! Attempt 2!");
 
-	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
-		var html$ = data.element;
-		var card = data.card;
-		console.log("appendCard() event fired on " + card.name);
-		PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
-			console.log("Theme Song Data Ready for " + card.name);
-			var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
-			var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
-			if (card.id in cardExceptions) { // Load and Gaster Blaster respectively.
-				//console.log(card, "This is a Gaster Blaster or a Load!");
-				doesCardHaveTheme = true;
-			} else if ("hasThemeSong" in card) {
-				doesCardHaveTheme = card.hasThemeSong;
-			} else if (themeSongSettings) {
-				doesCardHaveTheme = true;
-			}
-			
-			if (doesCardHaveTheme) {
-				console.log(card.name + " has theme songs!");
-				var button;
-				if (themeSongSettings) {
-					console.log(card.name + " has complex buttons!");
-					button = createComplexButton(themeSongSettings);
-				} else {
-					console.log(card.name + " has a simple button!");
-					button = createSimpleButton(card);
-				}
-				console.log(card.name + "'s button: " + button);
-				html$.append(button);
-			}
-		});
-	});
+	PrettyCards_plugin.events.on("appendCard()", processCard);
+	PrettyCards_plugin.events.on("PC_appendCard", processCard);
 	
 }
 
