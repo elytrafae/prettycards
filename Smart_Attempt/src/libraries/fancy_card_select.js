@@ -1,6 +1,6 @@
 
 import { utility } from "./utility";
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 
 var background = null;
 var dummyDialogue = { // This is so Onu can properly close this thing.
@@ -60,7 +60,7 @@ function LookAtCards(selectCards) {
     document.body.appendChild(background);
 }
 
-settings.fancy_card_select = PrettyCards_plugin.settings().add({
+addSetting({
     'key': 'fancy_card_select',
     'name': 'Enable Fancy "Choose a card" screen in games.', // Name in settings page
     'type': 'boolean',

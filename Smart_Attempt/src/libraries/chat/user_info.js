@@ -1,5 +1,5 @@
 
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.js";
 import {pagegetters} from "/src/libraries/page_getters.js";
@@ -32,7 +32,7 @@ var leaderboard = [];
 var $;
 var oldGetInfo;
 
-settings.user_info = PrettyCards_plugin.settings().add({
+addSetting({
     'key': 'user_info',
     'name': 'Better User Info', // Name in settings page
     'type': 'boolean',

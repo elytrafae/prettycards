@@ -1,9 +1,9 @@
-import { PrettyCards_plugin, settings } from "../underscript_checker";
+import { PrettyCards_plugin, settings, addSetting } from "../underscript_checker";
 
 const icon = "https://github.com/CMD-God/prettycards/raw/master/img/RarityIcons/ALL_RARITIES.png";
 const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
 
-settings.za_filter = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'za_filter',
 	'name': 'Enable "Toggle All Rarities" button', // Name in settings page
 	'note': "Also known as the \"Za Filter\".",

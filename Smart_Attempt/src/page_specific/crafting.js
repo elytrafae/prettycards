@@ -1,6 +1,6 @@
 import { artifactDisplay } from "../libraries/artifact_display";
 import { pagegetters } from "../libraries/page_getters";
-import { PrettyCards_plugin, settings } from "../libraries/underscript_checker";
+import { PrettyCards_plugin, settings, addSetting } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
 const minDeckCodeLength = 50; // Original result was 132, but I decided to not have that many bugs today . . .
@@ -11,7 +11,7 @@ var missingArtifacts = [];
 var missingDTCount = 0;
 var lastArtifactIds = [];
 
-settings.sktimacraft = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'sktimacraft',
 	'name': 'Enable Mass Crafting input', // Name in settings page
 	'note': "Also known as \"Sktimacraft\".",

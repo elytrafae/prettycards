@@ -1,6 +1,6 @@
 
 import $ from "/src/third_party/jquery-3.6.0.min.js";
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 import { ExecuteWhen } from "./pre_load/event_ensure";
 
 // https://github.com/CMD-God/prettycards/releases/latest/download/prettycards.user.js
@@ -17,7 +17,7 @@ var options = [
 var options = ["All the time", "Hourly", "Daily", "Never"];
 var times = [0, 3600000, 3600000*24, 9007199254740991];
 
-settings.update_frequency = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'update_frequency',
 	'name': 'Update Check Frequency', // Name in settings page
 	'type': 'select',

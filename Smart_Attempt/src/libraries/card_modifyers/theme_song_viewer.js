@@ -1,16 +1,16 @@
 
 // This library adds a button onto cards outside of games so you can listen to their theme songs.
 
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings , addSetting} from "/src/libraries/underscript_checker.js";
 
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
 import { prettycards } from "../underscript_checker";
 import {getThemeSongSettingByCardId} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 
-settings.theme_song_preview = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'theme_song_preview',
 	'name': 'Card Theme Song Preview', // Name in settings page
-	'note': "Outside of games, if this is on, a button will appear on cards<br>if they are hovered in the top-left corner of the card image.<br>Pressing it will play that card's theme song (if it has one)!",
+	'note': "Outside of games, if this is on, a button will appear on cards if they are hovered in the top-left corner of the card image. Pressing it will play that card's theme song (if it has one)!",
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': false, // default value

@@ -1,7 +1,7 @@
 
 // I REALLY need to make this more flexible!
 
-import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, prettycards, addSetting} from "/src/libraries/underscript_checker.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 
@@ -69,7 +69,7 @@ var footer_about_data = {
 	}
 }
 
-settings.mobile_mode = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'mobile_mode',
 	'name': 'Mobile Mode', // Name in settings page
 	'note': 'Experimental feature to make the game more mobile-friendly.',

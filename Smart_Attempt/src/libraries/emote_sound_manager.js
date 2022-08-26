@@ -1,8 +1,8 @@
-import { PrettyCards_plugin, settings } from "/src/libraries/underscript_checker";
+import { PrettyCards_plugin, settings, addSetting } from "/src/libraries/underscript_checker";
 import { utility } from "/src/libraries/utility";
 
 
-settings.emote_sounds = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'emote_sounds',
 	'name': 'Enable Emote Sounds', // Name in settings page
 	'type': 'boolean',

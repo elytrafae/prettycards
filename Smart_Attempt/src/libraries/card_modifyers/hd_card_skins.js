@@ -1,11 +1,11 @@
-import { prettycards, PrettyCards_plugin, settings } from "../underscript_checker";
+import { prettycards, PrettyCards_plugin, settings , addSetting } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 var hd_card_skins = [];
 var debugList = [];
 
-settings.hd_card_skins = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'hd_card_skins',
 	'name': 'HD Card Skins', // Name in settings page
     'note': 'Enables HD Card Skins. Only applies to registered card skins.<br>I would recommend turning this off if:<br>- You are using a low resolution device.<br>- You have slow internet access.<br>- You pay for your internet based on consumption (ex. Mobile data).',

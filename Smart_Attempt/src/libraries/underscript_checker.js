@@ -31,7 +31,16 @@ window.PrettyCards_plugin = PrettyCards_plugin;
 var settings = {};
 window.PrettyCards_settings = settings;
 
-settings.turn_off = PrettyCards_plugin.settings().add({
+function addSetting(data) {
+    if (data.note) {
+        data.note = `<div style="max-width: 600px;">${data.note}</div>`;
+    }
+    var setting = PrettyCards_plugin.settings().add(data);
+    settings[data.key] = setting;
+    return setting;
+}
+
+addSetting({
     'key': 'turn_off',
     'name': 'Turn Off PrettyCards', // Name in settings page
     'type': 'boolean',
@@ -43,7 +52,7 @@ if (settings.turn_off.value()) {
     throw "PrettyCards is stopped!";
 }
 
-settings.packs = PrettyCards_plugin.settings().add({
+addSetting({
     'key': 'packs_page',
     'name': 'Enable Fancy Packs Page', // Name in settings page
     'type': 'boolean',
@@ -51,7 +60,7 @@ settings.packs = PrettyCards_plugin.settings().add({
     'default': true, // default value
 });
 
-settings.override_decks = PrettyCards_plugin.settings().add({
+addSetting({
     'key': 'override_decks',
     'name': 'Override Deck System', // Name in settings page
     'note': 'Overrides the current deck system locally with a more flexible one. This inludes the Decks page, Play page, Custom page and the Custom Challenge system.',
@@ -63,4 +72,4 @@ settings.override_decks = PrettyCards_plugin.settings().add({
 
 //console.log(settings);
 
-export {PrettyCards_plugin, settings, prettycards};
+export {PrettyCards_plugin, settings, prettycards, addSetting};

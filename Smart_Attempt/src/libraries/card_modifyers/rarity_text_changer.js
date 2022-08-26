@@ -1,10 +1,10 @@
 
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 import { rarityIconsHTML } from "../rarity_icons";
 
 var optionList = ["Text", "Adapt", "Undertale", "Deltarune"];
 
-settings.rarity_text_change = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'rarity_text_change',
 	'name': 'Change Rarity Text', // Name in settings page
     'note': function() {

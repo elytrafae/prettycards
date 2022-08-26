@@ -2,7 +2,7 @@
 // This is for testing only for now.
 // import {} from "/src/libraries/background/custom_backgrounds.js";
 
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 
 var background_sizes = ["Auto", "Cover", "Contain"];
 var background_positions_x = ["Left", "Center", "Right"];
@@ -19,7 +19,7 @@ function SetBackgroundProperties() {
 	document.body.style.backgroundPositionY = settings.background_position_y.value().toLowerCase();
 }
 
-settings.background_size = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'background_size',
 	'name': 'Background Size', // Name in settings page
 	'note': 'Change the size of the background based on your preferred logic.',
@@ -31,7 +31,7 @@ settings.background_size = PrettyCards_plugin.settings().add({
 	'onChange': SetBackgroundProperties
 });
 
-settings.background_position_x = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'background_position_x',
 	'name': 'Background Position X', // Name in settings page
 	'note': 'Change the horizontal position of the background.',
@@ -43,7 +43,7 @@ settings.background_position_x = PrettyCards_plugin.settings().add({
 	'onChange': SetBackgroundProperties
 });
 
-settings.background_position_y = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'background_position_y',
 	'name': 'Background Position Y', // Name in settings page
 	'note': 'Change the vertical position of the background.',

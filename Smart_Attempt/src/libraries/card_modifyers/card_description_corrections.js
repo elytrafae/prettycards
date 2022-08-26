@@ -1,7 +1,7 @@
 
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 
-settings.card_number_colors = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'card_number_colors',
 	'name': 'Card Number Colors', // Name in settings page
 	'note': "Stats in card descriptions in an <span class='atk-color'>ATK</span>/<span class='hp-color'>HP</span> or <span class='cost-color'>COST</span>/<span class='atk-color'>ATK</span>/<span class='hp-color'>HP</span> format will have the numbers colored after the stat they represent.",
@@ -10,7 +10,7 @@ settings.card_number_colors = PrettyCards_plugin.settings().add({
 	'default': true, // default value
 });
 
-settings.non_dt_inconsistency = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'non_dt_inconsistency',
 	'name': 'Fix Non-DT inconsistency.', // Name in settings page
 	'note': "Fixes any inconsistent version of the phrase \"non-<span class='DETERMINATION'>DT</span>\" on card descriptions.",

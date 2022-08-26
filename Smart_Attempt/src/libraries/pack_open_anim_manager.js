@@ -1,5 +1,5 @@
 
-import {PrettyCards_plugin, settings} from "./underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "./underscript_checker.js";
 import {NormalPackOpenAnimation} from "./../libraries/pack_open_animation_templates/normal.js";
 import {OnuPackOpenAnimation} from "./../libraries/pack_open_animation_templates/onu.js";
 import {InitPacks, GetPageTemplateByName, settingsoptions} from "/src/page_specific/packs.js";
@@ -37,7 +37,7 @@ function ChangeTemplate(newname, oldname) {
 	currAnim = GetAnimByName(newname);
 }
 
-settings.packs_animation_template = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'packs_animation_template', // key
 	'name': 'Pack Opening Animation', // Name in settings page
 	'type': 'select',

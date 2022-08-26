@@ -1,7 +1,7 @@
-import { prettycards, PrettyCards_plugin, settings } from "../libraries/underscript_checker";
+import { prettycards, PrettyCards_plugin, settings , addSetting} from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
-settings.friendship_sort = PrettyCards_plugin.settings().add({
+addSetting({
     'key': 'friendship_sort',
     'name': 'Enable Friendship Sorting', // Name in settings page
     'type': 'boolean',

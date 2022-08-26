@@ -1,8 +1,8 @@
 
 import { utility } from "./utility";
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 
-settings.kromer_test = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'kromer_test',
 	'name': 'Kromer Test', // Name in settings page
 	'note': 'Changes every instance of UCP to KROMER.',

@@ -29,6 +29,7 @@ import {} from "/src/libraries/card_modifyers/switch_highlight.js";
 import {} from "/src/libraries/card_modifyers/za_filter.js";
 import {} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 import {} from "/src/libraries/card_modifyers/hd_card_skins.js";
+import {} from "/src/libraries/card_modifyers/hd_game_animations.js";
 
 import {} from "/src/libraries/translation/translation_manager.js";
 
@@ -61,7 +62,7 @@ import {InitCustomTranslations} from "/src/page_specific/custom_translations.js"
 
 //import {} from "/src/libraries/april_fools_downloader.js"; // Keeping this here for next year!
 
-if (settings.packs.value() && underscript.onPage('Packs')) {
+if (settings.packs_page.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
 	InitPacks();
 } else if (underscript.onPage("Hub")) {

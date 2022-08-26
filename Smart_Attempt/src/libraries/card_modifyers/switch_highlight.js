@@ -1,7 +1,7 @@
-import { PrettyCards_plugin, settings } from "../underscript_checker";
+import { PrettyCards_plugin, settings , addSetting } from "../underscript_checker";
 import { utility } from "../utility";
 
-settings.switch_highlight = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'switch_highlight',
 	'name': 'Switch Highlight', // Name in settings page
 	'note': 'Adds some handy highlighting to Switch cards while they are being hovered over the arena mid-game.',

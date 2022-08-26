@@ -2,9 +2,9 @@
 // This library makes it so when you hover over a breaking skin card, the text goes over the skin (onto z-index 7).
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
-import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 
-settings.breaking_skin_fix = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'breaking_skin_fix',
 	'name': 'Breaking Skin Fix', // Name in settings page
 	'note': 'Whenever you hover over a breaking skin card, the name, description, cost, ATK and HP will go over the skin.',

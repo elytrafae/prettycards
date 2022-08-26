@@ -1,4 +1,4 @@
-import { PrettyCards_plugin, settings } from "../underscript_checker";
+import { PrettyCards_plugin, settings , addSetting } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
@@ -8,7 +8,7 @@ const FLOWEY_BASE_ATK = 4;
 const HEROINE_BASE_ATK = 8;
 const HEROINE_ATK_STEP = 2;
 
-settings.multi_theme_songs = PrettyCards_plugin.settings().add({
+addSetting({
 	'key': 'multi_theme_songs',
 	'name': 'Enable Multiple Card Jingles', // Name in settings page
     'note': 'Also adds some sound effects to certaion token cards.',
@@ -162,7 +162,7 @@ if (settings.multi_theme_songs.value()) {
             PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);
         });
 
-        if (window.underscript.onPage("Game")) {
+        if (window.underscript.onPage("Game") || window.underscript.onPage("Spectate")) {
             cardSoundFX = new Audio();
             PrettyCards_plugin.events.on("getMonsterPlayed getSpellPlayed", function(data) {
                 var card = JSON.parse(data.card);
