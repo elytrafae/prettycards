@@ -28,7 +28,8 @@ addSetting({
 	'disabled': false,
 	'options': background_sizes,
 	'default': () => background_sizes[1], // default value
-	'onChange': SetBackgroundProperties
+	'onChange': SetBackgroundProperties,
+	'category': "background"
 });
 
 addSetting({
@@ -40,7 +41,8 @@ addSetting({
 	'disabled': false,
 	'options': background_positions_x,
 	'default': () => background_positions_x[1], // default value
-	'onChange': SetBackgroundProperties
+	'onChange': SetBackgroundProperties,
+	'category': "background"
 });
 
 addSetting({
@@ -52,7 +54,8 @@ addSetting({
 	'disabled': false,
 	'options': background_positions_y,
 	'default': () => background_positions_y[1], // default value
-	'onChange': SetBackgroundProperties
+	'onChange': SetBackgroundProperties,
+	'category': "background"
 });
 
 SetBackgroundProperties();

@@ -7,6 +7,7 @@ addSetting({
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': true, // default value
+	'category': "controversial"
 });
 
 function wrapAnimFunction(funcName, image) {
@@ -19,6 +20,8 @@ function wrapAnimFunction(funcName, image) {
 
 function replaceAnim(image) {
 	var imgs = $(".vfx:not(.PrettyCards_DoneVFX)");
+	imgs.attr("src", `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardVFX/${image}.png?v=${window.animationCounter}`);
+	imgs.addClass("PrettyCards_DoneVFX");
 }
 
 if (settings.hd_game_animations.value() && (window.underscript.onPage("Game") || window.underscript.onPage("Spectate"))) {

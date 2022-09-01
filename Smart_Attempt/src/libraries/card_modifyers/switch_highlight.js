@@ -8,7 +8,8 @@ addSetting({
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'disabled': false,
-	'default': true // default value
+	'default': true, // default value
+    'category': "card"
 });
 
 function isElementSwitchCard(ele) {

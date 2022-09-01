@@ -9,6 +9,9 @@ import {} from "/src/libraries/custom_page_base.js";
 // The Event ensurer MUST be required AFTER underscript stuff, but BEFORE anything else that might require it!
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
+// This is here to make sure the background settings are above the Miscallenious ones.
+import {} from "/src/libraries/background/background_manager.js";
+
 import {} from "/src/libraries/kromer_test.js";
 
 import {} from "./libraries/mobile/navigation.js";
@@ -42,8 +45,6 @@ import {} from "/src/libraries/emote_sound_manager.js";
 // import {} from "/src/libraries/cosmetic_wishlist.js"; // Temporarily Removed!
 
 import {} from "./libraries/main_menu.js";
-
-import {} from "/src/libraries/background/background_manager.js";
 
 // import {} from "/src/libraries/external_api_integration/youtube_player.js";
 

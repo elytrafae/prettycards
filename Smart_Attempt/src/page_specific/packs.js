@@ -46,6 +46,7 @@ addSetting({
 	'reset': true, // Adds a reset button (sets to default)
 	'refresh': false,
 	'onChange': ChangeTemplate, // called when value is changed
+	'category': "packs"
 });
 
 //console.log("PageGetters", pagegetters);

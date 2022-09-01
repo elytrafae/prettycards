@@ -9,7 +9,8 @@ addSetting({
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'disabled': false,
-	'default': false // default value
+	'default': false, // default value
+	'category': "controversial"
 });
 
 var translationKeys = ["item-ucp", "header-free-ucp", "shop-title", "quests-ucp", "settings-username-ucp", "packs-error-add", "reward-ucp", "cardskins-shop-confirm"];

@@ -8,6 +8,7 @@ addSetting({
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': true, // default value
+	'category': "card"
 });
 
 addSetting({
@@ -17,6 +18,7 @@ addSetting({
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': true, // default value
+	'category': "card"
 });
 
 var card_numbers_regex = /[+-]?(\d+)\/[+-]?(\d+)(?:\/[+-]?(\d+))?/gm;

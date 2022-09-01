@@ -12,6 +12,7 @@ addSetting({
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': true, // default value
+    'category': "controversial"
 });
 
 function returnHDImageIfThereIs(image, forceNormal = false) {

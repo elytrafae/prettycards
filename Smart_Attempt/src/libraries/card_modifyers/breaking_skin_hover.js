@@ -4,15 +4,6 @@
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 
-addSetting({
-	'key': 'breaking_skin_fix',
-	'name': 'Breaking Skin Fix', // Name in settings page
-	'note': 'Whenever you hover over a breaking skin card, the name, description, cost, ATK and HP will go over the skin.',
-	'type': 'boolean',
-	'refresh': true, // true to add note "Will require you to refresh the page"
-	'default': true, // default value
-});
-
 ExecuteWhen("PrettyCards:onPageLoad", function () {
 	if (settings.breaking_skin_fix.value()) {
 
@@ -37,6 +28,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 				z-index: 7;
 			}
 
+			${!settings.breaking_skin_stats_fix.value() ? "" : `
 			.card.breaking-skin .cardStatus {
 				z-index: 5;
 			}
@@ -51,7 +43,8 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 
 			.card.breaking-skin:hover .cardTribes {
 				z-index: 8;
-			}
+			}`}
+
 		</style>`);
 	}
 	

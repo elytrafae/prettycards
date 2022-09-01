@@ -49,6 +49,7 @@ addSetting({
 	'refresh': false,
 	'reset': true, // Adds a reset button (sets to default)
 	'onChange': ChangeTemplate, // called when value is changed
+	'category': "packs"
 });
 
 ChangeTemplate(settings.packs_animation_template.value() || animsettingsoptions[0], null);

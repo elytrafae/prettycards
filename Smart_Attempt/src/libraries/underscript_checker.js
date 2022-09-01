@@ -31,10 +31,19 @@ window.PrettyCards_plugin = PrettyCards_plugin;
 var settings = {};
 window.PrettyCards_settings = settings;
 
+var categories = {
+    "misc" : "Miscellaneous",
+    "card" : "Card Related",
+    "controversial" : "<span class='red'>Controversial</span>",
+    "background" : "Background",
+    "packs" : "Packs"
+}
+
 function addSetting(data) {
-    if (data.note) {
+    if (data.note && typeof(data.note) != "function") {
         data.note = `<div style="max-width: 600px;">${data.note}</div>`;
     }
+    data.category = categories[data.category || "misc"];
     var setting = PrettyCards_plugin.settings().add(data);
     settings[data.key] = setting;
     return setting;
@@ -46,6 +55,7 @@ addSetting({
     'type': 'boolean',
     'refresh': true, // true to add note "Will require you to refresh the page"
     'default': false, // default value
+    'category': "controversial"
 });
 
 if (settings.turn_off.value()) {
@@ -58,6 +68,27 @@ addSetting({
     'type': 'boolean',
     'refresh': true, // true to add note "Will require you to refresh the page"
     'default': true, // default value
+    'category': "packs"
+});
+
+addSetting({
+	'key': 'breaking_skin_fix',
+	'name': 'Breaking Skin Fix', // Name in settings page
+	'note': 'Whenever you hover over a breaking skin card, the name, description, cost, ATK and HP will go over the skin.',
+	'type': 'boolean',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	'default': true, // default value
+	'category': "card"
+});
+
+addSetting({
+	'key': 'breaking_skin_stats_fix',
+	'name': 'Breaking Skin Stats Fix', // Name in settings page
+	'note': 'Hides stats and tribes behind breaking skin to not break immersion. Hovering over a card will show them. Only works if Breaking Skin Fix is active.',
+	'type': 'boolean',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	'default': true, // default value
+	'category': "card"
 });
 
 addSetting({
@@ -68,6 +99,7 @@ addSetting({
     //'disabled': true,
     'refresh': true, // true to add note "Will require you to refresh the page"
     'default': true, // default value
+    'category': "controversial"
 });
 
 //console.log(settings);

@@ -14,6 +14,7 @@ addSetting({
     'options': optionList,
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': optionList[0], // default value
+    'category': "card"
 });
 
 function DisplayToSystem(str) {

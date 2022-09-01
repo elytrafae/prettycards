@@ -14,6 +14,7 @@ addSetting({
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': false, // default value
+	'category': "card"
 });
 
 var cardExceptions = {
@@ -81,9 +82,9 @@ function createComplexButton(settings) {
 function processCard(data) {
 	var html$ = data.element;
 	var card = data.card;
-	console.log("appendCard() event fired on " + card.name);
+	//console.log("appendCard() event fired on " + card.name);
 	PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
-		console.log("Theme Song Data Ready for " + card.name);
+		//console.log("Theme Song Data Ready for " + card.name);
 		var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
 		var doesCardHaveTheme = card.rarity === "LEGENDARY" || card.rarity === "DETERMINATION";
 		if (card.id in cardExceptions) { // Load and Gaster Blaster respectively.
@@ -96,16 +97,16 @@ function processCard(data) {
 		}
 		
 		if (doesCardHaveTheme) {
-			console.log(card.name + " has theme songs!");
+			//console.log(card.name + " has theme songs!");
 			var button;
 			if (themeSongSettings) {
-				console.log(card.name + " has complex buttons!");
+				//console.log(card.name + " has complex buttons!");
 				button = createComplexButton(themeSongSettings);
 			} else {
-				console.log(card.name + " has a simple button!");
+				//console.log(card.name + " has a simple button!");
 				button = createSimpleButton(card);
 			}
-			console.log(card.name + "'s button: " + button);
+			//console.log(card.name + "'s button: " + button);
 			html$.append(button);
 		}
 	});
@@ -114,7 +115,7 @@ function processCard(data) {
 
 if (settings.theme_song_preview.value() && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
 
-	console.log("Theme Song Preview is turned on, and it's not the Game or Spectator page! Attempt 2!");
+	//console.log("Theme Song Preview is turned on, and it's not the Game or Spectator page! Attempt 2!");
 
 	PrettyCards_plugin.events.on("appendCard()", processCard);
 	PrettyCards_plugin.events.on("PC_appendCard", processCard);
