@@ -1,4 +1,4 @@
-import { PrettyCards_plugin } from "./underscript_checker";
+import { prettycards, PrettyCards_plugin } from "./underscript_checker";
 
 var collectionPlace = document.getElementById("collection"); // This is for a workaround with how friendship cards are added.
 if (!collectionPlace) {
@@ -14,7 +14,6 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
 			PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", data[0].sha);
 		});
 	} else {
-		//console.log("SESSION STORAGE!");
 		PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", GM_info.script.version);
 	}
 });
@@ -64,13 +63,38 @@ if (String.prototype.splice === undefined) {
 	};
   }
 
+const baseCSSEventName = "PrettyCards:CommitCSSLoad";
+
+
 
 class Utility {
+
+	constructor() {
+		this.githubCSSSources = {};
+		this.addCSSSourceData("base", {
+			eventName: "PrettyCards:CommitCSSLoad",
+			apiLink: "https://api.github.com/repos/CMD-God/prettycards/commits",
+			urlLinkFunc: (data, name) => `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${data}/css/${name}.css`
+		});
+	}
+
+	addCSSSourceData(name, settings) {
+		this.githubCSSSources[name] = settings;
+		PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
+			if (GM_info.script.version == "local") {
+				window.$.get(settings.apiLink, function(data) {
+					PrettyCards_plugin.events.emit.singleton(settings.eventName, data[0].sha);
+				});
+			} else {
+				PrettyCards_plugin.events.emit.singleton(settings.eventName, GM_info.script.version);
+			}
+		});
+	}
 	
-	loadCSSFromGH(name) {
-		PrettyCards_plugin.events.on("PrettyCards:CommitCSSLoad", function(data) {
-			const url = `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${data}/css/${name}.css`;
-			utility.loadCSSFromLink(url);
+	loadCSSFromGH(name, srcName = "base") {
+		var src = this.githubCSSSources[srcName];
+		PrettyCards_plugin.events.on(src.eventName, function(data) {
+			utility.loadCSSFromLink(src.urlLinkFunc(data, name));
 		});
 	}
 
@@ -277,5 +301,7 @@ class Utility {
 }
 
 var utility = new Utility();
+
+window.prettycards.utility = utility;
 
 export {utility};
