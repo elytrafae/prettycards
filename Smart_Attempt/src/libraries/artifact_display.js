@@ -1,5 +1,6 @@
 
 import { pagegetters } from "./page_getters";
+import { prettycards } from "./underscript_checker";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
@@ -84,6 +85,7 @@ ArtifactDisplay.DTArtifactIds = [25, 34, 43, 46]; // Genocide, Outbreak, Ultimat
 
 var artifactDisplay = new ArtifactDisplay();
 
+prettycards.artifactDisplay = artifactDisplay;
 window.artifactDisplay = artifactDisplay;
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
