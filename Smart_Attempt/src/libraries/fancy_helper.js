@@ -308,4 +308,6 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 	//
 });
 
+prettycards.FancyDisplay = FancyDisplay;
+
 export {FancyDisplay};
