@@ -131,10 +131,12 @@ function registerCustomExtensions() {
             return `<span class="rainbowText">${text}</span>`;
         },
         pc_tc: function(nodes) {
+            var cmdName = nodes[0].toLowerCase();
             if (nodes.length == 1) {
-                return "[" + nodes[0] + "]"
+                return "[" + cmdName + "]"
             }
-            return "[" + nodes[0] + ":" + nodes.slice(0, 1).join("|") + "]";
+            nodes.splice(0, 1);
+            return "[" + cmdName + ":" + nodes.join("|") + "]";
         }
     })
 }
