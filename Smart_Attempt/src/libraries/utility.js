@@ -92,18 +92,24 @@ class Utility {
 	}
 	
 	loadCSSFromGH(name, srcName = "base") {
-		var src = this.githubCSSSources[srcName];
-		PrettyCards_plugin.events.on(src.eventName, function(data) {
-			utility.loadCSSFromLink(src.urlLinkFunc(data, name));
+		return new Promise((resolve, reject) => {
+			var src = this.githubCSSSources[srcName];
+			PrettyCards_plugin.events.on(src.eventName, function(data) {
+				utility.loadCSSFromLink(src.urlLinkFunc(data, name)).then(resolve).catch(reject);
+			});
 		});
 	}
 
 	loadCSSFromLink(url) {
-		var e = document.createElement("link");
-		e.rel  = 'stylesheet';
-		e.type = 'text/css';
-		e.href = url;
-		document.head.appendChild(e);
+		return new Promise((resolve, reject) => {
+			var e = document.createElement("link");
+			e.rel  = 'stylesheet';
+			e.type = 'text/css';
+			e.href = url;
+			e.onload = resolve;
+			e.onerror = reject;
+			document.head.appendChild(e);
+		});
 	}
 	
 	// Some code I found on stack overflow. Let's see if it works . . . 
@@ -302,6 +308,6 @@ class Utility {
 
 var utility = new Utility();
 
-window.prettycards.utility = utility;
+prettycards.utility = utility;
 
 export {utility};

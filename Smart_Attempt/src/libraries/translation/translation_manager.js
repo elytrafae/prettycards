@@ -1,6 +1,6 @@
 
 import { rarityIconsHTML } from "../rarity_icons";
-import { PrettyCards_plugin } from "../underscript_checker";
+import { prettycards, PrettyCards_plugin } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
@@ -8,6 +8,13 @@ class TranslationManager {
 
     constructor() {
         this.allValuesLists = {};
+    }
+
+    getStringOrList(key) {
+        if (this.allValuesLists[key]) {
+            return this.getTranslatedValueList(key);
+        }
+        return window.$.i18n(key);
     }
 
     getTranslatedValueList(key) {
@@ -145,5 +152,7 @@ function prePageLoadStuff() {
 }
 
 prePageLoadStuff();
+
+prettycards.translationManager = translationManager;
 
 export {translationManager};

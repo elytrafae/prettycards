@@ -337,6 +337,11 @@
     "pc-customgame-options-name" : "Game Name",
     "pc-customgame-options-recipients" : "Invitees (separate names with \",\")",
     "pc-customgame-options-everyone" : "Challenge Everyone?",
-    "pc-customgame-options-soul" : "Soul"
+    "pc-customgame-options-soul" : "Soul",
+
+    "pc-shops-option-buy" : "Buy",
+    "pc-shops-option-check" : "Check",
+    "pc-shops-option-talk" : "Talk",
+    "pc-shops-option-exit" : "Exit"
 }
 
