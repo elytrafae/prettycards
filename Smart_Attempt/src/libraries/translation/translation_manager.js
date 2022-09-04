@@ -129,6 +129,12 @@ function registerCustomExtensions() {
         pc_shiny: function(nodes) {
             var text = nodes[0];
             return `<span class="rainbowText">${text}</span>`;
+        },
+        pc_tc: function(nodes) {
+            if (nodes.length == 1) {
+                return "[" + nodes[0] + "]"
+            }
+            return "[" + nodes[0] + ":" + nodes.slice(0, 1).join("|") + "]";
         }
     })
 }
