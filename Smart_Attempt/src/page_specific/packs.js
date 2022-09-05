@@ -121,19 +121,6 @@ for (var i=0; i < packs_data.length; i++) {
 	packs_data2[data.code_id] = data;
 }
 
-function hideUglyPage() { // Nothing personal.
-	var children = [...document.querySelector(".mainContent").children];
-	//console.log(children);
-	for (var i=0; i < children.length; i++) {
-		var element = children[i];
-		if (element.nodeName == "NAV" || element.nodeName == "FOOTER" || element.nodeName == "SCRIPT" /*|| (element.nodeName == "TABLE" && element.id == "cardsOpen")*/) {
-			continue;
-		} else {
-			element.style.display = "none";
-		}
-	}
-}
-
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromGH("Packs"); // Other pages might use flippable cards, so I am gonna load this every time.
 })
@@ -141,7 +128,7 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 function InitPacks() {
 	
 	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function () {
-		hideUglyPage();
+		utility.hideUglyPage();
 		document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
 		ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
 		prettycards.testPackOpenAnimation = function(a, b) {StartOpenPackAnimation(packs_data2[a], b)};

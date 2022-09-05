@@ -303,6 +303,19 @@ class Utility {
 		}
 		return prefix + filename;
 	}
+
+	hideUglyPage() { // Nothing personal.
+		var children = [...document.querySelector(".mainContent").children];
+		//console.log(children);
+		for (var i=0; i < children.length; i++) {
+			var element = children[i];
+			if (element.nodeName == "NAV" || element.nodeName == "FOOTER" || element.nodeName == "SCRIPT" /*|| (element.nodeName == "TABLE" && element.id == "cardsOpen")*/) {
+				continue;
+			} else {
+				element.style.display = "none";
+			}
+		}
+	}
 	
 }
 
