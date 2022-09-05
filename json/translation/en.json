@@ -351,13 +351,23 @@
     "pc-shops-gerson-dial-exit" : "Be careful out there, kid!",
     "pc-shops-gerson-dial-bought" : "Thanks! Wa ha ha.",
     "pc-shops-gerson-dial-buyerror" : "You're a bit short on cash.",
-    "pc-shops-gerson-talk-title-aboutyou" : "About you",
+
+    "pc-shops-gerson-talk-title-aboutyou" : "About yourself",
     "pc-shops-gerson-talk-aboutyou" : {
         "values" : [
-            "I've been around a long time.",
-			"Maybe too long.",
-			"Studying history sure is easy when you've lived through so much of it yourself!",
-            "Wa ha ha!"
+            "I've been around a long time.\nMaybe too long.",
+			"Studying history sure is easy when you've lived through so much of it yourself!\nWa ha ha!"
+        ]
+    },
+    "pc-shops-gerson-talk-title-emblem" : "That emblem",
+    "pc-shops-gerson-talk-emblem" : {
+        "values" : [
+            "Eh?[w:200]\nYou don't know what that is?",
+			"What are they teaching you kids in school nowadays...?[w:200]\nWa ha ha!",
+			"That's the [style:yellow]Delta Rune[style:], the emblem of our kingdom.\nThe Kingdom...",
+            "... of Monsters.",
+            "Wa ha ha![w:150]\nGreat name, huh?[w:150]\nIt's as I always say...",
+            "Ol' King Fluffybuns can't name for beans!"
         ]
     }
 }
