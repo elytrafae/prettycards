@@ -344,7 +344,8 @@
     "pc-shops-option-talk" : "Talk",
     "pc-shops-option-exit" : "Exit",
 
-    "pc-shops-gerson-dial-intro" : "{{PC_TC:instant}}Hi!{{PC_TC:w|500}} I'm {{PC_TC:style|red}}Gerson{{PC_TC:style|}}!{{PC_TC:speed|500}} {{PC_TC:instant|off}}{{PC_TC:style|cyan}}\rNice to meet you!{{PC_TC:speed|33}} \nNow I will have an insanely long monologue for testing purposes!",
+    "pc-shops-gerson-dial-intro-test-dont-translate" : "{{PC_TC:instant}}Hi!{{PC_TC:w|500}} I'm {{PC_TC:style|red}}Gerson{{PC_TC:style|}}!{{PC_TC:speed|500}} {{PC_TC:instant|off}}{{PC_TC:style|cyan}}\rNice to meet you!{{PC_TC:speed|33}} \nNow I will have an insanely long monologue for testing purposes!",
+    "pc-shops-gerson-dial-intro" : "Woah there![w:300]\nI've got some neat junk for sale.",
     "pc-shops-gerson-dial-buy" : "What are you lookin for?",
     "pc-shops-gerson-dial-check" : "What's so interesting about all this junk?",
     "pc-shops-gerson-dial-talk" : "Anything you wanna know?",

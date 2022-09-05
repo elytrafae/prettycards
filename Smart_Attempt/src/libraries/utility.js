@@ -215,6 +215,12 @@ class Utility {
 	}
 
 	getRandomFromArray(array) {
+		if (array.length <= 0) {
+			return undefined;
+		}
+		if (array.length == 1) {
+			return array[0];
+		}
 		return array[this.randomInt(0, array.length)];
 	}
 
@@ -245,11 +251,11 @@ class Utility {
 	}
 
 	preloadAudio(url) {
-		var audio = new Audio();
+		var audio = new Audio(url);
 		// once this file loads, it will call loadedAudio()
 		// the file will be kept by the browser as cache
 		//audio.addEventListener('canplaythrough', loadedAudio, false);
-		audio.src = url;
+		audio.src = url; // Just to be sure it works with every browser.
 	}
 
 	preloadImage(url) {
