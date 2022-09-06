@@ -1,10 +1,9 @@
 
 // This library adds a button onto cards outside of games so you can listen to their theme songs.
 
-import {PrettyCards_plugin, settings , addSetting} from "/src/libraries/underscript_checker.js";
+import {PrettyCards_plugin, settings , addSetting, prettycards} from "/src/libraries/underscript_checker.js";
 
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
-import { prettycards } from "../underscript_checker";
 import {getThemeSongSettingByCardId} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 
 addSetting({
@@ -25,10 +24,14 @@ var cardExceptions = {
 const audio = new Audio();
 //console.log("Audio", audio);
 
-window.prettycards.playThemeSongPreviewEvent = function(SRC, e) {
+prettycards.playThemeSongPreviewEvent = function(SRC, e) {
 	// console.log("Button clicked!", e);
+	PrettyCards_plugin.events.emit("PrettyCards:pauseBGM");
 	audio.src = SRC;
 	audio.play();
+	audio.onended = audio.onerror = function() {
+		PrettyCards_plugin.events.emit("PrettyCards:resumeBGM");
+	}
 	e.stopPropagation();
 }
 

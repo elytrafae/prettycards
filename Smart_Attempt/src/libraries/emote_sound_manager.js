@@ -13,10 +13,19 @@ addSetting({
 var emoteAudio = new Audio();
 emoteAudio.volume = 0.7;
 
-function playEmoteSound(emote, onerror = function() {}) {
+function playEmoteSound(emote, onerror = function() {}, muteBGM = false) {
+    if (muteBGM) {
+        PrettyCards_plugin.events.emit("PrettyCards:pauseBGM");
+    }
     emoteAudio.pause();
     emoteAudio.src = `https://github.com/CMD-God/prettycards/raw/master/audio/emotes/${emote}.ogg`;
-    emoteAudio.onerror = onerror;
+    emoteAudio.onerror = function() {
+        onerror();
+        PrettyCards_plugin.events.emit("PrettyCards:resumeBGM");
+    };
+    emoteAudio.onended = function() {
+        PrettyCards_plugin.events.emit("PrettyCards:resumeBGM");
+    }
     emoteAudio.play();
 }
 
@@ -46,7 +55,7 @@ if (settings.emote_sounds.value() && window.underscript.onPage("CosmeticsShop"))
                 playEmoteSound(emote, function() {
                     speaker.style.color = "red";
                     speaker.onclick = function() {};
-                });
+                }, true);
             }
             e.parentElement.appendChild(speaker);
         });
