@@ -8,17 +8,6 @@ if (!collectionPlace) {
 	document.body.appendChild(collectionPlace);
 }
 
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
-	if (GM_info.script.version == "local") {
-		window.$.get("https://api.github.com/repos/CMD-God/prettycards/commits", function(data) {
-			PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", data[0].sha);
-		});
-	} else {
-		PrettyCards_plugin.events.emit.singleton("PrettyCards:CommitCSSLoad", GM_info.script.version);
-	}
-});
-
-
 var season_number = -1;
 const seasonKeyStart = "quest-s";
 const seasonKeyEnd = "-start-1";
@@ -63,15 +52,13 @@ if (String.prototype.splice === undefined) {
 	};
   }
 
-const baseCSSEventName = "PrettyCards:CommitCSSLoad";
-
-
 
 class Utility {
 
 	constructor() {
 		this.githubCSSSources = {};
 		this.addCSSSourceData("base", {
+			version: GM_info.script.version,
 			eventName: "PrettyCards:CommitCSSLoad",
 			apiLink: "https://api.github.com/repos/CMD-God/prettycards/commits",
 			urlLinkFunc: (data, name) => `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${data}/css/${name}.css`
@@ -81,12 +68,12 @@ class Utility {
 	addCSSSourceData(name, settings) {
 		this.githubCSSSources[name] = settings;
 		PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
-			if (GM_info.script.version == "local") {
+			if (settings.version == "local") {
 				window.$.get(settings.apiLink, function(data) {
 					PrettyCards_plugin.events.emit.singleton(settings.eventName, data[0].sha);
 				});
 			} else {
-				PrettyCards_plugin.events.emit.singleton(settings.eventName, GM_info.script.version);
+				PrettyCards_plugin.events.emit.singleton(settings.eventName, settings.version);
 			}
 		});
 	}
@@ -251,16 +238,22 @@ class Utility {
 	}
 
 	preloadAudio(url) {
-		var audio = new Audio(url);
-		// once this file loads, it will call loadedAudio()
-		// the file will be kept by the browser as cache
-		//audio.addEventListener('canplaythrough', loadedAudio, false);
-		audio.src = url; // Just to be sure it works with every browser.
+		return Promise((resolve, reject) => {
+			var audio = new Audio();
+			audio.onload = resolve;
+			audio.onerror = reject;
+			audio.src = url; // Just to be sure it works with every browser.
+		})
+		
 	}
 
 	preloadImage(url) {
-		var image = new Image();
-		image.src = url;
+		return Promise((resolve, reject) => {
+			var image = new Image();
+			image.onload = resolve;
+			image.onerror = reject;
+			image.src = url;
+		})
 	}
 
 	featuresAccessForGroupOnly(groups) {
