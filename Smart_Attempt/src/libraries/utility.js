@@ -238,7 +238,7 @@ class Utility {
 	}
 
 	preloadAudio(url) {
-		return Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			var audio = new Audio();
 			audio.onload = resolve;
 			audio.onerror = reject;
@@ -248,7 +248,7 @@ class Utility {
 	}
 
 	preloadImage(url) {
-		return Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			var image = new Image();
 			image.onload = resolve;
 			image.onerror = reject;
