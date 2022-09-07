@@ -240,7 +240,7 @@ class Utility {
 	preloadAudio(url) {
 		return new Promise((resolve, reject) => {
 			var audio = new Audio();
-			audio.onload = resolve;
+			audio.onload = function() {resolve(audio)};
 			audio.onerror = reject;
 			audio.src = url; // Just to be sure it works with every browser.
 		})
@@ -250,7 +250,7 @@ class Utility {
 	preloadImage(url) {
 		return new Promise((resolve, reject) => {
 			var image = new Image();
-			image.onload = resolve;
+			image.onload = function() {resolve(image)};
 			image.onerror = reject;
 			image.src = url;
 		})
