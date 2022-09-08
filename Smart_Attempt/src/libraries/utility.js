@@ -256,6 +256,36 @@ class Utility {
 		})
 	}
 
+	resizePixelArt(img, scale = 1) {
+		console.log(img, scale);
+		var offtx = document.createElement('CANVAS').getContext('2d');
+		offtx.height = img.height;
+		offtx.width = img.width;
+		offtx.drawImage(img,0,0);
+		var imgData = offtx.getImageData(0,0,img.width,img.height).data;
+
+		var retCanv = document.createElement("CANVAS");
+		retCanv.height = img.height * scale;
+		retCanv.width = img.width * scale;
+		var ctx2 = retCanv.getContext('2d');
+		for (var x=0;x<img.width;++x){
+			for (var y=0;y<img.height;++y){
+			  	// Find the starting index in the one-dimensional image data
+				var i = (y*img.width + x)*4;
+				var r = imgData[i  ];
+				var g = imgData[i+1];
+				var b = imgData[i+2];
+				var a = imgData[i+3];
+				ctx2.fillStyle = "rgba("+r+","+g+","+b+","+(a/255)+")";
+				ctx2.fillRect(x*scale,y*scale,scale,scale);
+			}
+		}
+
+		document.body.appendChild(retCanv);
+
+		return retCanv;
+	}
+
 	featuresAccessForGroupOnly(groups) {
 		if (accessExceptions.includes(window.selfUsername)) {
 			return true;
