@@ -81,7 +81,7 @@ addSetting({
 
 function SetMobileView() {
 	$("nav").css("display", "none");
-	$("nav").css("display", "none");
+	$("footer").css("display", "none");
 	//$(".mainContent").css("width", "100%");
 	
 	var temp = $('header').contents();
