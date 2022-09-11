@@ -356,8 +356,8 @@
     "pc-shops-gerson-talk-title-aboutyou" : "About yourself",
     "pc-shops-gerson-talk-aboutyou" : {
         "values" : [
-            "I've been around a long time.\nMaybe too long.",
-			"Studying history sure is easy when you've lived through so much of it yourself!\nWa ha ha!"
+            "I've been around a long time.\n[face:sus]Maybe too long.",
+			"[face:happy]Studying history sure is easy when you've lived through so much of it yourself![face:default]\nWa ha ha!"
         ]
     },
     "pc-shops-gerson-talk-title-emblem" : "That emblem",
