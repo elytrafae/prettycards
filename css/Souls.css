@@ -9,6 +9,13 @@
 	margin: 2px;
 }
 
+.MYTHIC {
+	animation-name: rainbow;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
 .PrettyCards_Soul_DETERMINATION.PrettyCards_SelectedSoul,.PrettyCards_DisplaySoul_DETERMINATION {
 	filter: drop-shadow(0px 0px 15px #ff0000);
 }

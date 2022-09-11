@@ -232,6 +232,38 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         hp: 7,
         description: `Whenever an enemy monster deals {{DMG}} to you, this deals 3 {{DMG}} back.`
     })
+
+    c.newArtifact({
+		name: "BASE Test", 
+		image: "File_Explorer",
+		aprilImage: "File_Explorer",
+		rarity: "BASE",
+		description: `Increase the chance of being the second player.`,
+	});
+
+    c.newArtifact({
+		name: "RARE Test", 
+		image: "File_Explorer",
+		aprilImage: "File_Explorer",
+		rarity: "RARE",
+		description: `Old Glamburger lol`,
+	});
+
+    c.newArtifact({
+		name: "EPIC Test", 
+		image: "File_Explorer",
+		aprilImage: "File_Explorer",
+		rarity: "EPIC",
+		description: `Reverberation.`,
+	});
+
+    c.newArtifact({
+		name: "MYTHIC Test", 
+		image: "File_Explorer",
+		aprilImage: "File_Explorer",
+		rarity: "MYTHIC",
+		description: `Win the game XD`,
+	});
 	
 })
 
