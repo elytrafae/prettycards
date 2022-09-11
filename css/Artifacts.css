@@ -221,7 +221,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 
 .PrettyCards_ArtifactDisplay_EPIC {
 	filter: drop-shadow(0px 0px 12px purple);
-	animation: EPICArtifactGlow 3s alternate infinite ease-in-out;
+	animation: EpicArtifactGlow 3s alternate infinite ease-in-out;
 }
 
 .PrettyCards_ArtifactDisplay_LEGENDARY {
