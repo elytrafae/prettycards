@@ -221,6 +221,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 
 .PrettyCards_ArtifactDisplay_EPIC {
 	filter: drop-shadow(0px 0px 12px purple);
+	animation: EPICArtifactGlow 3s alternate infinite ease-in-out;
 }
 
 .PrettyCards_ArtifactDisplay_LEGENDARY {
@@ -240,14 +241,57 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	animation: DTArtifactGlow 3s alternate infinite ease-in-out;
 }
 
+.PrettyCards_ArtifactDisplay_MYTHIC {
+	animation: ArtifactFloat 3s alternate infinite ease-in-out;
+}
+
+.PrettyCards_ArtifactDisplay_MYTHIC > div {
+	animation: MYTHICArtifactGlow 7s alternate infinite ease-in-out;
+}
+
 @keyframes ArtifactFloat {
 	from { transform: translatey(12px);}
 	to { transform: translatey(-12px);}
 }
 
+@keyframes EpicArtifactGlow {
+	from {filter: drop-shadow(0px 0px 8px rgb(99, 0, 99));}
+	to {filter: drop-shadow(0px 0px 12px rgb(146, 0, 146));}
+}
+
 @keyframes DTArtifactGlow {
 	from {filter: drop-shadow(0px 0px 8px #660000);}
 	to {filter: drop-shadow(0px 0px 20px #EE0000);}
+}
+
+@keyframes MYTHICArtifactGlow {
+    0% {
+        filter: drop-shadow(0px 0px 20px red)
+    }
+
+    17% {
+        filter: drop-shadow(0px 0px 20px #ff0)
+    }
+
+    33% {
+        filter: drop-shadow(0px 0px 20px #0f0)
+    }
+
+    50% {
+        filter: drop-shadow(0px 0px 20px #0ff)
+    }
+
+    67% {
+        filter: drop-shadow(0px 0px 20px #00f)
+    }
+
+    84% {
+        filter: drop-shadow(0px 0px 20px #f0f)
+    }
+
+    100% {
+        filter: drop-shadow(0px 0px 20px red)
+    }
 }
 
 .PrettyCards_ArtifactDisplayShop {
