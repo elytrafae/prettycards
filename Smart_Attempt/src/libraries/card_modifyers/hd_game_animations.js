@@ -25,7 +25,7 @@ function replaceAnim(image) {
 }
 
 if (settings.hd_game_animations.value() && (window.underscript.onPage("Game") || window.underscript.onPage("Spectate"))) {
-	wrapAnimFunction("silenceAnimation", "Silence");
+	// wrapAnimFunction("silenceAnimation", "Silence"); // Activate when animations come!
 
 
 }
