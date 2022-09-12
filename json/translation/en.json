@@ -355,6 +355,7 @@
     "pc-shops-gerson-dial-exit" : "Be careful out there[w:150], kid!",
     "pc-shops-gerson-dial-bought" : "Thanks! Wa ha ha.",
     "pc-shops-gerson-dial-buyerror" : "You're a bit short on cash.",
+    "pc-shops-gerson-dial-buyhasall" : "Sorry, but you bought'em all.[w:200]\nCome back some other time!",
 
     "pc-shops-gerson-talk-title-aboutyou" : "About yourself",
     "pc-shops-gerson-talk-aboutyou" : {
