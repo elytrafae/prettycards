@@ -340,7 +340,8 @@
     "pc-customgame-options-soul" : "Soul",
 
     "pc-shops-playbtn-tip" : "Click to play song!",
-    "pc-shops-playbtn-tip-fail" : "The song failed to play automatically.", 
+    "pc-shops-playbtn-tip-fail" : "The song failed to play automatically.",
+    "pc-shops-clicktobuy" : "Click to buy!",
 
     "pc-shops-option-buy" : "Buy",
     "pc-shops-option-check" : "Check",
