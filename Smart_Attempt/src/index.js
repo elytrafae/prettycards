@@ -47,6 +47,8 @@ import {} from "/src/libraries/emote_sound_manager.js";
 
 import {} from "./libraries/main_menu.js";
 
+import {} from "/src/libraries/footer_remover.js";
+
 // import {} from "/src/libraries/external_api_integration/youtube_player.js";
 
 import {InitPacks} from "./page_specific/packs.js";

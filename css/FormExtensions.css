@@ -71,3 +71,8 @@ input:checked + .slider:before {
 .form_switch.friendshipSortSwitch input:checked + .slider {
     background-color: #FF49EF;
 }
+
+/* Seems like a good place to put this? */
+footer .glyphicon:hover {
+    opacity: .5;
+}

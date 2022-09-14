@@ -226,19 +226,3 @@ if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
 	})
 }
 
-function RemoveFooter() {
-	$("footer").css("display", settings.remove_footer.value() ? "none" : "block");
-}
-
-// I dunno where else to put this, so I'll put it here for now.
-addSetting({
-	'key': 'remove_footer',
-	'name': 'Remove Footer', // Name in settings page
-	'note': "Sayonara, ugly!",
-	'type': 'boolean',
-	'refresh': true, // true to add note "Will require you to refresh the page"
-	'default': false, // default value
-	'onChange' : RemoveFooter
-});
-
-RemoveFooter();
