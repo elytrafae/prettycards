@@ -1,4 +1,4 @@
-import { addSetting, settings } from "./underscript_checker";
+import { addSetting, PrettyCards_plugin, settings } from "./underscript_checker";
 
 
 function RemoveFooter() {
@@ -64,6 +64,18 @@ function AddRemoveFooterButton() {
     a.onclick = AskRemoval;
 
     navbarRight.appendChild(li);
+
+    PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
+        window.tippy(a, {
+            content: window.$.i18n("pc-footerremove-hover"),
+            arrow: true,
+            inertia: true,
+            placement: "auto",
+            appendTo: window.document.body,
+            boundary: 'window',
+            getReferenceClientRect: window.document.body.getBoundingClientRect
+        });
+    })
 }
 
 AddRemoveFooterButton();
