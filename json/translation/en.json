@@ -339,6 +339,9 @@
     "pc-customgame-options-everyone" : "Challenge Everyone?",
     "pc-customgame-options-soul" : "Soul",
 
+    "pc-footerremove-ask-title" : "You clicked on the \"Remove Footer\" button!",
+    "pc-footerremove-ask" : "Are you sure you want to remove the footer?<br>If you change your mind, you can go to the PrettyCards settings to reenable it.",
+
     "pc-skintype-normal" : "Normal",
     "pc-skintype-full" : "Full",
     "pc-skintype-breaking" : "Breaking",

@@ -17,6 +17,27 @@ addSetting({
 
 RemoveFooter();
 
+function AskRemoval() {
+    BootstrapDialog.show({
+        title: window.$.i18n("pc-footerremove-ask-title"),
+        message: window.$.i18n("pc-footerremove-ask"),
+        buttons: [{
+            label: $.i18n('pc-navigate-nevermind'),
+            cssClass: 'btn-danger',
+            action: function (dialog) {
+                dialog.close();
+            }
+        },{
+            label: $.i18n('pc-navigate-yes'),
+            cssClass: 'btn-primary',
+            action: function (dialog) {
+                settings.remove_footer.set(true);
+                dialog.close();
+            }
+        }]
+    });
+}
+
 function AddRemoveFooterButton() {
     var footer = window.$("footer");
     if (footer.length == 0) {
@@ -28,8 +49,10 @@ function AddRemoveFooterButton() {
     }
 
     var li = document.createElement("LI");
+    li.style = "border-left: 1px solid white;"
 
     var a = document.createElement("A");
+    a.style = "padding: 8px 10px 10px 10px;";
 
     var span = document.createElement("SPAN");
     span.style.fontSize = "18px";
@@ -37,6 +60,8 @@ function AddRemoveFooterButton() {
     
     a.appendChild(span);
     li.appendChild(a);
+
+    a.onclick = AskRemoval;
 
     navbarRight.appendChild(li);
 }
