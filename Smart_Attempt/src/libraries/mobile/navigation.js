@@ -81,7 +81,7 @@ addSetting({
 
 function SetMobileView() {
 	$("nav").css("display", "none");
-	$("footer").css("display", "none");
+	$("footer").addClass("PrettyCards_Hidden");
 	//$(".mainContent").css("width", "100%");
 	
 	var temp = $('header').contents();
