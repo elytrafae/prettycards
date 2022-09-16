@@ -385,7 +385,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		rank = "<div>" + window.$.i18n("pc-chat-ranked-rank") + ": " + getRankedPositionHTML(rankNr) + "</div>";
 	}
 	
-	console.log("USER", user);
+	//console.log("USER", user);
 	var wins = "<div>" + window.$.i18n("pc-chat-ranked-wins") + ": " + user.winsRanked + "</div>";
 	var losses = "<div>" + window.$.i18n("pc-chat-ranked-losses") + ": " + user.lossesRanked + "</div>";
 	var winrate = "<div>" + window.$.i18n("pc-chat-ranked-winrate") + ": " + (Math.floor((user.winsRanked / (user.winsRanked + user.lossesRanked))*10000) / 100) + "%</div>";

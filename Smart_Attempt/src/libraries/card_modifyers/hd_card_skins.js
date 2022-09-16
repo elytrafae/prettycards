@@ -27,13 +27,11 @@ function returnHDImageIfThereIs(image, forceNormal = false) {
 
 
 if (settings.hd_card_skins.value()) {
+    $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/hdCardSkins.json", {}, function(data) {
+        hd_card_skins = data;
+        PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", {skins: data});
+    })
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-        $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/hdCardSkins.json", {}, function(data) {
-            //console.log("HD Card Skin Data", data);
-            hd_card_skins = data;
-            PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", {skins: data});
-        })
-
         var originalAppendCardCardSkinShop = window.appendCardCardSkinShop;
         window.appendCardCardSkinShop = function(cardSkin, frameName) {
             var appendedCard = originalAppendCardCardSkinShop(cardSkin, frameName);
