@@ -93,7 +93,7 @@ var packs_data = [
 		g_cost : -1,
 		ucp_cost : -1,
 		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/SuperPack",
-		image_extension: ".png",
+		image_extension: ".gif",
 		name: "pc-packs-super-name",
 		description: "pc-packs-super-desc",
 		code_id: "SuperPack",
