@@ -345,6 +345,43 @@ class Utility {
 			}
 		}
 	}
+
+	binarySearch(array, value, mapFunc = (ele) => ele) {
+		var s = 0, e = array.length - 1;
+		while (s <= e) {
+			var m = Math.floor((s + e)/2);
+			var ele = array[m];
+			var mappedVal = mapFunc(ele);
+			if (mappedVal === value) {
+				return array[m];
+			}
+			if (value > mappedVal) {
+				s = m+1;
+			} else {
+				e = m - 1;
+			}
+		}
+		return null;
+	}
+
+	// From StackOverflow: https://stackoverflow.com/questions/5598743/finding-elements-position-relative-to-the-document
+	getCoordsRelativeToDocument(elem) { // crossbrowser version
+		var box = elem.getBoundingClientRect();
+	
+		var body = document.body;
+		var docEl = document.documentElement;
+	
+		var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+		var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+	
+		var clientTop = docEl.clientTop || body.clientTop || 0;
+		var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+	
+		var top  = box.top +  scrollTop - clientTop;
+		var left = box.left + scrollLeft - clientLeft;
+	
+		return { top: Math.round(top), left: Math.round(left), width: box.width, height: box.height };
+	}
 	
 }
 
