@@ -11,8 +11,7 @@
 }
 
 .PrettyCards_CardBottomLeftInfo > img {
-    width: 16px;
     height: 16px;
     cursor: help;
-    margin: 2px;
+    margin-right: 2px;
 }

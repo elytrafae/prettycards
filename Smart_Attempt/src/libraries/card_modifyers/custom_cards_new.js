@@ -99,11 +99,12 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			}
 			
 			if (card.note && card.note.length > 0) {
-				var noteIcon = window.$('<img src="https://github.com/CMD-God/prettycards/raw/master/img/CardPowers/note.png" class="infoPowers helpPointer" style="top: 66px;right: 138px;"></img>');
+				var noteIcon = window.$('<img src="https://github.com/CMD-God/prettycards/raw/master/img/CardPowers/note.png"></img>');
 				noteIcon.contextmenu(function() {
 					OpenAuthorNote(card);
 				});
-				element.find(".cardStatus").append(noteIcon);
+				element.find(".PrettyCards_CardBottomLeftInfo").append(noteIcon);
+				//element.find(".cardStatus").append(noteIcon);
 			}
 			
 			//card.onRender(data); // Removing this system because clones do not mix well with this.
