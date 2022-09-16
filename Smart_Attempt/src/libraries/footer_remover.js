@@ -15,8 +15,6 @@ addSetting({
 	'onChange' : RemoveFooter
 });
 
-RemoveFooter();
-
 function AskRemoval() {
     BootstrapDialog.show({
         title: window.$.i18n("pc-footerremove-ask-title"),
@@ -78,4 +76,13 @@ function AddRemoveFooterButton() {
     })
 }
 
-AddRemoveFooterButton();
+if (window.$) {
+    RemoveFooter();
+    AddRemoveFooterButton();
+} else {
+    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+        RemoveFooter();
+        AddRemoveFooterButton();
+    });
+}
+
