@@ -1,4 +1,14 @@
 
+#PrettyCards_CT_Phase0_SourceSelect > div {
+    font-size: 2em;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+#PrettyCards_CT_Phase0_SourceSelect > div:hover {
+    color: yellow;
+}
+
 #PrettyCards_CT_Phase1_LangaugeSelect {
 
 }

@@ -165,6 +165,7 @@ function prePageLoadStuff() {
     PrettyCards_plugin.events.on('translation:loaded', () => {
         registerCustomExtensions();
         PrettyCards_plugin.events.emit.singleton("PrettyCards:registerTranslationSources");
+        PrettyCards_plugin.events.emit.singleton("PrettyCards:translationSourcesDone");
         if (lan != "en") {
             languagesToLoad = translationManager.languageSources.length*2;
             loadLanguage('en');

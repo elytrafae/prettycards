@@ -183,7 +183,9 @@ function CreateSideNavMenu() {
 		var gold = $("#golds").text();
 		var ucp = $("#ucp").text();
 		//console.log("AVATAR", avatar);
-		var user_part = $(`
+		var user_part = $(`<div>DATA_PULL_ERROR</div>`);
+		if (avatar && gold && ucp) {
+			user_part = $(`
 			<table class="PrettyCards_NavBarProfile">
 				<tr>
 					<td rowspan="2"><img class="${avatar.className}" src="${avatar.src}"></td>
@@ -194,6 +196,8 @@ function CreateSideNavMenu() {
 				</tr>
 			</table>
 		`);
+		}
+		
 		user_part.click(function() {
 			user_menu.toggleClass("PrettyCards_Hidden");
 		})
@@ -207,7 +211,7 @@ function CreateSideNavMenu() {
 }
 
 prettycards.openSettings = function() {
-	settings.packs.show(); // Temporary solution. Works with any setting.
+	settings.turn_off.show(); // Temporary solution. Works with any setting.
 }
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {

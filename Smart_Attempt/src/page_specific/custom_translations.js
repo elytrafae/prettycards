@@ -1,6 +1,8 @@
-import { PrettyCards_plugin } from "../libraries/underscript_checker";
+import { prettycards, PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "/src/libraries/utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
+
+var source; // The source used for custom lines.
 
 var englishOriginal; // Onu's English File
 var englishCustom; // My English File
@@ -32,13 +34,15 @@ function InitCustomTranslations() {
 
 function StartVerified() {
 
-    loadEnglish();
-
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
         window.$("title").html("PrettyCards - Custom Translations");
         utility.loadCSSFromGH("CustomTranslations");
         $(".mainContent").html(`
-            <div id="PrettyCards_CT_Phase1">
+            <div id="PrettyCards_CT_Phase0">
+                <h1>Please select a source!</h1>
+                <div id="PrettyCards_CT_Phase0_SourceSelect"></div>
+            </div>
+            <div id="PrettyCards_CT_Phase1" class="PrettyCards_Hidden">
                 <h1>Please select a language!</h1>
                 <div id="PrettyCards_CT_Phase1_LangaugeSelect"></div>
             </div>
@@ -113,6 +117,17 @@ function StartVerified() {
             $(".mainContent").toggleClass("PrettyCards_WiderMainContent");
             $("#PrettyCards_CT_Phase2_QuickRef").toggleClass("PrettyCards_Hidden");
         })
+        PrettyCards_plugin.events.on("PrettyCards:translationSourcesDone", function() {
+            console.log(prettycards.translationManager.languageSources);
+            prettycards.translationManager.languageSources.forEach((s) => {
+                var line = $(`<div>${s.name}</div>`);
+                line.click(function() {
+                    setSource(s);
+                })
+                $("#PrettyCards_CT_Phase0_SourceSelect").append(line);
+            })
+        });
+
         PrettyCards_plugin.events.on("translation:loaded", function() {
             for (var i=1; i < window.availableLanguages.length; i++) {
                 const lan = window.availableLanguages[i];
@@ -151,12 +166,19 @@ function setUpQuickRef() {
     });
 }
 
+function setSource(s) {
+    source = s;
+    $("#PrettyCards_CT_Phase0").addClass("PrettyCards_Hidden");
+    $("#PrettyCards_CT_Phase1").removeClass("PrettyCards_Hidden");
+    loadEnglish();
+}
+
 function loadEnglish() {
     $.getJSON(`/translation/en.json`, {}, function(data) {
         englishOriginal = data;
         goToPhase2();
     });
-    $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/en.json`, {}, function(data) {
+    $.getJSON(source.urlFunc('en'), {}, function(data) {
         englishCustom = data;
         goToPhase2();
     })
@@ -169,7 +191,7 @@ function setLanguage(lan) {
         window.$.i18n().load({[lan]: data})
         goToPhase2();
     });
-    var call = $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`, {}, function(data) {
+    var call = $.getJSON(source.urlFunc(lan), {}, function(data) {
         editedCustom = data;
         goToPhase2();
     });
