@@ -4,12 +4,16 @@ import { prettycards, PrettyCards_plugin } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
+// pc-shops-.*-(dial|(talk(?!-title)))
+
 class TranslationManager {
 
     constructor() {
         this.allValuesLists = {};
         this.languageSources = [];
+        this.previewTypes = [];
         this.addLanguageSource("PrettyCards:Core", (lan) => `https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`);
+        this.addPreviewType("default", /.*/, (str) => {return `<span>${str}</span>`}, 0);
     }
 
     addLanguageSource(name = "DEFAULT_NAME", urlFunc = (lan) => lan) {
@@ -17,6 +21,23 @@ class TranslationManager {
             name: name,
             urlFunc: urlFunc
         })
+    }
+
+    addPreviewType(name = "DEFAULT_MAME", regex = /.*/, eleFunc = () => {}, priority = 0, onremove = () => {}) {
+        var previewType = {
+            name: name,
+            regex: regex,
+            eleFunc: eleFunc,
+            priority: priority,
+            onremove: onremove
+        };
+        var index = 0;
+        while (index < this.previewTypes.length && this.previewTypes[index].priority > priority) {
+            index++;
+        }
+        this.previewTypes.splice(index, 0, previewType);
+        console.log(this.previewTypes);
+        return previewType;
     }
 
     getStringOrList(key) {

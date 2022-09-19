@@ -67,8 +67,8 @@
 }
 
 .PrettyCards_CT_Phase2_ListEntryRow textarea {
-    max-width: 100%;
-    min-width: 100%;
+    max-width: 430px;
+    min-width: 430px;
 }
 
 @font-face {

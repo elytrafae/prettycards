@@ -118,7 +118,6 @@ function StartVerified() {
             $("#PrettyCards_CT_Phase2_QuickRef").toggleClass("PrettyCards_Hidden");
         })
         PrettyCards_plugin.events.on("PrettyCards:translationSourcesDone", function() {
-            console.log(prettycards.translationManager.languageSources);
             prettycards.translationManager.languageSources.forEach((s) => {
                 var line = $(`<div>${s.name}</div>`);
                 line.click(function() {
@@ -415,7 +414,7 @@ function setSingleTextToKey(key, str) {
         entry.value = str;
         return;
     }
-    editedCustom[key] = str;
+    editedCustom[key] = convertValueToString(str);
 }
 
 function displayEntry(key) {
@@ -448,17 +447,17 @@ function displayEntry(key) {
         $("#PrettyCards_CT_Phase2_OGEnglishText").parent().addClass("PrettyCards_Hidden");
         $("#PrettyCards_CT_Phase2_OGTranslatedText").parent().addClass("PrettyCards_Hidden");
     }
-    console.log(entry, getSingleTextFromEntry(entry));
     $("#PrettyCards_CT_Phase2_TranslationArea").parent().removeClass("PrettyCards_Hidden");
     var entryText = getSingleTextFromEntry(entry)
     $("#PrettyCards_CT_Phase2_TranslationArea").val(entryText);
-    setPreviewTo(entryText);
+    setPreviewTo(convertValueToString(entryText), key);
 
     const constKey = key;
     $("#PrettyCards_CT_Phase2_TranslationArea").unbind("keyup").keyup(function () {
         var txt = $("#PrettyCards_CT_Phase2_TranslationArea").val();
-        setSingleTextToKey(constKey, txt);
-        setPreviewTo(txt);
+        var convertedValue = convertValueToString(txt);
+        setSingleTextToKey(constKey, convertedValue);
+        setPreviewTo(convertedValue, constKey);
     });
 }
 
@@ -485,8 +484,9 @@ function displayListEntry(key, entry) {
         row.find("textarea").val(val || "");
         row.find("textarea").keyup(function () {
             var txt = $(this).val();
-            editedCustom[constKey].values[index] = txt;
-            setPreviewTo(txt);
+            var convertedValue = convertValueToString(txt);
+            editedCustom[constKey].values[index] = convertedValue;
+            setPreviewTo(convertedValue, constKey);
         });
         parent.append(row);
     }
@@ -513,6 +513,10 @@ function downloadJSON() {
     });
 }
 
+function convertValueToString(value) {
+    return value.replaceAll("\\n", "\n").replaceAll("\\r", "\r");
+}
+
 // Ok, I have to admit, I could not do this better than Onu. If I wanted to, it would be the exact same result, sooooo . . .
 function getColoredStringReference(stringReference, encodeInput = true) {
 
@@ -521,6 +525,7 @@ function getColoredStringReference(stringReference, encodeInput = true) {
 
     if (encodeInput) {
         stringReference = toEncodedHTML(stringReference);
+        var stringReference = stringReference.replaceAll("\n", '<span class="gray">\\n</span>').replaceAll("\r", '<span class="gray">\\r</span>');
     }
 
     var coloredString = stringReference.replace(/({{[^{}]*?}})/g, function (m) {
@@ -536,12 +541,27 @@ function getColoredStringReference(stringReference, encodeInput = true) {
     return coloredString;
 }
 
-function setPreviewTo(txt = "") {
-    if (txt == "") {
+var lastPreviewType;
+function setPreviewTo(txt = "", key = "") {
+    if (lastPreviewType) {
+        lastPreviewType.onremove();
+    }
+    if (txt === "") {
         $("#PrettyCards_CT_Phase2_Preview").html("");
         return;
     }
-    $("#PrettyCards_CT_Phase2_Preview").html(`<span>${utility.toLocale("decks-preview", editedTag)}: </span><span>${utility.toLocale(txt, editedTag)}</span>`)
+    var types = window.prettycards.translationManager.previewTypes;
+    var previewType;
+    for (var i=0; i < types.length; i++) {
+        var type = types[i];
+        if (key.match(type.regex)) {
+            previewType = type;
+            break;
+        }
+    }
+    lastPreviewType = previewType;
+    $("#PrettyCards_CT_Phase2_Preview").html(`<span>${utility.toLocale("decks-preview", editedTag)}: </span><span id="PrettyCards_CT_Phase2_PreviewInsert"></span>`);
+    $("#PrettyCards_CT_Phase2_PreviewInsert").append(previewType.eleFunc(utility.toLocale(txt, editedTag)));
 }
 
 export {InitCustomTranslations};
