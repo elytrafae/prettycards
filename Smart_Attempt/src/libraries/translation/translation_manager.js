@@ -8,6 +8,15 @@ class TranslationManager {
 
     constructor() {
         this.allValuesLists = {};
+        this.languageSources = [];
+        this.addLanguageSource("PrettyCards:Core", (lan) => `https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`);
+    }
+
+    addLanguageSource(name = "DEFAULT_NAME", urlFunc = (lan) => lan) {
+        this.languageSources.push({
+            name: name,
+            urlFunc: urlFunc
+        })
     }
 
     getStringOrList(key) {
@@ -71,16 +80,23 @@ function processJSON(lan, data) {
             }
         }
     }
+    progressLanguagesToLoad();
+}
+
+function progressLanguagesToLoad() {
     languagesToLoad--;
     if (languagesToLoad <= 0) {
-        PrettyCards_plugin.events.emit.singleton("PrettyCards:TranslationExtReady", {language: lan});
+        PrettyCards_plugin.events.emit.singleton("PrettyCards:TranslationExtReady");
     }
 }
 
 function loadLanguage(lan = 'en') {
-    $.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`, {}, function(data) {
-        PrettyCards_plugin.events.on('translation:loaded', () => {
+    translationManager.languageSources.forEach((source) => {
+        $.getJSON(source.urlFunc(lan), {}, function(data) {
             processJSON(lan, data);
+        }).fail(function() {
+            console.warn(`Language file from source "${source.name}" for language "${lan}", from address "${source.urlFunc(lan)}" could not be loaded!`);
+            progressLanguagesToLoad();
         })
     })
 }
@@ -146,16 +162,17 @@ function prePageLoadStuff() {
     if (!lan) { // Should never happen, but . . . 
         lan = window.getLanguage();
     }
-    if (lan != "en") {
-        languagesToLoad = 2;
-        loadLanguage('en');
-        loadLanguage(lan);
-    } else {
-        languagesToLoad = 1;
-        loadLanguage('en');
-    }
     PrettyCards_plugin.events.on('translation:loaded', () => {
         registerCustomExtensions();
+        PrettyCards_plugin.events.emit.singleton("PrettyCards:registerTranslationSources");
+        if (lan != "en") {
+            languagesToLoad = translationManager.languageSources.length*2;
+            loadLanguage('en');
+            loadLanguage(lan);
+        } else {
+            languagesToLoad = translationManager.languageSources.length;
+            loadLanguage('en');
+        }
     })
 }
 

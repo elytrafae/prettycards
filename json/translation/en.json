@@ -346,58 +346,7 @@
     "pc-skintype-normal" : "Normal",
     "pc-skintype-full" : "Full",
     "pc-skintype-breaking" : "Breaking",
-    "pc-skintype-any" : "Any",
-
-    "pc-shops-playbtn-tip" : "Click to play song!",
-    "pc-shops-playbtn-tip-fail" : "The song failed to play automatically.",
-    "pc-shops-clicktobuy" : "Click to buy!",
-    "pc-shops-newoffersin" : "New Offers In:",
-    "pc-shops-notenough" : "Not enough $1!",
-    "pc-shops-showownedonly" : "Show Owned Only",
-    "pc-shops-skintype" : "Skin Type",
-
-    "pc-shops-option-buy" : "Buy",
-    "pc-shops-option-check" : "Check",
-    "pc-shops-option-promo" : "Promo",
-    "pc-shops-option-talk" : "Talk",
-    "pc-shops-option-exit" : "Exit",
-
-    "pc-shops-gerson-dial-intro" : "Woah there![w:300]\nI've got some neat junk for sale.",
-    "pc-shops-gerson-dial-buy" : "What are you lookin for?",
-    "pc-shops-gerson-dial-check" : "What's so interesting about all this junk?",
-    "pc-shops-gerson-dial-talk" : "Anything you wanna know?",
-    "pc-shops-gerson-dial-exit" : "Be careful out there[w:150], kid!",
-    "pc-shops-gerson-dial-bought" : "Thanks! Wa ha ha.",
-    "pc-shops-gerson-dial-buyerror" : "You're a bit short on cash.",
-    "pc-shops-gerson-dial-buyhasall" : "Sorry, but you bought'em all.[w:200]\nCome back some other time!",
-
-    "pc-shops-gerson-talk-title-aboutyou" : "About yourself",
-    "pc-shops-gerson-talk-aboutyou" : {
-        "values" : [
-            "I've been around a long time.\n[face:sus]Maybe too long.",
-			"[face:happy]Studying history sure is easy when you've lived through so much of it yourself![face:default]\nWa ha ha!"
-        ]
-    },
-    "pc-shops-gerson-talk-title-emblem" : "That emblem",
-    "pc-shops-gerson-talk-emblem" : {
-        "values" : [
-            "Eh?[w:200]\nYou don't know what that is?",
-			"What are they teaching you kids in school nowadays...?[w:200]\nWa ha ha!",
-			"That's the [style:yellow]Delta Rune[style:], the emblem of our kingdom.\nThe Kingdom...",
-            "... of Monsters.",
-            "Wa ha ha![w:150]\nGreat name, huh?[w:150]\nIt's as I always say...",
-            "Ol' King Fluffybuns can't name for beans!"
-        ]
-    },
-    "pc-shops-gerson-talk-title-unlocktest" : "Unlocked!",
-    "pc-shops-gerson-talk-unlocktest" : "[face:sus]Can you feel it, Mr. Crabs?",
-
-    "pc-shops-bunny-dial-intro" : "Hello, traveller.[w:300]\nHow can I help you?",
-    "pc-shops-bunny-dial-buy" : "What would you like to buy?",
-    "pc-shops-bunny-dial-promo" : "These ones are on a discount!",
-    "pc-shops-bunny-dial-talk" : "Care to chat?",
-    "pc-shops-bunny-dial-exit" : "Bye now![w:200]\nCome again sometime!",
-    "pc-shops-bunny-dial-bought" : "Thanks for your purchase.",
-    "pc-shops-bunny-dial-buyerror" : "That's not enough money."
+    "pc-skintype-any" : "Any"
+    
 }
 

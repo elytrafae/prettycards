@@ -341,7 +341,7 @@ class Utility {
 			if (element.nodeName == "NAV" || element.nodeName == "FOOTER" || element.nodeName == "SCRIPT" /*|| (element.nodeName == "TABLE" && element.id == "cardsOpen")*/) {
 				continue;
 			} else {
-				element.style.display = "none";
+				element.style.setProperty("display", "none", "important");
 			}
 		}
 	}
