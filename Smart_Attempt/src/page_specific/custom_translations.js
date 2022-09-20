@@ -77,6 +77,7 @@ function StartVerified() {
 
                     <p id="PrettyCards_CT_Phase2_Preview"><span id="PrettyCards_CT_Phase2_PreviewName"></span><span id="PrettyCards_CT_Phase2_Preview"></span></p>
 
+                    <p id="PrettyCards_CT_Phase2_Error" class="red"></p>
                     <table id="PrettyCards_CT_Phase2_Table" class="translation table table-bordered">
                         <tbody>
                             <tr>
@@ -286,17 +287,18 @@ function isEntryEmpty(key) {
 
 function matchesSearch(key, search) {
     if (search === "") {return true;}
-    if (isEntryEmpty(key)) {return false;}
-    var entry = editedCustom[key];
     var searchStrings = [key];
-    if (typeof(entry) == "string") {
-        searchStrings.push(entry);
-    }
-    if (entry.value) {
-        searchStrings.push(entry.value);
-    }
-    if (entry.values) {
-        searchStrings = searchStrings.concat(entry.values);
+    if (!isEntryEmpty(key)) {
+        var entry = editedCustom[key];
+        if (typeof(entry) == "string") {
+            searchStrings.push(entry);
+        }
+        if (entry.value) {
+            searchStrings.push(entry.value);
+        }
+        if (entry.values) {
+            searchStrings = searchStrings.concat(entry.values);
+        }
     }
     for (var i=0; i < searchStrings.length; i++) {
         if (searchStrings[i].includes(search)) {
@@ -377,11 +379,27 @@ function showPage(nr) {
     $('#btnNext').prop('disabled', currentPage + 1 >= pages.length);
     $('#btnPrevious').prop('disabled', currentPage <= 0);
 
+    //console.log(pages, nr);
+    if (currentPage < 0) {
+        currentPage = 0;
+    }
+    if (currentPage >= pages.length) {
+        currentPage = pages.length - 1;
+    }
+    if (pages.length <= 0) {
+        $("#PrettyCards_CT_Phase2_Table").addClass("PrettyCards_Hidden");
+        $("#PrettyCards_CT_Phase2_Error").html("No entry matches the search! Please try something else!");
+        console.error("No entry matches the search! Please try something else!");
+        return;
+    }
+    $("#PrettyCards_CT_Phase2_Table").removeClass("PrettyCards_Hidden");
+    $("#PrettyCards_CT_Phase2_Error").html("");
     displayEntry(pages[currentPage]);
 }
 
 function returnNewEntryBasedOnEnglish(key) {
     var enEntry = englishCustom[key];
+    console.log(key, enEntry);
     if (typeof(enEntry) == "string") {
         return "";
     }
