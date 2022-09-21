@@ -21,6 +21,16 @@ class ArtifactDisplay {
 		return null;
 	}
 
+	GetArtifactByName(name) {
+		for (var i=0; i < this.artifacts.length; i++) {
+			var artifact = this.artifacts[i];
+			if (artifact.name === name) {
+				return artifact;
+			}
+		}
+		return null;
+	}
+
 	ReturnArtifactIcon(artifact_id) {
 		var artifact = this.GetArtifactById(artifact_id);
 		//console.log(this.artifacts, artifact);

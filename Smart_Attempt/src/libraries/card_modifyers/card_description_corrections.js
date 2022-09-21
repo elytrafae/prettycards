@@ -83,16 +83,18 @@ function processLanguage(lan = "en") {
 
 if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()) {
 	
-	PrettyCards_plugin.events.on('PrettyCards:TranslationExtReady PrettyCards:customCardsAfter', () => {
-		//console.log("CARD CORRECTIONS LOADED!");
-		processLanguage('en');
-		var lan = window.localStorage.getItem("language");
-		if (!lan) { // Should never happen, but . . . 
-			lan = window.getLanguage();
-		}
-		if (lan != "en") {
-			processLanguage(lan);
-		}
+	PrettyCards_plugin.events.on('PrettyCards:TranslationExtReady', () => {
+		PrettyCards_plugin.events.on("PrettyCards:customCardsAfter", () => {
+			//console.log("CARD CORRECTIONS LOADED!");
+			processLanguage('en');
+			var lan = window.localStorage.getItem("language");
+			if (!lan) { // Should never happen, but . . . 
+				lan = window.getLanguage();
+			}
+			if (lan != "en") {
+				processLanguage(lan);
+			}
+		})
 	});
 
 	/*

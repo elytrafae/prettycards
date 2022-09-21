@@ -342,6 +342,7 @@ class Utility {
 				continue;
 			} else {
 				element.style.setProperty("display", "none", "important");
+				element.className += " PrettyCards_Hidden";
 			}
 		}
 	}

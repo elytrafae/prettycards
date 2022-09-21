@@ -18,13 +18,16 @@ PrettyCards_plugin.events.on("appendCardDeck() appendCardCraft()", function(data
         PrettyCards_plugin.events.on("PrettyCards:selfFriendshipLeaderboardFetched", function(lbData) {
             var xp = 0;
             var pos = PLACEHOLDER_FRIENDSHIP_RANK; 
-            var friendshipItems = JSON.parse(data[0].friendshipItems);
+            if (Array.isArray(data)) {
+                data = data[0]; // IDK what TF this is about, but here we are.
+            }
+            var friendshipItems = JSON.parse(data.friendshipItems);
             var item = utility.binarySearch(friendshipItems, card.id, (ele) => ele.idCard);
             if (!item || item.xp <= 0) {
                 return;
             }
             xp = item.xp;
-            console.log(item, lbData);
+            //console.log(item, lbData);
             lbData = lbData[0];
             if (lbData) {
                 var rankItem = utility.binarySearch(lbData.scores, card.id, (ele) => ele.cardId);
@@ -87,7 +90,7 @@ $.getJSON("/FriendshipConfig", {}, function(data) {
 PrettyCards_plugin.events.on("Chat:Connected", function() {
     utility.getFriendshipInfo(window.selfId, function(data) {
         // Success
-        console.log(data);
+        //console.log(data);
         data.scores = data.scores.sort((a, b) => (a.cardId - b.cardId));
         PrettyCards_plugin.events.emit.singleton("PrettyCards:selfFriendshipLeaderboardFetched", data);
 	}).fail(function() {
