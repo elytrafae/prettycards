@@ -1,4 +1,4 @@
-import { PrettyCards_plugin } from "../underscript_checker";
+import { PrettyCards_plugin, settings } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
@@ -82,19 +82,32 @@ if (window.appendCardDeck) {
     })
 }
 
-$.getJSON("/FriendshipConfig", {}, function(data) {
-    friendshipData = data;
-    PrettyCards_plugin.events.emit.singleton("PrettyCards:friendshipFetched", friendshipData);
-})
+addSetting({
+	'key': 'friendship_info_on_cards',
+	'name': 'Display Friendship Info on Cards', // Name in settings page
+	'note': "When on, a heart will appear on the bottom-left corner of a card's image. Hovering over it will display information about your friendship status for that card.",
+	'type': 'boolean',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	'default': true, // default value
+	'category': "card"
+});
 
-PrettyCards_plugin.events.on("Chat:Connected", function() {
-    utility.getFriendshipInfo(window.selfId, function(data) {
-        // Success
-        //console.log(data);
-        data.scores = data.scores.sort((a, b) => (a.cardId - b.cardId));
-        PrettyCards_plugin.events.emit.singleton("PrettyCards:selfFriendshipLeaderboardFetched", data);
-	}).fail(function() {
-		// Fail
-        PrettyCards_plugin.events.emit.singleton("PrettyCards:selfFriendshipLeaderboardFetched", null);
-	});
-})
+if (settings.friendship_info_on_cards.value() && (window.underscript.onPage("Decks") || window.underscript.onPage("Crafting"))) {
+    $.getJSON("/FriendshipConfig", {}, function(data) {
+        friendshipData = data;
+        PrettyCards_plugin.events.emit.singleton("PrettyCards:friendshipFetched", friendshipData);
+    })
+    
+    PrettyCards_plugin.events.on("Chat:Connected", function() {
+        utility.getFriendshipInfo(window.selfId, function(data) {
+            // Success
+            //console.log(data);
+            data.scores = data.scores.sort((a, b) => (a.cardId - b.cardId));
+            PrettyCards_plugin.events.emit.singleton("PrettyCards:selfFriendshipLeaderboardFetched", data);
+        }).fail(function() {
+            // Fail
+            PrettyCards_plugin.events.emit.singleton("PrettyCards:selfFriendshipLeaderboardFetched", null);
+        });
+    })    
+}
+
