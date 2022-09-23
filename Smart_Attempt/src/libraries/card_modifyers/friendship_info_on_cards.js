@@ -1,4 +1,4 @@
-import { PrettyCards_plugin, settings } from "../underscript_checker";
+import { addSetting, PrettyCards_plugin, settings } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
