@@ -97,6 +97,8 @@ if (settings.override_decks.value()) {
 	}
 }
 
+import {} from "./libraries/cosmetics_shop_reader.js";
+
 /*
 var trans_array = [];
 for (var key in settings) {

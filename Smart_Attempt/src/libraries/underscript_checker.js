@@ -102,6 +102,17 @@ addSetting({
     'category': "controversial"
 });
 
+addSetting({
+    'key': 'override_decks_autogen',
+    'name': 'Create Autogen Decks', // Name in settings page
+    'note': 'While using my Custom Deck System, if the system cannot find an exact replica of the deck on Onu\'s server, it will create an "Autogen" deck. Unfortunately, this, for some reason, can malfunction in some cases. This is why I added this setting, with which you can turn off this behavior.<br><span class="red">If turned off, decks from other devices uploaded to the server may be lost forever without a backup. Use at own risk, or turn off the Custom Deck system entirely!</span>',
+    'type': 'boolean',
+    //'disabled': true,
+    'refresh': true, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+    'category': "controversial"
+});
+
 //console.log(settings);
 
 export {PrettyCards_plugin, settings, prettycards, addSetting};

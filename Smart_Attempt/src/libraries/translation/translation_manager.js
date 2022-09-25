@@ -36,7 +36,6 @@ class TranslationManager {
             index++;
         }
         this.previewTypes.splice(index, 0, previewType);
-        console.log(this.previewTypes);
         return previewType;
     }
 
