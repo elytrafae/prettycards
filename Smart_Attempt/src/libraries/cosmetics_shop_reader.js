@@ -78,6 +78,7 @@ GetPage().then((data) => {
             } 
 
             var obj = {
+                imageSrc: ele.getAttribute("src"),
                 name: GetCosmeticNameFromElement(ele),
                 type: GetTypeFromElement(ele),
                 owned: false
