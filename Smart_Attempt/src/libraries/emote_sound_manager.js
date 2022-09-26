@@ -50,7 +50,6 @@ if (settings.emote_sounds.value() && window.underscript.onPage("CosmeticsShop"))
             var url = new URL(e.src).pathname;
             const emote = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.'));; // Crops the image name from the src.
             const speaker = $(`<div class="glyphicon glyphicon-volume-up PrettyCards_EmoteSoundPlayer"></div>`)[0];
-            console.log(e, emote, speaker);
             speaker.onclick = function() {
                 playEmoteSound(emote, function() {
                     speaker.style.color = "red";
