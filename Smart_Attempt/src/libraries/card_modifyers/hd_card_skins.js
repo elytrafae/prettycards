@@ -25,21 +25,21 @@ function returnHDImageIfThereIs(image, forceNormal = false) {
     return utility.getCardImageLink(image);
 }
 
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+    var originalAppendCardCardSkinShop = window.appendCardCardSkinShop;
+    window.appendCardCardSkinShop = function(cardSkin, frameName) {
+        var appendedCard = originalAppendCardCardSkinShop(cardSkin, frameName);
+        PrettyCards_plugin.events.emit("appendCardCardSkinShop()", {cardSkin : cardSkin, frameName : frameName, element: appendedCard});
+        return appendedCard;
+    }
+});
 
 if (settings.hd_card_skins.value()) {
     $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/hdCardSkins.json", {}, function(data) {
         hd_card_skins = data;
         PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", {skins: data});
     })
-    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-        var originalAppendCardCardSkinShop = window.appendCardCardSkinShop;
-        window.appendCardCardSkinShop = function(cardSkin, frameName) {
-            var appendedCard = originalAppendCardCardSkinShop(cardSkin, frameName);
-            PrettyCards_plugin.events.emit("appendCardCardSkinShop()", {cardSkin : cardSkin, frameName : frameName, element: appendedCard});
-            return appendedCard;
-        }
-    });
-
+    
     PrettyCards_plugin.events.on("appendCard()", function(data) {
         var card = data.card;
         var element = data.element;

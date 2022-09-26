@@ -37,6 +37,44 @@ PrettyCards_plugin.events.on("translation:loaded", function(data) {
 })
 
 
+class SortedUniqueEntryHolder {
+
+	constructor(mapFunc = (ele) => ele) {
+		this.arr = [];
+		this.mapFunc = mapFunc;
+	}
+
+	insert(value) {
+		var s = 0, e = this.arr.length - 1;
+		while (s <= e) {
+			var m = (s + e) >>> 1;
+			var ele = this.arr[m];
+			var mappedEle = this.mapFunc(ele);
+			var mappedVal = this.mapFunc(value);
+			if (mappedEle === mappedVal) {
+				// Already exists. Will not to anything.
+				return false;
+			}
+			if (mappedVal > mappedEle) {
+				s = m+1;
+			} else {
+				e = m - 1;
+			}
+		}
+		this.arr.splice(s, 0, value);
+		return true;
+	}
+
+	getPos(value) {
+		return utility.binarySearch(this.arr, value, this.mapFunc);
+	}
+
+	includes(value) {
+		return utility.binarySearch(this.arr, value, this.mapFunc) !== null;
+	}
+
+}
+
 if (String.prototype.splice === undefined) {
 	/**
 	 * Splices text within a string.
@@ -56,6 +94,7 @@ if (String.prototype.splice === undefined) {
 class Utility {
 
 	constructor() {
+		this.SortedUniqueEntryHolder = SortedUniqueEntryHolder;
 		this.githubCSSSources = {};
 		this.addCSSSourceData("base", {
 			version: GM_info.script.version,
@@ -350,7 +389,7 @@ class Utility {
 	binarySearch(array, value, mapFunc = (ele) => ele) {
 		var s = 0, e = array.length - 1;
 		while (s <= e) {
-			var m = Math.floor((s + e)/2);
+			var m = (s + e) >>> 1;
 			var ele = array[m];
 			var mappedVal = mapFunc(ele);
 			if (mappedVal === value) {
