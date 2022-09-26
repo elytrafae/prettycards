@@ -35,26 +35,16 @@ PrettyCards_plugin.events.on("appendCardDeck() appendCardCraft()", function(data
                     pos = rankItem.rank;
                 }
             }
-            var icon = document.createElement("IMG");
-            icon.src = "/images/friendship.png";
-            element.find(".PrettyCards_CardBottomLeftInfo").append(icon);
 
             var level = window.getLevel(xp);
             var xp_left = xp - utility.getXpForLevel(level - 1);
             var xp_to_next = window.distanceNextLevel(level);
-            window.tippy(icon, {
-                content: `
-                    <span>Level: ${level}</span><br>
-                    <span>XP: ${xp_left}/${xp_to_next}</span>
-                    ${pos < PLACEHOLDER_FRIENDSHIP_RANK ? `<br><span>Rank: ${pos}</span>` : ""}`,
-                allowHTML: true,
-                arrow: true,
-                inertia: true,
-                placement: "top",
-                appendTo: window.document.body,
-                boundary: 'window',
-                getReferenceClientRect: window.document.body.getBoundingClientRect
-            });
+
+            utility.addCustomSimpleTextIconToCard(
+                element, 
+                "/images/friendship.png", 
+                `<span>Level: ${level}</span><br><span>XP: ${xp_left}/${xp_to_next}</span>${pos < PLACEHOLDER_FRIENDSHIP_RANK ? `<br><span>Rank: ${pos}</span>` : ""}`
+            );
         });
     });
 })

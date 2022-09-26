@@ -422,6 +422,39 @@ class Utility {
 	
 		return { top: Math.round(top), left: Math.round(left), width: box.width, height: box.height };
 	}
+
+	addCustomSimpleTextIconToCard(cardElement, iconSrc, text, windowTitle = window.$.i18n('dialog-information')) {
+		var icon = document.createElement("IMG");
+		icon.src = iconSrc;
+		cardElement.find(".PrettyCards_CardBottomLeftInfo").append(icon);
+
+		window.tippy(icon, {
+			content: text,
+			allowHTML: true,
+			arrow: true,
+			inertia: true,
+			placement: "top",
+			appendTo: window.document.body,
+			boundary: 'window',
+			getReferenceClientRect: window.document.body.getBoundingClientRect
+		});
+
+		icon.oncontextmenu = function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			BootstrapDialog.show({
+				title: windowTitle,
+				message: text,
+				buttons: [{
+					label: window.$.i18n('dialog-ok'),
+					cssClass: 'btn-primary',
+					action: function(dialog) {
+						dialog.close();
+					}
+				}]
+			});
+		}
+	}
 	
 }
 
