@@ -520,5 +520,17 @@
         "name": "Ralsei Heart",
         "image": "Ralsei_Heart",
         "ucpCost": 35
-    }
+    }, {
+		"code": ":AngyMuffet:",
+		"id": 88,
+		"name": "Angy Muffet",
+		"image": "Angy_Muffet",
+		"ucpCost": 35
+	}, {
+		"code": ":Nerdly:",
+		"id": 89,
+		"name": "Nerdly",
+		"image": "Nerdly",
+		"ucpCost": 35
+	}
 ]

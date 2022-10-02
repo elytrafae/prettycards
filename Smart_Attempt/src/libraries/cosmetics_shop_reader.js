@@ -87,14 +87,18 @@ function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
             var navbar = data.querySelector(".navbar");
             var footer = data.querySelector("footer");
             var shopItems = [];
-            var elements = data.querySelectorAll("img,.ucp");
+            var currentCategory = "";
+            var elements = data.querySelectorAll("img,.ucp,:scope > p");
             for (var i=0; i < elements.length; i++) {
                 var ele = elements[i];
                 if (navbar.contains(ele) || footer.contains(ele)) {
                     continue; // If it's part of the navbar or footer, just ignore.
                 }
                 var mostRecent = shopItems[shopItems.length-1];
-                if (ele.tagName === "IMG") {
+                if (ele.tagName === "P") {
+                    var str = ele.children[0].getAttribute("data-i18n");
+                    currentCategory = str.substring(6);
+                } else if (ele.tagName === "IMG") {
         
                     if (mostRecent && !mostRecent.cost) {
                         mostRecent.owned = true;
@@ -104,7 +108,8 @@ function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
                         imageSrc: ele.getAttribute("src"),
                         name: GetCosmeticNameFromElement(ele),
                         type: GetTypeFromElement(ele),
-                        owned: false
+                        owned: false,
+                        category: currentCategory
                     };
                     var rarity = GetCosmeticRarityFromElement(ele);
                     if (rarity) {
