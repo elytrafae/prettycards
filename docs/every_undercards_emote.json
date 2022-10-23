@@ -532,5 +532,23 @@
 		"name": "Nerdly",
 		"image": "Nerdly",
 		"ucpCost": 35
+	}, {
+		"code": ":KrisKry:",
+		"id": 90,
+		"name": "Kris Kry",
+		"image": "KrisKry",
+		"ucpCost": 35
+	}, {
+		"code": ":SaySike:",
+		"id": 91,
+		"name": "Say Sike",
+		"image": "SaySike",
+		"ucpCost": 35
+	}, {
+		"code": ":BloodyWise:",
+		"id": 92,
+		"name": "BloodyWise",
+		"image": "BloodyWise",
+		"ucpCost": 35
 	}
 ]
