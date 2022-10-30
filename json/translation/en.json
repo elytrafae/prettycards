@@ -234,6 +234,13 @@
         "ifEqual" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. If played on the left, send it to your deck and draw a card.",
         "value" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}} or {{PC_SWITCH_RED:1|do nothing}}."
     },
+	"card-477" : {
+        "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Catch a {{CARD:115|1}} or a {{CARD:451|1}}. {{KW:DUST}}: Release it to your hand with -1 {{COST}}.",
+        "value" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Catch a {{PC_SWITCH_CYAN:1|{{CARD:115|1}}}} or a {{PC_SWITCH_RED:1|{{CARD:451|1}}}}. {{KW:DUST}}: Release it to your hand with -1 {{COST}}."
+    },
+    "card-477-cyan" : "{{KW:MAGIC}}: Catch a {{PC_SWITCH_CYAN:1|{{CARD:115|1}}}}. {{KW:DUST}}: Release it to your hand with -1 {{COST}}.",
+    "card-477-red" : "{{KW:MAGIC}}: Catch a {{PC_SWITCH_RED:1|{{CARD:451|1}}}}. {{KW:DUST}}: Release it to your hand with -1 {{COST}}.",
+    "card-477-both" : "{{KW:MAGIC}}: Catch a {{PC_SWITCH_CYAN:1|{{CARD:115|1}}}} and a {{PC_SWITCH_RED:1|{{CARD:451|1}}}}. {{KW:DUST}}: Release it to your hand with -1 {{COST}}.",
     "card-407-cyan" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}.",
     "card-407-red" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_RED:0|Do nothing.}}",
     "card-407-both" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}.",

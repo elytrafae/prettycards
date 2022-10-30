@@ -75,7 +75,7 @@ addSetting({
 	'note': 'Experimental feature to make the game more mobile-friendly.',
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
-	'disabled': true,
+	'hidden' : true,
 	'default': () => window.mobile, // default value
 });
 
