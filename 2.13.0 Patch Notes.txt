@@ -12,3 +12,4 @@ TODO:
 - Add "Open Settings" option to the PrettyCards menu.
 - Add way to collapse the Friendship Data on User Profiles.
 - Add minimalistic version of deck system (?)
+- Solve card mentions in a lot of places being in plural!
