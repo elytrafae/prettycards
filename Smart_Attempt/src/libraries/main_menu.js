@@ -63,6 +63,7 @@ ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function()
 		var menuBase = window.$(`<div class="dropdown" id="PrettyCards_MainMenu">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${window.$.i18n("pc-menu-title")}</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 3px 5px;">
+				<a><p style="cursor: pointer;" onclick="PrettyCards_plugin.settings().open()">${window.$.i18n("pc-menu-settings")}</p></a>
 				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">${window.$.i18n("pc-menu-credits")}</p></a>
 				<a href="/CustomCardSkins"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcardskins")}</p></a>
 				<a href="/CustomCards"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcards")}</p></a>
