@@ -105,3 +105,11 @@
 #PrettyCards_UserInfo_SwapSortArea label {
 	margin: 3px;
 }
+
+.PrettyCards_UserInfo_FriendshipTitleText {
+	cursor: pointer;
+}
+
+.PrettyCards_UserInfo_FriendshipTitleText:hover {
+	color: #999999;
+}

@@ -417,7 +417,11 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 
 	var titleCont = document.createElement("DIV");
 	titleCont.id = "PrettyCards_UserInfo_FriendshipTitleContainer";
-	titleCont.innerHTML = `<h2>${window.$.i18n("pc-chat-friendship-title")}</h2>`;
+
+	var titleText = document.createElement("H2");
+	titleText.innerHTML = window.$.i18n("pc-chat-friendship-title");
+	titleText.className = "PrettyCards_UserInfo_FriendshipTitleText";
+	titleCont.appendChild(titleText);
 
 	column3.appendChild(titleCont);
 	column3.appendChild(friendshipContainer);

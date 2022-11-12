@@ -2,14 +2,14 @@
 
 - Added a feature to hide the footer at will.
 - Card Friendship data is now visible on the Crafting and Deck pages, too.
-- 
+- Added "Open Settings" option to the PrettyCards menu.
 
--Reworked a bit the translation system. I added the ability to have multiple sources and multiple preview types during editing.
+- Reworked a bit the translation system. I added the ability to have multiple sources and multiple preview types during editing.
+- Solved card mentions in some places being in plural!
 - Some small design changes and fixes.
 - Opened up some of the API.
 
+
 TODO:
-- Add "Open Settings" option to the PrettyCards menu.
 - Add way to collapse the Friendship Data on User Profiles.
 - Add minimalistic version of deck system (?)
-- Solve card mentions in a lot of places being in plural!
