@@ -211,7 +211,7 @@ function CreateSideNavMenu() {
 }
 
 prettycards.openSettings = function() {
-	settings.turn_off.show(); // Temporary solution. Works with any setting.
+	PrettyCards_plugin.settings().open();
 }
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
