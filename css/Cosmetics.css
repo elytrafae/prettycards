@@ -7,6 +7,11 @@
 }
 */
 
+.PrettyCards_FadeUCP {
+    color: #5ca890;
+    text-shadow: 0 0 10px #5ca890;
+}
+
 .PrettyCards_CosmeticsStar {
     display: none;
     position: absolute;
