@@ -1,5 +1,5 @@
 
-import { PrettyCards_plugin } from "./underscript_checker";
+import { PrettyCards_plugin, prettycards } from "./underscript_checker";
 import { utility } from "./utility";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
@@ -53,7 +53,7 @@ function isItApril() {
 	return (now.getMonth() == aprilFools.month);
 }
 
-window.showPrettyCardsCredits = showCredits;
+prettycards.showCredits = showCredits;
 ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {
 	if (true) {	
 		var x = $(document).width() - 450;
@@ -63,10 +63,10 @@ ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function()
 		var menuBase = window.$(`<div class="dropdown" id="PrettyCards_MainMenu">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${window.$.i18n("pc-menu-title")}</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 3px 5px;">
-				<a><p style="cursor: pointer;" onclick="PrettyCards_plugin.settings().open()">${window.$.i18n("pc-menu-settings")}</p></a>
-				<a><p style="cursor: pointer;" onclick="showPrettyCardsCredits()">${window.$.i18n("pc-menu-credits")}</p></a>
-				<a href="/CustomCardSkins"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcardskins")}</p></a>
-				<a href="/CustomCards"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcards")}</p></a>
+				<a><p style="cursor: pointer;" onclick="prettycards.openSettings()">${window.$.i18n("pc-menu-settings")}</p></a>
+				<a><p style="cursor: pointer;" onclick="prettycards.showCredits()">${window.$.i18n("pc-menu-credits")}</p></a>
+				<a class="PrettyCards_HiddenUntilLogin" href="/CustomCardSkins"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcardskins")}</p></a>
+				<a class="PrettyCards_HiddenUntilLogin" href="/CustomCards"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcards")}</p></a>
 				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">' + window.$.i18n("pc-menu-sop") + '</p></a>') : ""}
 				<a href="/CustomTranslations" class="PrettyCards_Hidden Translator"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customtranslate")}</p></a>
 				<a href="https://cmd-god.github.io/prettycards/artistConsole.html" class="PrettyCards_Hidden Artist"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customartistconsole")}</p></a>
@@ -75,6 +75,7 @@ ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function()
 		</div>`)
 
 		PrettyCards_plugin.events.on("PC_Chat:getSelfInfos Chat:Connected", function() {
+			$(".PrettyCards_HiddenUntilLogin").css("display", "initial");
 			if (utility.translatorFeaturesAccess()) {
 				$("#PrettyCards_MainMenu .Translator").removeClass("PrettyCards_Hidden");
 			}

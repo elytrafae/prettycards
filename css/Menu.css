@@ -37,3 +37,6 @@
     color: #888888;
 }
 
+.PrettyCards_HiddenUntilLogin {
+    display: none;
+}

@@ -40,6 +40,26 @@ addSetting({
     'default': true, // default value
 });
 
+function friendshipShowUpdate(newVal, oldVal, $elements = $(".PrettyCards_UserInfo_FriendshipHideable")) {
+	console.log("Hi!", newVal);
+	if (newVal) {
+		$elements.removeClass("PrettyCards_Hidden");
+	} else {
+		$elements.addClass("PrettyCards_Hidden");
+	}
+}
+
+var friendship_show_setting = addSetting({
+    'key': 'user_info_friendship_show',
+    'name': 'Show Friendship Data On User Info', // Name in settings page
+	'note': 'Requires "Better User Info" to have any effect!',
+    'type': 'boolean',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+	'onChange': friendshipShowUpdate,
+	'hidden': true
+});
+
 function getRankedLeaderboard() {
 	window.$.get("Leaderboard?action=ranked", function(e) {
 		//console.log(JSON.parse(e.leaderboard));
@@ -243,11 +263,6 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		if (!demoniocEasterEgg) {
 			ignoreContainer.innerHTML = '<span class="glyphicon glyphicon-volume-off gray"></span> ' + window.$.i18n("pc-chat-ignore-self");
 		} else {
-			var ignoreButtonMessages = [
-				"Believe me, I tried doing this a lot . . .",
-				"You don't even like yourself, huh?",
-				"You will always find a way to harrass yourself anyway."
-			];
 			ignoreContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-volume-off"></span> ' + translationManager.getRandomFromValueList("pc-chat-ignore-mystery") + "</span>";
 		}
 	}
@@ -284,21 +299,12 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		if (!demoniocEasterEgg) {
 			spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> ' + window.$.i18n("pc-chat-spectate-self");
 		} else {
-			var spectateButtonMessages = [
-				"You shouldn't spectate yourself.",
-				"You should pay attention to the game instead of looking at yourself.",
-				"Don't just sit by looking at yourself! Play the game!"
-			];
 			spectateContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-eye-open"></span> ' + translationManager.getRandomFromValueList("pc-chat-spectate-mystery-match") + "</span>";
 		}
 	} else if (pagegetters.IsMyself(user.id)) {
 		if (!demoniocEasterEgg) {
 			spectateContainer.innerHTML = '<span class="glyphicon glyphicon-eye-open gray"></span> ' + window.$.i18n("pc-chat-spectate-self");
 		} else {
-			var spectateButtonMessages = [
-				"You shouldn't spectate yourself, anyway.",
-				"Spectate others, not yourself."
-			];
 			spectateContainer.innerHTML = '<span style="color:red"><span class="glyphicon glyphicon-eye-open"></span> ' + translationManager.getRandomFromValueList("pc-chat-spectate-mystery-idle") + "</span>";
 		}
 	} else {
@@ -412,7 +418,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 
 	// Friendship Stuff
 	var friendshipContainer = document.createElement("DIV");
-	friendshipContainer.className = "PrettyCards_ChatFriendshipContainer";
+	friendshipContainer.className = "PrettyCards_ChatFriendshipContainer PrettyCards_UserInfo_FriendshipHideable";
 	friendshipContainer.innerHTML = `<h2 class='gray'>${window.$.i18n("pc-chat-friendship-fetching")}</h2>`;
 
 	var titleCont = document.createElement("DIV");
@@ -428,30 +434,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 
 	utility.getFriendshipInfo(user.id, function(data) {
 		friendshipContainer.innerHTML = "";
-		/*
-		var topXpCard = data.scores[0];
-		var topRankCard = data.scores[0];
-		for (var i=1; i < data.scores.length; i++) {
-			var score = data.scores[i];
-			if (topXpCard.xp < score.xp || (topXpCard.xp == score.xp && topXpCard.rank < score.rank)) { // Find the highest XP, then worst Rank card.
-				topXpCard = score;
-			}
-			if (topRankCard.rank > score.rank || (topRankCard.rank == score.rank && topRankCard.xp > score.xp)) { // Find the best Rank, then the lowest XP card.
-				topRankCard = score;
-			}
-		}
 
-		if (topRankCard.cardId == topXpCard.cardId) {
-			appendFriendshipCard(topRankCard, $(friendshipContainer), 3);
-		} else {
-			appendFriendshipCard(topXpCard, $(friendshipContainer), 1);
-			appendFriendshipCard(topRankCard, $(friendshipContainer), 2);
-		}
-		*/
+		titleText.onclick = () => {
+			var newVal = !friendship_show_setting.value();
+			friendship_show_setting.set(newVal, !newVal);
+		};
 
-		//var $swapSortBtn = $(`<button class="btn btn-primary" id="PrettyCards_UserInfo_SwapSortBtn"></button>`);
 		var $swapSortBtn = $(`
-		<div style="display:flex;" id="PrettyCards_UserInfo_SwapSortArea">
+		<div style="display:flex;" id="PrettyCards_UserInfo_SwapSortArea" class="PrettyCards_UserInfo_FriendshipHideable">
 			<label class="form-check-label" for="PrettyCards_UserInfo_SwapSortBtn">${window.$.i18n("pc-chat-friendship-sortxp")}</label>
 			<label class="form_switch friendshipSortSwitch">
 				<input type="checkbox" id="PrettyCards_UserInfo_SwapSortBtn">
@@ -467,13 +457,14 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		})
 
 		updateSortAndDisplay(data.scores, $(friendshipContainer), $input);
-
+		
 		var lastFetched = document.createElement("P");
-		lastFetched.className = "gray";
+		lastFetched.className = "PrettyCards_UserInfo_FriendshipHideable gray";
 		var date = new Date(data.lastUpdated);
 		lastFetched.innerHTML = `${window.$.i18n("pc-chat-friendship-fetchedat")}: ${date.toUTCString()}`;
 		column3.appendChild(lastFetched);
 
+		friendshipShowUpdate(friendship_show_setting.value(), friendship_show_setting.value(), $(column3).find(".PrettyCards_UserInfo_FriendshipHideable"));
 	}).fail(function() {
 		friendshipContainer.innerHTML = `<p class='red'>${window.$.i18n("pc-chat-friendship-fail")}</p>`; 
 	});
@@ -517,14 +508,6 @@ function appendFriendshipCard(score, container, topType = 1) {
 		card.append('<div class="PrettyCards_FriendshipTop">' + topTxt + '</div>');
 	}
 	card.append(`<div class="PrettyCards_FriendshipRank"${score.rank <= 5 ? ' top' : ''} val="${score.rank}"></div>`);
-	/*
-	if (topType == 1 || topType == 3) {
-		card.append('<div class="PrettyCards_FriendshipTop">TOP XP</div>')
-	}
-	if (topType == 2 || topType == 3) {
-		card.append('<div class="PrettyCards_FriendshipTop PrettyCards_FriendshipTop_Right">TOP RANK</div>')
-	}
-	*/
 	card.off("click");
 	card.find('.cardDesc').empty();
 	return card;
