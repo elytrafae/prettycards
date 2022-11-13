@@ -2,6 +2,7 @@
 // Functions that get specific data from the page that SHOULD be stored as variables or smth.
 // . . . And other utility functions.
 
+import { prettycards } from "./underscript_checker";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 class pagegetters {
@@ -115,6 +116,6 @@ class pagegetters {
 	
 }
 
-window.pagegetters = pagegetters;
+prettycards.pagegetters = pagegetters;
 
 export {pagegetters};
