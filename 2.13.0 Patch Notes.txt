@@ -5,3 +5,4 @@
 TODO:
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist
+- Make Game End Screen look actually decent
