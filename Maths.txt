@@ -1,0 +1,9 @@
+
+Normal Ratio: 16/9
+Full Ratio: 16/23
+
+Original Normal: 160/90
+Original Full: 160/230
+
+Dia Normal: 1920/1080 (12x)
+Dia Full: 
