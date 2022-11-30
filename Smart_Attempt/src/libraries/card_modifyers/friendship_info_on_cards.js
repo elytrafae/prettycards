@@ -12,10 +12,12 @@ PrettyCards_plugin.events.on("appendCard()", function(data) {
 const PLACEHOLDER_FRIENDSHIP_RANK = 222222222; // Really big number that is beyond what the leaderboard position can be.
 
 PrettyCards_plugin.events.on("appendCardDeck() appendCardCraft()", function(data) {
+    console.log("Feild's events work!");
     var card = data.card;
     var element = data.element;
     PrettyCards_plugin.events.on("PrettyCards:friendshipFetched", function(data) {
         PrettyCards_plugin.events.on("PrettyCards:selfFriendshipLeaderboardFetched", function(lbData) {
+            console.log("My events work!");
             var xp = 0;
             var pos = PLACEHOLDER_FRIENDSHIP_RANK; 
             if (Array.isArray(data)) {
@@ -49,6 +51,7 @@ PrettyCards_plugin.events.on("appendCardDeck() appendCardCraft()", function(data
     });
 })
 
+/*
 function overrideWithEvent() {
     var oldFunc = window.appendCardDeck;
     window.appendCardDeck = function(card) {
@@ -71,6 +74,7 @@ if (window.appendCardDeck) {
         overrideWithEvent();
     })
 }
+*/
 
 addSetting({
 	'key': 'friendship_info_on_cards',

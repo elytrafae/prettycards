@@ -9,6 +9,8 @@ class ZoomManager {
     }
 
     zoomElement(xZoom, yZoom, element) {
+        var e = element[0];
+        
         element.css("transform", `scale(${xZoom}, ${yZoom})`);
     }
 
