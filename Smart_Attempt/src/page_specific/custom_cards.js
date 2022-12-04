@@ -264,4 +264,8 @@ function InitCustomCards() {
 	});
 }
 
+if (!window.underscript.onPage("CustomCards")) {
+	PrettyCards_plugin.events.emit.singleton("PrettyCards:customCardsAfter");
+}
+
 export {InitCustomCards};
