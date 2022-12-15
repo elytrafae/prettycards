@@ -1,6 +1,7 @@
 
 
 - Made some entries in the PrettyCards menu appear only after someone logged in due to them not working properly otherwise.
+- BASE Artifacts
 - Fixed some issues
 
 TODO:
@@ -12,4 +13,3 @@ TODO:
 - Multiple Settings for HD Settings
 - Remake Lobby Games
 - "Would You Rather" for April.
-- BASE Artifacts
