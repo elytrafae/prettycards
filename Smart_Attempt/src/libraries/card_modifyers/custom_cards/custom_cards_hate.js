@@ -81,7 +81,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Graveyard Rise|Graveyard Rises}}",
 		image: "Graveyard_Rise",
 		cost: 3,
-		description: "{{KW:DELAY}}: Add a copy of every different monster that died this turn to your hand.",
+		description: "{{KW:DELAY}}: Add a copy of every different ally monster that died this turn to your hand with -1 {{cost}}.",
 		extension: "DELTARUNE",
 		rarity: "COMMON"
 	});
