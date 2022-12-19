@@ -13,3 +13,4 @@ TODO:
 - Multiple Settings for HD Settings
 - Remake Lobby Games
 - "Would You Rather" for April.
+- Fun Value (Especially for Card Descriptions)
