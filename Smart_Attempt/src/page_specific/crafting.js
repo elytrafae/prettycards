@@ -126,6 +126,14 @@ function generateCardsSection(cardIds, mode = 0) {
     return parent;
 }
 
+function getRarityClass(rarity) {
+    var c = 'normal';
+    if (rarity !== "COMMON") {
+        c = rarity.toLowerCase();
+    }
+    return c + "Artifact";
+}
+
 function generateArtifactsSection(artifacts, artifactIds) {
     if (!artifacts || artifactIds.length <= 0) {
         return;
@@ -135,7 +143,7 @@ function generateArtifactsSection(artifacts, artifactIds) {
     artifactIds.forEach((artId) => {
         var artifact = artifactDisplay.GetArtifactById(artId);
         var ownedClass = artifact.owned ? "" : "PrettyCards_MassCraft_MissingArtifact";
-        var rarityClass = artifact.rarity == "COMMON" ? "normalArtifact" : "legendaryArtifact";
+        var rarityClass = getRarityClass(artifact.rarity);
         //console.log(artifact);
         artifacts.append(`<div class="PrettyCards_MassCraft_ArtifactSlot pointer ${ownedClass} ${artifact.rarity}" onclick="artifactInfo(${artId})"><img class="${rarityClass} ${ownedClass}" src="${utility.getArtifactImageLink(artifact.image)}"> ${$.i18n("artifact-name-" + artId)}</div>`);
         if (!artifact.owned) {

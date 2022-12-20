@@ -364,7 +364,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		hp: 7,
 		// description: `{{KW:MAGIC}}: Add the ${file_exp.me()} artifact. {{KW:DELAY}}: Add the next ${chr_spells.me()} to your hand if an ally ${fallen.me()} monster died this turn.`,
 		// description: `{{KW:MAGIC}}: Fill your hand with ${chr_spells.me(2)}. {{KW:DELAY}}: Add all of the ${chr_spells.me(2)} to your deck for each 15 {{gold}} the monsters in your dustpile {{cost}} combined.`,
-		description: `{{KW:MAGIC}}: Add 8 ${chr_spells.me(2)} to your hand, and excess ones to your deck. ${fallen.me()}: Add a random different ${chr_spells.me()} to your and and deck.`,
+		description: `{{KW:MAGIC}}: Add 8 ${chr_spells.me(2)} to your hand, and excess ones to your deck. ${fallen.me()}: Add a random different ${chr_spells.me()} to your hand and deck.`,
 		tribes: [doki],
 		extension: "DDLC",
 		typeSkin: 2,

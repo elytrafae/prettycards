@@ -42,7 +42,10 @@ class ArtifactDisplay {
 			return artifact.rarity;
 		}
 		if (!this.GetArtifactById(artifact.id)) {this.artifacts.push(artifact);}
-		if (artifact.cost != ArtifactDisplay.commonArtifactCost && artifact.cost != ArtifactDisplay.legendaryArtifactCost) {
+		if (ArtifactDisplay.BASEArtifactIds.includes(artifact.id)) {
+			artifact.rarity = "BASE";
+		} else if (artifact.unavailable) {
+		//if (artifact.cost != ArtifactDisplay.commonArtifactCost && artifact.cost != ArtifactDisplay.legendaryArtifactCost) {
 			artifact.rarity = ArtifactDisplay.DTArtifactIds.includes(artifact.id) ? "DETERMINATION" : "TOKEN";
 		} else {
 			artifact.rarity = artifact.legendary ? "LEGENDARY" : "COMMON";
@@ -91,6 +94,7 @@ class ArtifactDisplay {
 ArtifactDisplay.commonArtifactCost = 300;
 ArtifactDisplay.legendaryArtifactCost = 1000;
 ArtifactDisplay.DTArtifactIds = [25, 34, 43, 46]; // Genocide, Outbreak, Ultimate Fusion and FREE KROMER respectively.
+ArtifactDisplay.BASEArtifactIds = [1, 2, 3, 4, 6]; // Health, Draw, Poke, Power, Solidity
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var artifactDisplay = new ArtifactDisplay();

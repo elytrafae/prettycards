@@ -148,11 +148,11 @@
     "pc-fd-authornote" : "Author's Note",
     "card-12" : {
         "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Draw a monster or draw a spell from your deck.",
-        "value" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Draw {{PC_SWITCH_CYAN:1|a monster}} or {{PC_SWITCH_RED:1|a spell}} from your deck."
+        "value" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Draw {{PC_SWITCH_CYAN:1|a monster}} or {{PC_SWITCH_RED:1|a spell}}."
     },
-    "card-12-cyan" : "{{KW:MAGIC}}: Draw {{PC_SWITCH_CYAN:1|a monster}} from your deck.",
-    "card-12-red" : "{{KW:MAGIC}}: Draw {{PC_SWITCH_RED:1|a spell}} from your deck.",
-    "card-12-both" : "{{KW:MAGIC}}: Draw {{PC_SWITCH_CYAN:1|a monster}} and {{PC_SWITCH_RED:1|a spell}} from your deck.",
+    "card-12-cyan" : "{{KW:MAGIC}}: Draw {{PC_SWITCH_CYAN:1|a monster}}.",
+    "card-12-red" : "{{KW:MAGIC}}: Draw {{PC_SWITCH_RED:1|a spell}}.",
+    "card-12-both" : "{{KW:MAGIC}}: Draw {{PC_SWITCH_CYAN:1|a monster}} and {{PC_SWITCH_RED:1|a spell}}.",
     "card-275" : {
         "ifEqual" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. {{KW:SWITCH}}: Add a copy of it into your hand or add 2 in your deck.",
         "value" : "{{KW:MAGIC}}: Choose another non-{{RARITY:TOKEN}} {{TRIBE:PIECE|1}} in your hand. {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Add a copy of it into your hand}} or {{PC_SWITCH_RED:1|add 2 in your deck}}."

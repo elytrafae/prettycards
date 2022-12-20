@@ -81,7 +81,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "{{PLURAL:$1|Graveyard Rise|Graveyard Rises}}",
 		image: "Graveyard_Rise",
 		cost: 3,
-		description: "{{KW:DELAY}}: Add a copy of every different monster that died this turn to your hand.",
+		description: "{{KW:DELAY}}: Add a copy of every different ally monster that died this turn to your hand with -1 {{cost}}.",
 		extension: "DELTARUNE",
 		rarity: "COMMON"
 	});
@@ -159,6 +159,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	});
 
     var aimless_vessel = c.newCard({
+		soul: soul,
         name: "{{PLURAL:$1|Aimless Vessel|Aimless Vessel}}",
         image: "Aimless_Vessel",
         cost: 5,
@@ -169,7 +170,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         rarity: "TOKEN"
     });
 
-    numbing.setDescription(`Kill a non-DT ally monster costing 3 or more and add an ${aimless_vessel.me()} to your hand with same stats.`);
+    numbing.setDescription(`Kill a non-{{RARITY:DETERMINATION}} ally monster costing 3 or more and add an ${aimless_vessel.me()} to your hand with same stats.`);
 
 	c.newCard({
 		soul: soul,

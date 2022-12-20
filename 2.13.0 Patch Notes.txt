@@ -1,8 +1,16 @@
 
 
 - Made some entries in the PrettyCards menu appear only after someone logged in due to them not working properly otherwise.
+- BASE Artifacts
+- Fixed some issues
 
 TODO:
 - Add minimalistic version of deck system (?)
-- Cosmetics Wishlist
+- Cosmetics Wishlist (Possibly with Discord integration?)
 - Make Game End Screen look actually decent
+
+- Animation Upgrades
+- Multiple Settings for HD Settings
+- Remake Lobby Games
+- "Would You Rather" for April.
+- Fun Value (Especially for Card Descriptions)
