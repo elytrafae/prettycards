@@ -1,5 +1,5 @@
 
-import { PrettyCards_plugin, prettycards } from "./underscript_checker";
+import { PrettyCards_plugin, prettycards } from "../underscript_checker";
 
 // Will need to animate this and code a way to zoom in on a specific element.
 
@@ -13,7 +13,7 @@ class ZoomManager {
     }
 
     zoomScreen(xZoom, yZoom) {
-        zoomElement(xZoom, yZoom, $("body"));
+        this.zoomElement(xZoom, yZoom, $("body"));
     }
 
 }

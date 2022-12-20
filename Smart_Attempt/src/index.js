@@ -39,6 +39,7 @@ import {} from "/src/libraries/card_modifyers/friendship_info_on_cards.js";
 import {} from "/src/libraries/card_modifyers/card_skin_shop_additions.js";
 
 import {} from "/src/libraries/translation/translation_manager.js";
+import {} from "/src/libraries/visual_effects/zoom.js";
 
 // import {} from "/src/libraries/persona_overlay.js";
 
