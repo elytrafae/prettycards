@@ -158,8 +158,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "EPIC"
 	});
 
-    var aimless_vessel = c.newCard({
-		soul: soul,
+    var aimless_vessel = c.newCard({ // Not added to the soul because it doesn't appear, anyway.
         name: "{{PLURAL:$1|Aimless Vessel|Aimless Vessel}}",
         image: "Aimless_Vessel",
         cost: 5,
