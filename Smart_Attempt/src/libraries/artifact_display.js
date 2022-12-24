@@ -37,7 +37,7 @@ class ArtifactDisplay {
 		return `<img class="pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.legendary.toString()}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="${utility.getArtifactImageLink(artifact.image)}"> `;
 	}
 	
-	SetRarityForArtifact(artifact) {
+	SetAdditionalDataForArtifact(artifact) {
 		if (artifact.rarity) {
 			return artifact.rarity;
 		}
@@ -49,6 +49,9 @@ class ArtifactDisplay {
 			artifact.rarity = ArtifactDisplay.DTArtifactIds.includes(artifact.id) ? "DETERMINATION" : "TOKEN";
 		} else {
 			artifact.rarity = artifact.legendary ? "LEGENDARY" : "COMMON";
+		}
+		if (ArtifactDisplay.SOULArtifactIds[artifact.id]) {
+			artifact.soul = ArtifactDisplay.SOULArtifactIds[artifact.id];
 		}
 		return artifact.rarity;
 	}
@@ -62,7 +65,7 @@ class ArtifactDisplay {
 			// Setting artifact rarities and ownership for my system.
 			for (var i=0; i < this.artifacts.length; i++) {
 				var artifact = this.artifacts[i];
-				this.SetRarityForArtifact(artifact);
+				this.SetAdditionalDataForArtifact(artifact);
 				// A little school-like code :hue:
 				artifact.owned = false;
 			}
@@ -95,6 +98,15 @@ ArtifactDisplay.commonArtifactCost = 300;
 ArtifactDisplay.legendaryArtifactCost = 1000;
 ArtifactDisplay.DTArtifactIds = [25, 34, 43, 46]; // Genocide, Outbreak, Ultimate Fusion and FREE KROMER respectively.
 ArtifactDisplay.BASEArtifactIds = [1, 2, 3, 4, 6]; // Health, Draw, Poke, Power, Solidity
+ArtifactDisplay.SOULArtifactIds = {
+	1 : "DETERMINATION",
+	2 : "BRAVERY",
+	3 : "JUSTICE",
+	4 : "KINDNESS",
+	5 : "PATIENCE",
+	6 : "INTEGRITY",
+	7 : "PERSEVERANCE"
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var artifactDisplay = new ArtifactDisplay();
@@ -121,7 +133,7 @@ PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
 	//console.log("BACKUP", backup_artifacts);
 	for (var i=0; i < backup_artifacts.length; i++) {
 		var artifact = backup_artifacts[i];
-		artifactDisplay.SetRarityForArtifact(artifact);
+		artifactDisplay.SetAdditionalDataForArtifact(artifact);
 		window.$(".artifact-img[artifactId=" + artifact.id + "]").addClass("PrettyCards_Artifact_" + artifact.rarity);
 	}
 });

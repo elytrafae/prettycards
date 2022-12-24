@@ -156,13 +156,19 @@ class FancyDisplay {
 				}
 			}
 		}
+		var imageClass = "PrettyCards_ArtifactDisplay_" + artifact.rarity;
+		var rarityText = window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase()));
+		if (artifact.soul) {
+			imageClass = "PrettyCards_ArtifactDisplay_SoulArt_" + artifact.soul;
+			rarityText = window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("soul-" + artifact.soul.toLowerCase()));
+		}
 		var data = {
 			name: $.i18n("artifact-name-" + artifact.id),
 			image: image_src,
-			text_class: artifact.rarity || "COMMON",
-			rarity_text: window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase())),
+			text_class: artifact.soul || artifact.rarity || "COMMON",
+			rarity_text: rarityText,
 			description: window.$.i18n("artifact-" + artifact.id),
-			image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
+			image_class: imageClass,
 			note: window.$.i18n(artifact.note || ""),
 			disabled: artifact.disabled,
 			counter: artifact.counter,
