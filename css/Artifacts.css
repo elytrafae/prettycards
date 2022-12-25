@@ -79,6 +79,8 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	background-color: black;
 	padding: 12px;
 	padding-top: 60px;
+	background-position: center;
+	background-size: cover;
 }
 
 .PrettyCards_ArtifactCircle {
@@ -149,10 +151,12 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 .PrettyCards_ArtifactListBackground {
 		/* background-color: #990000; */
 		position: absolute;
-		top: 0;
+		top: -7.5px;
 		left: -35px;
-		bottom: 0;
+		bottom: -7.5px;
 		right: -15px;
+		background-position: center;
+		background-size: cover;
 }
 
 .PrettyCards_ArtifactListCircle {

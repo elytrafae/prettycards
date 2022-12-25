@@ -17,7 +17,7 @@ class FancyListDisplay {
 		
 		for (var i=0; i < datas.length; i++) {
 			var data = datas[i];
-			var row = window.$(`<div class="PrettyCards_ArtifactListRow"><div class="PrettyCards_ArtifactListBackground"></div></div>`);
+			var row = window.$(`<div class="PrettyCards_ArtifactListRow"><div class="PrettyCards_ArtifactListBackground ${data.backgroundClass || ""}"></div></div>`);
 			//var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
 			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"></div>`);
 			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "");
@@ -64,7 +64,7 @@ class FancyDisplay {
 		//this.backdrop = window.$(`<div class="PrettyCards_ScreenCover PrettyCards_HalfTransparentBG"></div>`);
 		//this.backdrop.click(function() {this.remove();});
 		
-		this.box = window.$(`<div class="PrettyCards_ArtifactDisplayBox"></div>`);
+		this.box = window.$(`<div class="PrettyCards_ArtifactDisplayBox ${data.backgroundClass || ""}"></div>`);
 		this.box.click(function (e) {e.stopPropagation();});
 		//this.backdrop.append(this.box);
 		
@@ -170,7 +170,8 @@ class FancyDisplay {
 			note: window.$.i18n(artifact.note || ""),
 			disabled: artifact.disabled,
 			counter: artifact.counter,
-			shopInfo: shopInfo
+			shopInfo: shopInfo,
+			backgroundClass: artifact.backgroundClass
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewArtifact()", {artifact: artifact, helper: helper});
@@ -275,7 +276,8 @@ class FancyDisplay {
 					description: window.$.i18n("artifact-" + artifact.id),
 					image_class: rarityData.imgClass,
 					disabled: isDisabled, // || artifact.disabled,
-					counter: artifactCounter || artifact.counter
+					counter: artifactCounter || artifact.counter,
+					backgroundClass: artifact.backgroundClass
 				});
 			});
 			var helper = new FancyListDisplay(datas, title);
@@ -300,6 +302,7 @@ FancyDisplay.customSouls = [];
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	utility.loadCSSFromGH("CustomCards");
+	utility.loadCSSFromGH("ArtifactBackgrounds");
 	
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.showArtifactDescBox = FancyDisplay.ViewArtifactInfo.bind(this);

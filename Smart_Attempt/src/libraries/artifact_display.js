@@ -142,10 +142,10 @@ ArtifactDisplay.hardcodedAdditionalData = [
 	{id:  3, rarity: "BASE"},
 	{id:  4, rarity: "BASE"},
 	{id:  6, rarity: "BASE"},
-	{id: 25, rarity: "DETERMINATION", ownerId: 28},  // Genocide
-	{id: 34, rarity: "DETERMINATION", ownerId: 505}, // Outbreak/Dark Fountain
-	{id: 43, rarity: "DETERMINATION", ownerId: 688}, // Ultimate Fusion
-	{id: 46, rarity: "DETERMINATION", ownerId: 717}, // FREE KROMER
+	{id: 25, rarity: "DETERMINATION", ownerId: 28 , backgroundClass: "PrettyCards_ArtBG_Genocide"},  // Genocide
+	{id: 34, rarity: "DETERMINATION", ownerId: 505, backgroundClass: "PrettyCards_ArtBG_DarkFountain"}, // Outbreak/Dark Fountain
+	{id: 43, rarity: "DETERMINATION", ownerId: 688, backgroundClass: "PrettyCards_ArtBG_UltimateFusion"}, // Ultimate Fusion
+	{id: 46, rarity: "DETERMINATION", ownerId: 717, backgroundClass: "PrettyCards_ArtBG_FreeKromer"}, // FREE KROMER
 ];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
