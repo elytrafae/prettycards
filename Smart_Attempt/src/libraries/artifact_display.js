@@ -42,16 +42,21 @@ class ArtifactDisplay {
 			return artifact.rarity;
 		}
 		if (!this.GetArtifactById(artifact.id)) {this.artifacts.push(artifact);}
-		if (ArtifactDisplay.BASEArtifactIds.includes(artifact.id)) {
-			artifact.rarity = "BASE";
-		} else if (artifact.unavailable) {
-		//if (artifact.cost != ArtifactDisplay.commonArtifactCost && artifact.cost != ArtifactDisplay.legendaryArtifactCost) {
-			artifact.rarity = ArtifactDisplay.DTArtifactIds.includes(artifact.id) ? "DETERMINATION" : "TOKEN";
+		if (artifact.unavailable) {
+			artifact.rarity = "TOKEN";
 		} else {
 			artifact.rarity = artifact.legendary ? "LEGENDARY" : "COMMON";
 		}
-		if (ArtifactDisplay.SOULArtifactIds[artifact.id]) {
-			artifact.soul = ArtifactDisplay.SOULArtifactIds[artifact.id];
+
+		// Merges current artifact data with additional data.
+		for (var i=0; i < ArtifactDisplay.hardcodedAdditionalData.length; i++) {
+			var data = ArtifactDisplay.hardcodedAdditionalData[i];
+			if (data.id === artifact.id) {
+				for (var key in data) {
+					artifact[key] = data[key];
+				}
+				break;
+			}
 		}
 		return artifact.rarity;
 	}
@@ -89,6 +94,29 @@ class ArtifactDisplay {
 			PrettyCards_plugin.events.emit("PrettyCards:artBuySuccess", {idArtifact: artifactId, artifact: artifact});
 		}.bind(this));
 	}
+
+	GetRarityTextFor(artifact) {
+		// Card + Soul -> <name>'s <SOUL> Artifact
+		// Card -> <name>'s Artifact
+		// Soul -> <SOUL> Artifact
+		// Rarity only -> <rarity> Artifact
+		// TODO: Finish this function and hook it up to both artifact viewing functions in fancy_helper.js
+		var txtClass = artifact.customTxtClass || artifact.soul || artifact.rarity;
+		var soul = artifact.soul;
+		var rarity = artifact.rarity;
+		var hasOwner = artifact.ownerId && (!!window.getCard(artifact.ownerId)); 
+		var text = "";
+		if (hasOwner && soul) {
+			text = window.$.i18n("pc-fd-artifactwithownerandsoul", window.$.i18n("card-name-" + artifact.ownerId, 1), window.$.i18n("soul-" + artifact.soul.toLowerCase()));
+		} else if (hasOwner) {
+			text = window.$.i18n("pc-fd-artifactwithowner", window.$.i18n("card-name-" + artifact.ownerId, 1));
+		} else if (soul) {
+			text = window.$.i18n("pc-fd-artifactwithsoul", window.$.i18n("soul-" + artifact.soul.toLowerCase()));
+		} else {
+			window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase()));
+		}
+		return {text: text, txtClass: txtClass};
+	}
 	
 }
 
@@ -96,17 +124,17 @@ class ArtifactDisplay {
 // Only used on artifacts the server sends. Custom ones should be handled by the author.
 ArtifactDisplay.commonArtifactCost = 300;
 ArtifactDisplay.legendaryArtifactCost = 1000;
-ArtifactDisplay.DTArtifactIds = [25, 34, 43, 46]; // Genocide, Outbreak, Ultimate Fusion and FREE KROMER respectively.
-ArtifactDisplay.BASEArtifactIds = [1, 2, 3, 4, 6]; // Health, Draw, Poke, Power, Solidity
-ArtifactDisplay.SOULArtifactIds = {
-	1 : "DETERMINATION",
-	2 : "BRAVERY",
-	3 : "JUSTICE",
-	4 : "KINDNESS",
-	5 : "PATIENCE",
-	6 : "INTEGRITY",
-	7 : "PERSEVERANCE"
-};
+ArtifactDisplay.hardcodedAdditionalData = [
+	{id:  1, rarity: "BASE"},
+	{id:  2, rarity: "BASE"},
+	{id:  3, rarity: "BASE"},
+	{id:  4, rarity: "BASE"},
+	{id:  6, rarity: "BASE"},
+	{id: 25, rarity: "DETERMINATION", ownerId: 28},  // Genocide
+	{id: 34, rarity: "DETERMINATION", ownerId: 505}, // Outbreak/Dark Fountain
+	{id: 43, rarity: "DETERMINATION", ownerId: 688}, // Ultimate Fusion
+	{id: 46, rarity: "DETERMINATION", ownerId: 717}, // FREE KROMER
+];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var artifactDisplay = new ArtifactDisplay();
