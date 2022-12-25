@@ -1,6 +1,9 @@
 
 .PrettyCards_ArtBG_Genocide {
-
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Genocide.png);
+    background-size: auto;
+    background-position: top left;
+    background-repeat: repeat;
 }
 
 .PrettyCards_ArtBG_DarkFountain {
@@ -12,5 +15,5 @@
 }
 
 .PrettyCards_ArtBG_FreeKromer {
-    
+
 }
