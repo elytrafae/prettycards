@@ -36,7 +36,8 @@ var categories = {
     "card" : "Card Related",
     "controversial" : "<span class='red'>Controversial</span>",
     "background" : "Background",
-    "packs" : "Packs"
+    "packs" : "Packs",
+    "artifact" : "Artifact Related"
 }
 
 function addSetting(data) {

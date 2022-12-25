@@ -4,7 +4,7 @@
 import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
-import { prettycards, PrettyCards_plugin } from "./underscript_checker";
+import { addSetting, prettycards, PrettyCards_plugin, settings } from "./underscript_checker";
 import { createFloatingSoul } from "./floating_souls";
 import { pagegetters } from "./page_getters";
 
@@ -17,7 +17,8 @@ class FancyListDisplay {
 		
 		for (var i=0; i < datas.length; i++) {
 			var data = datas[i];
-			var row = window.$(`<div class="PrettyCards_ArtifactListRow"><div class="PrettyCards_ArtifactListBackground ${data.backgroundClass || ""}"></div></div>`);
+			var bgClass = settings.no_artifact_background.value() ? "" : (data.backgroundClass || "");
+			var row = window.$(`<div class="PrettyCards_ArtifactListRow"><div class="PrettyCards_ArtifactListBackground ${bgClass}"></div></div>`);
 			//var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
 			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"></div>`);
 			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "");
@@ -64,7 +65,8 @@ class FancyDisplay {
 		//this.backdrop = window.$(`<div class="PrettyCards_ScreenCover PrettyCards_HalfTransparentBG"></div>`);
 		//this.backdrop.click(function() {this.remove();});
 		
-		this.box = window.$(`<div class="PrettyCards_ArtifactDisplayBox ${data.backgroundClass || ""}"></div>`);
+		var bgClass = settings.no_artifact_background.value() ? "" : (data.backgroundClass || "");
+		this.box = window.$(`<div class="PrettyCards_ArtifactDisplayBox ${bgClass}"></div>`);
 		this.box.click(function (e) {e.stopPropagation();});
 		//this.backdrop.append(this.box);
 		

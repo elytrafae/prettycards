@@ -18,5 +18,8 @@
 }
 
 .PrettyCards_ArtBG_FreeKromer {
-
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/FREE_KROMER.png);
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: bottom left;
 }

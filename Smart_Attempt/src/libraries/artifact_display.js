@@ -1,9 +1,27 @@
 
 import { pagegetters } from "./page_getters";
-import { prettycards } from "./underscript_checker";
+import { addSetting, prettycards } from "./underscript_checker";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
+
+var old_rarity = addSetting({
+    'key': 'old_artifact_rarity',
+    'name': 'Disable Post-2023 Artifact Rarity System', // Name in settings page
+    'type': 'boolean',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': false, // default value
+	'category': 'artifact'
+});
+
+var no_bg = addSetting({
+    'key': 'no_artifact_background',
+    'name': 'Disable Artifact Backgrounds', // Name in settings page
+    'type': 'boolean',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': false, // default value
+	'category': 'artifact'
+});
 
 class ArtifactDisplay {
 	
@@ -106,14 +124,14 @@ class ArtifactDisplay {
 		var rarity = artifact.rarity;
 		var hasOwner = artifact.ownerId && (!!window.getCard(artifact.ownerId)); 
 		var text = "";
-		if (hasOwner && soul) {
+		if (old_rarity.value() || (!hasOwner && !soul)) {
+			text = window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + rarity.toLowerCase()));
+		} else if (hasOwner && soul) {
 			text = window.$.i18n("pc-fd-artifactwithownerandsoul", window.$.i18n("card-name-" + artifact.ownerId, 1), window.$.i18n("soul-" + soul.toLowerCase()));
 		} else if (hasOwner) {
 			text = window.$.i18n("pc-fd-artifactwithowner", window.$.i18n("card-name-" + artifact.ownerId, 1));
 		} else if (soul) {
 			text = window.$.i18n("pc-fd-artifactwithsoul", window.$.i18n("soul-" + soul.toLowerCase()));
-		} else {
-			text = window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + rarity.toLowerCase()));
 		}
 
 		// Image Class
