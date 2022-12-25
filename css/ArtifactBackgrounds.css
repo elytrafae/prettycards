@@ -7,7 +7,9 @@
 }
 
 .PrettyCards_ArtBG_DarkFountain {
-
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Dark_Fountain.png);
+    background-size: cover;
+    background-position: center center;
 }
 
 .PrettyCards_ArtBG_UltimateFusion {
