@@ -95,27 +95,39 @@ class ArtifactDisplay {
 		}.bind(this));
 	}
 
-	GetRarityTextFor(artifact) {
+	GetRarityDataFor(artifact) {
 		// Card + Soul -> <name>'s <SOUL> Artifact
 		// Card -> <name>'s Artifact
 		// Soul -> <SOUL> Artifact
 		// Rarity only -> <rarity> Artifact
 		// TODO: Finish this function and hook it up to both artifact viewing functions in fancy_helper.js
-		var txtClass = artifact.customTxtClass || artifact.soul || artifact.rarity;
+		
 		var soul = artifact.soul;
 		var rarity = artifact.rarity;
 		var hasOwner = artifact.ownerId && (!!window.getCard(artifact.ownerId)); 
 		var text = "";
 		if (hasOwner && soul) {
-			text = window.$.i18n("pc-fd-artifactwithownerandsoul", window.$.i18n("card-name-" + artifact.ownerId, 1), window.$.i18n("soul-" + artifact.soul.toLowerCase()));
+			text = window.$.i18n("pc-fd-artifactwithownerandsoul", window.$.i18n("card-name-" + artifact.ownerId, 1), window.$.i18n("soul-" + soul.toLowerCase()));
 		} else if (hasOwner) {
 			text = window.$.i18n("pc-fd-artifactwithowner", window.$.i18n("card-name-" + artifact.ownerId, 1));
 		} else if (soul) {
-			text = window.$.i18n("pc-fd-artifactwithsoul", window.$.i18n("soul-" + artifact.soul.toLowerCase()));
+			text = window.$.i18n("pc-fd-artifactwithsoul", window.$.i18n("soul-" + soul.toLowerCase()));
 		} else {
-			window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase()));
+			text = window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + rarity.toLowerCase()));
 		}
-		return {text: text, txtClass: txtClass};
+
+		// Image Class
+		var imgClass = "PrettyCards_ArtifactDisplay_" + rarity;
+		if (artifact.customImgClass) {
+			imgClass = artifact.customImgClass;
+		} else if (soul) {
+			imgClass = "PrettyCards_ArtifactDisplay_SoulArt_" + soul;
+		}
+
+		// Text Class
+		var txtClass = artifact.customTxtClass || artifact.soul || artifact.rarity;
+
+		return {text: text, txtClass: txtClass, imgClass: imgClass};
 	}
 	
 }

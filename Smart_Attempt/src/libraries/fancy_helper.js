@@ -18,7 +18,10 @@ class FancyListDisplay {
 		for (var i=0; i < datas.length; i++) {
 			var data = datas[i];
 			var row = window.$(`<div class="PrettyCards_ArtifactListRow"></div>`);
-			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
+			//var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
+			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"></div>`);
+			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "");
+			circle.append(floatingSoul);
 			row.append(circle);
 			
 			if (data.counter && data.counter > 0) {
@@ -156,19 +159,14 @@ class FancyDisplay {
 				}
 			}
 		}
-		var imageClass = "PrettyCards_ArtifactDisplay_" + artifact.rarity;
-		var rarityText = window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase()));
-		if (artifact.soul) {
-			imageClass = "PrettyCards_ArtifactDisplay_SoulArt_" + artifact.soul;
-			rarityText = window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("soul-" + artifact.soul.toLowerCase()));
-		}
+		var rarityData = artifactDisplay.GetRarityDataFor(artifact);
 		var data = {
 			name: $.i18n("artifact-name-" + artifact.id),
 			image: image_src,
-			text_class: artifact.soul || artifact.rarity || "COMMON",
-			rarity_text: rarityText,
+			text_class: rarityData.txtClass,
+			rarity_text: rarityData.text,
 			description: window.$.i18n("artifact-" + artifact.id),
-			image_class: imageClass,
+			image_class: rarityData.imgClass,
 			note: window.$.i18n(artifact.note || ""),
 			disabled: artifact.disabled,
 			counter: artifact.counter,
@@ -258,6 +256,7 @@ class FancyDisplay {
 				var artifactCounter = artData.counter;
 				var isDisabled = artData.disabled;
 				var artifact = artifactDisplay.GetArtifactById(artifactId);
+				var rarityData = artifactDisplay.GetRarityDataFor(artifact);
 				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
 				var image_src = utility.getArtifactImageLink(artifact.image);
 				if (artifact.collection) {
@@ -271,10 +270,10 @@ class FancyDisplay {
 				datas.push({
 					name: $.i18n("artifact-name-" + artifact.id),
 					image: image_src,
-					text_class: artifact.rarity || "COMMON",
-					rarity_text: window.$.i18n("pc-fd-artifactwithrarity", window.$.i18n("rarity-" + artifact.rarity.toLowerCase())),
+					text_class: rarityData.txtClass || "COMMON",
+					rarity_text: rarityData.text,
 					description: window.$.i18n("artifact-" + artifact.id),
-					image_class: "PrettyCards_ArtifactDisplay_" + artifact.rarity,
+					image_class: rarityData.imgClass,
 					disabled: isDisabled, // || artifact.disabled,
 					counter: artifactCounter || artifact.counter
 				});
