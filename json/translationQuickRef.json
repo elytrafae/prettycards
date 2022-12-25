@@ -28,5 +28,11 @@
         "syntax" : "{{PC_SHINY:text}}",
         "description" : "Displays the text inside with the rainbowText class. Self-explanatory.",
         "example": "{{PC_SHINY:This text is shiny, wooooo!}}"
+    },
+    {
+        "title" : "PC ENGLISH POSSESSIVE",
+        "syntax" : "{{PC_EN_POSS:text}}",
+        "description" : "Adds \"'s\" to the string if it doesn't end in \"s\", otherwise it only adds \"'\".",
+        "example" : "{{PC_EN_POSS:Soulless Kris}}, {{PC_EN_POSS:Chara}}"
     }
 ]

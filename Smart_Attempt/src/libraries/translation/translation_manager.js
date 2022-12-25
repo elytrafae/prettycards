@@ -173,6 +173,12 @@ function registerCustomExtensions() {
             }
             nodes.splice(0, 1);
             return "[" + cmdName + ":" + nodes.join("|") + "]";
+        },
+        pc_en_poss: function(nodes) {
+            if (nodes[0].endsWith('s')) {
+                return nodes[0] + "'";
+            }
+            return nodes[0] + "'s";
         }
     })
 }
