@@ -17,7 +17,7 @@ class FancyListDisplay {
 		
 		for (var i=0; i < datas.length; i++) {
 			var data = datas[i];
-			var row = window.$(`<div class="PrettyCards_ArtifactListRow"></div>`);
+			var row = window.$(`<div class="PrettyCards_ArtifactListRow"><div class="PrettyCards_ArtifactListBackground"></div></div>`);
 			//var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
 			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"></div>`);
 			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "");
