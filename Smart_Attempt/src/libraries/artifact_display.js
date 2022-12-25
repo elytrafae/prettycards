@@ -66,6 +66,10 @@ class ArtifactDisplay {
 			artifact.rarity = artifact.legendary ? "LEGENDARY" : "COMMON";
 		}
 
+		if (artifact.rarity == "LEGENDARY") {
+			artifact.backgroundClass = "PrettyCards_ArtBG_Legendary";
+		}
+
 		// Merges current artifact data with additional data.
 		for (var i=0; i < ArtifactDisplay.hardcodedAdditionalData.length; i++) {
 			var data = ArtifactDisplay.hardcodedAdditionalData[i];
