@@ -11,7 +11,10 @@
 }
 
 .PrettyCards_ArtBG_UltimateFusion {
-
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Ultimate_Fusion.png);
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: top left;
 }
 
 .PrettyCards_ArtBG_FreeKromer {
