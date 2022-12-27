@@ -2,6 +2,8 @@
 import { prettycards } from "../../underscript_checker";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
+var spellbook;
+
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
@@ -25,7 +27,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		note: "An idea for a spell-oriented soul. Unfortunately, I lost access to the original sheet where I submitted all of these cards, so they will have minimal reasoning now . . ."
 	});
 
-	var spellbook = c.newCard({
+	spellbook = c.newCard({
 		soul: soul,
 		name: "{{PLURAL:$1|Spellbook|Spellbooks}}",
 		image: "Spellbook",
@@ -238,3 +240,5 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	});
 
 });
+
+export {spellbook};

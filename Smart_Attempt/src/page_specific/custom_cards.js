@@ -11,6 +11,7 @@ import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_ddlc_v2.
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_switch.js";
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_hate.js";
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_uco.js";
+import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_updatetest.js";
 
 import { createFloatingSoul } from "../libraries/floating_souls";
 

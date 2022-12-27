@@ -43,3 +43,46 @@
     background-repeat: repeat;
     background-position: bottom left;
 }
+
+.PrettyCards_ArtBG_WornDagger {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Worn_Dagger.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.PrettyCards_ArtBG_ToughGlove {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Tough_Glove.png);
+    background-size: cover;
+    background-position: center right;
+}
+
+.PrettyCards_ArtBG_EmptyGun {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Empty_Gun.png);
+    background-size: cover;
+    background-position: top left;
+}
+
+.PrettyCards_ArtBG_BurntPan {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Burnt_Pan.png);
+    background-size: cover;
+    background-position: center left;
+}
+
+.PrettyCards_ArtBG_ToyKnife {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Toy_Knife.png);
+    background-size: cover;
+    background-position: bottom left;
+}
+
+.PrettyCards_ArtBG_BalletShoes {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Ballet_Shoes.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.PrettyCards_ArtBG_TornNotebook {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Torn_Notebook.png);
+    background-size: cover;
+    background-position: top left;
+}
+
