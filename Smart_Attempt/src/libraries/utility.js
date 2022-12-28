@@ -455,6 +455,22 @@ class Utility {
 			});
 		}
 	}
+
+	getResizedFontSizeHorizontal(text, initSize, maxWidth, minSize = 10, step = 0.5) {
+		var ele = document.createElement("SPAN");
+		ele.innerHTML = text;
+		ele.style.fontSize = initSize + "px";
+		var textSize = initSize;
+		document.body.appendChild(ele);
+
+		while (textSize > minSize && ele.getBoundingClientRect().width > maxWidth) {
+			console.log(text, ele.getBoundingClientRect().width, maxWidth);
+			textSize -= step;
+			ele.style.fontSize = textSize + "px";
+		}
+		ele.remove();
+		return textSize;
+	}
 	
 }
 

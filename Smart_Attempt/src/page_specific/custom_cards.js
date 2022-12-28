@@ -14,6 +14,7 @@ import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_uco.js";
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_updatetest.js";
 
 import { createFloatingSoul } from "../libraries/floating_souls";
+import { artifactDisplay } from "../libraries/artifact_display";
 
 function takeScreenshot(filename) {
 	if (window.$("#PrettyCards_CustomCardShowcase:visible").length == 0) {
@@ -40,8 +41,10 @@ function appendArtifact(artifact, c, $parent) {
 	var prefix = isAprilFools ? c.aprilArtifactImagePrefix  : c.artifactImagePrefix;
 	var imageName = isAprilFools ? artifact.aprilImage : artifact.image;
 
+	var rarityData = artifactDisplay.GetRarityDataFor(artifact);
+
 	var image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
-	var art = $(`<img class="PrettyCards_Artifact PrettyCards_Artifact_${artifact.rarity}" src="${image_src}">`);
+	var art = $(`<img class="PrettyCards_Artifact ${rarityData.imgClass}" src="${image_src}">`);
 	art.click(function () {
 		window.artifactInfo(artifact.id);
 	})
@@ -54,17 +57,19 @@ function appendArtifactNew(artifact, c, $parent) {
 	var prefix = isAprilFools ? c.aprilArtifactImagePrefix  : c.artifactImagePrefix;
 	var imageName = isAprilFools ? artifact.aprilImage : artifact.image;
 
+	var rarityData = artifactDisplay.GetRarityDataFor(artifact);
+
 	var image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 	var art = $(`
-	<div class="PrettyCards_CollectionNew_Soultifact">
+	<div class="PrettyCards_CollectionNew_Soultifact ${artifact.backgroundClass || ""}">
 		<div id="PrettyCards_CollectionNew_SoultifactImageContainer"></div>
 		<div>
-			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactName">${window.$.i18n("artifact-name-" + artifact.id)}</div>
-			<div class="${artifact.rarity} PrettyCards_CollectionNew_SoultifactRarity">${artifact.rarity} Artifact</div>
+			<div class="${rarityData.txtClass} PrettyCards_CollectionNew_SoultifactName">${window.$.i18n("artifact-name-" + artifact.id)}</div>
+			<div class="${rarityData.txtClass} PrettyCards_CollectionNew_SoultifactRarity">${rarityData.text}</div>
 			<div>${window.$.i18n("artifact-" + artifact.id)}</div>
 		</div>
 	<div>`);
-	art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image_src, "PrettyCards_CollectionNew_SoultifactImage PrettyCards_Artifact_" + artifact.rarity, "", ""));
+	art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image_src, "PrettyCards_CollectionNew_SoultifactImage " + (rarityData.imageClass), "", ""));
 	art.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.artifactInfo(artifact.id);
 	})

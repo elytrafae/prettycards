@@ -323,6 +323,12 @@ class Artifact {
 		this.aprilImage = settings.aprilImage;
 		this.rarity = settings.rarity || "COMMON";
 		this.note = settings.note || "";
+		this.soul = settings.soul;
+		if (this.soul.name) {
+			this.soul = this.soul.name;
+		}
+		this.ownerId = settings.ownerId;
+		this.backgroundClass = settings.backgroundClass || "";
 		Object.defineProperty(this, "id", {
 			value: nextCustomArtifact,
 			writable: false

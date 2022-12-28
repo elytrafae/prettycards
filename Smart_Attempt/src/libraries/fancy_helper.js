@@ -30,7 +30,9 @@ class FancyListDisplay {
 				row.append(counter);
 			}
 
-			var name = window.$(`<div class="PrettyCards_ArtifactListName ${data.text_class}">${data.name} (${data.rarity_text}) ${data.disabled ? disabledText : ""}</div>`);
+			var namestr = `${data.name} (${data.rarity_text}) ${data.disabled ? disabledText : ""}`;
+			var name = window.$(`<div class="PrettyCards_ArtifactListName ${data.text_class}">${namestr}</div>`);
+			name.css("font-size", utility.getResizedFontSizeHorizontal(namestr, 25, 538, 10, 0.5));
 			var description = window.$(`<div class="PrettyCards_ArtifactListDescription"></div>`);
 			description.append(data.description);
 			

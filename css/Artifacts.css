@@ -267,6 +267,10 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	animation: MYTHICArtifactGlow 7s alternate infinite ease-in-out;
 }
 
+.PrettyCards_ArtifactDisplay_FloatingForSoul {
+	animation: ArtifactFloat 3s alternate infinite ease-in-out;
+}
+
 @keyframes ArtifactFloat {
 	from { transform: translatey(12px);}
 	to { transform: translatey(-12px);}

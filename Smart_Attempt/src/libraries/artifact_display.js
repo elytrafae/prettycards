@@ -144,6 +144,9 @@ class ArtifactDisplay {
 			imgClass = artifact.customImgClass;
 		} else if (soul) {
 			imgClass = "PrettyCards_ArtifactDisplay_SoulArt_" + soul;
+			if (rarity == "LEGENDARY" || rarity == "DETERMINATION" || rarity == "MYTHIC") { // Even if the soul color overrides floating, reapply it!
+				imgClass += " PrettyCards_ArtifactDisplay_FloatingForSoul";
+			}
 		}
 
 		// Text Class
@@ -164,10 +167,18 @@ ArtifactDisplay.hardcodedAdditionalData = [
 	{id:  3, rarity: "BASE"},
 	{id:  4, rarity: "BASE"},
 	{id:  6, rarity: "BASE"},
-	{id: 25, rarity: "DETERMINATION", ownerId: 28 , backgroundClass: "PrettyCards_ArtBG_Genocide"},  // Genocide
-	{id: 34, rarity: "DETERMINATION", ownerId: 505, backgroundClass: "PrettyCards_ArtBG_DarkFountain"}, // Outbreak/Dark Fountain
-	{id: 43, rarity: "DETERMINATION", ownerId: 688, backgroundClass: "PrettyCards_ArtBG_UltimateFusion"}, // Ultimate Fusion
-	{id: 46, rarity: "DETERMINATION", ownerId: 717, backgroundClass: "PrettyCards_ArtBG_FreeKromer"}, // FREE KROMER
+	{id: 25, rarity: "DETERMINATION", ownerId: 28 , backgroundClass: "PrettyCards_ArtBG_Genocide"},  		// Genocide
+	{id: 34, rarity: "DETERMINATION", ownerId: 505, backgroundClass: "PrettyCards_ArtBG_DarkFountain"}, 	// Outbreak/Dark Fountain
+	{id: 43, rarity: "DETERMINATION", ownerId: 688, backgroundClass: "PrettyCards_ArtBG_UltimateFusion"}, 	// Ultimate Fusion
+	{id: 46, rarity: "DETERMINATION", ownerId: 717, backgroundClass: "PrettyCards_ArtBG_FreeKromer"}, 		// FREE KROMER
+	// Frisk Artifacts
+	{id: 60, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_WornDagger", soul: "DETERMINATION"}, 		// Worn Dagger
+	{id: 56, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_ToughGlove", soul: "BRAVERY"}, 				// Tough Glove
+	{id: 59, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_EmptyGun", soul: "JUSTICE"},  				// Empty Gun
+	{id: 58, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_BurntPan", soul: "KINDNESS"}, 				// Burnt Pan
+	{id: 55, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_ToyKnife", soul: "PATIENCE"}, 				// Toy Knife
+	{id: 57, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_BalletShoes", soul: "INTEGRITY"}, 			// Ballet Shoes
+	{id: 24, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_TornNotebook", soul: "PERSEVERANCE"}, 		// Torn Notebook
 ];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
