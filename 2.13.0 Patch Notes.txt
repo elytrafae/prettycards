@@ -6,6 +6,7 @@
 - Added Artifact Backgrounds (for DT artifacts)
 - Artifact names in list views are now resized to not overflow.
 - Show/Hide hands to spectating friends became less abiguous.
+- Frisk's Wording now includes a helper for their artifacts. Gerson's line, however, was deleted. So long, first artifact generator!
 
 - I feel like I forgot some things . . .
 
@@ -13,6 +14,7 @@ TODO:
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)
 - Make Game End Screen look actually decent
+- Resource Packs
 
 - Animation Upgrades
 - Multiple Settings for HD Settings
