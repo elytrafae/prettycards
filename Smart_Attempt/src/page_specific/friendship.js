@@ -1,7 +1,7 @@
 import { prettycards, PrettyCards_plugin, settings , addSetting} from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
-addSetting({
+var friendship_sort_setting = addSetting({
     'key': 'friendship_sort',
     'name': 'Enable Friendship Sorting', // Name in settings page
     'type': 'boolean',
@@ -88,7 +88,7 @@ function InitFriendshipSort() {
 }
 
 function InitFriendship() {
-    if (settings.friendship_sort.value()) {
+    if (friendship_sort_setting.value()) {
         InitFriendshipSort();
     }
 

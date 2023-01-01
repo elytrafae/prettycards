@@ -9,17 +9,15 @@ PrettyCards_plugin.events.on("appendCard()", function(data) {
     lastAppendedCard = data.element;
 })
 
-const PLACEHOLDER_FRIENDSHIP_RANK = 222222222; // Really big number that is beyond what the leaderboard position can be.
-
-PrettyCards_plugin.events.on("appendCardDeck() appendCardCraft()", function(data) {
-    console.log("Feild's events work!");
-    var card = data.card;
-    var element = data.element;
+PrettyCards_plugin.events.on("func:appendCardDeck func:appendCardCraft", function(card, element) {
+    //console.log("Feild's events work!", data1, data2);
+    //var card = data.card;
+    //var element = data.element;
     PrettyCards_plugin.events.on("PrettyCards:friendshipFetched", function(data) {
         PrettyCards_plugin.events.on("PrettyCards:selfFriendshipLeaderboardFetched", function(lbData) {
-            console.log("My events work!");
+            //console.log("My events work!");
             var xp = 0;
-            var pos = PLACEHOLDER_FRIENDSHIP_RANK; 
+            var pos = -1; 
             if (Array.isArray(data)) {
                 data = data[0]; // IDK what TF this is about, but here we are.
             }
@@ -45,7 +43,7 @@ PrettyCards_plugin.events.on("appendCardDeck() appendCardCraft()", function(data
             utility.addCustomSimpleTextIconToCard(
                 element, 
                 "/images/friendship.png", 
-                `<span>Level: ${level}</span><br><span>XP: ${xp_left}/${xp_to_next}</span>${pos < PLACEHOLDER_FRIENDSHIP_RANK ? `<br><span>Rank: ${pos}</span>` : ""}`
+                `<span>Level: ${level}</span><br><span>XP: ${xp_left}/${xp_to_next}</span>${pos != -1 ? `<br><span>Rank: ${pos}</span>` : ""}`
             );
         });
     });

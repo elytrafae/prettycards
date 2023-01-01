@@ -1,7 +1,7 @@
 import { addSetting, PrettyCards_plugin } from "../libraries/underscript_checker";
 
 var setting = addSetting({
-    'key': 'friendship_sort',
+    'key': 'hand_reveal_setting',
     'name': 'Improved Reveal Hand Setting', // Name in settings page
     'type': 'boolean',
     'refresh': true, // true to add note "Will require you to refresh the page"
