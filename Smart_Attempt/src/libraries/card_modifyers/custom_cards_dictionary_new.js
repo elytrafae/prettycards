@@ -324,7 +324,7 @@ class Artifact {
 		this.rarity = settings.rarity || "COMMON";
 		this.note = settings.note || "";
 		this.soul = settings.soul;
-		if (this.soul.name) {
+		if (this.soul && this.soul.name) {
 			this.soul = this.soul.name;
 		}
 		this.ownerId = settings.ownerId;

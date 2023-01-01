@@ -239,6 +239,15 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "TOKEN"
 	});
 
+	var magic_wand = c.newArtifact({
+		name: "Magic Wand", 
+		image: "Magic_Wand",
+		rarity: "DETERMINATION",
+        ownerId: 65,
+        soul: soul.name,
+        backgroundClass: "PrettyCards_ArtBG_MagicWand",
+		description: `At the start of every even turn add a ${spellbook.me()} to your hand.`
+	});
+
 });
 
-export {spellbook};

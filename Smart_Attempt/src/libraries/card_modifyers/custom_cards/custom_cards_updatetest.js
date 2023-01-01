@@ -1,6 +1,5 @@
 
 import { prettycards } from "../../underscript_checker";
-import { spellbook } from "./custom_cards_switch";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
@@ -113,18 +112,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         backgroundClass: "PrettyCards_ArtBG_TornNotebook",
 		description: `{{KW:TURN-START}}: Give {{KR}} and -1/-1 to the highest {{ATK}} enemy monster without {{KR}}.`
 	});
-
-/*
-    var magic_wand = c.newArtifact({
-		name: "Magic Wand", 
-		image: "Magic_Wand",
-		rarity: "DETERMINATION",
-        ownerId: frisk.id,
-        soul: "SWITCH",
-        backgroundClass: "PrettyCards_ArtBG_MagicWand",
-		description: `At the start of every even turn add a ${spellbook.me()} to your hand.`
-	});
-*/
 
     var frisk_artifacts = [worn_dagger, tough_glove, empty_gun, burnt_pan, toy_knife, ballet_shoes, torn_notebook];
     var upgraded_version_string = "";
