@@ -86,3 +86,9 @@
     background-position: top left;
 }
 
+.PrettyCards_ArtBG_TornNotebook {
+    background-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ArtifactBackgrounds/Magic_Wand.png);
+    background-size: cover;
+    background-position: top center;
+}
+
