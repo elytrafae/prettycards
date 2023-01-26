@@ -53,6 +53,10 @@ import {} from "./libraries/main_menu.js";
 
 import {} from "/src/libraries/footer_remover.js";
 
+//import {} from "/src/libraries/mid_match/match_profiles.js";
+
+import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
+
 // import {} from "/src/libraries/external_api_integration/youtube_player.js";
 
 import {InitPacks} from "./page_specific/packs.js";

@@ -41,7 +41,6 @@ addSetting({
 });
 
 function friendshipShowUpdate(newVal, oldVal, $elements = $(".PrettyCards_UserInfo_FriendshipHideable")) {
-	console.log("Hi!", newVal);
 	if (newVal) {
 		$elements.removeClass("PrettyCards_Hidden");
 	} else {
@@ -87,6 +86,7 @@ ExecuteWhen("PrettyCards:onPageLoad", onPageLoaded);
 function sendUserInfoEvent(ele) {
 	
 	var infos = $(ele).data('infos');
+	console.log(infos);
     var user = infos.user;
 	//console.log(infos);
 	
@@ -100,7 +100,7 @@ function sendUserInfoEvent(ele) {
 
 PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	if (!settings.user_info.value()) {return;}
-	//console.log("Chat:getInfo ", data);
+	console.log("Chat:getInfo ", data);
 	var user = data.user;
 	var header = data.popupElement.querySelector(".modal-header");
 	var name_color = window.localStorage["prettycards.profile_skin_text_color." + window.selfId + "." + user.profileSkin.id] || "#FFFFFF"
