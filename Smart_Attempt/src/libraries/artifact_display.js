@@ -207,7 +207,11 @@ PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
 	for (var i=0; i < backup_artifacts.length; i++) {
 		var artifact = backup_artifacts[i];
 		artifactDisplay.SetAdditionalDataForArtifact(artifact);
-		window.$(".artifact-img[artifactId=" + artifact.id + "]").addClass("PrettyCards_Artifact_" + artifact.rarity);
+		var className = "PrettyCards_Artifact_" + artifact.rarity;
+		if (artifact.soul) {
+			className = "PrettyCards_Artifact_Soul_" + artifact.soul;
+		}
+		window.$(".artifact-img[artifactId=" + artifact.id + "]").addClass(className);
 	}
 });
 

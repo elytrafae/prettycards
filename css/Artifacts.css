@@ -46,6 +46,38 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	animation: DTArtifact 1.5s alternate infinite ease-in-out;
 }
 
+.PrettyCards_Artifact_Soul_DETERMINATION {
+	filter: drop-shadow(0.1em 0.08em 0.05em red);
+}
+
+.PrettyCards_Artifact_Soul_BRAVERY {
+	filter: drop-shadow(0.1em 0.08em 0.05em #fca500);
+}
+
+.PrettyCards_Artifact_Soul_JUSTICE {
+	filter: drop-shadow(0.1em 0.08em 0.05em #FFFF00);
+}
+
+.PrettyCards_Artifact_Soul_KINDNESS {
+	filter: drop-shadow(0.1em 0.08em 0.05em #00c000);
+}
+
+.PrettyCards_Artifact_Soul_PATIENCE {
+	filter: drop-shadow(0.1em 0.08em 0.05em #41fcff);
+}
+
+.PrettyCards_Artifact_Soul_INTEGRITY {
+	filter: drop-shadow(0.1em 0.08em 0.05em #0064ff);
+}
+
+.PrettyCards_Artifact_Soul_PERSEVERANCE {
+	filter: drop-shadow(0.1em 0.08em 0.05em #d535d9);
+}
+
+.PrettyCards_Artifact_Soul_MONSTER {
+	filter: drop-shadow(0.1em 0.08em 0.05em #ffffff);
+}
+
 .PrettyCards_Artifact {
 	width: 4em;
 	height: 4em;
