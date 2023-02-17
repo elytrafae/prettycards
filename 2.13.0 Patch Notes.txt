@@ -11,6 +11,8 @@
 - I feel like I forgot some things . . .
 
 TODO:
+- Change Breaking Skin fix according to announcement.
+- Add more Hourglass GIFs.
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)
 - Make Game End Screen look actually decent
