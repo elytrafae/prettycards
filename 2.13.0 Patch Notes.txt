@@ -13,6 +13,7 @@
 TODO:
 - Change Breaking Skin fix according to announcement.
 - Add more Hourglass GIFs.
+- "View all cards with tribes" filter button (discuss with Field)
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)
 - Make Game End Screen look actually decent
