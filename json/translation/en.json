@@ -85,8 +85,8 @@
     "pc-chat-ignore-mystery" : {
         "values" : [
             "Believe me, I tried doing this a lot . . .",
-			"You don't even like yourself, huh?",
-			"You will always find a way to harrass yourself anyway.",
+            "You don't even like yourself, huh?",
+            "You will always find a way to harrass yourself anyway.",
             "Ignoring your problems will not solve them.",
             "Ignoring your needs is a huge source of frustration."
         ]
@@ -97,8 +97,8 @@
     "pc-chat-pm-mystery" : {
         "values" : [
             "Your internal monologue should probably stay in your head.",
-			"A notebook would be a better place to keep your thoughts.",
-			"Messaging yourself would be pointless, wouldn't it?",
+            "A notebook would be a better place to keep your thoughts.",
+            "Messaging yourself would be pointless, wouldn't it?",
             "Desparate to talk to someone? I feel you."
         ]
     },
@@ -109,14 +109,14 @@
     "pc-chat-spectate-mystery-idle" : {
         "values" : [
             "You shouldn't spectate yourself, anyway.",
-			"Spectate others, not yourself."
+            "Spectate others, not yourself."
         ]
     },
     "pc-chat-spectate-mystery-match" : {
         "values" : [
             "You shouldn't spectate yourself.",
-			"You should pay attention to the game instead of looking at yourself.",
-			"Don't just sit by looking at yourself! Play the game!"
+            "You should pay attention to the game instead of looking at yourself.",
+            "Don't just sit by looking at yourself! Play the game!"
         ]
     },
     "pc-chat-challenge-create" : "Challenge!",
@@ -240,7 +240,7 @@
     "card-407-cyan" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}.",
     "card-407-red" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_RED:0|Do nothing.}}",
     "card-407-both" : "{{KW:MAGIC}}: Trigger the {{KW:TURBO}} effect of a monster in your hand. {{PC_SWITCH_CYAN:1|Send it to your deck and draw a card}}.",
-	"card-477" : {
+    "card-477" : {
         "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Catch a {{CARD:115|1}} or a {{CARD:451|1}}. {{KW:DUST}}: Release it to your hand with -1 {{COST}}.",
         "value" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Catch a {{PC_SWITCH_CYAN:1|{{CARD:115|1}}}} or a {{PC_SWITCH_RED:1|{{CARD:451|1}}}}. {{KW:DUST}}: Release it to your hand with -1 {{COST}}."
     },
