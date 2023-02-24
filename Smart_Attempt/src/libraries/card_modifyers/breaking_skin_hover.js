@@ -7,29 +7,15 @@ import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscri
 ExecuteWhen("PrettyCards:onPageLoad", function () {
 	if (settings.breaking_skin_fix.value()) {
 		window.$("head").append(`<style>
-			.card.breaking-skin:hover .cardName {
-				z-index: 7;
-			}
-			
-			.card.breaking-skin:hover .cardCost {
-				z-index: 7;
-			}
-			
-			.card.breaking-skin:hover .cardDesc {
-				z-index: 7;
-			}
-			
-			.card.breaking-skin:hover .cardATK {
-				z-index: 7;
-			}
-			
-			.card.breaking-skin:hover .cardHP {
-				z-index: 7;
+			.card.breaking-skin:hover .cardImage {
+				z-index: 4;
 			}
 		</style>`);
+	}
 
-		if (settings.breaking_skin_stats_fix.value()) {
-			window.$("head").append(`
+	if (settings.breaking_skin_stats_fix.value()) {
+		window.$("head").append(`
+			<style>
 				.card.breaking-skin .cardStatus {
 					z-index: 5;
 				}
@@ -38,16 +24,11 @@ ExecuteWhen("PrettyCards:onPageLoad", function () {
 					z-index: 5;
 				}
 
-				.card.breaking-skin:hover .cardStatus {
-					z-index: 8;
+				.card.breaking-skin .PrettyCards_CardBottomLeftInfo {
+					z-index: 5;
 				}
-
-				.card.breaking-skin:hover .cardTribes {
-					z-index: 8;
-				}
-			`);
-		}
-		
+			</style>
+		`);
 	}
 	
 	// Let's be real. This just improves things.

@@ -85,7 +85,7 @@ addSetting({
 addSetting({
 	'key': 'breaking_skin_stats_fix',
 	'name': 'Breaking Skin Stats Fix', // Name in settings page
-	'note': 'Hides stats and tribes behind breaking skin to not break immersion. Hovering over a card will show them. Only works if Breaking Skin Fix is active.',
+	'note': 'Hides stats and tribes behind breaking skin to not break immersion. Hovering over a card will show them. Only works in non-Game settings if Breaking Skin Fix is also enabled.',
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': true, // default value

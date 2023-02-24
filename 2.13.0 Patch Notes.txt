@@ -1,17 +1,9 @@
 
 
-- Fixed multiple visual inconsistencies between the Single Artifact Display and the Multiple Artifact Display.
-- Added Artifacts with Souls (for DT artifacts, at least for now) - Displayed in the Rarity String 
-- Added Artifacts with Owners (for DT artifacts) - Displayed in the Rarity String
-- Added Artifact Backgrounds (for DT artifacts)
-- Artifact names in list views are now resized to not overflow.
-- Show/Hide hands to spectating friends became less abiguous.
-- Frisk's Wording now includes a helper for their artifacts. Gerson's line, however, was deleted. So long, first artifact generator!
-
-- I feel like I forgot some things . . .
+- Changed Breaking Skin Fix and Breaking according to announcement.
 
 TODO:
-- Change Breaking Skin fix according to announcement.
+- Make setting to disable Switch highlights in card descriptions.
 - Add more Hourglass GIFs.
 - "View all cards with tribes" filter button (discuss with Field)
 - Add minimalistic version of deck system (?)
