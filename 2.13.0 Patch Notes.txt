@@ -4,9 +4,10 @@
 - Solved critical issue in adding a friend through PrettyCards causing my alt account to be added instead of the intended target.
 - Snoelle and The Heroine theme fix due to their (relatively) recent balance changes (DIDN'T HAVE TIME TO FULLY TEST, BUT IT SHOULDN'T BREAK THE WHOLE SCRIPT, EVEN IF I MESSED UP THE MATH)
 - Disabling Switch Highlights will now (visually) disable the colors on the cards as well!
+- Added UC:O card icon
 
 TODO:
-- UC:O card icon
+
 - Add more Hourglass GIFs.
 - "View all cards with tribes" filter button (discuss with Field)
 - Add minimalistic version of deck system (?)
