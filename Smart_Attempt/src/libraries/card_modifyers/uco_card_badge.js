@@ -18,7 +18,7 @@ PrettyCards_plugin.events.on("appendCard()", function(data) {
         console.log(data, idList);
         if (idList.has(card.fixedId || card.id)) {
             utility.addCustomSimpleTextIconToCard2(ele, 
-                "https://media.discordapp.net/attachments/588807965151330322/1082027812904517653/New_Piskel-1.png_27.png?width=256&height=256",
+                "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardPowers/uco.png",
                 "UC:O Card", 
                 "This is an Undercards Original card, which means that this is in no way canon to Undertale or Deltarune. Think of this as Undercards' own, original AU.",
                 "Undercards Original"
