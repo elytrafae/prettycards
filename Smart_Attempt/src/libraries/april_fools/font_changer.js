@@ -26,7 +26,8 @@ var aprilFontSetting = addSetting({
     'options': ["RANDOM", "OFF", defaultAprilFoolsFontName].concat(aprilFoolsFontNames),
     'refresh': true, // true to add note "Will require you to refresh the page"
     'default': (utility.getSeasonNumber() < 81 || utility.getSeasonMonth() != 3) ? "OFF" : "RANDOM", // default value
-    'hidden': utility.getSeasonNumber() < 81
+    'hidden': utility.getSeasonNumber() < 81,
+    'category': "april"
 });
 
 if (aprilFontSetting.value() != "OFF") {
@@ -48,7 +49,7 @@ if (aprilFontSetting.value() != "OFF") {
     
     //document.body.style.fontFamily = "Arial";
     changeFont();
-    plugin.events.on("PrettyCards:onPageLoad", changeFont);
+    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", changeFont);
 }
 
 function changeFont() {

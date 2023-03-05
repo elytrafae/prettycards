@@ -1,16 +1,19 @@
 
 
-- Changed Breaking Skin Fix and Breaking according to announcement.
+- Adjusted Breaking Skin Fix according to announcement.
+- Solved critical issue in adding a friend through PrettyCards causing my alt account to be added instead of the intended target.
+- Snoelle and The Heroine theme fix due to their (relatively) recent balance changes (DIDN'T HAVE TIME TO FULLY TEST, BUT IT SHOULDN'T BREAK THE WHOLE SCRIPT, EVEN IF I MESSED UP THE MATH)
+- Disabling Switch Highlights will now (visually) disable the colors on the cards as well!
 
 TODO:
-- Make setting to disable Switch highlights in card descriptions.
+- UC:O card icon
 - Add more Hourglass GIFs.
 - "View all cards with tribes" filter button (discuss with Field)
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)
 - Make Game End Screen look actually decent
-- Resource Packs
 
+- Resource Packs
 - Animation Upgrades
 - Multiple Settings for HD Settings
 - Remake Lobby Games

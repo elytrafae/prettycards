@@ -196,7 +196,7 @@ class Utility {
 	
 	// This. Code. Is. ANCIENT. What is up with this, Onu!?!?
 	addFriend(username, callback) {
-		$.post("Friends", {username: "Jazmin290", addFriend: "Add friend"}, callback);
+		$.post("Friends", {username: username, addFriend: "Add friend"}, callback);
 	}
 	
 	appendCardFriendship(card, container, level, currentXp, maxXp) { // Why must you torture me . . . ?

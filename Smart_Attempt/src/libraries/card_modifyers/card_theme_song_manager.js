@@ -5,8 +5,10 @@ import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 const FLOWEY_BASE_ATK = 4;
-const HEROINE_BASE_ATK = 8;
-const HEROINE_ATK_STEP = 2;
+const HEROINE_BASE_ATK = 7;
+const HEROINE_ATK_STEP = 1;
+const SNOELLE_BASE_ATK = 2;
+const SNOELLE_ATK_STEP = 1;
 
 addSetting({
 	'key': 'multi_theme_songs',
@@ -110,7 +112,7 @@ function hardCodedCardInteractions() {
             if (card.originalAttack < 1) {
                 return null;
             }
-            return this.replacements[card.originalAttack - 1];
+            return this.replacements[(card.originalAttack - SNOELLE_BASE_ATK)/SNOELLE_ATK_STEP];
         }
     }
 
