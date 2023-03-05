@@ -36,6 +36,7 @@ import {} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 import {} from "/src/libraries/card_modifyers/hd_card_skins.js";
 import {} from "/src/libraries/card_modifyers/hd_game_animations.js";
 import {} from "/src/libraries/card_modifyers/friendship_info_on_cards.js";
+import {} from "/src/libraries/card_modifyers/uco_card_badge.js";
 import {} from "/src/libraries/card_modifyers/card_skin_shop_additions.js";
 
 import {} from "/src/libraries/translation/translation_manager.js";

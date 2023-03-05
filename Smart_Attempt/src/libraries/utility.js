@@ -424,6 +424,10 @@ class Utility {
 	}
 
 	addCustomSimpleTextIconToCard(cardElement, iconSrc, text, windowTitle = window.$.i18n('dialog-information')) {
+		this.addCustomSimpleTextIconToCard2(cardElement, iconSrc, text, text, windowTitle);
+	}
+
+	addCustomSimpleTextIconToCard2(cardElement, iconSrc, text, windowText = text, windowTitle = window.$.i18n('dialog-information')) {
 		var icon = document.createElement("IMG");
 		icon.src = iconSrc;
 		cardElement.find(".PrettyCards_CardBottomLeftInfo").append(icon);
@@ -444,7 +448,7 @@ class Utility {
 			e.stopPropagation();
 			BootstrapDialog.show({
 				title: windowTitle,
-				message: text,
+				message: windowText,
 				buttons: [{
 					label: window.$.i18n('dialog-ok'),
 					cssClass: 'btn-primary',
