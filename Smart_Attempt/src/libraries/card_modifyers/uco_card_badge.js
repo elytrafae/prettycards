@@ -17,12 +17,14 @@ PrettyCards_plugin.events.on("appendCard()", function(data) {
     PrettyCards_plugin.events.on("PrettyCards:ucoCardListFetched", function(idList) {
         console.log(data, idList);
         if (idList.has(card.fixedId || card.id)) {
-            utility.addCustomSimpleTextIconToCard2(ele, 
-                "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardPowers/uco.png",
-                "UC:O Card", 
-                "This is an Undercards Original card, which means that this is in no way canon to Undertale or Deltarune. Think of this as Undercards' own, original AU.",
-                "Undercards Original"
-            );
+            PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
+                utility.addCustomSimpleTextIconToCard2(ele, 
+                    "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardPowers/uco.png",
+                    window.$.i18n("pc-cardbadge-uco-short"), 
+                    window.$.i18n("pc-cardbadge-uco-desc"),
+                    window.$.i18n("pc-cardbadge-uco-title")
+                );
+            });
         }
     })
 })

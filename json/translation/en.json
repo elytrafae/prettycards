@@ -364,7 +364,10 @@
     "pc-skintype-normal" : "Normal",
     "pc-skintype-full" : "Full",
     "pc-skintype-breaking" : "Breaking",
-    "pc-skintype-any" : "Any"
-    
+    "pc-skintype-any" : "Any",
+
+    "pc-cardbadge-uco-short": "UC:O Card",
+    "pc-cardbadge-uco-title": "Undercards Original",
+    "pc-cardbadge-uco-desc": "This is an Undercards Original card, which means that this is in no way canon to Undertale or Deltarune. Think of this as Undercards' own, original AU."
 }
 
