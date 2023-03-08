@@ -114,6 +114,17 @@ addSetting({
     'category': "controversial"
 });
 
+addSetting({
+    'key': 'my_own_custom_cards',
+    'name': 'My Own Custom Cards', // Name in settings page
+    'note': 'A Hidden setting that lets me see my own custom card sets, while not letting others see it.',
+    'type': 'boolean',
+    'disabled': true,
+    'hidden': true,
+    'refresh': true, // true to add note "Will require you to refresh the page"
+    'default': false, // default value
+});
+
 //console.log(settings);
 
 export {PrettyCards_plugin, settings, prettycards, addSetting};

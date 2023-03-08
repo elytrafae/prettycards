@@ -4,6 +4,8 @@ import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.j
 
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
+	if (!settings.my_own_custom_cards.value()) {return;}
+
     var c = window.prettycards.newCollection({
 		name: "Update Tester Sheet",
 		author: "CMD_God",
