@@ -1,6 +1,6 @@
 
 import { rarityIconsHTML } from "../rarity_icons";
-import { prettycards, PrettyCards_plugin } from "../underscript_checker";
+import { prettycards, PrettyCards_plugin, settings } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
@@ -126,8 +126,12 @@ function switchPartHelper(nodes, className) {
     if (isNaN(opacity)) {
         opacity = 1;
     }
+    var classPart = `class="PrettyCards_SwitchHighlight_${className}" `;
+    if (!settings.switch_highlight.value()) {
+        classPart = "";
+    }
     var text = nodes[1];
-    return `<span class="PrettyCards_SwitchHighlight_${className}" style="opacity:${opacity}; ${opacity <= 0 ? "display:none;" : ""}">${text}</span>`;
+    return `<span ${classPart}style="opacity:${opacity}; ${opacity <= 0 ? "display:none;" : ""}">${text}</span>`;
 }
 
 function registerCustomExtensions() {

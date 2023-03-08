@@ -36,6 +36,7 @@ import {} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
 import {} from "/src/libraries/card_modifyers/hd_card_skins.js";
 import {} from "/src/libraries/card_modifyers/hd_game_animations.js";
 import {} from "/src/libraries/card_modifyers/friendship_info_on_cards.js";
+import {} from "/src/libraries/card_modifyers/uco_card_badge.js";
 import {} from "/src/libraries/card_modifyers/card_skin_shop_additions.js";
 
 import {} from "/src/libraries/translation/translation_manager.js";
@@ -58,6 +59,9 @@ import {} from "/src/libraries/footer_remover.js";
 import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
 
 // import {} from "/src/libraries/external_api_integration/youtube_player.js";
+
+import {} from "/src/libraries/april_fools/font_changer.js";
+import {} from "/src/libraries/april_fools/uglycards_translation.js";
 
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";

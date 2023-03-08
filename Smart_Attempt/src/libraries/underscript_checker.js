@@ -37,7 +37,8 @@ var categories = {
     "controversial" : "<span class='red'>Controversial</span>",
     "background" : "Background",
     "packs" : "Packs",
-    "artifact" : "Artifact Related"
+    "artifact" : "Artifact Related",
+    "april": "<span class='ranbowText'>April Fools</span>"
 }
 
 function addSetting(data) {
