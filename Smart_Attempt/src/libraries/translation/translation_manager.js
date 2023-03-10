@@ -12,7 +12,6 @@ class TranslationManager {
         this.allValuesLists = {};
         this.languageSources = [];
         this.previewTypes = [];
-        this.addLanguageSource("PrettyCards:Core", (lan) => `https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`);
         this.addPreviewType("default", /.*/, (str) => {return `<span>${str}</span>`}, 0);
     }
 
@@ -77,6 +76,18 @@ class TranslationManager {
 }
 
 var translationManager = new TranslationManager();
+
+// STUFF RELATED TO APRIL FOOLS
+
+PrettyCards_plugin.events.on("PrettyCards:registerTranslationSources", function() {
+    if (aprilTranslationSetting.value() && utility.getSeasonMonth() == 3) {
+        translationFileSource = (lan) => `https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/april/${lan}.json`;
+        window.prettycards.translationManager.addLanguageSource("PrettyCards:UglyWording", translationFileSource);
+    }
+    this.addLanguageSource("PrettyCards:Core", (lan) => `https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/${lan}.json`);
+})
+
+///////////////////////////////
 
 var languagesToLoad = 0;
 

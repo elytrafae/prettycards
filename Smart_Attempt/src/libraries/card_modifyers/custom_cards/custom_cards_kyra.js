@@ -57,18 +57,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "EPIC"
     });
 
-	var tagled_wires2 = c.newCard({
-        name: "{{PLURAL:$1|Tangled Wires|Tangled Wires}}",
-		image: "Tangled_Wires",
-		cost: 5,
-		attack: 4,
-		hp: 3,
-		description: `{{KW:MAGIC}}: Catch an ally {{TRIBE:PLUG}} or {{TRIBE:AMALGAMATE}} and copy its stat buffs. {{KW:DUST}}: Release it with {{KW:SWITCH}}: this card's stat buffs or +2/+3.`,
-		tribes: ["PLUG", "AMALGAMATE"],
-		extension: "BASE",
-		rarity: "EPIC"
-    });
-
     var tembomination = c.newCard({
         name: "{{PLURAL:$1|Tembomination|Tembominations}}",
 		image: "Tembomination",
@@ -81,41 +69,40 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		rarity: "RARE"
     });
 
-	var tem_bomb1 = c.newCard({
-        name: "{{PLURAL:$1|Tem Bomb|Tem Bomb}}",
-		image: "Tem_Bomb",
-		cost: 3,
-		attack: 1,
-		hp: 4,
-        charge: true,
-		description: `{{KW:CHARGE}}. {{KW:TURN_START}}: Burn this to summon 3 {{CARD:50|2}}.`,
-		tribes: ["TEMMIE", "BOMB"],
+	var hoivemind = c.newCard({
+        name: "{{PLURAL:$1|Hoivemind|Hoiveminds}}",
+		image: "Hoivemind",
+		cost: 4,
+		attack: 4,
+		hp: 2,
+		haste: true,
+		description: `{{KW:HASTE}}. {{KW:MAGIC}}: {{KW:SWITCH}}: Draw a {{TRIBE:TEMMIE}} or an {{TRIBE:AMALGAMATE}}. {{KW:SYNERGY}}: If this is not {{KW:GENERATED}}, add two copies of it to your deck.`,
+		tribes: ["TEMMIE", "AMALGAMATE"],
+		extension: "BASE",
+		rarity: "COMMON"
+    });
+
+    var ice_cave = c.newCard({
+        name: "{{PLURAL:$1|Ice Cave|Ice Cave}}",
+		image: "Ice_Cave",
+		cost: 7,
+		attack: 4,
+		hp: 6,
+		description: `{{KW:MAGIC}} and {{KW:TURN_START}}: Summon an {{CARD:9}}.`,
+		tribes: [],
 		extension: "BASE",
 		rarity: "EPIC"
     });
 
-	var tem_bomb2 = c.newCard({
-        name: "{{PLURAL:$1|Tem Bomb|Tem Bomb}}",
-		image: "Tem_Bomb",
-		cost: 3,
-		attack: 1,
-		hp: 3,
-        charge: true,
-		description: `{{KW:CHARGE}}. After this attacked an enemy monster and survived, burn this and {{KW:DELAY}}: Add 2 1-{{cost}} {{CARD:356|2}} to your hand.`,
-		tribes: ["TEMMIE", "BOMB"],
-		extension: "BASE",
-		rarity: "EPIC"
-    });
-
-    var tem_bomb3 = c.newCard({
-        name: "{{PLURAL:$1|Tem Bomb|Tem Bomb}}",
-		image: "Tem_Bomb",
-		cost: 3,
-		attack: 1,
-		hp: 3,
-        charge: true,
-		description: `{{KW:CHARGE}}. After this attacked an enemy monster and survived, burn this and {{KW:DELAY}}: Add 2 0-{{cost}} {{CARD:356|2}} to your hand.`,
-		tribes: ["TEMMIE", "BOMB"],
+	var ice_cave2 = c.newCard({
+        name: "{{PLURAL:$1|Ice Cave|Ice Cave}}",
+		image: "Ice_Cave",
+		cost: 6,
+		attack: 2,
+		hp: 5,
+		candy: true,
+		description: `{{KW:CANDY}}. {{KW:MAGIC}} and {{KW:TURN_START}}: Summon an {{CARD:9}}.`,
+		tribes: [],
 		extension: "BASE",
 		rarity: "EPIC"
     });

@@ -26,7 +26,6 @@ if (ucoBadgeSetting.value()) {
         var card = data.card;
         var ele = data.element;
         PrettyCards_plugin.events.on("PrettyCards:ucoCardListFetched", function(idList) {
-            console.log(data, idList);
             if (idList.has(card.fixedId || card.id)) {
                 PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
                     utility.addCustomSimpleTextIconToCard2(ele, 
