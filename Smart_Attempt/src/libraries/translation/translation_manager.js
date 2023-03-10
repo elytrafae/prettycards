@@ -90,7 +90,8 @@ var aprilTranslationSetting = addSetting({
 });
 
 PrettyCards_plugin.events.on("PrettyCards:registerTranslationSources", function() {
-    if (aprilTranslationSetting.value()){ //&& utility.getSeasonMonth() == 3) {
+    console.log("MONTH", utility.getSeasonNumber());
+    if (aprilTranslationSetting.value()){ // && utility.getSeasonMonth() == 3) {
         var translationFileSource = (lan) => `https://raw.githubusercontent.com/CMD-God/prettycards/master/json/translation/april/${lan}.json`;
         translationManager.addLanguageSource("PrettyCards:UglyWording", translationFileSource);
     }
