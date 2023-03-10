@@ -61,7 +61,6 @@ import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
 // import {} from "/src/libraries/external_api_integration/youtube_player.js";
 
 import {} from "/src/libraries/april_fools/font_changer.js";
-import {} from "/src/libraries/april_fools/uglycards_translation.js";
 
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";
