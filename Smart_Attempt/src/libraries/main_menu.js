@@ -7,12 +7,12 @@ var credits = `
 	<span style="font-size: 2em;">General</span>
 	<span>Uses Underscript's API.</span>
 	<span>Feildmaster has been a MASSIVE help over the years and I cannot thank him enough! ^^</span>
-	<span>Also huge thanks to the <span class="Translator">Translator</span> and <span class="Artist">Artist</span> teams for helping me out with certain features!</span>
+	<span>Also huge thanks to the <span class="Translator">Translator</span> and <span class="Artist">Artist</span> teams for helping me out with certain features, including our team of English Translators!</span>
 
 	<span style="font-size: 2em;">Card Theme Songs</span>
 	<span>MysteryHD is the one who makes the audio files, I just paste them in and run a script. <img style="height:3em;" src="images/emotes/Hue.png"></span>
 	<span>I could not have pulled this off without the help of HeavenlyFlower, who suggested a genious solution for non-Game pages.</span>
-	
+
 	<span style="font-size: 2em;">Custom Cards</span>
 	<span>Doki Doki Literature Club by <a href="http://teamsalvato.com/" target="_blank">Team Salvato</a></span>
 	<span>Chibi MC sprite by <a href="https://www.deviantart.com/gyletotherescue/art/DDLC-MC-Chibi-Sprites-711310032" target="_blank">GyleToTheRescue on Deviantart</a></span>

@@ -85,7 +85,8 @@ var aprilTranslationSetting = addSetting({
     'type': 'select',
     'refresh': true, // true to add note "Will require you to refresh the page"
     'default': true,//(utility.getSeasonNumber() >= 81 && utility.getSeasonMonth() == 3), // default value
-    'hidden': utility.getSeasonNumber() < 81,
+    'note': "This will ONLY work during the month of April, and may be removed in the future!",
+    'hidden': function() {return utility.getSeasonNumber() < 81},
     'category': "april"
 });
 
