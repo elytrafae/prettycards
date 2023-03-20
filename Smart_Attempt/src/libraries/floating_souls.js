@@ -1,7 +1,7 @@
 
-function createFloatingSoul(image, containerClass, leftClass, rightClass) {
+function createFloatingSoul(image, containerClass, leftClass, rightClass, isBig = falsse) {
     var container = document.createElement("DIV");
-    container.className = "PrettyCards_SplitSoul_Container " + containerClass;
+    container.className = "PrettyCards_SplitSoul_Container " + (isBig ? "PrettyCards_SplitSoul_Big " : "") + containerClass;
 
     var left = document.createElement("DIV");
     left.className = "PrettyCards_SplitSoul_Left";

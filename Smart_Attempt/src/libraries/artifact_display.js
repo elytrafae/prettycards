@@ -60,6 +60,7 @@ class ArtifactDisplay {
 			return artifact.rarity;
 		}
 		if (!this.GetArtifactById(artifact.id)) {this.artifacts.push(artifact);}
+		artifact.isImageBig = false;
 		if (artifact.unavailable) {
 			artifact.rarity = "TOKEN";
 		} else {
@@ -167,6 +168,7 @@ ArtifactDisplay.hardcodedAdditionalData = [
 	{id:  3, rarity: "BASE"},
 	{id:  4, rarity: "BASE"},
 	{id:  6, rarity: "BASE"},
+	{id: 45, isImageBig: true},
 	{id: 25, rarity: "DETERMINATION", ownerId: 28 , backgroundClass: "PrettyCards_ArtBG_Genocide"},  		// Genocide
 	{id: 34, rarity: "DETERMINATION", ownerId: 505, backgroundClass: "PrettyCards_ArtBG_DarkFountain"}, 	// Outbreak/Dark Fountain
 	{id: 43, rarity: "DETERMINATION", ownerId: 688, backgroundClass: "PrettyCards_ArtBG_UltimateFusion"}, 	// Ultimate Fusion

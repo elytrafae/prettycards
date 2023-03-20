@@ -146,6 +146,10 @@
 	position: absolute;
 }
 
+.PrettyCards_SplitSoul_Container.PrettyCards_SplitSoul_Big img {
+	height: 75%;
+}
+
 .PrettyCards_SplitSoul_Left img {
 	left: 100%;
 }
