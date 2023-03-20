@@ -94,6 +94,16 @@ addSetting({
 });
 
 addSetting({
+    'key': 'hd_artifacts',
+    'name': 'HD Artifact Images', // Name in settings page
+    'note': 'Most places will now display Artifacts in HD. (still a WIP, feedback is appreciated)',
+    'type': 'boolean',
+    'refresh': true, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+    'category': "artifact"
+});
+
+addSetting({
     'key': 'override_decks',
     'name': 'Override Deck System', // Name in settings page
     'note': 'Overrides the current deck system locally with a more flexible one. This inludes the Decks page, Play page, Custom page and the Custom Challenge system.',
