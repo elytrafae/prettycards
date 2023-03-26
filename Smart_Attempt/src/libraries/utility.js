@@ -1,4 +1,4 @@
-import { prettycards, PrettyCards_plugin } from "./underscript_checker";
+import { prettycards, PrettyCards_plugin, settings } from "./underscript_checker";
 
 var collectionPlace = document.getElementById("collection"); // This is for a workaround with how friendship cards are added.
 if (!collectionPlace) {
@@ -272,6 +272,9 @@ class Utility {
 	getArtifactImageLink(image) {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
 			return `/images/aprilFools/artifacts/${image}.png`;
+		}
+		if (settings.hd_artifacts.value()) {
+			return `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/HDArtifacts/${image}.png`;
 		}
 		return `/images/artifacts/${image}.png`;
 	}

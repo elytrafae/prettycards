@@ -21,7 +21,7 @@ class FancyListDisplay {
 			var row = window.$(`<div class="PrettyCards_ArtifactListRow"><div class="PrettyCards_ArtifactListBackground ${bgClass}"></div></div>`);
 			//var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
 			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"></div>`);
-			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "");
+			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "", data.isImageBig);
 			circle.append(floatingSoul);
 			row.append(circle);
 			
@@ -74,7 +74,7 @@ class FancyDisplay {
 		
 		// <img class="PrettyCards_ArtifactImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img>
 		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"></div>`);
-		this.circle.append(createFloatingSoul(data.image, data.image_class, "", ""));
+		this.circle.append(createFloatingSoul(data.image, data.image_class, "", "", data.isImageBig));
 		this.box.append(this.circle);
 		
 		this.name = window.$(`<div class="PrettyCards_ArtifactDisplayName ${data.text_class}">${data.name}</div>`);
@@ -175,7 +175,8 @@ class FancyDisplay {
 			disabled: artifact.disabled,
 			counter: artifact.counter,
 			shopInfo: shopInfo,
-			backgroundClass: artifact.backgroundClass
+			backgroundClass: artifact.backgroundClass,
+			isImageBig: artifact.isImageBig
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewArtifact()", {artifact: artifact, helper: helper});
@@ -224,7 +225,8 @@ class FancyDisplay {
 			image: image_src,
 			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id,
 			note: (customObj ? window.$.i18n(customObj.note || "") : ""),
-			size: BootstrapDialog.SIZE_LARGE
+			size: BootstrapDialog.SIZE_LARGE,
+			isImageBig: false
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewSoul()", {id: id, helper: helper});
@@ -281,7 +283,8 @@ class FancyDisplay {
 					image_class: rarityData.imgClass,
 					disabled: isDisabled, // || artifact.disabled,
 					counter: artifactCounter || artifact.counter,
-					backgroundClass: artifact.backgroundClass
+					backgroundClass: artifact.backgroundClass,
+					isImageBig: artifact.isImageBig,
 				});
 			});
 			var helper = new FancyListDisplay(datas, title);
