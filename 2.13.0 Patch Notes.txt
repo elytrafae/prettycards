@@ -6,6 +6,7 @@
 - Disabling Switch Highlights will now (visually) disable the colors on the cards as well!
 - Added UC:O card icon
 - Added HD artifacts (partially) (too bad April Fools images take priority lol)
+- Added a system for disabling theme song override for certain cards temporarily (Not a setting, this is for me and the team. Everyone will have the same themes disabled no matter what)
 - QWRkZWQgZW50aXJlIHN5c3RlbSBmb3Igc21hbGwgdmlzdWFsIGVhc3RlciBlZ2cgZm9yIE9ORSBhcnRpZmFjdCwgRnJlZWRvbSAob3IgY3VzdG9tIG9uZXMgd2l0aCB0aGUgaXNJbWFnZUJpZyBwcm9wZXJ0eSk=
 - QXByaWwgRm9vbHMgV29yZGluZyBhbmQgRm9udCBjaGFuZ2VzLiBUaGUgZm9udCBzZXR0aW5nIHdpbGwgc3RheSBldmVuIGFmdGVyIGFwcmlsIGZvb2xzIGN1eiB3aHkgbm90Lg==
 
