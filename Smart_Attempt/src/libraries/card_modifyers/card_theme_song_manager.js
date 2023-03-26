@@ -109,7 +109,6 @@ function returnDisabledNameList() {
 ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady PrettyCards:TranslationExtReady", function() { // Has to wait for translations because season number for disabled check.
     var disabledNameList = returnDisabledNameList();
     for (var key in baseThemeSongData) {
-        console.log(key, disabledNameList, baseThemeSongData);
         if (key == "_Disabled_Themes" || disabledNameList.includes(key)) {
             continue;
         }
