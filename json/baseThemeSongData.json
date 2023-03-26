@@ -1,8 +1,10 @@
 {
-    "_Disabled_Themes": {
-        "season_nr": 81,
-        "cards": ["Kris", "Spamton", "Spamton NEO"]
-    },
+    "_Disabled_Themes": [
+        {
+            "season_nr": 80,
+            "cards": ["Kris", "Spamton", "Spamton NEO"]
+        }
+    ],
 	"ACT Button": 1,
     "Alphys": 3,
     "Angel of Death": 2,
