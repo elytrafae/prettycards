@@ -1,4 +1,8 @@
 {
+    "_Disabled_Themes": {
+        "season_nr": 81,
+        "cards": ["Kris", "Spamton", "Spamton NEO"]
+    },
 	"ACT Button": 1,
     "Alphys": 3,
     "Angel of Death": 2,
@@ -86,5 +90,6 @@
     "Too Many Dogs": 1,
     "Toriel": 3,
     "Ultimathrash": 3,
-    "Undyne": 3
+    "Undyne": 3,
+    "Wheelvil": 3
 }
