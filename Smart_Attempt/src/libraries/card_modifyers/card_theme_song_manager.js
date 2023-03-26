@@ -88,8 +88,31 @@ function registerCard(card) {
     return s;
 }
 
-ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady", function() {
+/**
+ * Fetches the list of disabled cards in terms of theme songs for the currect season.
+ * The list is empty if the season has no disabked cards.
+ * @returns {String[]}
+ */
+function returnDisabledNameList() {
+    if (!baseThemeSongData["_Disabled_Themes"]) {
+        return [];
+    }
+    for (var i=0; i < baseThemeSongData["_Disabled_Themes"].length; i++) {
+        var data = baseThemeSongData["_Disabled_Themes"][i];
+        if (data.season_nr == utility.getSeasonNumber()) {
+            return data.cards;
+        }
+    }
+    return [];
+}
+
+ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady PrettyCards:TranslationExtReady", function() { // Has to wait for translations because season number for disabled check.
+    var disabledNameList = returnDisabledNameList();
     for (var key in baseThemeSongData) {
+        console.log(key, disabledNameList, baseThemeSongData);
+        if (key == "_Disabled_Themes" || disabledNameList.includes(key)) {
+            continue;
+        }
         var card = window.getCardWithName(key);
         if (card) {
             var s = registerCard(card);
