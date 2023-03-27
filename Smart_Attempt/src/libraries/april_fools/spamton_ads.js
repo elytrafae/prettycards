@@ -43,7 +43,7 @@ var ads = [
         centerText: true
     },
     {
-        text: "Looking for a little fun with [[{{CARD:723|1}}]] in your area~?",
+        text: "Looking for a little fun with \\[\\[{{CARD:723|1}}\\]\\] in your area~?",
         bgImage: "https://t4.ftcdn.net/jpg/03/22/89/73/360_F_322897394_X2JQen9I6ECDSsQZoESOJ87dfebaGaAe.jpg",
         bgSize: "cover",
         bgPosition: "center",
@@ -52,14 +52,24 @@ var ads = [
         textSize: 2,
         link: "https://i.redd.it/6ztypom2wy661.jpg",
         centerText: true
+    },
+    {
+        text: "Club music for any<br>&gt[[MAN, WOMAN OR CHILD]]&lt!!",
+        bgImage: "https://www.bettaeventhire.com.au/wp-content/uploads/2019/10/shutterstock_139152893.jpg",
+        bgSize: "cover",
+        bgPosition: "center",
+        color: "cyan",
+        picSrc: "images/cards/Dancer_Mettaton.png",
+        textSize: 2,
+        link: "https://www.youtube.com/watch?v=x_QgxpTeKzM",
     }
 ]
 
 console.log("SPAMTON G SPAMTON!")
 PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
     console.log(data);
-    //var ad = utility.getRandomFromArray(ads);
-    var ad = ads[ads.length-1];
+    var ad = utility.getRandomFromArray(ads);
+    //var ad = ads[ads.length-1];
     var adContainer = document.createElement("DIV");
 
     var bgText = `background-color: ${ad.bgColor || "black"};`;
@@ -67,7 +77,7 @@ PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
         bgText = `background-image: url(${ad.bgImage}); background-size: ${ad.bgSize || "auto"}; background-position: ${ad.bgPosition || "unset"}`;
     }
 
-    var finalText = window.$.i18n(ad.text.replaceAll("[", "\\[").replaceAll("]", "\\]"));
+    var finalText = window.$.i18n(ad.text);//.replaceAll("[", "\\[").replaceAll("]", "\\]"));
 
     adContainer.style = `${bgText};border: 5px solid white;border-width: 0 5px;margin: 0;padding: 5px; display:flex; user-select: none; justify-content: space-between;`;
     adContainer.innerHTML = `<p style="font-size: ${ad.textSize || 2}em; color: ${ad.color || white}">${finalText}</p>${ad.picSrc ? `<img src="${ad.picSrc}">` : ""}`;
