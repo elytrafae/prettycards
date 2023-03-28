@@ -62,6 +62,16 @@ var ads = [
         picSrc: "images/cards/Dancer_Mettaton.png",
         textSize: 2,
         link: "https://www.youtube.com/watch?v=x_QgxpTeKzM",
+    },
+    {
+        text: "Hey   EVERY   !!!IT's ME!! Wan to be [[Number 1 Rated Salesman1997]]? Click HERE for the [[Specil Deal]]",
+        bgImage: "https://media.tenor.com/FOgfl0x7RiUAAAAC/spamton-dancing.gif",
+        bgSize: "contain",
+        bgPosition: "unset",
+        color: "green",
+        picSrc: "images/cards/Spamton.png",
+        textSize: 1.5,
+        link: "https://cdn.discordapp.com/attachments/1089991272174993519/1089996859998736414/k55m8nkfsra81.png",
     }
 ]
 
@@ -77,7 +87,7 @@ PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
         bgText = `background-image: url(${ad.bgImage}); background-size: ${ad.bgSize || "auto"}; background-position: ${ad.bgPosition || "unset"}`;
     }
 
-    var finalText = window.$.i18n(ad.text);//.replaceAll("[", "\\[").replaceAll("]", "\\]"));
+    var finalText = window.$.i18n(ad.text.replaceAll("   ", " &nbsp "));//.replaceAll("[", "\\[").replaceAll("]", "\\]"));
 
     adContainer.style = `${bgText};border: 5px solid white;border-width: 0 5px;margin: 0;padding: 5px; display:flex; user-select: none; justify-content: space-between;`;
     adContainer.innerHTML = `<p style="font-size: ${ad.textSize || 2}em; color: ${ad.color || white}">${finalText}</p>${ad.picSrc ? `<img src="${ad.picSrc}">` : ""}`;
