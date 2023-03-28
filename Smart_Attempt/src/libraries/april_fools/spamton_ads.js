@@ -77,7 +77,10 @@ var ads = [
 
 console.log("SPAMTON G SPAMTON!")
 PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
-    console.log(data);
+    if (data.$modalContent.find(".mulligan")[0]) {
+        return;
+    }
+
     var ad = utility.getRandomFromArray(ads);
     //var ad = ads[ads.length-1];
     var adContainer = document.createElement("DIV");
