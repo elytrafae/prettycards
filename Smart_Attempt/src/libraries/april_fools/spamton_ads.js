@@ -72,6 +72,16 @@ var ads = [
         picSrc: "images/cards/Spamton.png",
         textSize: 1.5,
         link: "https://cdn.discordapp.com/attachments/1089991272174993519/1089996859998736414/k55m8nkfsra81.png",
+    },
+    {
+        text: "are YOU [[All Alone On A Late Night?]]????? Want more [[PRIME ENTERTAINMENT!]] CLICK HERE!!!",
+        bgImage: "https://media.discordapp.net/attachments/1089991272174993519/1090257788938240131/Sanest_libteg.jpg",
+        bgSize: "contain",
+        bgPosition: "unset",
+        color: "green",
+        picSrc: "images/cards/Sand_Dog.png",
+        textSize: 1.75,
+        link: "https://youtu.be/4X2y5_k2zEw",
     }
 ]
 
@@ -81,8 +91,8 @@ PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
         return;
     }
 
-    var ad = utility.getRandomFromArray(ads);
-    //var ad = ads[ads.length-1];
+    //var ad = utility.getRandomFromArray(ads);
+    var ad = ads[ads.length-1];
     var adContainer = document.createElement("DIV");
 
     var bgText = `background-color: ${ad.bgColor || "black"};`;
