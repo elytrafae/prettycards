@@ -85,14 +85,28 @@ var ads = [
     }
 ]
 
-console.log("SPAMTON G SPAMTON!")
+var adSetting = addSetting({
+	'key': 'spamton_ads',
+	'name': 'Enable Spamton Ads', // Name in settings page
+    'note': '[[NumberOneRatedSetting1997]]',
+	'type': 'select',
+	'refresh': false, // true to add note "Will require you to refresh the page"
+    'options': ["OFF", "SEASONAL", "ON"],
+	'default': "SEASONAL", // default value
+    'category': "april"
+});
+
 PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
-    if (data.$modalContent.find(".mulligan")[0]) {
+    var isSettingOff = adSetting.value() == "OFF";
+    if (adSetting.value() == "SEASONAL") {
+        isSettingOff = utility.getSeasonMonth() != 3;
+    } 
+    if (isSettingOff || data.$modalContent.find(".mulligan")[0]) {
         return;
     }
 
-    //var ad = utility.getRandomFromArray(ads);
-    var ad = ads[ads.length-1];
+    var ad = utility.getRandomFromArray(ads);
+    //var ad = ads[ads.length-1];
     var adContainer = document.createElement("DIV");
 
     var bgText = `background-color: ${ad.bgColor || "black"};`;
