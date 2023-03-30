@@ -82,7 +82,7 @@ var translationManager = new TranslationManager();
 var aprilTranslationSetting = addSetting({
     'key': 'april_fools_wording',
     'name': 'Uglycards Wording', // Name in settings page
-    'type': 'select',
+    'type': 'boolean',
     'refresh': true, // true to add note "Will require you to refresh the page"
     'default': true,//(utility.getSeasonNumber() >= 81 && utility.getSeasonMonth() == 3), // default value
     'note': "This will ONLY work during the month of April, and may be removed in the future!",

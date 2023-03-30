@@ -5,7 +5,7 @@ var cardHoverSetting = addSetting({
     'name': 'Interactive card Hover Helper', // Name in settings page
     'note': `Hovering over a card's name to see what it is is not moved over to an interractive tippy hover, which lets you click on things on that card as well. Useful for nested TOKEN references.`,
     'type': 'boolean',
-    'refresh': true, // true to add note "Will require you to refresh the page"
+    'refresh': false, // true to add note "Will require you to refresh the page"
     'default': true, // default value
     'category': "card"
 });
@@ -19,7 +19,7 @@ function overrideCardHover() {
     }
     overwritten = true;
     oldFn = window.displayCardHelp;
-    
+
     window.displayCardHelp = function(element, cardId, shiny = false) {
         if (!cardHoverSetting.value()) {
             return oldFn(...arguments);
