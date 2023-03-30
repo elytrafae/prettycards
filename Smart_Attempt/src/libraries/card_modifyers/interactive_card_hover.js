@@ -42,10 +42,10 @@ function overrideCardHover() {
             arrow: false,
             animation: false,
             interactive: true,
-            placement: "auto",
+            placement: "left-end",
             appendTo: window.document.body,
             boundary: 'window',
-            getReferenceClientRect: window.document.body.getBoundingClientRect
+            getReferenceClientRect: window.document.body.getBoundingClientRect,
         });
     }
 }

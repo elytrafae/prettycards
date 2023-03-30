@@ -39,11 +39,12 @@ if (shinyHoverFix.value()) {
         })
     })
 
-    PrettyCards_plugin.events.on("pre:func:appendCard", function(data) {
-        console.log("BEFORE CARD IS APPENDED", data);
+    PrettyCards_plugin.events.on("pre:func:appendCard", function(card) {
+        isShiny = card.shiny; 
+        console.log("isShiny UPDATED:" , isShiny);
     })
 
     PrettyCards_plugin.events.on("func:appendCard", function(data) {
-        console.log("AFTER CARD IS APPENDED", data);
+        isShiny = false;
     })
 }
