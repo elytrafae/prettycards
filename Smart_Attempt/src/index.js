@@ -38,6 +38,7 @@ import {} from "/src/libraries/card_modifyers/hd_game_animations.js";
 import {} from "/src/libraries/card_modifyers/friendship_info_on_cards.js";
 import {} from "/src/libraries/card_modifyers/uco_card_badge.js";
 import {} from "/src/libraries/card_modifyers/card_skin_shop_additions.js";
+import {} from "/src/libraries/card_modifyers/interactive_card_hover.js";
 
 import {} from "/src/libraries/translation/translation_manager.js";
 import {} from "/src/libraries/visual_effects/zoom.js";
