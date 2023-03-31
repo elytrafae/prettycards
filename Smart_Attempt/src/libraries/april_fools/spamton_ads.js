@@ -23,9 +23,9 @@ var ads = [
         link: "https://media.discordapp.net/attachments/1089991272174993519/1089991301069545492/image.png"
     },
     {
-        text: "Do you desire a [[delicious, half-priced]] meal of [[MOSS]]? Book your [[reservation]] now!",
-        bgImage: "https://cdn.britannica.com/07/140407-050-30CD8CA1/Broom-moss.jpg",
-        bgSize: "cover",
+        text: "Does your neighbors grass look [delicious and natural]? You can have the same [delicious outdoor floor], JUST BUY NOW!",
+        bgImage: "https://cdn.britannica.com/22/215522-050-8315BB78/green-grass-close-up.jpg",
+        bgSize: "contain",
         bgPosition: "center",
         color: "purple",
         textSize: 2,
@@ -93,7 +93,8 @@ var adSetting = addSetting({
 	'refresh': false, // true to add note "Will require you to refresh the page"
     'options': ["OFF", "SEASONAL", "ON"],
 	'default': "SEASONAL", // default value
-    'category': "april"
+    'category': "april",
+    'hidden': function() {return utility.getSeasonNumber() < 81},
 });
 
 PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
