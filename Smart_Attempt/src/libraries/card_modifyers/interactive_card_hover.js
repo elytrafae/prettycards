@@ -6,7 +6,8 @@ var cardHoverSetting = addSetting({
     'note': `Hovering over a card's name to see what it is is not moved over to an interractive tippy hover, which lets you click on things on that card as well. Useful for nested TOKEN references.`,
     'type': 'boolean',
     'refresh': false, // true to add note "Will require you to refresh the page"
-    'default': true, // default value
+    'default': false,//true, // default value
+    'hidden': true,
     'category': "card"
 });
 

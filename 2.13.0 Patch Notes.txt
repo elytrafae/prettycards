@@ -7,11 +7,13 @@
 - Added UC:O card icon
 - Added HD artifacts (partially) (too bad April Fools images take priority lol)
 - Added a system for disabling theme song override for certain cards temporarily (Not a setting, this is for me and the team. Everyone will have the same themes disabled no matter what)
+- T2ggbm8hIFNwYW10b24gaGFzIGZpbGxlZCB0aGUgZW50aXJlIHNpdGUgd2l0aCBBZHMhIChPaywgaW9uIGFjdHVhbGl0eSwgaXQncyBqdXN0IG1vc3QgQm9vdHN0cmFwIERpYWxvZ3Mp
 - QWRkZWQgZW50aXJlIHN5c3RlbSBmb3Igc21hbGwgdmlzdWFsIGVhc3RlciBlZ2cgZm9yIE9ORSBhcnRpZmFjdCwgRnJlZWRvbSAob3IgY3VzdG9tIG9uZXMgd2l0aCB0aGUgaXNJbWFnZUJpZyBwcm9wZXJ0eSk=
 - QXByaWwgRm9vbHMgV29yZGluZyBhbmQgRm9udCBjaGFuZ2VzLiBUaGUgZm9udCBzZXR0aW5nIHdpbGwgc3RheSBldmVuIGFmdGVyIGFwcmlsIGZvb2xzIGN1eiB3aHkgbm90Lg==
 
 TODO:
 - Add more Hourglass GIFs.
+- Crafting cards in the Decks page
 - "View all cards with tribes" filter button (discuss with Field)
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)

@@ -264,14 +264,14 @@ class Utility {
 
 	getCardImageLink(image) {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
-			return `/aprilfools/cards/${image}.png`;
+			return `/afi/cards/${image}.png`;
 		}
 		return `/images/cards/${image}.png`;
 	}
 
 	getArtifactImageLink(image) {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
-			return `/aprilfools/artifacts/${image}.png`;
+			return `/afi/artifacts/${image}.png`;
 		}
 		if (settings.hd_artifacts.value()) {
 			return `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/HDArtifacts/${image}.png`;
