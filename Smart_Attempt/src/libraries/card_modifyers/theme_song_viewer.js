@@ -2,6 +2,7 @@
 // This library adds a button onto cards outside of games so you can listen to their theme songs.
 
 import {PrettyCards_plugin, settings , addSetting, prettycards} from "/src/libraries/underscript_checker.js";
+import {utility} from "/src/libraries/utility.js";
 
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
 import {getThemeSongSettingByCardId} from "/src/libraries/card_modifyers/card_theme_song_manager.js";
@@ -54,7 +55,7 @@ function createSimpleButton(card) {
 		if (card.id in cardExceptions) {
 			_SRC = cardExceptions[card.id];
 		} else {
-			_SRC = "/musics/cards/" + card.name.split(' ').join('_') + ".ogg";
+			_SRC = utility.getCardJingleLink(card.name);
 		}
 	}
 	const SRC = _SRC;

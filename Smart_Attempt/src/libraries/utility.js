@@ -279,6 +279,14 @@ class Utility {
 		return `/images/artifacts/${image}.png`;
 	}
 
+	getCardJingleLink(card_name = "") {
+		card_name = card_name.replaceAll(" ", "_");
+		if (this.getSeasonMonth() == 3) { // Is it an April Season?
+			return `/afm/cards/${card_name}.ogg`;
+		}
+		return `/musics/cards/${card_name}.ogg`;
+	}
+
 	preloadAudio(url) {
 		return new Promise((resolve, reject) => {
 			var audio = new Audio();

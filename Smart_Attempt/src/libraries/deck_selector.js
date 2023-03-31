@@ -40,6 +40,28 @@ const onu_skin = {
 	unavailable: false
 }
 
+const PLACEHOLDER_CARD_DATA = {
+    "id": -22,
+    "fixedId": -22,
+    "typeCard": 1,
+    "name": "PLACEHOLDER",
+    "image": "Big_Mine",
+    "baseImage": "Big_Mine",
+    "cost": 0,
+    "rarity": "TOKEN",
+    "originalCost": 0,
+    "shiny": false,
+    "quantity": 1,
+    "extension": "BASE",
+    "tribes": [],
+    "selectCards": [],
+    "typeSkin": 0,
+    "playedTurn": 0,
+    "ownerId": 0,
+    "loop": 0,
+    "program": 0
+}
+
 function GetAllDecks() {
 	var decks = [];
 	DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
@@ -431,7 +453,7 @@ class SavedDeckSelector {
 	}
 	
 	appendCardDeck($parent, deck, ignoreBase) {
-		var card = window.appendCard(window.allCards[0], $parent);
+		var card = window.appendCard(PLACEHOLDER_CARD_DATA, $parent);
 		card.addClass("PrettyCards_DeckCard");
 		var cardNameDiv$ = card.find(".cardName div");
 		card.find(".cardName").css("width", "160px");
