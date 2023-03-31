@@ -40,9 +40,9 @@ if (settingVal == "SEASONAL") {
     performFontLogic();
 }
 
+var chosenFont;
 function performFontLogic() {
     if (settingVal != "OFF") {
-        var chosenFont;
         if (settingVal == "RANDOM") {
             chosenFont = defaultAprilFoolsFont;
             var nonArialChance = underscript.utils.rand(10, 1, true);
