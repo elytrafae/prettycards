@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        PrettyCards
-// @version     2.13.2
+// @version     2.13.4
 // @author      CMD_God
 // @description Make (parts of) Undercards look fabulous!
 // @homepage    https://github.com/CMD-God/prettycards
@@ -482,7 +482,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"createFloatingSoul\": () => (/* binding */ createFloatingSoul)\n/* harmony export */ });\n\r\nfunction createFloatingSoul(image, containerClass, leftClass, rightClass, isBig = falsse) {\r\n    var container = document.createElement(\"DIV\");\r\n    container.className = \"PrettyCards_SplitSoul_Container \" + (isBig ? \"PrettyCards_SplitSoul_Big \" : \"\") + containerClass;\r\n\r\n    var left = document.createElement(\"DIV\");\r\n    left.className = \"PrettyCards_SplitSoul_Left\";\r\n    left.innerHTML = `<img src=\"${image}\" class=\"${leftClass}\">`;\r\n    container.appendChild(left);\r\n\r\n    var right = document.createElement(\"DIV\");\r\n    right.className = \"PrettyCards_SplitSoul_Right\";\r\n    right.innerHTML = `<img src=\"${image}\" class=\"${rightClass}\">`;\r\n    container.appendChild(right);\r\n\r\n    return container;\r\n}\r\n\r\n\n\n//# sourceURL=webpack://prettycards/./src/libraries/floating_souls.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"createFloatingSoul\": () => (/* binding */ createFloatingSoul)\n/* harmony export */ });\n\r\nfunction createFloatingSoul(image, containerClass, leftClass, rightClass, isBig = false) {\r\n    var container = document.createElement(\"DIV\");\r\n    container.className = \"PrettyCards_SplitSoul_Container \" + (isBig ? \"PrettyCards_SplitSoul_Big \" : \"\") + containerClass;\r\n\r\n    var left = document.createElement(\"DIV\");\r\n    left.className = \"PrettyCards_SplitSoul_Left\";\r\n    left.innerHTML = `<img src=\"${image}\" class=\"${leftClass}\">`;\r\n    container.appendChild(left);\r\n\r\n    var right = document.createElement(\"DIV\");\r\n    right.className = \"PrettyCards_SplitSoul_Right\";\r\n    right.innerHTML = `<img src=\"${image}\" class=\"${rightClass}\">`;\r\n    container.appendChild(right);\r\n\r\n    return container;\r\n}\r\n\r\n\n\n//# sourceURL=webpack://prettycards/./src/libraries/floating_souls.js?");
 
 /***/ }),
 

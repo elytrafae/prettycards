@@ -12,9 +12,9 @@
 - QXByaWwgRm9vbHMgV29yZGluZyBhbmQgRm9udCBjaGFuZ2VzLiBUaGUgZm9udCBzZXR0aW5nIHdpbGwgc3RheSBldmVuIGFmdGVyIGFwcmlsIGZvb2xzIGN1eiB3aHkgbm90Lg==
 
 TODO:
+- Interactive Card Helper (finish this)
 - Add more Hourglass GIFs.
 - Crafting cards in the Decks page
-- "View all cards with tribes" filter button (discuss with Field)
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)
 - Make Game End Screen look actually decent

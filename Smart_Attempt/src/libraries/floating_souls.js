@@ -1,5 +1,5 @@
 
-function createFloatingSoul(image, containerClass, leftClass, rightClass, isBig = falsse) {
+function createFloatingSoul(image, containerClass, leftClass, rightClass, isBig = false) {
     var container = document.createElement("DIV");
     container.className = "PrettyCards_SplitSoul_Container " + (isBig ? "PrettyCards_SplitSoul_Big " : "") + containerClass;
 
