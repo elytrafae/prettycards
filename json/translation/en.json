@@ -254,6 +254,13 @@
     "card-646-cyan" : "{{KW:MAGIC}}: Gain {{PC_SWITCH_CYAN:1|+2 {{ATK}}}}. If this is in the center of the board, swap its stats.",
     "card-646-red" : "{{KW:MAGIC}}: Gain {{PC_SWITCH_RED:1|+2 {{HP}}}}. If this is in the center of the board, swap its stats.",
     "card-646-both" : "{{KW:MAGIC}}: Gain {{PC_SWITCH_CYAN:1|+2 {{ATK}}}} and {{PC_SWITCH_RED:1|+2 {{HP}}}}. If this is in the center of the board, swap its stats.",
+    "card-419": {
+        "ifEqual" : "{{KW:MAGIC}}: {{KW:SWITCH}}: Silence all enemy monsters or kill all enemy monsters with 2 {{HP}} or less.",
+        "value": "{{KW:MAGIC}}: {{KW:SWITCH}}: {{PC_SWITCH_CYAN:1|Silence all enemy monsters}} or {{PC_SWITCH_RED:1|kill all enemy monsters with 2 {{HP}} or less}}."
+    },
+    "card-419-cyan": "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Silence all enemy monsters}}.",
+    "card-419-red": "{{KW:MAGIC}}: {{PC_SWITCH_RED:1|Kill all enemy monsters with 2 {{HP}} or less}}.",
+    "card-419-both": "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Silence all enemy monsters}} and {{PC_SWITCH_RED:1|kill all enemy monsters with 2 {{HP}} or less}}.",
     "pc-hub-savedeck" : "Save Deck!",
     "pc-hub-deckby" : "by $1",
     "pc-hub-upload-success" : "Deck Uploaded Successfully!",
