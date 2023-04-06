@@ -9,8 +9,7 @@ var shinyHoverFix = addSetting({
     'note': `Hovering over a card's name to see what it is SHOULD now have proper shiny status based on the parent card.`,
     'type': 'boolean',
     'refresh': true, // true to add note "Will require you to refresh the page"
-    'default': false,//true, // default value
-    'hidden': true,
+    'default': true,//true, // default value
     'category': "card"
 });
 
