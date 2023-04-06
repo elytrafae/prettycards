@@ -66,6 +66,8 @@ import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
 import {} from "/src/libraries/april_fools/font_changer.js";
 import {} from "/src/libraries/april_fools/spamton_ads.js";
 
+import {} from "/src/libraries/shops/crafting_in_decks.js";
+
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";
 import {InitPlay} from "/src/page_specific/play.js";

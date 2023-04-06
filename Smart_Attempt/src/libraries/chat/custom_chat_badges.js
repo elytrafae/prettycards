@@ -11,7 +11,7 @@ function processMessage(message) {
     var user = message.user;
     user.groups.push(PC_CONTRIB_BADGE);
     //user.mainGroup = PC_CONTRIB_BADGE;
-    console.log(message);
+    //console.log(message);
 }
 
 function processChatHistoryEvent(data) {

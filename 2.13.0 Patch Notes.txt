@@ -12,6 +12,7 @@
 - QXByaWwgRm9vbHMgV29yZGluZyBhbmQgRm9udCBjaGFuZ2VzLiBUaGUgZm9udCBzZXR0aW5nIHdpbGwgc3RheSBldmVuIGFmdGVyIGFwcmlsIGZvb2xzIGN1eiB3aHkgbm90Lg==
 
 TODO:
+- appendCard() -> func:appendCard (CRITICAL!)
 - Interactive Card Helper (finish this)
 - Add more Hourglass GIFs.
 - Crafting cards in the Decks page
