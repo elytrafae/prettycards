@@ -1,5 +1,6 @@
 
 import { PrettyCards_plugin, addSetting } from "../underscript_checker";
+import { utility } from "../utility";
 
 var craftingInDecksSetting = addSetting({
     'key': 'crafting_in_decks',
@@ -13,11 +14,12 @@ var craftingInDecksSetting = addSetting({
 if (craftingInDecksSetting.value() && window.underscript.onPage("Decks")) {
     GrabDust();
     AppendCollection();
+    SetUpCardEvent();
 }
 
 var dust = 0;
-var collection = [];
-var collectionToAppend = []; // The cards to append to the Deck collection from the Crafting collection that can be crafted, but have none of.
+var collection = []; // Optimized collection data.
+var newCollection = []; // Basically Crafting Collection except TOKENS and non-owned DTs
 var uncraftableRarities = ["TOKEN", "DETERMINATION"]; // BASE is not here because shinies can be crafted
 
 function GrabDust() {
@@ -42,35 +44,43 @@ function GrabCraftingCollection() { // I shall play by Onu's rules, IG.
     })
 }
 
+function CanCraftMore(card) {
+    var rarity = card.rarity;
+    return (!uncraftableRarities.includes(rarity)) && card.quantity < underscript.utils.rarity.max(rarity) && dust >= underscript.utils.rarity.cost(rarity, card.shiny);
+}
+
 // Trims the collection to only contain minimal data, and only for actually craftable cards!
 function TrimCollection(collection) {
-    var newCollection = [];
+    var trimmedCollection = [];
     for (var i=0; i < collection.length; i++) {
         var card = collection[i];
         var rarity = card.rarity;
-        if ((!uncraftableRarities.includes(rarity)) && card.quantity < underscript.utils.rarity.max(rarity) && dust >= underscript.utils.rarity.cost(rarity, card.shiny)) {
-            newCollection.push({
+        if (CanCraftMore(card)) {
+            trimmedCollection.push({
                 shiny: card.shiny,
                 quantity: card.quantity,
                 id: card.id,
                 rarity: rarity
             });
-            if (card.quantity <= 0) {
-                collectionToAppend.push(card);
-            }
+        }
+        if ((!uncraftableRarities.includes(rarity)) || (card.quantity > 0)) {
+            newCollection.push(card);
         }
     }
     PrettyCards_plugin.events.emit.singleton("PrettyCards:DeckCollectionAppendReady");
-    return newCollection;
+    return trimmedCollection;
 }
 
 function AppendCollection() {
     PrettyCards_plugin.events.on("Deck:Loaded", () => {
         PrettyCards_plugin.events.on("PrettyCards:DeckCollectionAppendReady", () => {
+            window.collection = newCollection;
+            /*
             for (var i=0; i < collectionToAppend.length; i++) {
                 window.collection.push(collectionToAppend[i]);
-            }
+            }*/
 
+            /*
             window.collection.sort((a, b) => {
                 if (a.cost == b.cost) {
                     if (window.$.i18n(`card-${a.id}-name`) === window.$.i18n(`card-${b.id}-name`)) {
@@ -79,7 +89,7 @@ function AppendCollection() {
                     return compare(window.$.i18n(`card-${a.id}-name`), window.$.i18n(`card-${b.id}-name`));
                 }
                 return a.cost - b.cost;
-            })
+            })*/
 
             // Copied code from Onu to actually update the soul collections.
             for (var deckSoul in window.decks) {
@@ -96,3 +106,24 @@ function AppendCollection() {
     })
 }
 
+// Maybe I should somehow make this work with binary search, but the optional presence of shiny/nonshiny cards mess it up . . .
+function SearchInCraftableCollection(id, shiny) {
+    for (var i=0; i < collection.length; i++) {
+        var card = collection[i];
+        if (card.id === id && card.shiny === shiny) {
+            return card;
+        }
+    }
+    return null;
+}
+
+function SetUpCardEvent() {
+    PrettyCards_plugin.events.on("func:appendCardDeck", function(card, element) {
+        //console.log(card, element);
+        var carftData = SearchInCraftableCollection(card.id, card.shiny);
+        //if (carftData && CanCraftMore(carftData)) {
+        if (carftData) {
+            utility.addCustomSimpleTextIconToCard2(element, "/images/icons/dust.png", "Craft!", "Crafting UI here!", `Craft ${card.shiny ? "Shiny " : ""}${window.$.i18n(`card-name-${card.id}`)}`);
+        }
+    })
+}
