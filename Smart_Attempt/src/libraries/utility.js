@@ -443,7 +443,7 @@ class Utility {
 		icon.src = iconSrc;
 		cardElement.find(".PrettyCards_CardBottomLeftInfo").append(icon);
 
-		window.tippy(icon, {
+		var tooltip = window.tippy(icon, {
 			content: text,
 			allowHTML: true,
 			arrow: true,
@@ -469,6 +469,7 @@ class Utility {
 				}]
 			});
 		}
+		//return {icon: icon, tooltip: tooltip, }
 	}
 
 	getResizedFontSizeHorizontal(text, initSize, maxWidth, minSize = 10, step = 0.5) {

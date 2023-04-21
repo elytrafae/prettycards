@@ -51,23 +51,34 @@ function CanCraftMore(card) {
 
 // Trims the collection to only contain minimal data, and only for actually craftable cards!
 function TrimCollection(collection) {
+    var trimmedCollection = RefreshTrimmedCollection(collection, false);
+    collection.forEach((card) => {
+        if ((!uncraftableRarities.includes(card.rarity)) || (card.quantity > 0)) {
+            newCollection.push(card);
+        }
+    })
+    PrettyCards_plugin.events.emit.singleton("PrettyCards:DeckCollectionAppendReady");
+    return trimmedCollection;
+}
+
+// Collection can be both trimmed and untrimmed
+function RefreshTrimmedCollection(collection, alreadyTrimmed = true) {
     var trimmedCollection = [];
     for (var i=0; i < collection.length; i++) {
         var card = collection[i];
-        var rarity = card.rarity;
         if (CanCraftMore(card)) {
-            trimmedCollection.push({
-                shiny: card.shiny,
-                quantity: card.quantity,
-                id: card.id,
-                rarity: rarity
-            });
-        }
-        if ((!uncraftableRarities.includes(rarity)) || (card.quantity > 0)) {
-            newCollection.push(card);
+            if (alreadyTrimmed) {
+                trimmedCollection.push(card);
+            } else {
+                trimmedCollection.push({
+                    shiny: card.shiny,
+                    quantity: card.quantity,
+                    id: card.id,
+                    rarity: card.rarity
+                });
+            }
         }
     }
-    PrettyCards_plugin.events.emit.singleton("PrettyCards:DeckCollectionAppendReady");
     return trimmedCollection;
 }
 
@@ -75,28 +86,13 @@ function AppendCollection() {
     PrettyCards_plugin.events.on("Deck:Loaded", () => {
         PrettyCards_plugin.events.on("PrettyCards:DeckCollectionAppendReady", () => {
             window.collection = newCollection;
-            /*
-            for (var i=0; i < collectionToAppend.length; i++) {
-                window.collection.push(collectionToAppend[i]);
-            }*/
-
-            /*
-            window.collection.sort((a, b) => {
-                if (a.cost == b.cost) {
-                    if (window.$.i18n(`card-${a.id}-name`) === window.$.i18n(`card-${b.id}-name`)) {
-                        return a.shiny - b.shiny;
-                    }
-                    return compare(window.$.i18n(`card-${a.id}-name`), window.$.i18n(`card-${b.id}-name`));
-                }
-                return a.cost - b.cost;
-            })*/
 
             // Copied code from Onu to actually update the soul collections.
             for (var deckSoul in window.decks) {
                 window.deckCollections[deckSoul] = [];
                 for (var i = 0; i < window.collection.length; i++) {
                     var card = JSON.parse(JSON.stringify(window.collection[i]));
-                    if (card.typeCard === 0 || (card.hasOwnProperty('soul') && card.soul.name === deckSoul) || playground) {
+                    if (card.typeCard === 0 || (card.hasOwnProperty('soul') && card.soul.name === deckSoul) || window.playground) {
                         card.quantity = card.quantity - window.getQuantityInDeck(card, deckSoul);
                         window.deckCollections[deckSoul].push(card);
                     }
@@ -120,10 +116,128 @@ function SearchInCraftableCollection(id, shiny) {
 function SetUpCardEvent() {
     PrettyCards_plugin.events.on("func:appendCardDeck", function(card, element) {
         //console.log(card, element);
-        var carftData = SearchInCraftableCollection(card.id, card.shiny);
+        var craftData = SearchInCraftableCollection(card.id, card.shiny);
         //if (carftData && CanCraftMore(carftData)) {
-        if (carftData) {
-            utility.addCustomSimpleTextIconToCard2(element, "/images/icons/dust.png", "Craft!", "Crafting UI here!", `Craft ${card.shiny ? "Shiny " : ""}${window.$.i18n(`card-name-${card.id}`)}`);
+        if (craftData) {
+            var dustIcon = `<img style="height:1.6em;" src="/images/icons/dust.png">`;
+            var shinyText = craftData.shiny ? `<span class="rainbowText">S</span> ` : '';
+            var name = shinyText + $.i18n('card-name-' + card.id, 1);
+            var dust$ = window.$(`<p style="font-size: 1.2em;">${dustIcon} ${dust}</p>`);
+
+            var maxCraftCount = MaxCraftCount(craftData);
+            if (maxCraftCount <= 0) {
+                return;
+            }
+
+            var oneButton = window.$(`<button class="btn btn-success">Craft One (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)} ${dustIcon})</button>`);
+            var moreButton = window.$(`<button class="btn btn-success">Craft x${maxCraftCount} (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)*maxCraftCount} ${dustIcon})</button>`);
+            oneButton.click(() => {
+                oneButton.prop('disabled', true);
+                moreButton.prop('disabled', true);
+                CraftOne(craftData);
+            });
+
+            moreButton.click(() => {
+                oneButton.prop('disabled', true);
+                moreButton.prop('disabled', true);
+                CraftMore(craftData, maxCraftCount);
+            });
+
+            var craftingUI = $(`<div></div>`);
+            craftingUI.append(dust$);
+            craftingUI.append(oneButton);
+            craftingUI.append(moreButton);
+            
+            utility.addCustomSimpleTextIconToCard2(element, "/images/icons/dust.png", "Craft!", craftingUI, window.$.i18n('crafting-title', name));
         }
     })
 }
+
+function MaxCraftCount(craftData) {
+    var maxCraft = underscript.utils.rarity.max(craftData.rarity) - craftData.quantity;
+    if (maxCraft <= 0) {
+        return 0;
+    }
+    var cost = underscript.utils.rarity.cost(craftData.rarity, craftData.shiny);
+    if (dust < cost*maxCraft) {
+        maxCraft = Math.floor(dust/cost);
+    }
+    return maxCraft;
+}
+
+function CraftMore(craftData, count) {
+
+    SilentCraft(craftdata.id, craftData.shiny).then((data) => {
+        window.BootstrapDialog.closeAll();
+    }).catch((data) => {
+
+    })
+}
+
+function CraftOne(craftData) {
+    SilentCraft(craftdata.id, craftData.shiny).then((data) => {
+        window.BootstrapDialog.closeAll();
+        var shinyText = craftData.shiny ? `<span class="rainbowText">S</span> ` : '';
+        var name = shinyText + $.i18n('card-name-' + card.id, 1);
+        window.BootstrapDialog.show({
+            type: window.BootstrapDialog.TYPE_SUCCESS,
+            title: $.i18n('crafting-title', name),
+            message: $.i18n('crafting-craft-success', name),
+            buttons: [{
+                label: $.i18n('dialog-ok'),
+                cssClass: 'btn-primary',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
+    }).catch((data) => {
+        window.BootstrapDialog.closeAll();
+    })
+}
+
+function SilentCraft(id, shiny, updateCardList = true) {
+    // Am I just flexing the fact that I could do this manually, while using far less resources to generate the JSON text? Yes.
+    var JSON_data = `{"action": "craft", "idCard": ${id}, "isShiny": ${shiny ? "true" : "false"}}`;
+    return new Promise((resolve, reject) => {
+        window.$.post(`/CraftConfig`, JSON_data, function(data) {
+            if (data.status === "success") {
+                if (updateCardList) {
+                    dust = data.dust;
+
+                    // Update Optimized Craft List
+                    craftData.quantity++;
+                    collection = RefreshTrimmedCollection(collection);
+
+                    // Update Card List
+                    updateCardQuantities(craftData.id, craftData.shiny);
+                    window.applyFilters();
+                    window.showPage(window.currentPage);
+                }
+                resolve(data);
+            } else {
+                reject(data);
+            }
+        })
+    });
+}
+
+function updateCardQuantities(cardId, shiny, addAmount = 1) {
+    var allCollections = [window.collection];
+    for (var deck in deckCollections) { // wInDoW.dEcKcOlLeCtIoNs Is NoT iTeRaBlE
+        allCollections.push(deckCollections[deck]);
+    }
+    console.log(allCollections);
+    allCollections.forEach((coll) => {
+        for (var i=0; i < coll.length; i++) {
+            var card = coll[i];
+            if (card.id === cardId && card.shiny === shiny) {
+                console.log("Found card: ", card);
+                card.quantity += addAmount;
+                break;
+            }
+        }
+    })
+}
+
+
