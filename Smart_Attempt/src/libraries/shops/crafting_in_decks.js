@@ -130,7 +130,7 @@ function SetUpCardEvent() {
             }
 
             var oneButton = window.$(`<button class="btn btn-success">Craft One (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)} ${dustIcon})</button>`);
-            var moreButton = window.$(`<button class="btn btn-success">Craft x${maxCraftCount} (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)*maxCraftCount} ${dustIcon})</button>`);
+            var moreButton = window.$(`<button class="btn btn-success" style="margin-left: 0.6em">Craft x${maxCraftCount} (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)*maxCraftCount} ${dustIcon})</button>`);
             oneButton.click(() => {
                 oneButton.prop('disabled', true);
                 moreButton.prop('disabled', true);
@@ -146,7 +146,9 @@ function SetUpCardEvent() {
             var craftingUI = $(`<div></div>`);
             craftingUI.append(dust$);
             craftingUI.append(oneButton);
-            craftingUI.append(moreButton);
+            if (maxCraftCount > 1) {
+                craftingUI.append(moreButton);
+            }
             
             utility.addCustomSimpleTextIconToCard2(element, "/images/icons/dust.png", "Craft!", craftingUI, window.$.i18n('crafting-title', name));
         }
@@ -166,16 +168,71 @@ function MaxCraftCount(craftData) {
 }
 
 function CraftMore(craftData, count) {
+    var errors = [];
+    var countLeft = count;
+    var successes = 0;
+    for (var i=0; i < count; i++) {
+        SilentCraft(craftData.id, craftData.shiny).then((data) => {
+            successes++;
+            countLeft--;
+            dust = data.dust;
+            craftData.quantity++;
+            CraftMoreEnd(successes, errors, countLeft, craftData);
+        }).catch((data) => {
+            countLeft--;
+            errors.push(getErrorMessage(data));
+            CraftMoreEnd(successes, errors, countLeft, craftData);
+        })
+    }
+}
 
-    SilentCraft(craftdata.id, craftData.shiny).then((data) => {
-        window.BootstrapDialog.closeAll();
-    }).catch((data) => {
+function CraftMoreEnd(successes, errors = [], countLeft = 0, craftData) {
+    if (countLeft > 0) {
+        return;
+    }
 
-    })
+    collection = RefreshTrimmedCollection(collection);
+    updateCardQuantities(craftData.id, craftData.shiny, successes);
+    window.applyFilters();
+    window.showPage(window.currentPage);
+
+    window.BootstrapDialog.closeAll();
+    var total = successes + errors.length;
+    var type = successes > 0 ? window.BootstrapDialog.TYPE_SUCCESS : window.BootstrapDialog.TYPE_DANGER;
+    var shinyText = craftData.shiny ? `<span class="rainbowText">S</span> ` : '';
+    var name = shinyText + $.i18n('card-name-' + craftData.id, total);
+    var message = `<p style="font-size:1.2em" class="green">${successes}/${total} ${name} Crafted successfully!</p>`;
+    if (errors.length > 0) {
+        message += `<h2 class="red">Errors: </h2><ul>${"<li>" + errors.join("</li><li>") + "</li>"}</ul>`;
+    }
+    window.BootstrapDialog.show({
+        type: type,
+        title: "Multi Craft Results",
+        message: message,
+        buttons: [{
+            label: $.i18n('dialog-ok'),
+            cssClass: 'btn-primary',
+            action: function(dialog) {
+                dialog.close();
+            }
+        }]
+    });
 }
 
 function CraftOne(craftData) {
-    SilentCraft(craftdata.id, craftData.shiny).then((data) => {
+    SilentCraft(craftData.id, craftData.shiny).then((data) => {
+        dust = data.dust;
+
+        // Update Optimized Craft List
+        craftData.quantity++;
+        collection = RefreshTrimmedCollection(collection);
+
+        // Update Card List
+        updateCardQuantities(craftData.id, craftData.shiny);
+        window.applyFilters();
+        window.showPage(window.currentPage);
+
+        // Pop-up windows
         window.BootstrapDialog.closeAll();
         var shinyText = craftData.shiny ? `<span class="rainbowText">S</span> ` : '';
         var name = shinyText + $.i18n('card-name-' + card.id, 1);
@@ -193,27 +250,28 @@ function CraftOne(craftData) {
         });
     }).catch((data) => {
         window.BootstrapDialog.closeAll();
+        window.BootstrapDialog.show({
+            type: window.BootstrapDialog.TYPE_DANGER,
+            title: window.$.i18n('dialog-error'),
+            message: getErrorMessage(data),
+            buttons: [{
+                label: $.i18n('dialog-ok'),
+                cssClass: 'btn-primary',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
     })
 }
 
-function SilentCraft(id, shiny, updateCardList = true) {
+function SilentCraft(id, shiny) {
     // Am I just flexing the fact that I could do this manually, while using far less resources to generate the JSON text? Yes.
     var JSON_data = `{"action": "craft", "idCard": ${id}, "isShiny": ${shiny ? "true" : "false"}}`;
     return new Promise((resolve, reject) => {
         window.$.post(`/CraftConfig`, JSON_data, function(data) {
+            console.log(data);
             if (data.status === "success") {
-                if (updateCardList) {
-                    dust = data.dust;
-
-                    // Update Optimized Craft List
-                    craftData.quantity++;
-                    collection = RefreshTrimmedCollection(collection);
-
-                    // Update Card List
-                    updateCardQuantities(craftData.id, craftData.shiny);
-                    window.applyFilters();
-                    window.showPage(window.currentPage);
-                }
                 resolve(data);
             } else {
                 reject(data);
@@ -227,12 +285,10 @@ function updateCardQuantities(cardId, shiny, addAmount = 1) {
     for (var deck in deckCollections) { // wInDoW.dEcKcOlLeCtIoNs Is NoT iTeRaBlE
         allCollections.push(deckCollections[deck]);
     }
-    console.log(allCollections);
     allCollections.forEach((coll) => {
         for (var i=0; i < coll.length; i++) {
             var card = coll[i];
             if (card.id === cardId && card.shiny === shiny) {
-                console.log("Found card: ", card);
                 card.quantity += addAmount;
                 break;
             }
@@ -240,4 +296,9 @@ function updateCardQuantities(cardId, shiny, addAmount = 1) {
     })
 }
 
-
+function getErrorMessage(data) {
+    if (data.status === "errorMaintenance") {
+        return translateFromServerJson(data.message);
+    }
+    return "An unexpected error occurred!";
+}
