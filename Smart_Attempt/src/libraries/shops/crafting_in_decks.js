@@ -1,5 +1,5 @@
 
-import { PrettyCards_plugin, addSetting } from "../underscript_checker";
+import { PrettyCards_plugin, addSetting, prettycards } from "../underscript_checker";
 import { utility } from "../utility";
 
 var craftingInDecksSetting = addSetting({
@@ -79,6 +79,7 @@ function RefreshTrimmedCollection(collection, alreadyTrimmed = true) {
             }
         }
     }
+    console.log("TRIMMED COLLECTION", trimmedCollection);
     return trimmedCollection;
 }
 
@@ -103,7 +104,7 @@ function AppendCollection() {
 }
 
 // Maybe I should somehow make this work with binary search, but the optional presence of shiny/nonshiny cards mess it up . . .
-function SearchInCraftableCollection(id, shiny) {
+function SearchInCraftableCollection(id, shiny = false) {
     for (var i=0; i < collection.length; i++) {
         var card = collection[i];
         if (card.id === id && card.shiny === shiny) {
@@ -113,11 +114,16 @@ function SearchInCraftableCollection(id, shiny) {
     return null;
 }
 
+prettycards.test_SearchInCraftableCollection = SearchInCraftableCollection;
+
 function SetUpCardEvent() {
     PrettyCards_plugin.events.on("func:appendCardDeck", function(card, element) {
         //console.log(card, element);
         var craftData = SearchInCraftableCollection(card.id, card.shiny);
         //if (carftData && CanCraftMore(carftData)) {
+        if ((!craftData) && card.quantity < 3) {
+            console.log("M A U S   D E T E C T E D", card, craftData);
+        }
         if (craftData) {
             var dustIcon = `<img style="height:1.6em;" src="/images/icons/dust.png">`;
             var shinyText = craftData.shiny ? `<span class="rainbowText">S</span> ` : '';
@@ -179,6 +185,7 @@ function CraftMore(craftData, count) {
             craftData.quantity++;
             CraftMoreEnd(successes, errors, countLeft, craftData);
         }).catch((data) => {
+            if (data instanceof Error) { console.error(data); return; }
             countLeft--;
             errors.push(getErrorMessage(data));
             CraftMoreEnd(successes, errors, countLeft, craftData);
@@ -235,7 +242,7 @@ function CraftOne(craftData) {
         // Pop-up windows
         window.BootstrapDialog.closeAll();
         var shinyText = craftData.shiny ? `<span class="rainbowText">S</span> ` : '';
-        var name = shinyText + $.i18n('card-name-' + card.id, 1);
+        var name = shinyText + $.i18n('card-name-' + craftData.id, 1);
         window.BootstrapDialog.show({
             type: window.BootstrapDialog.TYPE_SUCCESS,
             title: $.i18n('crafting-title', name),
@@ -249,6 +256,7 @@ function CraftOne(craftData) {
             }]
         });
     }).catch((data) => {
+        if (data instanceof Error) { console.error(data); return; }
         window.BootstrapDialog.closeAll();
         window.BootstrapDialog.show({
             type: window.BootstrapDialog.TYPE_DANGER,
@@ -270,7 +278,6 @@ function SilentCraft(id, shiny) {
     var JSON_data = `{"action": "craft", "idCard": ${id}, "isShiny": ${shiny ? "true" : "false"}}`;
     return new Promise((resolve, reject) => {
         window.$.post(`/CraftConfig`, JSON_data, function(data) {
-            console.log(data);
             if (data.status === "success") {
                 resolve(data);
             } else {
