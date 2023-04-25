@@ -40,9 +40,7 @@ if (settings.hd_card_skins.value()) {
         PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", {skins: data});
     })
     
-    PrettyCards_plugin.events.on("appendCard()", function(data) {
-        var card = data.card;
-        var element = data.element;
+    PrettyCards_plugin.events.on("func:appendCard", function(card, element) {
         PrettyCards_plugin.events.on("PrettyCards:hdSkinsFetched", function() { // Race conditions bad
             if (hd_card_skins.includes(card.image)) {
                 element.find(".cardImage").css("backgroundImage", `url("${returnHDImageIfThereIs(card.image)}")`);

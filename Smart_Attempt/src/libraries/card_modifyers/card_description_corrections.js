@@ -97,23 +97,5 @@ if (settings.card_number_colors.value() || settings.non_dt_inconsistency.value()
 			}
 		})
 	});
-
-	/*
-	PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
-		var html$ = data.element;
-		var card = data.card;
-		
-		var text = $.i18n("card-" + (card.fixedId || card.id));
-		
-		if (settings.card_number_colors.value()) {
-			text = text.replaceAll(card_numbers_regex, RegexProcessor);
-		}
-		if (settings.non_dt_inconsistency.value()) {
-			text = text.replaceAll(non_dt_regex, NonDTCorrector);
-		}
-		html$.find(".cardDesc div").html(text);
-		//console.log(html$.find(".cardDesc div"));
-	});
-	*/
 	
 }

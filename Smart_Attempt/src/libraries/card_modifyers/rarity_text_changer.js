@@ -51,7 +51,7 @@ var mode = "TEXT";
         });
     })
 
-    PrettyCards_plugin.events.on('pre:appendCard() pre:viewArtifacts() pre:viewArtifact() pre:viewSoul()', (card) => {
+    PrettyCards_plugin.events.on('pre:func:appendCard pre:viewArtifacts() pre:viewArtifact() pre:viewSoul()', (card) => {
         if (window.underscript.onPage("CustomCards")) {mode = "TEXT"; return;} // Feature currently disabled on the Custom Cards page due to technical issues.
         const value = settings.rarity_text_change.value();
         //console.log("Setting Value: ", value);
@@ -63,7 +63,7 @@ var mode = "TEXT";
         }
         //console.log("Translating something . . .", mode);
     });
-    PrettyCards_plugin.events.on('appendCard() viewArtifacts() viewArtifact() viewSoul()', () => {
+    PrettyCards_plugin.events.on('func:appendCard viewArtifacts() viewArtifact() viewSoul()', () => {
         mode = "TEXT";
     });
 //}

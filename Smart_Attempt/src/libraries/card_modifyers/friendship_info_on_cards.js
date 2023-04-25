@@ -2,12 +2,7 @@ import { addSetting, PrettyCards_plugin, settings } from "../underscript_checker
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
-var lastAppendedCard;
 var friendshipData;
-
-PrettyCards_plugin.events.on("appendCard()", function(data) {
-    lastAppendedCard = data.element;
-})
 
 PrettyCards_plugin.events.on("func:appendCardDeck func:appendCardCraft", function(card, element) {
     //console.log("Feild's events work!", data1, data2);
@@ -48,31 +43,6 @@ PrettyCards_plugin.events.on("func:appendCardDeck func:appendCardCraft", functio
         });
     });
 })
-
-/*
-function overrideWithEvent() {
-    var oldFunc = window.appendCardDeck;
-    window.appendCardDeck = function(card) {
-        var ret = oldFunc(card);
-        PrettyCards_plugin.events.emit("appendCardDeck()", {card: card, element: lastAppendedCard});
-        return ret; // Just in case Onu changes the function.
-    }
-    var oldFuncCraft = window.appendCardCraft;
-    window.appendCardCraft = function(card) {
-        var ret = oldFuncCraft(card);
-        PrettyCards_plugin.events.emit("appendCardCraft()", {card: card, element: lastAppendedCard});
-        return ret; // Just in case Onu changes the function.
-    }
-}
-
-if (window.appendCardDeck) {
-    overrideWithEvent();
-} else {
-    PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-        overrideWithEvent();
-    })
-}
-*/
 
 addSetting({
 	'key': 'friendship_info_on_cards',

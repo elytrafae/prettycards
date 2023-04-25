@@ -126,36 +126,11 @@ function gameSetup() {
         }
     }
 
-    PrettyCards_plugin.events.on("appendCard()", function(data) {
-        var card = data.card;
-		var element = data.element;
+    PrettyCards_plugin.events.on("func:appendCard", function(card, element) {
         var id = card.fixedId || card.id;
         //console.log("ASSIGN FIXED ID", card, id);
         element.attr("fixedId", id);
     })
-
-    /*
-    PrettyCards_plugin.events.on("appendCard()", function(data) {
-        var card = data.card;
-		var element = data.element;
-        if (!isElementSwitchCard(element)) {return;}
-        var id = card.fixedId | card.id;
-        var regularText = $.i18n(`card-${id}`);
-        var cyanKey = `card-${id}-cyan`;
-        var redKey = `card-${id}-red`;
-        var cyanText = $.i18n(cyanKey);
-        var redText = $.i18n(redKey);
-        if (cyanText == cyanKey) {
-            cyanText = regularText;
-        }
-        if (redText == redKey) {
-            redText = regularText;
-        }
-
-        element.find(".cardDesc").append(`<div class="PrettyCards_SwitchHighlight_CyanDesc">${cyanText}</div><div class="PrettyCards_SwitchHighlight_CyanDesc">${cyanText}</div>`);
-
-    })
-    */
 
 }
 

@@ -1,0 +1,18 @@
+
+- Major refactor: Changed from the depracated appendCard() event to the new func:appendCard event, which should reduce lag (due to all of the spammed warning messages). If card related features randomly break this update, contact me!
+- Added April Fools 2023 Skins for deck selection
+
+TODO:
+- Crafting cards in the Decks page (FINISH AND OPTIMIZE!? Note: The reason I need to keep a copy of the collection is so that cards in a specific deck won't skrew stuff up + faster than searching in the global collection variable)
+- Interactive Card Helper (finish this)
+- Add more Hourglass GIFs.
+- Add minimalistic version of deck system (?)
+- Cosmetics Wishlist (Possibly with Discord integration?)
+- Make Game End Screen look actually decent
+
+- Resource Packs
+- Animation Upgrades
+- Multiple Settings for HD Settings
+- Remake Lobby Games
+- "Would You Rather" for April.
+- Fun Value (Especially for Card Descriptions)

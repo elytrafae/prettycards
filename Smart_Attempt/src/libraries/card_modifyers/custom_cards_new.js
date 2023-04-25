@@ -26,15 +26,12 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		var oldAppendCard = window.appendCard;
 		window.appendCard = function(card, container) {
 			var element = oldAppendCard(card, container);
-			PrettyCards_plugin.events.emit("PC_appendCard", {card: card, element: element});
+			PrettyCards_plugin.events.emit("PC_appendCard", card, element);
 			return element;
 		}
 		
-		// PrettyCards_plugin.events.on("appendCard()", function(data) { // Cannot use this because Underscript is in zombie mode on custom pages.
-		PrettyCards_plugin.events.on("PC_appendCard", function(data) {
-			//console.log("appendCard", data);
-			var card = data.card;
-			var element = data.element;
+		// PrettyCards_plugin.events.on("func:appendCard", function(card, element) { // Cannot use this because Underscript is in zombie mode on custom pages.
+		PrettyCards_plugin.events.on("PC_appendCard", function(card, element) {
 			if (!card.isCustom) {
 				return;
 			}

@@ -226,9 +226,8 @@ if (settings.multi_theme_songs.value()) {
 
         // Caching system for non-game pages so that it doesn't load everything at once unnecessarily.
         var cards_preloaded = [];
-        PrettyCards_plugin.events.on("appendCard() PC_appendCard", function(data) {
+        PrettyCards_plugin.events.on("func:appendCard PC_appendCard", function(card, element) {
             //var html$ = data.element;
-            var card = data.card;
             PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
                 var id = card.fixedId || card.id;
                 if (!cards_preloaded.includes(id)) {

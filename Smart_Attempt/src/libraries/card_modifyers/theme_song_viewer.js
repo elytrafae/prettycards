@@ -83,10 +83,8 @@ function createComplexButton(settings) {
 	</span>`);
 	return button;
 } 
-function processCard(data) {
-	var html$ = data.element;
-	var card = data.card;
-	//console.log("appendCard() event fired on " + card.name);
+function processCard(card, element) {
+	//console.log("func:appendCard event fired on " + card.name);
 	PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
 		//console.log("Theme Song Data Ready for " + card.name);
 		var themeSongSettings = getThemeSongSettingByCardId(card.fixedId || card.id);
@@ -121,8 +119,7 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game") && !under
 
 	//console.log("Theme Song Preview is turned on, and it's not the Game or Spectator page! Attempt 2!");
 
-	PrettyCards_plugin.events.on("appendCard()", processCard);
-	PrettyCards_plugin.events.on("PC_appendCard", processCard);
+	PrettyCards_plugin.events.on("func:appendCard PC_appendCard", processCard);
 	
 }
 

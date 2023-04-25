@@ -22,9 +22,7 @@ if (ucoBadgeSetting.value()) {
         PrettyCards_plugin.events.emit.singleton("PrettyCards:ucoCardListFetched", new Set());
     })
     
-    PrettyCards_plugin.events.on("appendCard()", function(data) {
-        var card = data.card;
-        var ele = data.element;
+    PrettyCards_plugin.events.on("func:appendCard", function(card, element) {
         PrettyCards_plugin.events.on("PrettyCards:ucoCardListFetched", function(idList) {
             if (idList.has(card.fixedId || card.id)) {
                 PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
