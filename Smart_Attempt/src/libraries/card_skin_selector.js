@@ -9,12 +9,18 @@ var ownedCardSkins = [];
 var notOwnedCardSkins = [];
 var defaultCardSkins = [];
 var customCardSkins = [];
-var aprilFools2022 = [];
+var aprilFools2022Skins = [];
+var aprilFools2023Skins = [];
 
 var bonusBaseCards = ["Heal Delivery", "Explosion", "Sacrifice", "Same Fate", "Onutrem"];
 
-var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCardSkins, aprilFools2022];
-var listNames = ["pc-skinselect-header-custom", "pc-skinselect-header-default", "pc-skinselect-header-owned", "pc-skinselect-header-notowned", ["pc-skinselect-header-april", 2022, 69]]
+var skinLists = [customCardSkins, defaultCardSkins, ownedCardSkins, notOwnedCardSkins, aprilFools2022Skins, aprilFools2023Skins];
+var listNames = ["pc-skinselect-header-custom", "pc-skinselect-header-default", "pc-skinselect-header-owned", "pc-skinselect-header-notowned", ["pc-skinselect-header-april", 2022, 69], ["pc-skinselect-header-april", 2023, 81]]
+
+var aprilFoolsData = [
+	{year: 2022, list: aprilFools2022Skins, ucpCost: 69420, id: -69},
+	{year: 2023, list: aprilFools2023Skins, ucpCost: 1997, id: -1997}
+]
 
 function processHeaderTranslations() {
 	listNames.forEach((e, i) => {
@@ -35,21 +41,21 @@ $.get("CardSkinsConfig?action=profile", {}, function(data) {
 });
 */
 
-function ProcessAprilFools2022Skins(data) {
+function ProcessAprilFoolsSkins(data, list, year, ucpCost, id) {
 	for (var i=0; i < data.length; i++) {
 		var id = data[i];
 		var card = window.getCard(id);
-		aprilFools2022.push({
+		list.push({
 			active: false,
 			authorName: "???",
 			cardId: card.id,
 			cardName: card.name,
-			id: -69,
-			image: `https://github.com/CMD-God/prettycards/raw/856f490c607fdd90d54e82143d0b696da6e27bde/img/Cards/April_Fools_2022/${card.image}.png`,
-			name: window.$.i18n("pc-skinselect-skinname-april", 2022, window.$.i18n(`card-name-${card.id}`, 1)),
+			id: id,
+			image: `https://github.com/CMD-God/prettycards/raw/856f490c607fdd90d54e82143d0b696da6e27bde/img/Cards/April_Fools_${year}/${card.image}.png`,
+			name: window.$.i18n("pc-skinselect-skinname-april", year, window.$.i18n(`card-name-${card.id}`, 1)),
 			owned: true,
 			typeSkin: 0,
-			ucpCost: 69420,
+			ucpCost: ucpCost,
 			unavailable: false,
 			isCustom: true
 		});
@@ -135,10 +141,12 @@ function loadAllCardSkins() { // This function is called whenever a feature requ
 		ExecuteWhen("Chat:Connected", function() {
 			ProcessCustomCardSkins();
 		});
-		$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/50f69f27a249d843792aedc5139d60fc9b178b23/json/aprilFools2022.json", {}, function(data) {
-			ProcessAprilFools2022Skins(data);
+		aprilFoolsData.forEach((listData) => {
+			$.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/50f69f27a249d843792aedc5139d60fc9b178b23/json/aprilFools${listData.year}.json`, {}, function(data) {
+				ProcessAprilFoolsSkins(data, listData.list, listData.year, listData.ucpCost, listData.id);
+			})
 		})
-
+		
 		processHeaderTranslations();
 	});
 

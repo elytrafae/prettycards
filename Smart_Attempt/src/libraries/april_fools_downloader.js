@@ -1,7 +1,7 @@
 import { prettycards } from "./underscript_checker";
 
 const normal_prefix = "/images/";
-const april_prefix = "/images/aprilFools/";
+const april_prefix = "/afi/";
 const json_file_name = "aprilFools2022.json";
 
 var card_id_list = [];
