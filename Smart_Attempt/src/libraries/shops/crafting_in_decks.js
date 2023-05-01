@@ -1,6 +1,10 @@
 
 import { PrettyCards_plugin, addSetting, prettycards } from "../underscript_checker";
 import { utility } from "../utility";
+import "../card_modifyers/basic_universal_card_additions";
+
+// Note: The reason I need to keep a copy of the collection is so that cards in a 
+// specific deck won't skrew stuff up + faster than searching in the global collection variable
 
 var craftingInDecksSetting = addSetting({
     'key': 'crafting_in_decks',
@@ -118,8 +122,8 @@ prettycards.test_SearchInCraftableCollection = SearchInCraftableCollection;
 
 function SetUpCardEvent() {
     PrettyCards_plugin.events.on("func:appendCardDeck", function(card, element) {
-        //console.log(card, element);
         var craftData = SearchInCraftableCollection(card.id, card.shiny);
+        console.log(card, element, craftData);
         //if (carftData && CanCraftMore(carftData)) {
         if ((!craftData) && card.quantity < 3) {
             console.log("M A U S   D E T E C T E D", card, craftData);
@@ -134,6 +138,7 @@ function SetUpCardEvent() {
             if (maxCraftCount <= 0) {
                 return;
             }
+            console.log("I'm in!");
 
             var oneButton = window.$(`<button class="btn btn-success">Craft One (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)} ${dustIcon})</button>`);
             var moreButton = window.$(`<button class="btn btn-success" style="margin-left: 0.6em">Craft x${maxCraftCount} (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)*maxCraftCount} ${dustIcon})</button>`);
@@ -157,6 +162,7 @@ function SetUpCardEvent() {
             }
             
             utility.addCustomSimpleTextIconToCard2(element, "/images/icons/dust.png", "Craft!", craftingUI, window.$.i18n('crafting-title', name));
+            console.log("Peekaboo!");
         }
     })
 }

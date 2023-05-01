@@ -26,7 +26,7 @@ if (ucoBadgeSetting.value()) {
         PrettyCards_plugin.events.on("PrettyCards:ucoCardListFetched", function(idList) {
             if (idList.has(card.fixedId || card.id)) {
                 PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
-                    utility.addCustomSimpleTextIconToCard2(ele, 
+                    utility.addCustomSimpleTextIconToCard2(element, 
                         "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardPowers/uco.png",
                         window.$.i18n("pc-cardbadge-uco-short"), 
                         window.$.i18n("pc-cardbadge-uco-desc"),

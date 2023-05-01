@@ -109,7 +109,7 @@ function processCard(card, element) {
 				button = createSimpleButton(card);
 			}
 			//console.log(card.name + "'s button: " + button);
-			html$.append(button);
+			element.append(button);
 		}
 	});
 } 

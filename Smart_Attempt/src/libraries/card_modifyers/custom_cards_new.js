@@ -3,6 +3,7 @@ import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {collections} from "/src/libraries/card_modifyers/custom_cards_dictionary_new.js";
+import {getOrCreateCardBottomLeftInfo} from "./basic_universal_card_additions";
 
 function OpenAuthorNote(card) {
 	window.BootstrapDialog.show({
@@ -100,7 +101,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 				noteIcon.contextmenu(function() {
 					OpenAuthorNote(card);
 				});
-				element.find(".PrettyCards_CardBottomLeftInfo").append(noteIcon);
+				getOrCreateCardBottomLeftInfo(element).append(noteIcon);
 				//element.find(".cardStatus").append(noteIcon);
 			}
 			

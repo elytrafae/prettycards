@@ -41,7 +41,7 @@ if (shinyHoverFix.value()) {
 
     PrettyCards_plugin.events.on("pre:func:appendCard", function(card) {
         isShiny = card.shiny; 
-        console.log("isShiny UPDATED:" , isShiny);
+        //console.log("isShiny UPDATED:" , isShiny);
     })
 
     PrettyCards_plugin.events.on("func:appendCard", function(data) {

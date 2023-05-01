@@ -1,4 +1,5 @@
 import { prettycards, PrettyCards_plugin, settings } from "./underscript_checker";
+import {getOrCreateCardBottomLeftInfo} from "./card_modifyers/basic_universal_card_additions";
 
 var collectionPlace = document.getElementById("collection"); // This is for a workaround with how friendship cards are added.
 if (!collectionPlace) {
@@ -441,7 +442,10 @@ class Utility {
 	addCustomSimpleTextIconToCard2(cardElement, iconSrc, text, windowText = text, windowTitle = window.$.i18n('dialog-information')) {
 		var icon = document.createElement("IMG");
 		icon.src = iconSrc;
-		cardElement.find(".PrettyCards_CardBottomLeftInfo").append(icon);
+		if (cardElement[0]) {
+			cardElement = cardElement[0];
+		}
+		getOrCreateCardBottomLeftInfo(cardElement).appendChild(icon);
 
 		var tooltip = window.tippy(icon, {
 			content: text,
