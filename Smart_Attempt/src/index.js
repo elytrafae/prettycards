@@ -41,6 +41,7 @@ import {} from "/src/libraries/card_modifyers/uco_card_badge.js";
 import {} from "/src/libraries/card_modifyers/card_skin_shop_additions.js";
 import {} from "/src/libraries/card_modifyers/interactive_card_hover.js";
 import {} from "/src/libraries/card_modifyers/card_hover_shiny_fix.js";
+import {} from "/src/libraries/card_modifyers/card_skin_text_fix.js";
 
 import {} from "/src/libraries/translation/translation_manager.js";
 import {} from "/src/libraries/visual_effects/zoom.js";
