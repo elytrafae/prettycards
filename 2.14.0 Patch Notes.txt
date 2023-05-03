@@ -3,7 +3,7 @@
 - Added April Fools 2023 Skins for deck selection
 - Added the ability to craft cards in the decks page!
 - Hovering over a card's name in a shiny card now properly makes the hovered card shiny!
-- The text on card skin showcases is not resized properly
+- The text on card skin showcases is now resized properly
 
 TODO:
 - Interactive Card Helper (finish this)
