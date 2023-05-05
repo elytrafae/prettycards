@@ -1,5 +1,6 @@
 import { utility } from "../utility";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 const PC_CONTRIB_BADGE = {
     id: 222,
@@ -22,17 +23,21 @@ const CUTIE = {
     icon: "Cutie"
 }
 
-var custom_badges = [PC_CONTRIB_BADGE, BADGE_999];
+var chatRoleUserData = {};
+var custom_badges = [PC_CONTRIB_BADGE, BADGE_999, CUTIE];
 
 function processMessage(message) {
     var user = message.user;
-    console.log(user);
-    user.groups.push(PC_CONTRIB_BADGE);
-    user.mainGroup = PC_CONTRIB_BADGE;
+    if (isInChatBadgeList(user, "pc_contributor")) {
+        user.groups.push(PC_CONTRIB_BADGE);
+        user.mainGroup = PC_CONTRIB_BADGE;
+    }
     if (user.level >= 999) {
         user.groups.push(BADGE_999);
     }
-    user.groups.push(CUTIE);
+    if (isInChatBadgeList(user, "cutie")) {
+        user.groups.push(CUTIE);
+    }
 }
 
 function correctCustomIcons(message, idRoom, isPrivate) {
@@ -63,6 +68,11 @@ function processChatMessageEvent(data) {
     data.chatMessage = JSON.stringify(message); // I hate that I have to do stuff like this >~<
 }
 
+$.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/customChatRoles.json", {}, function(data) {
+    chatRoleUserData = data;
+    PrettyCards_plugin.events.emit.singleton("PrettyCards:customChatRolesData", chatRoleUserData);
+})
+
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
     //console.log("CUSTOM BADGE HIGHJACK");
     utility.loadCSSFromGH("CustomChatBadges");
@@ -86,7 +96,13 @@ function getChatBadgeIcon(icon) {
     }
 }
 
-
+function isInChatBadgeList(user, listName) {
+    //console.log(chatRoleUserData, chatRoleUserData[listName]);
+    if (!chatRoleUserData[listName]) {
+        return false;
+    }
+    return !!chatRoleUserData[listName].find((u) => {return u.id === user.id});
+}
 
 //PrettyCards_plugin.events.on("preChat:getHistory preChat:getPrivateHistory", processChatHistoryEvent);
 //PrettyCards_plugin.events.on("preChat:getMessage preChat:getPrivateMessage", processChatMessageEvent);
