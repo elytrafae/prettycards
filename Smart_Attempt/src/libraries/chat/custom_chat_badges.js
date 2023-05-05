@@ -15,6 +15,13 @@ const BADGE_999 = {
     icon: "Overachiever"
 }
 
+const CUTIE = {
+    id: 277,
+    priority: 10,
+    name: "Cutie",
+    icon: "Cutie"
+}
+
 var custom_badges = [PC_CONTRIB_BADGE, BADGE_999];
 
 function processMessage(message) {
@@ -22,9 +29,10 @@ function processMessage(message) {
     console.log(user);
     user.groups.push(PC_CONTRIB_BADGE);
     user.mainGroup = PC_CONTRIB_BADGE;
-    if (user.level >= 900) {
+    if (user.level >= 999) {
         user.groups.push(BADGE_999);
     }
+    user.groups.push(CUTIE);
 }
 
 function correctCustomIcons(message, idRoom, isPrivate) {
