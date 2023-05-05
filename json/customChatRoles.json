@@ -1,7 +1,10 @@
 {
 	"pc_contributor": [
-		118586, // Diamaincrah
-		452931, // Nagasriel
+		{"username": "CMD_God", "id": 26827},
+		{"username": "Jazmin290", "id": 249709},
+		{"username": "Diamaincrah", "id": 118586},
+		{"username": "Nagasriel", "id": 452931},
+		{"username": "BrightGreenMoss", "id": 518429}
 		
 	]
 }

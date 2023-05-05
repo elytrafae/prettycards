@@ -20,13 +20,12 @@ function correctCustomIcons(message, idRoom, isPrivate) {
     var room = isPrivate ? 'chat-private-' + idRoom : 'chat-public-' + idRoom;
     var $chat = $('#' + room);
     var icons = $chat.find("#message-" + message.id).find(".groupIcon");
-    console.log("ICONS", icons);
     for (var i=0; i < icons.length; i++) {
         var icon = icons[i];
         var title = icon.getAttribute("title");
         var badge = custom_badges.find((badge) => badge.name == title);
         if (badge) {
-            icon.src = `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ChatBadges/${badge.icon}.png`;
+            icon.src = getCustomBadgeURL(badge.icon);
         }
     }
 }
@@ -46,7 +45,7 @@ function processChatMessageEvent(data) {
 }
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
-    console.log("CUSTOM BADGE HIGHJACK");
+    //console.log("CUSTOM BADGE HIGHJACK");
     utility.loadCSSFromGH("CustomChatBadges");
     var oldfn = window.appendMessage;
     window.appendMessage = (chatMessage, idRoom, isPrivate) => {
@@ -57,14 +56,18 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
 
 })
 
+function getCustomBadgeURL(icon) {return `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ChatBadges/${icon}.png`;}
+
 function getChatBadgeIcon(icon) {
     var customBadge = custom_badges.find((badge) => badge.icon == icon);
     if (customBadge) {
-        return `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ChatBadges/${icon}.png`
+        return getCustomBadgeURL(icon);
     } else {
         return `images/${icon}.png`;
     }
 }
+
+
 
 //PrettyCards_plugin.events.on("preChat:getHistory preChat:getPrivateHistory", processChatHistoryEvent);
 //PrettyCards_plugin.events.on("preChat:getMessage preChat:getPrivateMessage", processChatMessageEvent);
