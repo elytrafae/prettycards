@@ -8,12 +8,23 @@ const PC_CONTRIB_BADGE = {
     icon: "PC_Contrib"
 }
 
-var custom_badges = [PC_CONTRIB_BADGE];
+const BADGE_999 = {
+    id: 999,
+    priority: 10,
+    name: "Overachiever",
+    icon: "Overachiever"
+}
+
+var custom_badges = [PC_CONTRIB_BADGE, BADGE_999];
 
 function processMessage(message) {
     var user = message.user;
+    console.log(user);
     user.groups.push(PC_CONTRIB_BADGE);
     user.mainGroup = PC_CONTRIB_BADGE;
+    if (user.level >= 900) {
+        user.groups.push(BADGE_999);
+    }
 }
 
 function correctCustomIcons(message, idRoom, isPrivate) {
