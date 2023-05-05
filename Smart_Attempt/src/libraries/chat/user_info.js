@@ -7,6 +7,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 import {ChallengePlayerScreen} from "/src/libraries/private_games/private_game_screen.js";
 import { translationManager } from "../translation/translation_manager";
+import { getChatBadgeIcon } from "./custom_chat_badges";
 
 window.PrettyCards_plugin = PrettyCards_plugin;
 
@@ -167,7 +168,8 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		
 		if (group.icon) {
 			var icon = document.createElement("IMG");
-			icon.src = "images/" + group.icon + ".png";
+			//icon.src = "images/" + group.icon + ".png";
+			icon.src = getChatBadgeIcon(group.icon);
 			icon.onerror = function (e) {e.target.style.display = "none";};
 			icon.title = group.name;
 			cont.appendChild(icon);

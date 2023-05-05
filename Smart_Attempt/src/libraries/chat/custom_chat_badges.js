@@ -57,5 +57,16 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
 
 })
 
+function getChatBadgeIcon(icon) {
+    var customBadge = custom_badges.find((badge) => badge.icon == icon);
+    if (customBadge) {
+        return `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/ChatBadges/${icon}.png`
+    } else {
+        return `images/${icon}.png`;
+    }
+}
+
 //PrettyCards_plugin.events.on("preChat:getHistory preChat:getPrivateHistory", processChatHistoryEvent);
 //PrettyCards_plugin.events.on("preChat:getMessage preChat:getPrivateMessage", processChatMessageEvent);
+
+export {getChatBadgeIcon};
