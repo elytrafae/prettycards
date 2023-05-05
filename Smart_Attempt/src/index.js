@@ -84,7 +84,7 @@ import {InitFriendship} from "/src/page_specific/friendship.js";
 import {InitSmashOrPass} from "/src/page_specific/smash_or_pass.js";
 import {InitCustomTranslations} from "/src/page_specific/custom_translations.js";
 
-import {} from "/src/libraries/april_fools_downloader.js"; // Keeping this here for next year!
+// import {} from "/src/libraries/april_fools_downloader.js"; // Keeping this here for next year!
 
 if (settings.packs_page.value() && underscript.onPage('Packs')) {
 	//console.log("Packs page!", InitPacks);
