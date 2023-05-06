@@ -11,14 +11,14 @@ const PC_CONTRIB_BADGE = {
 
 const BADGE_999 = {
     id: 999,
-    priority: 10,
+    priority: 15,
     name: "Overachiever",
     icon: "Overachiever"
 }
 
 const CUTIE = {
     id: 277,
-    priority: 10,
+    priority: 16,
     name: "Cutie",
     icon: "Cutie"
 }
@@ -28,16 +28,28 @@ var custom_badges = [PC_CONTRIB_BADGE, BADGE_999, CUTIE];
 
 function processMessage(message) {
     var user = message.user;
-    if (isInChatBadgeList(user, "pc_contributor")) {
+    if (user.pc_touched) {
+        return;
+    }
+    user.pc_touched = true;
+    if (findInChatBadgeList(user.id, "pc_contributor")) {
         user.groups.push(PC_CONTRIB_BADGE);
-        user.mainGroup = PC_CONTRIB_BADGE;
+        if (user.mainGroup.priority >= 8) { // Only set this as the main group if the previous main group is Tester or worse.
+            var oldMain = user.groups.find((group) => group.id === user.mainGroup.id);
+            if (oldMain) {
+                oldMain.priority = 10;
+            }
+            user.mainGroup = PC_CONTRIB_BADGE;
+        }
+        
     }
     if (user.level >= 999) {
         user.groups.push(BADGE_999);
     }
-    if (isInChatBadgeList(user, "cutie")) {
+    if (findInChatBadgeList(user.id, "cutie")) {
         user.groups.push(CUTIE);
     }
+    user.groups.sort((a, b) => a.priority - b.priority);
 }
 
 function correctCustomIcons(message, idRoom, isPrivate) {
@@ -96,15 +108,23 @@ function getChatBadgeIcon(icon) {
     }
 }
 
-function isInChatBadgeList(user, listName) {
+function findInChatBadgeList(userId, listName) {
     //console.log(chatRoleUserData, chatRoleUserData[listName]);
     if (!chatRoleUserData[listName]) {
         return false;
     }
-    return !!chatRoleUserData[listName].find((u) => {return u.id === user.id});
+    return chatRoleUserData[listName].find((u) => {return u.id === userId});
+}
+
+function getCuteFaceForId(id) {
+    var badge = findInChatBadgeList(id, "cutie");
+    if (badge) {
+        return badge.face;
+    }
+    return null;
 }
 
 //PrettyCards_plugin.events.on("preChat:getHistory preChat:getPrivateHistory", processChatHistoryEvent);
 //PrettyCards_plugin.events.on("preChat:getMessage preChat:getPrivateMessage", processChatMessageEvent);
 
-export {getChatBadgeIcon};
+export {getChatBadgeIcon, getCuteFaceForId};
