@@ -16,6 +16,13 @@ const BADGE_999 = {
     icon: "Overachiever"
 }
 
+const BADGE_9999 = {
+    id: 9999,
+    priority: 15,
+    name: "Grassless",
+    icon: "Grassless"
+}
+
 const CUTIE = {
     id: 277,
     priority: 16,
@@ -24,7 +31,7 @@ const CUTIE = {
 }
 
 var chatRoleUserData = {};
-var custom_badges = [PC_CONTRIB_BADGE, BADGE_999, CUTIE];
+var custom_badges = [PC_CONTRIB_BADGE, BADGE_999, BADGE_9999, CUTIE];
 
 function processMessage(message) {
     var user = message.user;
@@ -43,7 +50,9 @@ function processMessage(message) {
         }
         
     }
-    if (user.level >= 999) {
+    if (user.level >= 9999) {
+        user.groups.push(BADGE_9999);
+    } else if (user.level >= 999) {
         user.groups.push(BADGE_999);
     }
     if (findInChatBadgeList(user.id, "cutie")) {
