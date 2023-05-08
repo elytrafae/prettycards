@@ -1,7 +1,8 @@
 
 - Major refactor: Changed from the deprecated appendCard() event to the new func:appendCard event, which should reduce lag (due to all of the spammed warning messages). If card related features randomly break this update, contact me!
-- Added April Fools 2023 Skins for deck selection
 - Added the ability to craft cards in the decks page!
+- Added special Chat Badges (that only work with PrettyCards): PrettyCards Contributor, Overachiever (LV 999+), ??? (LV 9999+) and Cutie (Special Event in a different server)
+- Added April Fools 2023 Skins for deck selection
 - Hovering over a card's name in a shiny card now properly makes the hovered card shiny!
 - The text on card skin showcases is now resized properly
 
