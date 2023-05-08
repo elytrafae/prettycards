@@ -586,7 +586,8 @@ function sendMessageAsPositionInRanked(pos) {
 	//console.log(fabricatedMessage);
 	window.appendMessage(fabricatedMessage, 1, false);
 	var eventData = {chatMessage : JSON.stringify(fabricatedMessage), room : "chat-public-1"};
-	processChatMessageEvent(eventData);
+	//processChatMessageEvent(eventData);
+	window.appendMessage(fabricatedMessage, "chat-public-1", false);
 }
 
 window.sendMessageAsPositionInRanked = sendMessageAsPositionInRanked;
