@@ -1,7 +1,7 @@
 {
 	"pc_contributor": [
 		{"username": "CMD_God", "id": 26827},
-		{"username": "Jazmin290", "id": 249709},
+		{"username": "Jazmin290", "id": 249709, "creditHidden": true},
 		{"username": "Diamaincrah", "id": 118586},
 		{"username": "Nagasriel", "id": 452931},
 		{"username": "BrightGreenMoss", "id": 518429},
@@ -9,7 +9,8 @@
 		{"username": "clpb", "id": 481679},
 		{"username": "MysteryHD", "id": 201876},
 		{"username": "AG", "id": 433216},
-		{"username": "feildmaster", "id": 63068}
+		{"username": "feildmaster", "id": 63068},
+		{"username": "nexit", "id": 17922}
 	],
 	"cutie": [
 		{"username": "Кyra", "id": 624815, "face": "uwu"},
