@@ -35,7 +35,7 @@ function GrabDust() {
         }
         console.log("DUST", dust);
         if (dust < underscript.utils.rarity.cost("COMMON", false)) { // If you can't even craft a non-shiny common card, don't bother going on.
-            console.warn("Craftuing in Decks page: Insufficient Dust to craft anything. Won't continue forward.");
+            console.warn("Crafting in Decks page: Insufficient Dust to craft anything. Won't continue forward.");
         } else {
             GrabCraftingCollection();
         }
@@ -83,7 +83,7 @@ function RefreshTrimmedCollection(collection, alreadyTrimmed = true) {
             }
         }
     }
-    console.log("TRIMMED COLLECTION", trimmedCollection);
+    //console.log("TRIMMED COLLECTION", trimmedCollection);
     return trimmedCollection;
 }
 
@@ -123,11 +123,8 @@ prettycards.test_SearchInCraftableCollection = SearchInCraftableCollection;
 function SetUpCardEvent() {
     PrettyCards_plugin.events.on("func:appendCardDeck", function(card, element) {
         var craftData = SearchInCraftableCollection(card.id, card.shiny);
-        console.log(card, element, craftData);
+        //console.log(card, element, craftData);
         //if (carftData && CanCraftMore(carftData)) {
-        if ((!craftData) && card.quantity < 3) {
-            console.log("M A U S   D E T E C T E D", card, craftData);
-        }
         if (craftData) {
             var dustIcon = `<img style="height:1.6em;" src="/images/icons/dust.png">`;
             var shinyText = craftData.shiny ? `<span class="rainbowText">S</span> ` : '';
@@ -138,7 +135,7 @@ function SetUpCardEvent() {
             if (maxCraftCount <= 0) {
                 return;
             }
-            console.log("I'm in!");
+            //console.log("I'm in!");
 
             var oneButton = window.$(`<button class="btn btn-success">Craft One (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)} ${dustIcon})</button>`);
             var moreButton = window.$(`<button class="btn btn-success" style="margin-left: 0.6em">Craft x${maxCraftCount} (-${underscript.utils.rarity.cost(craftData.rarity, craftData.shiny)*maxCraftCount} ${dustIcon})</button>`);
@@ -162,7 +159,7 @@ function SetUpCardEvent() {
             }
             
             utility.addCustomSimpleTextIconToCard2(element, "/images/icons/dust.png", "Craft!", craftingUI, window.$.i18n('crafting-title', name));
-            console.log("Peekaboo!");
+            //console.log("Peekaboo!");
         }
     })
 }

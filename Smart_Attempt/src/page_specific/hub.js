@@ -1,6 +1,6 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
-import {DeckEditor} from "/src/libraries/deck_editor.js";
+import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 import { translationManager } from "../libraries/translation/translation_manager";
 
 var custom_deck_sys = settings.override_decks.value();

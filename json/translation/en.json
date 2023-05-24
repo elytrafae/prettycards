@@ -298,6 +298,7 @@
     "pc-menu-customartistconsole" : "Artist Console",
     "pc-menu-apidocs" : "API Docs",
     "pc-menu-wyr" : "Would You Rather",
+    "pc-menu-emotefile": "Download Emote File",
     "pc-skinselect-title": "Select a card skin!",
     "pc-skinselect-search": "Search . . .",
     "pc-skinselect-header-custom" : "Custom Card Skins",
@@ -377,7 +378,9 @@
     "pc-cardbadge-uco-title": "Undercards Original",
     "pc-cardbadge-uco-desc": "This is an Undercards Original card, which means that this is in no way canon to Undertale or Deltarune. Think of this as Undercards' own, original AU.",
     
-    "group-prettycards_contributor": "PrettyCards Contributor",
+    "group-prettycards_staff": "PrettyCards Staff",
+    "group-prettycards_ministaff": "PrettyCards Mini-Staff",
+    "group-prettycards_owner": "PrettyCards Owner",
     "group-overachiever": "Overachiever",
     "group-grassless": "Grassless",
     "group-cutie": "Cutie"

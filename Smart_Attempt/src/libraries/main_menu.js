@@ -1,4 +1,5 @@
 
+import { CustomChatBadgeSystem } from "./chat/custom_chat_badges";
 import { PrettyCards_plugin, prettycards } from "./underscript_checker";
 import { utility } from "./utility";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
@@ -48,11 +49,6 @@ function isItAprilFoolDay() {
 	return (now.getMonth() == aprilFools.month && now.getDate() == aprilFools.date);
 }
 
-function isItApril() {
-	var now = new Date();
-	return (now.getMonth() == aprilFools.month);
-}
-
 prettycards.showCredits = showCredits;
 ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {
 	if (true) {	
@@ -69,6 +65,7 @@ ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function()
 				<a class="PrettyCards_HiddenUntilLogin" href="/CustomCards"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customcards")}</p></a>
 				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">' + window.$.i18n("pc-menu-sop") + '</p></a>') : ""}
 				<a href="/CustomTranslations" class="PrettyCards_Hidden Translator"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customtranslate")}</p></a>
+				<a class="PrettyCards_Hidden PrettyCards_Staff"><p style="cursor: pointer;" onclick="prettycards.downloadEmotesFile()">${window.$.i18n("pc-menu-emotefile")}</p></a>
 				<a href="https://cmd-god.github.io/prettycards/artistConsole.html" class="PrettyCards_Hidden Artist"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customartistconsole")}</p></a>
 				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">${window.$.i18n("pc-menu-apidocs")}</p></a>
 			</div>
@@ -82,6 +79,9 @@ ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function()
 			if (utility.featuresAccessForGroupOnly("Artist")) {
 				$("#PrettyCards_MainMenu .Artist").removeClass("PrettyCards_Hidden");
 			}
+			CustomChatBadgeSystem.getInstance().isStaffMember(window.selfId).then(() => {
+				$("#PrettyCards_MainMenu .PrettyCards_Staff").removeClass("PrettyCards_Hidden");
+			}).catch((e) => {});
 		})
 		
 		var isfadedIn = false;

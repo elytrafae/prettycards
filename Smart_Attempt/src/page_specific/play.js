@@ -2,8 +2,8 @@
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
-import {SavedDeckSelector, dummy_skin, onu_skin, GetAllDecks} from "/src/libraries/deck_selector.js";
-import {DeckEditor} from "/src/libraries/deck_editor.js";
+import {SavedDeckSelector, dummy_skin, onu_skin, GetAllDecks} from "/src/libraries/decks/deck_selector.js";
+import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 import {utility} from "/src/libraries/utility.js";
 
 var playLocked = true;

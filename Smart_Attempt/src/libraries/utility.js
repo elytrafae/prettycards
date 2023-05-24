@@ -229,7 +229,7 @@ class Utility {
 	}
 
 	// Yes, this one is from Stackoverflow.
-	downloadFile(content, fileName, contentType) {
+	downloadFile(content, fileName, contentType = "text/plain") {
 		var a = document.createElement("a");
 		var file = new Blob([content], {type: contentType});
 		a.href = URL.createObjectURL(file);
@@ -490,6 +490,36 @@ class Utility {
 		}
 		ele.remove();
 		return textSize;
+	}
+
+	/*
+	isImgUrl(url) {
+		const img = new Image();
+		var prom = new Promise((resolve) => {
+			img.onload = () => resolve(true);
+			img.onerror = () => resolve(false);
+		});
+		img.src = url;
+		return prom;
+	}
+	*/
+
+	isImgUrl(url) {
+		return new Promise((resolve, reject) => {
+			fetch(url, {method: 'HEAD'}).then(res => {
+				var contentType = res.headers.get('Content-Type');
+				console.log("CONTENTTYPE", contentType);
+				if (contentType.startsWith('image')) {
+					console.log("RESOLVING!");
+					resolve();
+				} else {
+					console.log("REJECTING!");
+					reject();
+				}
+			}).catch( () => {
+				reject();
+			})
+		})
 	}
 	
 }

@@ -7,7 +7,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
 import {ChallengePlayerScreen} from "/src/libraries/private_games/private_game_screen.js";
 import { translationManager } from "../translation/translation_manager";
-import { getChatBadgeIcon, getCuteFaceForId } from "./custom_chat_badges";
+import { CustomChatBadgeSystem } from "./custom_chat_badges";
 
 window.PrettyCards_plugin = PrettyCards_plugin;
 
@@ -110,14 +110,10 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	header.className += " PrettyCards_UserHeader";
 	header.style["background-image"] = "url(images/profiles/" + user.profileSkin.image + ".png)";
 	
-	var cutie_face = getCuteFaceForId(user.id);
-	var cutieStr = "";
-	if (cutie_face) {
-		cutieStr = ` <span class="Cutie">(${cutie_face})</span>`;
-	}
+	var statusStr = CustomChatBadgeSystem.getInstance().getStatusStringForId(user.id);
 
 	var title = header.querySelector(".bootstrap-dialog-title");
-	title.innerHTML += cutieStr;
+	title.innerHTML += statusStr;
 	title.className += " PrettyCards_UserTitle";
 	title.style.color = name_color;
 	
@@ -176,7 +172,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 		if (group.icon) {
 			var icon = document.createElement("IMG");
 			//icon.src = "images/" + group.icon + ".png";
-			icon.src = getChatBadgeIcon(group.icon);
+			icon.src = CustomChatBadgeSystem.getInstance().getChatBadgeIcon(group.icon);
 			icon.onerror = function (e) {e.target.style.display = "none";};
 			icon.title = group.name;
 			cont.appendChild(icon);

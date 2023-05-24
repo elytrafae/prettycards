@@ -4,8 +4,8 @@ import {pagegetters} from "/src/libraries/page_getters.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
-import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/deck_selector.js";
-import {DeckEditor} from "/src/libraries/deck_editor.js";
+import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/decks/deck_selector.js";
+import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 
 utility.loadCSSFromGH("Souls");
 

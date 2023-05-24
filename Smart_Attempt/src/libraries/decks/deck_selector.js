@@ -3,8 +3,8 @@ import {SoulSelector} from "/src/libraries/soul_selector.js";
 import {utility} from "/src/libraries/utility.js";
 import {SetCosmeticsForCardData, SetDeckSkin} from "/src/libraries/card_cosmetics_manager.js";
 import {artifactDisplay} from "/src/libraries/artifact_display.js";
-import {DeckEditor} from "/src/libraries/deck_editor.js";
-import { settings } from "./underscript_checker";
+import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
+import { settings } from "../underscript_checker";
 
 var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 

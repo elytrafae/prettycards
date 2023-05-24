@@ -55,6 +55,7 @@ import {} from "/src/libraries/emote_sound_manager.js";
 // import {} from "/src/libraries/cosmetic_wishlist.js"; // Temporarily Removed!
 
 import {} from "./libraries/main_menu.js";
+import {} from "./libraries/emote_dowloader.js";
 
 import {} from "/src/libraries/footer_remover.js";
 
@@ -69,6 +70,8 @@ import {} from "/src/libraries/april_fools/font_changer.js";
 import {} from "/src/libraries/april_fools/spamton_ads.js";
 
 import {} from "/src/libraries/shops/crafting_in_decks.js";
+
+import {} from "./libraries/decks/deck_image_import.js"; // Test
 
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";

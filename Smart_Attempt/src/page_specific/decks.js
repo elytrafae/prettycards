@@ -1,9 +1,9 @@
 
-import {CardSkinSelector, loadAllCardSkins} from "/src/libraries/card_skin_selector.js";
-import {SavedDeckSelector} from "/src/libraries/deck_selector.js";
+import {CardSkinSelector, loadAllCardSkins} from "/src/libraries/decks/card_skin_selector.js";
+import {SavedDeckSelector} from "/src/libraries/decks/deck_selector.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
-import {DeckEditor} from "/src/libraries/deck_editor.js";
+import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import { utility } from "../libraries/utility";

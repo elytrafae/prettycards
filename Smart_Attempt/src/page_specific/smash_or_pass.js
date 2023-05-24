@@ -1,4 +1,4 @@
-import { allCardSkins } from "../libraries/card_skin_selector";
+import { allCardSkins } from "../libraries/decks/card_skin_selector";
 import { FlippableCard } from "../libraries/flippable_card";
 import { translationManager } from "../libraries/translation/translation_manager";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";

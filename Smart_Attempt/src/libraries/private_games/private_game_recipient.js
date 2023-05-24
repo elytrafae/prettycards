@@ -4,8 +4,8 @@ import {utility} from "/src/libraries/utility.js";
 import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.js";
 import {pagegetters} from "/src/libraries/page_getters.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
-import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/deck_selector.js";
-import {DeckEditor} from "/src/libraries/deck_editor.js";
+import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/decks/deck_selector.js";
+import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 
 var custom_deck_sys = settings.override_decks.value();
 var deckSelector = new SavedDeckSelector();

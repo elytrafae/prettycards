@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "fuse.js": "^6.6.2",
+    "tesseract.js": "^4.0.6"
+  }
+}

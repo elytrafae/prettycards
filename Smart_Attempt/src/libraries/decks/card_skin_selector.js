@@ -1,5 +1,5 @@
 
-import { PrettyCards_plugin } from "./underscript_checker";
+import { PrettyCards_plugin } from "../underscript_checker";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 import {returnHDImageIfThereIs} from "/src/libraries/card_modifyers/hd_card_skins.js";
