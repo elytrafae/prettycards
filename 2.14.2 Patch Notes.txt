@@ -1,6 +1,4 @@
 
-- Custom Chat Badge System Updated
-
 TODO:
 - Image Recognition for Deck Imports
 - Interactive Card Helper (finish this)

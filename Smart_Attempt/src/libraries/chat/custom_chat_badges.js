@@ -60,21 +60,21 @@ class CustomChatBadgeSystem {
     }
 
     #initialize() {
-        $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/customChatRoles.json", {}, function(data) {
+        $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/customChatRoles.json", {}, (data) => {
             this.chatRoleUserData = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:customChatRolesData", this.chatRoleUserData);
-        }.bind(this))
+        })
         
-        PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
+        PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
             utility.loadCSSFromGH("CustomChatBadges");
             this.#oldFn = window.appendMessage;
-            window.appendMessage = function(chatMessage, idRoom, isPrivate) {
+            window.appendMessage = (chatMessage, idRoom, isPrivate) => {
                 this.#processMessage(chatMessage);
                 this.#oldFn(chatMessage, idRoom, isPrivate);
                 this.#correctCustomIcons(chatMessage, idRoom, isPrivate);
-            }.bind(this)
+            }
         
-        }.bind(this))
+        })
     }
 
     #processMessage(message) {
