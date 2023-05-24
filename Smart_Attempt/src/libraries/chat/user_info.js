@@ -95,7 +95,7 @@ function sendUserInfoEvent(ele) {
 	if (!preEvenet.canceled) {
 		oldGetInfo(ele);
 		var popup = window.BootstrapDialog.dialogs[Object.keys(BootstrapDialog.dialogs)[0]];
-		PrettyCards_plugin.events.emit("Chat:getInfo", {popup : popup, popupElement : popup.$modalDialog[0], infos : infos, user : user});
+		PrettyCards_plugin.events.emit("Chat:getInfo", {popupElement : popup.$modalDialog[0], infos : infos, user : user});
 	}
 }
 
@@ -105,7 +105,7 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	var user = data.user;
 	var header = data.popupElement.querySelector(".modal-header");
 	var name_color = window.localStorage["prettycards.profile_skin_text_color." + window.selfId + "." + user.profileSkin.id] || "#FFFFFF";
-	data.popup.$modalDialog[0].className = "modal-dialog modal-lg";
+	data.popupElement.className = "modal-dialog modal-lg";
 	
 	header.className += " PrettyCards_UserHeader";
 	header.style["background-image"] = "url(images/profiles/" + user.profileSkin.image + ".png)";

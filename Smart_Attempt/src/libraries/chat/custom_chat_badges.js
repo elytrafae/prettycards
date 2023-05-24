@@ -63,18 +63,18 @@ class CustomChatBadgeSystem {
         $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/customChatRoles.json", {}, function(data) {
             this.chatRoleUserData = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:customChatRolesData", this.chatRoleUserData);
-        })
+        }.bind(this))
         
-        PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
+        PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
             utility.loadCSSFromGH("CustomChatBadges");
             this.#oldFn = window.appendMessage;
-            window.appendMessage = (chatMessage, idRoom, isPrivate) => {
+            window.appendMessage = function(chatMessage, idRoom, isPrivate) {
                 this.#processMessage(chatMessage);
                 this.#oldFn(chatMessage, idRoom, isPrivate);
                 this.#correctCustomIcons(chatMessage, idRoom, isPrivate);
-            }
+            }.bind(this)
         
-        })
+        }.bind(this))
     }
 
     #processMessage(message) {
@@ -135,6 +135,7 @@ class CustomChatBadgeSystem {
 
     #findInChatBadgeList(userId, listName) {
         if (!this.chatRoleUserData[listName]) {
+            console.warn("List name", listName, "in", this.chatRoleUserData, "does not exist!");
             return false;
         }
         return this.chatRoleUserData[listName].find((u) => {return u.id === userId});
@@ -150,7 +151,7 @@ class CustomChatBadgeSystem {
     }
 
     #getCuteFaceForId(id) {
-        var badge = findInChatBadgeList(id, "cutie");
+        var badge = this.#findInChatBadgeList(id, "cutie");
         if (badge) {
             return badge.face;
         }
