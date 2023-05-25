@@ -11,3 +11,7 @@ html {
 .PrettyCards_Hidden {
     display: none!important;
 }
+
+.centeredText {
+    text-align: center;
+}
