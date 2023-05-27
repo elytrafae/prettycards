@@ -13,16 +13,23 @@
     </head>
 
     <body>
-        <div class="stage style1">
-            <div class="cube">
-                <div class="cubeSide top"></div>
-                <div class="cubeSide bottom"></div>
-                <div class="cubeSide front"></div>
-                <div class="cubeSide back"></div>
-                <div class="cubeSide left"></div>
-                <div class="cubeSide right"></div>
+        <div class="mainContent">
+            <div id="state0">Tap to start!</div>
+            <div id="state1" class="stage style1 PrettyCards_Hidden">
+                <div id="cube">
+                    <div class="cubeSide top"></div>
+                    <div class="cubeSide bottom"></div>
+                    <div class="cubeSide front"></div>
+                    <div class="cubeSide back"></div>
+                    <div class="cubeSide left"></div>
+                    <div class="cubeSide right"></div>
+                </div>
             </div>
         </div>
+
+        <audio id="free_bird" src="./audio/free_bird_colo.ogg">
+
+        <script src="./js/onucube.js"></script>
     </body>
 
 </html>

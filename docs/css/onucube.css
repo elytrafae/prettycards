@@ -1,4 +1,8 @@
 
+:root {
+    --cube-size: 300px;
+  }
+
 @font-face {
     font-family: DTM-Mono;
     src: url("../fonts/DTM-Mono.otf");
@@ -7,6 +11,13 @@
 html {
     font-family: DTM-Mono;
     background-color: black;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
 }
 
 .PrettyCards_Hidden {
@@ -24,48 +35,50 @@ html {
 }
 
 .stage {
-    width: 400px;
-    height: 400px;
+    width: calc(var(--cube-size) * 2);
+    height: calc(var(--cube-size) * 2);
+    /*
     border: 2px solid white;
     border-radius: 4px;
+    */
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 800px;
+    perspective: calc(var(--cube-size) * 4);
     perspective-origin: top right;
 }
 
 .cube {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: var(--cube-size);
+    height: var(--cube-size);
     transform-style: preserve-3d;
     animation: cubeRotate 10s linear infinite;
 }
 
 .front {
-    transform: translateZ(100px);
+    transform: translateZ(calc(var(--cube-size) / 2));
 }
 
 .back {
-    transform: translateZ(-100px);
+    transform: translateZ(calc(var(--cube-size) / 2 * -1));
 }
 
 .left {
     
-    transform: rotateY(90deg) translateZ(100px);
+    transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
 }
   
 .right {
-    transform: rotateY(-90deg) translateZ(100px);
+    transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 .top {
-    transform: rotateX(90deg) translateZ(100px);
+    transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
 }
    
 .bottom {
-    transform: rotateX(-90deg) translateZ(100px);
+    transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 @keyframes cubeRotate {
@@ -103,8 +116,25 @@ html {
 }
 
 .style1 .cubeSide {
-    border: 2px solid black;
+    border: 2px solid red;
     opacity: 1;
     background-image: url("../svg/Onu_SVG.svg");
     background-color: black;
+}
+
+#state0 {
+    color: #ABABAB;
+    font-size: 2em;
+    background-color: #222222;
+    padding: 1em 2em;
+    border-radius: 0.1em;
+}
+
+.stageFadeIn {
+    animation: stageFade 1s 1;
+}
+
+@keyframes stageFade {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
