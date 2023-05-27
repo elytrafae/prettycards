@@ -53,7 +53,7 @@ body {
     width: var(--cube-size);
     height: var(--cube-size);
     transform-style: preserve-3d;
-    animation: cubeRotate 10s linear infinite;
+    animation: cubeRotate 7s linear infinite;
 }
 
 .front {
@@ -131,7 +131,7 @@ body {
 }
 
 .stageFadeIn {
-    animation: stageFade 1s 1;
+    animation: stageFade 3s 1;
 }
 
 @keyframes stageFade {
