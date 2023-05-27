@@ -21,9 +21,7 @@ html {
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.9;
-    border: 2px solid white;
-  }
+}
 
 .stage {
     width: 400px;
@@ -46,36 +44,67 @@ html {
 }
 
 .front {
-    background-color: #d50000;
     transform: translateZ(100px);
 }
 
 .back {
-    background-color: #aa00ff;
     transform: translateZ(-100px);
 }
 
 .left {
-    background-color: #304ffe;
+    
     transform: rotateY(90deg) translateZ(100px);
 }
   
 .right {
-    background-color: #0091ea;
     transform: rotateY(-90deg) translateZ(100px);
 }
 
 .top {
-    background-color: #00Bfa5;
     transform: rotateX(90deg) translateZ(100px);
 }
    
 .bottom {
-    background-color: #64dd17;
     transform: rotateX(-90deg) translateZ(100px);
 }
 
 @keyframes cubeRotate {
     from { transform: rotateY(0deg) rotateX(720deg) rotateZ(0deg); }
     to { transform: rotateY(360deg) rotateX(0deg) rotateZ(360deg); }
+}
+
+.style0 .front {
+    background-color: #d50000;
+}
+
+.style0 .back {
+    background-color: #aa00ff;
+}
+
+.style0 .left {
+    background-color: #304ffe;
+}
+
+.style0 .right {
+    background-color: #0091ea;
+}
+
+.style0 .top {
+    background-color: #00Bfa5;
+}
+
+.style0 .bottom {
+    background-color: #64dd17;
+}
+
+.style0 .cubeSide {
+    border: 2px solid white;
+    opacity: 0.9;
+}
+
+.style1 .cubeSide {
+    border: 2px solid black;
+    opacity: 1;
+    background-image: url("../svg/Onu_SVG.svg");
+    background-color: black;
 }
