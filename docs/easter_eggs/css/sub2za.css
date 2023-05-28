@@ -1,0 +1,71 @@
+
+:root {
+    --size: 300px;
+}
+
+.stage {
+    width: calc(var(--size) * 2);
+    height: calc(var(--size) * 2);
+    /*
+    border: 2px solid white;
+    border-radius: 4px;
+    */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: calc(var(--size) * 4);
+    perspective-origin: top right;
+}
+
+#plus_thing{
+    width: var(--size);
+    height: var(--size);
+    position: relative;
+    animation: plusThingSpin infinite linear 10s;
+    /*transform:rotateY(45deg);*/
+    transform-style: preserve-3d;
+}
+
+.plane {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border: 2px solid white;
+    backface-visibility: hidden;
+    background-size: cover;
+}
+
+.front_face,.back_face {
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.front {
+    background-image: url("../img/Za.png");
+}
+
+.back {
+    background-image: url("../img/Sub2.png");
+    transform: rotateY(180deg);
+}
+
+.plane.second {
+    transform: rotateY(90deg);
+}
+
+.plane.second.back {
+    transform: rotateY(270deg);
+}
+
+@keyframes plusThingSpin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    };
+}

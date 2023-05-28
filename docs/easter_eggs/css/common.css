@@ -1,0 +1,33 @@
+
+@font-face {
+    font-family: DTM-Mono;
+    src: url("../../fonts/DTM-Mono.otf");
+}
+
+html {
+    font-family: DTM-Mono;
+    background-color: black;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.PrettyCards_Hidden {
+    display: none!important;
+}
+
+.centeredText {
+    text-align: center;
+}
+
+#state0 {
+    color: #ABABAB;
+    font-size: 2em;
+    background-color: #222222;
+    padding: 1em 2em;
+    border-radius: 0.1em;
+}
