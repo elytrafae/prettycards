@@ -1,0 +1,167 @@
+
+:root {
+    --size: 300px;
+    --length: 1000px;
+}
+
+body {
+    overflow: hidden;
+}
+
+.stage {
+    width: calc(var(--size) * 2);
+    height: calc(var(--size) * 2);
+    /*
+    border: 2px solid white;
+    border-radius: 4px;
+    */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: calc(var(--size) * 4);
+    perspective-origin: center;
+}
+
+#hallway{
+    width: calc(var(--size));
+    height: calc(var(--size) * 2);
+    position: relative;
+    animation: hallwayScroll infinite linear 3s;
+    /*transform:rotateY(45deg);*/
+    transform-style: preserve-3d;
+    /*transform: translateZ(500px);*/
+}
+
+.plane {
+    position: absolute;
+    width: var(--size);
+    height: var(--length);
+    background-size: cover;
+}
+
+.floor {
+    transform: rotateX(90deg);
+    /*background-color: blueviolet;*/
+    background-image: linear-gradient(45deg, blueviolet 25%, transparent 25%), linear-gradient(-45deg, blueviolet 25%, transparent 25%), linear-gradient(45deg, transparent 75%, blueviolet 75%), linear-gradient(-45deg, transparent 75%, blueviolet 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.ceiling {
+    transform: translateY(calc(var(--size) * -1)) rotateX(90deg);
+    background-color: green;
+}
+
+.left {
+    transform: translateX(calc(var(--size) / 2 * -1))  translateY(calc(var(--size) / 2 * -1)) rotateY(90deg) rotateZ(90deg);
+    background-color: red;
+}
+
+.right {
+    transform: translateX(calc(var(--size) / 2))  translateY(calc(var(--size) / 2 * -1)) rotateY(90deg) rotateZ(90deg);
+    background-color: blue;
+}
+
+.hallway_section {
+    position: absolute;
+    width: calc(var(--size));
+    height: calc(var(--size));
+    transform-style: preserve-3d;
+}
+
+.second_section {
+    transform: translateZ(calc(var(--length) * -1));
+}
+
+.third_section {
+    transform: translateZ(calc(var(--length) * 2 * -1));
+}
+
+@keyframes hallwayScroll {
+    from {
+        transform: translateZ(800px);
+    } 
+    to {
+        transform: translateZ(calc(var(--length) + 500px));
+    };
+}
+
+#fog {
+    width: calc(var(--size));
+    height: calc(var(--size) * 2);
+    position: absolute;
+    animation: fogScroll infinite linear 3s;
+    transform-style: preserve-3d;
+    transform: translateZ(-100px);
+}
+
+@keyframes fogScroll {
+    from {
+        transform: translateZ(calc(var(--length) - 100px));
+        
+    }
+    to {
+        transform: translateZ(-100px);
+        
+    }
+}
+
+.fog_plane {
+    width: calc(var(--size) * 1.5);
+    height: calc(var(--size) * 1.5);
+    position: absolute;
+    background-size: 200%;
+    opacity: 0.5;
+}
+
+.fog_plane.way_back {
+    background-color: cyan;
+    opacity: 1;
+}
+
+.back1 {
+    background-image: url("../img/2houfog/1.png");
+    filter: hue-rotate(210deg);
+    transform: translateZ(10px);
+    animation: fogMove infinite linear 12s;
+    animation-delay: 2s;
+}
+
+.back2 {
+    background-image: url("../img/2houfog/2.png");
+    filter: hue-rotate(230deg);
+    transform: translateZ(20px);
+    animation: fogMove infinite ease-in 9s;
+    animation-delay: 5s;
+}
+
+.back3 {
+    background-image: url("../img/2houfog/3.png");
+    filter: hue-rotate(250deg);
+    transform: translateZ(30px);
+    animation: fogMove infinite cubic-bezier(0.1, 0.7, 1, 0.1) 22s;
+    animation-delay: 0s;
+}
+
+.back4 {
+    background-image: url("../img/2houfog/4.png");
+    filter: hue-rotate(270deg);
+    transform: translateZ(40px);
+    animation: fogMove infinite ease-in-out 19s;
+    animation-delay: 9s;
+}
+
+@keyframes fogMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
