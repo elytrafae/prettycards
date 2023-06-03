@@ -1,5 +1,8 @@
 
+
 TODO:
+- Detailed History Tracking?
+- Don't allow "End Turn" press while selecting targets
 - Image Recognition for Deck Imports
 - Interactive Card Helper (finish this)
 - Add more Hourglass GIFs.
