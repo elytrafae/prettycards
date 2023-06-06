@@ -6,10 +6,13 @@ const dev = process.argv.includes('--dev');
 
 module.exports = {
   mode: dev ? 'development' : 'production',
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: {
+    [`${package.name}`] : path.resolve(__dirname, 'src', 'index.js'),
+    [`${package.name}_lite`] : path.resolve(__dirname, 'src', 'index_lite.js')
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: `${package.name}.user.js`,
+    filename: `[name].user.js`,
     //libraryTarget: 'this',
   },
   plugins: [
