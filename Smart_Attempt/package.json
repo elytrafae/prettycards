@@ -28,8 +28,10 @@
     },
     "dependencies": {
         "file-saver": "^2.0.5",
+        "fuse.js": "^6.6.2",
         "gifuct-js": "^2.1.2",
         "jszip": "^3.10.1",
-        "pako": "^2.0.4"
+        "pako": "^2.0.4",
+        "tesseract.js": "^4.1.0"
     }
 }

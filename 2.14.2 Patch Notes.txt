@@ -1,6 +1,7 @@
 
 
 TODO:
+- FIX https://discord.com/channels/330092826513899530/959722428592971856/1119767801708675082
 - Detailed History Tracking?
 - Don't allow "End Turn" press while selecting targets
 - Image Recognition for Deck Imports

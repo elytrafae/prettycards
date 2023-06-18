@@ -29,6 +29,7 @@ class ArtifactDisplay {
 		this.artifacts = [];
 	}
 	
+	/*
 	GetArtifactById(id) {
 		for (var i=0; i < this.artifacts.length; i++) {
 			var artifact = this.artifacts[i];
@@ -38,11 +39,16 @@ class ArtifactDisplay {
 		}
 		return null;
 	}
+	*/
+
+	GetArtifactById(id) {
+		return this.artifacts[id] || null;
+	}
 
 	GetArtifactByName(name) {
 		for (var i=0; i < this.artifacts.length; i++) {
 			var artifact = this.artifacts[i];
-			if (artifact.name === name) {
+			if (artifact && artifact.name === name) {
 				return artifact;
 			}
 		}
@@ -52,54 +58,16 @@ class ArtifactDisplay {
 	ReturnArtifactIcon(artifact_id) {
 		var artifact = this.GetArtifactById(artifact_id);
 		//console.log(this.artifacts, artifact);
-		return `<img class="pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.legendary.toString()}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="${utility.getArtifactImageLink(artifact.image)}"> `;
-	}
-	
-	SetAdditionalDataForArtifact(artifact) {
-		if (artifact.rarity) {
-			return artifact.rarity;
-		}
-		if (!this.GetArtifactById(artifact.id)) {this.artifacts.push(artifact);}
-		artifact.isImageBig = false;
-		if (artifact.unavailable) {
-			artifact.rarity = "TOKEN";
-		} else {
-			artifact.rarity = artifact.legendary ? "LEGENDARY" : "COMMON";
-		}
-
-		if (artifact.rarity == "LEGENDARY") {
-			artifact.backgroundClass = "PrettyCards_ArtBG_Legendary";
-		}
-
-		// Merges current artifact data with additional data.
-		for (var i=0; i < ArtifactDisplay.hardcodedAdditionalData.length; i++) {
-			var data = ArtifactDisplay.hardcodedAdditionalData[i];
-			if (data.id === artifact.id) {
-				for (var key in data) {
-					artifact[key] = data[key];
-				}
-				break;
-			}
-		}
-		return artifact.rarity;
+		return `<img class="pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.rarity === "LEGENDARY"}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="${utility.getArtifactImageLink(artifact.image)}"> `;
 	}
 
 	GetAllArtifacts() {
 		//console.log("Getting Artifact Data!");
-		$.get("/DecksConfig", {}, function(data) {
-			this.artifacts = JSON.parse(data.allArtifacts);
-			var ownedArtifacts = JSON.parse(data.artifacts);
-
-			// Setting artifact rarities and ownership for my system.
-			for (var i=0; i < this.artifacts.length; i++) {
-				var artifact = this.artifacts[i];
-				this.SetAdditionalDataForArtifact(artifact);
-				// A little school-like code :hue:
-				artifact.owned = false;
-			}
-
-			for (var i=0; i < ownedArtifacts.length; i++) {
-				this.GetArtifactById(ownedArtifacts[i].id).owned = true;
+		$.getJSON("https://raw.githubusercontent.com/PrettyCards/daily-collector/main/allArtifactsProcessed.json", {}, function(data) {
+			this.artifacts = [];
+			for (var i=0; i < data.length; i++) {
+				var art = data[i];
+				this.artifacts[art.id] = art;
 			}
 			PrettyCards_plugin.events.emit("PrettyCards:onArtifacts", this.artifacts);
 		}.bind(this));
@@ -123,7 +91,6 @@ class ArtifactDisplay {
 		// Card -> <name>'s Artifact
 		// Soul -> <SOUL> Artifact
 		// Rarity only -> <rarity> Artifact
-		// TODO: Finish this function and hook it up to both artifact viewing functions in fancy_helper.js
 		
 		var soul = artifact.soul;
 		var rarity = artifact.rarity;
@@ -157,32 +124,6 @@ class ArtifactDisplay {
 	}
 	
 }
-
-// The following three variables are the reason why I can even check what an artifact's rarity should be. 
-// Only used on artifacts the server sends. Custom ones should be handled by the author.
-ArtifactDisplay.commonArtifactCost = 300;
-ArtifactDisplay.legendaryArtifactCost = 1000;
-ArtifactDisplay.hardcodedAdditionalData = [
-	{id:  1, rarity: "BASE"},
-	{id:  2, rarity: "BASE"},
-	{id:  3, rarity: "BASE"},
-	{id:  4, rarity: "BASE"},
-	{id:  6, rarity: "BASE"},
-	{id: 45, isImageBig: true},
-	{id: 25, rarity: "DETERMINATION", ownerId: 28 , backgroundClass: "PrettyCards_ArtBG_Genocide"},  		// Genocide
-	{id: 34, rarity: "DETERMINATION", ownerId: 505, backgroundClass: "PrettyCards_ArtBG_DarkFountain"}, 	// Outbreak/Dark Fountain
-	{id: 43, rarity: "DETERMINATION", ownerId: 688, backgroundClass: "PrettyCards_ArtBG_UltimateFusion"}, 	// Ultimate Fusion
-	{id: 46, rarity: "DETERMINATION", ownerId: 717, backgroundClass: "PrettyCards_ArtBG_FreeKromer"}, 		// FREE KROMER
-	// Frisk Artifacts
-	{id: 60, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_WornDagger", soul: "DETERMINATION"}, 		// Worn Dagger
-	{id: 56, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_ToughGlove", soul: "BRAVERY"}, 				// Tough Glove
-	{id: 59, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_EmptyGun", soul: "JUSTICE"},  				// Empty Gun
-	{id: 58, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_BurntPan", soul: "KINDNESS"}, 				// Burnt Pan
-	{id: 55, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_ToyKnife", soul: "PATIENCE"}, 				// Toy Knife
-	{id: 57, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_BalletShoes", soul: "INTEGRITY"}, 			// Ballet Shoes
-	{id: 24, rarity: "DETERMINATION", ownerId: 65, backgroundClass: "PrettyCards_ArtBG_TornNotebook", soul: "PERSEVERANCE"}, 		// Torn Notebook
-];
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var artifactDisplay = new ArtifactDisplay();
 
