@@ -138,3 +138,7 @@ PrettyCards_plugin.events.on("GameEvent", function (data) {
 	}
 })
 */
+
+PrettyCards_plugin.events.on("GameEvent", (data) => {
+	console.log(data.action, "event: ", data);
+})
