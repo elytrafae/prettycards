@@ -63,6 +63,7 @@ import {} from "/src/libraries/footer_remover.js";
 
 import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
 import {} from "/src/libraries/_proof_of_concept/superposition_cards.js";
+import {} from "/src/libraries/_proof_of_concept/card_data_optimization.js";
 
 // import {} from "/src/libraries/external_api_integration/youtube_player.js";
 
