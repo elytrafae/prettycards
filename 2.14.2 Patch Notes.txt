@@ -1,5 +1,6 @@
 
 - Added cool BG for Profile Skins that have them into Better User Info
+- Custom Chat Commands: Uppercase (:upper:), Lowercase (:lower:), Mockingcase (:mock:), Shrug (:shrug:)
 
 TODO:
 - Don't allow "End Turn" press while selecting targets
