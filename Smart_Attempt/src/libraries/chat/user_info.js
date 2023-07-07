@@ -108,8 +108,24 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	data.popupElement.className = "modal-dialog modal-lg";
 	
 	header.className += " PrettyCards_UserHeader";
-	header.style["background-image"] = "url(images/profiles/" + user.profileSkin.image + ".png)";
-	
+	header.style["background-image"] = `url(/images/profiles/${user.profileSkin.image}.png)`
+
+	// This part is for the special profile skin backgrounds.
+	// I should have separated this mess in separate functions long ago, but it's to late to go back now haha
+	var modalContent = data.popupElement.querySelector(".modal-content"); // This is essentially the bottomost element I can give the BG to
+	modalContent.style["background-image"] = `url(/images/backgrounds/${user.profileSkin.image}.png)`;
+	modalContent.style["background-color"] = "black"; // This is the fallback color. Most profile skins don't have a background, so this is perfect!
+	modalContent.style["background-size"] =  "cover";
+	modalContent.style["background-position"] = "center";
+
+	var modalBody = data.popupElement.querySelector(".modal-body");
+	modalBody.style["background"] = "none";
+
+	var modalFooter = data.popupElement.querySelector(".modal-footer");
+	modalFooter.style["background"] = "none";
+
+	//////////////////////////////////////////////////////////
+
 	var statusStr = CustomChatBadgeSystem.getInstance().getStatusStringForId(user.id);
 
 	var title = header.querySelector(".bootstrap-dialog-title");
