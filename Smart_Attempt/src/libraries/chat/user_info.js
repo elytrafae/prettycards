@@ -41,6 +41,18 @@ addSetting({
     'default': true, // default value
 });
 
+var bgOpacitySlider = addSetting({
+    'key': 'user_info_special_bg_opacity',
+    'name': 'BUI: Background Opacity', // Name in settings page
+	'note': "Certain profile skins have special backgrounds while in battle. Better User Info displays these backgrounds as its background if there are any, or black if there is not. This setting lets you control the opacity of these special backgrounds, with lower numbers making them darker, and higher numbers making them brighter.",
+    'type': 'slider',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': 60, // default value
+	'min': 0,
+	'max': 100,
+	'step': 1
+});
+
 function friendshipShowUpdate(newVal, oldVal, $elements = $(".PrettyCards_UserInfo_FriendshipHideable")) {
 	if (newVal) {
 		$elements.removeClass("PrettyCards_Hidden");
@@ -118,11 +130,12 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	modalContent.style["background-size"] =  "cover";
 	modalContent.style["background-position"] = "center";
 
+	var darkOpacity = (100 - bgOpacitySlider.value())/100;
 	var modalBody = data.popupElement.querySelector(".modal-body");
-	modalBody.style["background"] = "none";
+	modalBody.style["background"] = `rgba(0, 0, 0, ${darkOpacity})`;
 
 	var modalFooter = data.popupElement.querySelector(".modal-footer");
-	modalFooter.style["background"] = "none";
+	modalFooter.style["background"] = `rgba(0, 0, 0, ${darkOpacity})`;
 
 	//////////////////////////////////////////////////////////
 
