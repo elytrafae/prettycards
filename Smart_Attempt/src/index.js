@@ -20,6 +20,7 @@ import {} from "./libraries/mobile/navigation.js";
 
 import {} from "./libraries/chat/user_info.js";
 import {} from "./libraries/chat/custom_chat_badges.js";
+import {} from "./libraries/chat/custom_chat_commands.js";
 // import {} from "./libraries/chat/embed_media.js";
 import {} from "./libraries/private_games/private_game_host.js";
 import {} from "./libraries/private_games/private_game_recipient.js";
