@@ -3,6 +3,7 @@
 - Custom Chat Commands: Uppercase (:upper:), Lowercase (:lower:), Mockingcase (:mock:), Shrug (:shrug:)
 
 - Switched to a more efficient way of getting artifacts for display!
+- Fixed lag and error spam caused by the browser refusing to preload audio in certain cases
 
 TODO:
 - Fix permissions for PC staff tools!
