@@ -135,6 +135,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 	artifactDisplay.GetAllArtifacts();
 });
 
+/*
 PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
 	//console.log("DATA", data);
 	var backup_artifacts = [];
@@ -150,6 +151,27 @@ PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
 	for (var i=0; i < backup_artifacts.length; i++) {
 		var artifact = backup_artifacts[i];
 		artifactDisplay.SetAdditionalDataForArtifact(artifact);
+		var className = "PrettyCards_Artifact_" + artifact.rarity;
+		if (artifact.soul) {
+			className = "PrettyCards_Artifact_Soul_" + artifact.soul;
+		}
+		window.$(".artifact-img[artifactId=" + artifact.id + "]").addClass(className);
+	}
+});
+*/
+
+PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
+	var displayed_artifacts = [];
+	if (data.action == "getPlayersStats") {
+		var artifacts = JSON.parse(data.artifacts);
+		for (var player in artifacts) {
+			displayed_artifacts = displayed_artifacts.concat(artifacts[player]);
+		}
+	} else {
+		displayed_artifacts = JSON.parse(data.enemyArtifacts).concat(JSON.parse(data.yourArtifacts));
+	}
+	for (var i=0; i < displayed_artifacts.length; i++) {
+		var artifact = artifactDisplay.GetArtifactById(displayed_artifacts[i].id);
 		var className = "PrettyCards_Artifact_" + artifact.rarity;
 		if (artifact.soul) {
 			className = "PrettyCards_Artifact_Soul_" + artifact.soul;
