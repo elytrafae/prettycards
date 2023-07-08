@@ -1,4 +1,5 @@
 import { PrettyCards_plugin } from "../underscript_checker";
+import owoify from "owoify-js";
 
 const IMPOSSIBLE_CHARACTER = "␚";//"᭼"; // IDK, a character that Onu's chat does not accept
 
@@ -23,16 +24,20 @@ class CommandTextPair {
 }
 
 const commandAliases = {
-    ":owo:": [":uwu:", ":owofy:"],
     ":upper:": [":fullcaps:", ":uppercase:", ":caps:"],
     ":lower:": ["fulllower", ":lowercase:"],
     ":mock:": [":mockcase:", ":swapcase:", ":alternatecase:"],
-    ":shrug:": []
 }
 
 const functionsForCommands = {
     ":owo:" : (text) => {
-        return new CommandTextPair("", text);
+        return new CommandTextPair("", owoify(text, "owo"));
+    },
+    ":uwu:" : (text) => {
+        return new CommandTextPair("", owoify(text, "uwu"));
+    },
+    ":uvu:" : (text) => {
+        return new CommandTextPair("", owoify(text, "uvu"));
     },
     ":upper:" : (text) => {
         return new CommandTextPair("", text.toUpperCase());
@@ -43,9 +48,12 @@ const functionsForCommands = {
     ":mock:" : (text) => {
         return new CommandTextPair("", text.toMockCase());
     },
-    ":shrug:": (text) => {
-        return new CommandTextPair("¯\\_(ツ)_/¯", text);
-    }
+    ":shrug:": asciiEmoteHelper("¯\\_(ツ)_/¯"),
+    ":fucku:": asciiEmoteHelper("(ツ)╭∩╮"),
+    ":shrugg:": asciiEmoteHelper("¯\\_( ͡° ͜ʖ ͡°)_/¯"),
+    ":above:": asciiEmoteHelper("☝(ツ)"),
+    ":tableflip:": asciiEmoteHelper("(╯°□°)╯︵ ┻━┻"),
+    ":tabledown:": asciiEmoteHelper("┬─┬ノ( º _ ºノ)")
 }
 
 function processMessage(message) {
@@ -97,8 +105,13 @@ String.prototype.toMockCase = function() {
 }
 
 function convert({ input }) {
-    console.log(input);
     $(input).val(processMessage($(input).val()));
+}
+
+function asciiEmoteHelper(emote) {
+    return (text) => {
+        return new CommandTextPair(emote, text);
+    }
 }
 
 PrettyCards_plugin.events.on('Chat:send', convert);

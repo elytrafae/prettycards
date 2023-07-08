@@ -22,7 +22,7 @@
     "author": "CMD_God",
     "license": "",
     "devDependencies": {
-        "webpack": "^5.74.0",
+        "webpack": "^5.88.1",
         "webpack-cli": "^3.3.11",
         "webpack-userscript": "^2.5.1"
     },
@@ -31,6 +31,7 @@
         "fuse.js": "^6.6.2",
         "gifuct-js": "^2.1.2",
         "jszip": "^3.10.1",
+        "owoify-js": "^2.0.0",
         "pako": "^2.0.4",
         "tesseract.js": "^4.1.0"
     }
