@@ -45,7 +45,8 @@ class ThemeSongSetting {
 
     addFile(path) {
         if (underscript.onPage("Game") || underscript.onPage("Spectate")) {
-            utility.preloadAudio(path); // Moving it to whenever a card is rendered, except during Games and Spectating.
+            // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
+            utility.preloadAudio(path).catch((e) => {}); // Moving it to whenever a card is rendered, except during Games and Spectating.
         }
         this.replacements.push(path);
     }
@@ -235,7 +236,8 @@ if (settings.multi_theme_songs.value()) {
                     var setting = getThemeSongSettingByCardId(id);
                     if (setting) {
                         setting.replacements.forEach( (url) => {
-                            utility.preloadAudio(url);
+                            // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
+                            utility.preloadAudio(url).catch(()=>{});
                         })
                     }
                 }

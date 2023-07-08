@@ -293,7 +293,7 @@ class Utility {
 			var audio = new Audio();
 			audio.onload = function() {resolve(audio)};
 			audio.onerror = reject;
-			audio.src = url; // Just to be sure it works with every browser.
+			audio.src = url;
 		})
 		
 	}
