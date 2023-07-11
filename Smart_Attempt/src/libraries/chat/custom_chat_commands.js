@@ -62,7 +62,10 @@ const functionsForCommands = {
     ":shrugg:": asciiEmoteHelper("¯\\_( ͡° ͜ʖ ͡°)_/¯"),
     ":above:": asciiEmoteHelper("☝(ツ)"),
     ":tableflip:": asciiEmoteHelper("(╯°□°)╯︵ ┻━┻"),
-    ":tabledown:": asciiEmoteHelper("┬─┬ノ( º _ ºノ)")
+    ":tabledown:": asciiEmoteHelper("┬─┬ノ( º _ ºノ)"),
+    ":lenny:": asciiEmoteHelper("( ͡° ͜ʖ ͡°)"),
+    ":lelelennynyny:": asciiEmoteHelper("( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)"),
+    ":amog:": asciiEmoteHelper("ඞ")
 }
 
 function processMessage(message) {
