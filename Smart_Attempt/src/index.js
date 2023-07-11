@@ -3,6 +3,7 @@
 import {} from "./libraries/jquery_additions.js";
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import {} from "/src/libraries/custom_setting_types.js";
 import {} from "/src/libraries/custom_page_base.js";
 //import {} from "/src/libraries/updater.js";
 

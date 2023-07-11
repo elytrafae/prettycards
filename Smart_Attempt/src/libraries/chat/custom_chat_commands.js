@@ -1,7 +1,16 @@
-import { PrettyCards_plugin } from "../underscript_checker";
+import { getSettingType } from "../custom_setting_types";
+import { PrettyCards_plugin, addSetting } from "../underscript_checker";
 import owoify from "owoify-js";
 
 const IMPOSSIBLE_CHARACTER = "␚";//"᭼"; // IDK, a character that Onu's chat does not accept
+
+addSetting({
+    'key': 'chat_ascii_emotes_list',
+    'name': 'Chat Ascii Emotes', // Name in settings page
+    'type': getSettingType("EditableList"),
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+});
 
 class CommandTextPair {
 
