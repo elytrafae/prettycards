@@ -7,6 +7,7 @@ const IMPOSSIBLE_CHARACTER = "␚";//"᭼"; // IDK, a character that Onu's chat 
 var customEmoteSetting = addSetting({
     'key': 'chat_ascii_emotes_list',
     'name': 'Chat Ascii Emotes', // Name in settings page
+    'note': `Chat shortcuts. The first value is the name you type between "::", the second is the text it will be replaced with. Examples provided below. <span class="red">CAN ONLY CONTAIN LOWERCASE LETTERS FROM THE ENGLISH ALPHABET!</span>`,
     'type': getSettingType("EditableList"),
     'refresh': false, // true to add note "Will require you to refresh the page"
     'default': {
