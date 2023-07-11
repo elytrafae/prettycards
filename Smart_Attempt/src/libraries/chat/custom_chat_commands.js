@@ -4,12 +4,22 @@ import owoify from "owoify-js";
 
 const IMPOSSIBLE_CHARACTER = "␚";//"᭼"; // IDK, a character that Onu's chat does not accept
 
-addSetting({
+var customEmoteSetting = addSetting({
     'key': 'chat_ascii_emotes_list',
     'name': 'Chat Ascii Emotes', // Name in settings page
     'type': getSettingType("EditableList"),
     'refresh': false, // true to add note "Will require you to refresh the page"
-    'default': true, // default value
+    'default': {
+        "shrug": "¯\\_(ツ)_/¯",
+        //":fucku:": asciiEmoteHelper("(ツ)╭∩╮"),
+        "shrugl": "¯\\_( ͡° ͜ʖ ͡°)_/¯",
+        "above": "☝(ツ)",
+        "tableflip": "(╯°□°)╯︵ ┻━┻",
+        "tabledown": "┬─┬ノ( º _ ºノ)",
+        "lenny": "( ͡° ͜ʖ ͡°)",
+        "lelelennynyny": "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)",
+        "amog": "ඞ"
+    }, // default value
 });
 
 class CommandTextPair {
@@ -38,7 +48,7 @@ const commandAliases = {
     ":mock:": [":mockcase:", ":swapcase:", ":alternatecase:"],
 }
 
-const functionsForCommands = {
+var functionsForCommands = {
     ":owo:" : (text) => {
         return new CommandTextPair("", owoify(text, "owo"));
     },
@@ -57,6 +67,7 @@ const functionsForCommands = {
     ":mock:" : (text) => {
         return new CommandTextPair("", text.toMockCase());
     },
+    /*
     ":shrug:": asciiEmoteHelper("¯\\_(ツ)_/¯"),
     ":fucku:": asciiEmoteHelper("(ツ)╭∩╮"),
     ":shrugg:": asciiEmoteHelper("¯\\_( ͡° ͜ʖ ͡°)_/¯"),
@@ -66,6 +77,12 @@ const functionsForCommands = {
     ":lenny:": asciiEmoteHelper("( ͡° ͜ʖ ͡°)"),
     ":lelelennynyny:": asciiEmoteHelper("( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)"),
     ":amog:": asciiEmoteHelper("ඞ")
+    */
+}
+
+var emotes = customEmoteSetting.value();
+for (var key in emotes) {
+    functionsForCommands[`:${key}:`] = asciiEmoteHelper(emotes[key]);
 }
 
 function processMessage(message) {

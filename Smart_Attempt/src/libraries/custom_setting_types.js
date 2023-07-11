@@ -24,7 +24,7 @@ class EditableList extends window.underscript.utils.SettingType {
         super('EditableList');
     }
 
-    addRow(parent, key = "", value = "") {
+    addRow(parent, key = "", value = "", prepend = false) {
         var row = document.createElement("DIV");
         row.className = "PrettyCards_Settings_EditableListRow";
 
@@ -49,7 +49,7 @@ class EditableList extends window.underscript.utils.SettingType {
 
         var deleteButton = document.createElement("BUTTON");
         deleteButton.innerHTML = "Delete";
-        deleteButton.className = "btn btn-danger";
+        deleteButton.className = "btn btn-danger PrettyCards_Settings_EditableListTableButton";
         deleteCell.appendChild(deleteButton);
 
         row.appendChild(keyCell);
@@ -57,7 +57,11 @@ class EditableList extends window.underscript.utils.SettingType {
         row.appendChild(valueCell);
         row.appendChild(deleteCell);
 
-        parent.appendChild(row);
+        if (prepend) {
+            parent.prepend(row);
+        } else {
+            parent.appendChild(row);
+        }
     }
     
     element(value, update, {
@@ -66,20 +70,30 @@ class EditableList extends window.underscript.utils.SettingType {
         container,
         key = '',
     }) {
-        console.log(data, remove, key);
+        console.log(value, update, data, remove, key);
         var myContainer = document.createElement("DIV");
         var table = document.createElement("DIV");
         table.className = "PrettyCards_Settings_EditableListTable";
         myContainer.appendChild(table);
 
-        this.addRow(table, "key_test", "value_test");
+        for (var key in value) {
+            this.addRow(table, key, value[key]);
+        }
 
         container[0].appendChild(myContainer);
-        return document.createElement("DIV");
+        var addButton = document.createElement("BUTTON");
+        addButton.onclick = () => {this.addRow(table, "", "", true)};
+        addButton.className = "btn btn-success PrettyCards_Settings_EditableListTableButton";
+        addButton.innerHTML = "Add";
+        return addButton;
+    }
+
+    default() {
+        return [];
     }
 
     value(val, data = undefined) {
-        if (typeof(val) === "object") {
+        if (typeof(val) !== "object") {
             val = JSON.parse(val);
         }
         return val;
@@ -95,7 +109,7 @@ class EditableList extends window.underscript.utils.SettingType {
             ".PrettyCards_Settings_EditableListRow div { padding: 0.2em; }",
             ".PrettyCards_Settings_EditableListRow input { padding: 3px 6px; height: 28px; }",
             ".PrettyCards_Settings_EditableListTable { width: 420px; border-bottom: 1px solid white; border-top: 1px solid white; margin: 2px 0 10px 0; padding: 10px 0; }",
-            ".PrettyCards_Settings_EditableListTable button { padding: 3px 6px; }"
+            ".PrettyCards_Settings_EditableListTableButton.btn { padding: 3px 6px; }"
         ];
     }
 }
