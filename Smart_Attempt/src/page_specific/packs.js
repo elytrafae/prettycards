@@ -10,6 +10,10 @@ import {WidePacksPage} from "./../libraries/packs_page_templates/wide.js";
 
 import {StartOpenPackAnimation} from "./../libraries/pack_open_anim_manager.js";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/Packs.css";
+loadCSS(css);
+
 var pagetemplates = [NormalPacksPage, WidePacksPage];
 
 var settingsoptions = [];
@@ -120,10 +124,6 @@ for (var i=0; i < packs_data.length; i++) {
 	data.image = data.image_without_extension + data.image_extension;
 	packs_data2[data.code_id] = data;
 }
-
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromGH("Packs"); // Other pages might use flippable cards, so I am gonna load this every time.
-})
 
 function InitPacks() {
 	

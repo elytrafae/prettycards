@@ -4,6 +4,10 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 import {returnHDImageIfThereIs} from "/src/libraries/card_modifyers/hd_card_skins.js";
 
+import { loadCSS } from "../../libraries/css_loader";
+import css from "../../css/CardSkinSelector.css";
+loadCSS(css);
+
 var allCardSkins = [];
 var ownedCardSkins = [];
 var notOwnedCardSkins = [];
@@ -89,8 +93,6 @@ function ProcessCardSkinLists() {
 	skinLists[2] = ownedCardSkins;
 	//console.log("Not owned card skins: ", notOwnedCardSkins);
 }
-
-utility.loadCSSFromGH("CardSkinSelector");
 
 function ProcessDefaultSkins() {
 	for (var i=0; i < allCards.length; i++) {

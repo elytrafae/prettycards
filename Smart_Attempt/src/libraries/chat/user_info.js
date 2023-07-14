@@ -9,6 +9,14 @@ import {ChallengePlayerScreen} from "/src/libraries/private_games/private_game_s
 import { translationManager } from "../translation/translation_manager";
 import { CustomChatBadgeSystem } from "./custom_chat_badges";
 
+import { loadCSS } from "../../libraries/css_loader";
+import css1 from "../../css/UserInfo.css";
+import css2 from "../../css/CustomFriendship.css";
+import css3 from "../../css/FormExtensions.css";
+loadCSS(css1);
+loadCSS(css2);
+loadCSS(css3);
+
 window.PrettyCards_plugin = PrettyCards_plugin;
 
 var $ = window.$;
@@ -86,9 +94,7 @@ function onPageLoaded() {
 	window.getInfo = sendUserInfoEvent;
 	$ = window.$;
 	
-	utility.loadCSSFromGH("UserInfo");
-	utility.loadCSSFromGH("CustomFriendship");
-	utility.loadCSSFromGH("FormExtensions");
+
 	utility.loadCSSFromLink("/css/meters.css");
 	//utility.loadCSSFromLink("/css/cards.css");
 	//utility.loadCSSFromLink("/css/frames.css");

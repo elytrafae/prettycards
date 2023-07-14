@@ -6,6 +6,10 @@ import {SavedDeckSelector, dummy_skin, onu_skin, GetAllDecks} from "/src/librari
 import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 import {utility} from "/src/libraries/utility.js";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/Play.css";
+loadCSS(css);
+
 var playLocked = true;
 var deckSelectLocked = true;
 var selectedDeck = {};
@@ -146,7 +150,6 @@ function StartJoiningQueue(game_mode) {
 
 function InitPlay() {
 	//console.log("Init Play!");
-	utility.loadCSSFromGH("Play");
 	
 	if (document.querySelector('span[data-i18n="[html]play-incomplete"]')) {
 		console.log("NO DECKS!");

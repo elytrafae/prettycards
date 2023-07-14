@@ -3,6 +3,10 @@ import {utility} from "/src/libraries/utility.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import { PrettyCards_plugin } from "../libraries/underscript_checker";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/CustomCardSkins.css";
+loadCSS(css);
+
 function appendCardCustomCardSkin(skin, container) {
 	
 	var card = utility.completeCopy(window.getCard(skin.cardId) || window.allCards[0]);
@@ -396,7 +400,6 @@ function InitCustomCardSkins() {
 	});
 	ExecuteWhen("PrettyCards:onPageLoad PC_Chat:getSelfInfos", function () {
 		window.$("title").html("PrettyCards - Custom Card Skins");
-		utility.loadCSSFromGH("CustomCardSkins");
 		window.$(".mainContent").html(`
 			<div id="PrettyCards_CardSkinsTab" style="font-size: 2em; margin-bottom: 0.1em;">
 				<button id="PrettyCards_CreateCustomCardSkinButton" class="brn btn-success">Create New</button>

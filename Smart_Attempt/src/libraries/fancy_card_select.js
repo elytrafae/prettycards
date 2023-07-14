@@ -2,6 +2,10 @@
 import { utility } from "./utility";
 import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/LookAtCards.css";
+loadCSS(css);
+
 var background = null;
 var dummyDialogue = { // This is so Onu can properly close this thing.
     close : function() {
@@ -75,7 +79,6 @@ var oldShowSelectCards;
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function () {
     oldShowSelectCards = window.showSelectCards;
-    utility.loadCSSFromGH("LookAtCards");
     if (settings.fancy_card_select.value()) {
         window.showSelectCards = LookAtCards;
     }

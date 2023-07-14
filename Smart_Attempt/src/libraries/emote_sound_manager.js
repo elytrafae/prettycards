@@ -1,6 +1,10 @@
 import { PrettyCards_plugin, settings, addSetting } from "/src/libraries/underscript_checker";
 import { utility } from "/src/libraries/utility";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/Cosmetics.css";
+loadCSS(css);
+
 
 addSetting({
 	'key': 'emote_sounds',
@@ -60,7 +64,3 @@ if (settings.emote_sounds.value() && window.underscript.onPage("CosmeticsShop"))
         });
     })
 }
-
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    utility.loadCSSFromGH("Cosmetics");
-})

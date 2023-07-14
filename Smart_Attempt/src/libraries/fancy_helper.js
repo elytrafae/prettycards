@@ -8,6 +8,12 @@ import { addSetting, prettycards, PrettyCards_plugin, settings } from "./undersc
 import { createFloatingSoul } from "./floating_souls";
 import { pagegetters } from "./page_getters";
 
+import { loadCSS } from "../libraries/css_loader";
+import css1 from "../css/CustomCards.css";
+import css2 from "../css/ArtifactBackgrounds.css";
+loadCSS(css1);
+loadCSS(css2);
+
 class FancyListDisplay {
 	
 	constructor(datas, title) {
@@ -308,8 +314,6 @@ class FancyDisplay {
 FancyDisplay.customSouls = [];
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromGH("CustomCards");
-	utility.loadCSSFromGH("ArtifactBackgrounds");
 	
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.showArtifactDescBox = FancyDisplay.ViewArtifactInfo.bind(this);

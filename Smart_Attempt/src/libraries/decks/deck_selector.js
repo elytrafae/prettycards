@@ -6,9 +6,11 @@ import {artifactDisplay} from "/src/libraries/artifact_display.js";
 import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 import { settings } from "../underscript_checker";
 
-var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
+import { loadCSS } from "../../libraries/css_loader";
+import css from "../../css/SavedDeckList.css";
+loadCSS(css);
 
-utility.loadCSSFromGH("SavedDeckList");
+var DECK_STORAGE_PREFIX = "underscript.deck." + window.selfId + ".";
 
 var demonEasterEgg = Math.random() <= 0.022;
 

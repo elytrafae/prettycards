@@ -8,6 +8,10 @@ import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/decks/deck
 import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 import {utility} from "/src/libraries/utility.js";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/Play.css";
+loadCSS(css);
+
 var playLocked = true;
 var deckSelectLocked = true;
 var selectedDeck = {};
@@ -91,7 +95,6 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 
 function InitGameList() {
 	//console.log("Init Play!");
-	utility.loadCSSFromGH("Play");
 	
 	$("#state1 > table").css("display", "none");
 	$("#state1 br").css("display", "none");

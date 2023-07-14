@@ -3,6 +3,10 @@ import { pagegetters } from "../libraries/page_getters";
 import { PrettyCards_plugin, settings, addSetting } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/MassCrafting.css";
+loadCSS(css);
+
 const minDeckCodeLength = 50; // Original result was 132, but I decided to not have that many bugs today . . .
 
 var prevDial;
@@ -310,7 +314,6 @@ function displayDeck(e) {
 function InitCrafting() {
     if (settings.sktimacraft.value()) {
         PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-            utility.loadCSSFromGH("MassCrafting");
             var myTD = $(`<td><input type="text" class="form-control" placeholder=". . ."></input></td>`);
             var td = $("#dust").closest("td");
             td.css("width", "unset").after(myTD);

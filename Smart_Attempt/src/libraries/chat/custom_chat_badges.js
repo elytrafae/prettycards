@@ -2,6 +2,10 @@ import { utility } from "../utility";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
+import { loadCSS } from "../../libraries/css_loader";
+import css from "../../css/CustomChatBadges.css";
+loadCSS(css);
+
 const PC_STAFF_BADGE = {
     id: 220,
     priority: 10,
@@ -66,7 +70,6 @@ class CustomChatBadgeSystem {
         })
         
         PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
-            utility.loadCSSFromGH("CustomChatBadges");
             this.#oldFn = window.appendMessage;
             window.appendMessage = (chatMessage, idRoom, isPrivate) => {
                 this.#processMessage(chatMessage);

@@ -1,6 +1,10 @@
 import { PrettyCards_plugin, settings , addSetting } from "../underscript_checker";
 import { utility } from "../utility";
 
+import { loadCSS } from "../../libraries/css_loader";
+import css from "../../css/SwitchHighlight.css";
+loadCSS(css);
+
 addSetting({
 	'key': 'switch_highlight',
 	'name': 'Switch Highlight', // Name in settings page
@@ -135,7 +139,6 @@ function gameSetup() {
 }
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    utility.loadCSSFromGH("SwitchHighlight");
     if (underscript.onPage("Game") && settings.switch_highlight.value()) {
         gameSetup();
     }

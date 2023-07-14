@@ -5,6 +5,11 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/Artifacts.css";
+loadCSS(css);
+
+
 var old_rarity = addSetting({
     'key': 'old_artifact_rarity',
     'name': 'Disable Post-2023 Artifact Rarity System', // Name in settings page
@@ -131,7 +136,6 @@ prettycards.artifactDisplay = artifactDisplay;
 window.artifactDisplay = artifactDisplay;
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromGH("Artifacts");
 	artifactDisplay.GetAllArtifacts();
 });
 

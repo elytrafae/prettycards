@@ -5,6 +5,10 @@ import {artifactDisplay} from "../artifact_display.js";
 import { PrettyCards_plugin, prettycards } from '../underscript_checker';
 import { utility } from "../utility.js";
 
+import { loadCSS } from "../../libraries/css_loader";
+import css from "../../css/DeckImageImport.css";
+loadCSS(css);
+
 const SOULS = [
     "DETERMINATION",
     "BRAVERY",
@@ -137,10 +141,6 @@ function decodeAndDisplayDeck(link = "https://media.discordapp.net/attachments/9
         }
     );
 }
-
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
-    utility.loadCSSFromGH("DeckImageImport");
-})
 
 prettycards.testDeckImageImport = decodeAndDisplayDeck;
 prettycards.testDeckImageImportDialogue = openDialogue;

@@ -5,6 +5,10 @@ import { PrettyCards_plugin } from "../libraries/underscript_checker";
 import { utility } from "../libraries/utility";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/SmashOrPass.css";
+loadCSS(css);
+
 const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
 var cards = [];
 var cardIndex = -1;
@@ -250,7 +254,6 @@ function InitSmashOrPass() {
     ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {
         $("title").html("PrettyCards - Smash or Pass");
         localStorage["prettycards.top_advert_closed"] = true; // Makes the advert disappear now that the user visited this page.
-        utility.loadCSSFromGH("SmashOrPass");
 
         if (window.allCards && window.allCards.length > 0) {
             initStuff();

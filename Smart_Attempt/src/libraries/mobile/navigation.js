@@ -5,6 +5,10 @@ import {PrettyCards_plugin, settings, prettycards, addSetting} from "/src/librar
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {utility} from "/src/libraries/utility.js";
 
+import { loadCSS } from "../../libraries/css_loader";
+import css from "../../css/MobileSidebar.css";
+loadCSS(css);
+
 ExecuteWhen("translation:loaded", function () {
 	var $ = window.$;
 });
@@ -213,10 +217,6 @@ function CreateSideNavMenu() {
 prettycards.openSettings = function() {
 	PrettyCards_plugin.settings().open();
 }
-
-ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromGH("Mobile_Sidebar");
-})
 
 if (!underscript.onPage("Game") && settings.mobile_mode.value()) {
 	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function() {

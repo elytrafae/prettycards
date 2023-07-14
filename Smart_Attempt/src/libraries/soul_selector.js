@@ -6,9 +6,9 @@ import {AddTooltip} from "/src/libraries/tooltips.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
-ExecuteWhen("PrettyCards:onPageLoad", function() {
-	utility.loadCSSFromGH("Souls");
-});
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/Souls.css";
+loadCSS(css);
 
 var areDecksLoaded = false;
 var decks = {};

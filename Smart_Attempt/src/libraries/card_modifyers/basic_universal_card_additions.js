@@ -2,9 +2,9 @@
 import { utility } from "../utility";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
-PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
-    utility.loadCSSFromGH("CardAdditions");
-});
+import { loadCSS } from "../../libraries/css_loader";
+import css from "../../css/CardAdditions.css";
+loadCSS(css);
 
 const CARD_INFO_CLASS = "PrettyCards_CardBottomLeftInfo";
 

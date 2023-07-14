@@ -2,6 +2,10 @@ import { prettycards, PrettyCards_plugin } from "../libraries/underscript_checke
 import { utility } from "/src/libraries/utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
+import { loadCSS } from "../libraries/css_loader";
+import css from "../css/CustomTranslations.css";
+loadCSS(css);
+
 var source; // The source used for custom lines.
 
 var englishOriginal; // Onu's English File
@@ -36,7 +40,6 @@ function StartVerified() {
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
         window.$("title").html("PrettyCards - Custom Translations");
-        utility.loadCSSFromGH("CustomTranslations");
         $(".mainContent").html(`
             <div id="PrettyCards_CT_Phase0">
                 <h1>Please select a source!</h1>
