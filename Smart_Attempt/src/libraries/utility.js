@@ -96,6 +96,7 @@ class Utility {
 
 	constructor() {
 		this.SortedUniqueEntryHolder = SortedUniqueEntryHolder;
+		/*
 		this.githubCSSSources = {};
 		this.addCSSSourceData("base", {
 			version: GM_info.script.version,
@@ -103,8 +104,10 @@ class Utility {
 			apiLink: "https://api.github.com/repos/CMD-God/prettycards/commits",
 			urlLinkFunc: (data, name) => `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${data}/css/${name}.css`
 		});
+		*/
 	}
 
+	/*
 	addCSSSourceData(name, settings) {
 		this.githubCSSSources[name] = settings;
 		PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function(data) {
@@ -126,6 +129,7 @@ class Utility {
 			});
 		});
 	}
+	*/
 
 	loadCSSFromLink(url) {
 		return new Promise((resolve, reject) => {
