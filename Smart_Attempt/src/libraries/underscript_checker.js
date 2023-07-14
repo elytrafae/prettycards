@@ -136,6 +136,8 @@ addSetting({
     'default': false, // default value
 });
 
+PrettyCards_plugin.events.emit.singleton("PrettyCards:init");
+
 //console.log(settings);
 
 export {PrettyCards_plugin, settings, prettycards, addSetting};
