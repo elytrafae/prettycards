@@ -1,4 +1,4 @@
-import { PrettyCards_plugin } from "./underscript_checker";
+import { PrettyCards_plugin, prettycards } from "./underscript_checker";
 
 
 var container = document.createElement("DIV");
@@ -16,5 +16,7 @@ function loadCSS(css = "") {
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
     window.document.head.appendChild(container);
 })
+
+prettycards.loadCSS = loadCSS;
 
 export {loadCSS};
