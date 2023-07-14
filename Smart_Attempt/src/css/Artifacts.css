@@ -204,7 +204,7 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	z-index: 2;
 }
 
-.PrettyCards_ArtifactListImage {
+.PrettyCards_ArtifactListImage,.PrettyCards_ArtifactListImage.PrettyCards_SplitSoul_Container {
 	position: relative;
     width: 96px;
     height: 96px;
