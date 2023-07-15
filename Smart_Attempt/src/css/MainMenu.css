@@ -1,0 +1,65 @@
+
+
+.PrettyCards_MainMenu_Backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2222;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+}
+
+.PrettyCards_MainMenu_PosBox {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.PrettyCards_MainMenu_BorderLayer {
+    /*border: 1px solid white;*/
+    animation: PrettyCards_BorderAnim 10s alternate infinite ease-in-out;
+    padding: 1px;
+    margin: 0;
+    width: fit-content;
+}
+
+.PrettyCards_MainMenu_Layer1 {
+    background-color: #ffffff;
+}
+
+.PrettyCards_MainMenu_Layer2 {
+    background-color: #cccccc;
+}
+
+.PrettyCards_MainMenu_Layer3 {
+    background-color: #999999;
+}
+
+.PrettyCards_MainMenu_Layer4 {
+    background-color: #666666;
+}
+
+.PrettyCards_MainMenu_Layer5 {
+    background-color: #333333;
+}
+
+.PrettyCards_MainMenu_ActualContent {
+    width: 800px;
+    height: 500px;
+    max-height: 100%;
+    background-color: black;
+    padding: 6px;
+}
+
+@keyframes PrettyCards_BorderAnim {
+    from {
+        padding: 2px;
+    }
+    to {
+        padding: 6px;
+    }
+}

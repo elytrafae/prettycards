@@ -18,6 +18,6 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
 })
 
 prettycards.loadCSS = loadCSS;
-PrettyCards_plugin.events.emit.singleton("PrettyCards:cssLoaderReady");
+PrettyCards_plugin.events.emit.singleton("PrettyCards:cssLoaderReady"); // This has to be used by external scripts using this API only
 
 export {loadCSS};
