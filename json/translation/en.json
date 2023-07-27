@@ -261,6 +261,13 @@
     "card-419-cyan": "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Silence all enemy monsters}}.",
     "card-419-red": "{{KW:MAGIC}}: {{PC_SWITCH_RED:1|Kill all enemy monsters with 2 {{HP}} or less}}.",
     "card-419-both": "{{KW:MAGIC}}: {{PC_SWITCH_CYAN:1|Silence all enemy monsters}} and {{PC_SWITCH_RED:1|kill all enemy monsters with 2 {{HP}} or less}}.",
+    "card-779": {
+        "ifEqual" : "{{KW:DODGE}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: Reveal a random spell costing 1 or more in your or enemy hand. Turn it into a {{CARD:351|1}}.",
+        "value": "{{KW:DODGE}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: Reveal a random spell costing 1 or more in {{PC_SWITCH_CYAN:1|your}} or {{PC_SWITCH_RED:1|the enemy}} hand. Turn it into a {{CARD:351|1}}."
+    },
+    "card-779-cyan": "{{KW:DODGE}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: Reveal a random spell costing 1 or more in {{PC_SWITCH_CYAN:1|your}} hand. Turn it into a {{CARD:351|1}}.",
+    "card-779-red": "{{KW:DODGE}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: Reveal a random spell costing 1 or more in {{PC_SWITCH_RED:1|the enemy}} hand. Turn it into a {{CARD:351|1}}.",
+    "card-779-both": "{{KW:DODGE}} (1). {{KW:MAGIC}}: {{KW:SWITCH}}: Reveal a random spell costing 1 or more in {{PC_SWITCH_CYAN:1|your}} and {{PC_SWITCH_RED:1|the enemy}} hand. Turn them into {{CARD:351|2}}.",
     "pc-hub-savedeck" : "Save Deck!",
     "pc-hub-deckby" : "by $1",
     "pc-hub-upload-success" : "Deck Uploaded Successfully!",
