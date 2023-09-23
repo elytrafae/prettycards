@@ -83,6 +83,180 @@
         "image": "Sleeping_Frisk",
         "ucpCost": 35
     }, {
+        "code": ":processingflowey:",
+        "id": 15,
+        "name": "Processing Flowey",
+        "image": "Processing_Flowey",
+        "ucpCost": 35
+    }, {
+        "code": ":undynelol:",
+        "id": 16,
+        "name": "Laughing Undyne",
+        "image": "Laughing_Undyne",
+        "ucpCost": 35
+    }, {
+        "code": ":frisklove:",
+        "id": 17,
+        "name": "Frisk Love",
+        "image": "Frisk_Love",
+        "ucpCost": 35
+    }, {
+        "code": ":snailfury:",
+        "id": 18,
+        "name": "Snail Fury",
+        "image": "Snail_Fury",
+        "ucpCost": 35
+    }, {
+        "code": ":undynelul:",
+        "id": 19,
+        "name": "Undyne LUL",
+        "image": "Undyne_LUL",
+        "ucpCost": 35
+    }, {
+        "code": ":tpose:",
+        "id": 20,
+        "name": "T Pose",
+        "image": "T_Pose",
+        "ucpCost": 35
+    }, {
+        "code": ":omegastare:",
+        "id": 21,
+        "name": "Omega Stare",
+        "image": "Omega_Stare",
+        "ucpCost": 35
+    }, {
+        "code": ":pingpon:",
+        "id": 22,
+        "name": "Ping Pon",
+        "image": "Ping_Pon",
+        "ucpCost": 35
+    }, {
+        "code": ":disturbedbp:",
+        "id": 23,
+        "name": "Disturbed Burger Pants",
+        "image": "Disturbed_Burger_Pants",
+        "ucpCost": 35
+    }, {
+        "code": ":alphyssweat:",
+        "id": 24,
+        "name": "Alphys Sweat",
+        "image": "Alphys_Sweat",
+        "ucpCost": 35
+    }, {
+        "code": ":ClapFrisk:",
+        "id": 25,
+        "name": "Frisk Clap",
+        "image": "Frisk_Clap",
+        "ucpCost": 60
+    }, {
+        "code": ":HelloFrisk:",
+        "id": 26,
+        "name": "Frisk Hello",
+        "image": "Frisk_Hello",
+        "ucpCost": 60
+    }, {
+        "code": ":TearsFrisk:",
+        "id": 27,
+        "name": "Frisk Tears",
+        "image": "Frisk_Tears",
+        "ucpCost": 60
+    }, {
+        "code": ":ShyChara:",
+        "id": 28,
+        "name": "Shy Chara",
+        "image": "Shy_Chara",
+        "ucpCost": 35
+    }, {
+        "code": ":ConfusedSans:",
+        "id": 29,
+        "name": "Confused Lost Sans",
+        "image": "Confused_Lost_Sans",
+        "ucpCost": 60
+    }, {
+        "code": ":AngryPaps:",
+        "id": 30,
+        "name": "Angry Paps",
+        "image": "Angry_Paps",
+        "ucpCost": 50
+    }, {
+        "code": ":Wheevil:",
+        "id": 31,
+        "name": "Wheevil",
+        "image": "Wheevil",
+        "ucpCost": 50
+    }, {
+        "code": ":IntensiveAsriel:",
+        "id": 32,
+        "name": "Intensive Asriel",
+        "image": "Intensive_Asriel",
+        "ucpCost": 60
+    }, {
+        "code": ":SmugAsriel:",
+        "id": 33,
+        "name": "Smug Asriel",
+        "image": "Smug_Asriel",
+        "ucpCost": 60
+    }, {
+        "code": ":ThinkingAsriel:",
+        "id": 34,
+        "name": "Thinking Asriel",
+        "image": "Thinking_Asriel",
+        "ucpCost": 60
+    }, {
+        "code": ":TroubledAsriel:",
+        "id": 35,
+        "name": "Troubled Asriel",
+        "image": "Troubled_Asriel",
+        "ucpCost": 60
+    }, {
+        "code": ":CharaStop:",
+        "id": 36,
+        "name": "Chara Stop",
+        "image": "Chara_Stop",
+        "ucpCost": 35
+    }, {
+        "code": ":CharaNo:",
+        "id": 37,
+        "name": "Chara No",
+        "image": "Chara_No",
+        "ucpCost": 35
+    }, {
+        "code": ":MockingFrisk:",
+        "id": 38,
+        "name": "Mocking Frisk",
+        "image": "Mocking_Frisk",
+        "ucpCost": 35
+    }, {
+        "code": ":SurprisedAlphys:",
+        "id": 39,
+        "name": "Surprised Alphys",
+        "image": "Surprised_Alphys",
+        "ucpCost": 35
+    }, {
+        "code": ":AsrielYes:",
+        "id": 40,
+        "name": "Asriel Yes",
+        "image": "Asriel_Yes",
+        "ucpCost": 35
+    }, {
+        "code": ":Smirkriel:",
+        "id": 41,
+        "name": "Smirkriel",
+        "image": "Smirkriel",
+        "ucpCost": 35
+    }, {
+        "code": ":ThisIsFine:",
+        "id": 42,
+        "name": "This is fine",
+        "image": "This_is_fine",
+        "ucpCost": 35
+    }, {
+        "code": ":zzz:",
+        "id": 43,
+        "name": "zzz",
+        "image": "zzz",
+        "ucpCost": 50
+    }, {
         "code": ":ApocaWhat:",
         "id": 44,
         "name": "Apoca What",
@@ -99,6 +273,54 @@
         "id": 46,
         "name": "Oh Yes",
         "image": "Oh_Yes",
+        "ucpCost": 35
+    }, {
+        "code": ":Mettatowo:",
+        "id": 47,
+        "name": "Mettatowo",
+        "image": "Mettatowo",
+        "ucpCost": 35
+    }, {
+        "code": ":Sansger:",
+        "id": 48,
+        "name": "Sansger",
+        "image": "Sansger",
+        "ucpCost": 35
+    }, {
+        "code": ":EvilTemmie:",
+        "id": 49,
+        "name": "Evil Temmie",
+        "image": "Evil_Temmie",
+        "ucpCost": 35
+    }, {
+        "code": ":SuperiorFrisk:",
+        "id": 50,
+        "name": "Superior Frisk",
+        "image": "Superior_Frisk",
+        "ucpCost": 35
+    }, {
+        "code": ":Angy:",
+        "id": 51,
+        "name": "Angy",
+        "image": "Angy",
+        "ucpCost": 50
+    }, {
+        "code": ":ForgiveMe:",
+        "id": 52,
+        "name": "Forgive Me",
+        "image": "Forgive_Me",
+        "ucpCost": 60
+    }, {
+        "code": ":ThanksFriend:",
+        "id": 53,
+        "name": "Thanks Friend",
+        "image": "Thanks_Friend",
+        "ucpCost": 60
+    }, {
+        "code": ":BPensive:",
+        "id": 54,
+        "name": "BPensive",
+        "image": "BPensive",
         "ucpCost": 35
     }, {
         "code": ":FlushFrisk:",
@@ -125,10 +347,28 @@
         "image": "Muffet_Smile",
         "ucpCost": 35
     }, {
+        "code": ":PogHeats:",
+        "id": 59,
+        "name": "Pog Heats",
+        "image": "Pog_Heats",
+        "ucpCost": 35
+    }, {
         "code": ":Frowoggit:",
         "id": 60,
         "name": "Frowoggit",
         "image": "Frowoggit",
+        "ucpCost": 35
+    }, {
+        "code": ":OwOChara:",
+        "id": 61,
+        "name": "OwO Chara",
+        "image": "OwO_Chara",
+        "ucpCost": 35
+    }, {
+        "code": ":UwUFrisk:",
+        "id": 62,
+        "name": "UwU Frisk",
+        "image": "UwU_Frisk",
         "ucpCost": 35
     }, {
         "code": ":SpookyFurry:",
@@ -179,16 +419,64 @@
         "image": "Hue",
         "ucpCost": 35
     }, {
+        "code": ":BlushyWhimsun:",
+        "id": 71,
+        "name": "Blushy Whimsun",
+        "image": "Blushy_Whimsun",
+        "ucpCost": 35
+    }, {
         "code": ":Doubtyne:",
         "id": 72,
         "name": "Doubtyne",
         "image": "Doubtyne",
         "ucpCost": 35
     }, {
+        "code": ":RalseiAngry:",
+        "id": 73,
+        "name": "Ralsei Angry",
+        "image": "Ralsei_Angry",
+        "ucpCost": 35
+    }, {
+        "code": ":RalseiShy:",
+        "id": 74,
+        "name": "Ralsei Shy",
+        "image": "Ralsei_Shy",
+        "ucpCost": 35
+    }, {
+        "code": ":RalseiSweat:",
+        "id": 75,
+        "name": "Ralsei Sweat",
+        "image": "Ralsei_Sweat",
+        "ucpCost": 35
+    }, {
+        "code": ":RalseiHeart:",
+        "id": 76,
+        "name": "Ralsei Heart",
+        "image": "Ralsei_Heart",
+        "ucpCost": 35
+    }, {
+        "code": ":NotLikeThis:",
+        "id": 77,
+        "name": "Not Like This",
+        "image": "Not_Like_This",
+        "ucpCost": 35
+    }, {
         "code": ":Quest:",
         "id": 78,
         "name": "Quest",
         "image": "Quest",
+        "ucpCost": 35
+    }, {
+        "code": ":Ponflushed:",
+        "id": 79,
+        "name": "Ponflushed",
+        "image": "Ponflushed",
+        "ucpCost": 35
+    }, {
+        "code": ":DarkPonchamp:",
+        "id": 80,
+        "name": "Dark Ponchamp",
+        "image": "Dark_Ponchamp",
         "ucpCost": 35
     }, {
         "code": ":CannyBP:",
@@ -221,204 +509,6 @@
         "image": "LOLQueen",
         "ucpCost": 35
     }, {
-        "code": ":BlushyWhimsun:",
-        "id": 71,
-        "name": "Blushy Whimsun",
-        "image": "Blushy_Whimsun",
-        "ucpCost": 35
-    }, {
-        "code": ":ShyChara:",
-        "id": 28,
-        "name": "Shy Chara",
-        "image": "Shy_Chara",
-        "ucpCost": 35
-    }, {
-        "code": ":CharaStop:",
-        "id": 36,
-        "name": "Chara Stop",
-        "image": "Chara_Stop",
-        "ucpCost": 35
-    }, {
-        "code": ":CharaNo:",
-        "id": 37,
-        "name": "Chara No",
-        "image": "Chara_No",
-        "ucpCost": 35
-    }, {
-        "code": ":MockingFrisk:",
-        "id": 38,
-        "name": "Mocking Frisk",
-        "image": "Mocking_Frisk",
-        "ucpCost": 35
-    }, {
-        "code": ":SurprisedAlphys:",
-        "id": 39,
-        "name": "Surprised Alphys",
-        "image": "Surprised_Alphys",
-        "ucpCost": 35
-    }, {
-        "code": ":AsrielYes:",
-        "id": 40,
-        "name": "Asriel Yes",
-        "image": "Asriel_Yes",
-        "ucpCost": 35
-    }, {
-        "code": ":EvilTemmie:",
-        "id": 49,
-        "name": "Evil Temmie",
-        "image": "Evil_Temmie",
-        "ucpCost": 35
-    }, {
-        "code": ":SuperiorFrisk:",
-        "id": 50,
-        "name": "Superior Frisk",
-        "image": "Superior_Frisk",
-        "ucpCost": 35
-    }, {
-        "code": ":PogHeats:",
-        "id": 59,
-        "name": "Pog Heats",
-        "image": "Pog_Heats",
-        "ucpCost": 35
-    }, {
-        "code": ":OwOChara:",
-        "id": 61,
-        "name": "OwO Chara",
-        "image": "OwO_Chara",
-        "ucpCost": 35
-    }, {
-        "code": ":UwUFrisk:",
-        "id": 62,
-        "name": "UwU Frisk",
-        "image": "UwU_Frisk",
-        "ucpCost": 35
-    }, {
-        "code": ":RalseiAngry:",
-        "id": 73,
-        "name": "Ralsei Angry",
-        "image": "Ralsei_Angry",
-        "ucpCost": 35
-    }, {
-        "code": ":RalseiShy:",
-        "id": 74,
-        "name": "Ralsei Shy",
-        "image": "Ralsei_Shy",
-        "ucpCost": 35
-    }, {
-        "code": ":RalseiSweat:",
-        "id": 75,
-        "name": "Ralsei Sweat",
-        "image": "Ralsei_Sweat",
-        "ucpCost": 35
-    }, {
-        "code": ":snailfury:",
-        "id": 18,
-        "name": "Snail Fury",
-        "image": "Snail_Fury",
-        "ucpCost": 35
-    }, {
-        "code": ":undynelul:",
-        "id": 19,
-        "name": "Undyne LUL",
-        "image": "Undyne_LUL",
-        "ucpCost": 35
-    }, {
-        "code": ":tpose:",
-        "id": 20,
-        "name": "T Pose",
-        "image": "T_Pose",
-        "ucpCost": 35
-    }, {
-        "code": ":omegastare:",
-        "id": 21,
-        "name": "Omega Stare",
-        "image": "Omega_Stare",
-        "ucpCost": 35
-    }, {
-        "code": ":pingpon:",
-        "id": 22,
-        "name": "Ping Pon",
-        "image": "Ping_Pon",
-        "ucpCost": 35
-    }, {
-        "code": ":disturbedbp:",
-        "id": 23,
-        "name": "Disturbed Burger Pants",
-        "image": "Disturbed_Burger_Pants",
-        "ucpCost": 35
-    }, {
-        "code": ":alphyssweat:",
-        "id": 24,
-        "name": "Alphys Sweat",
-        "image": "Alphys_Sweat",
-        "ucpCost": 35
-    }, {
-        "code": ":ConfusedSans:",
-        "id": 29,
-        "name": "Confused Lost Sans",
-        "image": "Confused_Lost_Sans",
-        "ucpCost": 60
-    }, {
-        "code": ":Smirkriel:",
-        "id": 41,
-        "name": "Smirkriel",
-        "image": "Smirkriel",
-        "ucpCost": 35
-    }, {
-        "code": ":ThisIsFine:",
-        "id": 42,
-        "name": "This is fine",
-        "image": "This_is_fine",
-        "ucpCost": 35
-    }, {
-        "code": ":zzz:",
-        "id": 43,
-        "name": "zzz",
-        "image": "zzz",
-        "ucpCost": 50
-    }, {
-        "code": ":Mettatowo:",
-        "id": 47,
-        "name": "Mettatowo",
-        "image": "Mettatowo",
-        "ucpCost": 35
-    }, {
-        "code": ":Sansger:",
-        "id": 48,
-        "name": "Sansger",
-        "image": "Sansger",
-        "ucpCost": 35
-    }, {
-        "code": ":Angy:",
-        "id": 51,
-        "name": "Angy",
-        "image": "Angy",
-        "ucpCost": 50
-    }, {
-        "code": ":BPensive:",
-        "id": 54,
-        "name": "BPensive",
-        "image": "BPensive",
-        "ucpCost": 35
-    }, {
-        "code": ":NotLikeThis:",
-        "id": 77,
-        "name": "Not Like This",
-        "image": "Not_Like_This",
-        "ucpCost": 35
-    }, {
-        "code": ":Ponflushed:",
-        "id": 79,
-        "name": "Ponflushed",
-        "image": "Ponflushed",
-        "ucpCost": 35
-    }, {
-        "code": ":DarkPonchamp:",
-        "id": 80,
-        "name": "Dark Ponchamp",
-        "image": "Dark_Ponchamp",
-        "ucpCost": 35
-    }, {
         "code": ":BurgerNO:",
         "id": 86,
         "name": "BurgerNO",
@@ -431,124 +521,106 @@
         "image": "HyperSnail",
         "ucpCost": 35
     }, {
-        "code": ":processingflowey:",
-        "id": 15,
-        "name": "Processing Flowey",
-        "image": "Processing_Flowey",
+        "code": ":AngyMuffet:",
+        "id": 88,
+        "name": "Angy Muffet",
+        "image": "Angy_Muffet",
         "ucpCost": 35
     }, {
-        "code": ":undynelol:",
-        "id": 16,
-        "name": "Laughing Undyne",
-        "image": "Laughing_Undyne",
+        "code": ":Nerdly:",
+        "id": 89,
+        "name": "Nerdly",
+        "image": "Nerdly",
         "ucpCost": 35
     }, {
-        "code": ":frisklove:",
-        "id": 17,
-        "name": "Frisk Love",
-        "image": "Frisk_Love",
+        "code": ":KrisKry:",
+        "id": 90,
+        "name": "KrisKry",
+        "image": "KrisKry",
         "ucpCost": 35
     }, {
-        "code": ":ClapFrisk:",
-        "id": 25,
-        "name": "Frisk Clap",
-        "image": "Frisk_Clap",
-        "ucpCost": 60
+        "code": ":SaySike:",
+        "id": 91,
+        "name": "SaySike",
+        "image": "SaySike",
+        "ucpCost": 35
     }, {
-        "code": ":HelloFrisk:",
-        "id": 26,
-        "name": "Frisk Hello",
-        "image": "Frisk_Hello",
-        "ucpCost": 60
+        "code": ":BloodyWise:",
+        "id": 92,
+        "name": "BloodyWise",
+        "image": "BloodyWise",
+        "ucpCost": 35
     }, {
-        "code": ":TearsFrisk:",
-        "id": 27,
-        "name": "Frisk Tears",
-        "image": "Frisk_Tears",
-        "ucpCost": 60
+        "code": ":Berdchilling:",
+        "id": 93,
+        "name": "berdchilling",
+        "image": "berdchilling",
+        "ucpCost": 35
     }, {
-        "code": ":AngryPaps:",
-        "id": 30,
-        "name": "Angry Paps",
-        "image": "Angry_Paps",
+        "code": ":Ralseyebrow:",
+        "id": 94,
+        "name": "Ralseyebrow",
+        "image": "Ralseyebrow",
+        "ucpCost": 35
+    }, {
+        "code": ":Pipis:",
+        "id": 95,
+        "name": "Pipis",
+        "image": "Pipis",
+        "ucpCost": 35
+    }, {
+        "code": ":Petrified:",
+        "id": 96,
+        "name": "Petrified",
+        "image": "Petrified",
         "ucpCost": 50
     }, {
-        "code": ":Wheevil:",
-        "id": 31,
-        "name": "Wheevil",
-        "image": "Wheevil",
+        "code": ":Provocation:",
+        "id": 97,
+        "name": "Provocation",
+        "image": "Provocation",
         "ucpCost": 50
     }, {
-        "code": ":IntensiveAsriel:",
-        "id": 32,
-        "name": "Intensive Asriel",
-        "image": "Intensive_Asriel",
-        "ucpCost": 60
+        "code": ":Vineboom:",
+        "id": 98,
+        "name": "Vineboom",
+        "image": "Vineboom",
+        "ucpCost": 50
     }, {
-        "code": ":SmugAsriel:",
-        "id": 33,
-        "name": "Smug Asriel",
-        "image": "Smug_Asriel",
-        "ucpCost": 60
+        "code": ":Yippiee:",
+        "id": 99,
+        "name": "Yippiee",
+        "image": "Yippiee",
+        "ucpCost": 50
     }, {
-        "code": ":ThinkingAsriel:",
-        "id": 34,
-        "name": "Thinking Asriel",
-        "image": "Thinking_Asriel",
-        "ucpCost": 60
-    }, {
-        "code": ":TroubledAsriel:",
-        "id": 35,
-        "name": "Troubled Asriel",
-        "image": "Troubled_Asriel",
-        "ucpCost": 60
-    }, {
-        "code": ":ForgiveMe:",
-        "id": 52,
-        "name": "Forgive Me",
-        "image": "Forgive_Me",
-        "ucpCost": 60
-    }, {
-        "code": ":ThanksFriend:",
-        "id": 53,
-        "name": "Thanks Friend",
-        "image": "Thanks_Friend",
-        "ucpCost": 60
-    }, {
-        "code": ":RalseiHeart:",
-        "id": 76,
-        "name": "Ralsei Heart",
-        "image": "Ralsei_Heart",
+        "code": ":SussyLancer:",
+        "id": 100,
+        "name": "SussyLancer",
+        "image": "SussyLancer",
         "ucpCost": 35
     }, {
-		"code": ":AngyMuffet:",
-		"id": 88,
-		"name": "Angy Muffet",
-		"image": "Angy_Muffet",
-		"ucpCost": 35
-	}, {
-		"code": ":Nerdly:",
-		"id": 89,
-		"name": "Nerdly",
-		"image": "Nerdly",
-		"ucpCost": 35
-	}, {
-		"code": ":KrisKry:",
-		"id": 90,
-		"name": "Kris Kry",
-		"image": "KrisKry",
-		"ucpCost": 35
-	}, {
-		"code": ":SaySike:",
-		"id": 91,
-		"name": "Say Sike",
-		"image": "SaySike",
-		"ucpCost": 35
-	}, {
-		"code": ":BloodyWise:",
-		"id": 92,
-		"name": "BloodyWise",
-		"image": "BloodyWise",
-		"ucpCost": 35
-	}
+        "code": ":SmarterThanYou:",
+        "id": 101,
+        "name": "Smarter Than You",
+        "image": "Smarter_Than_You",
+        "ucpCost": 50
+    }, {
+        "code": ":TotallyBoned:",
+        "id": 102,
+        "name": "Totally Boned",
+        "image": "Totally_Boned",
+        "ucpCost": 35
+    }, {
+        "code": ":SusieNurse:",
+        "id": 103,
+        "name": "Susie Nurse",
+        "image": "Susie_Nurse",
+        "ucpCost": 35
+    }, {
+        "code": ":KrisNurse:",
+        "id": 104,
+        "name": "Kris Nurse",
+        "image": "Kris_Nurse",
+        "ucpCost": 35
+    }
 ]
