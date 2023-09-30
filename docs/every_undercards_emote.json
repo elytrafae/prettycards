@@ -622,5 +622,11 @@
         "name": "Kris Nurse",
         "image": "Kris_Nurse",
         "ucpCost": 35
+    }, {
+        "code": ":RalseiNurse:",
+        "id": 105,
+        "name": "Ralsei Nurse",
+        "image": "Ralsei_Nurse",
+        "ucpCost": 35
     }
 ]
