@@ -89,8 +89,8 @@ class ArtifactDisplay {
 			if (artifactId >= 0) {
 				data = {idArtifact : artifactId, unlock: "Unlock"};
 			}
-			console.log(data);
-			$.get("/Artifacts", data, function(data) {
+			//console.log(data);
+			$.post("/Artifacts", data, function(data) {
 				var $page = $(data);
 				// I am officially dead inside.
 				// Shout out to my dad for figuring out that doing it with fancy JQuery stuff is not gonna cut it, no matter what we try.

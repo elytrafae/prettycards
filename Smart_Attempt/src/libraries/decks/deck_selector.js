@@ -259,14 +259,14 @@ class SavedDeckSelector {
 			return false;
 		}
 		if (deck.artifacts.length == 1) {
-			return art1.legendary;
+			return art1.rarity === "LEGENDARY";
 		}
 		var art2 = artifactDisplay.GetArtifactById(deck.artifacts[1]);
 		if (!art2) {
 			console.log("ARTIFACT WITH ID" + deck.artifacts[1] + " NOT FOUND!");
 			return false;
 		}
-		return !art1.legendary && !art2.legendary;
+		return art1.rarity !== "LEGENDARY" && art2.rarity !== "LEGENDARY";
 	}
 
 	SetUpButtons(buttonContainer) {

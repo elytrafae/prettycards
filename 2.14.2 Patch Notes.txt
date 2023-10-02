@@ -6,7 +6,6 @@
 - Fixed lag and error spam caused by the browser refusing to preload audio in certain cases
 
 TODO:
-- Make proper API for buying Artifacts
 - Fix permissions for PC staff tools!
 - Don't allow "End Turn" press while selecting targets
 - Detailed History Tracking?
