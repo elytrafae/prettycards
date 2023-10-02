@@ -19,6 +19,8 @@ import {} from "/src/libraries/kromer_test.js";
 
 import {} from "./libraries/mobile/navigation.js";
 
+import {} from "./libraries/mid_match/premature_turn_end_prevent.js";
+
 import {} from "./libraries/chat/user_info.js";
 import {} from "./libraries/chat/custom_chat_badges.js";
 import {} from "./libraries/chat/custom_chat_commands.js";

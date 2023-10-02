@@ -38,6 +38,7 @@ var categories = {
     "background" : "Background",
     "packs" : "Packs",
     "artifact" : "Artifact Related",
+    "noob_help" : "Mid-Match Help",
     "april": "<span class='ranbowText'>April Fools</span>"
 }
 

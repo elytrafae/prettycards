@@ -13,6 +13,9 @@
     "pc-navigate-accept" : "Accept!",
     "pc-navigate-cancel" : "Cancel!",
     "pc-navigate-send" : "Send!",
+    "pc-navigate-noturnend": "Nope! Do not end my turn!",
+    "pc-navigate-suicide": "Yes, I want to kill myself!",
+    "pc-navigate-disablewarn": "The previous one AND disable this warning!",
     "pc-sop-welcome" : "Welcome to Undercards Smash or Pass!",
     "pc-sop-q1" : "What is Smash or Pass?",
     "pc-sop-a1-p1" : "In case you have been living under a rock, Smash or Pass is a game where characters from a certain media are presented, one by one, and the player has to decide whether or not they would \"smash\" it. Interpret that as you will.",
@@ -390,6 +393,9 @@
     "group-prettycards_owner": "PrettyCards Owner",
     "group-overachiever": "Overachiever",
     "group-grassless": "Grassless",
-    "group-cutie": "Cutie"
+    "group-cutie": "Cutie",
+
+    "pc-matchwarn": "You are about to lose!",
+    "pc-matchwarn-sneo": "You have an {{CARD:719}} in your hand while {{ARTIFACT:46}} is active, so passing the turn now would kill you.<br>Proceed anyway?"
 }
 
