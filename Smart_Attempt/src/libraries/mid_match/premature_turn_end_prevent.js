@@ -22,8 +22,8 @@ var wasWarned = false;
 if (window.underscript.onPage("Game")) {
     PrettyCards_plugin.events.on("player:endTurn", function() {
         // #yourArtifacts [artifactid="46"]
-        var dealCondition = (dealSetting.value() && !!document.querySelector("#handCards [fixedid=719]") && !!document.querySelector("#yourArtifacts [artifactid=46]"));
-        if (dealCondition) {
+        var dealCondition = (dealSetting.value() && !!document.querySelector('#handCards [fixedid="719"]') && !!document.querySelector('#yourArtifacts [artifactid="46"]'));
+        if (dealCondition && !wasWarned) {
             sendDealWarning();
         }
         this.canceled = (selectSetting.value() && !!document.querySelector(".target")) || (dealCondition && !wasWarned);

@@ -396,6 +396,6 @@
     "group-cutie": "Cutie",
 
     "pc-matchwarn": "You are about to lose!",
-    "pc-matchwarn-sneo": "You have an {{CARD:719}} in your hand while {{ARTIFACT:46}} is active, so passing the turn now would kill you.<br>Proceed anyway?"
+    "pc-matchwarn-sneo": "You have an {{CARD:719}} in your hand while {{ARTIFACT:46}} is active, so ending the turn now would kill you.<br>Proceed anyway?"
 }
 
