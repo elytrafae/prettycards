@@ -1,6 +1,7 @@
 
 - Added cool BG for Profile Skins that have them into Better User Info
 - Custom Chat Commands: Uppercase (:upper:), Lowercase (:lower:), Mockingcase (:mock:), uwufication (:owo:, :uwu: and :uvu: for the three tiers), the rest can be found in settings
+- Updated Credits to include PrettyCards staff
 
 - Switched to a more efficient way of getting artifacts for display!
 - Fixed lag and error spam caused by the browser refusing to preload audio in certain cases
