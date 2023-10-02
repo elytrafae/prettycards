@@ -34,6 +34,14 @@ const DIVISIONS = [
     "DIAMOND_III",
     "DIAMOND_II",
     "DIAMOND_I",
+    "ONYX_IV",
+    "ONYX_III",
+    "ONYX_II",
+    "ONYX_I",
+    "MASTER_IV",
+    "MASTER_III",
+    "MASTER_II",
+    "MASTER_I",
     "LEGEND"
 ];
 

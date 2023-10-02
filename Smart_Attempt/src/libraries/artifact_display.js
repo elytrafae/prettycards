@@ -32,6 +32,7 @@ class ArtifactDisplay {
 	
 	constructor() {
 		this.artifacts = [];
+		this.buyableArtifactIds = {};
 	}
 	
 	/*
@@ -78,17 +79,84 @@ class ArtifactDisplay {
 		}.bind(this));
 	}
 
+	GetPage(artifactId = -1) {
+		return new Promise((resolve, reject) => {
+			if (artifactId === -1 && window.underscript.onPage("Artifacts")) {
+				resolve(document.getElementsByClassName("mainContent")[0]);
+				return;
+			}
+			var data = {};
+			if (artifactId >= 0) {
+				data = {idArtifact : artifactId, unlock: "Unlock"};
+			}
+			console.log(data);
+			$.get("/Artifacts", data, function(data) {
+				var $page = $(data);
+				// I am officially dead inside.
+				// Shout out to my dad for figuring out that doing it with fancy JQuery stuff is not gonna cut it, no matter what we try.
+				for (var i=0; i < $page.length; i++) {
+					var element = $page[i];
+					if (element && element.className && element.classList.contains('mainContent')) {
+						resolve(element);
+						return;
+					}
+				}
+				reject("ELEMENT_NOT_FOUND_ERROR");
+			});
+		})
+	}
+
+	GetPurchasableArtifacts(artifactId = -1) {
+		return new Promise((resolve, reject) => {
+			this.GetPage(artifactId).catch(reject).then((page) => {
+				var gold = page.querySelector("nav.navbar div .navbar-right .dropdown .dropdown-toggle #golds");
+				if (gold) {
+					pagegetters.gold = parseInt(gold.innerText);
+				}
+				var table = page.querySelector("table.table");
+				if (!table) {
+					reject("NO_TABLE");
+				}
+				var tbody = table.querySelector("tbody");
+				this.buyableArtifactIds = [];
+				for (var i=0; i < tbody.children.length; i++) {
+					var row = tbody.children[i];
+					/**@type {String} */
+					var nameId = row.children[1].getAttribute("data-i18n");
+					var price = parseInt(row.children[4].firstChild.innerText);
+					var id = parseInt(lastOf(nameId.split('-')));
+					//console.log(row, nameId, id);
+					this.buyableArtifactIds[id] = price;
+				}
+				resolve(this.buyableArtifactIds);
+			})
+		});
+	}
+
+	IsArtifactPurchasable(artifactId) {
+		return this.BuyPriceForArtifact(artifactId) > -1;
+	}
+
+	BuyPriceForArtifact(artifactId) {
+		if (artifactId in this.buyableArtifactIds) {
+			return this.buyableArtifactIds[artifactId];
+		}
+		return -1;
+	}
+
 	BuyArtifact(artifactId) {
-		window.$.post("/Artifacts", {idArtifact : artifactId, unlock: "Unlock"}, function(data) {
-			if (data.includes("artifact-name-" + artifactId)) {
+		this.GetPurchasableArtifacts(artifactId).catch((err) => {
+			console.error(err);
+			PrettyCards_plugin.events.emit("PrettyCards:artBuyError");
+		}).then((list) => {
+			if (this.IsArtifactPurchasable(artifactId)) {
+				console.warn("Server error when buying artifact");
 				PrettyCards_plugin.events.emit("PrettyCards:artBuyError");
 				return;
 			}
-			var artifact = this.GetArtifactById(artifactId);
-			artifact.owned = true;
-			pagegetters.gold = pagegetters.gold - artifact.cost;
-			PrettyCards_plugin.events.emit("PrettyCards:artBuySuccess", {idArtifact: artifactId, artifact: artifact});
-		}.bind(this));
+			// Gold being set the the correct amount is fixed in GetPurchasableArtifacts!
+			PrettyCards_plugin.events.emit("PrettyCards:artBuySuccess", {idArtifact: artifactId, artifact: this.GetArtifactById(artifactId)});
+		})
 	}
 
 	GetRarityDataFor(artifact) {
@@ -137,7 +205,15 @@ window.artifactDisplay = artifactDisplay;
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	artifactDisplay.GetAllArtifacts();
+	artifactDisplay.GetPurchasableArtifacts();
 });
+
+function lastOf(list) {
+	if (list.length <= 0) {
+		return null;
+	}
+	return list[list.length-1];
+}
 
 /*
 PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {

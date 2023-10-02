@@ -155,12 +155,13 @@ class FancyDisplay {
 			image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 		}
 		var shopInfo;
-		if (!artifact.collection && !artifact.owned && !artifact.unavailable && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
+		if (artifactDisplay.IsArtifactPurchasable(id) && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
 			const artId = id;
+			var cost = artifactDisplay.BuyPriceForArtifact(id);
 			shopInfo = {
-				price: artifact.cost,
+				price: cost,
 				topLine: window.$.i18n("pc-buyart-youdonthave"),
-				hasEnough: artifact.cost <= pagegetters.gold,
+				hasEnough: cost <= pagegetters.gold,
 				action: function(helper) {
 					PrettyCards_plugin.events.on("PrettyCards:artBuySuccess", function() {
 						helper.shop.addClass("PrettyCards_Hidden");
