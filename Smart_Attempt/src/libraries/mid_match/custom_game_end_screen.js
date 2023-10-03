@@ -169,8 +169,9 @@ function displayMatchResults(data) {
         // anim done
         landNoise.play();
         setTimeout(() => {
-
-        })
+            bgm.loop = true;
+            bgm.play();
+        }, 1000);
     });
     var container = document.createElement("DIV");
     container.className = "PrettyCards_GameEnd_Content";
