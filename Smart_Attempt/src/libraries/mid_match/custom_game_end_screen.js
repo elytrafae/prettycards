@@ -1,5 +1,30 @@
 
+import { loadCSS } from "../css_loader";
+import css from "../../css/CustomGameEndScreen.css";
+import { prettycards } from "../underscript_checker";
+loadCSS(css);
+
 const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
+
+/*{
+    "action": "getVictory",
+    "gameType": "RANKED",
+    "disconnected": false,
+    "golds": 5934,
+    "isDonator": false,
+    "oldGold": 5919,
+    "oldXp": 5709561,
+    "newXp": 5710123,
+    "nbLevelPassed": 0,
+    "oldJaugeSize": 6000,
+    "jaugeSize": 6000,
+    "xpUntilNextLevel": 3189,
+    "queueGoldBonus": 0,
+    "oldDivision": "AMETHYST_I",
+    "newDivision": "AMETHYST_I",
+    "oldElo": 1775,
+    "newElo": 1783
+}*/
 
 const DIVISIONS = [
     "COPPER_IV",
@@ -45,10 +70,48 @@ const DIVISIONS = [
     "LEGEND"
 ];
 
-class GoldSource {
+class GameEndTypes {
 
-    constructor(sourceName, amount) {
-        this.sourceName = sourceName;
+    static WIN = new GameEndTypes("game-game-victory", "");
+    static LEAVE_WIN = new GameEndTypes("game-game-victory", "");
+    static LOSE = new GameEndTypes("game-game-over", "");
+    static DRAW = new GameEndTypes("pc-game-draw", "");
+    static CHARA = new GameEndTypes("game-died", "red");
+
+    constructor(/**@type {String} */ textKey, /**@type {String} */ textClass) {
+        /**@type {String} */
+        this.textKey = textKey;
+        /**@type {String} */
+        this.textClass = textClass;
+    }
+
+}
+
+class RewardSource {
+
+    static MATCH = new RewardSource("match", "piggy-bank");
+    static SPECIAL = new RewardSource("special", "star");
+    static CONTRIBUTOR = new RewardSource("contributor", "euro");
+    static QUEUE = new RewardSource("queue", "time");
+    static LEVELUP = new RewardSource("levelup", "gift");
+    static QUEST = new RewardSource("levelup", "calendar");
+    static FRIENDSHIP = new RewardSource("friendship", "heart");
+
+    constructor(/**@type {String} */ id, /**@type {String} */ iconName) {
+        /**@type {String} */
+        this.id = id;
+        /**@type {String} */
+        this.iconName = iconName;
+    }
+
+}
+
+class RewardSourceInstance {
+
+    constructor(/**@type {RewardSource} */ source, /**@type {number} */ amount) {
+        /**@type {RewardSource} */
+        this.source = source;
+        /**@type {number} */
         this.amount = amount;
     }
 
@@ -67,26 +130,42 @@ function returnGoldSources(data) {
     var goldDiff = data.golds - data.oldGold;
     var sources = [];
     if (data.isDonator) {
-        sources.push(new GoldSource("CONTRIBUTOR", CONTRIB_GOLD));
+        sources.push(new RewardSourceInstance(RewardSource.CONTRIBUTOR, CONTRIB_GOLD));
         goldDiff -= CONTRIB_GOLD;
     }
     if (data.queueGoldBonus) {
-        sources.push(new GoldSource("QUEUE", data.queueGoldBonus));
+        sources.push(new RewardSourceInstance(RewardSource.QUEUE, data.queueGoldBonus));
         goldDiff -= data.queueGoldBonus;
     }
-    sources.unshift(new GoldSource("MATCH", goldDiff));
+    sources.unshift(new RewardSourceInstance(RewardSource.MATCH, goldDiff));
 
     return sources;
 }
 
 function transformMatchEndData(data) {
     var newData = {
-        endType : data.action === "getVictory" ? (data.disconnected ? "LEAVE_WIN" : "WIN") : (data.action == "getGameRemoved" ? "DRAW" : "LOSE"),
+        endType : data.action === "getVictory" ? (data.disconnected ? GameEndTypes.LEAVE_WIN : GameEndTypes.WIN) : (data.action == "getGameRemoved" ? GameEndTypes.DRAW : GameEndTypes.LOSE),
         oldGold : data.oldGold,
         goldSources : returnGoldSources(data),
         oldLevelBarSize: data.oldJaugeSize,
         newLevelBarSize : data.jaugeSize
     }
 }
+
+function displayMatchResults(data) {
+    var backdrop = document.createElement("DIV");
+    backdrop.className = "PrettyCards_GameEnd_Backdrop";
+    window.$(backdrop).css("top", -window.innerHeight + "px").animate({"top": "0px"}, 1000, "easeInQuad", () => {
+        // anim done
+        console.log("anim done");
+    });
+    var container = document.createElement("DIV");
+
+    backdrop.appendChild(container);
+
+    window.document.body.appendChild(backdrop);
+}
+
+prettycards.displayMatchResults = displayMatchResults;
 
 export {DIVISIONS, getDivisionForElo};

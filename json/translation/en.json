@@ -1,6 +1,4 @@
 {
-    "game-type-ranked": "CANCER CITY",
-    "game-type-standard": "FRIENDSHIP GO BRRRR",
     "card-65" : {
         "ifEqual" : "{{KW:MAGIC}}: Gain an upgraded version of the enemy Soul. Add an {{CARD:771|1}} to your hand.",
         "value" : "{{KW:MAGIC}}: Gain an {{PC_ARTIFACTS:Upgraded Version|60|56|59|58|55|57|24}} of the enemy SOUL. Add an {{CARD:771|1}} to your hand."
