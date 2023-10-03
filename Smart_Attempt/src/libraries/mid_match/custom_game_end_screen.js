@@ -150,9 +150,11 @@ function transformMatchEndData(data) {
         oldLevelBarSize: data.oldJaugeSize,
         newLevelBarSize : data.jaugeSize
     }
+    return newData;
 }
 
 function displayMatchResults(data) {
+    //console.log(data, data.endType, data.endType.textKey, window.$(data.endType.textKey));
     var backdrop = document.createElement("DIV");
     backdrop.className = "PrettyCards_GameEnd_Backdrop";
     window.$(backdrop).css("top", -window.innerHeight + "px").animate({"top": "0px"}, 1000, "easeInQuad", () => {
@@ -160,12 +162,19 @@ function displayMatchResults(data) {
         console.log("anim done");
     });
     var container = document.createElement("DIV");
+    container.className = "PrettyCards_GameEnd_Content";
+
+    var title = document.createElement("DIV");
+    title.className = "PrettyCards_GameEnd_Title " + data.endType.textClass;
+    title.innerHTML = window.$.i18n(data.endType.textKey);
+    container.appendChild(title);
 
     backdrop.appendChild(container);
 
     window.document.body.appendChild(backdrop);
 }
 
+prettycards.GameEndTypes = GameEndTypes;
 prettycards.displayMatchResults = displayMatchResults;
 
 export {DIVISIONS, getDivisionForElo};

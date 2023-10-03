@@ -6,4 +6,17 @@
     top: -100%;
     left: 0;
     background-color: black;
+    overflow: auto;
+}
+
+.PrettyCards_GameEnd_Content {
+    width: 900px;
+    min-height: 100%;
+    margin: auto;
+}
+
+.PrettyCards_GameEnd_Title {
+    font-size: 10em;
+    text-align: center;
+    line-height: 1.2;
 }
