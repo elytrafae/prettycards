@@ -72,17 +72,19 @@ const DIVISIONS = [
 
 class GameEndTypes {
 
-    static WIN = new GameEndTypes("game-game-victory", "");
-    static LEAVE_WIN = new GameEndTypes("game-game-victory", "");
-    static LOSE = new GameEndTypes("game-game-over", "");
-    static DRAW = new GameEndTypes("pc-game-draw", "");
-    static CHARA = new GameEndTypes("game-died", "red");
+    static WIN = new GameEndTypes("game-game-victory", "", "/musics/dr2_victory.ogg");
+    static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg");
+    static LOSE = new GameEndTypes("game-game-over", "", "/musics/dr2_gameover.ogg");
+    static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/CMD-God/prettycards/raw/master/audio/bgms/mus_star.ogg");
+    static CHARA = new GameEndTypes("game-died", "red", "/musics/toomuch.ogg");
 
-    constructor(/**@type {String} */ textKey, /**@type {String} */ textClass) {
+    constructor(/**@type {String} */ textKey, /**@type {String} */ textClass, /**@type {String} */ song) {
         /**@type {String} */
         this.textKey = textKey;
         /**@type {String} */
         this.textClass = textClass;
+        /**@type {String} */
+        this.songSrc = song;
     }
 
 }
@@ -155,11 +157,20 @@ function transformMatchEndData(data) {
 
 function displayMatchResults(data) {
     //console.log(data, data.endType, data.endType.textKey, window.$(data.endType.textKey));
+    var landNoise = new Audio();
+    landNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
+
+    var bgm = new Audio();
+    bgm.src = data.endType.songSrc;
+
     var backdrop = document.createElement("DIV");
     backdrop.className = "PrettyCards_GameEnd_Backdrop";
     window.$(backdrop).css("top", -window.innerHeight + "px").animate({"top": "0px"}, 1000, "easeInQuad", () => {
         // anim done
-        console.log("anim done");
+        landNoise.play();
+        setTimeout(() => {
+
+        })
     });
     var container = document.createElement("DIV");
     container.className = "PrettyCards_GameEnd_Content";
