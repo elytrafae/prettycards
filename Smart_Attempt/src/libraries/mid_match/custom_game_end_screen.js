@@ -210,6 +210,8 @@ class RewardRow {
         this.sources.push(inst);
     }
 
+    // TODO: Make it so rendering does not re-make ALL of the elements every tick!
+
 }
 
 function getDivisionForElo(elo) {
