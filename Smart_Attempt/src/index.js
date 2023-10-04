@@ -63,7 +63,7 @@ import {} from "./libraries/emote_dowloader.js";
 
 import {} from "/src/libraries/footer_remover.js";
 
-import {} from "/src/libraries/mid_match/match_profiles.js";
+//import {} from "/src/libraries/mid_match/match_profiles.js";
 
 import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
 import {} from "/src/libraries/_proof_of_concept/superposition_cards.js";
