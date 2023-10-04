@@ -70,6 +70,37 @@ const DIVISIONS = [
     "LEGEND"
 ];
 
+class Currency {
+
+    static GOLD = new Currency("yellow", () => {return window.$('<img src="images/icons/gold.png">')[0]});
+    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]});
+    static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]});
+    static DTFRAG = new Currency("DTFragment", () => {return window.$('<img src="images/dtFragment.png">')[0]});
+
+    static UT_PACK = new Currency("", () => {return window.$('<img src="images/icons/pack.png">')[0]});
+    static DR_PACK = new Currency("", () => {return window.$('<img src="images/icons/drPack.png">')[0]});
+    static SHINY_PACK = new Currency("rainbowText", () => {return window.$('<img src="images/icons/shinyPack.gif">')[0]});
+    static SUPER_PACK = new Currency("yellow", () => {return window.$('<img src="images/icons/superPack.gif">')[0]});
+    static FINAL_PACK = new Currency("DTFragment", () => {return window.$('<img src="images/icons/finalPack.gif">')[0]});
+
+    constructor(/**@type {String} */ textClass, /**@type {Function} */ icon) {
+        /**@type {String} */ 
+        this.textClass = textClass;
+        /**@type {Function} */
+        this.icon = icon;
+    }
+
+    /**@returns {HTMLElement} */
+    getCurrencyIcon()  {
+        return this.icon();
+    }
+
+    applyTextClass(/**@type {HTMLElement} */ elem) {
+        elem.classList.add(this.textClass);
+    }
+
+}
+
 class GameEndTypes {
 
     static WIN = new GameEndTypes("game-game-victory", "", "/musics/dr2_victory.ogg");
@@ -115,6 +146,28 @@ class RewardSourceInstance {
         this.source = source;
         /**@type {number} */
         this.amount = amount;
+        /**@type {number} */
+        this.passedAmount = 0;
+    }
+
+    attemptMerge(/**@type {RewardSourceInstance} */ other) {
+        if (other.source != this.source) {
+            return false;
+        }
+        this.amount += other.amount;
+    }
+
+}
+
+class RewardRow {
+
+    constructor(/**@type {Currency} */ currency) {
+        /**@type {Currency} */ 
+        this.currency = currency;
+        /**@type {Array.<RewardSourceInstance>} */
+        this.sources = [];
+        /**@type {Boolean} */
+        this.displaySources = true;
     }
 
 }

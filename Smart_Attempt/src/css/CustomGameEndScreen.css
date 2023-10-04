@@ -20,3 +20,8 @@
     text-align: center;
     line-height: 1.2;
 }
+
+.DTFragment {
+    color: #990000;
+    text-shadow: 0 0 10px #FF0000;
+}
