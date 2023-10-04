@@ -193,6 +193,21 @@ class RewardRow {
         this.sources = [];
         /**@type {Boolean} */
         this.displaySources = true;
+        /**@type {number} */
+        this.totalAmount = 0;
+        /**@type {number} */
+        this.tickSpeed = 1000; // Dummy number that should not cause issues later.
+    }
+
+    addInstance(/**@type {RewardSourceInstance} */ inst) {
+        this.totalAmount += inst.amount;
+        this.tickSpeed = this.currency.getSpeedForAmount(this.totalAmount);
+        for (var i=0; i < this.sources.length; i++) {
+            if (this.sources[i].attemptMerge(inst)) {
+                return;
+            }
+        }
+        this.sources.push(inst);
     }
 
 }
