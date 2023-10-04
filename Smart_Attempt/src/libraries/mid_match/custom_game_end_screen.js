@@ -72,22 +72,24 @@ const DIVISIONS = [
 
 class Currency {
 
-    static GOLD = new Currency("yellow", () => {return window.$('<img src="images/icons/gold.png">')[0]});
-    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]});
-    static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]});
-    static DTFRAG = new Currency("DTFragment", () => {return window.$('<img src="images/dtFragment.png">')[0]});
+    static GOLD = new Currency("yellow", () => {return window.$('<img src="images/icons/gold.png">')[0]}, Currency.speedFunction(100, 5, 500));
+    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]}, Currency.speedFunction(200, 10, 500));
+    static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]}, Currency.speedFunction(100, 5, 500));
+    static DTFRAG = new Currency("DTFragment", () => {return window.$('<img src="images/dtFragment.png">')[0]}, Currency.speedFunction(500, 100, 10));
 
-    static UT_PACK = new Currency("", () => {return window.$('<img src="images/icons/pack.png">')[0]});
-    static DR_PACK = new Currency("", () => {return window.$('<img src="images/icons/drPack.png">')[0]});
-    static SHINY_PACK = new Currency("rainbowText", () => {return window.$('<img src="images/icons/shinyPack.gif">')[0]});
-    static SUPER_PACK = new Currency("yellow", () => {return window.$('<img src="images/icons/superPack.gif">')[0]});
-    static FINAL_PACK = new Currency("DTFragment", () => {return window.$('<img src="images/icons/finalPack.gif">')[0]});
+    static UT_PACK = new Currency("", () => {return window.$('<img src="images/icons/pack.png">')[0]}, Currency.speedFunction(250, 100, 50));
+    static DR_PACK = new Currency("", () => {return window.$('<img src="images/icons/drPack.png">')[0]}, Currency.speedFunction(250, 100, 50));
+    static SHINY_PACK = new Currency("rainbowText", () => {return window.$('<img src="images/icons/shinyPack.gif">')[0]}, Currency.speedFunction(200, 100, 25));
+    static SUPER_PACK = new Currency("yellow", () => {return window.$('<img src="images/icons/superPack.gif">')[0]}, Currency.speedFunction(500, 200, 25));
+    static FINAL_PACK = new Currency("DTFragment", () => {return window.$('<img src="images/icons/finalPack.gif">')[0]}, Currency.speedFunction(500, 200, 25));
 
-    constructor(/**@type {String} */ textClass, /**@type {Function} */ icon) {
+    constructor(/**@type {String} */ textClass, /**@type {Function} */ icon, /**@type {Function} */ speed) {
         /**@type {String} */ 
         this.textClass = textClass;
         /**@type {Function} */
         this.icon = icon;
+        /**@type {Function} */
+        this.speed = speed;
     }
 
     /**@returns {HTMLElement} */
@@ -97,6 +99,17 @@ class Currency {
 
     applyTextClass(/**@type {HTMLElement} */ elem) {
         elem.classList.add(this.textClass);
+    }
+
+    /**@returns {number} */
+    getSpeedForAmount(amount)  {
+        return this.speed(amount);
+    }
+
+    static speedFunction(slowSpeed, fastSpeed, scaleAmount) {
+        return (amount) => {
+            return Math.ceil(fastSpeed + (slowSpeed - fastSpeed)*(1 - Math.min(amount, scaleAmount)/scaleAmount));
+        }
     }
 
 }
@@ -150,11 +163,23 @@ class RewardSourceInstance {
         this.passedAmount = 0;
     }
 
+    /**@returns {boolean} */
     attemptMerge(/**@type {RewardSourceInstance} */ other) {
         if (other.source != this.source) {
             return false;
         }
         this.amount += other.amount;
+        this.passedAmount += other.passedAmount;
+        return true;
+    }
+
+    /**@returns {boolean} */
+    finishedTicking() {
+        return this.passedAmount >= this.amount;
+    }
+
+    tick() {
+        this.passedAmount = Math.min(this.passedAmount + 1, this.amount);
     }
 
 }
