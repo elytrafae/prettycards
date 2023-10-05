@@ -90,7 +90,8 @@ class Currency {
     /**@type {Map.<number,CardCurrency>} */
     static CARD_CURRENCIES = new Map();
 
-    // TODO: Add Currencies for cosmetics, too, similar to cards.
+    // TODO: Add Currencies for cosmetics, too, similar to cards. They definitely be obtained from quests.
+    // Note to self: This whole thing became FAR bigger than initially anticipated
 
     constructor(/**@type {String} */ textClass, /**@type {Function} */ icon, /**@type {Function} */ speed) {
         /**@type {String} */ 
