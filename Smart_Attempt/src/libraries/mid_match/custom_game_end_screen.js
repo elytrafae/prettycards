@@ -474,6 +474,11 @@ function transformMatchEndData(data) {
     newData.rewardManager.addReward(Currency.DUST, new RewardSourceInstance(RewardSource.FRIENDSHIP, 100));
     newData.rewardManager.addReward(Currency.UT_PACK, new RewardSourceInstance(RewardSource.FRIENDSHIP, 5));
     newData.rewardManager.addReward(Currency.DR_PACK, new RewardSourceInstance(RewardSource.FRIENDSHIP, 5));
+
+    newData.rewardManager.addReward(Currency.UCP, new RewardSourceInstance(RewardSource.QUEST, 100));
+    newData.rewardManager.addReward(Currency.SHINY_PACK, new RewardSourceInstance(RewardSource.QUEST, 3));
+    newData.rewardManager.addReward(Currency.SUPER_PACK, new RewardSourceInstance(RewardSource.QUEST, 1));
+    newData.rewardManager.addReward(Currency.FINAL_PACK, new RewardSourceInstance(RewardSource.QUEST, 1));
     ////////////
     return newData;
 }
