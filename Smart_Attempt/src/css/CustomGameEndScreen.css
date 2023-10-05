@@ -25,3 +25,17 @@
     color: #990000;
     text-shadow: 0 0 10px #FF0000;
 }
+
+.PrettyCards_GameEnd_RewardSourceContainer::before {
+    content: " ";
+}
+
+.PrettyCards_GameEnd_RewardRow {
+    font-size: 1.5em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.PrettyCards_GameEnd_RewardRow img {
+    height: 32px;
+}
