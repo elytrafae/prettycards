@@ -105,6 +105,14 @@ class BarData {
         this.firstClass = firstClass;
         /**@type {String} */ 
         this.secondClass = secondClass;
+        /**@type {String} */
+        this.firstTextClass = "PrettyCards_Hidden";
+        /**@type {String} */
+        this.secondTextClass = "PrettyCards_Hidden";
+
+        /**@type {HTMLElement} */
+        this.container = document.createElement("DIV");
+        this.container.style.position = "relative";
 
         /**@type {HTMLElement} */
         this.bar = document.createElement("PROGRESS");
@@ -113,10 +121,44 @@ class BarData {
         this.bar.setAttribute("max", this.firstSize);
         this.bar.setAttribute("value", this.startValue);
 
+        /**@type {HTMLElement} */
+        this.barText = document.createElement("DIV");
+        this.barText.classList.add(this.firstTextClass);
+        this.barText.className = "PrettyCards_GameEnd_BarText";
+
+        this.container.appendChild(this.bar);
+        this.container.appendChild(this.barText);
+
         /**@type {boolean} */
         this.didTipOver = false;
         /**@type {Function} */
         this.tipOverFunction = () => {};
+
+        /**@type {boolean} */
+        this.customRow = false;
+        /**@type {HTMLElement} */
+        this.customRowElement = document.createElement("DIV");
+        /**@type {function} */
+        this.customRowFunction = () => {}
+    }
+
+    /**@returns {BarData} */
+    setTextClasses(/**@type {String} */ firstTextClass, /**@type {String} */ secondTextClass) {
+        this.barText.classList.remove(this.firstTextClass);
+        this.barText.classList.add(firstTextClass);
+
+        this.firstTextClass = firstTextClass;
+        this.secondTextClass = secondTextClass;
+        return this;
+    }
+
+    /**@returns {boolean} */
+    hasCustomRow() {
+        return this.customRow;
+    }
+
+    updateCustomRow(/**@type {number} */ passedAmount) {
+        this.customRowFunction(passedAmount);
     }
 
     updateBar(/**@type {number} */ passedAmount) {
@@ -136,10 +178,13 @@ class BarData {
             this.didTipOver = true;
             this.bar.classList.remove(this.firstClass);
             this.bar.classList.add(this.secondClass);
+            this.barText.classList.remove(this.firstTextClass);
+            this.barText.classList.add(this.secondTextClass);
             this.bar.setAttribute("max", this.secondSize);
             this.onTipOver();
         }
 
+        this.barText.innerHTML = newDisplayedValue + "/" + this.bar.getAttribute("max");
         this.bar.setAttribute("value", newDisplayedValue);
     }
 
@@ -152,25 +197,72 @@ class BarData {
         return new BarData(0, 0, 0, "PrettyCards_Hidden", "PrettyCards_Hidden");
     }
 
-    static returnXPData(/**@type {number} */ firstSize, /**@type {number} */ secondSize, /**@type {number} */ startValue, /**@type {Pair.<Currency,RewardSourceInstance>} */ reward, /**@type {RewardManager} */ manager) {
+    static returnXPData(/**@type {number} */ firstSize, /**@type {number} */ secondSize, /**@type {number} */ startValue, /**@type {Pair.<Currency,RewardSourceInstance>} */ reward, /**@type {RewardManager} */ manager, /**@type {number} */ lv) {
         var data = new BarData(firstSize, secondSize, startValue, "xpBar", "xpBar");
+        data.setTextClasses("PrettyCards_XPBarText", "PrettyCards_XPBarText");
+
+        var separator = document.createElement("SPAN");
+
         data.tipOverFunction = () => {
             playSound("/sounds/levelUp.wav");
+            lv++;
+            separator.innerHTML = window.$.i18n("pc-game-levelup");
+            separator.className = "GOLD_NEON";
             if (reward) {
                 manager.addReward(reward.getLeft(), reward.getRight());
             }
+        }
+        data.customRow = true;
+        var LVpart = document.createElement("SPAN");
+        data.customRowElement.appendChild(LVpart);
+        
+        separator.style.width = "180px";
+        separator.style.display = "inline-block";
+        data.customRowElement.appendChild(separator);
+        var XPpart = document.createElement("SPAN");
+        data.customRowElement.appendChild(XPpart);
+        data.customRowFunction = (passedAmount) => {
+            LVpart.innerHTML = "LV " + lv;
+            XPpart.innerHTML = "+ " + passedAmount + " XP";
         }
         return data;
     }
 
     static returnEloData(/**@type {number} */ startValue, /**@type {number} */ startElo, /**@type {number} */ endElo) {
-        var startArena = getDivisionForElo(startElo).split("_")[0];
-        var endArena = getDivisionForElo(endElo).split("_")[0];
+        var startDivision = getDivisionForElo(startElo);
+        var endDivision = getDivisionForElo(endElo);
+        var startArena = startDivision.split("_")[0];
+        var endArena = endDivision.split("_")[0];
         var startClass = startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "Bar");
         var endClass = endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "Bar");
         var data = new BarData(ELO_PER_DIVISION, ELO_PER_DIVISION, startValue, startClass, endClass);
-        data.tipOverFunction = (addRankUpStuff) => {
-            //playSound("/sounds/levelUp.wav");
+        data.setTextClasses(startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "_NEON"), endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "_NEON"));
+        
+        var divisionPart = document.createElement("SPAN");
+        data.tipOverFunction = () => {
+            // addRankUpStuff
+            var src = `https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
+            playSound(src);
+            divisionPart.innerHTML = window.$.i18n("{{DIVISION:" + endDivision + "}}");
+        }
+
+        data.customRow = true;
+        divisionPart.style.fontSize = "1.4em";
+        divisionPart.innerHTML = window.$.i18n("{{DIVISION:" + startDivision + "}}");
+        data.customRowElement.appendChild(divisionPart);
+        //var separator = document.createElement("SPAN");
+        //separator.innerHTML = " ";
+        //data.customRowElement.appendChild(separator);
+        var ELOpart = document.createElement("SPAN");
+        ELOpart.className = "LEGEND_NEON";
+        data.customRowElement.appendChild(ELOpart);
+        data.customRowFunction = (passedAmount) => {
+            var arena = data.didTipOver ? endArena : startArena;
+            if (arena === "LEGEND") {
+                ELOpart.innerHTML = " (" + passedAmount + ")";
+            } else {
+                ELOpart.innerHTML = "";
+            }
         }
         return data;
     }
@@ -183,8 +275,8 @@ class Currency {
     static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]}, Currency.speedFunction(200, 10, 200));
     static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]}, Currency.speedFunction(100, 5, 500));
     static DTFRAG = new Currency("DTFragment", () => {return window.$('<img src="images/dtFragment.png">')[0]}, Currency.speedFunction(500, 100, 10));
-    static XP = new Currency("PrettyCards_UserLV", () => {return window.$('<span>XP</span>')[0]}, Currency.speedFunction(50, 5, 3000)).setCountPerTick(5);
-    static ELO = new Currency("Contributor", () => {return window.$('<span>ELO</span>')[0]}, Currency.speedFunction(50, 5, ELO_PER_DIVISION));
+    static XP = new Currency("PrettyCards_UserLV", () => {return window.$('<span>XP</span>')[0]}, Currency.speedFunction(50, 5, 3000), "0.8em").setCountPerTick(5);
+    static ELO = new Currency("Contributor", () => {return window.$('<span>ELO</span>')[0]}, Currency.speedFunction(50, 5, ELO_PER_DIVISION), "0.8em");
 
     static UT_PACK = new Currency("", () => {return window.$('<img src="images/icons/pack.png">')[0]}, Currency.speedFunction(250, 100, 50));
     static DR_PACK = new Currency("", () => {return window.$('<img src="images/icons/drPack.png">')[0]}, Currency.speedFunction(250, 100, 50));
@@ -198,7 +290,7 @@ class Currency {
     // TODO: Add Currencies for cosmetics, too, similar to cards. They definitely be obtained from quests.
     // Note to self: This whole thing became FAR bigger than initially anticipated
 
-    constructor(/**@type {String} */ textClass, /**@type {Function} */ icon, /**@type {Function} */ speed) {
+    constructor(/**@type {String} */ textClass, /**@type {Function} */ icon, /**@type {Function} */ speed, /**@type {String} */ padding = "0") {
         /**@type {String} */ 
         this.textClass = textClass;
         /**@type {Function} */
@@ -207,6 +299,8 @@ class Currency {
         this.speed = speed;
         /**@type {number} */
         this.countPerTick = 1;
+        /**@type {number} */
+        this.padding = padding;
     }
 
     /**@returns {CardCurrency} */
@@ -374,9 +468,14 @@ class RewardRow {
         /**@type {HTMLElement} */
         this.container = document.createElement("DIV");
         currency.applyTextClass(this.container);
+        this.container.style.padding = this.currency.padding;
 
         /**@type {HTMLElement} */
         this.breakdownContainer = document.createElement("DIV");
+
+        /**@type {HTMLElement} */
+        this.customContainer = document.createElement("DIV");
+        this.customContainer.className = "PrettyCards_GameEnd_RewardRow";
 
         this.breakdownContainer.classList.add("PrettyCards_Hidden");
         this.breakdownContainer.classList.add("PrettyCards_GameEnd_RewardRow");
@@ -402,15 +501,18 @@ class RewardRow {
         this.breakdownContainer.appendChild(document.createTextNode(" )"));
 
         this.container.appendChild(this.breakdownContainer);
+        this.container.appendChild(this.customContainer);
         this.container.appendChild(this.barContainer);
     }
 
     setBarData(/**@type {BarData} */ barData) {
         if (this.barData) {
-            this.barContainer.removeChild(this.barData.bar);
+            this.barContainer.removeChild(this.barData.container);
+            this.customContainer.removeChild(this.barData.customRowElement);
         }
         this.barData = barData;
-        this.barContainer.appendChild(this.barData.bar);
+        this.barContainer.appendChild(this.barData.container);
+        this.customContainer.appendChild(this.barData.customRowElement);
     }
 
     addInstance(/**@type {RewardSourceInstance} */ inst, /**@type {boolean} */ front = false) {
@@ -444,9 +546,15 @@ class RewardRow {
         }
         if (!shouldTick) { // If something ticked . . .
             this.totalAmountElement.innerHTML = totalDisplayedAmount;
-            this.breakdownContainer.classList.remove("PrettyCards_Hidden");
             this.barContainer.classList.remove("PrettyCards_Hidden");
             this.barData.updateBar(totalDisplayedAmount);
+            // Keeping this if statement because the else clause is important to only be on else.
+            if (this.barData.customRow) {
+                this.barData.updateCustomRow(totalDisplayedAmount);
+            } else {
+                this.breakdownContainer.classList.remove("PrettyCards_Hidden");
+            }
+            
         }
         setTimeout(this.tick.bind(this), this.tickSpeed);
     }
@@ -622,7 +730,7 @@ function transformMatchEndData(data) {
     var bonusPair = returnReward(data.bonusRewardType === "CARD" ? data.bonusRewardType : data.bonusRewardStringKey, data.bonusRewardQuantity, newData.rewardManager, RewardSource.SPECIAL);
 
     newData.rewardManager.addReward(Currency.XP, new RewardSourceInstance(RewardSource.MATCH, data.newXp - data.oldXp));
-    newData.rewardManager.addBarForCurrency(Currency.XP, BarData.returnXPData(data.oldJaugeSize, data.jaugeSize, data.oldJaugeSize - data.xpUntilNextLevel, levelUpPair, newData.rewardManager));
+    newData.rewardManager.addBarForCurrency(Currency.XP, BarData.returnXPData(data.oldJaugeSize, data.jaugeSize, data.oldJaugeSize - data.xpUntilNextLevel, levelUpPair, newData.rewardManager, parseInt($('.level').html()) /* Yes, this is how Onu gets the LV */ ));
     if (data.oldElo && data.newElo) {
         newData.rewardManager.addReward(Currency.ELO, new RewardSourceInstance(RewardSource.MATCH, data.newElo - data.oldElo));
         var minEloDivision = getDivisionStart(data.oldElo);
@@ -738,5 +846,6 @@ prettycards.testMatchResults = () => {
         }
     ));
 };
+
 
 export {DIVISIONS, getDivisionForElo};
