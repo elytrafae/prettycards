@@ -399,6 +399,7 @@
     "pc-matchwarn-sneo": "You have an {{CARD:719}} in your hand while {{ARTIFACT:46}} is active, so ending the turn now would kill you.<br>Proceed anyway?",
     "pc-game-draw": "Draw",
     "pc-game-levelup": "Level Up!",
+    "pc-game-leave": "Return to Play Screen",
 
     "pc-rewardsource-match": "Match Reward",
     "pc-rewardsource-queue": "Queue Compensation",

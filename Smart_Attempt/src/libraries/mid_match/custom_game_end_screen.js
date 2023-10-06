@@ -238,11 +238,14 @@ class BarData {
         var data = new BarData(ELO_PER_DIVISION, ELO_PER_DIVISION, startValue, startClass, endClass);
         data.setTextClasses(startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "_NEON"), endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "_NEON"));
         
+        // I'm not using "playSound" here because I want to pre-load the sound.
+        var audio = new Audio();
+        audio.src = `https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
+
         var divisionPart = document.createElement("SPAN");
         data.tipOverFunction = () => {
             // addRankUpStuff
-            var src = `https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
-            playSound(src);
+            audio.play();
             divisionPart.innerHTML = window.$.i18n("{{DIVISION:" + endDivision + "}}");
         }
 
@@ -437,6 +440,9 @@ class RewardSourceInstance {
 
     /**@returns {boolean} */
     finishedTicking() {
+        if (this.amount < 0) {
+            return this.passedAmount <= this.amount;
+        }
         return this.passedAmount >= this.amount;
     }
 
@@ -475,7 +481,7 @@ class RewardRow {
 
         /**@type {HTMLElement} */
         this.customContainer = document.createElement("DIV");
-        this.customContainer.className = "PrettyCards_GameEnd_RewardRow";
+        this.customContainer.className = "PrettyCards_GameEnd_RewardRow PrettyCards_Hidden";
 
         this.breakdownContainer.classList.add("PrettyCards_Hidden");
         this.breakdownContainer.classList.add("PrettyCards_GameEnd_RewardRow");
@@ -551,6 +557,7 @@ class RewardRow {
             // Keeping this if statement because the else clause is important to only be on else.
             if (this.barData.customRow) {
                 this.barData.updateCustomRow(totalDisplayedAmount);
+                this.customContainer.classList.remove("PrettyCards_Hidden");
             } else {
                 this.breakdownContainer.classList.remove("PrettyCards_Hidden");
             }
@@ -623,7 +630,7 @@ class RewardManager {
         this.container.insertBefore(row.container, this.container.children[rowsInFront]);
     }
 
-    startTicking() {
+    startTicking(/**@type {Function} */ cb = () => {}) {
         this.alreadyStartedTicking = true;
         var j=0;
         for (var i=0; i < RewardManager.#ORDER.length; i++) {
@@ -634,6 +641,7 @@ class RewardManager {
                 j++;
             }
         }
+        setTimeout(cb, j*800);
     }
 
     addBarForCurrency(/**@type {Currency} */ currency, /**@type {BarData} */ data) {
@@ -767,6 +775,8 @@ function displayMatchResults(data) {
     var bgm = new Audio();
     bgm.src = data.endType.songSrc;
 
+    var leaveRow = document.createElement("DIV");
+
     var backdrop = document.createElement("DIV");
     backdrop.className = "PrettyCards_GameEnd_Backdrop";
     window.$(backdrop).css("top", -window.innerHeight + "px").animate({"top": "0px"}, 1000, "easeInQuad", () => {
@@ -776,7 +786,9 @@ function displayMatchResults(data) {
             bgm.loop = true;
             bgm.play();
 
-            data.rewardManager.startTicking();
+            data.rewardManager.startTicking(() => {
+                leaveRow.classList.remove("PrettyCards_Hidden");
+            });
         }, 1000);
     });
     var container = document.createElement("DIV");
@@ -788,7 +800,14 @@ function displayMatchResults(data) {
     container.appendChild(title);
 
     container.appendChild(data.rewardManager.container);
-    
+
+    leaveRow.className = "PrettyCards_Hidden PrettyCards_GameEnd_LeaveRow";
+    var leaveBtn = document.createElement("BUTTON");
+    leaveBtn.className = "btn btn-success";
+    leaveBtn.innerHTML = window.$.i18n("pc-game-leave");
+    leaveBtn.onclick = () => {window.location = "/Play";};
+    leaveRow.appendChild(leaveBtn);
+    container.appendChild(leaveRow);
 
     backdrop.appendChild(container);
     window.document.body.appendChild(backdrop);
@@ -821,6 +840,7 @@ prettycards.testMatchResults = () => {
     displayMatchResults(transformMatchEndData(
         {
             "action": "getVictory",
+            //"action": "getDefeat",
             "gameType": "RANKED",
             "disconnected": false,
             "golds": 5944,

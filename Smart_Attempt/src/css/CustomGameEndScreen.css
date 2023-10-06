@@ -12,7 +12,8 @@
 .PrettyCards_GameEnd_Content {
     width: 900px;
     min-height: 100%;
-    margin: 15px auto;
+    padding: 15px 0;
+    margin: auto;
 }
 
 .PrettyCards_GameEnd_Title {
@@ -106,4 +107,10 @@
 
 .PrettyCards_XPBarText {
     color: #000000;
+}
+
+.PrettyCards_GameEnd_LeaveRow {
+    text-align: center;
+    margin-top: 20px;
+    scale: 1.2;
 }
