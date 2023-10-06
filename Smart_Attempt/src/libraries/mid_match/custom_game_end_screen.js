@@ -1,7 +1,7 @@
 
 import { loadCSS } from "../css_loader";
 import css from "../../css/CustomGameEndScreen.css";
-import { prettycards } from "../underscript_checker";
+import { PrettyCards_plugin, prettycards } from "../underscript_checker";
 loadCSS(css);
 
 const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
@@ -286,6 +286,11 @@ class Currency {
     static SHINY_PACK = new Currency("rainbowText", () => {return window.$('<img src="images/icons/shinyPack.gif">')[0]}, Currency.speedFunction(200, 100, 25));
     static SUPER_PACK = new Currency("yellow", () => {return window.$('<img src="images/icons/superPack.gif">')[0]}, Currency.speedFunction(500, 200, 25));
     static FINAL_PACK = new Currency("DTFragment", () => {return window.$('<img src="images/icons/finalPack.gif">')[0]}, Currency.speedFunction(500, 200, 25));
+
+    static CARD_SKIN = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-card-skin")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
+    static PROFILE_SKIN = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-profile-skin")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
+    static AVATAR = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-avatar")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
+    static EMOTE = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-emote")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
 
     /**@type {Map.<number,CardCurrency>} */
     static CARD_CURRENCIES = new Map();
@@ -716,10 +721,10 @@ function getCurrencyFromTypeString(/**@type {String} */ rewardType) {
         case "ucp": return Currency.UCP;
         case "dt-fragment": return Currency.DTFRAG;
         case "dr-pack": return Currency.DR_PACK;
-        case "avatar": return null;
-        case "card-skin": return null;
-        case "profile-skin": return null;
-        case "emote": return null;
+        case "avatar": return Currency.AVATAR;
+        case "card-skin": return Currency.CARD_SKIN;
+        case "profile-skin": return Currency.PROFILE_SKIN;
+        case "emote": return Currency.EMOTE;
         default: return null;
     }
 }
@@ -866,6 +871,12 @@ prettycards.testMatchResults = () => {
         }
     ));
 };
+
+/* I should have planned ahead more for all of this . . .
+PrettyCards_plugin.events.on("getVictory getDefeat", function (data) {
+    displayMatchResults(transformMatchEndData(data));
+});
+*/
 
 
 export {DIVISIONS, getDivisionForElo};
