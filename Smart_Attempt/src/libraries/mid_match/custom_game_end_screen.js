@@ -72,10 +72,115 @@ const DIVISIONS = [
     "LEGEND"
 ];
 
+/**@template L,R */
+class Pair {
+    
+    constructor(/**@type {L} */ left, /**@type {R} */ right) {
+        /**@type {L} */
+        this.left = left;
+        /**@type {R} */
+        this.right = right;
+    }
+
+    getLeft() {
+        return this.left;
+    }
+
+    getRight() {
+        return this.right;
+    }
+
+}
+
+class BarData {
+
+    constructor(/**@type {number} */ firstSize, /**@type {number} */ secondSize, /**@type {number} */ startValue, /**@type {String} */ firstClass, /**@type {String} */ secondClass) {
+        /**@type {number} */ 
+        this.firstSize = firstSize;
+        /**@type {number} */ 
+        this.secondSize = secondSize;
+        /**@type {number} */ 
+        this.startValue = startValue;
+        /**@type {String} */ 
+        this.firstClass = firstClass;
+        /**@type {String} */ 
+        this.secondClass = secondClass;
+
+        /**@type {HTMLElement} */
+        this.bar = document.createElement("PROGRESS");
+        this.bar.classList.add(this.firstClass);
+        this.bar.setAttribute("min", 0);
+        this.bar.setAttribute("max", this.firstSize);
+        this.bar.setAttribute("value", this.startValue);
+
+        /**@type {boolean} */
+        this.didTipOver = false;
+        /**@type {Function} */
+        this.tipOverFunction = () => {};
+    }
+
+    updateBar(/**@type {number} */ passedAmount) {
+        var newValue = this.startValue + passedAmount;
+        var newDisplayedValue = newValue;
+        var usingSecondData = false;
+
+        if (newDisplayedValue >= this.firstSize) {
+            newDisplayedValue -= this.firstSize;
+            usingSecondData = true;
+        }
+        if (newDisplayedValue < 0) {
+            newDisplayedValue += this.secondSize;
+            usingSecondData = true;
+        }
+        if (usingSecondData && !this.didTipOver) {
+            this.didTipOver = true;
+            this.bar.classList.remove(this.firstClass);
+            this.bar.classList.add(this.secondClass);
+            this.bar.setAttribute("max", this.secondSize);
+            this.onTipOver();
+        }
+
+        this.bar.setAttribute("value", newDisplayedValue);
+    }
+
+    onTipOver() {
+        // TODO: Add level-up/rank change code
+        this.tipOverFunction();
+    }
+
+    static returnEmpty() {
+        return new BarData(0, 0, 0, "PrettyCards_Hidden", "PrettyCards_Hidden");
+    }
+
+    static returnXPData(/**@type {number} */ firstSize, /**@type {number} */ secondSize, /**@type {number} */ startValue, /**@type {Pair.<Currency,RewardSourceInstance>} */ reward, /**@type {RewardManager} */ manager) {
+        var data = new BarData(firstSize, secondSize, startValue, "xpBar", "xpBar");
+        data.tipOverFunction = () => {
+            playSound("/sounds/levelUp.wav");
+            if (reward) {
+                manager.addReward(reward.getLeft(), reward.getRight());
+            }
+        }
+        return data;
+    }
+
+    static returnEloData(/**@type {number} */ startValue, /**@type {number} */ startElo, /**@type {number} */ endElo) {
+        var startArena = getDivisionForElo(startElo).split("_")[0];
+        var endArena = getDivisionForElo(endElo).split("_")[0];
+        var startClass = startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "Bar");
+        var endClass = endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "Bar");
+        var data = new BarData(ELO_PER_DIVISION, ELO_PER_DIVISION, startValue, startClass, endClass);
+        data.tipOverFunction = (addRankUpStuff) => {
+            //playSound("/sounds/levelUp.wav");
+        }
+        return data;
+    }
+
+}
+
 class Currency {
 
     static GOLD = new Currency("yellow", () => {return window.$('<img src="images/icons/gold.png">')[0]}, Currency.speedFunction(100, 5, 500));
-    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]}, Currency.speedFunction(200, 10, 500));
+    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]}, Currency.speedFunction(200, 10, 200));
     static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]}, Currency.speedFunction(100, 5, 500));
     static DTFRAG = new Currency("DTFragment", () => {return window.$('<img src="images/dtFragment.png">')[0]}, Currency.speedFunction(500, 100, 10));
     static XP = new Currency("PrettyCards_UserLV", () => {return window.$('<span>XP</span>')[0]}, Currency.speedFunction(50, 5, 3000)).setCountPerTick(5);
@@ -187,8 +292,8 @@ class RewardSource {
     static SPECIAL = new RewardSource("special", "star");
     static CONTRIBUTOR = new RewardSource("contributor", "euro");
     static QUEUE = new RewardSource("queue", "time");
-    static LEVELUP = new RewardSource("levelup", "gift");
-    static QUEST = new RewardSource("levelup", "calendar");
+    static LEVELUP = new RewardSource("levelup", "arrow-up");
+    static QUEST = new RewardSource("quest", "calendar");
     static FRIENDSHIP = new RewardSource("friendship", "heart");
 
     constructor(/**@type {String} */ id, /**@type {String} */ iconName) {
@@ -214,10 +319,16 @@ class RewardSourceInstance {
         this.container = document.createElement("SPAN");
         /**@type {HTMLElement} */
         this.amountElement = document.createElement("SPAN");
+        /**@type {HTMLElement} */
+        this.iconElement = document.createElement("SPAN");
 
         this.container.className = "PrettyCards_GameEnd_RewardSourceContainer PrettyCards_Hidden";
-        this.container.innerHTML = ` <span class="glyphicon glyphicon-${this.source.iconName}">`;
-        this.container.prepend(this.amountElement);
+        this.iconElement.className = `glyphicon glyphicon-${this.source.iconName}`;
+        this.iconElement.appendChild(returnTooltip(window.$.i18n(`pc-rewardsource-${source.id}`)));
+
+        this.container.appendChild(this.amountElement);
+        this.container.appendChild(document.createTextNode(" "));
+        this.container.appendChild(this.iconElement);
     }
 
     /**@returns {boolean} */
@@ -236,7 +347,11 @@ class RewardSourceInstance {
     }
 
     tick(/**@type {number} */ count) {
-        this.passedAmount = Math.min(this.passedAmount + count, this.amount);
+        if (this.amount > 0) {
+            this.passedAmount = Math.min(this.passedAmount + count, this.amount);
+        } else {
+            this.passedAmount = Math.max(this.passedAmount - count, this.amount);
+        }
         this.amountElement.innerHTML = "+" + this.passedAmount;
         this.container.classList.remove("PrettyCards_Hidden");
     }
@@ -259,21 +374,43 @@ class RewardRow {
         /**@type {HTMLElement} */
         this.container = document.createElement("DIV");
         currency.applyTextClass(this.container);
-        this.container.classList.add("PrettyCards_Hidden");
-        this.container.classList.add("PrettyCards_GameEnd_RewardRow");
+
+        /**@type {HTMLElement} */
+        this.breakdownContainer = document.createElement("DIV");
+
+        this.breakdownContainer.classList.add("PrettyCards_Hidden");
+        this.breakdownContainer.classList.add("PrettyCards_GameEnd_RewardRow");
 
         /**@type {HTMLElement} */
         this.totalAmountElement = document.createElement("SPAN");
         /**@type {HTMLElement} */
         this.instanceContainer = document.createElement("SPAN");
+        /**@type {HTMLElement} */
+        this.barContainer = document.createElement("DIV");
+        this.barContainer.className = "PrettyCards_GameEnd_BarRow PrettyCards_Hidden";
 
-        this.container.innerHTML = "+ ";
-        this.container.appendChild(this.totalAmountElement);
-        this.container.appendChild(document.createTextNode(" "));
-        this.container.appendChild(this.currency.getCurrencyIcon());
-        this.container.appendChild(document.createTextNode(" ("));
-        this.container.appendChild(this.instanceContainer);
-        this.container.appendChild(document.createTextNode(" )"));
+        /**@type {BarData} */
+        this.barData;
+        this.setBarData(BarData.returnEmpty());
+
+        this.breakdownContainer.innerHTML = "+ ";
+        this.breakdownContainer.appendChild(this.totalAmountElement);
+        this.breakdownContainer.appendChild(document.createTextNode(" "));
+        this.breakdownContainer.appendChild(this.currency.getCurrencyIcon());
+        this.breakdownContainer.appendChild(document.createTextNode(" ("));
+        this.breakdownContainer.appendChild(this.instanceContainer);
+        this.breakdownContainer.appendChild(document.createTextNode(" )"));
+
+        this.container.appendChild(this.breakdownContainer);
+        this.container.appendChild(this.barContainer);
+    }
+
+    setBarData(/**@type {BarData} */ barData) {
+        if (this.barData) {
+            this.barContainer.removeChild(this.barData.bar);
+        }
+        this.barData = barData;
+        this.barContainer.appendChild(this.barData.bar);
     }
 
     addInstance(/**@type {RewardSourceInstance} */ inst, /**@type {boolean} */ front = false) {
@@ -307,7 +444,9 @@ class RewardRow {
         }
         if (!shouldTick) { // If something ticked . . .
             this.totalAmountElement.innerHTML = totalDisplayedAmount;
-            this.container.classList.remove("PrettyCards_Hidden");
+            this.breakdownContainer.classList.remove("PrettyCards_Hidden");
+            this.barContainer.classList.remove("PrettyCards_Hidden");
+            this.barData.updateBar(totalDisplayedAmount);
         }
         setTimeout(this.tick.bind(this), this.tickSpeed);
     }
@@ -335,6 +474,8 @@ class RewardManager {
         this.rows = new Map();
         /**@type {HTMLElement} */
         this.container = document.createElement("DIV");
+        /**@type {boolean} */
+        this.alreadyStartedTicking = false;
     }
 
     static getCurrencyOrder() {
@@ -342,12 +483,17 @@ class RewardManager {
     }
 
     addReward(/**@type {Currency} */ currency, /**@type {RewardSourceInstance} */ inst, /**@type {boolean} */ front = false) {
-        if (!this.rows.has(currency)) {
+        var newRow = !this.rows.has(currency);
+        if (newRow) {
             var row = new RewardRow(currency);
             this.#appendContainer(row);
             this.rows.set(currency, row);
         }
-        this.rows.get(currency).addInstance(inst, front);
+        var row = this.rows.get(currency);
+        row.addInstance(inst, front);
+        if (newRow && this.alreadyStartedTicking) {
+            row.tick();
+        }
     }
 
     #appendContainer(/**@type {RewardRow} */ row) {
@@ -370,6 +516,7 @@ class RewardManager {
     }
 
     startTicking() {
+        this.alreadyStartedTicking = true;
         var j=0;
         for (var i=0; i < RewardManager.#ORDER.length; i++) {
             var currency = RewardManager.#ORDER[i];
@@ -381,6 +528,13 @@ class RewardManager {
         }
     }
 
+    addBarForCurrency(/**@type {Currency} */ currency, /**@type {BarData} */ data) {
+        if (!this.rows.has(currency)) {
+            return;
+        }
+        this.rows.get(currency).setBarData(data);
+    }
+
     static addCardCurrencyToOrder(/**@type {CardCurrency} */ currency) {
         RewardManager.#ORDER.splice(4, 0, currency); // 4 is the index. This should put it right after DT FRAGS
     }
@@ -390,6 +544,10 @@ class RewardManager {
 function getDivisionForElo(elo) {
     var nr = Math.floor((elo - 1200)/ELO_PER_DIVISION);
     return DIVISIONS[Math.min(nr, DIVISIONS.length-1)];
+}
+
+function getDivisionStart(elo) {
+    return (Math.floor(elo/ELO_PER_DIVISION))*ELO_PER_DIVISION;
 }
 
 function getDivisionEnd(elo) {
@@ -409,22 +567,22 @@ function addGoldSources(data, /**@type {RewardManager} */ rewardManager) {
     rewardManager.addReward(Currency.GOLD, new RewardSourceInstance(RewardSource.MATCH, goldDiff), true);
 }
 
-function processReward(/**@type {String} */ rewardType, /**@type {number} */ rewardCount, /**@type {RewardManager} */ rewardManager, /**@type {RewardSource} */ source) {
+/**@returns {Pair.<Currency,RewardSourceInstance>|null} */
+function returnReward(/**@type {String} */ rewardType, /**@type {number} */ rewardCount, /**@type {RewardManager} */ rewardManager, /**@type {RewardSource} */ source) {
     if (!rewardType) {
-        return;
+        return null;
     }
     if (rewardType === 'CARD') {
         // Yes, in case of cards, Onu uses the count as the ID, and the count is always 1.
         var currency = Currency.getOrCreateCardCurrency(rewardCount);
-        rewardManager.addReward(currency, new RewardSourceInstance(source, 1));
-        return;
+        return new Pair(currency, new RewardSourceInstance(source, 1));
     }
     var currency = getCurrencyFromTypeString(rewardType);
     if (!currency) {
         console.warn("Could not find Currency type for string ", rewardType);
-        return;
+        return null;
     }
-    rewardManager.addReward(currency, new RewardSourceInstance(source, rewardCount));
+    return new Pair(currency, new RewardSourceInstance(source, rewardCount));
 }
 
 function getCurrencyFromTypeString(/**@type {String} */ rewardType) {
@@ -459,12 +617,21 @@ function transformMatchEndData(data) {
         newLevelBarSize : data.jaugeSize
     }
     addGoldSources(data, newData.rewardManager);
+
+    var levelUpPair = returnReward(data.rewardType === "CARD" ? data.rewardType : data.rewardStringKey, data.rewardQuantity, newData.rewardManager, RewardSource.LEVELUP);
+    var bonusPair = returnReward(data.bonusRewardType === "CARD" ? data.bonusRewardType : data.bonusRewardStringKey, data.bonusRewardQuantity, newData.rewardManager, RewardSource.SPECIAL);
+
     newData.rewardManager.addReward(Currency.XP, new RewardSourceInstance(RewardSource.MATCH, data.newXp - data.oldXp));
+    newData.rewardManager.addBarForCurrency(Currency.XP, BarData.returnXPData(data.oldJaugeSize, data.jaugeSize, data.oldJaugeSize - data.xpUntilNextLevel, levelUpPair, newData.rewardManager));
     if (data.oldElo && data.newElo) {
         newData.rewardManager.addReward(Currency.ELO, new RewardSourceInstance(RewardSource.MATCH, data.newElo - data.oldElo));
+        var minEloDivision = getDivisionStart(data.oldElo);
+        newData.rewardManager.addBarForCurrency(Currency.ELO, BarData.returnEloData(data.oldElo - minEloDivision, data.oldElo, data.newElo));
     }
-    processReward(data.rewardType === "CARD" ? data.rewardType : data.rewardStringKey, data.rewardQuantity, newData.rewardManager, RewardSource.LEVELUP);
-    processReward(data.bonusRewardType === "CARD" ? data.bonusRewardType : data.bonusRewardStringKey, data.bonusRewardQuantity, newData.rewardManager, RewardSource.SPECIAL);
+    
+    if (bonusPair) {
+        newData.rewardManager.addReward(bonusPair.getLeft(), bonusPair.getRight());
+    }
 
     // Test code
     newData.rewardManager.addReward(Currency.GOLD, new RewardSourceInstance(RewardSource.QUEST, 300));
@@ -519,6 +686,27 @@ function displayMatchResults(data) {
     window.document.body.appendChild(backdrop);
 }
 
+function playSound(src) {
+    var audio = new Audio();
+    audio.src = src;
+    audio.play();
+}
+
+function returnTooltip(/**@type {String} */ text) {
+    var container = document.createElement("DIV");
+    var textElem = document.createElement("DIV");
+    var arrowElem = document.createElement("DIV");
+    textElem.innerHTML = text;
+
+    container.className = "PrettyCards_GameEnd_Tooltip";
+    textElem.className = "PrettyCards_GameEnd_TooltipText";
+    arrowElem.className = "PrettyCards_GameEnd_TooltipArrow";
+
+    container.appendChild(textElem);
+    container.appendChild(arrowElem);
+    return container;
+}
+
 prettycards.GameEndTypes = GameEndTypes;
 prettycards.displayMatchResults = displayMatchResults;
 prettycards.testMatchResults = () => {
@@ -531,7 +719,7 @@ prettycards.testMatchResults = () => {
             "isDonator": false,
             "oldGold": 5919,
             "oldXp": 5709561,
-            "newXp": 5710123,
+            "newXp": 5713123,
             "nbLevelPassed": 0,
             "oldJaugeSize": 6000,
             "jaugeSize": 6000,
@@ -539,8 +727,8 @@ prettycards.testMatchResults = () => {
             "queueGoldBonus": 10,
             "oldDivision": "AMETHYST_I",
             "newDivision": "AMETHYST_I",
-            "oldElo": 1775,
-            "newElo": 1783,
+            "oldElo": 1888,
+            "newElo": 1900,
             "rewardStringKey": "reward-dt-fragment",
             "rewardType": "DTFRAGMENT",
             "rewardQuantity": 4,

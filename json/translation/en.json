@@ -397,6 +397,14 @@
 
     "pc-matchwarn": "You are about to lose!",
     "pc-matchwarn-sneo": "You have an {{CARD:719}} in your hand while {{ARTIFACT:46}} is active, so ending the turn now would kill you.<br>Proceed anyway?",
-    "pc-game-draw": "Draw"
+    "pc-game-draw": "Draw",
+
+    "pc-rewardsource-match": "Match Reward",
+    "pc-rewardsource-queue": "Queue Compensation",
+    "pc-rewardsource-contributor": "Contributor Reward",
+    "pc-rewardsource-levelup": "Level Up Reward",
+    "pc-rewardsource-quest": "Quest Reward",
+    "pc-rewardsource-friendship": "Friendship Reward",
+    "pc-rewardsource-special": "Bonus Reward"
 }
 

@@ -19,6 +19,7 @@
     font-size: 10em;
     text-align: center;
     line-height: 1.2;
+    margin-bottom: 0.3em;
 }
 
 .DTFragment {
@@ -38,4 +39,51 @@
 
 .PrettyCards_GameEnd_RewardRow img {
     height: 32px;
+}
+
+.PrettyCards_GameEnd_BarRow {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    /* align-content: center; */
+    justify-content: center;
+    align-items: center;
+}
+
+.PrettyCards_GameEnd_Content .glyphicon {
+    position: relative;
+}
+
+.PrettyCards_GameEnd_Tooltip {
+    position: absolute;
+    bottom: 100%;
+    translate: -50% 0;
+    left: 50%;
+    display: none;
+    white-space: nowrap;
+}
+
+*:hover > .PrettyCards_GameEnd_Tooltip {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.PrettyCards_GameEnd_TooltipText {
+    background-color: #303030;
+    font-family: DTM-Mono;
+    padding: 0.3em 0.4em;
+    border-radius: 0.3em;
+    color: white;
+    font-size: 0.8em;
+}
+
+.PrettyCards_GameEnd_TooltipArrow {
+    background-color: #303030;
+    width: 0.5em;
+    height: 0.5em;
+    transform: rotate(45deg);
+    translate: 0 -50%;
+    z-index: -1;
 }

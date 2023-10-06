@@ -193,7 +193,28 @@ function runEvent(data) {
                             }
                         }, 5);
                     }
-                    if (data.gameType === "RANKED") { var oldElo = data.oldElo; var newElo = data.newElo; var eloAmount = oldElo; var intervalElo = setInterval(function () { if (eloAmount > newElo && data.oldElo % 25 > 0) { eloAmount = eloAmount - 0.1; $('#eloBarLooser').attr("value", eloAmount - minEloDiv); } else { clearInterval(intervalElo); if (data.oldDivision !== data.newDivision) { $('.newDivision').append('<h2>' + $.i18n(newDivisionName) + '</h2>'); $('.legendElo').hide(); $('#eloBarLooser').show(); var newMinEloDiv = getMinEloDivision(data.newDivision); $('#eloBarLooser').removeClass(getDivisionFirstPart(data.oldDivision) + "Bar"); $('#eloBarLooser').addClass(getDivisionFirstPart(data.newDivision) + "Bar"); $('#eloBarLooser').attr("min", 0); $('#eloBarLooser').attr("value", data.newElo - newMinEloDiv); $('#eloBarLooser').attr("max", getNextEloDivision(data.newDivision) - newMinEloDiv); $('.oldDivision').hide(); $('.newDivision').show(); BootstrapDialog.show({ title: $.i18n('game-demotion'), type: BootstrapDialog.TYPE_DANGER, message: $.i18n('game-demotion-message', data.newDivision), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function (dialog) { dialog.close(); } }] }); } } }, 33); }
+                    if (data.gameType === "RANKED") { 
+                        var oldElo = data.oldElo; 
+                        var newElo = data.newElo; 
+                        var eloAmount = oldElo; 
+                        var intervalElo = setInterval(function () { 
+                            if (eloAmount > newElo && data.oldElo % 25 > 0) { 
+                                eloAmount = eloAmount - 0.1; 
+                                $('#eloBarLooser').attr("value", eloAmount - minEloDiv); 
+                            } else { 
+                                clearInterval(intervalElo); 
+                                if (data.oldDivision !== data.newDivision) { 
+                                    $('.newDivision').append('<h2>' + $.i18n(newDivisionName) + '</h2>'); 
+                                    $('.legendElo').hide(); 
+                                    $('#eloBarLooser').show(); 
+                                    var newMinEloDiv = getMinEloDivision(data.newDivision); 
+                                    $('#eloBarLooser').removeClass(getDivisionFirstPart(data.oldDivision) + "Bar"); 
+                                    $('#eloBarLooser').addClass(getDivisionFirstPart(data.newDivision) + "Bar"); 
+                                    $('#eloBarLooser').attr("min", 0); 
+                                    $('#eloBarLooser').attr("value", data.newElo - newMinEloDiv); 
+                                    $('#eloBarLooser').attr("max", getNextEloDivision(data.newDivision) - newMinEloDiv); 
+                                    $('.oldDivision').hide(); $('.newDivision').show(); 
+                                    BootstrapDialog.show({ title: $.i18n('game-demotion'), type: BootstrapDialog.TYPE_DANGER, message: $.i18n('game-demotion-message', data.newDivision), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function (dialog) { dialog.close(); } }] }); } } }, 33); }
                 }
             }, 2200);
         }, 750);
