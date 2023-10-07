@@ -7,6 +7,7 @@
     left: 0;
     background-color: black;
     overflow: auto;
+    z-index: 14;
 }
 
 .PrettyCards_GameEnd_Content {

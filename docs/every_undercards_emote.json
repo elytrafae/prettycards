@@ -628,5 +628,11 @@
         "name": "Ralsei Nurse",
         "image": "Ralsei_Nurse",
         "ucpCost": 35
+    }, {
+        "code": ":Whaaadyne:",
+        "id": 106,
+        "name": "Whaaadyne",
+        "image": "Whaaadyne",
+        "ucpCost": 35
     }
 ]

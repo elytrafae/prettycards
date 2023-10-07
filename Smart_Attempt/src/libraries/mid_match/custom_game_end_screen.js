@@ -587,6 +587,10 @@ class RewardManager {
         Currency.FINAL_PACK,
         Currency.ELO,
         Currency.XP,
+        Currency.CARD_SKIN,
+        Currency.PROFILE_SKIN,
+        Currency.AVATAR,
+        Currency.EMOTE,
     ];
 
     constructor() {
@@ -755,6 +759,7 @@ function transformMatchEndData(data) {
     }
 
     // Test code
+    /*
     newData.rewardManager.addReward(Currency.GOLD, new RewardSourceInstance(RewardSource.QUEST, 300));
     newData.rewardManager.addReward(Currency.DUST, new RewardSourceInstance(RewardSource.QUEST, 450));
     newData.rewardManager.addReward(Currency.UT_PACK, new RewardSourceInstance(RewardSource.QUEST, 3));
@@ -768,14 +773,16 @@ function transformMatchEndData(data) {
     newData.rewardManager.addReward(Currency.SHINY_PACK, new RewardSourceInstance(RewardSource.QUEST, 3));
     newData.rewardManager.addReward(Currency.SUPER_PACK, new RewardSourceInstance(RewardSource.QUEST, 1));
     newData.rewardManager.addReward(Currency.FINAL_PACK, new RewardSourceInstance(RewardSource.QUEST, 1));
+    */
     ////////////
     return newData;
 }
 
+var landNoise = new Audio();
+landNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
+
 function displayMatchResults(data) {
     //console.log(data, data.endType, data.endType.textKey, window.$(data.endType.textKey));
-    var landNoise = new Audio();
-    landNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
 
     var bgm = new Audio();
     bgm.src = data.endType.songSrc;
@@ -877,6 +884,16 @@ PrettyCards_plugin.events.on("getVictory getDefeat", function (data) {
     displayMatchResults(transformMatchEndData(data));
 });
 */
+
+var endEvents = ["getVictory", "getDefeat"];
+PrettyCards_plugin.events.on("PreGameEvent", function (data) {
+    console.log(data);
+    if (endEvents.includes(data.action)) {
+        displayMatchResults(transformMatchEndData(data));
+        this.canceled = true;
+    }
+    //
+});
 
 
 export {DIVISIONS, getDivisionForElo};

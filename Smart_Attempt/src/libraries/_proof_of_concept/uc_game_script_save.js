@@ -92,10 +92,18 @@ function runEvent(data) {
         }, 750);
     }
     else if (data.action === "getDefeat" && !spectate) {
-        $('#enemyMute').remove(); $('.spellPlayed').remove(); $('#game-history').remove(); if (settingsDialog !== null) { settingsDialog.close(); }
+        $('#enemyMute').remove(); 
+        $('.spellPlayed').remove(); 
+        $('#game-history').remove(); 
+        if (settingsDialog !== null) { settingsDialog.close(); }
         if (selectCardDialog !== null) { selectCardDialog.close(); }
         if (dustpileDialog !== null) { dustpileDialog.close(); }
-        music.pause(); finish = true; if (data.endType === "Chara") { $('#gameover-title').html($.i18n('game-died')); $('#gameover-title').css('color', '#f00'); }
+        music.pause(); 
+        finish = true; 
+        if (data.endType === "Chara") {
+            $('#gameover-title').html($.i18n('game-died')); 
+            $('#gameover-title').css('color', '#f00');
+        }
         if (data.gameType === "STANDARD" || data.gameType === "BOSS" || data.gameType === "EVENT") {
             $('.arrows').remove(); 
             $('.goldsAmount').html(data.golds); 
@@ -153,11 +161,47 @@ function runEvent(data) {
                 $('.bonus-reward').html('<p>' + $.i18n("game-reward") + ': <span class="yellow">' + $.i18n(data.bonusRewardStringKey) + '</span> x' + data.bonusRewardQuantity + '</p>'); 
             }
         }
-        if (data.endType !== "Chara") { if (shakeEnabled) { $('#user' + userId).effect("shake"); } } else { playSound('hit'); $('#handCards').hide(); $('#yourAvatar').hide(); $('#enemyAvatar').hide(); $('.rainbowAvatar').hide(); $('header').hide(); $('#phase2').hide(); $('body').css('background-image', 'url(images/99.png)'); $('body').css('background-repeat', 'repeat'); $('body').css('background-size', 'cover'); $('#gameOver').show(); }
+        if (data.endType !== "Chara") { 
+            if (shakeEnabled) { 
+                $('#user' + userId).effect("shake"); 
+            } 
+        } else { 
+            playSound('hit'); 
+            $('#handCards').hide(); 
+            $('#yourAvatar').hide(); 
+            $('#enemyAvatar').hide(); 
+            $('.rainbowAvatar').hide(); 
+            $('header').hide(); 
+            $('#phase2').hide(); 
+            $('body').css('background-image', 'url(images/99.png)'); 
+            $('body').css('background-repeat', 'repeat'); 
+            $('body').css('background-size', 'cover'); 
+            $('#gameOver').show(); 
+        }
         setTimeout(function () {
-            if (data.endType !== "Chara") { playSound('soulDeath'); $('#handCards').hide(); $('#yourAvatar').hide(); $('#enemyAvatar').hide(); $('.rainbowAvatar').hide(); $('header').hide(); $('#phase2').hide(); $('body').css('background', '#000'); $('#gameOver').show(); $('#soul').append('<img src="images/broke.gif" draggable="false"/>'); audio.play(); }
+            if (data.endType !== "Chara") { 
+                playSound('soulDeath'); 
+                $('#handCards').hide(); 
+                $('#yourAvatar').hide(); 
+                $('#enemyAvatar').hide();
+                 $('.rainbowAvatar').hide(); 
+                 $('header').hide(); 
+                 $('#phase2').hide(); 
+                 $('body').css('background', '#000'); 
+                 $('#gameOver').show(); 
+                 $('#soul').append('<img src="images/broke.gif" draggable="false"/>'); 
+                 audio.play(); 
+            }
             setTimeout(function () {
-                $('body').css('background', '#000'); $('#soul img').removeAttr('src', ''); $('#soul').remove(); $('#messageDefeat').fadeIn(1000); if (data.endType !== "Chara") { playMusic('dr2_gameover'); } else { playMusic('toomuch'); }
+                $('body').css('background', '#000'); 
+                $('#soul img').removeAttr('src', ''); 
+                $('#soul').remove(); 
+                $('#messageDefeat').fadeIn(1000); 
+                if (data.endType !== "Chara") { 
+                    playMusic('dr2_gameover');
+                } else { 
+                    playMusic('toomuch'); 
+                }
                 if (data.gameType === "STANDARD" || data.gameType === "BOSS" || data.gameType === "RANKED" || data.gameType === "EVENT") {
                     var nbLevelPassed = data.nbLevelPassed; 
                     var xpAdded = data.newXp - data.oldXp; 
