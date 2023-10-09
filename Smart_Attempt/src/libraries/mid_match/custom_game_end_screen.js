@@ -228,9 +228,7 @@ class BarData {
         return data;
     }
 
-    static returnEloData(/**@type {number} */ startValue, /**@type {number} */ startElo, /**@type {number} */ endElo) {
-        var startDivision = getDivisionForElo(startElo);
-        var endDivision = getDivisionForElo(endElo);
+    static returnEloData(/**@type {number} */ startValue, /**@type {number} */ startElo, /**@type {number} */ endElo, /**@type {String} */ startDivision, /**@type {String} */ endDivision) {
         var startArena = startDivision.split("_")[0];
         var endArena = endDivision.split("_")[0];
         var startClass = startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "Bar");
@@ -244,9 +242,10 @@ class BarData {
 
         var divisionPart = document.createElement("SPAN");
         data.tipOverFunction = () => {
-            // addRankUpStuff
-            audio.play();
-            divisionPart.innerHTML = window.$.i18n("{{DIVISION:" + endDivision + "}}");
+            if (startDivision !== endDivision) {
+                audio.play();
+                divisionPart.innerHTML = window.$.i18n("{{DIVISION:" + endDivision + "}}");
+            }
         }
 
         data.customRow = true;
@@ -751,7 +750,7 @@ function transformMatchEndData(data) {
     if (data.oldElo && data.newElo) {
         newData.rewardManager.addReward(Currency.ELO, new RewardSourceInstance(RewardSource.MATCH, data.newElo - data.oldElo));
         var minEloDivision = getDivisionStart(data.oldElo);
-        newData.rewardManager.addBarForCurrency(Currency.ELO, BarData.returnEloData(data.oldElo - minEloDivision, data.oldElo, data.newElo));
+        newData.rewardManager.addBarForCurrency(Currency.ELO, BarData.returnEloData(data.oldElo - minEloDivision, data.oldElo, data.newElo, data.oldDivision, data.newDivision));
     }
     
     if (bonusPair) {
@@ -865,8 +864,10 @@ prettycards.testMatchResults = () => {
             "jaugeSize": 6000,
             "xpUntilNextLevel": 3189,
             "queueGoldBonus": 10,
-            "oldDivision": "AMETHYST_I",
-            "newDivision": "AMETHYST_I",
+            //"oldDivision": "AMETHYST_I",
+            //"newDivision": "AMETHYST_I",
+            "oldDivision": "LEGEND",
+            "newDivision": "LEGEND",
             "oldElo": 1888,
             "newElo": 1900,
             "rewardStringKey": "reward-dt-fragment",
