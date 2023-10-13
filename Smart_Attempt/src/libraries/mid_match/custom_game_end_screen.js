@@ -686,7 +686,7 @@ function displayMatchResults(data) {
     var bgm = new Audio();
     bgm.src = data.endType.songSrc;
 
-    collectNoise.src = "";
+    collectNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/RewardCollect.ogg";
 
     var leaveRow = document.createElement("DIV");
 
@@ -723,6 +723,7 @@ function displayMatchResults(data) {
     leaveRow.appendChild(leaveBtn);
     container.appendChild(leaveRow);
 
+    // TODO: Make Friendship Container not display at all while there are no cards to claim
     friendshipContainer.className = "PrettyCards_Hidden";
     friendshipContainer.style.marginTop = "30px";
     container.appendChild(friendshipContainer);
@@ -739,22 +740,21 @@ function displayMatchResults(data) {
     var friendshipButton = document.createElement("BUTTON");
     friendshipButton.innerHTML = window.$.i18n("pc-game-collect-all");
     friendshipButton.className = "btn btn-primary";
-    friendshipButton.onclick = function() {
-        this.setAttribute("disabled", true);
-    };
     friendshipHeader.appendChild(friendshipButton);
 
     var friendshipCards = document.createElement("DIV");
     friendshipCards.className = "PrettyCards_GameEnd_FriendshipCards";
     friendshipContainer.appendChild(friendshipCards);
 
-    friendshipData.then((fd) => {
+    function renderFriendship(fd) {
+        friendshipCards.innerHTML = "";
         fd.renderAll(friendshipCards, (fi) => {return fi.getCollectableRewardCount();}, ($elem, fi) => {
             $elem.addClass("friendship-not-claimed");
             $elem.off("click").click(() => {
                 //console.log(fi, fi2);
                 fi.claimOnce().then((pair) => {
-
+                    collectNoise.currentTime = 0;
+                    collectNoise.play();
                     data.rewardManager.addReward(pair.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, pair.getRight()));
                     if (fi.getCollectableRewardCount() <= 0) {
                         $elem.remove();
@@ -762,6 +762,25 @@ function displayMatchResults(data) {
                 });
             });
         });
+    }
+
+    friendshipData.then((fd) => {
+        friendshipButton.onclick = function() {
+            friendshipButton.setAttribute("disabled", true);
+            fd.claimAll(
+                (fi, reward) => {
+                    collectNoise.currentTime = 0;
+                    collectNoise.play();
+                    data.rewardManager.addReward(reward.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, reward.getRight()));
+                }, 
+                () => {
+                    renderFriendship(fd);
+                    friendshipButton.removeAttribute("disabled");
+                }
+            );
+        };
+
+        renderFriendship(fd);
     });
 
     backdrop.appendChild(container);

@@ -132,14 +132,27 @@ class FriendshipData {
         })
     }
 
-    claimAll(callbackPerSuccess = (/**@type FriendshipItem */ item) => {}, callbackAtEnd = () => {}) {
+    claimAll(callbackPerSuccess = (/**@type {FriendshipItem} */ item, /**@type {Pair<Currency,number>} */ reward) => {}, callbackAtEnd = () => {}) {
         var items = this.#getItemsAfterFilter((item) => {return item.getCollectableRewardCount();});
         var c = 0;
         items.forEach((item) => {
             c += item.getCollectableRewardCount();
         });
+        if (c == 0) {
+            callbackAtEnd();
+            return;
+        }
         items.forEach((item) => {
-            // TODO: Do the claiming part
+            for (var i=0; i < item.getCollectableRewardCount(); i++) {
+                item.claimOnce().then((reward) => {
+                    callbackPerSuccess(item, reward);
+                }).finally(() => {
+                    c--;
+                    if (c <= 0) {
+                        callbackAtEnd();
+                    }
+                });
+            }
         });
     }
 

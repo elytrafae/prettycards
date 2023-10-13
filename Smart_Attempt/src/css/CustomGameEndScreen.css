@@ -135,11 +135,15 @@
     padding: 0 15px;
 }
 
-.friendship-not-claimed .cardFrame {
+.PrettyCards_GameEnd_Backdrop .friendship-not-claimed .cardFrame {
     -webkit-filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(100deg) saturate(500%) contrast(1.5);
     filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(100deg) saturate(500%) contrast(1.5)
 }
 
-.friendship-not-claimed .cardBackground {
+.PrettyCards_GameEnd_Backdrop .friendship-not-claimed .cardBackground {
     box-shadow: 0 0 10px 5px #4fff00
+}
+
+.PrettyCards_GameEnd_Backdrop .friendship-not-claimed:hover {
+    opacity: 0.8;
 }
