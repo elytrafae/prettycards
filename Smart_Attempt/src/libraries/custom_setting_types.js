@@ -1,4 +1,8 @@
 import { PrettyCards_plugin } from "./underscript_checker";
+import css from "../css/Settings.css";
+import { loadCSS } from "./css_loader";
+loadCSS(css);
+console.log("CSS loaded!", css);
 
 var settingTypes = {};
 
@@ -144,6 +148,7 @@ class EditableList extends window.underscript.utils.SettingType {
         return true;
     }
     
+    /*
     styles() {
         return [
             ".PrettyCards_Settings_EditableListRow { display: flex; }",
@@ -154,6 +159,7 @@ class EditableList extends window.underscript.utils.SettingType {
             ".PrettyCards_Settings_EditableListText { font-size: 0.8em; }"
         ];
     }
+    */
 }
 
 registerSettingType(EditableList);

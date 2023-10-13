@@ -206,6 +206,7 @@ class Utility {
 	
 	appendCardFriendship(card, container, level, currentXp, maxXp) { // Why must you torture me . . . ?
 		var $card = window.appendCardFriendship(card, level, currentXp, maxXp);
+		$card.find('.cardDesc').empty();
 		container.append($card);
 		return $card;
 	}
@@ -528,8 +529,36 @@ class Utility {
 	
 }
 
+/**@template L,R */
+class Pair {
+    
+    constructor(/**@type {L} */ left, /**@type {R} */ right) {
+        /**@type {L} */
+        this.left = left;
+        /**@type {R} */
+        this.right = right;
+    }
+
+    getLeft() {
+        return this.left;
+    }
+
+    getRight() {
+        return this.right;
+    }
+
+    setLeft(/**@type {L} */ left) {
+        this.left = left;
+    }
+
+    setRight(/**@type {R} */ right) {
+        this.right = right;
+    }
+
+}
+
 var utility = new Utility();
 
 prettycards.utility = utility;
 
-export {utility};
+export {utility, Pair};

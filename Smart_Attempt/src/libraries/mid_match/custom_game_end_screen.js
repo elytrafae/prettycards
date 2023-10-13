@@ -2,6 +2,9 @@
 import { loadCSS } from "../css_loader";
 import css from "../../css/CustomGameEndScreen.css";
 import { PrettyCards_plugin, prettycards } from "../underscript_checker";
+import { Currency } from "../shared_types/currency";
+import { getFriendshipData } from "../friendship_reward_processor";
+import { utility, Pair } from "../utility";
 loadCSS(css);
 
 const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
@@ -72,24 +75,14 @@ const DIVISIONS = [
     "LEGEND"
 ];
 
-/**@template L,R */
-class Pair {
-    
-    constructor(/**@type {L} */ left, /**@type {R} */ right) {
-        /**@type {L} */
-        this.left = left;
-        /**@type {R} */
-        this.right = right;
+/**@returns {CardCurrency} */
+function getOrCreateCardCurrency(/**@type {number} */ cardId) {
+    var existedBefore = Currency.CARD_CURRENCIES.has(cardId);
+    var currency = Currency.getOrCreateCardCurrency(cardId);
+    if (!existedBefore) {
+        RewardManager.addCardCurrencyToOrder(currency);
     }
-
-    getLeft() {
-        return this.left;
-    }
-
-    getRight() {
-        return this.right;
-    }
-
+    return currency;
 }
 
 class BarData {
@@ -267,103 +260,6 @@ class BarData {
             }
         }
         return data;
-    }
-
-}
-
-class Currency {
-
-    static GOLD = new Currency("yellow", () => {return window.$('<img src="images/icons/gold.png">')[0]}, Currency.speedFunction(100, 5, 500));
-    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]}, Currency.speedFunction(200, 10, 200));
-    static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]}, Currency.speedFunction(100, 5, 500));
-    static DTFRAG = new Currency("DTFragment", () => {return window.$('<img src="images/dtFragment.png">')[0]}, Currency.speedFunction(500, 100, 10));
-    static XP = new Currency("PrettyCards_UserLV", () => {return window.$('<span>XP</span>')[0]}, Currency.speedFunction(50, 5, 3000), "0.8em").setCountPerTick(5);
-    static ELO = new Currency("Contributor", () => {return window.$('<span>ELO</span>')[0]}, Currency.speedFunction(50, 5, ELO_PER_DIVISION), "0.8em");
-
-    static UT_PACK = new Currency("", () => {return window.$('<img src="images/icons/pack.png">')[0]}, Currency.speedFunction(250, 100, 50));
-    static DR_PACK = new Currency("", () => {return window.$('<img src="images/icons/drPack.png">')[0]}, Currency.speedFunction(250, 100, 50));
-    static SHINY_PACK = new Currency("rainbowText", () => {return window.$('<img src="images/icons/shinyPack.gif">')[0]}, Currency.speedFunction(200, 100, 25));
-    static SUPER_PACK = new Currency("yellow", () => {return window.$('<img src="images/icons/superPack.gif">')[0]}, Currency.speedFunction(500, 200, 25));
-    static FINAL_PACK = new Currency("DTFragment", () => {return window.$('<img src="images/icons/finalPack.gif">')[0]}, Currency.speedFunction(500, 200, 25));
-
-    static CARD_SKIN = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-card-skin")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
-    static PROFILE_SKIN = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-profile-skin")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
-    static AVATAR = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-avatar")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
-    static EMOTE = new Currency("", () => {return window.$(`<span>${window.$.i18n("reward-emote")}</span>`)[0]}, Currency.speedFunction(500, 200, 25));
-
-    /**@type {Map.<number,CardCurrency>} */
-    static CARD_CURRENCIES = new Map();
-
-    // TODO: Add Currencies for cosmetics, too, similar to cards. They definitely be obtained from quests.
-    // Note to self: This whole thing became FAR bigger than initially anticipated
-
-    constructor(/**@type {String} */ textClass, /**@type {Function} */ icon, /**@type {Function} */ speed, /**@type {String} */ padding = "0") {
-        /**@type {String} */ 
-        this.textClass = textClass;
-        /**@type {Function} */
-        this.icon = icon;
-        /**@type {Function} */
-        this.speed = speed;
-        /**@type {number} */
-        this.countPerTick = 1;
-        /**@type {number} */
-        this.padding = padding;
-    }
-
-    /**@returns {CardCurrency} */
-    static getOrCreateCardCurrency(/**@type {number} */ cardId) {
-        if (!Currency.CARD_CURRENCIES.has(cardId)) {
-            var currency = new CardCurrency(cardId);
-            Currency.CARD_CURRENCIES.set(cardId, currency);
-            RewardManager.addCardCurrencyToOrder(currency);
-        }
-        return Currency.CARD_CURRENCIES.get(cardId);
-    }
-
-    /**@returns {HTMLElement} */
-    getCurrencyIcon()  {
-        return this.icon();
-    }
-
-    applyTextClass(/**@type {HTMLElement} */ elem) {
-        if (this.textClass == "") {
-            return;
-        }
-        elem.classList.add(this.textClass);
-    }
-
-    /**@returns {number} */
-    getSpeedForAmount(amount)  {
-        return this.speed(amount);
-    }
-
-    /**@returns {Currency} */
-    setCountPerTick(/**@type {number} */ nr) {
-        this.countPerTick = nr;
-        return this;
-    }
-
-    static speedFunction(slowSpeed, fastSpeed, scaleAmount) {
-        return (amount) => {
-            return Math.ceil(fastSpeed + (slowSpeed - fastSpeed)*(1 - Math.min(amount, scaleAmount)/scaleAmount));
-        }
-    }
-
-}
-
-class CardCurrency extends Currency {
-
-    constructor(/**@type {number} */ cardId) {
-        super("", () => {}, () => {return 500;});
-        /**@type {number} */
-        this.cardId = cardId;
-    }
-
-    /**@returns {HTMLElement} */
-    getCurrencyIcon()  {
-        var cont = document.createElement("SPAN");
-        cont.innerHTML = window.$.i18n(`{{CARD:${this.cardId}|1}}`);
-        return cont;
     }
 
 }
@@ -698,7 +594,7 @@ function returnReward(/**@type {String} */ rewardType, /**@type {number} */ rewa
     }
     if (rewardType === 'CARD') {
         // Yes, in case of cards, Onu uses the count as the ID, and the count is always 1.
-        var currency = Currency.getOrCreateCardCurrency(rewardCount);
+        var currency = getOrCreateCardCurrency(rewardCount);
         return new Pair(currency, new RewardSourceInstance(source, 1));
     }
     var currency = getCurrencyFromTypeString(rewardType);
@@ -778,13 +674,19 @@ function transformMatchEndData(data) {
 }
 
 var landNoise = new Audio();
+var collectNoise = new Audio();
 landNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
 
 function displayMatchResults(data) {
     //console.log(data, data.endType, data.endType.textKey, window.$(data.endType.textKey));
 
+    var friendshipContainer = document.createElement("DIV");
+    var friendshipData = getFriendshipData();
+
     var bgm = new Audio();
     bgm.src = data.endType.songSrc;
+
+    collectNoise.src = "";
 
     var leaveRow = document.createElement("DIV");
 
@@ -799,6 +701,7 @@ function displayMatchResults(data) {
 
             data.rewardManager.startTicking(() => {
                 leaveRow.classList.remove("PrettyCards_Hidden");
+                friendshipContainer.classList.remove("PrettyCards_Hidden");
             });
         }, 1000);
     });
@@ -819,6 +722,47 @@ function displayMatchResults(data) {
     leaveBtn.onclick = () => {window.location = "/Play";};
     leaveRow.appendChild(leaveBtn);
     container.appendChild(leaveRow);
+
+    friendshipContainer.className = "PrettyCards_Hidden";
+    friendshipContainer.style.marginTop = "30px";
+    container.appendChild(friendshipContainer);
+
+    var friendshipHeader = document.createElement("DIV");
+    friendshipHeader.className = "PrettyCards_GameEnd_FriendshipHeader";
+    friendshipContainer.appendChild(friendshipHeader);
+
+    var friendshipTitle = document.createElement("DIV");
+    friendshipTitle.innerHTML = window.$.i18n("pc-game-friendship-header");
+    friendshipTitle.style.fontSize = "2.5em";
+    friendshipHeader.appendChild(friendshipTitle);
+
+    var friendshipButton = document.createElement("BUTTON");
+    friendshipButton.innerHTML = window.$.i18n("pc-game-collect-all");
+    friendshipButton.className = "btn btn-primary";
+    friendshipButton.onclick = function() {
+        this.setAttribute("disabled", true);
+    };
+    friendshipHeader.appendChild(friendshipButton);
+
+    var friendshipCards = document.createElement("DIV");
+    friendshipCards.className = "PrettyCards_GameEnd_FriendshipCards";
+    friendshipContainer.appendChild(friendshipCards);
+
+    friendshipData.then((fd) => {
+        fd.renderAll(friendshipCards, (fi) => {return fi.getCollectableRewardCount();}, ($elem, fi) => {
+            $elem.addClass("friendship-not-claimed");
+            $elem.off("click").click(() => {
+                //console.log(fi, fi2);
+                fi.claimOnce().then((pair) => {
+
+                    data.rewardManager.addReward(pair.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, pair.getRight()));
+                    if (fi.getCollectableRewardCount() <= 0) {
+                        $elem.remove();
+                    }
+                });
+            });
+        });
+    });
 
     backdrop.appendChild(container);
     window.document.body.appendChild(backdrop);
@@ -864,8 +808,8 @@ prettycards.testMatchResults = () => {
             "jaugeSize": 6000,
             "xpUntilNextLevel": 3189,
             "queueGoldBonus": 10,
-            //"oldDivision": "AMETHYST_I",
-            //"newDivision": "AMETHYST_I",
+            "oldDivision": "AMETHYST_I",
+            "newDivision": "AMETHYST_I",
             "oldDivision": "LEGEND",
             "newDivision": "LEGEND",
             "oldElo": 1888,

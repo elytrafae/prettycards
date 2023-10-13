@@ -400,6 +400,8 @@
     "pc-game-draw": "Draw",
     "pc-game-levelup": "Level Up!",
     "pc-game-leave": "Return to Play Screen",
+    "pc-game-friendship-header": "FRIENDSHIP REWARDS",
+    "pc-game-collect-all": "Collect All!",
 
     "pc-rewardsource-match": "Match Reward",
     "pc-rewardsource-queue": "Queue Compensation",

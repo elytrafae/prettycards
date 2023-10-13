@@ -115,3 +115,31 @@
     margin-top: 20px;
     scale: 1.2;
 }
+
+.PrettyCards_GameEnd_FriendshipCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.PrettyCards_GameEnd_FriendshipHeader {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.friendship-not-claimed .cardFrame {
+    -webkit-filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(100deg) saturate(500%) contrast(1.5);
+    filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(100deg) saturate(500%) contrast(1.5)
+}
+
+.friendship-not-claimed .cardBackground {
+    box-shadow: 0 0 10px 5px #4fff00
+}

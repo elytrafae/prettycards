@@ -549,7 +549,6 @@ function appendFriendshipCard(score, container, topType = 1) {
 	}
 	card.append(`<div class="PrettyCards_FriendshipRank"${score.rank <= 5 ? ' top' : ''} val="${score.rank}"></div>`);
 	card.off("click");
-	card.find('.cardDesc').empty();
 	return card;
 }
 

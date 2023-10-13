@@ -1,0 +1,6 @@
+.PrettyCards_Settings_EditableListRow { display: flex; }
+.PrettyCards_Settings_EditableListRow div { padding: 0.2em; }
+.PrettyCards_Settings_EditableListRow input { padding: 3px 6px; height: 28px; }
+.PrettyCards_Settings_EditableListTable { width: 420px; border-bottom: 1px solid white; border-top: 1px solid white; margin: 2px 0 10px 0; padding: 10px 0; }
+.PrettyCards_Settings_EditableListTableButton.btn { padding: 3px 6px; }
+.PrettyCards_Settings_EditableListText { font-size: 0.8em; }
