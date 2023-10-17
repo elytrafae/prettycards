@@ -700,6 +700,7 @@ function displayMatchResults(data) {
         landNoise.play();
         setTimeout(() => {
             bgm.loop = true;
+            bgm.volume = 0.7;
             bgm.play();
 
             data.rewardManager.startTicking(() => {
@@ -769,9 +770,9 @@ function displayMatchResults(data) {
         "pc-game-collect-all",
         "",
         (qd, dump, container, rewardManager) => {
-            console.log(qd, dump, container, rewardManager);
+            //console.log(qd, dump, container, rewardManager);
             qd.forEach((quest) => {
-                console.log(quest, quest.claimable);
+                //console.log(quest, quest.claimable);
                 if (!quest.claimable) {
                     //return;
                 }
@@ -785,10 +786,11 @@ function displayMatchResults(data) {
 
 
                 var rewardCell = document.createElement("DIV");
+                row.appendChild(rewardCell);
                 var pair = processQuestReward(rewardCell, quest.reward);
                 rewardCell.classList.add("PrettyCards_GameEnd_QuestReward");
-                console.log(pair);
-                row.appendChild(rewardCell);
+                //console.log(pair);
+                
 
                 var claimCell = document.createElement("DIV");
                 claimCell.className = "PrettyCards_GameEnd_QuestClaim";
@@ -978,7 +980,7 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
     }
 
     if (reward.type === "card" || reward.type === "card skin") {
-        console.log("CARD", reward);
+        //console.log("CARD", reward);
         var data = reward.reward;
         if (typeof(data) == "string") {
             data = {card : data};
@@ -992,6 +994,18 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
         return null;
     }
 
+    if (reward.type === "profile") {
+        console.log(rewardCont.parentElement); 
+        rewardCont.parentElement.style.backgroundImage = 'url(' + reward.reward + ')';
+        rewardCont.parentElement.style.backgroundPosition = "center center";
+        rewardCont.parentElement.style.backgroundSize = "cover";
+        return new Pair(Currency.PROFILE_SKIN, 1);
+    };
+
+    
+
+    console.warn("Unhandled reward type: ", reward.type, reward);
+
     rewardCont.innerHTML = `???`;
     return null;
 }
@@ -1002,18 +1016,23 @@ var nrToSkinClass = [
     "breaking-skin"
 ]
 
-window.underscript.lib.tippy(document, {
+window.underscript.lib.tippy(document.body, {
     target: "[data-reward-hover-data]",
     onShow(i) {
         console.log(i, i.reference);
         var data = JSON.parse(i.reference.dataset.rewardHoverData); // Element this triggered on
-        var card = window.appendCard(window.getCard(data.card), $(document.createElement("DIV")));
+        console.log(data);
+        var card = window.appendCard(window.getCard(Number(data.card)), $("<DIV>"));
         if (data.name) {
-            card.find(".cardImage").css("background-image", data.image);
+            var cardImageBG = 'url("' + data.image + '")';
+            console.log(cardImageBG);
+            card.find(".cardImage")[0].style.backgroundImage = cardImageBG;
+            console.log(card.find(".cardImage")[0].style.backgroundImage)
             card.removeClass("standard-skin").addClass(nrToSkinClass[data.type] || "");
             var cardSkinInfo = data.name + '<br/>' + '<span class="Artist">' + data.author + '</span>';
             card.find(".cardDesc div").html(cardSkinInfo);
         }
+        console.log(card[0], card.find(".cardImage")[0]);
         i.setContent(card[0]); // Set to generated card image
     },
 });
