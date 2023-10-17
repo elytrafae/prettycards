@@ -2,13 +2,11 @@ import { PrettyCards_plugin } from "./underscript_checker";
 import css from "../css/Settings.css";
 import { loadCSS } from "./css_loader";
 loadCSS(css);
-console.log("CSS loaded!", css);
 
 var settingTypes = {};
 
 function registerSettingType(settingClass) {
     var instance = new settingClass();
-    console.log(instance.name);
     settingTypes[instance.name] = instance;
     PrettyCards_plugin.settings().addType(instance);
     return instance;

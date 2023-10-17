@@ -147,3 +147,30 @@
 .PrettyCards_GameEnd_Backdrop .friendship-not-claimed:hover {
     opacity: 0.8;
 }
+
+.PrettyCards_GameEnd_QuestRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 60px;
+    border-top: 1px solid #ddd;
+}
+
+.PrettyCards_GameEnd_QuestRow img {
+    height: 32px;
+}
+
+.PrettyCards_GameEnd_QuestText {
+    padding: 0.5em;
+    width: 100%;
+}
+
+.PrettyCards_GameEnd_QuestProgress {
+    min-width: 190px;
+}
+
+.PrettyCards_GameEnd_QuestReward {
+    min-width: 100px;
+    text-align: center;
+}

@@ -2,11 +2,11 @@ const ELO_PER_DIVISION = 25;
 
 class Currency {
 
-    static GOLD = new Currency("yellow", () => {return window.$('<img src="images/icons/gold.png">')[0]}, Currency.speedFunction(100, 5, 500));
-    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]}, Currency.speedFunction(200, 10, 200));
-    static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]}, Currency.speedFunction(100, 5, 500));
+    static GOLD = new Currency("yellow", () => {return window.$('<img src="images/icons/gold.png">')[0]}, Currency.speedFunction(75, 5, 500));
+    static UCP = new Currency("ucp", () => {return window.$(`<span>${window.$.i18n("reward-ucp")}</span>`)[0]}, Currency.speedFunction(100, 10, 200));
+    static DUST = new Currency("gray", () => {return window.$('<img src="images/icons/dust.png">')[0]}, Currency.speedFunction(50, 5, 500));
     static DTFRAG = new Currency("DTFragment", () => {return window.$('<img src="images/dtFragment.png">')[0]}, Currency.speedFunction(500, 100, 10));
-    static XP = new Currency("PrettyCards_UserLV", () => {return window.$('<span>XP</span>')[0]}, Currency.speedFunction(50, 5, 3000), "0.8em").setCountPerTick(5);
+    static XP = new Currency("PrettyCards_UserLV", () => {return window.$('<span>XP</span>')[0]}, Currency.speedFunction(30, 5, 3000), "0.8em").setCountPerTick(5);
     static ELO = new Currency("Contributor", () => {return window.$('<span>ELO</span>')[0]}, Currency.speedFunction(50, 5, ELO_PER_DIVISION), "0.8em");
 
     static UT_PACK = new Currency("", () => {return window.$('<img src="images/icons/pack.png">')[0]}, Currency.speedFunction(250, 100, 50));

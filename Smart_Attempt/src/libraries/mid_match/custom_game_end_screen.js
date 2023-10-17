@@ -680,8 +680,8 @@ landNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/mus
 function displayMatchResults(data) {
     //console.log(data, data.endType, data.endType.textKey, window.$(data.endType.textKey));
 
-    var friendshipContainer = document.createElement("DIV");
     var friendshipData = getFriendshipData();
+    var questData = getQuests();
 
     var bgm = new Audio();
     bgm.src = data.endType.songSrc;
@@ -701,7 +701,7 @@ function displayMatchResults(data) {
 
             data.rewardManager.startTicking(() => {
                 leaveRow.classList.remove("PrettyCards_Hidden");
-                friendshipContainer.classList.remove("PrettyCards_Hidden");
+                rewardCollectionRows.forEach((row) => {row.classList.remove("PrettyCards_Hidden");});
             });
         }, 1000);
     });
@@ -723,50 +723,28 @@ function displayMatchResults(data) {
     leaveRow.appendChild(leaveBtn);
     container.appendChild(leaveRow);
 
-    // TODO: Make Friendship Container not display at all while there are no cards to claim
-    friendshipContainer.className = "PrettyCards_Hidden";
-    friendshipContainer.style.marginTop = "30px";
-    container.appendChild(friendshipContainer);
-
-    var friendshipHeader = document.createElement("DIV");
-    friendshipHeader.className = "PrettyCards_GameEnd_FriendshipHeader";
-    friendshipContainer.appendChild(friendshipHeader);
-
-    var friendshipTitle = document.createElement("DIV");
-    friendshipTitle.innerHTML = window.$.i18n("pc-game-friendship-header");
-    friendshipTitle.style.fontSize = "2.5em";
-    friendshipHeader.appendChild(friendshipTitle);
-
-    var friendshipButton = document.createElement("BUTTON");
-    friendshipButton.innerHTML = window.$.i18n("pc-game-collect-all");
-    friendshipButton.className = "btn btn-primary";
-    friendshipHeader.appendChild(friendshipButton);
-
-    var friendshipCards = document.createElement("DIV");
-    friendshipCards.className = "PrettyCards_GameEnd_FriendshipCards";
-    friendshipContainer.appendChild(friendshipCards);
-
-    function renderFriendship(fd) {
-        friendshipCards.innerHTML = "";
-        fd.renderAll(friendshipCards, (fi) => {return fi.getCollectableRewardCount();}, ($elem, fi) => {
-            $elem.addClass("friendship-not-claimed");
-            $elem.off("click").click(() => {
-                //console.log(fi, fi2);
-                fi.claimOnce().then((pair) => {
-                    collectNoise.currentTime = 0;
-                    collectNoise.play();
-                    data.rewardManager.addReward(pair.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, pair.getRight()));
-                    if (fi.getCollectableRewardCount() <= 0) {
-                        $elem.remove();
-                    }
+    container.appendChild(createRewardCollectSection(
+        "pc-game-friendship-header",
+        "pc-game-collect-all",
+        "PrettyCards_GameEnd_FriendshipCards",
+        (fd, friendshipCards, friendshipContainer, rewardManager) => {
+            fd.renderAll(friendshipCards, (fi) => {return fi.getCollectableRewardCount();}, ($elem, fi) => {
+                $elem.addClass("friendship-not-claimed");
+                $elem.off("click").click(() => {
+                    //console.log(fi, fi2);
+                    fi.claimOnce().then((pair) => {
+                        collectNoise.currentTime = 0;
+                        collectNoise.play();
+                        rewardManager.addReward(pair.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, pair.getRight()));
+                        if (fi.getCollectableRewardCount() <= 0) {
+                            $elem.remove();
+                            friendshipContainer.style.display = friendshipCards.children.length > 0 ? "block" : "none";
+                        }
+                    });
                 });
             });
-        });
-    }
-
-    friendshipData.then((fd) => {
-        friendshipButton.onclick = function() {
-            friendshipButton.setAttribute("disabled", true);
+        },
+        (fd, friendshipButton, renderFriendship) => {
             fd.claimAll(
                 (fi, reward) => {
                     collectNoise.currentTime = 0;
@@ -778,10 +756,60 @@ function displayMatchResults(data) {
                     friendshipButton.removeAttribute("disabled");
                 }
             );
-        };
+        },
+        friendshipData,
+        data.rewardManager
+    ));
 
-        renderFriendship(fd);
-    });
+    container.appendChild(createRewardCollectSection(
+        "pc-game-quest-header",
+        "pc-game-collect-all",
+        "",
+        (qd, dump, container, rewardManager) => {
+            console.log(qd, dump, container, rewardManager);
+            qd.forEach((quest) => {
+                console.log(quest, quest.claimable);
+                if (!quest.claimable) {
+                    //return;
+                }
+                var row = document.createElement("DIV");
+                row.className = "PrettyCards_GameEnd_QuestRow";
+
+                var progress = quest.progress;
+                row.innerHTML = `
+                    <div class="PrettyCards_GameEnd_QuestText ${quest.claimable ? "green" : ""}">${window.$.i18n(quest.key)}</div>
+                    <div class="PrettyCards_GameEnd_QuestProgress"><progress class="${progress.complete ? "EMERALDBar" : "xpBar"}" value="${progress.value}" max="${progress.max}" style="width: 100px;"></progress> ${progress.value} / ${progress.max}</div>`;
+
+
+                var rewardCell = document.createElement("DIV");
+                var pair = processQuestReward(rewardCell, quest.reward);
+                rewardCell.classList.add("PrettyCards_GameEnd_QuestReward");
+                console.log(pair);
+                row.appendChild(rewardCell);
+
+                var claimCell = document.createElement("DIV");
+                
+                row.appendChild(claimCell);
+
+                dump.appendChild(row);
+            });
+        },
+        (fd, friendshipButton, renderFriendship) => {
+            fd.claimAll(
+                (fi, reward) => {
+                    collectNoise.currentTime = 0;
+                    collectNoise.play();
+                    data.rewardManager.addReward(reward.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, reward.getRight()));
+                }, 
+                () => {
+                    renderFriendship(fd);
+                    friendshipButton.removeAttribute("disabled");
+                }
+            );
+        },
+        questData,
+        data.rewardManager
+    ));
 
     backdrop.appendChild(container);
     window.document.body.appendChild(backdrop);
@@ -851,13 +879,101 @@ PrettyCards_plugin.events.on("getVictory getDefeat", function (data) {
 
 var endEvents = ["getVictory", "getDefeat"];
 PrettyCards_plugin.events.on("PreGameEvent", function (data) {
-    console.log(data);
     if (endEvents.includes(data.action)) {
         displayMatchResults(transformMatchEndData(data));
         this.canceled = true;
     }
     //
 });
+
+var rewardCollectionRows = [];
+
+function createRewardCollectSection(titleKey, buttonKey, dumpClassName, renderFunc, claimAllFunc, dataPromise, rewardManager) {
+    var container = document.createElement("DIV");
+    container.className = "PrettyCards_Hidden";
+    container.style.display = "none";
+    container.style.marginTop = "30px";
+    //container.appendChild(container);
+
+    var header = document.createElement("DIV");
+    header.className = "PrettyCards_GameEnd_FriendshipHeader";
+    container.appendChild(header);
+
+    var title = document.createElement("DIV");
+    title.innerHTML = window.$.i18n(titleKey);
+    title.style.fontSize = "2.5em";
+    header.appendChild(title);
+
+    var button = document.createElement("BUTTON");
+    button.innerHTML = window.$.i18n(buttonKey);
+    button.className = "btn btn-primary";
+    header.appendChild(button);
+
+    var dump = document.createElement("DIV");
+    dump.className = dumpClassName;
+    container.appendChild(dump);
+
+    function renderAll(data) {
+        dump.innerHTML = "";
+        renderFunc(data, dump, container, rewardManager);
+        container.style.display = dump.children.length > 0 ? "block" : "none";
+    }
+
+    dataPromise.then((data) => {
+        button.onclick = function() {
+            button.setAttribute("disabled", true);
+            claimAllFunc(data, button, renderAll);
+        };
+
+        renderAll(data);
+    });
+
+    rewardCollectionRows.push(container);
+    return container;
+}
+
+function getQuests() {
+    var questArray = PrettyCards_plugin.quests.getQuests();
+    if (questArray && questArray.length > 0) {
+        return new Promise((resolve, reject) => {
+            resolve(questArray);
+        });
+    }
+    return new Promise((resolve, reject) => {
+        PrettyCards_plugin.quests.update().then((resData) => {
+            resolve(resData.quests);
+        }).catch((e) => {reject(e);});
+    });
+}
+
+var common_rewards = {
+    "gold": Currency.GOLD,
+    "Pack": Currency.UT_PACK,
+    "DR Pack": Currency.DR_PACK,
+    "Dust": Currency.DUST,
+    "Shiny pack": Currency.SHINY_PACK,
+
+}
+
+/**@returns {Pair<Currency,number>|null} */
+function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
+    console.log(reward);
+    if (reward.type === "UCP") {
+        rewardCont.innerHTML = window.$.i18n("quests-ucp", reward.reward);
+        return new Pair(Currency.UCP, parseInt(reward.reward));
+    }
+    
+    if (common_rewards[reward.type]) {
+        /**@type {Currency} */
+        var currency = common_rewards[reward.type];
+        rewardCont.innerHTML = currency.getCurrencyIcon().outerHTML + '<span class="white">x' + reward.reward + '</span>';
+        currency.applyTextClass(rewardCont);
+        return new Pair(currency, parseInt(reward.reward));
+    }
+
+    rewardCont.innerHTML = `???`;
+    return null;
+}
 
 
 export {DIVISIONS, getDivisionForElo};
