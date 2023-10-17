@@ -480,12 +480,12 @@ class RewardManager {
         Currency.SHINY_PACK, 
         Currency.SUPER_PACK, 
         Currency.FINAL_PACK,
-        Currency.ELO,
-        Currency.XP,
         Currency.CARD_SKIN,
         Currency.PROFILE_SKIN,
         Currency.AVATAR,
         Currency.EMOTE,
+        Currency.ELO,
+        Currency.XP,
     ];
 
     constructor() {
@@ -669,6 +669,7 @@ function transformMatchEndData(data) {
     newData.rewardManager.addReward(Currency.SUPER_PACK, new RewardSourceInstance(RewardSource.QUEST, 1));
     newData.rewardManager.addReward(Currency.FINAL_PACK, new RewardSourceInstance(RewardSource.QUEST, 1));
     */
+    //newData.rewardManager.addReward(Currency.PROFILE_SKIN, new RewardSourceInstance(RewardSource.QUEST, 1));
     ////////////
     return newData;
 }
@@ -777,7 +778,7 @@ function displayMatchResults(data) {
 
                 var progress = quest.progress;
                 row.innerHTML = `
-                    <div class="PrettyCards_GameEnd_QuestText ${quest.claimable ? "green" : ""}">${window.$.i18n(quest.key)}</div>
+                    <div class="PrettyCards_GameEnd_QuestText ${quest.claimable ? "green" : ""}">${quest.name}</div>
                     <div class="PrettyCards_GameEnd_QuestProgress"><progress class="${progress.complete ? "EMERALDBar" : "xpBar"}" value="${progress.value}" max="${progress.max}" style="width: 100px;"></progress> ${progress.value} / ${progress.max}</div>`;
 
 
@@ -788,7 +789,11 @@ function displayMatchResults(data) {
                 row.appendChild(rewardCell);
 
                 var claimCell = document.createElement("DIV");
-                
+                claimCell.className = "PrettyCards_GameEnd_QuestClaim";
+                var claimButton = document.createElement("BUTTON");
+                claimButton.className = "btn btn-success";
+                claimButton.innerHTML = window.$.i18n("quests-claim");
+                claimCell.appendChild(claimButton);
                 row.appendChild(claimCell);
 
                 dump.appendChild(row);
@@ -947,12 +952,12 @@ function getQuests() {
 }
 
 var common_rewards = {
-    "gold": Currency.GOLD,
+    "Gold": Currency.GOLD,
     "Pack": Currency.UT_PACK,
     "DR Pack": Currency.DR_PACK,
     "Dust": Currency.DUST,
-    "Shiny pack": Currency.SHINY_PACK,
-
+    "Shiny Pack": Currency.SHINY_PACK,
+    "DT Fragment": Currency.DTFRAG
 }
 
 /**@returns {Pair<Currency,number>|null} */
@@ -969,6 +974,18 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
         rewardCont.innerHTML = currency.getCurrencyIcon().outerHTML + '<span class="white">x' + reward.reward + '</span>';
         currency.applyTextClass(rewardCont);
         return new Pair(currency, parseInt(reward.reward));
+    }
+
+    if (reward.type === "card" || reward.type === "card skin") {
+        var hoverText = document.createElement("SPAN");
+        rewardCont.appendChild(hoverText);
+        tippy('div.mainContent', {
+            target: 'magic elements that cause hover',
+            onShow(i) {
+              i.reference; // Element this triggered on
+              i.setContent(); // Set to generated card image
+            },
+        });
     }
 
     rewardCont.innerHTML = `???`;
