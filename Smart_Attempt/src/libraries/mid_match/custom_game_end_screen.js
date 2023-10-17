@@ -679,6 +679,7 @@ var collectNoise = new Audio();
 landNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
 
 function displayMatchResults(data) {
+    
     //console.log(data, data.endType, data.endType.textKey, window.$(data.endType.textKey));
 
     var friendshipData = getFriendshipData();
@@ -692,6 +693,7 @@ function displayMatchResults(data) {
     var leaveRow = document.createElement("DIV");
 
     var backdrop = document.createElement("DIV");
+    window.document.body.appendChild(backdrop);
     backdrop.className = "PrettyCards_GameEnd_Backdrop";
     window.$(backdrop).css("top", -window.innerHeight + "px").animate({"top": "0px"}, 1000, "easeInQuad", () => {
         // anim done
@@ -817,7 +819,6 @@ function displayMatchResults(data) {
     ));
 
     backdrop.appendChild(container);
-    window.document.body.appendChild(backdrop);
 }
 
 function playSound(src) {
@@ -962,7 +963,7 @@ var common_rewards = {
 
 /**@returns {Pair<Currency,number>|null} */
 function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
-    console.log(reward);
+    //console.log(reward);
     if (reward.type === "UCP") {
         rewardCont.innerHTML = window.$.i18n("quests-ucp", reward.reward);
         return new Pair(Currency.UCP, parseInt(reward.reward));
@@ -977,20 +978,45 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
     }
 
     if (reward.type === "card" || reward.type === "card skin") {
+        console.log("CARD", reward);
+        var data = reward.reward;
+        if (typeof(data) == "string") {
+            data = {card : data};
+        }
         var hoverText = document.createElement("SPAN");
+        hoverText.innerHTML = "test";
+        hoverText.dataset.rewardHoverData = JSON.stringify(data);
         rewardCont.appendChild(hoverText);
-        tippy('div.mainContent', {
-            target: 'magic elements that cause hover',
-            onShow(i) {
-              i.reference; // Element this triggered on
-              i.setContent(); // Set to generated card image
-            },
-        });
+
+        const card = window.appendCard(window.getCard(1), $(document.createElement("DIV")))[0];
+        return null;
     }
 
     rewardCont.innerHTML = `???`;
     return null;
 }
+
+var nrToSkinClass = [
+    "standard-skin",
+    "full-skin",
+    "breaking-skin"
+]
+
+window.underscript.lib.tippy(document, {
+    target: "[data-reward-hover-data]",
+    onShow(i) {
+        console.log(i, i.reference);
+        var data = JSON.parse(i.reference.dataset.rewardHoverData); // Element this triggered on
+        var card = window.appendCard(window.getCard(data.card), $(document.createElement("DIV")));
+        if (data.name) {
+            card.find(".cardImage").css("background-image", data.image);
+            card.removeClass("standard-skin").addClass(nrToSkinClass[data.type] || "");
+            var cardSkinInfo = data.name + '<br/>' + '<span class="Artist">' + data.author + '</span>';
+            card.find(".cardDesc div").html(cardSkinInfo);
+        }
+        i.setContent(card[0]); // Set to generated card image
+    },
+});
 
 
 export {DIVISIONS, getDivisionForElo};
