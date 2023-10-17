@@ -1014,25 +1014,21 @@ var nrToSkinClass = [
     "standard-skin",
     "full-skin",
     "breaking-skin"
-]
+];
 
 window.underscript.lib.tippy(document.body, {
     target: "[data-reward-hover-data]",
+    theme: "undercards",
     onShow(i) {
-        console.log(i, i.reference);
         var data = JSON.parse(i.reference.dataset.rewardHoverData); // Element this triggered on
-        console.log(data);
         var card = window.appendCard(window.getCard(Number(data.card)), $("<DIV>"));
         if (data.name) {
             var cardImageBG = 'url("' + data.image + '")';
-            console.log(cardImageBG);
-            card.find(".cardImage")[0].style.backgroundImage = cardImageBG;
-            console.log(card.find(".cardImage")[0].style.backgroundImage)
+            card.find(".cardImage").css("background-image", cardImageBG);
             card.removeClass("standard-skin").addClass(nrToSkinClass[data.type] || "");
             var cardSkinInfo = data.name + '<br/>' + '<span class="Artist">' + data.author + '</span>';
             card.find(".cardDesc div").html(cardSkinInfo);
         }
-        console.log(card[0], card.find(".cardImage")[0]);
         i.setContent(card[0]); // Set to generated card image
     },
 });
