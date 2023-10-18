@@ -403,6 +403,15 @@
     "pc-game-friendship-header": "FRIENDSHIP REWARDS",
     "pc-game-quest-header": "QUEST REWARDS",
     "pc-game-collect-all": "Collect All!",
+    "pc-game-draw-messages": {
+        "values" : [
+            "A good effort",
+            "Such a long conflict, for nothing",
+            "An interesting saga, with a disappointing ending",
+            "As if it never was",
+            "Nothing can be allowed to exist forever"
+        ]
+    },
 
     "pc-rewardsource-match": "Match Reward",
     "pc-rewardsource-queue": "Queue Compensation",

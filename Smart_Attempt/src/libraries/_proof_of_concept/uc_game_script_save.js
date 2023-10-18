@@ -304,7 +304,13 @@ function runEvent(data) {
     setTimeout(nextEvent, waitTime);
 }
 function bypassQueueEvent(data) {
-    if (data.action === "getGameRemoved") { BootstrapDialog.show({ title: $.i18n('dialog-error'), type: BootstrapDialog.TYPE_DANGER, closable: false, message: $.i18n('game-cant-join'), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function () { document.location.href = "Play"; } }] }); } else if (data.action === "getError") { BootstrapDialog.show({ title: $.i18n('dialog-error'), type: BootstrapDialog.TYPE_DANGER, closable: false, message: translateFromServerJson(data.message), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function () { document.location.href = "/"; } }] }); } else if (data.action === "getGameError") { BootstrapDialog.show({ title: $.i18n('dialog-error'), type: BootstrapDialog.TYPE_DANGER, closable: false, message: translateFromServerJson(data.message), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function () { document.location.href = "Play"; } }] }); } else if (data.action === "getShowMulligan") {
+    if (data.action === "getGameRemoved") { 
+        BootstrapDialog.show({ title: $.i18n('dialog-error'), type: BootstrapDialog.TYPE_DANGER, closable: false, message: $.i18n('game-cant-join'), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function () { document.location.href = "Play"; } }] }); } 
+    else if (data.action === "getError") { 
+        BootstrapDialog.show({ title: $.i18n('dialog-error'), type: BootstrapDialog.TYPE_DANGER, closable: false, message: translateFromServerJson(data.message), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function () { document.location.href = "/"; } }] }); 
+    } else if (data.action === "getGameError") { 
+        BootstrapDialog.show({ title: $.i18n('dialog-error'), type: BootstrapDialog.TYPE_DANGER, closable: false, message: translateFromServerJson(data.message), buttons: [{ label: $.i18n('dialog-ok'), cssClass: 'btn-primary', action: function () { document.location.href = "Play"; } }] }); 
+    } else if (data.action === "getShowMulligan") {
         $('#handCards').empty(); mulliganDialog = new BootstrapDialog({
             title: $.i18n('game-mulligan') + ' - <span class="timerMulligan">15</span>', closable: false, message: '<p>' + $.i18n("game-mulligan-information") + '</p><div class="mulligan"></div><br/>', cssClass: 'dialog-mulligan', buttons: [{ label: $.i18n('dialog-confirm'), cssClass: 'btn-primary', action: function () { sendMulligan(); } }], onshown: function (dialog) {
                 var hand = JSON.parse(data.hand); for (var i = 0; i < hand.length; i++) { var gameCard = hand[i]; appendCard(gameCard, $('.mulligan')); $('.mulligan .card').addClass('col-sm-1'); }

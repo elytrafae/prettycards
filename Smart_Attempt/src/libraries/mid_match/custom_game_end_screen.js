@@ -5,6 +5,7 @@ import { PrettyCards_plugin, prettycards } from "../underscript_checker";
 import { Currency } from "../shared_types/currency";
 import { getFriendshipData } from "../friendship_reward_processor";
 import { utility, Pair } from "../utility";
+import { translationManager } from "../translation/translation_manager";
 loadCSS(css);
 
 const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
@@ -267,9 +268,9 @@ class BarData {
 class GameEndTypes {
 
     static WIN = new GameEndTypes("game-game-victory", "", "/musics/dr2_victory.ogg");
-    static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg");
+    static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg").setSubtitleFunction(leaveWinSubtitleFunction);
     static LOSE = new GameEndTypes("game-game-over", "", "/musics/dr2_gameover.ogg");
-    static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/CMD-God/prettycards/raw/master/audio/bgms/mus_star.ogg");
+    static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/CMD-God/prettycards/raw/master/audio/bgms/mus_star.ogg").setSubtitleFunction(drawSubtitleFunction);
     static CHARA = new GameEndTypes("game-died", "red", "/musics/toomuch.ogg");
 
     constructor(/**@type {String} */ textKey, /**@type {String} */ textClass, /**@type {String} */ song) {
@@ -279,8 +280,40 @@ class GameEndTypes {
         this.textClass = textClass;
         /**@type {String} */
         this.songSrc = song;
+        /**@type {function} */
+        this.subtitleFunction = () => {return document.createElement("DIV");};
     }
 
+    /**@returns {GameEndTypes} */
+    setSubtitleFunction(/**@type {Function}*/ func) {
+        this.subtitleFunction = func;
+        return this;
+    }
+
+    /**@returns {HTMLElement} */
+    getSubtitle() {
+        return this.subtitleFunction();
+    }
+
+}
+
+function leaveWinSubtitleFunction() {
+    var cont = document.createElement("DIV");
+    var img = document.createElement("IMG");
+    img.src = "images/annoyingDog.gif";
+    cont.appendChild(img.cloneNode());
+    var text = document.createElement("SPAN");
+    text.innerHTML = " " + window.$.i18n("game-opponent-left") + " ";
+    cont.appendChild(text);
+    cont.appendChild(img);
+    return cont;
+}
+
+function drawSubtitleFunction() {
+    var text = document.createElement("SPAN");
+    text.className = "PrettyCards_BarelyVisibleHallucinationMachine gray";
+    text.innerHTML = translationManager.getRandomFromValueList("pc-game-draw-messages");
+    return text;
 }
 
 class RewardSource {
@@ -717,6 +750,11 @@ function displayMatchResults(data) {
     title.innerHTML = window.$.i18n(data.endType.textKey);
     container.appendChild(title);
 
+    var subtitle = document.createElement("DIV");
+    subtitle.className = "PrettyCards_GameEnd_Subtitle";
+    subtitle.appendChild(data.endType.getSubtitle());
+    container.appendChild(subtitle);
+
     container.appendChild(data.rewardManager.container);
 
     leaveRow.className = "PrettyCards_Hidden PrettyCards_GameEnd_LeaveRow";
@@ -769,12 +807,10 @@ function displayMatchResults(data) {
         "pc-game-quest-header",
         "pc-game-collect-all",
         "",
-        (qd, dump, container, rewardManager) => {
-            //console.log(qd, dump, container, rewardManager);
+        (qd, dump, container, /**@type {RewardManager}*/ rewardManager) => {
             qd.forEach((quest) => {
-                //console.log(quest, quest.claimable);
                 if (!quest.claimable) {
-                    //return;
+                    return;
                 }
                 var row = document.createElement("DIV");
                 row.className = "PrettyCards_GameEnd_QuestRow";
@@ -789,32 +825,41 @@ function displayMatchResults(data) {
                 row.appendChild(rewardCell);
                 var pair = processQuestReward(rewardCell, quest.reward);
                 rewardCell.classList.add("PrettyCards_GameEnd_QuestReward");
-                //console.log(pair);
-                
 
                 var claimCell = document.createElement("DIV");
                 claimCell.className = "PrettyCards_GameEnd_QuestClaim";
                 var claimButton = document.createElement("BUTTON");
                 claimButton.className = "btn btn-success";
                 claimButton.innerHTML = window.$.i18n("quests-claim");
+                var numberId = parseInt(quest.id);
+                if (!isNaN(numberId)) {
+                    claimButton.onclick = () => {
+                        claimButton.setAttribute("disabled", "true");
+                        collectQuestReward(numberId).then((data) => {
+                            rewardManager.addReward(pair.getLeft(), new RewardSourceInstance(RewardSource.QUEST, pair.getRight()));
+                            row.remove();
+                            container.style.display = dump.children.length > 0 ? "block" : "none";
+                            collectNoise.currentTime = 0;
+                            collectNoise.play();
+                        }).catch(() => {
+                            claimButton.removeAttribute("disabled");
+                            container.style.display = dump.children.length > 0 ? "block" : "none";
+                        });
+                    }
+                }
                 claimCell.appendChild(claimButton);
                 row.appendChild(claimCell);
 
                 dump.appendChild(row);
             });
         },
-        (fd, friendshipButton, renderFriendship) => {
-            fd.claimAll(
-                (fi, reward) => {
-                    collectNoise.currentTime = 0;
-                    collectNoise.play();
-                    data.rewardManager.addReward(reward.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, reward.getRight()));
-                }, 
-                () => {
-                    renderFriendship(fd);
-                    friendshipButton.removeAttribute("disabled");
-                }
-            );
+        (data, button, renderFunc) => {
+            //console.log(button, button.parentElement, .);
+            // My code in 2016 be like
+            var buttons = button.parentElement.parentElement.querySelectorAll("button.btn.btn-success");
+            for (var i=0; i < buttons.length; i++) {
+                buttons[i].click();
+            }
         },
         questData,
         data.rewardManager
@@ -852,7 +897,7 @@ prettycards.testMatchResults = () => {
             "action": "getVictory",
             //"action": "getDefeat",
             "gameType": "RANKED",
-            "disconnected": false,
+            "disconnected": true,
             "golds": 5944,
             "isDonator": false,
             "oldGold": 5919,
@@ -879,6 +924,11 @@ prettycards.testMatchResults = () => {
     ));
 };
 
+prettycards.testMatchResultsDraw = () => {displayMatchResults({
+    endType : GameEndTypes.DRAW,
+    rewardManager: new RewardManager()
+});};
+
 /* I should have planned ahead more for all of this . . .
 PrettyCards_plugin.events.on("getVictory getDefeat", function (data) {
     displayMatchResults(transformMatchEndData(data));
@@ -892,6 +942,21 @@ PrettyCards_plugin.events.on("PreGameEvent", function (data) {
         this.canceled = true;
     }
     //
+});
+
+PrettyCards_plugin.events.on('getError:before getGameError:before', function (data) {
+    // For some reason Onu displays the same message for both cases. 
+    // However, I want to repare for when this gets fixed.
+    var actualMessage = JSON.parse(JSON.parse(data.message).args)[0];
+    console.log(data, actualMessage);
+    if (actualMessage != "game-turn-limit" && actualMessage != "game-time-limit") { 
+        return;
+    }
+    this.canceled = true;
+    displayMatchResults({
+        endType : GameEndTypes.DRAW,
+        rewardManager: new RewardManager()
+    });
 });
 
 var rewardCollectionRows = [];
@@ -986,23 +1051,29 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
             data = {card : data};
         }
         var hoverText = document.createElement("SPAN");
-        hoverText.innerHTML = "test";
+        hoverText.innerHTML = data.name ? data.name : window.$.i18n(`card-name-${data.card}`);
         hoverText.dataset.rewardHoverData = JSON.stringify(data);
+        hoverText.className = "cyan";
         rewardCont.appendChild(hoverText);
 
-        const card = window.appendCard(window.getCard(1), $(document.createElement("DIV")))[0];
-        return null;
+        var currency = Currency.CARD_SKIN;
+        if (reward.type === "card") {
+            currency = getOrCreateCardCurrency(parseInt(data.card));
+        }
+        return new Pair(currency, 1);
     }
 
     if (reward.type === "profile") {
-        console.log(rewardCont.parentElement); 
         rewardCont.parentElement.style.backgroundImage = 'url(' + reward.reward + ')';
         rewardCont.parentElement.style.backgroundPosition = "center center";
         rewardCont.parentElement.style.backgroundSize = "cover";
         return new Pair(Currency.PROFILE_SKIN, 1);
     };
 
-    
+    if (reward.type === "avatar") { 
+        rewardCont.innerHTML = `<img class="avatar ${reward.reward.rarity}" src="${reward.reward.image}">`
+        return new Pair(Currency.AVATAR, 1);
+    };
 
     console.warn("Unhandled reward type: ", reward.type, reward);
 
@@ -1019,19 +1090,35 @@ var nrToSkinClass = [
 window.underscript.lib.tippy(document.body, {
     target: "[data-reward-hover-data]",
     theme: "undercards",
+    animateFill: false,
     onShow(i) {
         var data = JSON.parse(i.reference.dataset.rewardHoverData); // Element this triggered on
         var card = window.appendCard(window.getCard(Number(data.card)), $("<DIV>"));
         if (data.name) {
-            var cardImageBG = 'url("' + data.image + '")';
+            console.log(data);
+            var cardImageBG = 'url("' + data.src + '")';
             card.find(".cardImage").css("background-image", cardImageBG);
-            card.removeClass("standard-skin").addClass(nrToSkinClass[data.type] || "");
+            card.removeClass("standard-skin").addClass(nrToSkinClass[parseInt(data.type)] || "");
             var cardSkinInfo = data.name + '<br/>' + '<span class="Artist">' + data.author + '</span>';
             card.find(".cardDesc div").html(cardSkinInfo);
         }
+        console.log(card[0], data.type);
         i.setContent(card[0]); // Set to generated card image
     },
 });
 
+
+function collectQuestReward(/**@type {number}*/ id) {
+    return new Promise((resolve, reject) => {
+        window.$.post("/Quests", {questId: id, dailyQuest: id}, (data) => {
+            // Nothing is expected
+            resolve(data);
+        }).error((e) => {
+            reject(e);
+        })
+    });
+}
+
+prettycards.collectQuestReward = collectQuestReward;
 
 export {DIVISIONS, getDivisionForElo};

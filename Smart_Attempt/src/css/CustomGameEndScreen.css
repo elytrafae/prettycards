@@ -21,7 +21,14 @@
     font-size: 10em;
     text-align: center;
     line-height: 1.2;
-    margin-bottom: 0.3em;
+    /*margin-bottom: 0.3em;*/
+}
+
+.PrettyCards_GameEnd_Subtitle {
+    font-size: 2em;
+    text-align: center;
+    line-height: 0.8;
+    margin-bottom: 1em;
 }
 
 .DTFragment {
@@ -161,6 +168,10 @@
     height: 32px;
 }
 
+.PrettyCards_GameEnd_QuestRow .avatar {
+    height: 48px;
+}
+
 .PrettyCards_GameEnd_QuestText {
     padding: 0.5em;
     width: 100%;
@@ -179,3 +190,54 @@
     min-width: 100px;
     text-align: center;
 }
+
+.PrettyCards_BarelyVisibleHallucinationMachine {
+    opacity: 0.01;
+    animation: PrettyCards_BarelyVisibleHallucinationMachine linear 30s infinite;
+}
+
+@keyframes PrettyCards_BarelyVisibleHallucinationMachine {
+    from {
+        opacity: 0;
+    }
+
+    22% {
+        opacity: 0.022;
+    }
+
+    25% {
+        opacity: 0.05;
+    }
+
+    28% {
+        opacity: 0;
+    }
+
+    70% {
+        opacity: 0.01;
+    }
+
+    75% {
+        opacity: 0.05;
+    }
+
+    77% {
+        opacity: 0;
+    }
+
+    90% {
+        opacity: 0.01;
+    }
+
+    92% {
+        opacity: 0.05;
+    }
+
+    93% {
+        opacity: 0;
+    }
+  
+    100% {
+        opacity: 0;
+    }
+  }
