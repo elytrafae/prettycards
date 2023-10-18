@@ -313,6 +313,10 @@ function drawSubtitleFunction() {
     var text = document.createElement("SPAN");
     text.className = "PrettyCards_BarelyVisibleHallucinationMachine gray";
     text.innerHTML = translationManager.getRandomFromValueList("pc-game-draw-messages");
+    setTimeout(() => {
+        text.className = "PrettyCards_Transparent";
+        text.innerHTML = "Too slow~";
+    }, 22000);
     return text;
 }
 

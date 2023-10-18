@@ -193,7 +193,13 @@
 
 .PrettyCards_BarelyVisibleHallucinationMachine {
     opacity: 0.01;
-    animation: PrettyCards_BarelyVisibleHallucinationMachine linear 30s infinite;
+    animation: PrettyCards_BarelyVisibleHallucinationMachine linear 22s infinite;
+    user-select: none;
+    pointer-events: none;
+}
+
+.PrettyCards_Transparent {
+    opacity: 0;
 }
 
 @keyframes PrettyCards_BarelyVisibleHallucinationMachine {
@@ -201,7 +207,7 @@
         opacity: 0;
     }
 
-    22% {
+    20% {
         opacity: 0.022;
     }
 
