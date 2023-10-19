@@ -972,7 +972,8 @@ PrettyCards_plugin.events.on("PreGameEvent", function (data) {
 });
 
 function gameEndHandler(didWin, callback) {
-    window.music.pause(); 
+    window.music.pause();
+    window.musicEnabled = false;
     window.finish = true; 
     window.$('.spellPlayed').remove(); 
     window.$('#enemyMute').remove(); 

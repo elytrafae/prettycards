@@ -44,6 +44,7 @@ class CardCollection {
 class FriendshipItem {
 
     static REWARD_LEVELS = 5; // The gap between reward levels
+    static MAX_FRIENDSHIP_REWARD_LEVEL = 200;
     //static rewardTypes = ['gold', 'dust', 'pack', 'drPack', 'ucp'];
     //static baseValueRewards = [100, 100, 1, 1, 5];
 
@@ -58,7 +59,7 @@ class FriendshipItem {
 
     /**@returns The number of rewards that can be claimed */
     getCollectableRewardCount() {
-        return Math.floor(this.getLevel()/FriendshipItem.REWARD_LEVELS) - this.claim;
+        return Math.floor(Math.min(this.getLevel(), MAX_FRIENDSHIP_REWARD_LEVEL)/FriendshipItem.REWARD_LEVELS) - this.claim;
     }
 
     getLevel() {

@@ -1,14 +1,8 @@
-
-- Custom Game End screen, with on-site Friendship and Quest claiming!
-- Added cool BG for Profile Skins that have them into Better User Info
-- Custom Chat Commands: Uppercase (:upper:), Lowercase (:lower:), Mockingcase (:mock:), uwufication (:owo:, :uwu: and :uvu: for the three tiers), the rest can be found in settings
-- Updated Credits to include PrettyCards staff
-- You now cannot end your turn in the middle of a selection, and receive a warning when you would die from FREE KROMER.
-
-- Switched to a more efficient way of getting artifacts for display!
-- Fixed lag and error spam caused by the browser refusing to preload audio in certain cases (At least, fixed the part that was in my control)
+- Fixed the friendship rewards supposedly showing up for 200+ level cards
 
 TODO:
+- Fix LEGEND ELO display
+
 - Detailed History Tracking?
 - Image Recognition for Deck Imports
 - Interactive Card Helper (finish this)
