@@ -1,11 +1,12 @@
 
+- Custom Game End screen, with on-site Friendship and Quest claiming!
 - Added cool BG for Profile Skins that have them into Better User Info
 - Custom Chat Commands: Uppercase (:upper:), Lowercase (:lower:), Mockingcase (:mock:), uwufication (:owo:, :uwu: and :uvu: for the three tiers), the rest can be found in settings
 - Updated Credits to include PrettyCards staff
 - You now cannot end your turn in the middle of a selection, and receive a warning when you would die from FREE KROMER.
 
 - Switched to a more efficient way of getting artifacts for display!
-- Fixed lag and error spam caused by the browser refusing to preload audio in certain cases
+- Fixed lag and error spam caused by the browser refusing to preload audio in certain cases (At least, fixed the part that was in my control)
 
 TODO:
 - Detailed History Tracking?
@@ -14,7 +15,6 @@ TODO:
 - Add more Hourglass GIFs.
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)
-- Make Game End Screen look actually decent
 
 - Resource Packs
 - Game Animation Upgrades + Optimization with remembering the image data and generating URLs fir each locally instead of re-fetching the image each time

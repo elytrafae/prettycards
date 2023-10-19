@@ -1,7 +1,7 @@
 
 import { loadCSS } from "../css_loader";
 import css from "../../css/CustomGameEndScreen.css";
-import { PrettyCards_plugin, prettycards } from "../underscript_checker";
+import { PrettyCards_plugin, prettycards, addSetting } from "../underscript_checker";
 import { Currency } from "../shared_types/currency";
 import { getFriendshipData } from "../friendship_reward_processor";
 import { utility, Pair } from "../utility";
@@ -874,6 +874,7 @@ function displayMatchResults(data) {
 
 function playSound(src) {
     var audio = new Audio();
+    audio.volume = 0.75;
     audio.src = src;
     audio.play();
 }
@@ -939,16 +940,69 @@ PrettyCards_plugin.events.on("getVictory getDefeat", function (data) {
 });
 */
 
+var customGameEndScreenSetting = addSetting({
+    'key': 'custom_game_end',
+    'name': 'Custom Game End Screen', // Name in settings page
+    'type': 'boolean',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+});
+
+var shakeSetting = addSetting({
+    'key': 'custom_game_end_death_anim',
+    'name': 'Custom Game End Screen: Death Animation', // Name in settings page
+    'note': "Should the death animation play with the Custom Game End Screen? I honestly do not know if this should be on or off.",
+    'type': 'boolean',
+    'refresh': false, // true to add note "Will require you to refresh the page"
+    'default': true, // default value
+});
+
 var endEvents = ["getVictory", "getDefeat"];
 PrettyCards_plugin.events.on("PreGameEvent", function (data) {
+    if (!customGameEndScreenSetting.value()) {
+        return;
+    }
     if (endEvents.includes(data.action)) {
-        displayMatchResults(transformMatchEndData(data));
+        gameEndHandler(data.action === "getVictory", () => {
+            displayMatchResults(transformMatchEndData(data));
+        });
         this.canceled = true;
     }
     //
 });
 
+function gameEndHandler(didWin, callback) {
+    window.music.pause(); 
+    window.finish = true; 
+    window.$('.spellPlayed').remove(); 
+    window.$('#enemyMute').remove(); 
+    window.$('#game-history').remove(); 
+    if (window.settingsDialog !== null) { window.settingsDialog.close(); }
+    if (window.selectCardDialog !== null) { window.selectCardDialog.close(); }
+    if (window.dustpileDialog !== null) { window.dustpileDialog.close(); }
+    var shakeElements = [window.$('#user' + (didWin ? window.opponentId : window.userId)), window.$(didWin ? "#enemyAvatar" : "#yourAvatar")];
+    if (window.shakeEnabled && shakeSetting.value()) {
+        shakeElements.forEach((e) => {
+            e.effect("shake");
+        });
+        setTimeout(() => {
+            shakeElements.forEach((e) => {
+                e.effect("puff");
+            });
+            playSound('/sounds/dust.wav');
+            setTimeout(() => {
+                callback();
+            }, 750);
+        }, 750);
+    } else {
+        callback();
+    }
+}
+
 PrettyCards_plugin.events.on('getError:before getGameError:before', function (data) {
+    if (!customGameEndScreenSetting.value()) {
+        return;
+    }
     // For some reason Onu displays the same message for both cases. 
     // However, I want to repare for when this gets fixed.
     var actualMessage = JSON.parse(JSON.parse(data.message).args)[0];

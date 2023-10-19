@@ -1,4 +1,10 @@
-var spectate = false; var headerUrl = new URL(location.href); var spectateGameId = headerUrl.searchParams.get("gameId"); var spectatePlayerId = headerUrl.searchParams.get("playerId"); var tutorial = getLastPart(location.href) === "Tutorial"; var url; if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+
+var spectate = false; 
+var headerUrl = new URL(location.href); 
+var spectateGameId = headerUrl.searchParams.get("gameId"); 
+var spectatePlayerId = headerUrl.searchParams.get("playerId"); 
+var tutorial = getLastPart(location.href) === "Tutorial"; 
+var url; if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     if (spectateGameId === null) { if (!tutorial) { url = "ws://" + location.hostname + ":8080/game"; } else { url = "ws://" + location.hostname + ":8080/gametutorial"; } } else {
         url = "ws://" + location.hostname + ":8080/spectate/" + spectateGameId; if (spectatePlayerId !== null) { url += '/' + spectatePlayerId; }
         spectate = true;
@@ -54,10 +60,15 @@ function runEvent(data) {
         }
     }
     else if (data.action === "getVictory" && !spectate) {
-        $('.spellPlayed').remove(); $('#enemyMute').remove(); $('#game-history').remove(); if (settingsDialog !== null) { settingsDialog.close(); }
+        $('.spellPlayed').remove(); 
+        $('#enemyMute').remove(); 
+        $('#game-history').remove(); 
+        if (settingsDialog !== null) { settingsDialog.close(); }
         if (selectCardDialog !== null) { selectCardDialog.close(); }
         if (dustpileDialog !== null) { dustpileDialog.close(); }
-        music.pause(); finish = true; if (data.gameType === "STANDARD" || data.gameType === "BOSS" || data.gameType === "EVENT") {
+        music.pause(); 
+        finish = true; 
+        if (data.gameType === "STANDARD" || data.gameType === "BOSS" || data.gameType === "EVENT") {
             $('.arrows').remove(); $('.goldsAmount').html(data.golds); $('.xpAdded').html(data.newXp - data.oldXp); $('.xpBar').attr("max", data.oldJaugeSize); $('.xpBar').attr("value", data.oldJaugeSize - data.xpUntilNextLevel); $('.xpMax').html(data.oldJaugeSize); $('.stats').show(); var baseGold = data.golds; if (data.isDonator) { baseGold = baseGold - 10; $('.donatorZone').show(); }
             if (data.queueGoldBonus > 0) { baseGold = baseGold - data.queueGoldBonus; $('.queue-gold-bonus-value').html(data.queueGoldBonus); $('.queue-gold-bonus').show(); }
             $('.goldWon').html(baseGold - data.oldGold);
