@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        PrettyCards Audio
-// @version     1.1.0
+// @version     1.1.1
 // @author      CMD_God
 // @description Add vibrant sounds to an Undercards match!
 // @homepage    https://github.com/CMD-God/prettycards
