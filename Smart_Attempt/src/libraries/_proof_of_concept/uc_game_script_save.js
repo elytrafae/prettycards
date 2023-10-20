@@ -25,7 +25,12 @@ function onMessageGame(event) {
 function nextEvent() { doingAnimation = false; if (eventQueue.length > 0) { $('#endTurnBtn').prop("disabled", true); var data = eventQueue.shift(); runEvent(data); } else { actionWorking = false; if (userTurn === userId) { $('#endTurnBtn').prop("disabled", false); } } }
 function jingleEnd() { if (musicEnabled) { music.play(); } }
 function runEvent(data) {
-    actionWorking = true; var waitTime = 0; if (data.action === "getUpdateHand") { $('#handCards').empty(); var hand = JSON.parse(data.hand); for (var i = 0; i < hand.length; i++) { var gameCard = hand[i]; var $appendedCard = appendCard(gameCard, $('#handCards')); $appendedCard.addClass('col-sm-1'); } } else if (data.action === "getPlayersStats") {
+    actionWorking = true; var waitTime = 0; 
+    if (data.action === "getUpdateHand") { 
+        $('#handCards').empty(); 
+        var hand = JSON.parse(data.hand); 
+        for (var i = 0; i < hand.length; i++) { 
+            var gameCard = hand[i]; var $appendedCard = appendCard(gameCard, $('#handCards')); $appendedCard.addClass('col-sm-1'); } } else if (data.action === "getPlayersStats") {
         var handsSize = JSON.parse(data.handsSize); var decksSize = JSON.parse(data.decksSize); var golds = JSON.parse(data.golds); var artifacts = JSON.parse(data.artifacts); for (var key in handsSize) { $('#user' + key + ' .handSize').html(handsSize[key]); }
         for (var key in decksSize) { $('#user' + key + ' .deckSize').html(decksSize[key]); }
         for (var key in golds) { $('#user' + key + ' .golds').html(golds[key]); }
