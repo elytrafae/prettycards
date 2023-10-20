@@ -1,5 +1,6 @@
 import { prettycards, PrettyCards_plugin, settings } from "./underscript_checker";
 import {getOrCreateCardBottomLeftInfo} from "./card_modifyers/basic_universal_card_additions";
+import { Currency } from "./shared_types/currency";
 
 var collectionPlace = document.getElementById("collection"); // This is for a workaround with how friendship cards are added.
 if (!collectionPlace) {
@@ -525,6 +526,29 @@ class Utility {
 				reject();
 			})
 		})
+	}
+
+	
+	/**@returns {Currency|null} */
+	/**@description Does not work on cards! */
+	feildItemsToMyCurrencies(item) {
+		const usconst = window.underscript.constants;
+		switch (item) {
+			case usconst.GOLD: return Currency.GOLD;
+			case usconst.UCP: return Currency.UCP;
+			case usconst.DUST: return Currency.DUST;
+			case usconst.DT_FRAGMENT: return Currency.DTFRAG;
+			case usconst.UT_PACK: return Currency.UT_PACK;
+			case usconst.DR_PACK: return Currency.DR_PACK;
+			case usconst.SHINY_PACK: return Currency.SHINY_PACK;
+			case usconst.SUPER_PACK: return Currency.SUPER_PACK;
+			case usconst.FINAL_PACK: return Currency.FINAL_PACK;
+			case usconst.SKIN: return Currency.CARD_SKIN;
+			case usconst.PROFILE: return Currency.PROFILE_SKIN;
+			case usconst.AVATAR: return Currency.AVATAR;
+			case usconst.EMOTE: return Currency.EMOTE;
+			default: return null;
+		}
 	}
 	
 }

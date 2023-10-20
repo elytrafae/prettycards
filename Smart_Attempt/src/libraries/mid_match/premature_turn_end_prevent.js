@@ -9,6 +9,7 @@ var selectSetting = addSetting({
     'category': "noob_help"
 });
 
+/*
 var dealSetting = addSetting({
     'key': 'no_turn_end_while_deal',
     'name': 'Turn End warning with [FREE KROMER]', // Name in settings page
@@ -17,12 +18,13 @@ var dealSetting = addSetting({
     'default': true, // default value
     'category': "noob_help"
 });
+*/
 
 var wasWarned = false;
 if (window.underscript.onPage("Game")) {
     PrettyCards_plugin.events.on("player:endTurn", function() {
-        // #yourArtifacts [artifactid="46"]
-        var dealCondition = (dealSetting.value() && !!document.querySelector('#handCards [fixedid="719"]') && !!document.querySelector('#yourArtifacts [artifactid="46"]'));
+        // The feature had to be disabled :/
+        var dealCondition = false; //(dealSetting.value() && !!document.querySelector('#handCards [fixedid="719"]') && !!document.querySelector('#yourArtifacts [artifactid="46"]'));
         if (dealCondition && !wasWarned) {
             sendDealWarning();
         }

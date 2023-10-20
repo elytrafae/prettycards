@@ -1,11 +1,9 @@
-- Fixed the friendship rewards supposedly showing up for 200+ level cards
+
 
 TODO:
-- Fix LEGEND ELO display
-
+- Interactive Card Helper (finish this)
 - Detailed History Tracking?
 - Image Recognition for Deck Imports
-- Interactive Card Helper (finish this)
 - Add more Hourglass GIFs.
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)

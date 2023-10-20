@@ -59,7 +59,7 @@ class FriendshipItem {
 
     /**@returns The number of rewards that can be claimed */
     getCollectableRewardCount() {
-        return Math.floor(Math.min(this.getLevel(), MAX_FRIENDSHIP_REWARD_LEVEL)/FriendshipItem.REWARD_LEVELS) - this.claim;
+        return Math.floor(Math.min(this.getLevel(), FriendshipItem.MAX_FRIENDSHIP_REWARD_LEVEL)/FriendshipItem.REWARD_LEVELS) - this.claim;
     }
 
     getLevel() {

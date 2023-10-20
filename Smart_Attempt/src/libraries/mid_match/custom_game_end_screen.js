@@ -255,7 +255,7 @@ class BarData {
         data.customRowFunction = (passedAmount) => {
             var arena = data.didTipOver ? endArena : startArena;
             if (arena === "LEGEND") {
-                ELOpart.innerHTML = " (" + passedAmount + ")";
+                ELOpart.innerHTML = " (" + (startElo + passedAmount) + ")";
             } else {
                 ELOpart.innerHTML = "";
             }
@@ -1077,33 +1077,33 @@ function getQuests() {
         }).catch((e) => {reject(e);});
     });
 }
-
-var common_rewards = {
-    "Gold": Currency.GOLD,
-    "Pack": Currency.UT_PACK,
-    "DR Pack": Currency.DR_PACK,
-    "Dust": Currency.DUST,
-    "Shiny Pack": Currency.SHINY_PACK,
-    "DT Fragment": Currency.DTFRAG
-}
+var common_rewards = [
+    Currency.GOLD,
+    Currency.DUST,
+    Currency.DTFRAG,
+    Currency.UT_PACK,
+    Currency.DR_PACK,
+    Currency.SHINY_PACK,
+    Currency.SUPER_PACK,
+    Currency.FINAL_PACK
+];
 
 /**@returns {Pair<Currency,number>|null} */
 function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
     //console.log(reward);
-    if (reward.type === "UCP") {
+    var currency = utility.feildItemsToMyCurrencies(reward.type);
+    if (currency === Currency.UCP) {
         rewardCont.innerHTML = window.$.i18n("quests-ucp", reward.reward);
         return new Pair(Currency.UCP, parseInt(reward.reward));
     }
     
-    if (common_rewards[reward.type]) {
-        /**@type {Currency} */
-        var currency = common_rewards[reward.type];
+    if (currency && common_rewards.includes(currency)) {
         rewardCont.innerHTML = currency.getCurrencyIcon().outerHTML + '<span class="white">x' + reward.reward + '</span>';
         currency.applyTextClass(rewardCont);
         return new Pair(currency, parseInt(reward.reward));
     }
 
-    if (reward.type === "card" || reward.type === "card skin") {
+    if (reward.type === window.underscript.constants.CARD || currency === Currency.CARD_SKIN) {
         //console.log("CARD", reward);
         var data = reward.reward;
         if (typeof(data) == "string") {
@@ -1115,21 +1115,21 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
         hoverText.className = "cyan";
         rewardCont.appendChild(hoverText);
 
-        var currency = Currency.CARD_SKIN;
-        if (reward.type === "card") {
-            currency = getOrCreateCardCurrency(parseInt(data.card));
+        var c = Currency.CARD_SKIN;
+        if (reward.type === window.underscript.constants.CARD) {
+            c = getOrCreateCardCurrency(parseInt(data.card));
         }
-        return new Pair(currency, 1);
+        return new Pair(c, 1);
     }
 
-    if (reward.type === "profile") {
+    if (currency === Currency.PROFILE_SKIN) {
         rewardCont.parentElement.style.backgroundImage = 'url(' + reward.reward + ')';
         rewardCont.parentElement.style.backgroundPosition = "center center";
         rewardCont.parentElement.style.backgroundSize = "cover";
         return new Pair(Currency.PROFILE_SKIN, 1);
     };
 
-    if (reward.type === "avatar") { 
+    if (currency === Currency.AVATAR) { 
         rewardCont.innerHTML = `<img class="avatar ${reward.reward.rarity}" src="${reward.reward.image}">`
         return new Pair(Currency.AVATAR, 1);
     };
@@ -1154,14 +1154,14 @@ window.underscript.lib.tippy(document.body, {
         var data = JSON.parse(i.reference.dataset.rewardHoverData); // Element this triggered on
         var card = window.appendCard(window.getCard(Number(data.card)), $("<DIV>"));
         if (data.name) {
-            console.log(data);
+            //console.log(data);
             var cardImageBG = 'url("' + data.src + '")';
             card.find(".cardImage").css("background-image", cardImageBG);
             card.removeClass("standard-skin").addClass(nrToSkinClass[parseInt(data.type)] || "");
             var cardSkinInfo = data.name + '<br/>' + '<span class="Artist">' + data.author + '</span>';
             card.find(".cardDesc div").html(cardSkinInfo);
         }
-        console.log(card[0], data.type);
+        //console.log(card[0], data.type);
         i.setContent(card[0]); // Set to generated card image
     },
 });
