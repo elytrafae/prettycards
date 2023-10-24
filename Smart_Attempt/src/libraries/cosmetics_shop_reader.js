@@ -30,7 +30,7 @@ function GetPage(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
         if (cosmeticType !== COSMETIC_TYPES.NULL && id >= 0) {
             data[COSMETIC_TYPE_TO_BUY_NAME[cosmeticType]] = id;
         }
-        $.get("/CosmeticsShop", data, function(data) {
+        $.post("/CosmeticsShop", data, function(data) {
             var $page = $(data);
             // I am officially dead inside.
             // Shout out to my dad for figuring out that doing it with fancy JQuery stuff is not gonna cut it, no matter what we try.
@@ -88,8 +88,9 @@ function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
             var footer = data.querySelector("footer");
             var shopItems = [];
             var currentCategory = "";
-            var elements = data.querySelectorAll("img,.ucp,:scope > p");
+            var elements = data.querySelectorAll("img,.ucp,:scope > p,form[action=CosmeticsShop]");
             for (var i=0; i < elements.length; i++) {
+                /**@type {HTMLElement} */
                 var ele = elements[i];
                 if (navbar.contains(ele) || footer.contains(ele)) {
                     continue; // If it's part of the navbar or footer, just ignore.
@@ -116,6 +117,18 @@ function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
                         obj.rarity = rarity;
                     }
                     shopItems.push(obj);
+                } else if (ele.tagName === "FORM") {
+                    //console.log("FORM!", ele, ele.children);
+                    for (var j=0; j < ele.children.length; j++) {
+                        var child = ele.children[j];
+                        //console.log(child.getAttribute("name").toString());
+                        if (child.tagName === "INPUT" && child.hasAttribute("name") && child.getAttribute("name").toString().includes("id")) {
+                            mostRecent.id = parseInt(child.getAttribute("value"));
+                            //console.log("ID set to", mostRecent.id, "for", mostRecent);
+                            break;
+                        }
+                    }
+
                 } else {
                     
                     var number = Number(ele.innerHTML);

@@ -547,6 +547,8 @@ class Utility {
 			case usconst.PROFILE: return Currency.PROFILE_SKIN;
 			case usconst.AVATAR: return Currency.AVATAR;
 			case usconst.EMOTE: return Currency.EMOTE;
+			case usconst.EXP: return Currency.XP;
+			case usconst.ELO: return Currency.ELO;
 			default: return null;
 		}
 	}

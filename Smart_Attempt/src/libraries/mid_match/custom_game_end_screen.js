@@ -232,6 +232,7 @@ class BarData {
         
         // I'm not using "playSound" here because I want to pre-load the sound.
         var audio = new Audio();
+        audio.volume = getUnderscriptVolumeSettingValue("sfx");
         audio.src = `https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
 
         var divisionPart = document.createElement("SPAN");
@@ -723,8 +724,10 @@ function displayMatchResults(data) {
     var questData = getQuests();
 
     var bgm = new Audio();
+    bgm.volume = getUnderscriptVolumeSettingValue("result");
     bgm.src = data.endType.songSrc;
 
+    collectNoise.volume = getUnderscriptVolumeSettingValue("sfx");
     collectNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/RewardCollect.ogg";
 
     var leaveRow = document.createElement("DIV");
@@ -734,6 +737,7 @@ function displayMatchResults(data) {
     backdrop.className = "PrettyCards_GameEnd_Backdrop";
     window.$(backdrop).css("top", -window.innerHeight + "px").animate({"top": "0px"}, 1000, "easeInQuad", () => {
         // anim done
+        landNoise.volume = getUnderscriptVolumeSettingValue("sfx");
         landNoise.play();
         setTimeout(() => {
             bgm.loop = true;
@@ -874,7 +878,7 @@ function displayMatchResults(data) {
 
 function playSound(src) {
     var audio = new Audio();
-    audio.volume = 0.75;
+    audio.volume = getUnderscriptVolumeSettingValue("sfx");
     audio.src = src;
     audio.play();
 }
@@ -1067,15 +1071,9 @@ function createRewardCollectSection(titleKey, buttonKey, dumpClassName, renderFu
 function getQuests() {
     var questArray = PrettyCards_plugin.quests.getQuests();
     if (questArray && questArray.length > 0) {
-        return new Promise((resolve, reject) => {
-            resolve(questArray);
-        });
+        return Promise.resolve(questArray);
     }
-    return new Promise((resolve, reject) => {
-        PrettyCards_plugin.quests.update().then((resData) => {
-            resolve(resData.quests);
-        }).catch((e) => {reject(e);});
-    });
+    return PrettyCards_plugin.quests.update().then((resData) => resData.quests);
 }
 var common_rewards = [
     Currency.GOLD,
@@ -1176,6 +1174,10 @@ function collectQuestReward(/**@type {number}*/ id) {
             reject(e);
         })
     });
+}
+
+function getUnderscriptVolumeSettingValue(category = "sfx") {
+    return PrettyCards_plugin.settings().value("underscript.audio." + category) ? PrettyCards_plugin.settings().value("underscript.audio." + category + ".volume") : 0;
 }
 
 prettycards.collectQuestReward = collectQuestReward;

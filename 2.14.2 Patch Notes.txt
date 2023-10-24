@@ -1,4 +1,6 @@
 
+- The volume of the Game End screen now obeys Feildmaster's volume settings
+- Non-intrusive API improvements
 
 TODO:
 - Interactive Card Helper (finish this)
