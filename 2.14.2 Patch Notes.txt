@@ -3,6 +3,8 @@
 - Non-intrusive API improvements
 
 TODO:
+- Make the Game End screen check for the data to be present before displaying anything.
+- Make the HD artifacts system fall back onto pixelated textures if HD is not found.
 - Interactive Card Helper (finish this)
 - Detailed History Tracking?
 - Image Recognition for Deck Imports
