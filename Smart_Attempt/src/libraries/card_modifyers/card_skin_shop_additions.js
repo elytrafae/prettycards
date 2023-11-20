@@ -21,7 +21,7 @@ PrettyCards_plugin.events.on("appendCardCardSkinShop()", function(data) {
         if (ids_with_owned_card_skins.includes(skin.cardId)) {
             utility.addCustomSimpleTextIconToCard(
                 element, 
-                "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardPowers/already_have.png", 
+                "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardPowers/already_have.png", 
                 `You already own a card skin for <span style="white-space: nowrap;">${window.$.i18n(`card-name-${skin.cardId}`, 1)}</span>!`
             );
         }

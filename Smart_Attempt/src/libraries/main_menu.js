@@ -35,8 +35,8 @@ ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function()
 				${ (utility.getSeasonMonth() == 3) ? ('<a href="/SmashOrPass"><p style="cursor: pointer; color: yellow;">' + window.$.i18n("pc-menu-sop") + '</p></a>') : ""}
 				<a href="/CustomTranslations" class="PrettyCards_Hidden Translator PrettyCards_Staff"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customtranslate")}</p></a>
 				<a class="PrettyCards_Hidden PrettyCards_Staff"><p style="cursor: pointer;" onclick="prettycards.downloadEmotesFile()">${window.$.i18n("pc-menu-emotefile")}</p></a>
-				<a href="https://cmd-god.github.io/prettycards/artistConsole.html" class="PrettyCards_Hidden Artist"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customartistconsole")}</p></a>
-				<a href="https://github.com/CMD-God/prettycards/wiki"><p style="cursor: pointer;">${window.$.i18n("pc-menu-apidocs")}</p></a>
+				<a href="https://elytrafae.github.io/prettycards/artistConsole.html" class="PrettyCards_Hidden Artist"><p style="cursor: pointer;">${window.$.i18n("pc-menu-customartistconsole")}</p></a>
+				<a href="https://github.com/elytrafae/prettycards/wiki"><p style="cursor: pointer;">${window.$.i18n("pc-menu-apidocs")}</p></a>
 			</div>
 		</div>`)
 

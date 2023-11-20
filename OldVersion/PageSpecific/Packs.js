@@ -155,7 +155,7 @@ if (settings.packs.value() && underscript.onPage('Packs')) {
 	
 	PrettyCards_plugin.events.on("openedPacks", function(a1, a2, a3) {console.log(a1, a2, a3)});
 	
-	loadCSSFromLink("https://cdn.jsdelivr.net/gh/CMD-God/prettycards@480a1ecd355d15a6eec631871f965c18bf6adf90/css/Packs.css");
+	loadCSSFromLink("https://cdn.jsdelivr.net/gh/elytrafae/prettycards@480a1ecd355d15a6eec631871f965c18bf6adf90/css/Packs.css");
 	
 }
 

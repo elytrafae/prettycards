@@ -20,7 +20,7 @@ function wrapAnimFunction(funcName, image) {
 
 function replaceAnim(image) {
 	var imgs = $(".vfx:not(.PrettyCards_DoneVFX)");
-	imgs.attr("src", `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardVFX/${image}.png?v=${window.animationCounter}`);
+	imgs.attr("src", `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardVFX/${image}.png?v=${window.animationCounter}`);
 	imgs.addClass("PrettyCards_DoneVFX");
 }
 

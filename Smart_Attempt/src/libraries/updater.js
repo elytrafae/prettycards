@@ -3,7 +3,7 @@ import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 import { ExecuteWhen } from "./pre_load/event_ensure";
 
-// https://github.com/CMD-God/prettycards/releases/latest/download/prettycards.user.js
+// https://github.com/elytrafae/prettycards/releases/latest/download/prettycards.user.js
 // function Toast({title, text, footer, className, css={}, buttons, timeout, onClose}={}) {
 
 /*
@@ -41,7 +41,7 @@ var setting_time_id = options.indexOf(settings.update_frequency.value() || optio
 
 if (now - lastChecked >= times[setting_time_id]) {
 	window.localStorage.setItem("PrettyCards_LastCheckedUpdate", now);
-	$.get("https://api.github.com/repos/CMD-God/prettycards/releases/latest", {}, function(data) {
+	$.get("https://api.github.com/repos/elytrafae/prettycards/releases/latest", {}, function(data) {
 		//console.log("data: ", data, "version: ", version);
 		if (version != "local" && version != data.tag_name) {
 			var toastData = {

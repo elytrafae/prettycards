@@ -233,7 +233,7 @@ class BarData {
         // I'm not using "playSound" here because I want to pre-load the sound.
         var audio = new Audio();
         audio.volume = getUnderscriptVolumeSettingValue("sfx");
-        audio.src = `https://github.com/CMD-God/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
+        audio.src = `https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
 
         var divisionPart = document.createElement("SPAN");
         data.tipOverFunction = () => {
@@ -271,7 +271,7 @@ class GameEndTypes {
     static WIN = new GameEndTypes("game-game-victory", "", "/musics/dr2_victory.ogg");
     static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg").setSubtitleFunction(leaveWinSubtitleFunction);
     static LOSE = new GameEndTypes("game-game-over", "", "/musics/dr2_gameover.ogg");
-    static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/CMD-God/prettycards/raw/master/audio/bgms/mus_star.ogg").setSubtitleFunction(drawSubtitleFunction);
+    static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/elytrafae/prettycards/raw/master/audio/bgms/mus_star.ogg").setSubtitleFunction(drawSubtitleFunction);
     static CHARA = new GameEndTypes("game-died", "red", "/musics/toomuch.ogg");
 
     constructor(/**@type {String} */ textKey, /**@type {String} */ textClass, /**@type {String} */ song) {
@@ -714,7 +714,7 @@ function transformMatchEndData(data) {
 
 var landNoise = new Audio();
 var collectNoise = new Audio();
-landNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
+landNoise.src = "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
 
 function displayMatchResults(data) {
     
@@ -728,7 +728,7 @@ function displayMatchResults(data) {
     bgm.src = data.endType.songSrc;
 
     collectNoise.volume = getUnderscriptVolumeSettingValue("sfx");
-    collectNoise.src = "https://github.com/CMD-God/prettycards/raw/master/audio/sfx/RewardCollect.ogg";
+    collectNoise.src = "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/RewardCollect.ogg";
 
     var leaveRow = document.createElement("DIV");
 

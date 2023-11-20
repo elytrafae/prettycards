@@ -9,13 +9,13 @@ if (settings.easter_egg_cards.value()) {
 
   for (var i=0; i < bonusExtensions.length; i++) {
     var ext = bonusExtensions[i];
-    GM_addStyle(".monster.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_monster.png');}");
-    GM_addStyle(".spell.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/" + ext + "/frame_spell.png');}");
+    GM_addStyle(".monster.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/" + ext + "/frame_monster.png');}");
+    GM_addStyle(".spell.ext_"+ ext +" .cardFrame {background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/" + ext + "/frame_spell.png');}");
   }
 
-  GM_addStyle(".card.ext_DDLC .cardBackground {background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_background.png'); top: 7px; height: 231px;}");
-  GM_addStyle("@font-face {font-family: Aller;src: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/fonts/Aller_Rg.ttf);}");
-  //https://raw.githubusercontent.com/CMD-God/prettycards/master/fonts/Aller_Rg.ttf
+  GM_addStyle(".card.ext_DDLC .cardBackground {background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_background.png'); top: 7px; height: 231px;}");
+  GM_addStyle("@font-face {font-family: Aller;src: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/fonts/Aller_Rg.ttf);}");
+  //https://raw.githubusercontent.com/elytrafae/prettycards/master/fonts/Aller_Rg.ttf
   GM_addStyle(".card.ext_DDLC {font-family: Aller;");
   GM_addStyle(".cardHeader, .cardFooter { background-color: rgb(0, 0, 0, 0); }");
 
@@ -24,9 +24,9 @@ if (settings.easter_egg_cards.value()) {
       var card = data.card;
     if (card.fixedId >= customCardsStart) {
       html$.addClass("ext_" + card.extension);
-      html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
+      html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
       if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
-        html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
+        html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/' + card.extension + '/' + card.rarity + '.png\') no-repeat');
       };
       var cardNameDiv$ = html$.find('.cardName div');
       var cardDescDiv$ = html$.find('.cardDesc div');
@@ -37,7 +37,7 @@ if (settings.easter_egg_cards.value()) {
       for (var i=0; i < card.tribes.length; i++) {
         var tribe = card.tribes[i];
         if (bonusTribes.includes(tribe)) {
-          tribe_elements[i].src = "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Tribes/" + tribe + ".png";
+          tribe_elements[i].src = "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Tribes/" + tribe + ".png";
         }
       }
     }
@@ -46,10 +46,10 @@ if (settings.easter_egg_cards.value()) {
   /*function AppendCustomCard(container, card) {
       var html$ = window.appendCard(container, card);
       html$.addClass("ext_" + card.extension);
-      html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
+      html$.find(".cardImage").css('background', "url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/" + card.extension + "/" + card.image + '.' + card.imageExtension + "') no-repeat");
       console.log("card extension", card.extension);
       if ((card.extension !== "BASE") && (card.extension !== "DELTARUNE")) {
-        html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/' + card.extension + '_' + card.rarity + '.png\') no-repeat');
+        html$.find('.cardRarity').css('background', 'transparent url(\'https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/' + card.extension + '_' + card.rarity + '.png\') no-repeat');
       };
   }*/
 

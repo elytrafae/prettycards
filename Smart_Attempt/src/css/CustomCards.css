@@ -11,24 +11,24 @@
 
 /*
 .monster.ext_DDLC .cardFrame {
-	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_monster.png');
+	background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_monster.png');
 }
 
 .spell.ext_DDLC .cardFrame {
-	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_spell.png');
+	background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_spell.png');
 }
 */
 
 .monster.ext_LUNA .cardFrame {
-	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/LUNA/frame_monster.png');
+	background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/LUNA/frame_monster.png');
 }
 
 .spell.ext_LUNA .cardFrame {
-	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/LUNA/frame_spell.png');
+	background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/LUNA/frame_spell.png');
 }
 
 .card.ext_DDLC .cardBackground {
-	background-image: url('https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_background.png'); 
+	background-image: url('https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_background.png'); 
 	top: 7px; 
 	height: 231px;
 }
@@ -36,7 +36,7 @@
 /*
 @font-face {
 	font-family: Aller;
-	src: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/fonts/Aller_Rg.ttf);
+	src: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/fonts/Aller_Rg.ttf);
 }
 */
 

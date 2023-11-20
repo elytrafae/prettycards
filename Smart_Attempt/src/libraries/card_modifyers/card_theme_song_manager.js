@@ -118,7 +118,7 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady PrettyCards:Transl
             var s = registerCard(card);
             s.playAsJingle = card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION" || card.tribes.includes("ROYAL_INVENTION");
             for (var i=1; i <= baseThemeSongData[key]; i++) {
-                s.addFile(`https://github.com/CMD-God/prettycards/raw/master/audio/cards/${card.name.replaceAll(" ", "_")}/intro_${i}.ogg`);
+                s.addFile(`https://github.com/elytrafae/prettycards/raw/master/audio/cards/${card.name.replaceAll(" ", "_")}/intro_${i}.ogg`);
             }
         }
     }
@@ -182,7 +182,7 @@ if (settings.multi_theme_songs.value()) {
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 
-        $.getJSON("https://raw.githubusercontent.com/CMD-God/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
+        $.getJSON("https://raw.githubusercontent.com/elytrafae/prettycards/master/json/baseThemeSongData.json", {}, function(data) {
             //console.log(data);
             baseThemeSongData = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);

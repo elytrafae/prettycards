@@ -19,7 +19,7 @@ module.exports = {
         match: 'https://*.undercards.net/*',
         exclude: 'https://*.undercards.net/*/*',
         //updateURL: `https://unpkg.com/${package.name}/dist/${package.name}.meta.js`,
-		//updateURL: `https://github.com/CMD-God/${package.name}/releases/latest/download/${package.name}.user.js`,
+		//updateURL: `https://github.com/elytrafae/${package.name}/releases/latest/download/${package.name}.user.js`,
         //downloadURL: `https://unpkg.com/${package.name}/dist/${package.name}.user.js`,
         require: [],
         grant: 'none',

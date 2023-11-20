@@ -59,7 +59,7 @@ var packs_data = [
 	{
 		g_cost : 100,
 		ucp_cost : 10,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack",
+		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UndertalePack",
 		image_extension: ".png",
 		name: "pc-packs-ut-name",
 		description: "pc-packs-ut-desc",
@@ -72,7 +72,7 @@ var packs_data = [
 	{
 		g_cost : 100,
 		ucp_cost : 10,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/DeltarunePack",
+		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/DeltarunePack",
 		image_extension: ".png",
 		name: "pc-packs-dr-name",
 		description: "pc-packs-dr-desc",
@@ -85,7 +85,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/ShinyPack",
+		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/ShinyPack",
 		image_extension: ".gif",
 		name: "pc-packs-shiny-name",
 		description: "pc-packs-shiny-desc",
@@ -96,7 +96,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/SuperPack",
+		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/SuperPack",
 		image_extension: ".gif",
 		name: "pc-packs-super-name",
 		description: "pc-packs-super-desc",
@@ -107,7 +107,7 @@ var packs_data = [
 	{
 		g_cost : -1,
 		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/FinalPack",
+		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/FinalPack",
 		image_extension: ".gif",
 		name: "pc-packs-final-name",
 		description: "pc-packs-final-desc",

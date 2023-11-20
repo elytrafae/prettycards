@@ -86,7 +86,7 @@ function loadCSSFromLink(url) {
 
 function loadScript(lnk, callback) {
     var e = document.createElement("script");
-    e.src = "https://cdn.jsdelivr.net/gh/CMD-God/prettycards@" + PrettyCardsVer + "/PageSpecific/" + lnk + ".js";
+    e.src = "https://cdn.jsdelivr.net/gh/elytrafae/prettycards@" + PrettyCardsVer + "/PageSpecific/" + lnk + ".js";
     e.onload = callback || function () {};
     document.body.appendChild(e);
 }

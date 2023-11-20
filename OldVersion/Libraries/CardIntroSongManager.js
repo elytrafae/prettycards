@@ -40,7 +40,7 @@ function ProcessJingle(card) {
 	}
 	console.log(name, nums[name]);
 	var song_nr = (israndom ? getRandomInt(1, numberOfSongsCardsHave[name]) : ((nums[name]-1) % numberOfSongsCardsHave[name])+1)
-	card.card_Jingle = PlayJingle("https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/cards/" + name + "/intro_" + song_nr + ".ogg");
+	card.card_Jingle = PlayJingle("https://raw.githubusercontent.com/elytrafae/prettycards/master/audio/cards/" + name + "/intro_" + song_nr + ".ogg");
 	return true;
 }
 

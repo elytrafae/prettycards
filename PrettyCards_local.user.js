@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      local
 // @description  Make Undercards look fabulous!
-// @author       CMD_God
+// @author       elytrafae
 // @match        https://*.undercards.net/*
 // @exclude      https://*.undercards.net/*/*
 // @grant        none

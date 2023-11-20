@@ -97,7 +97,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			}
 			
 			if (card.note && card.note.length > 0) {
-				var noteIcon = window.$('<img src="https://github.com/CMD-God/prettycards/raw/master/img/CardPowers/note.png"></img>');
+				var noteIcon = window.$('<img src="https://github.com/elytrafae/prettycards/raw/master/img/CardPowers/note.png"></img>');
 				noteIcon.contextmenu(function() {
 					OpenAuthorNote(card);
 				});

@@ -5,10 +5,10 @@ import {CanvasDrawer, BasicParallax} from "/src/libraries/background/basic_canva
 class SpamtonCaveBG {
 	
 	constructor(canvas_drawer) {
-		this.spamcave_image = canvas_drawer.register_image("https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamcave.png");
-		this.spamtown_back_image = canvas_drawer.register_image("https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamtown_Back.png");
-		this.spamtown_front_image = canvas_drawer.register_image("https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamtown_Front.png");
-		this.spamtracks_image = canvas_drawer.register_image("https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamtracks.png");
+		this.spamcave_image = canvas_drawer.register_image("https://github.com/elytrafae/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamcave.png");
+		this.spamtown_back_image = canvas_drawer.register_image("https://github.com/elytrafae/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamtown_Back.png");
+		this.spamtown_front_image = canvas_drawer.register_image("https://github.com/elytrafae/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamtown_Front.png");
+		this.spamtracks_image = canvas_drawer.register_image("https://github.com/elytrafae/prettycards/raw/master/img/Backgrounds/SpamtonNEOBasement/Spamtracks.png");
 		
 		this.spamcave_parallax = new BasicParallax(this.spamcave_image);
 		this.spamcave_parallax.xscale = 2;

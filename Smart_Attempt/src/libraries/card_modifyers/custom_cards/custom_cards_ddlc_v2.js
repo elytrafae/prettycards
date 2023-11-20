@@ -6,28 +6,28 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
 		name: "Doki Doki Literature Club Set",
-		author: "CMD_God",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/",
-		cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/DDLC/",
-		rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/DDLC/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/aprilFools/",
+		author: "elytrafae",
+		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/DDLC/",
+		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/DDLC/",
+		rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
+		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
+		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
+		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
+		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/DDLC/aprilFools/",
+		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
 		//universalCustomFont: "Aller",
 		note: `This is a Doki Doki Literature Club themed card set I wanted to make for the longest time. I wanted it to be perfect, so I often modified it, asked for feedback and even the custom cards idea was born because of this set. So, please enjoy and don't be afraid to give me feedback! ^^
 		<br><br>
 		NOTE: Hand nerfs cannot bring a monster below 1 HP. I didn't add this in every instance because some cards are full enough already.`
 	});
 	
-	var font_name = c.loadFont("Aller", "https://raw.githubusercontent.com/CMD-God/prettycards/master/fonts/Aller_Rg.ttf");
+	var font_name = c.loadFont("Aller", "https://raw.githubusercontent.com/elytrafae/prettycards/master/fonts/Aller_Rg.ttf");
 	c.universalCustomFont = font_name;
 
 	var frame = c.newFrame({
 		id: "DDLC",
-		monsterImage: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_monster.png",
-		spellImage: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/DDLC/frame_spell.png"
+		monsterImage: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_monster.png",
+		spellImage: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_spell.png"
 	});
 	
 	var doki = c.newTribe({

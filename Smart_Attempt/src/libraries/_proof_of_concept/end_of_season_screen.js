@@ -37,8 +37,8 @@ function viewEndOfSeasonScreen(elo, passedLegend = false) {
         divisionStr += `<div style="font-size:30px;">With ${elo} ELO!</div>`;
     }
 
-    var rewardStr = returnRewardStringImg("https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/UndertalePack.png", packCount) + 
-        returnRewardStringImg("https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/DeltarunePack.png", packCount) + 
+    var rewardStr = returnRewardStringImg("https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UndertalePack.png", packCount) + 
+        returnRewardStringImg("https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/DeltarunePack.png", packCount) + 
         returnRewardStringImg("images/dtFragment.png", dtFragCount) +
         returnRewardString(`<span class="ucp" style="font-size: 3em;">${window.$.i18n("item-ucp")}</span>`, ucpData[endDivision] || 0);
 

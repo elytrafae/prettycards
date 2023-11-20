@@ -55,8 +55,8 @@ function ProcessAprilFoolsSkins(data, list, year, ucpCost, id) {
 			cardId: card.id,
 			cardName: card.name,
 			id: id,
-			image: `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/April_Fools_${year}/${card.image}.png`,
-			//image: `https://github.com/CMD-God/prettycards/raw/856f490c607fdd90d54e82143d0b696da6e27bde/img/Cards/April_Fools_${year}/${card.image}.png`,
+			image: `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/April_Fools_${year}/${card.image}.png`,
+			//image: `https://github.com/elytrafae/prettycards/raw/856f490c607fdd90d54e82143d0b696da6e27bde/img/Cards/April_Fools_${year}/${card.image}.png`,
 			name: window.$.i18n("pc-skinselect-skinname-april", year, window.$.i18n(`card-name-${card.id}`, 1)),
 			owned: true,
 			typeSkin: 0,
@@ -145,7 +145,7 @@ function loadAllCardSkins() { // This function is called whenever a feature requ
 			ProcessCustomCardSkins();
 		});
 		aprilFoolsData.forEach((listData) => {
-			$.getJSON(`https://raw.githubusercontent.com/CMD-God/prettycards/master/json/aprilFools${listData.year}.json`, {}, function(data) {
+			$.getJSON(`https://raw.githubusercontent.com/elytrafae/prettycards/master/json/aprilFools${listData.year}.json`, {}, function(data) {
 				ProcessAprilFoolsSkins(data, listData.list, listData.year, listData.ucpCost, listData.id);
 			})
 		})

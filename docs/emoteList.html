@@ -118,13 +118,13 @@
                             <td>${emote.name}</td>
                             <td>${emote.image}</td>
                             <td><a href="https://undercards.net/images/emotes/${emote.image}.png" target="_blank">CLICK HERE</a></td>
-                            <td style="text-align: center;">${emote.isPresent ? '<span class="audioPlayer material-icons" onclick="play(this);"><audio onended="$(this.parentElement).removeClass(\'playing\')" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
+                            <td style="text-align: center;">${emote.isPresent ? '<span class="audioPlayer material-icons" onclick="play(this);"><audio onended="$(this.parentElement).removeClass(\'playing\')" src="https://raw.githubusercontent.com/elytrafae/prettycards/master/audio/emotes/' + emote.image + '.ogg"></audio></span>' : "NONE"}</td>
                         </tr>
                     `);
                 })
             }
 
-            $.getJSON("https://api.github.com/repos/cmd-god/prettycards/contents/audio/emotes", {}, function(data) {
+            $.getJSON("https://api.github.com/repos/elytrafae/prettycards/contents/audio/emotes", {}, function(data) {
                 data.forEach(function(d) {
                     emotesWithSounds.push(d.name.substring(0, d.name.length-4));
                 })

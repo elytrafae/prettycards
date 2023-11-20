@@ -132,7 +132,7 @@ function spawnNextCard() {
     currentFlipCard.flipToFace(500);
     currentFlipCard.glideTo(window.innerWidth/2, spaceBoundingBox.top + spaceBoundingBox.height/2, 500, function() {});
     if ($("#PrettyCards_SOP_BlindModeSetting").prop('checked')) {
-        currentFlipCard.back.style.backgroundImage = "url(https://github.com/CMD-God/prettycards/raw/master/img/CardBackMystery.png)";
+        currentFlipCard.back.style.backgroundImage = "url(https://github.com/elytrafae/prettycards/raw/master/img/CardBackMystery.png)";
         var front = $(currentFlipCard.front);
         front.removeClass("monster").addClass("spell");
         front.removeClass("full-skin").removeClass("breaking-skin").addClass("standard-skin");
@@ -145,8 +145,8 @@ function spawnNextCard() {
         front.find(".cardName")[0].className = "cardName";
         // utility.getRandomFromArray(mysteryDescriptions)
         front.find(".cardDesc > div").html(translationManager.getRandomFromValueList("pc-sop-mysterydescriptions"));
-        front.find(".cardImage").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryCard.png)");
-        front.find(".cardRarity").css("background-image", "url(https://github.com/CMD-God/prettycards/raw/master/img/MysteryRarity.png)");
+        front.find(".cardImage").css("background-image", "url(https://github.com/elytrafae/prettycards/raw/master/img/MysteryCard.png)");
+        front.find(".cardRarity").css("background-image", "url(https://github.com/elytrafae/prettycards/raw/master/img/MysteryRarity.png)");
         front.find(".PrettyCards_CardThemeSongPlayer").remove();
 
         var cardNameDiv$ = front.find('.cardName div');
@@ -319,7 +319,7 @@ function InitSmashOrPass() {
                         <input type="checkbox" id="tokenRarityInput" checked class="rarityInput customRarityInput" rarity="TOKEN"> <img src="images/rarity/BASE_TOKEN.png">
                     </label>
                     <label>
-                        <input type="checkbox" id="everyRarityInput" checked> <img style="height: 24px;" src="https://github.com/CMD-God/prettycards/raw/master/img/RarityIcons/ALL_RARITIES.png" alt="Za Filter">
+                        <input type="checkbox" id="everyRarityInput" checked> <img style="height: 24px;" src="https://github.com/elytrafae/prettycards/raw/master/img/RarityIcons/ALL_RARITIES.png" alt="Za Filter">
                     </label>
                 </p>
                 <h2 style="display:inline-block;">${window.$.i18n("pc-sop-answers")}</h2>

@@ -14,7 +14,7 @@ var season_number = -1;
 const seasonKeyStart = "quest-s";
 const seasonKeyEnd = "-start-1";
 
-const accessExceptions = ["CMD_God", "Jazmin290"]; // Usernames to let use Translator features for obvious reasons. Might use this for other types of permissions as well later? IDK.
+const accessExceptions = ["elytrafae", "Jazmin290"]; // Usernames to let use Translator features for obvious reasons. Might use this for other types of permissions as well later? IDK.
 
 PrettyCards_plugin.events.on("translation:loaded", function(data) {
 	var messages = $.i18n.messageStore.messages.en;
@@ -102,8 +102,8 @@ class Utility {
 		this.addCSSSourceData("base", {
 			version: GM_info.script.version,
 			eventName: "PrettyCards:CommitCSSLoad",
-			apiLink: "https://api.github.com/repos/CMD-God/prettycards/commits",
-			urlLinkFunc: (data, name) => `https://cdn.jsdelivr.net/gh/CMD-God/prettycards@${data}/css/${name}.css`
+			apiLink: "https://api.github.com/repos/elytrafae/prettycards/commits",
+			urlLinkFunc: (data, name) => `https://cdn.jsdelivr.net/gh/elytrafae/prettycards@${data}/css/${name}.css`
 		});
 		*/
 	}
@@ -281,7 +281,7 @@ class Utility {
 			return `/afi/artifacts/${image}.png`;
 		}
 		if (settings.hd_artifacts.value()) {
-			return `https://raw.githubusercontent.com/CMD-God/prettycards/master/img/HDArtifacts/${image}.png`;
+			return `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/HDArtifacts/${image}.png`;
 		}
 		return `/images/artifacts/${image}.png`;
 	}

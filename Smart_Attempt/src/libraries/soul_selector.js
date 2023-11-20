@@ -111,7 +111,7 @@ class SoulSelector {
 			if (firstSoul === "") {
 				firstSoul = deckName;
 			}
-			html += `<img src="https://github.com/CMD-God/prettycards/raw/master/img/Souls/${deckName}.png" id="${this.idPrefix}${deckName}" onclick='PrettyCards_ChangeDeck_${this.idPrefix}("${deckName}");' class="PrettyCards_Soul_${deckName} PrettyCards_${sizeClass}Soul ${(deckName === firstSoul && this.highlightSelectedSoul) ? "PrettyCards_SelectedSoul" : ""}"></img>`;
+			html += `<img src="https://github.com/elytrafae/prettycards/raw/master/img/Souls/${deckName}.png" id="${this.idPrefix}${deckName}" onclick='PrettyCards_ChangeDeck_${this.idPrefix}("${deckName}");' class="PrettyCards_Soul_${deckName} PrettyCards_${sizeClass}Soul ${(deckName === firstSoul && this.highlightSelectedSoul) ? "PrettyCards_SelectedSoul" : ""}"></img>`;
 		}
 		this.selectedSoul = firstSoul;
 		return html;

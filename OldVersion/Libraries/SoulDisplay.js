@@ -40,7 +40,7 @@ GM_addStyle(".PrettyCards_SoulHover_ClickMe {color:white}");
 function AddSoulHover(ele, soul, side, moreText) {
 	var soul_data = GetSoulData(soul);
 	var html =	'<div class="PrettyCards_SoulHover">'+
-					'<img class="PrettyCards_SoulHover_Soul PrettyCards_SoulImage" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + soul + '.png">'+
+					'<img class="PrettyCards_SoulHover_Soul PrettyCards_SoulImage" src="https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Souls/' + soul + '.png">'+
 					'<p class="PrettyCards_SoulHover_Name '+ soul +'" data-i18n="[html]'+ soul_data.soulStringKey +'">' + soul_data.name + '</p>'+
 					'<p class="PrettyCards_SoulHover_Desc" data-i18n="[html]'+ soul_data.soulDescStringKey +'">'+ soul_data.desc + '</p>'+
 					'<p class="PrettyCards_SoulHover_ClickMe">' + (moreText || '(Click for more info)') + '</p>'+
@@ -65,7 +65,7 @@ function _SoulClickFunc(e) {
         }
     }
     //console.log(card_cont);
-    var text$ = $('<div><img class="PrettyCards_SoulHover_Soul PrettyCards_SoulImage" src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + data.id + '.png"/>'+
+    var text$ = $('<div><img class="PrettyCards_SoulHover_Soul PrettyCards_SoulImage" src="https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Souls/' + data.id + '.png"/>'+
                   '<p class="PrettyCards_SoulHover_Name '+ data.id +'" data-i18n="[html]'+ data.soulStringKey +'">' + data.name + '</p>'+
                   '<p class="PrettyCards_SoulHover_Desc" data-i18n="[html]'+ data.soulDescStringKey +'">'+ data.desc + '</p>' +
                   (list ? '<p>'+ data.name +'\'s Spells:</p>' : '')+'</div>');
@@ -117,7 +117,7 @@ function _OnSelectSoul(e) {
     select.value = soulid;
 
     var heart = img.parentElement.parentElement.heart;
-    heart.src = 'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + soulid + '.png';
+    heart.src = 'https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Souls/' + soulid + '.png';
     heart.parentElement.querySelector(".tooltiptext").remove();
 	AddSoulHover(heart.parentElement, soulid, 4, "(Click to change!)");
 
@@ -143,14 +143,14 @@ function _SoulSelectClick(e) {
         cont.heart = e.target;
         cont.PrettyCards_OriginalSoulSelect = e.target.PrettyCards_OriginalSoulSelect;
         for (var i=0; i < cont.PrettyCards_OriginalSoulSelect.children.length; i++) {
-            //txt += '<img src="https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + key + '.png" class="PrettyCards_SoulImage">';
+            //txt += '<img src="https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Souls/' + key + '.png" class="PrettyCards_SoulImage">';
 			var sel = cont.PrettyCards_OriginalSoulSelect.children[i];
 			var key = sel.value;
             var div = document.createElement("div");
             div.className = "PrettyCards_SoulDiv";
             var img = document.createElement("img");
             img.className = "PrettyCards_SoulImage";
-            img.src = 'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + key + '.png';
+            img.src = 'https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Souls/' + key + '.png';
             img.setAttribute("PrettyCards_SoulSelected", key);
             img.onclick = _OnSelectSoul;
             AddSoulHover(div, key, 3, "(Click to select!)");
@@ -176,7 +176,7 @@ function CustomizeSoulSelectObj(select, startSoul, side) {
     var div = document.createElement("div");
     div.style = "text-align: center;";
     var img = document.createElement("IMG");
-    img.src = 'https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Souls/' + (startSoul || select.value) + '.png';
+    img.src = 'https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Souls/' + (startSoul || select.value) + '.png';
     img.onclick = _SoulSelectClick;
     img.PrettyCards_OriginalSoulSelect = select;
     AddSoulHover(div, (startSoul || select.value), side || 4, "(Click to change!)");

@@ -51,10 +51,10 @@
 .PrettyCards_FloatingPackImage {
 	width: 60%;
 	margin: 0px;
-	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack.svg);
+	mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack.svg);
 	mask-position: center;
 	mask-size: cover;
-	-webkit-mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack.svg);
+	-webkit-mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack.svg);
 	-webkit-mask-position: center;
 	-webkit-mask-size: cover;
 	display: inline-block;
@@ -209,21 +209,21 @@
 }
 
 .PrettyCards_RippedPack_Up {
-	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_HorizontalRip_Top.svg);
-	-webkit-mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_HorizontalRip_Top.svg);
+	mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_HorizontalRip_Top.svg);
+	-webkit-mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_HorizontalRip_Top.svg);
 }
 
 .PrettyCards_RippedPack_Down {
-	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_HorizontalRip_Bottom.svg);
-	-webkit-mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_HorizontalRip_Bottom.svg);
+	mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_HorizontalRip_Bottom.svg);
+	-webkit-mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_HorizontalRip_Bottom.svg);
 }
 
 .PrettyCards_RippedPack_Left {
-	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_VerticalRip_Left.svg);
-	-webkit-mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_VerticalRip_Left.svg);
+	mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_VerticalRip_Left.svg);
+	-webkit-mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_VerticalRip_Left.svg);
 }
 
 .PrettyCards_RippedPack_Right {
-	mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_VerticalRip_Right.svg);
-	-webkit-mask-image: url(https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Packs/Pack_VerticalRip_Right.svg);
+	mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_VerticalRip_Right.svg);
+	-webkit-mask-image: url(https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/Pack_VerticalRip_Right.svg);
 }

@@ -8,13 +8,13 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
 	var c = window.prettycards.newCollection({
 		name: "Hate Soul Set",
-		author: "MysteryHD, bantikat and CMD_God",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/Hate_Soul/",
-		//cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/DDLC/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
+		author: "MysteryHD, bantikat and elytrafae",
+		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/Hate_Soul/",
+		//cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/DDLC/",
+		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
+		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
+		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
+		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
 		note: `A HATE Soul concept we threw together to explore some game mechanics that went underutilised in the main game. Enjoy! ^^`
 	});
 	

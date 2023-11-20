@@ -8,15 +8,15 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
     var c = window.prettycards.newCollection({
 		name: "Update Tester Sheet",
-		author: "CMD_God",
+		author: "elytrafae",
 		cardImagePrefix: "/images/cards/",
-		cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/UpdateTest/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/UpdateTest/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/aprilFools/",
+		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/UpdateTest/",
+		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
+		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
+		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
+		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
+		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/UpdateTest/aprilFools/",
+		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
 		//universalCustomFont: "Aller",
 		note: `Test sheet go brrrrrr`
 	});

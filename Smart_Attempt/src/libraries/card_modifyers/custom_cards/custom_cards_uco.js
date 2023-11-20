@@ -24,15 +24,15 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
 		name: "UCO Ideas Set",
-		author: "CMD_God",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/UCO_Ideas/",
-		cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/UCO_Ideas/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/UCO_Ideas/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/aprilFools/",
+		author: "elytrafae",
+		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/UCO_Ideas/",
+		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/UCO_Ideas/",
+		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
+		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
+		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
+		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
+		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/UCO_Ideas/aprilFools/",
+		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
 		//universalCustomFont: "Aller",
 		note: `Here are some of my UCO ideas.
         <br>

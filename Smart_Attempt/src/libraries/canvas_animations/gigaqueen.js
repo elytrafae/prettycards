@@ -11,12 +11,12 @@ class GigaQueenBG {
 		this.mysurface = -999;
 		this.oldlen = 0;
 				
-		this.image = canvas_drawer.register_image("https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/GigaQueen/bg_cityscape.png");
+		this.image = canvas_drawer.register_image("https://github.com/elytrafae/prettycards/raw/master/img/Backgrounds/GigaQueen/bg_cityscape.png");
 		//console.log("GIGA BG: ", this);
 	}
 	
 	onupdate(ctx, canvas_drawer) {
-		// https://github.com/CMD-God/prettycards/raw/master/img/Backgrounds/GigaQueen/bg_cityscape.png
+		// https://github.com/elytrafae/prettycards/raw/master/img/Backgrounds/GigaQueen/bg_cityscape.png
 		if (this.depth == 1000) {
 			this.mysurface = -999
 			this.depth = 998

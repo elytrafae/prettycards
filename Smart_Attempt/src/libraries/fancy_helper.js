@@ -199,7 +199,7 @@ class FancyDisplay {
 				break;
 			}
 		}
-		var image_src = "https://github.com/CMD-God/prettycards/raw/master/img/Souls/" + id + ".png";
+		var image_src = "https://github.com/elytrafae/prettycards/raw/master/img/Souls/" + id + ".png";
 		if (customObj) {
 			var c = customObj.collection;
 			var isAprilFools = utility.getSeasonMonth() == 3 && customObj.aprilImage;

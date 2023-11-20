@@ -7,16 +7,16 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
     if (!settings.my_own_custom_cards.value()) {return;}
 
     var c = window.prettycards.newCollection({
-		name: "Kyra x CMD_God Sheet",
-		author: "Kyra and CMD_God",
-		cardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/Kyra/",
-		cardSongPrefix: "https://github.com/CMD-God/prettycards/raw/master/audio/cards/Kyra/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Kyra/",
-		tribeImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/Cards/Kyra/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/CMD-God/prettycards/raw/master/img/Artifacts/aprilFools/",
+		name: "Kyra x elytrafae Sheet",
+		author: "Kyra and elytrafae",
+		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/Kyra/",
+		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/Kyra/",
+		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
+		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Kyra/",
+		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
+		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
+		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/Kyra/aprilFools/",
+		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
 		//universalCustomFont: "Aller",
 		note: `A little sheet I made for ideas that we came up with together :3`
 	});

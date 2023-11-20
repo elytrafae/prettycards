@@ -292,7 +292,7 @@ class SavedDeckSelector {
 		if (this.canEditDecks) {
 			soulSelectToggle = document.createElement("DIV");
 			soulSelectToggle.className = "PrettyCards_SoulSelect_Soul";
-			soulSelectToggle.style = "background-image: url('https://github.com/CMD-God/prettycards/raw/master/img/Souls/SOUL_SELECT.png')";
+			soulSelectToggle.style = "background-image: url('https://github.com/elytrafae/prettycards/raw/master/img/Souls/SOUL_SELECT.png')";
 			soulSelectToggle.innerHTML = `<div class="PrettyCards_SoulSelect_Rainbow"></div>`;
 			header.appendChild(soulSelectToggle);
 			//PrettyCards_SoulSelect_Rainbow
@@ -462,7 +462,7 @@ class SavedDeckSelector {
 		cardNameDiv$.html(deck.name);
 		card.find(".cardName").addClass(deck.soul);
 		card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + (deck.description || "").replaceAll("\n", "<br>") + '</span>' + ( (!ignoreBase && deck.isBase) ? '<p style="color:grey; margin:0px;">(Loaded)</p>' : '') );
-		card.find(".cardFrame").css("background-image", "url(" + ( (!ignoreBase && deck.isBase) ? "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/CMD-God/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
+		card.find(".cardFrame").css("background-image", "url(" + ( (!ignoreBase && deck.isBase) ? "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
 		
 		SetDeckSkin(card, deck.image);
 		

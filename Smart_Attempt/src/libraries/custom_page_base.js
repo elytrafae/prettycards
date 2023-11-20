@@ -39,7 +39,7 @@ if (IsOnCustomPage()) {
 	
 	//console.log("underscript", underscript);
 	$.ajax({
-		url: "https://raw.githubusercontent.com/CMD-God/prettycards/master/html_templates/undercards.html",
+		url: "https://raw.githubusercontent.com/elytrafae/prettycards/master/html_templates/undercards.html",
 		success: function (data) {
 			//console.log(data);
 			document.open();
