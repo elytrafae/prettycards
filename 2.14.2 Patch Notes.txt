@@ -3,9 +3,12 @@
 - Non-intrusive API improvements
 
 TODO:
+- Remake the Packs Page entirely!
+- Add Pack Drop Rates to the modified pack pages
 - "VICTORY" in quotation marks when opponent leaves
 - Make the Game End screen check for the data to be present before displaying anything.
 - Make the HD artifacts system fall back onto pixelated textures if HD is not found.
+- Favorite Cards
 - Interactive Card Helper (finish this)
 - Detailed History Tracking?
 - Image Recognition for Deck Imports

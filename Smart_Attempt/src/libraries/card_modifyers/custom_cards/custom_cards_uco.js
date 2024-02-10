@@ -56,6 +56,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
     }))
     */
 
+    /*
     c.newCard(returnBattleMewMew({
         cost: 6,
         attack: 6,
@@ -64,14 +65,13 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         description: `{{KW:HASTE}}. {{KW:MAGIC}}: Summon an exact copy of an enemy monster for the enemy and halve both monsters' stats (rounded down).`
     }))
 
-    /*
+    
     c.newCard(returnBattleMewMew({
         cost: 8,
         attack: 5,
         hp: 5,
         description: `{{KW:HASTE}}. {{KW:MAGIC}}: Deal 3 {{DMG}} to all enemy monsters. {{KW:DELAY}}: Summon 1/1 copies of all monsters killed this turn.`
     }))
-    */
 
     c.newCard(returnBattleMewMew({
         cost: 8,
@@ -81,7 +81,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         description: `{{KW:HASTE}}. {{KW:DELAY}}: Summon 2/1 copies of all enemy monsters killed this turn.`
     }))
 
-    /*
     c.newCard(returnBattleMewMew({
         cost: 7,
         attack: 4,
@@ -118,7 +117,7 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         hp: 5,
         description: `{{KW:MAGIC}}: Copy the stat buffs, {{KW:HASTE}}, {{KW:TRANSPARENCY}} and {{KW:CANDY}} of an ally monster.`
     }))
-    */
+    
 
     c.newCard(returnBattleMewMew({
         cost: 8,
@@ -150,7 +149,6 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
         description: `{{KW:SUPPORT}}: If the target is a monster, give it -2/-2. If it died, the attacker can attack another monster.`
     }))
 
-    /*
     c.newCard(returnBattleMewMew({
         cost: 5,
         attack: 5,
@@ -180,13 +178,37 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
     });
 
     astro.setDescription(`{{KW:CHARGE}}. {{KW:DUST}}: Add a ${pit.me()} to your hand.`);
-    */
 	
     c.newCard(returnBattleMewMew({
         cost: 5,
         attack: 5,
         hp: 3,
         description: `{{KW:MAGIC}}: Summon an exact copy of a non-{{RARITY:DETERMINATION}} ally monster and {{KW:Switch}}: Halve their {{PC_SWITCH_CYAN:1|{{ATK}}}} or {{PC_SWITCH_RED:1|{{HP}}}}.`
+    }))
+    */
+
+    c.newCard(returnBattleMewMew({
+        cost: 8,
+        attack: 5,
+        hp: 5,
+        haste: true,
+        description: `{{KW:HASTE}}. {{KW:DELAY}}: Summon 2/1 copies of all enemy monsters killed this turn.`
+    }))
+
+    c.newCard(returnBattleMewMew({
+        cost: 7,
+        attack: 4,
+        hp: 4,
+        haste: true,
+        description: `{{KW:HASTE}}. Before this attacks a monster, halve the {{ATK}} and {{HP}} of the target.`
+    }))
+
+    c.newCard(returnBattleMewMew({
+        cost: 6,
+        attack: 4,
+        hp: 4,
+        haste: true,
+        description: `{{KW:MAGIC}}: Burn half of your Dustpile, deal 3 {{DMG}} randomly spilt among enemy monsters for each 2 monsters burned.`
     }))
 
     c.newCard({
