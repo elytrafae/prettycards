@@ -9,10 +9,12 @@ class PacksPageTemplate {
 		this.displayName = "Base";
 		this.description = "This should not be visible!";
 		this.packs_data2 = {};
+		this.terribleDropRatesButtonHTML = `<span style="color: gray;border: 1px dotted gray;padding: 5px;background-color: black;position: absolute;top: 0em;left: 5em;font-size: 2em;" onclick="showDropRates();" class="pointer" data-i18n="[html]packs-drop-rates">${window.$.i18n("packs-drop-rates")}</span>`;
 	}
 	
 	pageAdditions() { // Required
 		return `
+			${this.terribleDropRatesButtonHTML}
 			<div class="PrettyCards_PacksRow">
 				<div class="PrettyCards_PackCell" data-packid="Pack"></div>
 				<div class="PrettyCards_PackCell" data-packid="DRPack"></div>

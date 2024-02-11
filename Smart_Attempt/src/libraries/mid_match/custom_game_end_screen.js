@@ -269,7 +269,7 @@ class BarData {
 class GameEndTypes {
 
     static WIN = new GameEndTypes("game-game-victory", "", "/musics/dr2_victory.ogg");
-    static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg").setSubtitleFunction(leaveWinSubtitleFunction);
+    static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg").setSubtitleFunction(leaveWinSubtitleFunction).setChangeTitleFunction((title) => {return '"' + title + '"';});
     static LOSE = new GameEndTypes("game-game-over", "", "/musics/dr2_gameover.ogg");
     static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/elytrafae/prettycards/raw/master/audio/bgms/mus_star.ogg").setSubtitleFunction(drawSubtitleFunction);
     static CHARA = new GameEndTypes("game-died", "red", "/musics/toomuch.ogg");
@@ -283,11 +283,19 @@ class GameEndTypes {
         this.songSrc = song;
         /**@type {function} */
         this.subtitleFunction = () => {return document.createElement("DIV");};
+        /**@type {function} */
+        this.changeTitleFunction = (/**@type {string} */ title) => {return title;};
     }
 
     /**@returns {GameEndTypes} */
     setSubtitleFunction(/**@type {Function}*/ func) {
         this.subtitleFunction = func;
+        return this;
+    }
+
+    /**@returns {GameEndTypes} */
+    setChangeTitleFunction(/**@type {Function}*/ func) {
+        this.changeTitleFunction = func;
         return this;
     }
 
@@ -674,13 +682,19 @@ function transformMatchEndData(data) {
         oldLevelBarSize: data.oldJaugeSize,
         newLevelBarSize : data.jaugeSize
     }
-    addGoldSources(data, newData.rewardManager);
+
+    if (data.oldGold) {
+        addGoldSources(data, newData.rewardManager);
+    }
 
     var levelUpPair = returnReward(data.rewardType === "CARD" ? data.rewardType : data.rewardStringKey, data.rewardQuantity, newData.rewardManager, RewardSource.LEVELUP);
     var bonusPair = returnReward(data.bonusRewardType === "CARD" ? data.bonusRewardType : data.bonusRewardStringKey, data.bonusRewardQuantity, newData.rewardManager, RewardSource.SPECIAL);
 
-    newData.rewardManager.addReward(Currency.XP, new RewardSourceInstance(RewardSource.MATCH, data.newXp - data.oldXp));
-    newData.rewardManager.addBarForCurrency(Currency.XP, BarData.returnXPData(data.oldJaugeSize, data.jaugeSize, data.oldJaugeSize - data.xpUntilNextLevel, levelUpPair, newData.rewardManager, parseInt($('.level').html()) /* Yes, this is how Onu gets the LV */ ));
+    if (data.newXp && data.oldXp) {
+        newData.rewardManager.addReward(Currency.XP, new RewardSourceInstance(RewardSource.MATCH, data.newXp - data.oldXp));
+        newData.rewardManager.addBarForCurrency(Currency.XP, BarData.returnXPData(data.oldJaugeSize, data.jaugeSize, data.oldJaugeSize - data.xpUntilNextLevel, levelUpPair, newData.rewardManager, parseInt($('.level').html()) /* Yes, this is how Onu gets the LV */ ));
+    }
+    
     if (data.oldElo && data.newElo) {
         newData.rewardManager.addReward(Currency.ELO, new RewardSourceInstance(RewardSource.MATCH, data.newElo - data.oldElo));
         var minEloDivision = getDivisionStart(data.oldElo);
@@ -755,7 +769,7 @@ function displayMatchResults(data) {
 
     var title = document.createElement("DIV");
     title.className = "PrettyCards_GameEnd_Title " + data.endType.textClass;
-    title.innerHTML = window.$.i18n(data.endType.textKey);
+    title.innerHTML = data.endType.changeTitleFunction(window.$.i18n(data.endType.textKey));
     container.appendChild(title);
 
     var subtitle = document.createElement("DIV");
@@ -1009,7 +1023,7 @@ PrettyCards_plugin.events.on('getError:before getGameError:before', function (da
         return;
     }
     // For some reason Onu displays the same message for both cases. 
-    // However, I want to repare for when this gets fixed.
+    // However, I want to prepare for when this gets fixed.
     var actualMessage = JSON.parse(JSON.parse(data.message).args)[0];
     console.log(data, actualMessage);
     if (actualMessage != "game-turn-limit" && actualMessage != "game-time-limit") { 

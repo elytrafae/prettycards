@@ -1,13 +1,15 @@
 
 - The volume of the Game End screen now obeys Feildmaster's volume settings
 - Non-intrusive API improvements
+- Fixed Friendship Rewards not being parsed correctly on the Game End Screen
+- Game End screen no longer displays errors with Custom Games
+- "VICTORY" is now in quotation marks when the opponent leaves the game
+- Added Pack Drop Rates to the modified pack pages
 
 TODO:
 - Remake the Packs Page entirely!
-- Add Pack Drop Rates to the modified pack pages
-- "VICTORY" in quotation marks when opponent leaves
-- Make the Game End screen check for the data to be present before displaying anything.
 - Make the HD artifacts system fall back onto pixelated textures if HD is not found.
+
 - Favorite Cards
 - Interactive Card Helper (finish this)
 - Detailed History Tracking?

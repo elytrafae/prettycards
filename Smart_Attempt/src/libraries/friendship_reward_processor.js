@@ -180,6 +180,7 @@ function friendshipRewardStringToCurrency(/**@type {String} */ string) {
         case "UCP": return Currency.UCP;
         case "PACK": return Currency.UT_PACK;
         case "DR_PACK": return Currency.DR_PACK;
+        case "SHINY_PACK": return Currency.SHINY_PACK;
         default: return null;
     }
 }
