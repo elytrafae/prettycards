@@ -276,14 +276,21 @@ class Utility {
 		return `/images/cards/${image}.png`;
 	}
 
-	getArtifactImageLink(image) {
+	getArtifactImageLink(image, forceNoHd = false) {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
 			return `/afi/artifacts/${image}.png`;
 		}
-		if (settings.hd_artifacts.value()) {
+		if (settings.hd_artifacts.value() && !forceNoHd) {
 			return `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/HDArtifacts/${image}.png`;
 		}
 		return `/images/artifacts/${image}.png`;
+	}
+
+	getSoulImageLink(image, forceNoHd = false) {
+		if (!forceNoHd) {
+			return `https://github.com/elytrafae/prettycards/raw/master/img/Souls/${image}.png`;
+		}
+		return `/images/souls/${image}.png`;
 	}
 
 	getCardJingleLink(card_name = "") {

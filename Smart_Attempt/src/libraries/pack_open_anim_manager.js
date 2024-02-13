@@ -1,11 +1,11 @@
 
-import {PrettyCards_plugin, settings, addSetting} from "./underscript_checker.js";
+import {PrettyCards_plugin, settings, addSetting, prettycards} from "./underscript_checker.js";
 import {NormalPackOpenAnimation} from "./../libraries/pack_open_animation_templates/normal.js";
 import {OnuPackOpenAnimation} from "./../libraries/pack_open_animation_templates/onu.js";
 import {InitPacks, GetPageTemplateByName, settingsoptions} from "/src/page_specific/packs.js";
 
 PrettyCards_plugin.events.on('openedPacks', function (open_data) {
-	//console.log(open_data, window.PrettyCards_pack_being_opened);
+	console.log(open_data, window.PrettyCards_pack_being_opened);
 	window.PrettyCards_pack_being_opened.amount -= open_data.count;
 	GetPageTemplateByName(settings.packs_page_template.value() || settingsoptions[0]).updatePackCount(window.PrettyCards_pack_being_opened.code_id);
 	StartOpenPackAnimation(window.PrettyCards_pack_being_opened, open_data.cards);

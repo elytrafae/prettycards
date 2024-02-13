@@ -27,7 +27,7 @@ class FancyListDisplay {
 			var row = window.$(`<div class="PrettyCards_ArtifactListRow"><div class="PrettyCards_ArtifactListBackground ${bgClass}"></div></div>`);
 			//var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"><img class="PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img></div>`);
 			var circle = window.$(`<div class="PrettyCards_ArtifactListCircle"></div>`);
-			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "", data.isImageBig);
+			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.image_class} ${data.disabled ? "transparent" : ""}`, "", "", data.isImageBig, data.backupImage);
 			circle.append(floatingSoul);
 			row.append(circle);
 			
@@ -80,7 +80,7 @@ class FancyDisplay {
 		
 		// <img class="PrettyCards_ArtifactImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img>
 		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"></div>`);
-		this.circle.append(createFloatingSoul(data.image, data.image_class, "", "", data.isImageBig));
+		this.circle.append(createFloatingSoul(data.image, data.image_class, "", "", data.isImageBig, data.backupImage));
 		this.box.append(this.circle);
 		
 		this.name = window.$(`<div class="PrettyCards_ArtifactDisplayName ${data.text_class}">${data.name}</div>`);
@@ -183,7 +183,8 @@ class FancyDisplay {
 			counter: artifact.counter,
 			shopInfo: shopInfo,
 			backgroundClass: artifact.backgroundClass,
-			isImageBig: artifact.isImageBig
+			isImageBig: artifact.isImageBig,
+			backupImage: artifact.collection ? null : utility.getArtifactImageLink(artifact.image, true) // Custom artifacts have no chance of being on Onu's server
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewArtifact()", {artifact: artifact, helper: helper});
@@ -199,7 +200,7 @@ class FancyDisplay {
 				break;
 			}
 		}
-		var image_src = "https://github.com/elytrafae/prettycards/raw/master/img/Souls/" + id + ".png";
+		var image_src = utility.getSoulImageLink(id);
 		if (customObj) {
 			var c = customObj.collection;
 			var isAprilFools = utility.getSeasonMonth() == 3 && customObj.aprilImage;
@@ -233,7 +234,8 @@ class FancyDisplay {
 			image_class: "PrettyCards_ArtifactDisplay_Floating PrettyCards_DisplaySoul_" + id,
 			note: (customObj ? window.$.i18n(customObj.note || "") : ""),
 			size: BootstrapDialog.SIZE_LARGE,
-			isImageBig: false
+			isImageBig: false,
+			backupImage: customObj ? null : utility.getSoulImageLink(id, true) // Custom souls have no chance of being on Onu's server
 		};
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewSoul()", {id: id, helper: helper});
@@ -292,6 +294,7 @@ class FancyDisplay {
 					counter: artifactCounter || artifact.counter,
 					backgroundClass: artifact.backgroundClass,
 					isImageBig: artifact.isImageBig,
+					backupImage: artifact.collection ? null : utility.getArtifactImageLink(artifact.image, true) // Custom artifacts have no chance of being on Onu's server
 				});
 			});
 			var helper = new FancyListDisplay(datas, title);

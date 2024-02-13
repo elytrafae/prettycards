@@ -131,7 +131,28 @@ function InitPacks() {
 		utility.hideUglyPage();
 		document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
 		ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
-		prettycards.testPackOpenAnimation = function(a, b) {StartOpenPackAnimation(packs_data2[a], b)};
+		//prettycards.testPackOpenAnimation = function(a, b) {StartOpenPackAnimation(packs_data2[a], b)};
+
+		prettycards.testPackOpeningNew = (chanceN = 0.4, chanceS = 0.2) => {
+			window.PrettyCards_pack_being_opened = packs_data[0];
+			var cards = [];
+			window.allCards.forEach(card => {
+				if (Math.random() < chanceN) {
+					for (var i=Math.floor(Math.random() * 3 + 1); i > 0; i--) {
+						var card1 = {...card};
+						cards.push(card1);
+					}
+				}
+				if (Math.random() < chanceS) {
+					for (var i=Math.floor(Math.random() * 3 + 1); i > 0; i--) {
+						var card2 = {...card};
+						card2.shiny = true;
+						cards.push(card2);
+					}
+				}
+			});
+			PrettyCards_plugin.events.emit('openedPacks', {count: 999, cards: cards});
+		}
 	});
 	
 }

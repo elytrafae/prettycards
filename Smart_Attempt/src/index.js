@@ -73,6 +73,7 @@ import {} from "/src/libraries/_proof_of_concept/card_data_optimization.js";
 
 import {} from "/src/libraries/april_fools/font_changer.js";
 import {} from "/src/libraries/april_fools/spamton_ads.js";
+//import {} from "/src/libraries/april_fools/owofy_cards.js";
 
 import {} from "/src/libraries/shops/crafting_in_decks.js";
 
