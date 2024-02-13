@@ -45,13 +45,12 @@ var last_tooltip;
 
 function SetSelectedDeck(deck) {
 	selectedDeck = deck;
-	var arts = "";
+	$('#PrettyCards_DeckArtifacts').html("");
 	for (var i=0; i < deck.artifacts.length; i++) {
 		var artifact = deck.artifacts[i];
-		arts += artifactDisplay.ReturnArtifactIcon(artifact);
+		$('#PrettyCards_DeckArtifacts').append(artifactDisplay.ReturnArtifactIcon(artifact)).append(" ");
 	}
 	//console.log("Artifacts to display: ", arts, deck.artifacts);
-	$('#PrettyCards_DeckArtifacts').html(arts);
 	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckId"] = deck.id;
 	window.localStorage["prettycards." + window.selfId + ".selectedCustomDeckSoul"] = deck.soul;
 	playLocked = false;

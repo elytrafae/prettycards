@@ -1,6 +1,6 @@
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
-import {utility} from "/src/libraries/utility.js";
+import {utility} from "./utility.js";
 import {pagegetters} from "/src/libraries/page_getters.js";
 import {AddTooltip} from "/src/libraries/tooltips.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
@@ -65,22 +65,34 @@ class SoulSelector {
 	}
 
 	GenerateArtifacts(artifacts) {
-		var html = '<div class="PrettyCards_ArtifactContainer">';
+		var cont = document.createElement("DIV");
+		cont.className = "PrettyCards_ArtifactContainer";
 		for (var i = 0; i < artifacts.length; i++) {
 			var artifact = artifacts[i];
-			html += `<span class="${artifact.legendary ? 'yellow' : ''}"><img style="height: 16px;" src="${utility.getArtifactImageLink(artifact.image)}" /> ${artifact.name}</span>${(i < artifacts.length-1) ? "<br>" : ""}`;
+			if (i > 0) {
+				cont.appendChild(document.createElement("BR"));
+			}
+			var span = document.createElement("SPAN");
+			span.className = artifact.legendary ? 'yellow' : '';
+			var image = utility.getArtifactImage(artifact.image);
+			image.style = "height: 16px;";
+
+			span.appendChild(image);
+			span.appendChild(document.createTextNode(" " + artifact.name));
+			cont.appendChild(span);
 		}
-		html += '</div>'
-		return html;
+		return cont;
 	}
 
 	GenerateCards(cards) {
+		var cont = document.createElement("DIV");
 		var html = "";
 		for (var i = 0; i < cards.length; i++) {
 			var card = cards[i];
 			html += `${card.shiny ? '<span class="rainbowText">S</span> ' : ''}<span class="${card.rarity}">${card.name}</span><br>`;
 		}
-		return html;
+		cont.innerHTML = html;
+		return cont;
 	}
 
 	ChangeDeck(deckName) {
@@ -122,11 +134,14 @@ class SoulSelector {
 		for (var deckName in playableDecks) {
 			//console.log("#" + this.idPrefix + deckName, document.querySelector("#" + this.idPrefix + deckName));
 			const el = document.querySelector("#" + this.idPrefix + deckName);
-			var html = '<div class="PrettyCards_DeckTooltip">' + this.GenerateArtifacts(playableDecks[deckName].artifacts) + this.GenerateCards(playableDecks[deckName].cards) + "</div>";
+			var cont = document.createElement("DIV");
+			cont.className = "PrettyCards_DeckTooltip";
+			cont.appendChild(this.GenerateArtifacts(playableDecks[deckName].artifacts));
+			cont.appendChild(this.GenerateCards(playableDecks[deckName].cards));
 			//console.log(window.document.body.getBoundingClientRect, window.document.body.getBoundingClientRect());
 			
 			window.tippy("#" + this.idPrefix + deckName, {
-				content: html,
+				content: cont,
 				allowHTML: true,
 				arrow: true,
 				inertia: true,

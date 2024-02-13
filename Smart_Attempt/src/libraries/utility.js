@@ -276,6 +276,7 @@ class Utility {
 		return `/images/cards/${image}.png`;
 	}
 
+	/**@deprecated Use getArtifactImage instead unless very necessary!*/
 	getArtifactImageLink(image, forceNoHd = false) {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
 			return `/afi/artifacts/${image}.png`;
@@ -284,6 +285,23 @@ class Utility {
 			return `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/HDArtifacts/${image}.png`;
 		}
 		return `/images/artifacts/${image}.png`;
+	}
+
+	getArtifactImage(/**@type {string}*/ image) {
+		var mainImage = `/images/artifacts/${image}.png`;
+		var backupImage = mainImage;
+		if (this.getSeasonMonth() == 3) { // Is it an April Season?
+			mainImage = `/afi/artifacts/${image}.png`;
+		} else if (settings.hd_artifacts.value()) {
+			mainImage = `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/HDArtifacts/${image}.png`;
+		}
+		var element = new Image();
+		element.onerror = function() {
+			this.src = backupImage;
+			element.onerror = function() {}
+		}
+		element.src = mainImage;
+		return element;
 	}
 
 	getSoulImageLink(image, forceNoHd = false) {

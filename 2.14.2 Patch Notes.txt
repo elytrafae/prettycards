@@ -8,7 +8,8 @@
 
 TODO:
 - Remake the Packs Page entirely!
-- Make the HD artifacts system fall back onto pixelated textures if HD is not found.
+- Make the HD artifacts system fall back onto pixelated textures if HD is not found. (Continue for everything, including for FloatingSouls themselves)
+- Fix Mass Crafting not working with the new artifact system
 
 - Favorite Cards
 - Interactive Card Helper (finish this)

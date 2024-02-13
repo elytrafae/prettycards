@@ -3,7 +3,7 @@ import { pagegetters } from "./page_getters";
 import { addSetting, prettycards } from "./underscript_checker";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
-import {utility} from "/src/libraries/utility.js";
+import {utility} from "./utility";
 
 import { loadCSS } from "../libraries/css_loader";
 import css from "../css/Artifacts.css";
@@ -47,6 +47,7 @@ class ArtifactDisplay {
 	}
 	*/
 
+	/**@returns {object|null} */
 	GetArtifactById(id) {
 		return this.artifacts[id] || null;
 	}
@@ -64,7 +65,17 @@ class ArtifactDisplay {
 	ReturnArtifactIcon(artifact_id) {
 		var artifact = this.GetArtifactById(artifact_id);
 		//console.log(this.artifacts, artifact);
-		return `<img class="pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}" style="height: 24px;" name="${artifact.name}" image="${artifact.image}" legendary="${artifact.rarity === "LEGENDARY"}" artifactid="${artifact.id}" onclick="artifactInfo(${artifact.id});" src="${utility.getArtifactImageLink(artifact.image)}"> `;
+		var img = utility.getArtifactImage(artifact.image);
+		img.style = "height: 24px;";
+		img.className = `pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}`;
+		img.setAttribute("name", artifact.name);
+		img.setAttribute("image", artifact.image);
+		img.setAttribute("legendary", artifact.rarity === "LEGENDARY");
+		img.setAttribute("artifactid", artifact.id);
+		img.onclick = function () {
+			window.artifactInfo(parseInt(this.getAttribute("artifactid")));
+		}
+		return img;
 	}
 
 	GetAllArtifacts() {

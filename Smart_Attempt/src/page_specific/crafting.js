@@ -138,6 +138,8 @@ function getRarityClass(rarity) {
     return c + "Artifact";
 }
 
+// eyJzb3VsIjoiREVURVJNSU5BVElPTiIsImNhcmRJZHMiOls2Niw2Niw2MDAsNjAwLDI3MywyNTYsMjU2LDMwOCwzMDgsNTA4LDEyOSwxMjksMTI5LDYwMyw1OTksNTk5LDU5OSwyMCw0NjUsNDY1LDQ2NSwxNzksMTc5LDI2Myw3OTFdLCJhcnRpZmFjdElkcyI6WzExLDU0XX0=
+
 function generateArtifactsSection(artifacts, artifactIds) {
     if (!artifacts || artifactIds.length <= 0) {
         return;
@@ -149,7 +151,11 @@ function generateArtifactsSection(artifacts, artifactIds) {
         var ownedClass = artifact.owned ? "" : "PrettyCards_MassCraft_MissingArtifact";
         var rarityClass = getRarityClass(artifact.rarity);
         //console.log(artifact);
-        artifacts.append(`<div class="PrettyCards_MassCraft_ArtifactSlot pointer ${ownedClass} ${artifact.rarity}" onclick="artifactInfo(${artId})"><img class="${rarityClass} ${ownedClass}" src="${utility.getArtifactImageLink(artifact.image)}"> ${$.i18n("artifact-name-" + artId)}</div>`);
+        var artSlot = document.createElement("DIV");
+        artSlot.className = `PrettyCards_MassCraft_ArtifactSlot pointer ${ownedClass} ${artifact.rarity}`;
+        artSlot.appendChild(utility.getArtifactImage(artifact.image));
+        artSlot.appendChild(document.createTextNode(" " + $.i18n("artifact-name-" + artId)));
+        artifacts.append(artSlot);
         if (!artifact.owned) {
             missingArtifacts.push(artifact);
         }
