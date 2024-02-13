@@ -91,11 +91,12 @@ function GetChallengeJQueryObject(user) {
 			<p>${window.$.i18n("pc-customgame-options-recipients")}: </p><input id="PrettyCards_PrivateGameRecipients" type="text" class="form-control" value="${ (!!user) ? user.username : ""}"></input>
 			<br>
 			<label class="form-check-label"><input id="PrettyCards_PrivateGameEveryone" type="checkbox" class="form-check-input" ${(!user) ? "checked" : ""}></input> ${window.$.i18n("pc-customgame-options-everyone")}</label>
-			<p ${custom_deck_sys ? "hidden" : ""}>${window.$.i18n("pc-customgame-options-soul")}: ${soulSelector.SetUp("PrettyCards_ChallengeSoul_", "Normal")}</p>
+			<p ${custom_deck_sys ? "hidden" : ""} className="PrettyCards_PrivateGameChallengeForm_Souls">${window.$.i18n("pc-customgame-options-soul")}: </p>
 			<div id="PrettyCards_PrivateGameChallengeDeckCard"></div>
 		</div>
 		<div id="PrettyCards_PrivateGameChallengeDeckSelector" hidden></div>
 	`)
+	html.find("#PrettyCards_PrivateGameChallengeForm .PrettyCards_PrivateGameChallengeForm_Souls").append(soulSelector.SetUp("PrettyCards_ChallengeSoul_", "Normal"));
 	if (custom_deck_sys) {		
 		html.find("#PrettyCards_PrivateGameChallengeDeckCard").click(OpenDeckSelector);
 	}

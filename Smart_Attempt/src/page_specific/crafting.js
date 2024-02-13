@@ -210,8 +210,8 @@ function generateContent(jsonDeck) {
     var cont = $(`<div id="PrettyCards_MassCraft_Preview"></div>`);
     var row1 = $(`<div id="PrettyCards_MassCraft_SoulDeckRow"></div>`);
 
-    var soul = $(`<div class="${soulName} pointer" onclick="soulInfo('${soulName}')"><img src="https://github.com/elytrafae/prettycards/raw/master/img/Souls/${soulName}.png"> ${$.i18n("soul-" + soulName.toLowerCase())}</div>`);
-
+    var soul = $(`<div class="${soulName} pointer" onclick="soulInfo('${soulName}')"> ${$.i18n("soul-" + soulName.toLowerCase())}</div>`);
+    soul.prepend(utility.getSoulImage(soulName));
     lastArtifactIds = jsonDeck.artifactIds;
     var artifacts = $(`<div id="PrettyCards_MassCraft_Artifacts"></div>`);
     generateArtifactsSection(artifacts, lastArtifactIds);

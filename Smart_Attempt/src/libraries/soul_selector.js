@@ -114,7 +114,7 @@ class SoulSelector {
 		if (this.soulsToDisplay.length <= 0) {
 			this.soulsToDisplay = Object.keys(playableDecks);
 		}
-		var html = "";
+		var cont = document.createElement("DIV");
 		var firstSoul = "";
 		window["PrettyCards_ChangeDeck_" + this.idPrefix] = this.ChangeDeck.bind(this);
 		//for (var deckName in this.soulsToDisplay) {
@@ -123,10 +123,14 @@ class SoulSelector {
 			if (firstSoul === "") {
 				firstSoul = deckName;
 			}
-			html += `<img src="https://github.com/elytrafae/prettycards/raw/master/img/Souls/${deckName}.png" id="${this.idPrefix}${deckName}" onclick='PrettyCards_ChangeDeck_${this.idPrefix}("${deckName}");' class="PrettyCards_Soul_${deckName} PrettyCards_${sizeClass}Soul ${(deckName === firstSoul && this.highlightSelectedSoul) ? "PrettyCards_SelectedSoul" : ""}"></img>`;
+			var image = utility.getSoulImage(deckName);
+			image.id = this.idPrefix + deckName;
+			image.className = `PrettyCards_Soul_${deckName} PrettyCards_${sizeClass}Soul ${(deckName === firstSoul && this.highlightSelectedSoul) ? "PrettyCards_SelectedSoul" : ""}`;
+			image.onclick = new Function('event', `PrettyCards_ChangeDeck_${this.idPrefix}("${deckName}");`);
+			cont.appendChild(image);
 		}
 		this.selectedSoul = firstSoul;
-		return html;
+		return cont;
 	}
 
 	AddDeckTooltips() {

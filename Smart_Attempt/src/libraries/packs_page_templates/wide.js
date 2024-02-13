@@ -13,7 +13,7 @@ class WidePacksTemplate extends PacksPageTemplate {
 	
 	pageAdditions() { // Required
 		return `
-			${this.terribleDropRatesButtonHTML}
+			${this.terribleDropRatesButtonHTML()}
 			<div class="PrettyCards_ThirdPackSpacer"></div>
 			<div class="PrettyCards_PacksRow PrettyCards_WideTemplate">
 				<div class="PrettyCards_PackCell" data-packid="Pack"></div>

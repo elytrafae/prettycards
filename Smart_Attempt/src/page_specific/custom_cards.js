@@ -60,7 +60,8 @@ function appendArtifactNew(artifact, c, $parent) {
 
 	var rarityData = artifactDisplay.GetRarityDataFor(artifact);
 
-	var image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
+	var image = document.createElement("IMG");
+	image.src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 	var art = $(`
 	<div class="PrettyCards_CollectionNew_Soultifact ${artifact.backgroundClass || ""}">
 		<div id="PrettyCards_CollectionNew_SoultifactImageContainer"></div>
@@ -70,7 +71,7 @@ function appendArtifactNew(artifact, c, $parent) {
 			<div>${window.$.i18n("artifact-" + artifact.id)}</div>
 		</div>
 	<div>`);
-	art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image_src, "PrettyCards_CollectionNew_SoultifactImage " + (rarityData.imageClass), "", ""));
+	art.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image, "PrettyCards_CollectionNew_SoultifactImage " + (rarityData.imageClass), "", ""));
 	art.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.artifactInfo(artifact.id);
 	})
@@ -97,7 +98,8 @@ function appendSoulNew(soul, c, $parent) {
 	var prefix = isAprilFools ? c.aprilSoulImagePrefix  : c.soulImagePrefix;
 	var imageName = isAprilFools ? soul.aprilImage : soul.image;
 
-	var image_src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
+	var image = document.createElement("IMG");
+	image.src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 	var s = $(`
 	<div class="PrettyCards_CollectionNew_Soultifact">
 		<div id="PrettyCards_CollectionNew_SoultifactImageContainer"></div>
@@ -106,7 +108,7 @@ function appendSoulNew(soul, c, $parent) {
 			<div>${window.$.i18n("soul-" + soul.name.toLowerCase() + "-desc")}</div>
 		</div>
 	<div>`);
-	s.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image_src, "PrettyCards_CollectionNew_SoultifactImage PrettyCards_DisplaySoul_" + soul.name, "", ""));
+	s.find("#PrettyCards_CollectionNew_SoultifactImageContainer").append(createFloatingSoul(image, "PrettyCards_CollectionNew_SoultifactImage PrettyCards_DisplaySoul_" + soul.name, "", ""));
 	s.find(".PrettyCards_CollectionNew_SoultifactImage").click(function () {
 		window.soulInfo(soul.name);
 	})

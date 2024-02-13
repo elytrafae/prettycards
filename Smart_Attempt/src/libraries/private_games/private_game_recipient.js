@@ -41,7 +41,7 @@ function processChatMessageHTML(ele, msg) {
 							var soulSelector = new SoulSelector();
 							var soulContainer = document.createElement("SPAN");
 							soulContainer.style = "white-space: nowrap;";
-							soulContainer.innerHTML = soulSelector.SetUp("PrettyCards_ChallengeMessage_" + msg.id + "_", "Small");
+							soulContainer.appendChild(soulSelector.SetUp("PrettyCards_ChallengeMessage_" + msg.id + "_", "Small"));
 							ele.appendChild(soulContainer);
 							soulSelector.AddDeckTooltips();
 						}

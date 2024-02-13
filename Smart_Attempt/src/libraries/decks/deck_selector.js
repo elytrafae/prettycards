@@ -328,7 +328,7 @@ class SavedDeckSelector {
 		for (var soul in decks) {
 			this.soulSelector.soulsToDisplay.push(soul);
 		}
-		soulContainer.innerHTML = this.soulSelector.SetUp("PrettyCards_SavedDeckSelectSoul_", "Normal");
+		soulContainer.appendChild(this.soulSelector.SetUp("PrettyCards_SavedDeckSelectSoul_", "Normal"));
 		
 		var decksContainer = document.createElement("DIV");
 		decksContainer.className = "PrettyCards_DeckListContainer";

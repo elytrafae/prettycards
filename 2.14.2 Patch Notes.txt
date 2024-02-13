@@ -5,12 +5,13 @@
 - Game End screen no longer displays errors with Custom Games
 - "VICTORY" is now in quotation marks when the opponent leaves the game
 - Added Pack Drop Rates to the modified pack pages
+- Made Soul and Artifact images fall back onto pixelated textures if HD is not found. (Had to rewrite a lot, if you find a bug, pls report it)
 
 TODO:
-- Remake the Packs Page entirely!
-- Make the HD artifacts system fall back onto pixelated textures if HD is not found. (Continue for everything, including for FloatingSouls themselves)
 - Fix Mass Crafting not working with the new artifact system
+- Fix Custom Cards not working with the new artifact system
 
+- Remake the Packs Page entirely!
 - Favorite Cards
 - Interactive Card Helper (finish this)
 - Detailed History Tracking?
