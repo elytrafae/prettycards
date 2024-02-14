@@ -1,5 +1,5 @@
 
-import {artifactDisplay} from "/src/libraries/artifact_display.js";
+import {artifactDisplay} from "../artifact_display.js";
 import {FancyDisplay} from "/src/libraries/fancy_helper.js";
 import {PrettyCards_plugin, settings, prettycards} from "/src/libraries/underscript_checker.js";
 import {LoadFont, ListenForWhenAllFontsAreLoaded} from "/src/libraries/font_loader.js";
@@ -329,6 +329,7 @@ class Artifact {
 		}
 		this.ownerId = settings.ownerId;
 		this.backgroundClass = settings.backgroundClass || "";
+		this.isImageBig = settings.isImageBig || false;
 		Object.defineProperty(this, "id", {
 			value: nextCustomArtifact,
 			writable: false
@@ -342,7 +343,7 @@ class Artifact {
 		});
 		this.name = window.$.i18n("artifact-name-" + this.id, 1);
 		
-		artifactDisplay.artifacts.push(this);
+		artifactDisplay.AddCustomArtifact(this);
 	}
 	
 	mention(nr = 1) {

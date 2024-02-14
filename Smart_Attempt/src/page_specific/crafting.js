@@ -148,7 +148,7 @@ function generateArtifactsSection(artifacts, artifactIds) {
     artifacts.empty();
     artifactIds.forEach((artId) => {
         var artifact = artifactDisplay.GetArtifactById(artId);
-        var ownedClass = artifact.owned ? "" : "PrettyCards_MassCraft_MissingArtifact";
+        var ownedClass = artifactDisplay.IsArtifactPurchasable(artifact.id) ? "PrettyCards_MassCraft_MissingArtifact" : "";
         var rarityClass = getRarityClass(artifact.rarity);
         //console.log(artifact);
         var artSlot = document.createElement("DIV");
@@ -156,7 +156,7 @@ function generateArtifactsSection(artifacts, artifactIds) {
         artSlot.appendChild(utility.getArtifactImage(artifact.image));
         artSlot.appendChild(document.createTextNode(" " + $.i18n("artifact-name-" + artId)));
         artifacts.append(artSlot);
-        if (!artifact.owned) {
+        if (artifactDisplay.IsArtifactPurchasable(artifact.id)) {
             missingArtifacts.push(artifact);
         }
     })

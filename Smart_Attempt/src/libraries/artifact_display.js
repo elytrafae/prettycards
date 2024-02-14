@@ -47,6 +47,10 @@ class ArtifactDisplay {
 	}
 	*/
 
+	AddCustomArtifact(artifact) {
+		this.artifacts[artifact.id] = artifact;
+	}
+
 	/**@returns {object|null} */
 	GetArtifactById(id) {
 		return this.artifacts[id] || null;
