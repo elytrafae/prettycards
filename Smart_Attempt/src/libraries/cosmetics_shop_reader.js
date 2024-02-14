@@ -98,7 +98,12 @@ function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
                 var mostRecent = shopItems[shopItems.length-1];
                 if (ele.tagName === "P") {
                     var str = ele.children[0].getAttribute("data-i18n");
-                    currentCategory = str.substring(6);
+                    if (!str) {
+                        //console.warn("Error while reading cosmetic page! str is null", ele);
+                        // This happens immediately after purchase. Do nothing.
+                    } else {
+                        currentCategory = str.substring(6);
+                    }
                 } else if (ele.tagName === "IMG") {
         
                     if (mostRecent && !mostRecent.cost) {

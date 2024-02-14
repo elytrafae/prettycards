@@ -1,0 +1,19 @@
+
+
+TODO:
+- Remake the Packs Page entirely!
+- Favorite Cards
+
+- Interactive Card Helper (finish this)
+- Detailed History Tracking?
+- Image Recognition for Deck Imports
+- Add more Hourglass GIFs.
+- Add minimalistic version of deck system (?)
+- Cosmetics Wishlist (Possibly with Discord integration?)
+
+- Resource Packs
+- Game Animation Upgrades + Optimization with remembering the image data and generating URLs fir each locally instead of re-fetching the image each time
+- Multiple Settings for HD Settings
+- Remake Lobby Games
+- "Would You Rather" for April.
+- Fun Value (Especially for Card Descriptions)
