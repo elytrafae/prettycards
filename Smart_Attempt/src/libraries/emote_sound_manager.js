@@ -3,6 +3,7 @@ import { utility } from "/src/libraries/utility";
 
 import { loadCSS } from "../libraries/css_loader";
 import css from "../css/Cosmetics.css";
+import { prettycards } from "./underscript_checker";
 loadCSS(css);
 
 
@@ -64,3 +65,5 @@ if (settings.emote_sounds.value() && window.underscript.onPage("CosmeticsShop"))
         });
     })
 }
+
+prettycards.playEmoteSound = playEmoteSound;

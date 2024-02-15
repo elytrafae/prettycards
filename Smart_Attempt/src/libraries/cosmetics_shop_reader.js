@@ -84,6 +84,7 @@ function GetCosmeticRarityFromElement(ele) {
 function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
     return new Promise((resolve, reject) => {
         GetPage(cosmeticType, id).then((data) => {
+            prettycards.cosmeticShop.isLastReadASuccessfulBuy = false;
             var navbar = data.querySelector(".navbar");
             var footer = data.querySelector("footer");
             var shopItems = [];
@@ -97,12 +98,22 @@ function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
                 }
                 var mostRecent = shopItems[shopItems.length-1];
                 if (ele.tagName === "P") {
-                    var str = ele.children[0].getAttribute("data-i18n");
-                    if (!str) {
-                        //console.warn("Error while reading cosmetic page! str is null", ele);
-                        // This happens immediately after purchase. Do nothing.
-                    } else {
-                        currentCategory = str.substring(6);
+                    var ele2 = ele.children[0];
+                    if (ele2) {
+                        var str = ele2.getAttribute("data-i18n");
+                        if (!str) {
+                            var str2 = ele2.getAttribute("data-i18n-custom");
+                            console.log(ele, ele2, str2)
+                            if (str2.endsWith("unlocked")) {
+                                // If a "successful purchase" message was detected on this page . . .
+                                //PrettyCards_plugin.events.emit("PrettyCards:CosmeticBought", {name: ele3.getAttribute("data-i18n-args")});
+                                prettycards.cosmeticShop.isLastReadASuccessfulBuy = true;
+                            }
+                            // console.warn("Error while reading cosmetic page! str is null", ele);
+                            // This usually happens immediately after purchase. Do nothing.
+                        } else {
+                            currentCategory = str.substring(6);
+                        }
                     }
                 } else if (ele.tagName === "IMG") {
         
@@ -155,6 +166,7 @@ function GetCosmeticShopData(cosmeticType = COSMETIC_TYPES.NULL, id = -1) {
 
 prettycards.cosmeticShop = {};
 
+prettycards.cosmeticShop.isLastReadASuccessfulBuy = false;
 prettycards.cosmeticShop.GetPage = GetPage;
 prettycards.cosmeticShop.GetData = GetCosmeticShopData;
 prettycards.cosmeticShop.COSMETIC_TYPES = COSMETIC_TYPES;
