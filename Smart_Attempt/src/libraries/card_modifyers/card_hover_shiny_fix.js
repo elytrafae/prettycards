@@ -13,7 +13,7 @@ var shinyHoverFix = addSetting({
     'category': "card"
 });
 
-var isShiny = true;
+var isShiny = false;
 
 if (shinyHoverFix.value()) {
     PrettyCards_plugin.events.on("translation:loaded", function() {

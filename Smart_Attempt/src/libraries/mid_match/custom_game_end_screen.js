@@ -183,7 +183,6 @@ class BarData {
     }
 
     onTipOver() {
-        // TODO: Add level-up/rank change code
         this.tipOverFunction();
     }
 
