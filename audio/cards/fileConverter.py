@@ -3,7 +3,15 @@ import os
 import glob
 import json
 
+JSON_PATH = "../../json/baseThemeSongData.json"
+
 data = {}
+if os.path.isfile(JSON_PATH):
+	print("Existing file found!")
+	f = open(JSON_PATH, "r")
+	data = json.loads(f.read())
+	f.close()
+
 for file in glob.glob("input/*.ogg"):
     # print(file)
     number = file[-5:-4:1]
@@ -25,5 +33,9 @@ for file in glob.glob("input/*.ogg"):
     else:
         data[cardName] = int(number)
 
-stringData = json.dumps(data)
+stringData = json.dumps(data, indent=4)
 print(stringData)
+
+f = open(JSON_PATH, "w")
+f.write(stringData)
+f.close()
