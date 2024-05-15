@@ -43,5 +43,14 @@
         "name": "pc-packs-final-name",
         "description": "pc-packs-final-desc",
         "code_id": "FinalPack"
+    },
+    {
+        "g_cost": -1,
+        "ucp_cost": -1,
+        "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/DDLCPack",
+        "image_extension": ".gif",
+        "name": "pc-packs-ddlc-name",
+        "description": "pc-packs-ddlc-desc",
+        "code_id": "DDLCPack"
     }
 ]

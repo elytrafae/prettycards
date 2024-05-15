@@ -15,7 +15,19 @@ class PacksPageTemplate {
 		return `<span style="color: gray;border: 1px dotted gray;padding: 5px;background-color: black;position: absolute;top: 0em;left: 5em;font-size: 2em;" onclick="showDropRates();" class="pointer" data-i18n="[html]packs-drop-rates">${window.$.i18n("packs-drop-rates")}</span>`;
 	}
 	
-	pageAdditions() { // Required
+	pageAdditions(packs_data) { // Required
+		var text = this.terribleDropRatesButtonHTML() + `<div class="PrettyCards_PacksRow">`;
+		for (var i=0; i < packs_data.length; i++) {
+			text += `<div class="PrettyCards_PackCell" data-packid="${packs_data[i].code_id}"></div>`;
+			if (i % 3 == 2) {
+				text += `</div><div class="PrettyCards_PackSpacer"></div><div class="PrettyCards_PacksRow">`;
+			}
+		}
+		if (packs_data.length % 3 != 0) {
+			text += `</div><div class="PrettyCards_PackSpacer"></div>`;
+		}
+		return text;
+/*
 		return `
 			${this.terribleDropRatesButtonHTML()}
 			<div class="PrettyCards_PacksRow">
@@ -30,6 +42,7 @@ class PacksPageTemplate {
 			</div>
 			<div class="PrettyCards_PackSpacer"></div>
 		`;
+*/
 	}
 	
 	generateBuyRow(pack_data) { // Required?
@@ -229,7 +242,7 @@ class PacksPageTemplate {
 	generatePage(packs_data, packs_data2) { // Required
 		this.packs_data2 = packs_data2;
 		
-		document.getElementById("PrettyCards_MainContent").innerHTML =  this.pageAdditions();
+		document.getElementById("PrettyCards_MainContent").innerHTML =  this.pageAdditions(packs_data);
 				
 		for (var i=0; i < packs_data.length; i++) {
 			this.generatePagePack(packs_data[i]);
