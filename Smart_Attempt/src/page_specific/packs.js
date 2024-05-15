@@ -72,7 +72,12 @@ function GetPacksData(cb) {
 			if (packTypeData.ucp_cost >= 0) {
 				packTypeData.ucp_buy_count = 1;
 			}
-			packTypeData.amount = pagegetters.GetNumberOfPacks(packTypeData.code_id); // Appends how many packs of that kind does the user have to the pack data.
+			packTypeData.amount = 0;
+			try {
+				packTypeData.amount = pagegetters.GetNumberOfPacks(packTypeData.code_id); // Appends how many packs of that kind does the user have to the pack data.
+			} catch (e) {
+				// Do nothing
+			}
 			packTypeData.image = packTypeData.image_without_extension + packTypeData.image_extension;
 			packs_data.push(packTypeData);
 			packs_data2[packTypeData.code_id] = packTypeData;

@@ -19,13 +19,11 @@ class PacksPageTemplate {
 		var text = this.terribleDropRatesButtonHTML() + `<div class="PrettyCards_PacksRow">`;
 		for (var i=0; i < packs_data.length; i++) {
 			text += `<div class="PrettyCards_PackCell" data-packid="${packs_data[i].code_id}"></div>`;
-			if (i % 3 == 2) {
+			if (i % 3 == 2 && i != packs_data.length-1) {
 				text += `</div><div class="PrettyCards_PackSpacer"></div><div class="PrettyCards_PacksRow">`;
 			}
 		}
-		if (packs_data.length % 3 != 0) {
-			text += `</div><div class="PrettyCards_PackSpacer"></div>`;
-		}
+		text += `</div><div class="PrettyCards_PackSpacer"></div>`;
 		return text;
 /*
 		return `
