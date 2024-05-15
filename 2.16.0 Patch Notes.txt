@@ -1,5 +1,10 @@
 
 - More API spagetti I did not to change stuff
+- Remove the Wide Packs Page Format because the UTY pack would not fit
+
+ESCAPE TODO: 
+- Make this thing scalable for new pack types with JSON
+- Find someone to take over the project maintanance
 
 TODO:
 - Remake the Packs Page entirely!

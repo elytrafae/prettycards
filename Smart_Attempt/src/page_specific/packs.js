@@ -6,7 +6,7 @@ import {prettycards, PrettyCards_plugin, settings, addSetting} from "./../librar
 import {utility} from "./../libraries/utility.js";
 
 import {NormalPacksPage} from "./../libraries/packs_page_templates/normal.js";
-import {WidePacksPage} from "./../libraries/packs_page_templates/wide.js";
+//import {WidePacksPage} from "./../libraries/packs_page_templates/wide.js";
 
 import {StartOpenPackAnimation} from "./../libraries/pack_open_anim_manager.js";
 
@@ -14,7 +14,7 @@ import { loadCSS } from "../libraries/css_loader";
 import css from "../css/Packs.css";
 loadCSS(css);
 
-var pagetemplates = [NormalPacksPage, WidePacksPage];
+var pagetemplates = [NormalPacksPage/*, WidePacksPage*/]; // Sad that the wide page has to go . . .
 
 var settingsoptions = [];
 var settingsnote = "Select the look of the Packs Page!";
@@ -55,105 +55,63 @@ addSetting({
 
 //console.log("PageGetters", pagegetters);
 
-var packs_data = [
-	{
-		g_cost : 100,
-		ucp_cost : 10,
-		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UndertalePack",
-		image_extension: ".png",
-		name: "pc-packs-ut-name",
-		description: "pc-packs-ut-desc",
-		code_id: "Pack", // Open command: open + ID, Buy G command: add + ID, Buy UCP command: add + ID + Ucp
-		does_exist: true,
-		g_buy_count: 1,
-		ucp_buy_count: 1,
-		open_count: 1
-	},
-	{
-		g_cost : 100,
-		ucp_cost : 10,
-		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/DeltarunePack",
-		image_extension: ".png",
-		name: "pc-packs-dr-name",
-		description: "pc-packs-dr-desc",
-		code_id: "DRPack",
-		does_exist: true,
-		g_buy_count: 1,
-		ucp_buy_count: 1,
-		open_count: 1
-	},
-	{
-		g_cost : -1,
-		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/ShinyPack",
-		image_extension: ".gif",
-		name: "pc-packs-shiny-name",
-		description: "pc-packs-shiny-desc",
-		code_id: "ShinyPack",
-		does_exist: true,
-		open_count: 1
-	},
-	{
-		g_cost : -1,
-		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/SuperPack",
-		image_extension: ".gif",
-		name: "pc-packs-super-name",
-		description: "pc-packs-super-desc",
-		code_id: "SuperPack",
-		does_exist: true,
-		open_count: 1
-	},
-	{
-		g_cost : -1,
-		ucp_cost : -1,
-		image_without_extension: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/FinalPack",
-		image_extension: ".gif",
-		name: "pc-packs-final-name",
-		description: "pc-packs-final-desc",
-		code_id: "FinalPack",
-		does_exist: true,
-		open_count: 1
-	}
-]
+var packs_data = [];
 
 var packs_data2 = {}; // To ease id-based search of pack data.
-for (var i=0; i < packs_data.length; i++) {
-	var data = packs_data[i];
-	data.amount = pagegetters.GetNumberOfPacks(data.code_id); // Appends how many packs of that kind does the user have to the pack data.
-	data.image = data.image_without_extension + data.image_extension;
-	packs_data2[data.code_id] = data;
+
+function GetPacksData(cb) {
+	window.$.getJSON("https://raw.githubusercontent.com/elytrafae/prettycards/master/json/packs.json", {}, (data) => {
+		console.log(data);
+		for (var i=0; i < data.length; i++) {
+			var packTypeData = data[i];
+			packTypeData.does_exist = true; // I am too lazy to remove this
+			packTypeData.open_count = 1;
+			if (packTypeData.g_cost >= 0) {
+				packTypeData.g_buy_count = 1;
+			}
+			if (packTypeData.ucp_cost >= 0) {
+				packTypeData.ucp_buy_count = 1;
+			}
+			packTypeData.amount = pagegetters.GetNumberOfPacks(packTypeData.code_id); // Appends how many packs of that kind does the user have to the pack data.
+			packTypeData.image = packTypeData.image_without_extension + packTypeData.image_extension;
+			packs_data.push(packTypeData);
+			packs_data2[packTypeData.code_id] = packTypeData;
+		}
+		cb();
+	});
 }
 
 function InitPacks() {
 	
-	ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function () {
-		utility.hideUglyPage();
-		document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
-		ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
-		//prettycards.testPackOpenAnimation = function(a, b) {StartOpenPackAnimation(packs_data2[a], b)};
-
-		prettycards.testPackOpeningNew = (chanceN = 0.4, chanceS = 0.2) => {
-			window.PrettyCards_pack_being_opened = packs_data[0];
-			var cards = [];
-			window.allCards.forEach(card => {
-				if (Math.random() < chanceN) {
-					for (var i=Math.floor(Math.random() * 3 + 1); i > 0; i--) {
-						var card1 = {...card};
-						cards.push(card1);
+	GetPacksData(() => {
+		ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function () {
+			utility.hideUglyPage();
+			document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
+			ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
+			//prettycards.testPackOpenAnimation = function(a, b) {StartOpenPackAnimation(packs_data2[a], b)};
+	
+			prettycards.testPackOpeningNew = (chanceN = 0.4, chanceS = 0.2) => {
+				window.PrettyCards_pack_being_opened = packs_data[0];
+				var cards = [];
+				window.allCards.forEach(card => {
+					if (Math.random() < chanceN) {
+						for (var i=Math.floor(Math.random() * 3 + 1); i > 0; i--) {
+							var card1 = {...card};
+							cards.push(card1);
+						}
 					}
-				}
-				if (Math.random() < chanceS) {
-					for (var i=Math.floor(Math.random() * 3 + 1); i > 0; i--) {
-						var card2 = {...card};
-						card2.shiny = true;
-						cards.push(card2);
+					if (Math.random() < chanceS) {
+						for (var i=Math.floor(Math.random() * 3 + 1); i > 0; i--) {
+							var card2 = {...card};
+							card2.shiny = true;
+							cards.push(card2);
+						}
 					}
-				}
-			});
-			PrettyCards_plugin.events.emit('openedPacks', {count: 999, cards: cards});
-		}
-	});
+				});
+				PrettyCards_plugin.events.emit('openedPacks', {count: 999, cards: cards});
+			}
+		});
+	})
 	
 }
 
