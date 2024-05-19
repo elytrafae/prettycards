@@ -46,15 +46,15 @@ class PacksPageTemplate {
 	generateBuyRow(pack_data) { // Required?
 		return `
 			<input type="number" class="PrettyCards_PackBuyCount" data-packid="${pack_data.code_id}" value="1" min="1" pattern="[0-9]">
-			x <button class="PrettyCards_PackGBuy btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-buy")} (<span class="PrettyCards_PackGPrice" data-packid="${pack_data.code_id}">100</span> <img src="images/icons/gold.png" class="height-16">)</button>
-			<button class="PrettyCards_PackUcpBuy btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-buy")} (<span class="ucp PrettyCards_PackUcpPrice" data-packid="${pack_data.code_id}">10</span> UCP)</button>
+			x <button class="PrettyCards_PackGBuy btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-buy")} (<span class="PrettyCards_PackGPrice" data-packid="${pack_data.code_id}">${pack_data.g_cost}</span> <img src="images/icons/gold.png" class="height-16">)</button>
+			<button class="PrettyCards_PackUcpBuy btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-buy")} (<span class="ucp PrettyCards_PackUcpPrice" data-packid="${pack_data.code_id}">${pack_data.ucp_cost}</span> UCP)</button>
 		`;
 	}
 	
 	generateOpenRow(pack_data) { // Required?
 		return `
 			<input type="number" class="PrettyCards_PackOpenCount" data-packid="${pack_data.code_id}" value="1" min="1" pattern="[0-9]">
-			x <button class="PrettyCards_PackOpen btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-open")} <span class="PrettyCards_PackOpenCountButton" data-packid="${pack_data.code_id}">1</span></button>
+			x <button class="PrettyCards_PackOpen btn-primary" data-packid="${pack_data.code_id}">${window.$.i18n("pc-packs-open")} <span class="PrettyCards_PackOpenCountButton" data-packid="${pack_data.code_id}">${Math.min(pack_data.amount, 1)}</span></button>
 		`;
 	}
 	
