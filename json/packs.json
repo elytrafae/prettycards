@@ -18,8 +18,8 @@
         "code_id": "DRPack"
     },
     {
-        "g_cost": 150,
-        "ucp_cost": 15,
+        "g_cost": 200,
+        "ucp_cost": 20,
         "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UTYPack",
         "image_extension": ".png",
         "name": "pc-packs-uty-name",
