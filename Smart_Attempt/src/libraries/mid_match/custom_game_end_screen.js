@@ -267,9 +267,9 @@ class BarData {
 
 class GameEndTypes {
 
-    static WIN = new GameEndTypes("game-game-victory", "", "/musics/dr2_victory.ogg");
+    static WIN = new GameEndTypes("game-game-victory", "", "/musics/uty_victory.ogg");
     static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg").setSubtitleFunction(leaveWinSubtitleFunction).setChangeTitleFunction((title) => {return '"' + title + '"';});
-    static LOSE = new GameEndTypes("game-game-over", "", "/musics/dr2_gameover.ogg");
+    static LOSE = new GameEndTypes("game-game-over", "", "/musics/uty_gameover.ogg");
     static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/elytrafae/prettycards/raw/master/audio/bgms/mus_star.ogg").setSubtitleFunction(drawSubtitleFunction);
     static CHARA = new GameEndTypes("game-died", "red", "/musics/toomuch.ogg");
 

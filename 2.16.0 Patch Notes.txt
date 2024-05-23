@@ -2,6 +2,7 @@
 - More API spagetti I did not to change stuff
 - Remove the Wide Packs Page Format because the UTY pack would not fit
 - Make this thing scalable for new pack types with JSON
+- Custom Game End screen now play UTY songs
 
 ESCAPE TODO: 
 - Find someone to take over the project maintanance
