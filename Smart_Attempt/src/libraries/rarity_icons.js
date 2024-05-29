@@ -3,7 +3,7 @@ import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 var rarityIconsHTML = {};
 var rarities = ["BASE", "COMMON", "RARE", "EPIC", "LEGENDARY", "DETERMINATION", "TOKEN"];
-var extensions = ["BASE", "DELTARUNE"];
+var extensions = ["BASE", "DELTARUNE", "UTY"];
 
 function getUrlForIcon(extension, rarity) {
 	return `/images/rarity/${extension}_${rarity}.png`;
@@ -23,6 +23,7 @@ for (var i=0; i < extensions.length; i++) {
 }
 
 rarityIconsHTML["DELTARUNE"]["BASE"] = `<img src="/images/rarity/DELTARUNE.png" title="BASE">`;
+rarityIconsHTML["UTY"]["BASE"] = `<img src="/images/rarity/UTY.png" title="BASE">`;
 
 function preLoadIcons() {
 	var element = document.createElement("DIV");

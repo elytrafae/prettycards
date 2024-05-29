@@ -3,6 +3,7 @@
 - Remove the Wide Packs Page Format because the UTY pack would not fit
 - Make this thing scalable for new pack types with JSON
 - Custom Game End screen now play UTY songs
+- Fixed cards not loading on some pages properly
 
 ESCAPE TODO: 
 - Find someone to take over the project maintanance
