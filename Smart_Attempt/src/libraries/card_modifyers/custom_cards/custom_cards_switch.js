@@ -1,6 +1,7 @@
 
 import { prettycards } from "../../underscript_checker";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import { utility } from "../../utility";
 
 var spellbook;
 
@@ -9,12 +10,12 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	var c = window.prettycards.newCollection({
 		name: "Switch Soul Set",
 		author: "Baltoni and elytrafae",
-		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/Switch_Soul/",
-		//cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/DDLC/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
+		cardImagePrefix: utility.asset("img/Cards/Switch_Soul/"),
+		//cardSongPrefix: utility.asset("audio/cards/DDLC/"),
+		//rarityImagePrefix: utility.asset("img/RarityIcons/"),
+		artifactImagePrefix: utility.asset("img/Artifacts/"),
+		tribeImagePrefix: utility.asset("img/Tribes/"),
+		soulImagePrefix: utility.asset("img/Souls/"),
 		//universalCustomFont: "Aller",
 		note: `A collaboration between @Baltoni#7741 and I for Soultest back in the day, now in a fresh format!`
 	});

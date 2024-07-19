@@ -23,7 +23,7 @@ function playEmoteSound(emote, onerror = function() {}, muteBGM = false) {
         PrettyCards_plugin.events.emit("PrettyCards:pauseBGM");
     }
     emoteAudio.pause();
-    emoteAudio.src = `https://github.com/elytrafae/prettycards/raw/master/audio/emotes/${emote}.ogg`;
+    emoteAudio.src = utility.asset(`audio/emotes/${emote}.ogg`);
     emoteAudio.onerror = function() {
         onerror();
         PrettyCards_plugin.events.emit("PrettyCards:resumeBGM");

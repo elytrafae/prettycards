@@ -64,7 +64,7 @@ class CustomChatBadgeSystem {
     }
 
     #initialize() {
-        $.getJSON("https://raw.githubusercontent.com/elytrafae/prettycards/master/json/customChatRoles.json", {}, (data) => {
+        $.getJSON(utility.asset("json/customChatRoles.json"), {}, (data) => {
             this.chatRoleUserData = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:customChatRolesData", this.chatRoleUserData);
         })
@@ -134,7 +134,7 @@ class CustomChatBadgeSystem {
         }
     }
 
-    #getCustomBadgeURL(icon) {return `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/ChatBadges/${icon}.png`;}
+    #getCustomBadgeURL(icon) {return utility.asset(`img/ChatBadges/${icon}.png`);}
 
     #findInChatBadgeList(userId, listName) {
         if (!this.chatRoleUserData[listName]) {

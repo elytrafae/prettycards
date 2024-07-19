@@ -97,11 +97,11 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 			}
 			
 			if (card.note && card.note.length > 0) {
-				var noteIcon = window.$('<img src="https://github.com/elytrafae/prettycards/raw/master/img/CardPowers/note.png"></img>');
+				var noteIcon = window.$(`<img src="${utility.asset("img/CardPowers/note.png")}"></img>`);
 				noteIcon.contextmenu(function() {
 					OpenAuthorNote(card);
 				});
-				getOrCreateCardBottomLeftInfo(element).append(noteIcon);
+				getOrCreateCardBottomLeftInfo(element).append(noteIcon[0]);
 				//element.find(".cardStatus").append(noteIcon);
 			}
 			

@@ -1,6 +1,7 @@
 
 import { prettycards } from "../../underscript_checker";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import { utility } from "../../utility";
 
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
@@ -10,13 +11,13 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 		name: "Update Tester Sheet",
 		author: "elytrafae",
 		cardImagePrefix: "/images/cards/",
-		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/UpdateTest/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/UpdateTest/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
+		cardSongPrefix: utility.asset("audio/cards/UpdateTest/"),
+		//rarityImagePrefix: utility.asset("img/RarityIcons/"),
+		artifactImagePrefix: utility.asset("img/Artifacts/"),
+		tribeImagePrefix: utility.asset("img/Tribes/"),
+		soulImagePrefix: utility.asset("img/Souls/"),
+		aprilCardImagePrefix: utility.asset("img/Cards/UpdateTest/aprilFools/"),
+		aprilArtifactImagePrefix: utility.asset("img/Artifacts/aprilFools/"),
 		//universalCustomFont: "Aller",
 		note: `Test sheet go brrrrrr`
 	});

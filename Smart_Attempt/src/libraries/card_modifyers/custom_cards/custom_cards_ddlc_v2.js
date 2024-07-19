@@ -1,33 +1,34 @@
 
 import { prettycards } from "../../underscript_checker";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import { utility } from "../../utility";
 
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	
 	var c = window.prettycards.newCollection({
 		name: "Doki Doki Literature Club Set",
 		author: "elytrafae",
-		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/DDLC/",
-		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/DDLC/",
-		rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/DDLC/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
+		cardImagePrefix: utility.asset(`img/Cards/DDLC/`),
+		cardSongPrefix: utility.asset(`audio/cards/DDLC/`),
+		rarityImagePrefix: utility.asset(`img/RarityIcons/`),
+		artifactImagePrefix: utility.asset(`img/Artifacts/`),
+		tribeImagePrefix: utility.asset(`img/Tribes/`),
+		soulImagePrefix: utility.asset(`img/Souls/`),
+		aprilCardImagePrefix: utility.asset(`img/Cards/DDLC/aprilFools/`),
+		aprilArtifactImagePrefix: utility.asset(`img/Artifacts/aprilFools/`),
 		//universalCustomFont: "Aller",
 		note: `This is a Doki Doki Literature Club themed card set I wanted to make for the longest time. I wanted it to be perfect, so I often modified it, asked for feedback and even the custom cards idea was born because of this set. So, please enjoy and don't be afraid to give me feedback! ^^
 		<br><br>
 		NOTE: Hand nerfs cannot bring a monster below 1 HP. I didn't add this in every instance because some cards are full enough already.`
 	});
 	
-	var font_name = c.loadFont("Aller", "https://raw.githubusercontent.com/elytrafae/prettycards/master/fonts/Aller_Rg.ttf");
+	var font_name = c.loadFont("Aller", utility.asset("fonts/Aller_Rg.ttf"));
 	c.universalCustomFont = font_name;
 
 	var frame = c.newFrame({
 		id: "DDLC",
-		monsterImage: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_monster.png",
-		spellImage: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/DDLC/frame_spell.png"
+		monsterImage: utility.asset("img/CardFrames/DDLC/frame_monster.png"),
+		spellImage: utility.asset("img/CardFrames/DDLC/frame_spell.png")
 	});
 	
 	var doki = c.newTribe({

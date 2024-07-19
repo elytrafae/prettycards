@@ -1,6 +1,7 @@
 
 import { prettycards } from "../../underscript_checker";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import { utility } from "../../utility";
 
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 
@@ -9,14 +10,14 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
     var c = window.prettycards.newCollection({
 		name: "Kyra x elytrafae Sheet",
 		author: "Kyra and elytrafae",
-		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/Kyra/",
-		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/Kyra/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Kyra/",
-		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/Kyra/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
+		cardImagePrefix: utility.asset("img/Cards/Kyra/"),
+		cardSongPrefix: utility.asset("audio/cards/Kyra/"),
+		//rarityImagePrefix: utility.asset("img/RarityIcons/"),
+		artifactImagePrefix: utility.asset("img/Kyra/"),
+		tribeImagePrefix: utility.asset("img/Tribes/"),
+		soulImagePrefix: utility.asset("img/Souls/"),
+		aprilCardImagePrefix: utility.asset("img/Cards/Kyra/aprilFools/"),
+		aprilArtifactImagePrefix: utility.asset("img/Artifacts/aprilFools/"),
 		//universalCustomFont: "Aller",
 		note: `A little sheet I made for ideas that we came up with together :3`
 	});

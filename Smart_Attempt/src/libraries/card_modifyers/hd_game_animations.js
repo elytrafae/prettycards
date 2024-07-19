@@ -1,4 +1,5 @@
 import { PrettyCards_plugin, settings , addSetting } from "../underscript_checker";
+import { utility } from "../utility";
 
 addSetting({
 	'key': 'hd_game_animations',
@@ -20,7 +21,7 @@ function wrapAnimFunction(funcName, image) {
 
 function replaceAnim(image) {
 	var imgs = $(".vfx:not(.PrettyCards_DoneVFX)");
-	imgs.attr("src", `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardVFX/${image}.png?v=${window.animationCounter}`);
+	imgs.attr("src", utility.asset(`img/CardVFX/${image}.png?v=${window.animationCounter}`));
 	imgs.addClass("PrettyCards_DoneVFX");
 }
 

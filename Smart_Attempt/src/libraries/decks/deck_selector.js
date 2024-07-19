@@ -462,7 +462,7 @@ class SavedDeckSelector {
 		cardNameDiv$.html(deck.name);
 		card.find(".cardName").addClass(deck.soul);
 		card.find(".cardDesc div").html('<span class="' + deck.soul + '">' + (deck.description || "").replaceAll("\n", "<br>") + '</span>' + ( (!ignoreBase && deck.isBase) ? '<p style="color:grey; margin:0px;">(Loaded)</p>' : '') );
-		card.find(".cardFrame").css("background-image", "url(" + ( (!ignoreBase && deck.isBase) ? "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/frame_deck_gold.png" : "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardFrames/frame_deck.png") + ")" );
+		card.find(".cardFrame").css("background-image", "url(" + ( (!ignoreBase && deck.isBase) ? utility.asset("img/CardFrames/frame_deck_gold.png") : utility.asset("img/CardFrames/frame_deck.png")) + ")" );
 		
 		SetDeckSkin(card, deck.image);
 		

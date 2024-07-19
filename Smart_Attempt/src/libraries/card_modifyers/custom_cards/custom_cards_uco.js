@@ -1,6 +1,7 @@
 
 import { prettycards } from "../../underscript_checker";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
+import { utility } from "../../utility";
 
 const BATTLE_MEW_MEW_BASE = {
 	name: "{{PLURAL:$1|Battle Mew Mew|Battle Mew Mews}}",
@@ -25,14 +26,14 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	var c = window.prettycards.newCollection({
 		name: "UCO Ideas Set",
 		author: "elytrafae",
-		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/UCO_Ideas/",
-		cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/UCO_Ideas/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
-		aprilCardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/UCO_Ideas/aprilFools/",
-		aprilArtifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/aprilFools/",
+		cardImagePrefix: utility.asset("img/Cards/UCO_Ideas/"),
+		cardSongPrefix: utility.asset("audio/cards/UCO_Ideas/"),
+		//rarityImagePrefix: utility.asset("img/RarityIcons/"),
+		artifactImagePrefix: utility.asset("img/Artifacts/"),
+		tribeImagePrefix: utility.asset("img/Tribes/"),
+		soulImagePrefix: utility.asset("img/Souls/"),
+		aprilCardImagePrefix: utility.asset("img/Cards/UCO_Ideas/aprilFools/"),
+		aprilArtifactImagePrefix: utility.asset("img/Artifacts/aprilFools/"),
 		//universalCustomFont: "Aller",
 		note: `Here are some of my UCO ideas.
         <br>

@@ -1,5 +1,4 @@
-import { PrettyCards_plugin, prettycards } from "./underscript_checker";
-
+import { PrettyCards_plugin, prettycards, settings } from "./underscript_checker";
 
 var container = document.createElement("DIV");
 container.id = "PrettyCards_StyleContainer";
@@ -9,8 +8,12 @@ function loadCSS(css = "") {
         css = css.toString();
     }
     var ele = document.createElement("STYLE");
-    ele.innerHTML = css;
+    ele.innerHTML = parseCSS(css);
     container.appendChild(ele);
+}
+
+function parseCSS(/** @type {string} */text) {
+    return text.replace(/\$asset\$/gm, settings.asset_directory.value());
 }
 
 PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {

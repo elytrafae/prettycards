@@ -137,6 +137,17 @@ addSetting({
     'default': false, // default value
 });
 
+addSetting({
+	'key': 'asset_directory',
+	'name': 'Asset Directory', // Name in settings page
+	'note': "If you don't know what this does or how to change it, don't touch it!",
+	'type': 'text',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+    'hidden' : true,
+	//'default': "https://raw.githubusercontent.com/elytrafae/prettycards/master/", // default value
+    'default': "https://raw.githubusercontent.com/MysteryHD/prettycards-assets/master/", // default value
+});
+
 PrettyCards_plugin.events.emit.singleton("PrettyCards:init");
 
 //console.log(settings);

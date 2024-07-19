@@ -60,7 +60,7 @@ var packs_data = [];
 var packs_data2 = {}; // To ease id-based search of pack data.
 
 function GetPacksData(cb) {
-	window.$.getJSON("https://raw.githubusercontent.com/elytrafae/prettycards/master/json/packs.json", {}, (data) => {
+	window.$.getJSON(utility.asset("json/packs.json"), {}, (data) => {
 		console.log(data);
 		for (var i=0; i < data.length; i++) {
 			var packTypeData = data[i];

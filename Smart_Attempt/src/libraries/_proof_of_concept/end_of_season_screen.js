@@ -1,5 +1,6 @@
 import { getDivisionForElo } from "../mid_match/custom_game_end_screen";
 import { prettycards } from "../underscript_checker";
+import { utility } from "../utility";
 
 function returnRewardString(html, count) {
     if (count == 0) {return "";}
@@ -37,8 +38,8 @@ function viewEndOfSeasonScreen(elo, passedLegend = false) {
         divisionStr += `<div style="font-size:30px;">With ${elo} ELO!</div>`;
     }
 
-    var rewardStr = returnRewardStringImg("https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UndertalePack.png", packCount) + 
-        returnRewardStringImg("https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/DeltarunePack.png", packCount) + 
+    var rewardStr = returnRewardStringImg(utility.asset("img/Packs/UndertalePack.png"), packCount) + 
+        returnRewardStringImg(utility.asset("img/Packs/DeltarunePack.png"), packCount) + 
         returnRewardStringImg("images/dtFragment.png", dtFragCount) +
         returnRewardString(`<span class="ucp" style="font-size: 3em;">${window.$.i18n("item-ucp")}</span>`, ucpData[endDivision] || 0);
 

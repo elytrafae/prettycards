@@ -1,4 +1,5 @@
 
+import { utility } from "../utility.js";
 import {pagegetters} from "./../../libraries/page_getters.js";
 
 // This is the parent class.
@@ -64,8 +65,8 @@ class PacksPageTemplate {
 		return `
 		<div class="PrettyCards_PackContainer">
 			<div class="PrettyCards_FloatingPack">
-				<div class="PrettyCards_FloatingPackImage" style="background-image: url(${pack_data.image})">
-					<img src="https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UndertalePack.png" class="PrettyCards_InvisiblePack">
+				<div class="PrettyCards_FloatingPackImage" style="background-image: url(${utility.asset("img/Packs/" + pack_data.image)})">
+					<img src="${utility.asset("img/Packs/UndertalePack.png")}" class="PrettyCards_InvisiblePack">
 					<div class="PrettyCards_PackAmount">${pack_data.amount}</div>
 				</div>
 			</div>

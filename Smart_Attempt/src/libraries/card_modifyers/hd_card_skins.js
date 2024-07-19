@@ -17,7 +17,7 @@ addSetting({
 
 function returnHDImageIfThereIs(image, forceNormal = false) {
     if (hd_card_skins.includes(image)) {
-        return `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/HDCardSkins/${image}.png`;
+        return utility.asset(`img/HDCardSkins/${image}.png`);
     }
     if (forceNormal) {
         return `/images/cards/${image}.png`;
@@ -35,7 +35,7 @@ PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 });
 
 if (settings.hd_card_skins.value()) {
-    $.getJSON("https://raw.githubusercontent.com/elytrafae/prettycards/master/json/hdCardSkins.json", {}, function(data) {
+    $.getJSON(utility.asset("json/hdCardSkins.json"), {}, function(data) {
         hd_card_skins = data;
         PrettyCards_plugin.events.emit.singleton("PrettyCards:hdSkinsFetched", {skins: data});
     })

@@ -85,6 +85,10 @@ img[name="Genocide"],img[name="Outbreak"],img[name="Ultimate Fusion"] {
 	cursor: pointer;
 }
 
+.PrettyCards_AverageSizedArtifact {
+	height: 24px;
+}
+
 /*
 .PrettyCards_ScreenCover {
 	position: fixed;

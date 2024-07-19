@@ -143,6 +143,10 @@ class Utility {
 			document.head.appendChild(e);
 		});
 	}
+
+	asset(restOfPath) {
+		return settings.asset_directory.value() + restOfPath;
+	}
 	
 	// Some code I found on stack overflow. Let's see if it works . . . 
 	copyCSS(from_element, to_element) {
@@ -292,7 +296,7 @@ class Utility {
 			return `/afi/artifacts/${image}.png`;
 		}
 		if (settings.hd_artifacts.value() && !forceNoHd) {
-			return `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/HDArtifacts/${image}.png`;
+			return this.asset(`img/HDArtifacts/${image}.png`);
 		}
 		return `/images/artifacts/${image}.png`;
 	}
@@ -303,7 +307,7 @@ class Utility {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
 			mainImage = `/afi/artifacts/${image}.png`;
 		} else if (settings.hd_artifacts.value()) {
-			mainImage = `https://raw.githubusercontent.com/elytrafae/prettycards/master/img/HDArtifacts/${image}.png`;
+			mainImage = this.asset(`img/HDArtifacts/${image}.png`);
 		}
 		return this.getFallbackedImage(mainImage, backupImage);
 	}
@@ -311,13 +315,13 @@ class Utility {
 	/**@depracated Use getSoulImage instead!*/
 	getSoulImageLink(image, forceNoHd = false) {
 		if (!forceNoHd) {
-			return `https://github.com/elytrafae/prettycards/raw/master/img/Souls/${image}.png`;
+			return this.asset(`img/Souls/${image}.png`);
 		}
 		return `/images/souls/${image}.png`;
 	}
 
 	getSoulImage(/**@type {string}*/ image) {
-		return this.getFallbackedImage(`https://github.com/elytrafae/prettycards/raw/master/img/Souls/${image}.png`, `/images/souls/${image}.png`);
+		return this.getFallbackedImage(this.asset(`img/Souls/${image}.png`), `/images/souls/${image}.png`);
 	}
 
 	getCardJingleLink(card_name = "") {

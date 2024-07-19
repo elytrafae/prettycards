@@ -1,6 +1,7 @@
 import { PrettyCards_plugin, settings, addSetting } from "../underscript_checker";
+import { utility } from "../utility";
 
-const icon = "https://github.com/elytrafae/prettycards/raw/master/img/RarityIcons/ALL_RARITIES.png";
+const icon = utility.asset(`img/RarityIcons/ALL_RARITIES.png`);
 const rarityInputList = ["baseRarityInput", "commonRarityInput", "rareRarityInput", "epicRarityInput", "legendaryRarityInput", "determinationRarityInput", "tokenRarityInput", "baseGenInput:not(:disabled)"];
 
 addSetting({

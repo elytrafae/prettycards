@@ -14,7 +14,7 @@ var ucoBadgeSetting = addSetting({
 });
 
 if (ucoBadgeSetting.value()) {
-    $.getJSON("https://raw.githubusercontent.com/elytrafae/prettycards/master/json/ucoCardIds.json", {}, function(data) {
+    $.getJSON(utility.asset("json/ucoCardIds.json"), {}, function(data) {
         var set = new Set(data);
         PrettyCards_plugin.events.emit.singleton("PrettyCards:ucoCardListFetched", set);
     }).fail(function(err) {
@@ -27,7 +27,7 @@ if (ucoBadgeSetting.value()) {
             if (idList.has(card.fixedId || card.id)) {
                 PrettyCards_plugin.events.on("PrettyCards:TranslationExtReady", function() {
                     utility.addCustomSimpleTextIconToCard2(element, 
-                        "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/CardPowers/uco.png",
+                        utility.asset("img/CardPowers/uco.png"),
                         window.$.i18n("pc-cardbadge-uco-short"), 
                         window.$.i18n("pc-cardbadge-uco-desc"),
                         window.$.i18n("pc-cardbadge-uco-title")

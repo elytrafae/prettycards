@@ -3,15 +3,15 @@ class AudioDictionary {
 	
 	constructor() {
 		this.sounds = {
-			"your_turn_start" : "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Turn_Start.ogg",
+			"your_turn_start" : GetSoundPath("Turn_Start"),
 			"enemy_turn_start" : "",
 			"card_draw": "",
-			"monster_buff": "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Buff.ogg",
-			"monster_nerf": "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Nerf.ogg",
-			"paralyze": "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Paralyze.ogg",
-			"kr": "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/KR.ogg",
-			"silence": "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Silence.ogg",
-			"crit_spell": "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Spell_Crit.ogg"
+			"monster_buff": GetSoundPath("Buff"),
+			"monster_nerf": GetSoundPath("Nerf"),
+			"paralyze": GetSoundPath("Paralyze"),
+			"kr": GetSoundPath("KR"),
+			"silence": GetSoundPath("Silence"),
+			"crit_spell": GetSoundPath("Spell_Crit")
 		}
 		this.audio_objects = {}
 	}
@@ -28,6 +28,14 @@ class AudioDictionary {
 		audio.volume = volume * (volume_setting/100);
 		audio.play();
 		this.audio_objects[name] = audio;
+	}
+
+	GetSoundPath(name) {
+		var prefix = "https://raw.githubusercontent.com/MysteryHD/prettycards-assets/master/";
+		if (window.PrettyCards_settings) {
+			prefix = window.PrettyCards_settings.asset_directory.value();
+		}
+		return `${prefix}/audio/sfx/${name}.ogg`;
 	}
 	
 }

@@ -2,6 +2,7 @@
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
+import {utility} from '/src/libraries/utility.js';
 
 var custom_pages = ["CustomCardSkins", "CustomCards", "SmashOrPass", "CustomTranslations"];
 
@@ -39,7 +40,7 @@ if (IsOnCustomPage()) {
 	
 	//console.log("underscript", underscript);
 	$.ajax({
-		url: "https://raw.githubusercontent.com/elytrafae/prettycards/master/html_templates/undercards.html",
+		url: utility.asset("html_templates/undercards.html"),
 		success: function (data) {
 			//console.log(data);
 			document.open();

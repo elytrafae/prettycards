@@ -6,6 +6,11 @@
 - Fixed cards not loading on some pages properly
 
 ESCAPE TODO: 
+- Fix github workflow
+- Test workflow with Mystery
+- Make announcement about breaking changes
+- Make breaking changes
+- Release update shortly after
 - Find someone to take over the project maintanance
 
 TODO:

@@ -152,7 +152,7 @@ function StartVerified() {
 
 const openCloseFunction = "$(this).parent().toggleClass('PrettyCards_CT_Phase2_QuickRefEntryOpen')"
 function setUpQuickRef() {
-    $.getJSON(`https://raw.githubusercontent.com/elytrafae/prettycards/master/json/translationQuickRef.json`, {}, function(data) {
+    $.getJSON(utility.asset(`json/translationQuickRef.json`), {}, function(data) {
         var parent = $("#PrettyCards_CT_Phase2_QuickRef");
         for (var i=0; i < data.length; i++) {
             var entry = data[i];

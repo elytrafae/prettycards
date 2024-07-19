@@ -2,7 +2,7 @@
     {
         "g_cost": 100,
         "ucp_cost": 10,
-        "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UndertalePack",
+        "image_without_extension": "UndertalePack",
         "image_extension": ".png",
         "name": "pc-packs-ut-name",
         "description": "pc-packs-ut-desc",
@@ -11,7 +11,7 @@
     {
         "g_cost": 100,
         "ucp_cost": 10,
-        "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/DeltarunePack",
+        "image_without_extension": "DeltarunePack",
         "image_extension": ".png",
         "name": "pc-packs-dr-name",
         "description": "pc-packs-dr-desc",
@@ -20,7 +20,7 @@
     {
         "g_cost": 200,
         "ucp_cost": 20,
-        "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/UTYPack",
+        "image_without_extension": "UTYPack",
         "image_extension": ".png",
         "name": "pc-packs-uty-name",
         "description": "pc-packs-uty-desc",
@@ -29,7 +29,7 @@
     {
         "g_cost": -1,
         "ucp_cost": -1,
-        "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/ShinyPack",
+        "image_without_extension": "ShinyPack",
         "image_extension": ".gif",
         "name": "pc-packs-shiny-name",
         "description": "pc-packs-shiny-desc",
@@ -38,7 +38,7 @@
     {
         "g_cost": -1,
         "ucp_cost": -1,
-        "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/SuperPack",
+        "image_without_extension": "SuperPack",
         "image_extension": ".gif",
         "name": "pc-packs-super-name",
         "description": "pc-packs-super-desc",
@@ -47,7 +47,7 @@
     {
         "g_cost": -1,
         "ucp_cost": -1,
-        "image_without_extension": "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Packs/FinalPack",
+        "image_without_extension": "FinalPack",
         "image_extension": ".gif",
         "name": "pc-packs-final-name",
         "description": "pc-packs-final-desc",

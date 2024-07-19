@@ -1,5 +1,6 @@
 
 import { prettycards } from "../../underscript_checker";
+import { utility } from "../../utility";
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
 
 PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
@@ -9,12 +10,12 @@ PrettyCards_plugin.events.on("PrettyCards:customCards", function () {
 	var c = window.prettycards.newCollection({
 		name: "Hate Soul Set",
 		author: "MysteryHD, bantikat and elytrafae",
-		cardImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/Cards/Hate_Soul/",
-		//cardSongPrefix: "https://github.com/elytrafae/prettycards/raw/master/audio/cards/DDLC/",
-		//rarityImagePrefix: "https://raw.githubusercontent.com/elytrafae/prettycards/master/img/RarityIcons/",
-		artifactImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Artifacts/",
-		tribeImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Tribes/",
-		soulImagePrefix: "https://github.com/elytrafae/prettycards/raw/master/img/Souls/",
+		cardImagePrefix: utility.asset("img/Cards/Hate_Soul/"),
+		//cardSongPrefix: utility.asset("audio/cards/DDLC/"),
+		//rarityImagePrefix: utility.asset("img/RarityIcons/"),
+		artifactImagePrefix: utility.asset("img/Artifacts/"),
+		tribeImagePrefix: utility.asset("img/Tribes/"),
+		soulImagePrefix: utility.asset("img/Souls/"),
 		note: `A HATE Soul concept we threw together to explore some game mechanics that went underutilised in the main game. Enjoy! ^^`
 	});
 	

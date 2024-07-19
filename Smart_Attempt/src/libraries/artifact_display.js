@@ -71,7 +71,7 @@ class ArtifactDisplay {
 		//console.log(this.artifacts, artifact);
 		var img = utility.getArtifactImage(artifact.image);
 		img.style = "height: 24px;";
-		img.className = `pointer PrettyCards_Artifact_${artifact.rarity || "COMMON"}`;
+		img.className = `pointer PrettyCards_AverageSizedArtifact PrettyCards_Artifact_${artifact.rarity || "COMMON"}`;
 		img.setAttribute("name", artifact.name);
 		img.setAttribute("image", artifact.image);
 		img.setAttribute("legendary", artifact.rarity === "LEGENDARY");
