@@ -1,9 +1,5 @@
 
-- More API spagetti I did not to change stuff
-- Remove the Wide Packs Page Format because the UTY pack would not fit
-- Make this thing scalable for new pack types with JSON
-- Custom Game End screen now play UTY songs
-- Fixed cards not loading on some pages properly
+- Made asset pathes dynamic, and moved assets to a separate repo. This changes nothing for the average user except faster updates for stuff like theme songs.
 
 ESCAPE TODO: 
 - Fix github workflow
