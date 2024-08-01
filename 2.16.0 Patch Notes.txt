@@ -1,12 +1,8 @@
 
-- Made asset pathes dynamic, and moved assets to a separate repo. This changes nothing for the average user except faster updates for stuff like theme songs.
+
 
 ESCAPE TODO: 
-- Fix github workflow
-- Test workflow with Mystery
-- Make announcement about breaking changes
-- Make breaking changes
-- Release update shortly after
+- Pretty annoying bug: The Game End Screen has the number of cards given as plural!
 - Find someone to take over the project maintanance
 
 TODO:
