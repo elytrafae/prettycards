@@ -192,7 +192,7 @@ class PackOpenAnimationTemplate {
 		
 		var up = document.createElement("DIV");
 		up.className = "PrettyCards_RippedPack_Up PrettyCards_RippedPack";
-		up.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		up.style.backgroundImage = `url("${utility.asset("img/Packs/" + this.pack_data.image)}")`;
 		up.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
 		up.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
 		up.style.width = anim_pack_rect.width + "px";
@@ -201,7 +201,7 @@ class PackOpenAnimationTemplate {
 		
 		var down = document.createElement("DIV");
 		down.className = "PrettyCards_RippedPack_Down PrettyCards_RippedPack";
-		down.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		down.style.backgroundImage = `url("${utility.asset("img/Packs/" + this.pack_data.image)}")`;
 		down.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
 		down.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
 		down.style.width = anim_pack_rect.width + "px";
@@ -219,7 +219,7 @@ class PackOpenAnimationTemplate {
 		
 		var left = document.createElement("DIV");
 		left.className = "PrettyCards_RippedPack_Left PrettyCards_RippedPack";
-		left.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		left.style.backgroundImage = `url("${utility.asset("img/Packs/" + this.pack_data.image)}")`;
 		left.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
 		left.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
 		left.style.width = anim_pack_rect.width + "px";
@@ -228,7 +228,7 @@ class PackOpenAnimationTemplate {
 		
 		var right = document.createElement("DIV");
 		right.className = "PrettyCards_RippedPack_Left PrettyCards_RippedPack";
-		right.style.backgroundImage = "url(" + this.pack_data.image_without_extension + this.pack_data.image_extension + ")";
+		right.style.backgroundImage = `url("${utility.asset("img/Packs/" + this.pack_data.image)}")`;
 		right.style.top = (window.innerHeight/2 - anim_pack_rect.height/2) + "px";
 		right.style.left = (window.innerWidth/2 - anim_pack_rect.width/2) + "px";
 		right.style.width = anim_pack_rect.width + "px";
