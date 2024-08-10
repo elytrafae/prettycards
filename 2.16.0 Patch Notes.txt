@@ -1,9 +1,9 @@
 
 
 
-ESCAPE TODO: 
+BUGFIX TODO: 
 - Pretty annoying bug: The Game End Screen has the number of cards given as plural!
-- Find someone to take over the project maintanance
+- https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541
 
 TODO:
 - Remake the Packs Page entirely!
