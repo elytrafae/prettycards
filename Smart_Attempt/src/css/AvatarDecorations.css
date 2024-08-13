@@ -1,0 +1,81 @@
+
+.PrettyCards_AvatarWrapper {
+    position: relative;
+}
+
+.PrettyCards_ActualAvatarImage {
+    height: 100%;
+}
+
+.PrettyCards_CommonAvatarDecoComponent {
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Delta Rune */
+
+.PrettyCards_AvatarDeco_DeltaRuneLeftWing {
+    width: 80%;
+    height: 50%;
+    right: 100%;
+    top: 25%;
+    background-color: #CCCCCC;
+    animation: DeltaRuneWingFloat 5s alternate-reverse ease-in-out infinite;
+}
+
+.PrettyCards_AvatarDeco_DeltaRuneRightWing {
+    width: 80%;
+    height: 50%;
+    left: 100%;
+    top: 25%;
+    background-color: #CCCCCC;
+    animation: DeltaRuneWingFloat 5s alternate-reverse ease-in-out infinite;
+}
+
+.PrettyCards_AvatarDeco_DeltaRuneBody {
+    translate: -50% -50%;
+    top: 0;
+    left: 50%;
+    width: 20%;
+    height: 20%;
+    background-color: #AA0000;
+    animation: DeltaRuneBodyFloat 6s alternate-reverse ease-in-out infinite;
+}
+
+.PrettyCards_AvatarDeco_DeltaRuneTriangles {
+    translate: -50% -50%;
+    top: 100%;
+    left: 50%;
+    width: 50%;
+    height: 25%;
+    background-color: #00AA00;
+    animation: DeltaRuneTriangleFloat 5s alternate-reverse ease-in-out infinite;
+    animation-delay: 300ms;
+}
+
+@keyframes DeltaRuneWingFloat {
+    from {
+        top: 15%;
+    }
+    to {
+        top: 35%;
+    }
+}
+
+@keyframes DeltaRuneBodyFloat {
+    from {
+        top: -5%;
+    }
+    to {
+        top: 5%;
+    }
+}
+
+@keyframes DeltaRuneTriangleFloat {
+    from {
+        top: 95%;
+    }
+    to {
+        top: 105%;
+    }
+}

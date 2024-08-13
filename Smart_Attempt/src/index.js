@@ -64,9 +64,9 @@ import {} from "/src/libraries/footer_remover.js";
 
 //import {} from "/src/libraries/mid_match/match_profiles.js";
 
-import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
-import {} from "/src/libraries/_proof_of_concept/superposition_cards.js";
-import {} from "/src/libraries/_proof_of_concept/card_data_optimization.js";
+//import {} from "/src/libraries/_proof_of_concept/end_of_season_screen.js";
+//import {} from "/src/libraries/_proof_of_concept/superposition_cards.js";
+//import {} from "/src/libraries/_proof_of_concept/card_data_optimization.js";
 
 // import {} from "/src/libraries/external_api_integration/youtube_player.js";
 
@@ -76,7 +76,9 @@ import {} from "/src/libraries/april_fools/spamton_ads.js";
 
 import {} from "/src/libraries/shops/crafting_in_decks.js";
 
-import {} from "./libraries/decks/deck_image_import.js"; // Test
+//import {} from "./libraries/decks/deck_image_import.js"; // Test
+
+import {} from "./libraries/paid_cosmetics/avatar_decorations.js";
 
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";

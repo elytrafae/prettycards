@@ -1,9 +1,12 @@
 
 
 
-BUGFIX TODO: 
+SHORT-TERM TODO: 
 - Pretty annoying bug: The Game End Screen has the number of cards given as plural!
 - https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541
+- https://discord.com/channels/330092826513899530/959722428592971856/1272738009011195905
+- Remove Custom Deck System
+- Add stuff from backlog from Google Notes
 
 TODO:
 - Remake the Packs Page entirely!
@@ -16,7 +19,6 @@ TODO:
 - Add minimalistic version of deck system (?)
 - Cosmetics Wishlist (Possibly with Discord integration?)
 
-- Resource Packs
 - Game Animation Upgrades + Optimization with remembering the image data and generating URLs fir each locally instead of re-fetching the image each time
 - Multiple Settings for HD Settings
 - Remake Lobby Games
