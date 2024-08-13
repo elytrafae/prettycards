@@ -5,6 +5,7 @@ SHORT-TERM TODO:
 - Pretty annoying bug: The Game End Screen has the number of cards given as plural!
 - https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541
 - https://discord.com/channels/330092826513899530/959722428592971856/1272738009011195905
+- Fix Friendship sort
 - Remove Custom Deck System
 - Add stuff from backlog from Google Notes
 
