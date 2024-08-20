@@ -3,6 +3,7 @@ import {PrettyCards_plugin, settings, addSetting, prettycards} from "./underscri
 import {NormalPackOpenAnimation} from "./../libraries/pack_open_animation_templates/normal.js";
 import {OnuPackOpenAnimation} from "./../libraries/pack_open_animation_templates/onu.js";
 import {InitPacks, GetPageTemplateByName, settingsoptions} from "/src/page_specific/packs.js";
+import { utility } from "./utility.js";
 
 PrettyCards_plugin.events.on('openedPacks', function (open_data) {
 	console.log(open_data, window.PrettyCards_pack_being_opened);
@@ -57,7 +58,7 @@ ChangeTemplate(settings.packs_animation_template.value() || animsettingsoptions[
 function StartOpenPackAnimation(pack_data, open_data) {
 	var pack_image = document.createElement("IMG");
 	pack_image.className = "PrettyCards_AnimationPack";
-	pack_image.src = pack_data.image;
+	pack_image.src = utility.asset("img/Packs/" + pack_data.image);
 	
 	//console.log(open_data);
 	//console.log(JSON.stringify(open_data));

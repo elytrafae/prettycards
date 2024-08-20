@@ -91,6 +91,7 @@ function InitPacks() {
 	GetPacksData(() => {
 		ExecuteWhen("PrettyCards:onPageLoad PrettyCards:TranslationExtReady", function () {
 			utility.hideUglyPage();
+			// TODO: Make this add actual elements. Appending to innerHTML will cause problems later!
 			document.querySelector(".mainContent").innerHTML += "<div id='PrettyCards_MainContent'></div><div id='PrettyCards_PackOpenContent'></div>";
 			ChangeTemplate(settings.packs_page_template.value() || settingsoptions[0], null);
 			//prettycards.testPackOpenAnimation = function(a, b) {StartOpenPackAnimation(packs_data2[a], b)};
