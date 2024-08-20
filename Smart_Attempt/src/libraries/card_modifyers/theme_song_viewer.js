@@ -66,6 +66,10 @@ function createSimpleButton(card) {
 	return button;
 }
 
+function BigPreviewLogic(nr) {
+	return nr != 4 && nr < 7;
+}
+
 function createComplexButton(settings) {
 	if (settings.replacements.length == 0) {
 		return "";
@@ -80,7 +84,7 @@ function createComplexButton(settings) {
 	var button = $(`
 	<span class="glyphicon glyphicon-volume-up PrettyCards_CardThemeSongPlayer" onclick="event.stopPropagation();">
 		<span class="PrettyCards_TransparentText">S</span>
-		<span class="PrettyCards_CardThemeSongList">
+		<span class="PrettyCards_CardThemeSongList${BigPreviewLogic(settings.replacements.length) ? " PrettyCards_CardThemeSongList_Big" : ""}">
 			${options}
 		</span>
 	</span>`);

@@ -4,12 +4,13 @@
 - Fixed card jingle stuff not listening to Underscript's settings all the time
 - Added a setting to control whether ot not you want theme songs to be pre-loaded. It's on by default (current behaviour)
 - Changed mid-game preload behavior (will only preload the first song, and if that's played then the second etc.) (The exception to this is cards with special rules) (needs testing)
-- Gold, Dust and XP tick faster on the Custom Game End Screen
 - Mettaton NEO no longer has 13 themes and no longer has a special rule
+- Theme song previews had some small changes in UI. CSS should also be faster now
+- Gold, Dust and XP tick faster on the Custom Game End Screen
 
 SHORT-TERM TODO: 
 
-- https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541
+- https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541 (hopefully addressed above)
 - Fix Friendship sort
 - Remove Custom Deck System
 - Add stuff from backlog from Google Notes
