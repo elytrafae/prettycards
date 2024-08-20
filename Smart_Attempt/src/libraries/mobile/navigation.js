@@ -192,7 +192,7 @@ function CreateSideNavMenu() {
 			user_part = $(`
 			<table class="PrettyCards_NavBarProfile">
 				<tr>
-					<td rowspan="2"><img class="${avatar.className}" src="${avatar.src}"></td>
+					<td rowspan="2">${avatar.outerHTML}</td>
 					<td>${selfUsername}</td>
 				</tr>
 				<tr>

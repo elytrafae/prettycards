@@ -342,6 +342,7 @@ class Utility {
 		
 	}
 
+	/**@returns {Promise<HTMLImageElement>} */
 	preloadImage(url) {
 		return new Promise((resolve, reject) => {
 			var image = new Image();
@@ -589,6 +590,11 @@ class Utility {
 			case usconst.ELO: return Currency.ELO;
 			default: return null;
 		}
+	}
+
+	/** @returns {number} */
+	getUnderscriptVolumeSettingValue(category = "sfx") {
+		return PrettyCards_plugin.settings().value("underscript.audio." + category) ? PrettyCards_plugin.settings().value("underscript.audio." + category + ".volume") : 0;
 	}
 	
 }

@@ -20,6 +20,7 @@ import {} from "/src/libraries/kromer_test.js";
 import {} from "./libraries/mobile/navigation.js";
 
 import {} from "./libraries/mid_match/premature_turn_end_prevent.js";
+import {} from "./libraries/mid_match/custom_game_end_screen.js";
 
 import {} from "./libraries/chat/user_info.js";
 import {} from "./libraries/chat/custom_chat_badges.js";
@@ -78,7 +79,7 @@ import {} from "/src/libraries/shops/crafting_in_decks.js";
 
 //import {} from "./libraries/decks/deck_image_import.js"; // Test
 
-import {} from "./libraries/paid_cosmetics/avatar_decorations.js";
+import {} from "./libraries/paid_cosmetics/avatar_borders.js";
 
 import {InitPacks} from "./page_specific/packs.js";
 import {InitDecks} from "/src/page_specific/decks.js";

@@ -231,7 +231,7 @@ class BarData {
         
         // I'm not using "playSound" here because I want to pre-load the sound.
         var audio = new Audio();
-        audio.volume = getUnderscriptVolumeSettingValue("sfx");
+        audio.volume = utility.getUnderscriptVolumeSettingValue("sfx");
         audio.src = `https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
 
         var divisionPart = document.createElement("SPAN");
@@ -737,10 +737,10 @@ function displayMatchResults(data) {
     var questData = getQuests();
 
     var bgm = new Audio();
-    bgm.volume = getUnderscriptVolumeSettingValue("result");
+    bgm.volume = utility.getUnderscriptVolumeSettingValue("result");
     bgm.src = data.endType.songSrc;
 
-    collectNoise.volume = getUnderscriptVolumeSettingValue("sfx");
+    collectNoise.volume = utility.getUnderscriptVolumeSettingValue("sfx");
     collectNoise.src = "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/RewardCollect.ogg";
 
     var leaveRow = document.createElement("DIV");
@@ -750,7 +750,7 @@ function displayMatchResults(data) {
     backdrop.className = "PrettyCards_GameEnd_Backdrop";
     window.$(backdrop).css("top", -window.innerHeight + "px").animate({"top": "0px"}, 1000, "easeInQuad", () => {
         // anim done
-        landNoise.volume = getUnderscriptVolumeSettingValue("sfx");
+        landNoise.volume = utility.getUnderscriptVolumeSettingValue("sfx");
         landNoise.play();
         setTimeout(() => {
             bgm.loop = true;
@@ -891,7 +891,7 @@ function displayMatchResults(data) {
 
 function playSound(src) {
     var audio = new Audio();
-    audio.volume = getUnderscriptVolumeSettingValue("sfx");
+    audio.volume = utility.getUnderscriptVolumeSettingValue("sfx");
     audio.src = src;
     audio.play();
 }
@@ -1121,7 +1121,7 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
             data = {card : data};
         }
         var hoverText = document.createElement("SPAN");
-        hoverText.innerHTML = data.name ? data.name : window.$.i18n(`card-name-${data.card}`);
+        hoverText.innerHTML = data.name ? data.name : window.$.i18n(`card-name-${data.card}`, 1);
         hoverText.dataset.rewardHoverData = JSON.stringify(data);
         hoverText.className = "cyan";
         rewardCont.appendChild(hoverText);
@@ -1187,10 +1187,6 @@ function collectQuestReward(/**@type {number}*/ id) {
             reject(e);
         })
     });
-}
-
-function getUnderscriptVolumeSettingValue(category = "sfx") {
-    return PrettyCards_plugin.settings().value("underscript.audio." + category) ? PrettyCards_plugin.settings().value("underscript.audio." + category + ".volume") : 0;
 }
 
 prettycards.collectQuestReward = collectQuestReward;

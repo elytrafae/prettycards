@@ -17,6 +17,8 @@ addSetting({
 	'category': "card"
 });
 
+
+
 var cardExceptions = {
 	358 : "/sounds/load.wav",
 	351 : "/sounds/gasterBlaster.wav"
@@ -29,6 +31,7 @@ prettycards.playThemeSongPreviewEvent = function(SRC, e) {
 	// console.log("Button clicked!", e);
 	PrettyCards_plugin.events.emit("PrettyCards:pauseBGM");
 	audio.src = SRC;
+	audio.volume = utility.getUnderscriptVolumeSettingValue("jingle");
 	audio.play();
 	audio.onended = audio.onerror = function() {
 		PrettyCards_plugin.events.emit("PrettyCards:resumeBGM");

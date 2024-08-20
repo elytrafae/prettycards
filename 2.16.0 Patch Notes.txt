@@ -1,10 +1,15 @@
 
-
+- The Game End Screen displaying cards as plural when collecting quests is (hopefully) fixed!
+- Hopefully fixed switch stuff trying to be erroniously loaded (https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541)
+- Fixed card jingle stuff not listening to Underscript's settings all the time
+- Added a setting to control whether ot not you want theme songs to be pre-loaded. It's on by default (current behaviour)
+- Changed mid-game preload behavior (will only preload the first song, and if that's played then the second etc.) (The exception to this is cards with special rules) (needs testing)
+- Gold, Dust and XP tick faster on the Custom Game End Screen
+- Mettaton NEO no longer has 13 themes and no longer has a special rule
 
 SHORT-TERM TODO: 
-- Pretty annoying bug: The Game End Screen has the number of cards given as plural!
+
 - https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541
-- https://discord.com/channels/330092826513899530/959722428592971856/1272738009011195905
 - Fix Friendship sort
 - Remove Custom Deck System
 - Add stuff from backlog from Google Notes

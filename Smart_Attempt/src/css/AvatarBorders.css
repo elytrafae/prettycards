@@ -1,0 +1,205 @@
+
+.PrettyCards_AvatarWrapper {
+    position: relative;
+}
+
+.PrettyCards_AvatarWrapper * {
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.PrettyCards_AvatarBorder {
+    pointer-events: none;
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-position: center;
+    background-size: contain;
+}
+
+.PrettyCards_AvatarBorderColor {
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    opacity: 1;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
+.COMMON .PrettyCards_AvatarBorderColor {
+    background-color: #999;
+}
+
+.RARE .PrettyCards_AvatarBorderColor {
+    background-color: #00b8ff;
+}
+
+.EPIC .PrettyCards_AvatarBorderColor {
+    background-color: #d535d9;
+}
+
+.LEGENDARY .PrettyCards_AvatarBorderColor {
+    background-color: gold;
+}
+
+.MYTHIC .PrettyCards_AvatarBorderColor {
+    animation: MythicColor 5s linear infinite;
+}
+
+.TOKEN .PrettyCards_AvatarBorderColor {
+    background-color: #00c800;
+}
+
+.FAE .PrettyCards_AvatarBorderColor {
+    background-color: #ec00dd!important;
+}
+
+.avatar.PrettyCards_AvatarBorderChanged {
+    border: none;
+    animation: none;
+    box-shadow: none;
+    margin: 1px;
+}
+
+/*
+.MYTHIC .PrettyCards_AvatarBorder {
+    animation: MythicHueRotate 5s linear infinite;
+}
+*/
+
+@keyframes MythicColor {
+    0% {
+        background-color: #f00;
+    }
+
+    17% {
+        background-color: #ff0;
+    }
+
+    33% {
+        background-color: #0f0;
+    }
+
+    50% {
+        background-color: #0ff;
+    }
+
+    67% {
+        background-color: #00f;
+    }
+
+    84% {
+        background-color: #f0f;
+    }
+
+    100% {
+        background-color: #f00;
+    }
+}
+
+@keyframes MythicHueRotate {
+    0% {
+        filter: invert(44%) sepia(51%) saturate(6859%) hue-rotate(277deg) brightness(90%) contrast(101%);
+    }
+
+    17% {
+        filter: invert(87%) sepia(8%) saturate(5224%) hue-rotate(1deg) brightness(102%) contrast(102%);
+    }
+
+    33% {
+        filter: invert(62%) sepia(45%) saturate(4532%) hue-rotate(80deg) brightness(124%) contrast(126%);
+    }
+
+    50% {
+        filter: invert(89%) sepia(74%) saturate(6756%) hue-rotate(100deg) brightness(107%) contrast(101%);
+    }
+
+    67% {
+        filter: invert(12%) sepia(98%) saturate(5113%) hue-rotate(245deg) brightness(90%) contrast(154%);
+    }
+
+    84% {
+        filter: invert(18%) sepia(97%) saturate(3274%) hue-rotate(292deg) brightness(118%) contrast(131%);
+    }
+
+    100% {
+        filter: invert(44%) sepia(51%) saturate(6859%) hue-rotate(277deg) brightness(90%) contrast(101%);
+    }
+}
+
+.PrettyCards_CommonAvatarDecoComponent {
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Delta Rune */
+
+.PrettyCards_AvatarDeco_DeltaRuneLeftWing {
+    width: 80%;
+    height: 50%;
+    right: 100%;
+    top: 25%;
+    background-color: #CCCCCC;
+    animation: DeltaRuneWingFloat 5s alternate-reverse ease-in-out infinite;
+}
+
+.PrettyCards_AvatarDeco_DeltaRuneRightWing {
+    width: 80%;
+    height: 50%;
+    left: 100%;
+    top: 25%;
+    background-color: #CCCCCC;
+    animation: DeltaRuneWingFloat 5s alternate-reverse ease-in-out infinite;
+}
+
+.PrettyCards_AvatarDeco_DeltaRuneBody {
+    translate: -50% -50%;
+    top: 0;
+    left: 50%;
+    width: 20%;
+    height: 20%;
+    background-color: #AA0000;
+    animation: DeltaRuneBodyFloat 6s alternate-reverse ease-in-out infinite;
+}
+
+.PrettyCards_AvatarDeco_DeltaRuneTriangles {
+    translate: -50% -50%;
+    top: 100%;
+    left: 50%;
+    width: 50%;
+    height: 25%;
+    background-color: #00AA00;
+    animation: DeltaRuneTriangleFloat 5s alternate-reverse ease-in-out infinite;
+    animation-delay: 300ms;
+}
+
+@keyframes DeltaRuneWingFloat {
+    from {
+        top: 15%;
+    }
+    to {
+        top: 35%;
+    }
+}
+
+@keyframes DeltaRuneBodyFloat {
+    from {
+        top: -5%;
+    }
+    to {
+        top: 5%;
+    }
+}
+
+@keyframes DeltaRuneTriangleFloat {
+    from {
+        top: 95%;
+    }
+    to {
+        top: 105%;
+    }
+}

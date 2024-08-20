@@ -20,6 +20,16 @@ addSetting({
     'category': "card"
 });
 
+var themePreloadSetting = addSetting({
+	'key': 'theme_song_preload',
+	'name': 'Card Theme Song Preload', // Name in settings page
+	'note': "If Multiple Card Jingles is on alongside this, songs will be preloaded to prevent delays between the action and the song actually playing",
+	'type': 'boolean',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	'default': true, // default value
+	'category': "card"
+});
+
 class ThemeSongSetting {
 
     constructor(card) {
@@ -28,6 +38,7 @@ class ThemeSongSetting {
         this.replacements = [];
         this.playedBefore = 0; // Only counts at times when it goes in order.
         this.playAsJingle = true;
+        this.preloadedNr = -1; // This is only taken mid-game!
     }
 
     getNextReplacement() {
@@ -44,15 +55,35 @@ class ThemeSongSetting {
     }
 
     addFile(path) {
-        if (underscript.onPage("Game") || underscript.onPage("Spectate")) {
-            // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
-            utility.preloadAudio(path).catch((e) => {}); // Moving it to whenever a card is rendered, except during Games and Spectating.
-        }
         this.replacements.push(path);
+    }
+
+    // THIS IS ONLY FOR MID-GAME PRELOADING!
+    preloadNext() {
+        if (!themePreloadSetting.value()) {
+            return;
+        }
+        this.preloadedNr++;
+        if (this.preloadedNr >= this.replacements.length) {
+            return; // All variants got loaded!
+        } 
+        // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
+        utility.preloadAudio(this.replacements[this.preloadedNr]).catch((e) => {});
+    }
+
+    preloadAllIfInGame() {
+        if ((underscript.onPage("Game") || underscript.onPage("Spectate")) && themePreloadSetting.value()) {
+            for (var i=this.preloadedNr+1; i < this.replacements.length; i++) {
+                // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
+                utility.preloadAudio(this.replacements[i]).catch((e) => {}); // Moving it to whenever a card is rendered, except during Games and Spectating.
+            }
+            this.preloadedNr = this.replacements.length;
+        }
     }
 
 }
 
+/** @type {Array<ThemeSongSetting>} */
 var options = [];
 var baseThemeSongData = {};
 
@@ -113,12 +144,16 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady PrettyCards:Transl
         if (key == "_Disabled_Themes" || disabledNameList.includes(key)) {
             continue;
         }
+        var isGame = underscript.onPage("Game") || underscript.onPage("Spectate");
         var card = window.getCardWithName(key);
         if (card) {
             var s = registerCard(card);
             s.playAsJingle = card.rarity == "LEGENDARY" || card.rarity == "DETERMINATION" || card.tribes.includes("ROYAL_INVENTION");
             for (var i=1; i <= baseThemeSongData[key]; i++) {
                 s.addFile(utility.asset(`audio/cards/${card.name.replaceAll(" ", "_")}/intro_${i}.ogg`));
+            }
+            if (isGame) {
+                s.preloadNext(); // Preload first theme to play, second one will follow when the first is played etc.
             }
         }
     }
@@ -137,6 +172,7 @@ function hardCodedCardInteractions() {
             }
             return this.replacements[(card.originalAttack - SNOELLE_BASE_ATK)/SNOELLE_ATK_STEP];
         }
+        snoelle.preloadAllIfInGame();
     }
 
     var flowey = getThemeSongSettingByCardId(54);
@@ -147,6 +183,7 @@ function hardCodedCardInteractions() {
             }
             return this.replacements[(FLOWEY_BASE_ATK - card.originalAttack) % this.replacements.length];
         }
+        flowey.preloadAllIfInGame();
     }
 
     var heroine = getThemeSongSettingByCardId(106);
@@ -157,8 +194,10 @@ function hardCodedCardInteractions() {
             }
             return this.replacements[(HEROINE_BASE_ATK - card.originalAttack)/HEROINE_ATK_STEP];
         }
+        heroine.preloadAllIfInGame();
     }
 
+    /*
     var mtt_neo = getThemeSongSettingByCardId(110);
     if (mtt_neo) {
         mtt_neo.getReplacementOnCardData = function(card) {
@@ -166,6 +205,7 @@ function hardCodedCardInteractions() {
             return this.replacements[Math.min(this.playedBefore-1, this.replacements.length-1)]; // Have to reduce it by one because we increase the "playedBefore" counter before getting this, skipping the first one.
         }
     }
+    */
 }
 
 var originalAudio;
@@ -173,7 +213,7 @@ var cardSoundFX;
 
 function playSoundFX(address) {
     cardSoundFX = new Audio(address);
-    cardSoundFX.volume = 0.2;
+    cardSoundFX.volume = utility.getUnderscriptVolumeSettingValue("jingle");
     cardSoundFX.play();
 }
 
@@ -199,7 +239,10 @@ if (settings.multi_theme_songs.value()) {
                 }
                 var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
                 if (setting) {
-                    var name = setting.getReplacementOnCardData(card) || setting.getNextReplacement();
+                    var name = setting.getReplacementOnCardData(card);
+                    if (name == null) {
+                        name = setting.getNextReplacement();
+                    }
                     if (setting.playAsJingle) {
                         window.playJingle("NON EXISTENT CARD");
                         window.jingle.src = name;
@@ -207,6 +250,7 @@ if (settings.multi_theme_songs.value()) {
                     } else {
                         playSoundFX(name);
                     }
+                    setting.preloadNext();
                 }
             }) 
         } else {
@@ -225,25 +269,28 @@ if (settings.multi_theme_songs.value()) {
             window.Audio = AudioSpoofed;
         }
 
-        // Caching system for non-game pages so that it doesn't load everything at once unnecessarily.
-        var cards_preloaded = [];
-        PrettyCards_plugin.events.on("func:appendCard PC_appendCard", function(card, element) {
-            //var html$ = data.element;
-            PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
-                var id = card.fixedId || card.id;
-                if (!cards_preloaded.includes(id)) {
-                    cards_preloaded.push(id);
-                    var setting = getThemeSongSettingByCardId(id);
-                    if (setting) {
-                        setting.replacements.forEach( (url) => {
-                            // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
-                            utility.preloadAudio(url).catch(()=>{});
-                        })
+        if (themePreloadSetting.value()) {
+            // Caching system for non-game pages so that it doesn't load everything at once unnecessarily.
+            var cards_preloaded = [];
+            PrettyCards_plugin.events.on("func:appendCard PC_appendCard", function(card, element) {
+                //var html$ = data.element;
+                PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
+                    var id = card.fixedId || card.id;
+                    if (!cards_preloaded.includes(id)) {
+                        cards_preloaded.push(id);
+                        var setting = getThemeSongSettingByCardId(id);
+                        if (setting) {
+                            setting.replacements.forEach( (url) => {
+                                // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
+                                utility.preloadAudio(url).catch(()=>{});
+                            })
+                        }
                     }
-                }
-            })
+                })
 
-        })
+            })
+        }
+        
         
     })
 
