@@ -150,9 +150,11 @@ function switchPartHelper(nodes, className) {
         opacity = 1;
     }
     var classPart = `class="PrettyCards_SwitchHighlight_${className}" `;
+    /* This setting no longer exists
     if (!settings.switch_highlight.value()) {
         classPart = "";
     }
+    */
     var text = nodes[1];
     return `<span ${classPart}style="opacity:${opacity}; ${opacity <= 0 ? "display:none;" : ""}">${text}</span>`;
 }

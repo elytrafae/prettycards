@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        PrettyCards
-// @version     2.15.5
+// @version     2.15.6
 // @author      elytrafae
 // @description Make (parts of) Undercards look fabulous!
 // @homepage    https://github.com/elytrafae/prettycards
