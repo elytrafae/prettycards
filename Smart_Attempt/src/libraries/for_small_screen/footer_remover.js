@@ -1,4 +1,4 @@
-import { addSetting, PrettyCards_plugin, settings } from "./underscript_checker";
+import { addSetting, PrettyCards_plugin, settings } from "../underscript_checker";
 
 
 function RemoveFooter() {
@@ -10,7 +10,7 @@ addSetting({
 	'name': 'Remove Footer', // Name in settings page
 	'note': "Sayonara, ugly!",
 	'type': 'boolean',
-	'refresh': true, // true to add note "Will require you to refresh the page"
+	'refresh': false, // true to add note "Will require you to refresh the page"
 	'default': false, // default value
 	'onChange' : RemoveFooter
 });

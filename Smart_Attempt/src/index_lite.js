@@ -61,7 +61,8 @@ import {} from "/src/libraries/emote_sound_manager.js";
 import {} from "./libraries/main_menu.js";
 import {} from "./libraries/emote_dowloader.js";
 
-import {} from "/src/libraries/footer_remover.js";
+import {} from "/src/libraries/for_small_screen/footer_remover.js";
+import {} from "/src/libraries/for_small_screen/logo_remover.js";
 
 //import {} from "/src/libraries/mid_match/match_profiles.js";
 

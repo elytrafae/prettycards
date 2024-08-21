@@ -8,6 +8,8 @@
 - Theme song previews had some small changes in UI. CSS should also be faster now
 - Gold, Dust and XP tick faster on the Custom Game End Screen
 - Fixed packs images being kinda all over the place
+- Added a setting for removing the logo. It's off by default.
+- Attempted to address a potential reason for slow loading and lag for PrettyCards
 
 SHORT-TERM TODO: 
 - https://discord.com/channels/330092826513899530/959722428592971856/1271803065930088541 (hopefully addressed above)
