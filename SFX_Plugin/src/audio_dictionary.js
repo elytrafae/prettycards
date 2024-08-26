@@ -1,10 +1,17 @@
 
+import { plugin } from "./underscript_checker";
+
 class AudioDictionary {
-	
+
 	constructor() {
+		this.sounds = {};
+		this.audio_objects = {};
+	}
+
+	SetSounds() {
 		this.sounds = {
-			"your_turn_start" : GetSoundPath("Turn_Start"),
-			"enemy_turn_start" : "",
+			"your_turn_start": GetSoundPath("Turn_Start"),
+			"enemy_turn_start": "",
 			"card_draw": "",
 			"monster_buff": GetSoundPath("Buff"),
 			"monster_nerf": GetSoundPath("Nerf"),
@@ -12,10 +19,9 @@ class AudioDictionary {
 			"kr": GetSoundPath("KR"),
 			"silence": GetSoundPath("Silence"),
 			"crit_spell": GetSoundPath("Spell_Crit")
-		}
-		this.audio_objects = {}
+		};
 	}
-	
+
 	PlaySoundEffect(name, volume_setting = 50, volume = 0.4) {
 		if (!window.soundEnabled || volume_setting <= 0) {
 			return;
@@ -25,7 +31,7 @@ class AudioDictionary {
 		}
 		var musicPath = this.sounds[name];
 		var audio = new Audio(musicPath);
-		audio.volume = volume * (volume_setting/100);
+		audio.volume = volume * (volume_setting / 100);
 		audio.play();
 		this.audio_objects[name] = audio;
 	}
@@ -37,9 +43,12 @@ class AudioDictionary {
 		}
 		return `${prefix}/audio/sfx/${name}.ogg`;
 	}
-	
+
 }
 
 var audioDictionary = new AudioDictionary();
+plugin.events.on("connect", () => {
+	audioDictionary.SetSounds();
+})
 
-export {audioDictionary}
+export { audioDictionary }

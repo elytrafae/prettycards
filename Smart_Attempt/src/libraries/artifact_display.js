@@ -130,9 +130,14 @@ class ArtifactDisplay {
 				}
 				var table = page.querySelector("table.table");
 				if (!table) {
-					reject("NO_TABLE");
+					resolve([]);
+					return;
 				}
 				var tbody = table.querySelector("tbody");
+				if (!tbody) {
+					resolve([]);
+					return;
+				}
 				this.buyableArtifactIds = [];
 				for (var i=0; i < tbody.children.length; i++) {
 					var row = tbody.children[i];
