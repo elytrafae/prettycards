@@ -10,15 +10,15 @@ class AudioDictionary {
 
 	SetSounds() {
 		this.sounds = {
-			"your_turn_start": GetSoundPath("Turn_Start"),
+			"your_turn_start": this.GetSoundPath("Turn_Start"),
 			"enemy_turn_start": "",
 			"card_draw": "",
-			"monster_buff": GetSoundPath("Buff"),
-			"monster_nerf": GetSoundPath("Nerf"),
-			"paralyze": GetSoundPath("Paralyze"),
-			"kr": GetSoundPath("KR"),
-			"silence": GetSoundPath("Silence"),
-			"crit_spell": GetSoundPath("Spell_Crit")
+			"monster_buff": this.GetSoundPath("Buff"),
+			"monster_nerf": this.GetSoundPath("Nerf"),
+			"paralyze": this.GetSoundPath("Paralyze"),
+			"kr": this.GetSoundPath("KR"),
+			"silence": this.GetSoundPath("Silence"),
+			"crit_spell": this.GetSoundPath("Spell_Crit")
 		};
 	}
 
