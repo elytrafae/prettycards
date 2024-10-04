@@ -45,13 +45,22 @@
 </table>
 */
 
-function ApplyBattleProfileSkin() {
+function ApplyBattleProfileSkin(data) {
     // Potential idea for buttons: Hide the original buttons, add new ones that just press the old buttons for max compat
     // Also, maybe use a bitmap for the server communicating which features are on/off?
 
     // Insert part for changing .yourRank/.enemyRank if needed
+    if (data.featureFlags & 1) {
+
+    }
     // Insert part for changing soul image (.profile .soul img)
+    if (data.featureFlags & 2) {
+        
+    }
     // Insert part for potentially changing stuff about the health bar (.profile .hpBar) (most likely just add a CSS class and only change stuff that way)
+    if (data.featureFlags & 4) {
+        
+    }
     // Insert part to edit the end turn button (#endTurnBtn, only do this for the current player, otherwise jank might arise)
     // Insert part to edit the icons (.stats-group img) (The turn should be skipped for the enemy, then everything else in order. They have no other distinguishing features)
     // Insert part to edit Dustpile Button (.btn-dustpile)

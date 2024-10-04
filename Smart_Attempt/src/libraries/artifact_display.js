@@ -141,6 +141,11 @@ class ArtifactDisplay {
 				this.buyableArtifactIds = [];
 				for (var i=0; i < tbody.children.length; i++) {
 					var row = tbody.children[i];
+					if (!row) {
+						console.error("Somehow, someway, row #" + i + " does not exist, despite tbody.children.length being " + tbody.children.length);
+						resolve(this.buyableArtifactIds);
+						return;
+					}
 					/**@type {String} */
 					var nameId = row.children[1].getAttribute("data-i18n");
 					var price = parseInt(row.children[4].firstChild.innerText);

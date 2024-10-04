@@ -568,4 +568,4 @@ class CardFrame {
 
 prettycards.newCollection = newCollection;
 
-export {collections};
+export {collections, CustomCardCollection};

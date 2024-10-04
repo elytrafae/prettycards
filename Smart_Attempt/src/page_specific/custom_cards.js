@@ -13,6 +13,7 @@ import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_hate.js"
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_uco.js";
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_updatetest.js";
 import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_kyra.js";
+import {} from "/src/libraries/card_modifyers/custom_cards/custom_cards_robot_tribe.js";
 
 import { createFloatingSoul } from "../libraries/floating_souls";
 import { artifactDisplay } from "../libraries/artifact_display";
@@ -126,7 +127,7 @@ function ViewCollection(c) {
 		<div id='PrettyCards_CustomCardsShowcaseContent'>
 			<div class="PrettyCards_BigCollectionName">${c.name}</div>
 			<div class="PrettyCards_BigCollectionAuthor Artist">${c.author}</div>
-			<div>${c.note}</div>	
+			<div>${window.$.i18n(c.note)}</div>	
 		</div>
 	`);
 	

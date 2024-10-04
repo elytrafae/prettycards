@@ -72,10 +72,13 @@ function AddBorder(/** @type {HTMLElement} */ wrappedAvatar, /** @type {string|n
 }
 
 function RenderImageWithBorder(/** @type {string} */ avatarImgAddr, /** @type {string} */ borderImgAddr = null, /** @type {string} */ rarity = "COMMON") {
+    /** @type {HTMLImageElement} */
     var avatarImg = null;
+    /** @type {HTMLImageElement} */
     var borderImg = null;
 
     function TrueRender() {
+        
         // Do shit here
     }
 
