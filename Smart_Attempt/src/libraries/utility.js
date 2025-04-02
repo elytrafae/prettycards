@@ -13,13 +13,15 @@ if (!collectionPlace) {
 var season_number = -1;
 const seasonKeyStart = "quest-s";
 const seasonKeyEnd = "-start-1";
+const aprilImage = 'fishImages';
+const aprilMusic = 'fishMusics';
 
 const accessExceptions = ["elytrafae", "Jazmin290"]; // Usernames to let use Translator features for obvious reasons. Might use this for other types of permissions as well later? IDK.
 
 PrettyCards_plugin.events.on("translation:loaded", function(data) {
 	var messages = $.i18n.messageStore.messages.en;
 	var list = Object.keys(messages);
-	
+
     //for (var key in messages) {
     //    if (key.startsWith(seasonKeyStart) && key.endsWith(seasonKeyEnd)) {
 	//		var portion = key.substring(seasonKeyStart.length, key.length-seasonKeyEnd.length);
@@ -121,7 +123,7 @@ class Utility {
 			}
 		});
 	}
-	
+
 	loadCSSFromGH(name, srcName = "base") {
 		return new Promise((resolve, reject) => {
 			var src = this.githubCSSSources[srcName];
@@ -147,8 +149,8 @@ class Utility {
 	asset(restOfPath) {
 		return settings.asset_directory.value() + restOfPath;
 	}
-	
-	// Some code I found on stack overflow. Let's see if it works . . . 
+
+	// Some code I found on stack overflow. Let's see if it works . . .
 	copyCSS(from_element, to_element) {
 		const styles = window.getComputedStyle(from_element);
 		if (styles.cssText !== "") {
@@ -164,7 +166,7 @@ class Utility {
 			to_element.style.cssText = cssText
 		}
 	}
-	
+
 	completeCopyArray(arr) {
 		if (!Array.isArray(arr)) {
 			return this.completeCopy(arr);
@@ -179,7 +181,7 @@ class Utility {
 		}
 		return copy;
 	}
-	
+
 	completeCopy(object) { // WARNING! Does not handle recursive refernces!
 		if (Array.isArray(object)) {
 			return this.completeCopyArray(object);
@@ -194,7 +196,7 @@ class Utility {
 		}
 		return copy;
 	}
-	
+
 	deleteByValue(arr, item) {
 		var index = arr.indexOf(item);
 		if (index !== -1) {
@@ -203,12 +205,12 @@ class Utility {
 		}
 		return false;
 	}
-	
+
 	// This. Code. Is. ANCIENT. What is up with this, Onu!?!?
 	addFriend(username, callback) {
 		$.post("Friends", {username: username, addFriend: "Add friend"}, callback);
 	}
-	
+
 	appendCardFriendship(card, container, level, currentXp, maxXp) { // Why must you torture me . . . ?
 		var $card = window.appendCardFriendship(card, level, currentXp, maxXp);
 		$card.find('.cardDesc').empty();
@@ -275,7 +277,7 @@ class Utility {
 
 	getCardImageLink(image) {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
-			return `/afi/cards/${image}.png`;
+			return `/${aprilImage}/cards/${image}.png`;
 		}
 		return `/images/cards/${image}.png`;
 	}
@@ -293,7 +295,7 @@ class Utility {
 	/**@deprecated Use getArtifactImage instead unless very necessary!*/
 	getArtifactImageLink(image, forceNoHd = false) {
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
-			return `/afi/artifacts/${image}.png`;
+			return `/${aprilImage}/artifacts/${image}.png`;
 		}
 		if (settings.hd_artifacts.value() && !forceNoHd) {
 			return this.asset(`img/HDArtifacts/${image}.png`);
@@ -305,7 +307,7 @@ class Utility {
 		var backupImage = `/images/artifacts/${image}.png`;
 		var mainImage = backupImage;
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
-			mainImage = `/afi/artifacts/${image}.png`;
+			mainImage = `/${aprilImage}/artifacts/${image}.png`;
 		} else if (settings.hd_artifacts.value()) {
 			mainImage = this.asset(`img/HDArtifacts/${image}.png`);
 		}
@@ -327,7 +329,7 @@ class Utility {
 	getCardJingleLink(card_name = "") {
 		card_name = card_name.replaceAll(" ", "_");
 		if (this.getSeasonMonth() == 3) { // Is it an April Season?
-			return `/afm/cards/${card_name}.ogg`;
+			return `/${aprilMusic}/cards/${card_name}.ogg`;
 		}
 		return `/musics/cards/${card_name}.ogg`;
 	}
@@ -339,7 +341,7 @@ class Utility {
 			audio.onerror = reject;
 			audio.src = url;
 		})
-		
+
 	}
 
 	/**@returns {Promise<HTMLImageElement>} */
@@ -464,19 +466,19 @@ class Utility {
 	// From StackOverflow: https://stackoverflow.com/questions/5598743/finding-elements-position-relative-to-the-document
 	getCoordsRelativeToDocument(elem) { // crossbrowser version
 		var box = elem.getBoundingClientRect();
-	
+
 		var body = document.body;
 		var docEl = document.documentElement;
-	
+
 		var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
 		var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-	
+
 		var clientTop = docEl.clientTop || body.clientTop || 0;
 		var clientLeft = docEl.clientLeft || body.clientLeft || 0;
-	
+
 		var top  = box.top +  scrollTop - clientTop;
 		var left = box.left + scrollLeft - clientLeft;
-	
+
 		return { top: Math.round(top), left: Math.round(left), width: box.width, height: box.height };
 	}
 
@@ -567,7 +569,7 @@ class Utility {
 		})
 	}
 
-	
+
 	/**@returns {Currency|null} */
 	/**@description Does not work on cards! */
 	feildItemsToMyCurrencies(item) {
@@ -596,12 +598,12 @@ class Utility {
 	getUnderscriptVolumeSettingValue(category = "sfx") {
 		return PrettyCards_plugin.settings().value("underscript.audio." + category) ? PrettyCards_plugin.settings().value("underscript.audio." + category + ".volume") : 0;
 	}
-	
+
 }
 
 /**@template L,R */
 class Pair {
-    
+
     constructor(/**@type {L} */ left, /**@type {R} */ right) {
         /**@type {L} */
         this.left = left;
