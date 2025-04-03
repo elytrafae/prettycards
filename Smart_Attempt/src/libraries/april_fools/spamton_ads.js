@@ -20,7 +20,7 @@ var ads = [
         color: "darkblue",
         picSrc: "images/cards/Bulldogzer.png",
         textSize: 2,
-        link: "https://media.discordapp.net/attachments/1089991272174993519/1089991301069545492/image.png"
+        link: "https://i.imgur.com/lLwWBvH.png"
     },
     {
         text: "Does your neighbors grass look [delicious and natural]? You can have the same [delicious outdoor floor], JUST BUY NOW!",
@@ -71,7 +71,7 @@ var ads = [
         color: "green",
         picSrc: "images/cards/Spamton.png",
         textSize: 1.5,
-        link: "https://cdn.discordapp.com/attachments/1089991272174993519/1089996859998736414/k55m8nkfsra81.png",
+        link: "https://i.imgur.com/BbgWGW5.png",
     },
     {
         text: "are YOU [[All Alone On A Late Night?]]????? Want more [[PRIME ENTERTAINMENT!]] CLICK HERE!!!",
@@ -101,7 +101,7 @@ PrettyCards_plugin.events.on("BootstrapDialog:show", function(data) {
     var isSettingOff = adSetting.value() == "OFF";
     if (adSetting.value() == "SEASONAL") {
         isSettingOff = utility.getSeasonMonth() != 3;
-    } 
+    }
     if (isSettingOff || data.$modalContent.find(".mulligan")[0]) {
         return;
     }
