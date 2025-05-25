@@ -87,9 +87,19 @@
 }
 
 .PrettyCards_ArtBG_MagicWand {
-
     background-image: url($asset$img/ArtifactBackgrounds/Magic_Wand.png);
     background-size: cover;
     background-position: top center;
 }
 
+.PrettyCards_ArtBG_DarkWorld {
+    background-image: url($asset$img/ArtifactBackgrounds/Dark_World.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.PrettyCards_ArtBG_GigaBattery {
+    background-image: url($asset$img/ArtifactBackgrounds/Giga_Battery.png);
+    background-size: cover;
+    background-position: center;
+}
