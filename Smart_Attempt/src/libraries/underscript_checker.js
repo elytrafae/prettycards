@@ -1,26 +1,3 @@
-
-if (typeof(window.underscript) === "undefined") {
-    if ((!window.localStorage.getItem("PrettyCards_DependencyErrorMessageShown")) || (window.localStorage.getItem("PrettyCards_DependencyErrorMessageShown") == "false")) {
-        var dialog = window.BootstrapDialog.show({
-                title: "Oh no!",
-                type: window.BootstrapDialog.TYPE_WARNING,
-                message: "Looks like you don't have Underscript installed, or you deactivated it! In order for PrettyCards to work, you need to have it up and running. Until then, the features of this userscript will simply not work. Thank you for your understanding.",
-                buttons: [{
-                        label: "Proceed",
-                        cssClass: 'btn-primary',
-                        action: function (dialog) {
-                            dialog.close();
-                        }
-                    }
-                ]
-            });
-        window.localStorage.setItem("PrettyCards_DependencyErrorMessageShown", true);
-    };
-	console.error("PrettyCards Error: Underscript is not installed!");
-} else {
-    window.localStorage.setItem("PrettyCards_DependencyErrorMessageShown", false);
-}
-
 var PrettyCards_plugin = window.underscript.plugin("PrettyCards", GM_info.script.version);
 var prettycards = {};
 window.prettycards = prettycards;

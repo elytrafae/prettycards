@@ -24,10 +24,12 @@ module.exports = {
         //updateURL: `https://unpkg.com/${package.name}/dist/${package.name}.meta.js`,
         updateURL: `https://github.com/elytrafae/${package.name}/releases/latest/download/${package.name}.user.js`,
         //downloadURL: `https://unpkg.com/${package.name}/dist/${package.name}.user.js`,
-		downloadURL: `https://github.com/elytrafae/prettycards/releases/latest/download/prettycards.user.js`,
-        require: [],
+		    downloadURL: `https://github.com/elytrafae/prettycards/releases/latest/download/prettycards.user.js`,
+        require: [
+          'https://raw.githubusercontent.com/UCProjects/UnderScript/master/src/checkerV2.js',
+        ],
         grant: 'none',
-        "run-at" : "document-idle" 
+        "run-at" : "document-idle"
       },
       pretty: true,
     }),
