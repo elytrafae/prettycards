@@ -1,4 +1,3 @@
-import { utility } from "./utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 
 var rarityIconsHTML = {};
@@ -21,9 +20,6 @@ for (var i=0; i < extensions.length; i++) {
 		rarityIconsHTML[extension][rarity] = GenerateRarityIconHTML(extension, rarity);
 	}
 }
-
-rarityIconsHTML["DELTARUNE"]["BASE"] = `<img src="/images/rarity/DELTARUNE.png" title="BASE">`;
-rarityIconsHTML["UTY"]["BASE"] = `<img src="/images/rarity/UTY.png" title="BASE">`;
 
 function preLoadIcons() {
 	var element = document.createElement("DIV");
