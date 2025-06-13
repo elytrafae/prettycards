@@ -8,7 +8,7 @@ PrettyCards_plugin.updater?.({
 });
 
 if (localStorage.getItem("PrettyCards_UpdatedToVersion") !== version && version != "local" ) {
-	$.get(`https://api.github.com/repos/elytrafae/prettycards/releases/${version}`, {}, function(data) {
+	$.get(`https://api.github.com/repos/elytrafae/prettycards/releases/tags/${version}`, {}, function(data) {
 		ExecuteWhen("PrettyCards:TranslationExtReady", function() {
 			PrettyCards_plugin.toast({
 				title: window.$.i18n("pc-updater-success-title") + "<br>" + (data.name || "No name available"),
