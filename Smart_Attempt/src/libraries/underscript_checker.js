@@ -21,7 +21,7 @@ if (typeof(window.underscript) === "undefined") {
     window.localStorage.setItem("PrettyCards_DependencyErrorMessageShown", false);
 }
 
-var PrettyCards_plugin = window.underscript.plugin("PrettyCards");
+var PrettyCards_plugin = window.underscript.plugin("PrettyCards", GM_info.script.version);
 var prettycards = {};
 window.prettycards = prettycards;
 window.PrettyCards_plugin = PrettyCards_plugin;
