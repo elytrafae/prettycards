@@ -30,46 +30,38 @@ const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
     "newElo": 1783
 }*/
 
-const ELO_PER_DIVISION = 25;
+const ELO_BASE = 1100;
+
+const ELO_PER_DIVISION = 30;
 
 const DIVISIONS = [
-    "COPPER_IV",
     "COPPER_III",
     "COPPER_II",
     "COPPER_I",
-    "IRON_IV",
     "IRON_III",
     "IRON_II",
     "IRON_I",
-    "GOLD_IV",
     "GOLD_III",
     "GOLD_II",
     "GOLD_I",
-    "EMERALD_IV",
     "EMERALD_III",
     "EMERALD_II",
     "EMERALD_I",
-    "SAPPHIRE_IV",
     "SAPPHIRE_III",
     "SAPPHIRE_II",
     "SAPPHIRE_I",
-    "AMETHYST_IV",
     "AMETHYST_III",
     "AMETHYST_II",
     "AMETHYST_I",
-    "RUBY_IV",
     "RUBY_III",
     "RUBY_II",
     "RUBY_I",
-    "DIAMOND_IV",
     "DIAMOND_III",
     "DIAMOND_II",
     "DIAMOND_I",
-    "ONYX_IV",
     "ONYX_III",
     "ONYX_II",
     "ONYX_I",
-    "MASTER_IV",
     "MASTER_III",
     "MASTER_II",
     "MASTER_I",
@@ -89,15 +81,15 @@ function getOrCreateCardCurrency(/**@type {number} */ cardId) {
 class BarData {
 
     constructor(/**@type {number} */ firstSize, /**@type {number} */ secondSize, /**@type {number} */ startValue, /**@type {String} */ firstClass, /**@type {String} */ secondClass) {
-        /**@type {number} */ 
+        /**@type {number} */
         this.firstSize = firstSize;
-        /**@type {number} */ 
+        /**@type {number} */
         this.secondSize = secondSize;
-        /**@type {number} */ 
+        /**@type {number} */
         this.startValue = startValue;
-        /**@type {String} */ 
+        /**@type {String} */
         this.firstClass = firstClass;
-        /**@type {String} */ 
+        /**@type {String} */
         this.secondClass = secondClass;
         /**@type {String} */
         this.firstTextClass = "PrettyCards_Hidden";
@@ -208,7 +200,7 @@ class BarData {
         data.customRow = true;
         var LVpart = document.createElement("SPAN");
         data.customRowElement.appendChild(LVpart);
-        
+
         separator.style.width = "180px";
         separator.style.display = "inline-block";
         data.customRowElement.appendChild(separator);
@@ -228,7 +220,7 @@ class BarData {
         var endClass = endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "Bar");
         var data = new BarData(ELO_PER_DIVISION, ELO_PER_DIVISION, startValue, startClass, endClass);
         data.setTextClasses(startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "_NEON"), endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "_NEON"));
-        
+
         // I'm not using "playSound" here because I want to pre-load the sound.
         var audio = new Audio();
         audio.volume = utility.getUnderscriptVolumeSettingValue("sfx");
@@ -356,7 +348,7 @@ class RewardSourceInstance {
         this.amount = amount;
         /**@type {number} */
         this.passedAmount = 0;
-        
+
         /**@type {HTMLElement} */
         this.container = document.createElement("SPAN");
         /**@type {HTMLElement} */
@@ -406,7 +398,7 @@ class RewardSourceInstance {
 class RewardRow {
 
     constructor(/**@type {Currency} */ currency) {
-        /**@type {Currency} */ 
+        /**@type {Currency} */
         this.currency = currency;
         /**@type {Array.<RewardSourceInstance>} */
         this.sources = [];
@@ -481,7 +473,7 @@ class RewardRow {
             this.sources.push(inst);
             this.instanceContainer.appendChild(inst.container);
         }
-        
+
     }
 
     tick() {
@@ -506,7 +498,7 @@ class RewardRow {
             } else {
                 this.breakdownContainer.classList.remove("PrettyCards_Hidden");
             }
-            
+
         }
         setTimeout(this.tick.bind(this), this.tickSpeed);
     }
@@ -516,14 +508,14 @@ class RewardRow {
 class RewardManager {
 
     static #ORDER = [
-        Currency.GOLD, 
-        Currency.DUST, 
-        Currency.UCP, 
-        Currency.DTFRAG, 
-        Currency.UT_PACK, 
-        Currency.DR_PACK, 
-        Currency.SHINY_PACK, 
-        Currency.SUPER_PACK, 
+        Currency.GOLD,
+        Currency.DUST,
+        Currency.UCP,
+        Currency.DTFRAG,
+        Currency.UT_PACK,
+        Currency.DR_PACK,
+        Currency.SHINY_PACK,
+        Currency.SUPER_PACK,
         Currency.FINAL_PACK,
         Currency.CARD_SKIN,
         Currency.PROFILE_SKIN,
@@ -607,7 +599,7 @@ class RewardManager {
 }
 
 function getDivisionForElo(elo) {
-    var nr = Math.floor((elo - 1200)/ELO_PER_DIVISION);
+    var nr = Math.floor((elo - ELO_BASE)/ELO_PER_DIVISION);
     return DIVISIONS[Math.min(nr, DIVISIONS.length-1)];
 }
 
@@ -693,13 +685,13 @@ function transformMatchEndData(data) {
         newData.rewardManager.addReward(Currency.XP, new RewardSourceInstance(RewardSource.MATCH, data.newXp - data.oldXp));
         newData.rewardManager.addBarForCurrency(Currency.XP, BarData.returnXPData(data.oldJaugeSize, data.jaugeSize, data.oldJaugeSize - data.xpUntilNextLevel, levelUpPair, newData.rewardManager, parseInt($('.level').html()) /* Yes, this is how Onu gets the LV */ ));
     }
-    
+
     if (data.oldElo && data.newElo) {
         newData.rewardManager.addReward(Currency.ELO, new RewardSourceInstance(RewardSource.MATCH, data.newElo - data.oldElo));
         var minEloDivision = getDivisionStart(data.oldElo);
         newData.rewardManager.addBarForCurrency(Currency.ELO, BarData.returnEloData(data.oldElo - minEloDivision, data.oldElo, data.newElo, data.oldDivision, data.newDivision));
     }
-    
+
     if (bonusPair) {
         newData.rewardManager.addReward(bonusPair.getLeft(), bonusPair.getRight());
     }
@@ -730,7 +722,7 @@ var collectNoise = new Audio();
 landNoise.src = "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
 
 function displayMatchResults(data) {
-    
+
     //console.log(data, data.endType, data.endType.textKey, window.$(data.endType.textKey));
 
     var friendshipData = getFriendshipData();
@@ -813,7 +805,7 @@ function displayMatchResults(data) {
                     collectNoise.currentTime = 0;
                     collectNoise.play();
                     data.rewardManager.addReward(reward.getLeft(), new RewardSourceInstance(RewardSource.FRIENDSHIP, reward.getRight()));
-                }, 
+                },
                 () => {
                     renderFriendship(fd);
                     friendshipButton.removeAttribute("disabled");
@@ -991,10 +983,10 @@ PrettyCards_plugin.events.on("PreGameEvent", function (data) {
 function gameEndHandler(didWin, callback) {
     window.music.pause();
     window.musicEnabled = false;
-    window.finish = true; 
-    window.$('.spellPlayed').remove(); 
-    window.$('#enemyMute').remove(); 
-    window.$('#game-history').remove(); 
+    window.finish = true;
+    window.$('.spellPlayed').remove();
+    window.$('#enemyMute').remove();
+    window.$('#game-history').remove();
     if (window.settingsDialog !== null) { window.settingsDialog.close(); }
     if (window.selectCardDialog !== null) { window.selectCardDialog.close(); }
     if (window.dustpileDialog !== null) { window.dustpileDialog.close(); }
@@ -1021,11 +1013,11 @@ PrettyCards_plugin.events.on('getError:before getGameError:before', function (da
     if (!customGameEndScreenSetting.value()) {
         return;
     }
-    // For some reason Onu displays the same message for both cases. 
+    // For some reason Onu displays the same message for both cases.
     // However, I want to prepare for when this gets fixed.
     var actualMessage = JSON.parse(JSON.parse(data.message).args)[0];
     console.log(data, actualMessage);
-    if (actualMessage != "game-turn-limit" && actualMessage != "game-time-limit") { 
+    if (actualMessage != "game-turn-limit" && actualMessage != "game-time-limit") {
         return;
     }
     this.canceled = true;
@@ -1107,7 +1099,7 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
         rewardCont.innerHTML = window.$.i18n("quests-ucp", reward.reward);
         return new Pair(Currency.UCP, parseInt(reward.reward));
     }
-    
+
     if (currency && common_rewards.includes(currency)) {
         rewardCont.innerHTML = currency.getCurrencyIcon().outerHTML + '<span class="white">x' + reward.reward + '</span>';
         currency.applyTextClass(rewardCont);
@@ -1140,7 +1132,7 @@ function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
         return new Pair(Currency.PROFILE_SKIN, 1);
     };
 
-    if (currency === Currency.AVATAR) { 
+    if (currency === Currency.AVATAR) {
         rewardCont.innerHTML = `<img class="avatar ${reward.reward.rarity}" src="${reward.reward.image}">`
         return new Pair(Currency.AVATAR, 1);
     };
