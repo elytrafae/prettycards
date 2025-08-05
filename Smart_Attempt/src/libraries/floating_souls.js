@@ -8,7 +8,7 @@ function createFloatingSoul(/**@type {HTMLImageElement}*/ image, containerClass,
     left.className = "PrettyCards_SplitSoul_Left";
     var leftImage = image.cloneNode()
     leftImage.className += leftClass;
-    left.appendChild(image.cloneNode());
+    left.appendChild(leftImage.cloneNode());
     container.appendChild(left);
 
     var right = document.createElement("DIV");
