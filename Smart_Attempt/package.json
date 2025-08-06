@@ -6,7 +6,8 @@
     "homepage": "https://github.com/elytrafae/prettycards",
     "bugs": "https://github.com/elytrafae/prettycards",
     "scripts": {
-        "start": "webpack --config webpack.config.js --watch --stdin --dev",
+        "_start": "webpack --help",
+        "start": "webpack --config webpack.config.js --watch --mode development -d eval-source-map",
         "build": "webpack --config webpack.config.js",
         "prepack": "webpack --config webpack.config.js",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,20 +23,20 @@
     "author": "elytrafae",
     "license": "",
     "devDependencies": {
-        "css-loader": "^6.10.0",
+        "css-loader": "^7.1.2",
         "raw-loader": "^4.0.2",
-        "webpack": "^5.88.1",
-        "webpack-cli": "^3.3.11",
-        "webpack-userscript": "^2.5.1"
+        "webpack": "^5.101.0",
+        "webpack-cli": "^6.0.1",
+        "webpack-userscript": "^3.2.3"
     },
     "dependencies": {
         "file-saver": "^2.0.5",
-        "fuse.js": "^6.6.2",
+        "fuse.js": "^7.1.0",
         "gifuct-js": "^2.1.2",
         "jszip": "^3.10.1",
         "owoify-js": "^2.0.0",
-        "pako": "^2.0.4",
-        "style-loader": "^3.3.3",
-        "tesseract.js": "^4.1.0"
+        "pako": "^2.1.0",
+        "style-loader": "^4.0.0",
+        "tesseract.js": "^6.0.1"
     }
 }

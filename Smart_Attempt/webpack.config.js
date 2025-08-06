@@ -2,7 +2,9 @@ const path = require('path');
 const WebpackUserscript = require('webpack-userscript');
 const package = require('./package.json');
 
-const dev = process.argv.includes('--dev');
+//const dev = process.argv.includes('--dev');
+const dev = process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development';
+
 
 module.exports = {
   mode: dev ? 'development' : 'production',
@@ -16,23 +18,25 @@ module.exports = {
     //libraryTarget: 'this',
   },
   plugins: [
-    new WebpackUserscript({
-      headers: {
-        name: 'PrettyCards',
-        match: 'https://*.undercards.net/*',
-        exclude: 'https://*.undercards.net/*/*',
-        //updateURL: `https://unpkg.com/${package.name}/dist/${package.name}.meta.js`,
-        updateURL: `https://github.com/elytrafae/${package.name}/releases/latest/download/${package.name}.user.js`,
-        //downloadURL: `https://unpkg.com/${package.name}/dist/${package.name}.user.js`,
-		    downloadURL: `https://github.com/elytrafae/prettycards/releases/latest/download/prettycards.user.js`,
-        require: [
-          'https://raw.githubusercontent.com/UCProjects/UnderScript/master/src/checkerV2.js',
-        ],
-        grant: 'none',
-        "run-at" : "document-idle"
-      },
-      pretty: true,
-    }),
+    new WebpackUserscript.UserscriptPlugin({
+      
+      headers(original) {
+        return {
+          name: 'PrettyCards',
+          match: 'https://*.undercards.net/*',
+          exclude: 'https://*.undercards.net/*/*',
+          updateURL: `https://github.com/elytrafae/${package.name}/releases/latest/download/${package.name}.user.js`,
+          downloadURL: `https://github.com/elytrafae/prettycards/releases/latest/download/prettycards.user.js`,
+          require: [
+            'https://raw.githubusercontent.com/UCProjects/UnderScript/master/src/checkerV2.js',
+          ],
+          grant: 'none',
+          "run-at" : "document-idle"
+        };
+    },
+    pretty: true
+  }),
+    
   ],
   module: {
     rules: [

@@ -35,7 +35,14 @@ function GetPageTemplateByName(name) {
 }
 
 function ChangeTemplate(newname, oldname) {
-	GetPageTemplateByName(newname).generatePage(packs_data, packs_data2);
+	var template = GetPageTemplateByName(newname);
+	if (!template) {
+		if (pagetemplates.length <= 0) {
+			throw "No templates of any kind could be loaded! Something went terribly wrong!";
+		}
+		template = pagetemplates[0];
+	}
+	template.generatePage(packs_data, packs_data2);
 }
 
 addSetting({
