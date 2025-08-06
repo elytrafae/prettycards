@@ -148,10 +148,13 @@ class ArtifactDisplay {
 					}
 					/**@type {String} */
 					var nameId = row.children[1].getAttribute("data-i18n");
-					var price = parseInt(row.children[4].firstChild.innerText);
-					var id = parseInt(lastOf(nameId.split('-')));
-					//console.log(row, nameId, id);
-					this.buyableArtifactIds[id] = price;
+					var priceEntity = row.children[4].firstChild;
+					if (priceEntity) { // Fix for artifacts page containing all artifacts, and not just ones you can buy
+						var price = parseInt(row.children[4].firstChild.innerText);
+						var id = parseInt(lastOf(nameId.split('-')));
+						//console.log(row, nameId, id);
+						this.buyableArtifactIds[id] = price;
+					}
 				}
 				resolve(this.buyableArtifactIds);
 			})
