@@ -6,7 +6,7 @@ import { Currency } from "../shared_types/currency";
 import { getFriendshipData } from "../friendship_reward_processor";
 import { utility, Pair } from "../utility";
 import { translationManager } from "../translation/translation_manager";
-import { fetchAndProcessRankedRewards } from "../ranked_reward_processor";
+import { claimNextRankedReward, fetchAndProcessRankedRewards, RANKED_REWARD_LEVEL_INTERVAL } from "../ranked_reward_processor";
 loadCSS(css);
 
 const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
@@ -31,43 +31,20 @@ const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
     "newElo": 1783
 }*/
 
-const ELO_BASE = 1100;
+function onPageLoaded() {
+    if (!window.minElo) {
+        var elem = document.createElement("SCRIPT");
+        elem.src = "js/divisions.js";
+        window.document.body.appendChild(elem);
+    }
+}
 
-const ELO_PER_DIVISION = 30;
+/** @returns {string} */
+function lastDivision() {
+    return window.divisions[window.divisions.length-1];
+}
 
-const DIVISIONS = [
-    "COPPER_III",
-    "COPPER_II",
-    "COPPER_I",
-    "IRON_III",
-    "IRON_II",
-    "IRON_I",
-    "GOLD_III",
-    "GOLD_II",
-    "GOLD_I",
-    "EMERALD_III",
-    "EMERALD_II",
-    "EMERALD_I",
-    "SAPPHIRE_III",
-    "SAPPHIRE_II",
-    "SAPPHIRE_I",
-    "AMETHYST_III",
-    "AMETHYST_II",
-    "AMETHYST_I",
-    "RUBY_III",
-    "RUBY_II",
-    "RUBY_I",
-    "DIAMOND_III",
-    "DIAMOND_II",
-    "DIAMOND_I",
-    "ONYX_III",
-    "ONYX_II",
-    "ONYX_I",
-    "MASTER_III",
-    "MASTER_II",
-    "MASTER_I",
-    "LEGEND"
-];
+PrettyCards_plugin.events.on("PrettyCards:onPageLoad", onPageLoaded);
 
 /**@returns {CardCurrency} */
 function getOrCreateCardCurrency(/**@type {number} */ cardId) {
@@ -215,17 +192,19 @@ class BarData {
     }
 
     static returnEloData(/**@type {number} */ startValue, /**@type {number} */ startElo, /**@type {number} */ endElo, /**@type {String} */ startDivision, /**@type {String} */ endDivision) {
-        var startArena = startDivision.split("_")[0];
-        var endArena = endDivision.split("_")[0];
-        var startClass = startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "Bar");
-        var endClass = endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "Bar");
-        var data = new BarData(ELO_PER_DIVISION, ELO_PER_DIVISION, startValue, startClass, endClass);
-        data.setTextClasses(startArena === "LEGEND" ? "PrettyCards_Hidden" : (startArena + "_NEON"), endArena === "LEGEND" ? "PrettyCards_Hidden" : (endArena + "_NEON"));
+        //var startArena = startDivision.split("_")[0];
+        //var endArena = endDivision.split("_")[0];
+        var startArena = startDivision[0];
+        var endArena = endDivision[0];
+        var startClass = startArena === lastDivision() ? "PrettyCards_Hidden" : (startArena + "Bar");
+        var endClass = endArena === lastDivision() ? "PrettyCards_Hidden" : (endArena + "Bar");
+        var data = new BarData(window.divElo, window.divElo, startValue, startClass, endClass);
+        data.setTextClasses(startArena === lastDivision() ? "PrettyCards_Hidden" : (startArena + "_NEON"), endArena === lastDivision() ? "PrettyCards_Hidden" : (endArena + "_NEON"));
 
         // I'm not using "playSound" here because I want to pre-load the sound.
         var audio = new Audio();
         audio.volume = utility.getUnderscriptVolumeSettingValue("sfx");
-        audio.src = `https://github.com/elytrafae/prettycards/raw/master/audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`;
+        audio.src = utility.asset(`audio/sfx/Rank${startElo < endElo ? "Up" : "Down"}.ogg`);
 
         var divisionPart = document.createElement("SPAN");
         data.tipOverFunction = () => {
@@ -243,11 +222,11 @@ class BarData {
         //separator.innerHTML = " ";
         //data.customRowElement.appendChild(separator);
         var ELOpart = document.createElement("SPAN");
-        ELOpart.className = "LEGEND_NEON";
+        ELOpart.className = lastDivision() + "_NEON";
         data.customRowElement.appendChild(ELOpart);
         data.customRowFunction = (passedAmount) => {
             var arena = data.didTipOver ? endArena : startArena;
-            if (arena === "LEGEND") {
+            if (arena === lastDivision()) {
                 ELOpart.innerHTML = " (" + (startElo + passedAmount) + ")";
             } else {
                 ELOpart.innerHTML = "";
@@ -601,19 +580,6 @@ class RewardManager {
 
 }
 
-function getDivisionForElo(elo) {
-    var nr = Math.floor((elo - ELO_BASE)/ELO_PER_DIVISION);
-    return DIVISIONS[Math.min(nr, DIVISIONS.length-1)];
-}
-
-function getDivisionStart(elo) {
-    return (Math.floor(elo/ELO_PER_DIVISION))*ELO_PER_DIVISION;
-}
-
-function getDivisionEnd(elo) {
-    return (Math.floor(elo/ELO_PER_DIVISION)+1)*ELO_PER_DIVISION - 1;
-}
-
 function addGoldSources(data, /**@type {RewardManager} */ rewardManager) {
     var goldDiff = data.golds - data.oldGold;
     if (data.isDonator) {
@@ -691,7 +657,7 @@ function transformMatchEndData(data) {
 
     if (data.oldElo && data.newElo) {
         newData.rewardManager.addReward(Currency.ELO, new RewardSourceInstance(RewardSource.MATCH, data.newElo - data.oldElo));
-        var minEloDivision = getDivisionStart(data.oldElo);
+        var minEloDivision = window.getMinEloDivision(data.oldDivision);
         newData.rewardManager.addBarForCurrency(Currency.ELO, BarData.returnEloData(data.oldElo - minEloDivision, data.oldElo, data.newElo, data.oldDivision, data.newDivision));
     }
 
@@ -736,7 +702,7 @@ function displayMatchResults(data) {
     bgm.src = data.endType.songSrc;
 
     collectNoise.volume = utility.getUnderscriptVolumeSettingValue("sfx");
-    collectNoise.src = "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/RewardCollect.ogg";
+    collectNoise.src = utility.asset("audio/sfx/RewardCollect.ogg");
 
     var leaveRow = document.createElement("DIV");
 
@@ -885,19 +851,79 @@ function displayMatchResults(data) {
         "pc-game-rankedreward-header",
         "pc-game-collect-all",
         "",
-        (rrd, dump, container, /**@type {RewardManager}*/ rewardManager) => {
-            for (var i=0; i < rrd.length; i++) {
-                var pair = rrd[i];
-                console.log(pair);
-            }
+        (rrd, /** @type {HTMLElement} */ dump, container, /**@type {RewardManager}*/ rewardManager) => {
+            var rewardArray = rrd.getLeft();
+            var startLevel = rrd.getRight();
+            var i = 0;
+            rewardArray.forEach( (pair) => {
+                /** @type {Pair<Currency,number>} */
+                var row = document.createElement("DIV");
+                row.className = "PrettyCards_GameEnd_QuestRow";
+
+                var numberCell = document.createElement("DIV");
+                numberCell.className = "PrettyCards_GameEnd_QuestText";
+                numberCell.innerHTML = "<span style='font-size:1.6em'>" + (startLevel + i*RANKED_REWARD_LEVEL_INTERVAL) + " " + window.$.i18n("profile-wins") + "</h1>";
+                row.appendChild(numberCell);
+
+                var rewardCell = document.createElement("DIV");
+                rewardCell.className = "PrettyCards_GameEnd_QuestReward";
+                row.appendChild(rewardCell);
+                tryProcessCommonReward(rewardCell, pair.getLeft(), pair.getRight());
+                
+                var claimCell = document.createElement("DIV");
+                claimCell.className = "PrettyCards_GameEnd_QuestClaim";
+                var claimButton = document.createElement("BUTTON");
+                claimButton.className = "btn btn-success";
+                claimButton.innerHTML = window.$.i18n("quests-claim");
+                if (i != 0) {
+                    claimButton.setAttribute("disabled", "true");
+                }
+                claimButton.onclick = () => {
+                    claimButton.setAttribute("disabled", "true");
+                    claimNextRankedReward().then((reward) => {
+                        rewardManager.addReward(reward.getLeft(), new RewardSourceInstance(RewardSource.RANKEDREWARD, reward.getRight()));
+                        row.remove();
+                        if (dump.firstChild) {
+                            var nextButton = dump.firstChild.querySelector(".PrettyCards_GameEnd_QuestClaim .btn");
+                            console.log(nextButton);
+                            nextButton.removeAttribute("disabled");
+                        }
+                        container.style.display = dump.children.length > 0 ? "block" : "none";
+                        collectNoise.currentTime = 0;
+                        collectNoise.play();
+
+                    }).catch(() => {
+                        claimButton.removeAttribute("disabled");
+                        container.style.display = dump.children.length > 0 ? "block" : "none";
+                    });
+                }
+                claimCell.appendChild(claimButton);
+                row.appendChild(claimCell);
+
+                dump.appendChild(row);
+                i++;
+            });
         },
-        (data, button, renderFunc) => {
-            // My code in 2016 be like
-            //var buttons = button.parentElement.parentElement.querySelectorAll("button.btn.btn-success");
-            //for (var i=0; i < buttons.length; i++) {
-            //    buttons[i].click();
-            //}
-            // TODO: Make this as well, keeping in mind that you can only claim one at a time
+        (rrd, button, renderFunc) => {
+            console.log(data);
+            var limit = 1000;
+            function claimRecursive() {
+                limit--;
+                if (limit <= 0) {
+                    return;
+                }
+                console.log("Claiming! ", limit);
+                claimNextRankedReward().then((reward) => {
+                    data.rewardManager.addReward(reward.getLeft(), new RewardSourceInstance(RewardSource.RANKEDREWARD, reward.getRight()));
+                    claimRecursive();
+                });
+            }
+            claimRecursive();
+
+            button.parentElement.parentElement.style.display = "none";
+            //container.style.display = dump.children.length > 0 ? "block" : "none";
+            collectNoise.currentTime = 0;
+            collectNoise.play();
         },
         fetchAndProcessRankedRewards(),
         data.rewardManager
@@ -947,10 +973,10 @@ prettycards.testMatchResults = () => {
             "jaugeSize": 6000,
             "xpUntilNextLevel": 3189,
             "queueGoldBonus": 10,
-            "oldDivision": "AMETHYST_I",
-            "newDivision": "AMETHYST_I",
-            "oldDivision": "LEGEND",
-            "newDivision": "LEGEND",
+            "oldDivision": "S",
+            "newDivision": "S",
+            //"oldDivision": "T",
+            //"newDivision": "T",
             "oldElo": 1888,
             "newElo": 1900,
             "rewardStringKey": "reward-dt-fragment",
@@ -1092,7 +1118,7 @@ function createRewardCollectSection(titleKey, buttonKey, dumpClassName, renderFu
         };
 
         renderAll(data);
-    });
+    }).catch((e) => {/* Do nothing */});
 
     rewardCollectionRows.push(container);
     return container;
@@ -1117,18 +1143,28 @@ var common_rewards = [
     Currency.FINAL_PACK
 ];
 
+/** @returns {boolean} */
+function tryProcessCommonReward(/**@type {HTMLElement}*/ rewardCont, /**@type {Currency}*/ currency, /** @type {number} */ amount) {
+    if (currency === Currency.UCP) {
+        rewardCont.innerHTML = window.$.i18n("quests-ucp", amount);
+        return true;
+    }
+
+    if (currency && common_rewards.includes(currency)) {
+        rewardCont.innerHTML = currency.getCurrencyIcon().outerHTML + '<span class="white">x' + amount + '</span>';
+        currency.applyTextClass(rewardCont);
+        return true;
+    }
+
+    return false;
+}
+
 /**@returns {Pair<Currency,number>|null} */
 function processQuestReward(/**@type {HTMLElement}*/ rewardCont, reward) {
     //console.log(reward);
     var currency = utility.feildItemsToMyCurrencies(reward.type);
-    if (currency === Currency.UCP) {
-        rewardCont.innerHTML = window.$.i18n("quests-ucp", reward.reward);
-        return new Pair(Currency.UCP, parseInt(reward.reward));
-    }
 
-    if (currency && common_rewards.includes(currency)) {
-        rewardCont.innerHTML = currency.getCurrencyIcon().outerHTML + '<span class="white">x' + reward.reward + '</span>';
-        currency.applyTextClass(rewardCont);
+    if (tryProcessCommonReward(rewardCont, currency, parseInt(reward.reward))) {
         return new Pair(currency, parseInt(reward.reward));
     }
 
@@ -1209,4 +1245,4 @@ function collectQuestReward(/**@type {number}*/ id) {
 
 prettycards.collectQuestReward = collectQuestReward;
 
-export {DIVISIONS, getDivisionForElo};
+export {};

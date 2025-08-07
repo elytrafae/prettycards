@@ -65,9 +65,10 @@ class CustomChatBadgeSystem {
 
     #initialize() {
         $.getJSON(utility.asset("json/customChatRoles.json"), {}, (data) => {
+            console.log(data);
             this.chatRoleUserData = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:customChatRolesData", this.chatRoleUserData);
-        })
+        }).catch((e1, e2, e3) => {console.error("Could not fetch chat role user data: ", e1, e2, e3);})
         
         PrettyCards_plugin.events.on("PrettyCards:onPageLoad", () => {
             this.#oldFn = window.appendMessage;
@@ -138,7 +139,7 @@ class CustomChatBadgeSystem {
 
     #findInChatBadgeList(userId, listName) {
         if (!this.chatRoleUserData[listName]) {
-            console.warn("List name", listName, "in", this.chatRoleUserData, "does not exist!");
+            //console.warn("List name", listName, "in", this.chatRoleUserData, "does not exist!");
             return false;
         }
         return this.chatRoleUserData[listName].find((u) => {return u.id === userId});

@@ -180,9 +180,11 @@ function friendshipRewardStringToCurrency(/**@type {String} */ string) {
         case "UCP": return Currency.UCP;
         case "PACK": return Currency.UT_PACK;
         case "DR_PACK": return Currency.DR_PACK;
+        case "UTY_PACK": return Currency.UTY_PACK;
         case "SHINY_PACK": return Currency.SHINY_PACK;
+        case "SUPER_PACK": return Currency.SUPER_PACK;
         default: return null;
     }
 }
 
-export {getFriendshipData};
+export {getFriendshipData, friendshipRewardStringToCurrency};

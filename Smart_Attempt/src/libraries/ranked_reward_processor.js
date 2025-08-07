@@ -3,8 +3,11 @@
 // var rewardTypes = ['gold', 'pack', 'drPack', 'utyPack', 'superPack', 'gold', 'pack', 'drPack', 'utyPack', 'dtFragment', 'ucp', 'ucp', 'ucp', 'ucp', 'ucp', 'ucp', 'ucp', 'ucp', 'ucp', 'ucp'];
 // var rewardValues = [1000, 10, 10, 10, 1, 2000, 20, 20, 20, 1, 10, 10, 15, 15, 20, 20, 25, 25, 30, 30];
 
+import { friendshipRewardStringToCurrency } from "./friendship_reward_processor";
 import { Currency } from "./shared_types/currency";
 import { Pair } from "./utility";
+
+const RANKED_REWARD_LEVEL_INTERVAL = 10;
 
 /** @type {Array<Pair<Currency,number>>} */
 var rewards = [
@@ -30,7 +33,7 @@ var rewards = [
     new Pair(Currency.UCP, 30),
 ];
 
-/** @returns {Promise<Array<Pair<Currency,number>>>} */
+/** @returns {Promise<Pair<Array<Pair<Currency,number>>,number>>} */
 function fetchAndProcessRankedRewards() {
     return new Promise((resolve, reject) => {
         window.$.getJSON("/PlayConfig", {}, (data) => {
@@ -46,14 +49,34 @@ function fetchAndProcessRankedRewards() {
 
 }
 
-/** @returns {Array<Pair<Currency,number>>} */
+/** @returns {Pair<Array<Pair<Currency,number>>, number>} */
 function processWinsAndClaims(/** @type {number} */ claimed, /** @type {number} */ wins) {
-    var maxClaim = Math.min(Math.floor(wins / 10), rewards.length);
+    var maxClaim = Math.min(Math.floor(wins / RANKED_REWARD_LEVEL_INTERVAL), rewards.length);
     var arr = [];
     for (var i=claimed; i < maxClaim; i++) {
         arr.push(rewards[i]);
     }
-    return arr;
+    return new Pair(arr, (claimed+1) * RANKED_REWARD_LEVEL_INTERVAL);
 }
 
-export {fetchAndProcessRankedRewards}
+/** @returns {Promise<Pair<Currency,number>>} */
+function claimNextRankedReward() {
+    return new Promise((resolve, reject) => {
+        window.$.post("/PlayConfig", {action: "claim"}, (data) => {
+            if (data.status === "success") {
+                var currency = friendshipRewardStringToCurrency(data.reward);
+                if (!currency) {
+                    reject("Could not parse " + data.reward + " as currency");
+                }
+                resolve(new Pair(currency, data.quantity));
+            } else {
+                reject("Maintanance or other error from server " + data);
+            }
+        }).error((e) => {
+            reject(e);
+        });
+    });
+
+}
+
+export {fetchAndProcessRankedRewards, claimNextRankedReward, RANKED_REWARD_LEVEL_INTERVAL}
