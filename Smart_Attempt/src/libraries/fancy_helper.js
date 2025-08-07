@@ -125,12 +125,12 @@ class FancyDisplayData {
 }
 
 class FancyListDisplay {
-	
+
 	constructor(/**@type {Array<FancyDisplayData>}*/ datas, title) {
 		const disabledText = `<span class='gray'>(${window.$.i18n("pc-fd-disabled")})</span>`;
 
 		var container = window.$(`<div class="PrettyCards_ArtifactListContainer"></div>`);
-		
+
 		for (var i=0; i < datas.length; i++) {
 			var data = datas[i];
 			var bgClass = settings.no_artifact_background.value() ? "" : (data.backgroundClass || "");
@@ -141,7 +141,7 @@ class FancyListDisplay {
 			var floatingSoul = createFloatingSoul(data.image, `PrettyCards_ArtifactListImage ${data.imageClass} ${data.disabled ? "transparent" : ""}`, "", "", data.isImageBig);
 			circle.append(floatingSoul);
 			row.append(circle);
-			
+
 			if (data.counter && data.counter > 0) {
 				var counter = window.$(`<div class="PrettyCards_ArtifactListCounter">${data.counter}</div>`);
 				row.append(counter);
@@ -152,12 +152,12 @@ class FancyListDisplay {
 			name.css("font-size", utility.getResizedFontSizeHorizontal(namestr, 25, 538, 10, 0.5));
 			var description = window.$(`<div class="PrettyCards_ArtifactListDescription"></div>`);
 			description.append(data.description);
-			
+
 			row.append(name);
 			row.append(description);
 			container.append(row);
 		}
-		
+
 		window.BootstrapDialog.show({
             title: title || window.$.i18n("artifacts-title"),
             message: container,
@@ -172,29 +172,29 @@ class FancyListDisplay {
 				}
 			]
         });
-		
+
 	}
-	
+
 }
 
 class FancyDisplay {
-	
+
 	constructor(/**@type {FancyDisplayData}*/ data) {
 		this.data = data;
 		//this.backdrop = window.$(`<div class="PrettyCards_ScreenCover PrettyCards_HalfTransparentBG"></div>`);
 		//this.backdrop.click(function() {this.remove();});
-		
+
 		var bgClass = settings.no_artifact_background.value() ? "" : (data.backgroundClass || "");
 		this.box = window.$(`<div class="PrettyCards_ArtifactDisplayBox ${bgClass}"></div>`);
 		this.box.click(function (e) {e.stopPropagation();});
 		//this.backdrop.append(this.box);
-		
+
 		// <img class="PrettyCards_ArtifactImage ${data.image_class} ${data.disabled ? "transparent" : ""}" src="${data.image}"></img>
 		this.circle = window.$(`<div class="PrettyCards_ArtifactCircle"></div>`);
 		console.log(data);
 		this.circle.append(createFloatingSoul(data.image, data.imageClass, "", "", data.isImageBig));
 		this.box.append(this.circle);
-		
+
 		this.name = window.$(`<div class="PrettyCards_ArtifactDisplayName ${data.textClass}">${data.name}</div>`);
 		this.rarity = window.$(`<div class="PrettyCards_ArtifactDisplayRarity ${data.textClass}">${data.rarityText}</div>`);
 		this.description = window.$(`<div class="PrettyCards_ArtifactDisplayDescription"></div>`);
@@ -203,7 +203,7 @@ class FancyDisplay {
 			this.counter = window.$(`<div class="PrettyCards_ArtifactDisplayCounter">${data.counter}</div>`);
 			this.box.append(this.counter);
 		}
-		
+
 		this.box.append(this.name);
 		this.box.append(this.rarity);
 
@@ -224,15 +224,15 @@ class FancyDisplay {
 			this.shop.find("button").click(function() {data.shopInfo.action(this)}.bind(this));
 			this.box.append(this.shop);
 		}
-		
+
 		if (data.note && data.note.length > 0) {
 			this.noteTitle = window.$(`<div class="PrettyCards_ArtifactDisplayNoteTitle">${window.$.i18n("pc-fd-authornote")}</div>`);
 			this.note = window.$(`<div class="PrettyCards_ArtifactDisplayNote">${data.note}</div>`);
-			
+
 			this.box.append(this.noteTitle);
 			this.box.append(this.note);
 		}
-		
+
 		//$("body").append(this.backdrop);
 		var dial = window.BootstrapDialog.show({
             title: 'You shouldn\'t be able to see this!',
@@ -242,18 +242,18 @@ class FancyDisplay {
         });
 
 		dial.$modalDialog[0].className = "modal-dialog modal-lg";
-		
+
 	}
-	
+
 	OnShow(dial) {
 		//console.log(dial);
 		dial.$modalFooter.css("display", "none");
 		dial.$modalHeader.css("display", "none");
 		dial.$modalContent.css("background-color", "transparent").css("box-shadow", "initial").css("border", "none").css("padding", "0px");
 		dial.$modalBody.css("border", "none").css("background-color", "transparent").css("padding", "0px").css("box-shadow", "initial");
-		
+
 	}
-	
+
 	static ViewArtifactInfo(id) {
 		var artifact = artifactDisplay.GetArtifactById(id);
 		PrettyCards_plugin.events.emit("pre:viewArtifact()", artifact);
@@ -264,7 +264,7 @@ class FancyDisplay {
 			var isAprilFools = utility.getSeasonMonth() == 3 && artifact.aprilImage;
 			var prefix = isAprilFools ? c.aprilArtifactImagePrefix  : c.artifactImagePrefix;
 			var imageName = isAprilFools ? artifact.aprilImage : artifact.image;
-			
+
 			image = document.createElement("IMG");
 			image.src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
 		} else {
@@ -303,7 +303,7 @@ class FancyDisplay {
 		var helper = new FancyDisplay(data);
 		PrettyCards_plugin.events.emit("viewArtifact()", {artifact: artifact, helper: helper});
 	}
-	
+
 	static ViewSoulInfo(id) {
 		PrettyCards_plugin.events.emit("pre:viewSoul", id);
 		var customObj = null;
@@ -328,7 +328,7 @@ class FancyDisplay {
 			image = utility.getSoulImage(id);
 		}
 		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
-		
+
 		var transDesc = window.$.i18n("soul-" + id.toLowerCase() + "-desc");
 		var transName = window.$.i18n("soul-" + id.toLowerCase());
 
@@ -340,9 +340,9 @@ class FancyDisplay {
 				window.appendCard(card, cards);
 			}
 		}
-		
+
 		desc.append(cards);
-		
+
 		var data = new FancyDisplayData()
 			.setName(transName)
 			.setImage(image)
@@ -376,7 +376,7 @@ class FancyDisplay {
 		})
 		FancyDisplay.ViewArtifactsInfo(datas, title);
 	}
-	
+
 	static ViewArtifactsInfo(artDatas, title) {
 		PrettyCards_plugin.events.emit("pre:viewArtifacts", artDatas);
 		//console.log(box);
@@ -390,17 +390,15 @@ class FancyDisplay {
 				var rarityData = artifactDisplay.GetRarityDataFor(artifact);
 				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
 				/**@type {HTMLImageElement} */
-				var image;
+				var image = artifact.image;
 				if (artifact.collection) {
 					var c = artifact.collection;
 					var isAprilFools = utility.getSeasonMonth() == 3 && artifact.aprilImage;
 					var prefix = isAprilFools ? c.aprilArtifactImagePrefix  : c.artifactImagePrefix;
 					var imageName = isAprilFools ? artifact.aprilImage : artifact.image;
-					
+
 					image = document.createElement("IMG");
 					image.src = utility.constructURL(prefix, imageName, "png", c.oldPrefixBehavior);
-				} else {
-					image = utility.getArtifactImage(artifact.image);
 				}
 				datas.push(new FancyDisplayData()
 					.setName($.i18n("artifact-name-" + artifact.id))
@@ -420,7 +418,7 @@ class FancyDisplay {
 			PrettyCards_plugin.events.emit("viewArtifacts()", {artDatas: artDatas, helper: helper});
 		}
 	}
-	
+
 	static TestArtifactsInfo() {
 		PrettyCards_plugin.events.emit("pre:viewArtifacts", box);
 		var box = window.$("<div></div>");
@@ -431,18 +429,18 @@ class FancyDisplay {
 		window.artifactsInfo(box);
 		PrettyCards_plugin.events.emit("viewArtifacts()", {});
 	}
-	
+
 }
 
 FancyDisplay.customSouls = [];
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
-	
+
 	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.showArtifactDescBox = FancyDisplay.ViewArtifactInfo.bind(this);
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);
 	window.artifactsInfo = FancyDisplay.ViewArtifactsInfoBox.bind(this);
-	
+
 	prettycards.viewArtifactsInfoForIdArray = FancyDisplay.ViewArtifactsInfoForIdArray.bind(this);
 
 	// Test functions
