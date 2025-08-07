@@ -581,6 +581,7 @@ class Utility {
 			case usconst.DT_FRAGMENT: return Currency.DTFRAG;
 			case usconst.UT_PACK: return Currency.UT_PACK;
 			case usconst.DR_PACK: return Currency.DR_PACK;
+			case usconst.UTY_PACK: return Currency.UTY_PACK;
 			case usconst.SHINY_PACK: return Currency.SHINY_PACK;
 			case usconst.SUPER_PACK: return Currency.SUPER_PACK;
 			case usconst.FINAL_PACK: return Currency.FINAL_PACK;

@@ -11,6 +11,7 @@ class Currency {
 
     static UT_PACK = new Currency("", () => {return window.$('<img src="images/icons/pack.png">')[0]}, Currency.speedFunction(250, 100, 50));
     static DR_PACK = new Currency("", () => {return window.$('<img src="images/icons/drPack.png">')[0]}, Currency.speedFunction(250, 100, 50));
+    static UTY_PACK = new Currency("", () => {return window.$('<img src="images/icons/utyPack.png">')[0]}, Currency.speedFunction(250, 100, 50));
     static SHINY_PACK = new Currency("rainbowText", () => {return window.$('<img src="images/icons/shinyPack.png">')[0]}, Currency.speedFunction(200, 100, 25));
     static SUPER_PACK = new Currency("yellow", () => {return window.$('<img src="images/icons/superPack.png">')[0]}, Currency.speedFunction(500, 200, 25));
     static FINAL_PACK = new Currency("DTFragment", () => {return window.$('<img src="images/icons/finalPack.png">')[0]}, Currency.speedFunction(500, 200, 25));

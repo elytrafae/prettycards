@@ -6,6 +6,7 @@ import { Currency } from "../shared_types/currency";
 import { getFriendshipData } from "../friendship_reward_processor";
 import { utility, Pair } from "../utility";
 import { translationManager } from "../translation/translation_manager";
+import { fetchAndProcessRankedRewards } from "../ranked_reward_processor";
 loadCSS(css);
 
 const CONTRIB_GOLD = 10; // Yes, Onu hardcoded this. Surprised?
@@ -259,10 +260,10 @@ class BarData {
 
 class GameEndTypes {
 
-    static WIN = new GameEndTypes("game-game-victory", "", "/musics/uty_victory.ogg");
+    static WIN = new GameEndTypes("game-game-victory", "", "/musics/dr34_victory.ogg");
     static LEAVE_WIN = new GameEndTypes("game-game-victory", "", "/musics/dogsong.ogg").setSubtitleFunction(leaveWinSubtitleFunction).setChangeTitleFunction((title) => {return '"' + title + '"';});
-    static LOSE = new GameEndTypes("game-game-over", "", "/musics/uty_gameover.ogg");
-    static DRAW = new GameEndTypes("pc-game-draw", "", "https://github.com/elytrafae/prettycards/raw/master/audio/bgms/mus_star.ogg").setSubtitleFunction(drawSubtitleFunction);
+    static LOSE = new GameEndTypes("game-game-over", "", "/musics/dr34_gameover.ogg");
+    static DRAW = new GameEndTypes("pc-game-draw", "", utility.asset("audio/bgms/mus_star.ogg")).setSubtitleFunction(drawSubtitleFunction);
     static CHARA = new GameEndTypes("game-died", "red", "/musics/toomuch.ogg");
 
     constructor(/**@type {String} */ textKey, /**@type {String} */ textClass, /**@type {String} */ song) {
@@ -323,12 +324,13 @@ function drawSubtitleFunction() {
 class RewardSource {
 
     static MATCH = new RewardSource("match", "piggy-bank");
-    static SPECIAL = new RewardSource("special", "star");
+    static SPECIAL = new RewardSource("special", "gift");
     static CONTRIBUTOR = new RewardSource("contributor", "euro");
     static QUEUE = new RewardSource("queue", "time");
     static LEVELUP = new RewardSource("levelup", "arrow-up");
     static QUEST = new RewardSource("quest", "calendar");
     static FRIENDSHIP = new RewardSource("friendship", "heart");
+    static RANKEDREWARD = new RewardSource("rankedreward", "star");
 
     constructor(/**@type {String} */ id, /**@type {String} */ iconName) {
         /**@type {String} */
@@ -514,6 +516,7 @@ class RewardManager {
         Currency.DTFRAG,
         Currency.UT_PACK,
         Currency.DR_PACK,
+        Currency.UTY_PACK,
         Currency.SHINY_PACK,
         Currency.SUPER_PACK,
         Currency.FINAL_PACK,
@@ -719,7 +722,7 @@ function transformMatchEndData(data) {
 
 var landNoise = new Audio();
 var collectNoise = new Audio();
-landNoise.src = "https://github.com/elytrafae/prettycards/raw/master/audio/sfx/mus_intronoise.ogg";
+landNoise.src = utility.asset("audio/sfx/mus_intronoise.ogg");
 
 function displayMatchResults(data) {
 
@@ -875,6 +878,28 @@ function displayMatchResults(data) {
             }
         },
         questData,
+        data.rewardManager
+    ));
+
+    container.appendChild(createRewardCollectSection(
+        "pc-game-rankedreward-header",
+        "pc-game-collect-all",
+        "",
+        (rrd, dump, container, /**@type {RewardManager}*/ rewardManager) => {
+            for (var i=0; i < rrd.length; i++) {
+                var pair = rrd[i];
+                console.log(pair);
+            }
+        },
+        (data, button, renderFunc) => {
+            // My code in 2016 be like
+            //var buttons = button.parentElement.parentElement.querySelectorAll("button.btn.btn-success");
+            //for (var i=0; i < buttons.length; i++) {
+            //    buttons[i].click();
+            //}
+            // TODO: Make this as well, keeping in mind that you can only claim one at a time
+        },
+        fetchAndProcessRankedRewards(),
         data.rewardManager
     ));
 
@@ -1086,6 +1111,7 @@ var common_rewards = [
     Currency.DTFRAG,
     Currency.UT_PACK,
     Currency.DR_PACK,
+    Currency.UTY_PACK,
     Currency.SHINY_PACK,
     Currency.SUPER_PACK,
     Currency.FINAL_PACK
