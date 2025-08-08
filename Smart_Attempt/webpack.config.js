@@ -19,21 +19,18 @@ module.exports = {
   },
   plugins: [
     new WebpackUserscript.UserscriptPlugin({
-      
-      headers(original) {
-        return {
-          name: 'PrettyCards',
-          match: 'https://*.undercards.net/*',
-          exclude: 'https://*.undercards.net/*/*',
-          updateURL: `https://github.com/elytrafae/${package.name}/releases/latest/download/${package.name}.user.js`,
-          downloadURL: `https://github.com/elytrafae/prettycards/releases/latest/download/prettycards.user.js`,
-          require: [
-            'https://raw.githubusercontent.com/UCProjects/UnderScript/master/src/checkerV2.js',
-          ],
-          grant: 'none',
-          "run-at" : "document-idle"
-        };
-    },
+      headers: {
+        name: 'PrettyCards',
+        match: 'https://*.undercards.net/*',
+        exclude: 'https://*.undercards.net/*/*',
+        updateURL: `https://github.com/elytrafae/${package.name}/releases/latest/download/${package.name}.user.js`,
+        downloadURL: `https://github.com/elytrafae/prettycards/releases/latest/download/prettycards.user.js`,
+        require: [
+          'https://raw.githubusercontent.com/UCProjects/UnderScript/master/src/checkerV2.js',
+        ],
+        grant: 'none',
+        "run-at" : "document-idle"
+      },
     pretty: true
   }),
     
