@@ -20,9 +20,24 @@ var categories = {
 }
 
 function addSetting(data) {
-    if (data.note && typeof(data.note) != "function") {
-        data.note = `<div style="max-width: 600px;">${data.note}</div>`;
+    if (data.note) {
+        var prefix = '<div style="max-width: 600px;">';
+        var suffix = '</div>';
+        if (data.experimental) {
+            prefix = prefix + '<span class="red">EXPERIMENTAL!</span> ';
+        }
+        if (typeof(data.note) != "function") {
+            data.note = `${prefix}${data.note}${suffix}`;
+        } else {
+            const oldFn = data.note;
+            data.note = (...a) => {return prefix + oldFn(...a) + suffix;};
+        }
     }
+
+    if (data.experimental) {
+        data.name = `<span class="red">${data.name}</span>`;
+    }
+
     data.category = categories[data.category || "misc"];
     var setting = PrettyCards_plugin.settings().add(data);
     settings[data.key] = setting;

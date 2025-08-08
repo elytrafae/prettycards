@@ -2,13 +2,13 @@ import { addSetting, PrettyCards_plugin } from "../underscript_checker";
 
 var cardHoverSetting = addSetting({
     'key': 'interactive_card_hover',
-    'name': 'Interactive card Hover Helper', // Name in settings page
-    'note': `Hovering over a card's name to see what it is is not moved over to an interractive tippy hover, which lets you click on things on that card as well. Useful for nested TOKEN references.`,
+    'name': 'Interactive Card Hover Helper', // Name in settings page
+    'note': `Hovering over a card's name to see what it is is now moved over to an interractive tippy hover, which lets you click on things on that card as well. Useful for nested TOKEN references.`,
     'type': 'boolean',
     'refresh': false, // true to add note "Will require you to refresh the page"
-    'default': false,//true, // default value
-    'hidden': true,
-    'category': "card"
+    'default': false, // default value
+    'category': "card",
+    'experimental': true
 });
 
 var overwritten = false;
