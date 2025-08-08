@@ -251,11 +251,9 @@ class FancyDisplay {
 		dial.$modalHeader.css("display", "none");
 		dial.$modalContent.css("background-color", "transparent").css("box-shadow", "initial").css("border", "none").css("padding", "0px");
 		dial.$modalBody.css("border", "none").css("background-color", "transparent").css("padding", "0px").css("box-shadow", "initial");
-
 	}
 
-	static ViewArtifactInfo(id) {
-		var artifact = artifactDisplay.GetArtifactById(id);
+	static ViewArtifactInfo(artifact) {
 		PrettyCards_plugin.events.emit("pre:viewArtifact()", artifact);
 		/**@type {HTMLImageElement} */
 		var image;
@@ -271,9 +269,9 @@ class FancyDisplay {
 			image = utility.getArtifactImage(artifact.image);
 		}
 		var shopInfo;
-		if (artifactDisplay.IsArtifactPurchasable(id) && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
-			const artId = id;
-			var cost = artifactDisplay.BuyPriceForArtifact(id);
+		if (artifactDisplay.IsArtifactPurchasable(artifact.id) && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
+			const artId = artifact.id;
+			var cost = artifactDisplay.BuyPriceForArtifact(artId);
 			shopInfo = {
 				price: cost,
 				topLine: window.$.i18n("pc-buyart-youdonthave"),
@@ -434,10 +432,27 @@ class FancyDisplay {
 
 FancyDisplay.customSouls = [];
 
+var oldArtifactInfo;
+var oldShowArtifactDescBox;
+
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 
-	window.artifactInfo = FancyDisplay.ViewArtifactInfo.bind(this);
-	window.showArtifactDescBox = FancyDisplay.ViewArtifactInfo.bind(this);
+	oldArtifactInfo = window.artifactInfo;
+	window.artifactInfo = (id) => {
+		var artifact = artifactDisplay.GetArtifactById(id);
+		if (!artifact) {
+			oldArtifactInfo(id);
+		}
+		FancyDisplay.ViewArtifactInfo.bind(this)(artifact);
+	};
+	oldShowArtifactDescBox = window.showArtifactDescBox;
+	window.showArtifactDescBox = (id) => {
+		var artifact = artifactDisplay.GetArtifactById(id);
+		if (!artifact) {
+			oldShowArtifactDescBox(id);
+		}
+		FancyDisplay.ViewArtifactInfo.bind(this)(artifact);
+	}
 	window.soulInfo = FancyDisplay.ViewSoulInfo.bind(this);
 	window.artifactsInfo = FancyDisplay.ViewArtifactsInfoBox.bind(this);
 

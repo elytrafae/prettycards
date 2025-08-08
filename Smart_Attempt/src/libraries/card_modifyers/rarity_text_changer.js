@@ -2,7 +2,7 @@
 import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 import { rarityIconsHTML } from "../rarity_icons";
 
-var optionList = ["Text", "Adapt", "Undertale", "Deltarune"];
+var optionList = ["Text", "Adapt", "Undertale", "Deltarune", "Undertale Yellow"];
 
 addSetting({
 	'key': 'rarity_text_change',
@@ -25,6 +25,7 @@ function DisplayToSystem(str) {
         case optionList[1]: ret = "ADAPT"; break;
         case optionList[2]: ret = "BASE"; break;
         case optionList[3]: ret = "DELTARUNE"; break;
+        case optionList[4]: ret = "UTY"; break;
     }
     return ret;
 }
