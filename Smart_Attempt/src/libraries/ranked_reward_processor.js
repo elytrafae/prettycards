@@ -62,21 +62,24 @@ function processWinsAndClaims(/** @type {number} */ claimed, /** @type {number} 
 /** @returns {Promise<Pair<Currency,number>>} */
 function claimNextRankedReward() {
     return new Promise((resolve, reject) => {
-        window.$.post("/PlayConfig", {action: "claim"}, (data) => {
-            if (data.status === "success") {
-                var currency = friendshipRewardStringToCurrency(data.reward);
-                if (!currency) {
-                    reject("Could not parse " + data.reward + " as currency");
+        //window.$.get("/Play", {}, (page) => { // Fuck sending only necessary requests, I guess.
+            window.$.post("/PlayConfig", `{"action": "claim"}`, (data) => {
+                if (data.status === "success") {
+                    var currency = friendshipRewardStringToCurrency(data.reward);
+                    if (!currency) {
+                        reject("Could not parse " + data.reward + " as currency");
+                    }
+                    resolve(new Pair(currency, data.quantity));
+                } else {
+                    reject("Maintanance or other error from server " + data);
                 }
-                resolve(new Pair(currency, data.quantity));
-            } else {
-                reject("Maintanance or other error from server " + data);
-            }
-        }).error((e) => {
-            reject(e);
-        });
+            }).error((e) => {
+                reject(e);
+            });
+       // }).error((e) => {
+        //    reject(e);
+        //});
     });
-
 }
 
 export {fetchAndProcessRankedRewards, claimNextRankedReward, RANKED_REWARD_LEVEL_INTERVAL}

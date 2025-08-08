@@ -892,9 +892,10 @@ function displayMatchResults(data) {
                         collectNoise.currentTime = 0;
                         collectNoise.play();
 
-                    }).catch(() => {
+                    }).catch((e) => {
                         claimButton.removeAttribute("disabled");
                         container.style.display = dump.children.length > 0 ? "block" : "none";
+                        console.warn("Could not claim ranked reward. ", e);
                     });
                 }
                 claimCell.appendChild(claimButton);
