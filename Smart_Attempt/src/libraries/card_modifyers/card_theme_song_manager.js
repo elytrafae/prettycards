@@ -13,8 +13,24 @@ const SNOELLE_ATK_STEP = 1;
 addSetting({
 	'key': 'multi_theme_songs',
 	'name': 'Enable Multiple Card Jingles', // Name in settings page
-    'note': 'Also adds some sound effects to certaion token cards.',
+    'note': 'Also adds some sound effects to certain token cards.',
 	'type': 'boolean',
+	'refresh': true, // true to add note "Will require you to refresh the page"
+	'default': true, // default value
+    'category': "card"
+});
+
+var randomnessSetting = addSetting({
+	'key': 'theme_song_logic',
+	'name': 'Theme Song Randomness Logic', // Name in settings page
+    'note': `
+        If Multiple Card Jingles is on alongside this and you are in a match, this setting will define the logic of how theme songs will be played.<br>
+        - DEFAULT: All cards will play their available theme songs sequentially. Cards with defined logic will play their themes based on said logic<br>
+        - RANDOM: All cards will play their available themes in random order. Cards with defined logic will still play their themes based on said logic.<br>
+        - TRUE RANDOM: All cards will play their themes randomly, regardless of other logic<br>
+        NOTE that due to preloading concerns, the order is randomized only once, and that order is kept until the page is reloaded`,
+	'type': 'select',
+    'options': ["DEFAULT", "RANDOM", "TRUE RANDOM"],
 	'refresh': true, // true to add note "Will require you to refresh the page"
 	'default': true, // default value
     'category': "card"
@@ -36,14 +52,19 @@ class ThemeSongSetting {
         this.cardId = card.fixedId || card.id;
         this.originalUrl = `musics/cards/${card.name.replaceAll(" ", "_")}.ogg`;
         this.replacements = [];
+        this.randomreplacementorder = []; // Order used if the random setting is used!
         this.playedBefore = 0; // Only counts at times when it goes in order.
         this.playAsJingle = true;
         this.preloadedNr = -1; // This is only taken mid-game!
     }
 
     getNextReplacement() {
+        var index = this.playedBefore % this.replacements.length;
+        if (this.shouldUseMidGameRandomSystem()) {
+            index = this.randomreplacementorder[index];
+        }
         this.playedBefore++;
-        return this.replacements[(this.playedBefore-1) % this.replacements.length]; // Have to reduce it by one because we increase the "playedBefore" counter before getting this, skipping the first one.
+        return this.replacements[index];
     }
 
     getRandomReplacement() {
@@ -58,6 +79,11 @@ class ThemeSongSetting {
         this.replacements.push(path);
     }
 
+    finishFileSetup() {
+        for (var i=0; i < this.replacements.length; i++) {this.randomreplacementorder[i] = i;}
+        utility.shuffleArray(this.randomreplacementorder);
+    }
+
     // THIS IS ONLY FOR MID-GAME PRELOADING!
     preloadNext() {
         if (!themePreloadSetting.value()) {
@@ -67,8 +93,13 @@ class ThemeSongSetting {
         if (this.preloadedNr >= this.replacements.length) {
             return; // All variants got loaded!
         } 
+        var replacementIndex = this.shouldUseMidGameRandomSystem() ? this.randomreplacementorder[this.preloadedNr] : this.preloadedNr;
         // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
-        utility.preloadAudio(this.replacements[this.preloadedNr]).catch((e) => {});
+        utility.preloadAudio(this.replacements[replacementIndex]).catch((e) => {});
+    }
+
+    shouldUseMidGameRandomSystem() {
+        return randomnessSetting.value == "TRUE RANDOM" || (randomnessSetting.value == "RANDOM" && !getReplacementOnCardData(window.getCard(this.cardId)));
     }
 
     preloadAllIfInGame() {
@@ -122,7 +153,7 @@ function registerCard(card) {
 
 /**
  * Fetches the list of disabled cards in terms of theme songs for the currect season.
- * The list is empty if the season has no disabked cards.
+ * The list is empty if the season has no disabled cards.
  * @returns {String[]}
  */
 function returnDisabledNameList() {
@@ -152,12 +183,14 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady PrettyCards:Transl
             for (var i=1; i <= baseThemeSongData[key]; i++) {
                 s.addFile(utility.asset(`audio/cards/${card.name.replaceAll(" ", "_")}/intro_${i}.ogg`));
             }
+            s.finishFileSetup();
             if (isGame) {
                 s.preloadNext(); // Preload first theme to play, second one will follow when the first is played etc.
             }
         }
     }
     hardCodedCardInteractions();
+    //console.log(options);
     PrettyCards_plugin.events.emit.singleton("PrettyCards:customCardsSongsAppend");
     PrettyCards_plugin.events.emit.singleton("PrettyCards:themeSongsReady");
     //console.log(options);
@@ -239,7 +272,7 @@ if (settings.multi_theme_songs.value()) {
                 }
                 var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
                 if (setting) {
-                    var name = setting.getReplacementOnCardData(card);
+                    var name = randomnessSetting.value == "TRUE RANDOM" ? null : setting.getReplacementOnCardData(card);
                     if (name == null) {
                         name = setting.getNextReplacement();
                     }

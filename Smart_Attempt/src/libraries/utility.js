@@ -569,6 +569,34 @@ class Utility {
 		})
 	}
 
+	shuffleArray(/**@type {Array<any>}*/ array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[array[i], array[j]] = [array[j], array[i]];
+		}
+	}
+
+	getArenaFromDivision(division) {
+		//return division.split("_")[0];
+		return division[0];
+	}
+
+	getBarClassFromArena(arena) {
+		return `${arena}Bar`;
+	}
+
+	getNeonTextClassFromArena(arena) {
+		return `${arena}_NEON`;
+	}
+
+	isDivisionWithoutBar(division) {
+		return division == window.divisions[window.divisions.length-1];
+	}
+
+	getGreenBarClass() {
+		// return "EMERALDBar";
+		return "FBar";
+	}
 
 	/**@returns {Currency|null} */
 	/**@description Does not work on cards! */

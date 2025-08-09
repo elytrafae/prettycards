@@ -419,9 +419,9 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	
 	// Column 2
 	column2.innerHTML += window.$.i18n('{{DIVISION:' + user.division + '}}');
-	var progress = '<span style="font-size: 20px;" class="rainbowText">' + user.eloRanked + '</span>';
-    if (user.division !== "LEGEND") {
-        progress = '  <progress max="25" value="' + (user.eloRanked % 25) + '" class="' + getRank(user.division) + 'Bar" style="width: 150px;"></progress> <span>(' + user.eloRanked + ')</span>';
+	var progress = ' &nbsp; <span style="font-size: 20px;" class="rainbowText">' + user.eloRanked + '</span>';
+    if (!utility.isDivisionWithoutBar(user.division)) {
+        progress = '  <progress max="' + window.divElo + '" value="' + (user.eloRanked - window.getMinEloDivision(user.division)) + '" class="' + utility.getBarClassFromArena(utility.getArenaFromDivision(user.division)) + '" style="width: 150px;"></progress> <span>(' + user.eloRanked + ')</span>';
     }
 	column2.innerHTML += progress;
 	
@@ -581,11 +581,6 @@ function getRankedPositionHTML(rankNr) {
 		return rarityIconsHTML.DELTARUNE.COMMON + " " + window.$.i18n("pc-chat-ranked-fifth");
 	}
 	return rankNr;
-}
-
-// Copied from Undercards itself because it is not present on all pages.
-function getRank(string) {
-    return string.substring(0, string.indexOf('_'));
 }
 
 // Test Function

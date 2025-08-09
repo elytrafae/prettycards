@@ -194,12 +194,12 @@ class BarData {
     static returnEloData(/**@type {number} */ startValue, /**@type {number} */ startElo, /**@type {number} */ endElo, /**@type {String} */ startDivision, /**@type {String} */ endDivision) {
         //var startArena = startDivision.split("_")[0];
         //var endArena = endDivision.split("_")[0];
-        var startArena = startDivision[0];
-        var endArena = endDivision[0];
-        var startClass = startArena === lastDivision() ? "PrettyCards_Hidden" : (startArena + "Bar");
-        var endClass = endArena === lastDivision() ? "PrettyCards_Hidden" : (endArena + "Bar");
+        var startArena = utility.getArenaFromDivision(startDivision);
+        var endArena = utility.getArenaFromDivision(endDivision);
+        var startClass = utility.isDivisionWithoutBar(startDivision) ? "PrettyCards_Hidden" : utility.getBarClassFromArena(startArena);
+        var endClass = utility.isDivisionWithoutBar(endDivision) ? "PrettyCards_Hidden" : utility.getBarClassFromArena(endArena);
         var data = new BarData(window.divElo, window.divElo, startValue, startClass, endClass);
-        data.setTextClasses(startArena === lastDivision() ? "PrettyCards_Hidden" : (startArena + "_NEON"), endArena === lastDivision() ? "PrettyCards_Hidden" : (endArena + "_NEON"));
+        data.setTextClasses(utility.isDivisionWithoutBar(startDivision) ? "PrettyCards_Hidden" : utility.getNeonTextClassFromArena(startArena), utility.isDivisionWithoutBar(endDivision) ? "PrettyCards_Hidden" : utility.getNeonTextClassFromArena(endArena));
 
         // I'm not using "playSound" here because I want to pre-load the sound.
         var audio = new Audio();
@@ -800,7 +800,7 @@ function displayMatchResults(data) {
                 var progress = quest.progress;
                 row.innerHTML = `
                     <div class="PrettyCards_GameEnd_QuestText ${quest.claimable ? "green" : ""}">${quest.name}</div>
-                    <div class="PrettyCards_GameEnd_QuestProgress"><progress class="${progress.complete ? "EMERALDBar" : "xpBar"}" value="${progress.value}" max="${progress.max}" style="width: 100px;"></progress> ${progress.value} / ${progress.max}</div>`;
+                    <div class="PrettyCards_GameEnd_QuestProgress"><progress class="${progress.complete ? utility.getGreenBarClass() : "xpBar"}" value="${progress.value}" max="${progress.max}" style="width: 100px;"></progress> ${progress.value} / ${progress.max}</div>`;
 
 
                 var rewardCell = document.createElement("DIV");
