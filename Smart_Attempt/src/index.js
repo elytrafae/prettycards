@@ -131,6 +131,9 @@ if (settings.override_decks.value()) {
 
 import {} from "./libraries/cosmetics_shop_reader.js";
 
+import { sayHello } from "./libraries/typescript_test.ts";
+console.log(sayHello(":3"));
+
 /*
 var trans_array = [];
 for (var key in settings) {
