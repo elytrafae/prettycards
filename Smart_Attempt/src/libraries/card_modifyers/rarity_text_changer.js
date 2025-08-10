@@ -1,6 +1,6 @@
 
 import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
-import { rarityIconsHTML } from "../rarity_icons";
+import { rarityIconsHTML } from "../rarity_icons.ts";
 
 var optionList = ["Text", "Adapt", "Undertale", "Deltarune", "Undertale Yellow"];
 

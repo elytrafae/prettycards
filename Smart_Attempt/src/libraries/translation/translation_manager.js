@@ -1,5 +1,5 @@
 
-import { rarityIconsHTML } from "../rarity_icons";
+import { rarityIconsHTML } from "../rarity_icons.ts";
 import { prettycards, PrettyCards_plugin, settings, addSetting } from "../underscript_checker";
 import { utility } from "../utility";
 import $ from "/src/third_party/jquery-3.6.0.min.js";

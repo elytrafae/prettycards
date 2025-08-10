@@ -1,6 +1,5 @@
 
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
-import {rarityIconsHTML, rarities} from "./../libraries/rarity_icons.js";
 import {pagegetters} from "./../libraries/page_getters.js";
 import {prettycards, PrettyCards_plugin, settings, addSetting} from "./../libraries/underscript_checker.js";
 import {utility} from "./../libraries/utility.js";

@@ -1,7 +1,7 @@
 
 import {PrettyCards_plugin, settings, addSetting} from "/src/libraries/underscript_checker.js";
 import {utility} from "/src/libraries/utility.js";
-import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.js";
+import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.ts";
 import {pagegetters} from "/src/libraries/page_getters.js";
 import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 

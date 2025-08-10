@@ -1,7 +1,7 @@
 
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {utility} from "/src/libraries/utility.js";
-import {rarityIconsHTML, rarities} from "./../rarity_icons.js";
+import {rarityIconsHTML, rarities} from "./../rarity_icons.ts";
 import {FlippableCard} from "/src/libraries/flippable_card.js";
 
 class PackOpenAnimationTemplate {

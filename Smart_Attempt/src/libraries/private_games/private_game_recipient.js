@@ -1,8 +1,5 @@
 
 import {PrettyCards_plugin, settings} from "/src/libraries/underscript_checker.js";
-import {utility} from "/src/libraries/utility.js";
-import {rarityIconsHTML, rarities} from "/src/libraries/rarity_icons.js";
-import {pagegetters} from "/src/libraries/page_getters.js";
 import {SoulSelector} from "/src/libraries/soul_selector.js";
 import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/decks/deck_selector.js";
 import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
