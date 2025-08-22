@@ -282,12 +282,23 @@ class Utility {
 		return `/images/cards/${image}.png`;
 	}
 
+	/**@returns {OnErrorEventHandlerNonNull} */
+	getFallbackImageOnErrorMethod(/**@type {string} */ backupImage) {
+		const backup = backupImage;
+		return (event) => {
+			console.log("Fallback called!", event, event.target);
+			if (typeof(event) == "string") {
+				// IDK how to handle this
+				return;
+			}
+			event.target.src = backup;
+			event.target.onerror = function() {};
+		};
+	}
+
 	getFallbackedImage(/**@type {string}*/ mainImage, /**@type {string}*/ backupImage) {
 		var element = new Image();
-		element.onerror = function() {
-			this.src = backupImage;
-			element.onerror = function() {}
-		}
+		element.onerror = this.getFallbackImageOnErrorMethod(backupImage);
 		element.src = mainImage;
 		return element;
 	}

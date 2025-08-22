@@ -1,11 +1,14 @@
 import {utility} from "/src/libraries/utility.js";
 
 /** @returns {HTMLImageElement} */
-function getImage(image) {
-    if (typeof image === 'string') {
+function getImageClone(image) {
+    // Made by feildmaster
+    if (typeof image === 'string') { // Temporary fix - elytrafae
         return utility.getArtifactImage(image);
     }
-    return image.cloneNode();
+    var newImage = image.cloneNode();
+    newImage.onerror = image.onerror;
+    return newImage;
 }
 
 function createFloatingSoul(/**@type {HTMLImageElement}*/ image, containerClass, leftClass, rightClass, isBig = false) {
@@ -15,14 +18,14 @@ function createFloatingSoul(/**@type {HTMLImageElement}*/ image, containerClass,
 
     var left = document.createElement("DIV");
     left.className = "PrettyCards_SplitSoul_Left";
-    var leftImage = getImage(image);
+    var leftImage = getImageClone(image);
     leftImage.className += leftClass;
-    left.appendChild(leftImage.cloneNode());
+    left.appendChild(leftImage);
     container.appendChild(left);
 
     var right = document.createElement("DIV");
     right.className = "PrettyCards_SplitSoul_Right";
-    var rightImage = getImage(image);
+    var rightImage = getImageClone(image);
     rightImage.className += rightClass;
     right.appendChild(rightImage);
     container.appendChild(right);
