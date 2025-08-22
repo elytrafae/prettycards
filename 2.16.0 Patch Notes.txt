@@ -1,5 +1,16 @@
+- Added ranked reward claiming to the Game End screen
+- Added theme song randomization setting! Now you can make PrettyCards' vast array of available theme songs play in random order!
+- Interactive card hovers! A feature I made long ago that I forgot why I never released... So, here it is!
 
 - "Fixed" an error happening when you buy your last artifact with PrettyCards
+- Fixed artifact ownership checks breaking in the latest update
+- Fixed an issue where half of "Floating Soul" images discarded fallbacks
+- Updated songs on the Game End screen
+- Fixed ELOs and divisions again! Now most of the data should be pulled from the game itself to avoid issues stemming from things being out of sync 
+- Fixed issues with several instances of audio playing from PrettyCards when the setting for them has been turned off
+- Fixed missing artifact data preventing people from seeing artifacts. Instead, the system will fall back to Undercards' default screen
+- Fixed several places not recognizing UTY as an extension
+- 
 
 SHORT-TERM TODO: 
 - Fix Friendship sort
