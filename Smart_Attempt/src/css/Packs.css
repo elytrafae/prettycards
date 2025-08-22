@@ -174,7 +174,7 @@
 	overflow-y: auto;
 	text-align: center;
 	height: 100%;
-	max-height: 100%; /* To make sure the overflow works on EVERY browser */
+	max-height: 100%; /* To make sure the overflow work on EVERY browser */
 	top: 100%;
 	position: absolute;
 }

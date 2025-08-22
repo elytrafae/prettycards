@@ -245,9 +245,12 @@ var originalAudio;
 var cardSoundFX;
 
 function playSoundFX(address) {
-    cardSoundFX = new Audio(address);
-    cardSoundFX.volume = utility.getUnderscriptVolumeSettingValue("jingle");
-    cardSoundFX.play();
+    if (window.soundEnabled) {
+        cardSoundFX = new Audio(address);
+        cardSoundFX.volume = utility.getUnderscriptVolumeSettingValue("jingle");
+        cardSoundFX.play();
+    }
+    
 }
 
 
