@@ -99,7 +99,7 @@ class ThemeSongSetting {
     }
 
     shouldUseMidGameRandomSystem() {
-        return randomnessSetting.value == "TRUE RANDOM" || (randomnessSetting.value == "RANDOM" && !getReplacementOnCardData(window.getCard(this.cardId)));
+        return randomnessSetting.value() == "TRUE RANDOM" || (randomnessSetting.value() == "RANDOM" && !this.getReplacementOnCardData(window.getCard(this.cardId)));
     }
 
     preloadAllIfInGame() {
@@ -190,10 +190,8 @@ ExecuteWhen("allCardsReady PrettyCards:baseThemeSongDataReady PrettyCards:Transl
         }
     }
     hardCodedCardInteractions();
-    //console.log(options);
     PrettyCards_plugin.events.emit.singleton("PrettyCards:customCardsSongsAppend");
     PrettyCards_plugin.events.emit.singleton("PrettyCards:themeSongsReady");
-    //console.log(options);
 });
 
 function hardCodedCardInteractions() {
@@ -259,7 +257,6 @@ if (settings.multi_theme_songs.value()) {
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
 
         $.getJSON(utility.asset("json/baseThemeSongData.json"), {}, function(data) {
-            //console.log(data);
             baseThemeSongData = data;
             PrettyCards_plugin.events.emit.singleton("PrettyCards:baseThemeSongDataReady", data);
         });
@@ -275,7 +272,7 @@ if (settings.multi_theme_songs.value()) {
                 }
                 var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
                 if (setting) {
-                    var name = randomnessSetting.value == "TRUE RANDOM" ? null : setting.getReplacementOnCardData(card);
+                    var name = randomnessSetting.value() == "TRUE RANDOM" ? null : setting.getReplacementOnCardData(card);
                     if (name == null) {
                         name = setting.getNextReplacement();
                     }
@@ -294,11 +291,9 @@ if (settings.multi_theme_songs.value()) {
             class AudioSpoofed extends Audio{
                 constructor(name) {
                     var setting = getThemeSongSettingByOriginalUrl(name);
-                    //console.log(name, setting);
                     if (setting) {
                         name = setting.getRandomReplacement();
                     }
-                    //console.log("NAME", name);
                     super(name);
                 }
             }
