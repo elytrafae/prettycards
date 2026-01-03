@@ -327,8 +327,9 @@ class FancyDisplay {
 		}
 		//console.log("CUSTOM SOUL", customObj, FancyDisplay.customSouls, image_src);
 
-		var transDesc = window.$.i18n("soul-" + id.toLowerCase() + "-desc");
-		var transName = window.$.i18n("soul-" + id.toLowerCase());
+		var extra = id === 'MONSTER' && window.idFight ? `-${window.idFight}` : '';
+		var transDesc = window.$.i18n("soul-" + id.toLowerCase() + extra + "-desc");
+		var transName = window.$.i18n("soul-" + id.toLowerCase() + extra);
 
 		var desc = window.$(`<div><div>${transDesc}</div><div class="PrettyCards_SoulDisplay_SpellsHeader">${window.$.i18n("pc-fd-soulspells", transName)}:</div></div>`);
 		var cards = window.$(`<div class="PrettyCards_SoulDisplay_Spells"></div>`);
