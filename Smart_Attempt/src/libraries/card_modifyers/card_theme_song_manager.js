@@ -92,7 +92,7 @@ class ThemeSongSetting {
         this.preloadedNr++;
         if (this.preloadedNr >= this.replacements.length) {
             return; // All variants got loaded!
-        } 
+        }
         var replacementIndex = this.shouldUseMidGameRandomSystem() ? this.randomreplacementorder[this.preloadedNr] : this.preloadedNr;
         // The error is usually just "yOu ShOuLd NoT pLaY aUdIo BeFoRe InTeRaCtInG wItH tHe PaGe"
         utility.preloadAudio(this.replacements[replacementIndex]).catch((e) => {});
@@ -242,16 +242,6 @@ function hardCodedCardInteractions() {
 var originalAudio;
 var cardSoundFX;
 
-function playSoundFX(address) {
-    if (window.soundEnabled) {
-        cardSoundFX = new Audio(address);
-        cardSoundFX.volume = utility.getUnderscriptVolumeSettingValue("jingle");
-        cardSoundFX.play();
-    }
-    
-}
-
-
 if (settings.multi_theme_songs.value()) {
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
@@ -267,7 +257,7 @@ if (settings.multi_theme_songs.value()) {
                 var card = JSON.parse(data.card);
                 // Will trigger when a monster's Dust effect triggers.
                 // Why would that happen? Well, apparently, for Onu Dust effect = Spell.
-                if (card.typeCard == 0 && data.action == "getSpellPlayed") { 
+                if (card.typeCard == 0 && data.action == "getSpellPlayed") {
                     return;
                 }
                 var setting = getThemeSongSettingByCardId(card.fixedId || card.id);
@@ -276,18 +266,22 @@ if (settings.multi_theme_songs.value()) {
                     if (name == null) {
                         name = setting.getNextReplacement();
                     }
+                    const volume = utility.getUnderscriptVolumeSettingValue('jingle');
                     if (setting.playAsJingle) {
-                        if (window.musicEnabled) { 
+                        if (window.jingleEnabled) {
                             window.playJingle("NON EXISTENT CARD");
                             window.jingle.src = name;
-                            window.jingle.play();
+                            window.jingle.volume = volume;
+                            window.jingle.play().catch(()=>{});
                         }
-                    } else {
-                        playSoundFX(name);
+                    } else if (window.soundEnabled) {
+                        cardSoundFX = new Audio(address);
+                        cardSoundFX.volume = volume;
+                        cardSoundFX.play().catch(()=>{});
                     }
                     setting.preloadNext();
                 }
-            }) 
+            });
         } else {
             originalAudio = window.Audio;
             class AudioSpoofed extends Audio{
@@ -319,14 +313,10 @@ if (settings.multi_theme_songs.value()) {
                             })
                         }
                     }
-                })
-
-            })
+                });
+            });
         }
-        
-        
-    })
-
+    });
 } else {
     PrettyCards_plugin.events.emit.singleton("PrettyCards:themeSongsReady"); // Required for the normal song previews to still appear.
 }

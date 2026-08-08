@@ -31,7 +31,7 @@ prettycards.playThemeSongPreviewEvent = function(SRC, e) {
 	// console.log("Button clicked!", e);
 	PrettyCards_plugin.events.emit("PrettyCards:pauseBGM");
 	audio.src = SRC;
-	audio.volume = utility.getUnderscriptVolumeSettingValue("jingle");
+	audio.volume = utility.getUnderscriptVolumeSettingValue("jingle") || utility.getUnderscriptVolumeSettingValue('music');
 	audio.play();
 	audio.onended = audio.onerror = function() {
 		PrettyCards_plugin.events.emit("PrettyCards:resumeBGM");
@@ -89,7 +89,7 @@ function createComplexButton(settings) {
 		</span>
 	</span>`);
 	return button;
-} 
+}
 function processCard(card, element) {
 	//console.log("func:appendCard event fired on " + card.name);
 	PrettyCards_plugin.events.on("PrettyCards:themeSongsReady", function() { // This makes sure these don't get appended before the page loads.
@@ -104,7 +104,7 @@ function processCard(card, element) {
 		} else if (themeSongSettings) {
 			doesCardHaveTheme = true;
 		}
-		
+
 		if (doesCardHaveTheme) {
 			//console.log(card.name + " has theme songs!");
 			var button;
@@ -119,7 +119,7 @@ function processCard(card, element) {
 			element.append(button);
 		}
 	});
-} 
+}
 
 
 if (settings.theme_song_preview.value() && !underscript.onPage("Game") && !underscript.onPage("Spectate")) {
@@ -127,7 +127,7 @@ if (settings.theme_song_preview.value() && !underscript.onPage("Game") && !under
 	//console.log("Theme Song Preview is turned on, and it's not the Game or Spectator page! Attempt 2!");
 
 	PrettyCards_plugin.events.on("func:appendCard PC_appendCard", processCard);
-	
+
 }
 
 export {};

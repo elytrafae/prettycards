@@ -634,11 +634,35 @@ class Utility {
 		}
 	}
 
-	/** @returns {number} */
-	getUnderscriptVolumeSettingValue(category = "sfx") {
-		return PrettyCards_plugin.settings().value("underscript.audio." + category) ? PrettyCards_plugin.settings().value("underscript.audio." + category + ".volume") : 0;
+	/** @param {'jingle'|'music'|'result'|'sfx'} [category='sfx'] */
+	getAudioEnabled(category = 'sfx') {
+		const settings = PrettyCards_plugin.settings();
+		switch (category) {
+			case 'music':
+			case 'result':
+				return !settings.value('gameMusicDisabled');
+			case 'jingle':
+				return !settings.value('gameJinglesDisabled');
+			case 'sfx':
+				return !settings.value('gameSoundsDisabled');
+			default:
+				return false;
+		}
 	}
 
+	/** @returns {number} */
+	getUnderscriptVolumeSettingValue(category = "sfx") {
+		if (!this.getAudioEnabled(category)) return 0;
+		const audio = window.UCAudio;
+		switch (category) {
+			default:
+				return audio?.getMusicVolume() ?? settings.value('gameMusicVolume') / 100;
+			case 'jingle':
+				return audio?.getJingleVolume() ?? settings.value('gameJingleVolume') / 100;
+			case 'sfx':
+				return audio?.getEffectsVolume() ?? settings.value('gameSoundsVolume') / 100;
+		}
+	}
 }
 
 /**@template L,R */
