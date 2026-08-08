@@ -79,7 +79,7 @@ addSetting({
 	'note': 'Experimental feature to make the game more mobile-friendly.',
 	'type': 'boolean',
 	'refresh': true, // true to add note "Will require you to refresh the page"
-	'hidden' : true,
+	'hidden' : () => !window.mobile,
 	'default': () => window.mobile, // default value
 });
 
@@ -87,19 +87,19 @@ function SetMobileView() {
 	$("nav").css("display", "none");
 	$("footer").addClass("PrettyCards_Hidden");
 	//$(".mainContent").css("width", "100%");
-	
+
 	var temp = $('header').contents();
 	//console.log(temp);
 	$("header").html(`<div class="PrettyCards_HeaderFlex"><div id="PrettyCards_HeaderLeft"></div><div id="PrettyCards_HeaderMid"></div><div id="PrettyCards_HeaderRight"></div></div>`);
 	$("#PrettyCards_HeaderMid").append(temp);
-	
+
 	var menu_button = $('<button class="btn btn-outline-secondary PrettyCards_Mobile_HeaderButton"><i class="glyphicon glyphicon-menu-hamburger"></i></button>');
 	menu_button.click(function() {
 		$("#PrettyCards_Mobile_NavBar").toggleClass("PrettyCards_Hidden");
 		$("#PrettyCards_Mobile_NavBarBG").toggleClass("PrettyCards_Hidden");
 	});
 	$("#PrettyCards_HeaderLeft").prepend(menu_button);
-	
+
 	var menu_bg = $('<div id="PrettyCards_Mobile_NavBarBG" class="PrettyCards_Hidden"></div>');
 	menu_bg.click(function() {
 		$("#PrettyCards_Mobile_NavBarBG").addClass("PrettyCards_Hidden");
@@ -172,17 +172,17 @@ var friends;
 
 function CreateSideNavMenu() {
 	friends = window.selfId ? '<span class="glyphicon glyphicon-user green"></span>' : "";
-	
+
 	$("#PrettyCards_Mobile_NavBar").remove();
 	var menu_obj = $('<div id="PrettyCards_Mobile_NavBar" class="PrettyCards_Hidden"></div>');
 	menu_obj.append(CreateSideBarPortion(window.selfId ? menu_data : menu_data_nologin));
 	$("body").append(menu_obj);
-	
+
 	if (window.selfId) {
 		var user_menu = CreateSideBarPortion(user_menu_data, "#333333");
 		user_menu.addClass("PrettyCards_Hidden");
 		menu_obj.prepend(user_menu);
-		
+
 		var avatar = $("nav .avatar")[0];
 		var gold = $("#golds").text();
 		var ucp = $("#ucp").text();
@@ -201,17 +201,18 @@ function CreateSideNavMenu() {
 			</table>
 		`);
 		}
-		
+
 		user_part.click(function() {
 			user_menu.toggleClass("PrettyCards_Hidden");
 		})
 		menu_obj.prepend(user_part);
 	}
-	
+
 	menu_obj.append('<div class="PrettyCards_Divider"></div>');
 	menu_obj.append(CreateSideBarPortion(footer_data, "#000000", true));
 	menu_obj.append(CreateSideBarPortion(footer_about_data));
-	menu_obj.append('<div class="PrettyCards_NavBarCopyright">Undercards © 2021<br>' + $.i18n("footer-copyright") + '</div>');
+	const year = new Date().getFullYear();
+	menu_obj.append(`<div class="PrettyCards_NavBarCopyright">Undercards © ${year}<br>${$.i18n("footer-copyright")}</div>`);
 }
 
 prettycards.openSettings = function() {
