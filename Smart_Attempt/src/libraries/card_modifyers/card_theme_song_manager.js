@@ -269,7 +269,6 @@ if (settings.multi_theme_songs.value()) {
                     const volume = utility.getUnderscriptVolumeSettingValue('jingle');
                     if (setting.playAsJingle) {
                         if (window.jingleEnabled) {
-                            window.playJingle("NON EXISTENT CARD");
                             window.jingle.src = name;
                             window.jingle.volume = volume;
                             window.jingle.play().catch(()=>{});
