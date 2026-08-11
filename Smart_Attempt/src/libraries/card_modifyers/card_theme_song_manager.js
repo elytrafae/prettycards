@@ -242,6 +242,14 @@ function hardCodedCardInteractions() {
 var originalAudio;
 var cardSoundFX;
 
+function playEffect(audio, src, volume) {
+    audio.crossOrigin = 'anonymous';
+    audio.src = src;
+    audio.load();
+    audio.volume = volume;
+    audio.play().catch(()=>{});
+}
+
 if (settings.multi_theme_songs.value()) {
 
     PrettyCards_plugin.events.on("PrettyCards:onPageLoad", function() {
@@ -269,14 +277,15 @@ if (settings.multi_theme_songs.value()) {
                     const volume = utility.getUnderscriptVolumeSettingValue('jingle');
                     if (setting.playAsJingle) {
                         if (window.jingleEnabled) {
-                            window.jingle.src = name;
-                            window.jingle.volume = volume;
-                            window.jingle.play().catch(()=>{});
+                            playEffect(window.jingle, name, volume);
                         }
                     } else if (window.soundEnabled) {
-                        cardSoundFX = new Audio(address);
-                        cardSoundFX.volume = volume;
-                        cardSoundFX.play().catch(()=>{});
+                        const audio = window.UCAudio;
+                        if (audio?.playEffect) {
+                            audio.playEffect(name, volume);
+                        } else {
+                            playEffect(cardSoundFX, name, volume);
+                        }
                     }
                     setting.preloadNext();
                 }
