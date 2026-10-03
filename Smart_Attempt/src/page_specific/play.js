@@ -70,6 +70,7 @@ var gamemode_functions = {
 	standard: window.sendJoinQueue,
 	ranked: window.sendJoinRankedQueue,
 	//ranked: askRanked,
+	cpu: window.sendStartCpuGame,
 	event: window.sendJoinEventQueue,
 	boss: window.sendJoinBossQueue,
 	reload: ReloadPage
@@ -167,27 +168,20 @@ function InitPlay() {
 		return;
 	}
 	
-	$("#phase1 > table").css("display", "none");
-	$("#game-modes").css("display", "none");
-	$("#phase1").append(`
-		<div class="PrettyCards_GamemodeContainer">
+	$("#phase1 > table").css("display", "none").after(`
+		<div class="PrettyCards_PlayDeckRow">
 			<div class="PrettyCards_GamemodeDeck">
 				<div id="PrettyCards_DeckContainer"></div>
-				<div id="PrettyCards_DeckArtifacts"></div>
-				<div id="PrettyCards_SeasonRewards">
-					<a style="color: gray; border: 1px dotted gray; padding: 5px; background-color: black;" href="rewards.jsp" class="pointer" data-i18n="[html]play-rewards"></a>
-				</div>
 			</div>
-			<div class="PrettyCards_Gamemodes">
-				<div id="standardContainer"></div>
-				<div id="rankedContainer"></div>
-				<div id="customContainer"></div>
-				<div id="tornamentContainer">
-				</div>
+			<div class="PrettyCards_PlayDeckInfo">
+				<div id="PrettyCards_DeckArtifacts"></div>
+				<div id="PrettyCards_SeasonRewards"></div>
 			</div>
 		</div>
 	`);
-	
+	$(".PrettyCards_PlayDeckRow").next("br").remove();
+	$("#PrettyCards_SeasonRewards").append($("#rewardsBtn"));
+
 	$('.mainContent').append('<div id="deckSelectContainer" hidden></div>');
 	$(".playSoulArtifacts").css( // Stop. Resetting. The Visibility!
 		{
@@ -196,16 +190,13 @@ function InitPlay() {
 		}
 	);	
 	
-	$("#standardContainer").append($("#standard-mode").addClass("game-mode"));
-	$("#rankedContainer").append($("#ranked-mode").addClass("game-mode"));
-	$("#customContainer").append($("#custom-mode").addClass("game-mode"));
-	
 	$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
 	$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
-	
-	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts PrettyCards:TranslationExtReady", function () {
-		window.$("#PrettyCards_SeasonRewards a").html(window.$.i18n("play-rewards"));
+	$("#cpu-mode").each(function () {
+		this.onclick = function () {StartJoiningQueue("cpu")};
+	});
 
+	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts PrettyCards:TranslationExtReady", function () {
 		deckSelector.closable = true;
 		deckSelector.closeCallback = CloseDeckSelector;
 		deckSelector.callback = DeckSelectorCallback;

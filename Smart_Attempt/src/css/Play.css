@@ -61,3 +61,36 @@
 	display: block;
 	margin: 5px;
 }
+
+.PrettyCards_PlayDeckRow {
+	display: flex;
+	align-items: flex-start;
+	width: 900px;
+	max-width: 100%;
+}
+
+.PrettyCards_PlayDeckRow .PrettyCards_GamemodeDeck {
+	height: auto;
+}
+
+.PrettyCards_PlayDeckRow + #game-modes {
+	padding-top: 0;
+}
+
+.PrettyCards_PlayDeckInfo {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 5px 10px;
+}
+
+.PrettyCards_PlayDeckInfo #PrettyCards_DeckArtifacts {
+	margin-top: 0;
+	text-align: right;
+}
+
+.PrettyCards_PlayDeckInfo #PrettyCards_SeasonRewards {
+	margin-top: 10px;
+	text-align: right;
+}
