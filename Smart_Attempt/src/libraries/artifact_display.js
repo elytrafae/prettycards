@@ -33,6 +33,8 @@ class ArtifactDisplay {
 	constructor() {
 		this.artifacts = [];
 		this.buyableArtifactIds = {};
+		this.serverArtifacts = [];
+		this.serverArtifactsPromise = null;
 	}
 	
 	/*
@@ -90,8 +92,52 @@ class ArtifactDisplay {
 				var art = data[i];
 				this.artifacts[art.id] = art;
 			}
+			this.applyServerFallbacks();
 			PrettyCards_plugin.events.emit("PrettyCards:onArtifacts", this.artifacts);
 		}.bind(this));
+	}
+
+	applyServerFallbacks() {
+		this.serverArtifacts.forEach((artifact) => {
+			if (!this.artifacts[artifact.id]) {
+				this.artifacts[artifact.id] = {
+					id: artifact.id,
+					name: artifact.name,
+					image: artifact.image,
+					rarity: artifact.legendary ? "LEGENDARY" : "COMMON",
+				};
+			}
+		});
+	}
+
+	LoadServerArtifacts(force = false) {
+		if (this.serverArtifactsPromise && !force) {
+			return this.serverArtifactsPromise;
+		}
+		this.serverArtifactsPromise = fetch("/DecksConfig", {credentials: "same-origin", cache: "no-store"})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Unable to load artifacts: " + response.status);
+				}
+				return response.json();
+			})
+			.then((data) => {
+				var owned = new Set(JSON.parse(data.artifacts).map((artifact) => artifact.id));
+				this.serverArtifacts = JSON.parse(data.allArtifacts);
+				this.buyableArtifactIds = [];
+				this.serverArtifacts.forEach((artifact) => {
+					if (!artifact.unavailable && !owned.has(artifact.id)) {
+						this.buyableArtifactIds[artifact.id] = artifact.cost;
+					}
+				});
+				this.applyServerFallbacks();
+				return this.buyableArtifactIds;
+			})
+			.catch((err) => {
+				this.serverArtifactsPromise = null;
+				throw err;
+			});
+		return this.serverArtifactsPromise;
 	}
 
 	GetPage(artifactId = -1) {
@@ -122,43 +168,15 @@ class ArtifactDisplay {
 	}
 
 	GetPurchasableArtifacts(artifactId = -1) {
-		return new Promise((resolve, reject) => {
-			this.GetPage(artifactId).catch(reject).then((page) => {
-				var gold = page.querySelector("nav.navbar div .navbar-right .dropdown .dropdown-toggle #golds");
-				if (gold) {
-					pagegetters.gold = parseInt(gold.innerText);
-				}
-				var table = page.querySelector("table.table");
-				if (!table) {
-					resolve([]);
-					return;
-				}
-				var tbody = table.querySelector("tbody");
-				if (!tbody) {
-					resolve([]);
-					return;
-				}
-				this.buyableArtifactIds = [];
-				for (var i=0; i < tbody.children.length; i++) {
-					var row = tbody.children[i];
-					if (!row) {
-						console.error("Somehow, someway, row #" + i + " does not exist, despite tbody.children.length being " + tbody.children.length);
-						resolve(this.buyableArtifactIds);
-						return;
-					}
-					/**@type {String} */
-					var nameId = row.children[1].getAttribute("data-i18n");
-					var priceEntity = row.children[4].firstChild;
-					var buyCell = row.children[5];
-					if (priceEntity && buyCell.querySelector("form")) { // Fix for artifacts page containing all artifacts, and not just ones you can buy
-						var price = parseInt(row.children[4].firstChild.innerText);
-						var id = parseInt(lastOf(nameId.split('-')));
-						//console.log(row, nameId, id);
-						this.buyableArtifactIds[id] = price;
-					}
-				}
-				resolve(this.buyableArtifactIds);
-			})
+		if (artifactId < 0) {
+			return this.LoadServerArtifacts();
+		}
+		return this.GetPage(artifactId).then((page) => {
+			var gold = page.querySelector("#golds");
+			if (gold) {
+				pagegetters.gold = parseInt(gold.innerText);
+			}
+			return this.LoadServerArtifacts(true);
 		});
 	}
 
@@ -234,15 +252,8 @@ window.artifactDisplay = artifactDisplay;
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
 	artifactDisplay.GetAllArtifacts();
-	artifactDisplay.GetPurchasableArtifacts();
+	artifactDisplay.GetPurchasableArtifacts().catch(console.error);
 });
-
-function lastOf(list) {
-	if (list.length <= 0) {
-		return null;
-	}
-	return list[list.length-1];
-}
 
 /*
 PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
