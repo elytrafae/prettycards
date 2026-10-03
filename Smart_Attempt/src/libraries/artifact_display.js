@@ -137,7 +137,7 @@ class ArtifactDisplay {
 	fetchServerArtifacts(force) {
 		var user = window.underscript.user;
 		if (!force && user && user.getAllArtifacts && user.getArtifacts) {
-			return Promise.all([user.getAllArtifacts(), user.getArtifacts()]).then(([all, owned]) => ({all, owned}));
+			return user.getAllArtifacts().then((all) => user.getArtifacts().then((owned) => ({all, owned})));
 		}
 		return fetch("/DecksConfig", {credentials: "same-origin", cache: "no-store"})
 			.then((response) => {
