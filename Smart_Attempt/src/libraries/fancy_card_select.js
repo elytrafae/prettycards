@@ -9,9 +9,17 @@ loadCSS(css);
 var background = null;
 var dummyDialogue = { // This is so Onu can properly close this thing.
     close : function() {
-        background.remove();
-        background == null;
+        if (background !== null) {
+            background.remove();
+            background = null;
+        }
         $("body").removeClass("PrettyCards_LookAt_NoScroll");
+        if (window.selectCardDialog === dummyDialogue) {
+            window.selectCardDialog = null;
+        }
+        if (typeof window.clearTargetCursors === "function") {
+            window.clearTargetCursors();
+        }
     }
 }
 
