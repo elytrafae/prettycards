@@ -715,7 +715,7 @@ function displayMatchResults(data) {
         landNoise.play();
         setTimeout(() => {
             bgm.loop = true;
-            bgm.volume = 0.7;
+            bgm.volume = utility.getUnderscriptVolumeSettingValue("result");
             bgm.play();
 
             data.rewardManager.startTicking(() => {

@@ -1,6 +1,7 @@
 
 import $ from "/src/third_party/jquery-3.6.0.min.js";
 import {SetCosmeticsForCardData} from "./card_cosmetics_manager.js";
+import {utility} from "./utility";
 
 class FlippableCard {
 	
@@ -115,11 +116,15 @@ class FlippableCard {
 		if (this.card_data.rarity != "LEGENDARY" && this.card_data.rarity != "DETERMINATION") {
 			return;
 		}
+		this.silent = true;
+		const volume = utility.getUnderscriptVolumeSettingValue("jingle");
+		if (!volume) {
+			return;
+		}
 		var soundPath = '/musics/cards/' + this.card_data.name.split(' ').join('_') + '.ogg';
 		var audio = new window.Audio(soundPath);
-		audio.volume = 0.4;
+		audio.volume = volume * 0.4;
 		audio.play();
-		this.silent = true;
 	}
 	
 }

@@ -652,6 +652,12 @@ class Utility {
 
 	/** @returns {number} */
 	getUnderscriptVolumeSettingValue(category = "sfx") {
+		const level = this.getUnderscriptVolumeLevel(category);
+		return window.UCAudio ? level * level : level;
+	}
+
+	/** @returns {number} */
+	getUnderscriptVolumeLevel(category = "sfx") {
 		if (!this.getAudioEnabled(category)) return 0;
 		const audio = window.UCAudio;
 		switch (category) {

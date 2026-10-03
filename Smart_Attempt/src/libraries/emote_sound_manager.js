@@ -16,9 +16,13 @@ addSetting({
 });
 
 var emoteAudio = new Audio();
-emoteAudio.volume = 0.7;
 
 function playEmoteSound(emote, onerror = function() {}, muteBGM = false) {
+    const volume = utility.getUnderscriptVolumeSettingValue("sfx");
+    if (!volume) {
+        return;
+    }
+    emoteAudio.volume = volume * 0.7;
     if (muteBGM) {
         PrettyCards_plugin.events.emit("PrettyCards:pauseBGM");
     }

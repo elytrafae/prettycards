@@ -282,7 +282,7 @@ if (settings.multi_theme_songs.value()) {
                     } else if (window.soundEnabled) {
                         const audio = window.UCAudio;
                         if (audio?.playEffect) {
-                            audio.playEffect(name, volume);
+                            audio.playEffect(name, utility.getUnderscriptVolumeLevel('jingle'));
                         } else {
                             playEffect(cardSoundFX, name, volume);
                         }
