@@ -95,44 +95,24 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 function InitGameList() {
 	//console.log("Init Play!");
 	
-	$("#state1 > table").css("display", "none");
-	$("#state1 br").css("display", "none");
-	$(".mainContent > br").css("display", "none");
-	$("#game-modes").css("display", "none");
-	$("#state1").append(`
-		<div class="PrettyCards_GamemodeContainer">
+	$("#state1 > table").first().css("display", "none").after(`
+		<div class="PrettyCards_PlayDeckRow">
 			<div class="PrettyCards_GamemodeDeck">
 				<div id="PrettyCards_DeckContainer"></div>
-				<div id="PrettyCards_DeckArtifacts"></div>
-				<div id="PrettyCards_JoinCreate"></div>
 			</div>
-			<div class="PrettyCards_GamesList">
-				<table id="PrettyCards_Games" class="table table-bordered">
-					<tr>
-						<td data-i18n="[html]lobby-game-name"></td>
-						<td data-i18n="[html]lobby-game-owner"></td>
-						<td data-i18n="[html]lobby-game-slots"></td>
-						<td data-i18n="[html]lobby-game-password"></td>
-					</tr>
-				</table>
+			<div class="PrettyCards_PlayDeckInfo">
+				<div id="PrettyCards_DeckArtifacts"></div>
 			</div>
 		</div>
 	`);
-	
+	$(".PrettyCards_PlayDeckRow").next("br").remove();
+
 	$('.mainContent').append('<div id="deckSelectContainer" hidden></div>');
-	$(".playSoulArtifacts").css( // Stop. Resetting. The Visibility!
-		{
-			"opacity": "0",
-			"position": "absolute"
-		}
-	);
-	
-	$("#PrettyCards_JoinCreate").append($("#state1 button"));
-	//$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
-	//$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
-	
-	$("#PrettyCards_JoinCreate button")[0].onclick = function() {window.PrettyCards_StartJoiningQueue(null, 'create')}
-	
+
+	window.createGame = function () {window.PrettyCards_StartJoiningQueue(null, 'create')};
+	window.joinGame = function (id) {window.PrettyCards_StartJoiningQueue(id, 'normal')};
+	window.joinGamePassword = function (id) {window.PrettyCards_StartJoiningQueue(id, 'password')};
+
 	ExecuteWhen("SoulSelector:decksLoaded Chat:Connected PrettyCards:onArtifacts PrettyCards:TranslationExtReady", function () {
 		deckSelector.closable = true;
 		deckSelector.closeCallback = CloseDeckSelector;
@@ -179,24 +159,6 @@ function InitGameList() {
 	})
 	
 	$("#PrettyCards_DeckContainer").click(OpenDeckSelector);
-	
-	window.regenerateTable = function(games) {
-		$("#PrettyCards_Games").find("tr:gt(0)").remove();
-		for (var i = 0; i < games.length; i++) {
-			var slots;
-			if (games[i].player !== undefined) {
-				slots = "2/2";
-			} else {
-				slots = "1/2";
-			}
-			var gameMode = '{{MODE:' + games[i].gameType + '}}';
-			if (games[i].isPrivate) {
-				$('#PrettyCards_Games tr:last').after('<tr class="pointer" onclick="PrettyCards_StartJoiningQueue(' + games[i].id + ', \'password\')"><td>' + games[i].name + '</td><td>' + games[i].owner.username + '</td><td>' + slots + '</td><td>' + $.i18n("lobby-yes") + '</td></tr>');
-			} else {
-				$('#PrettyCards_Games tr:last').after('<tr class="pointer" onclick="PrettyCards_StartJoiningQueue(' + games[i].id + ', \'normal\')"><td>' + games[i].name + '</td><td>' + games[i].owner.username + '</td><td>' + slots + '</td><td>' + $.i18n("lobby-no") + '</td></tr>');
-			}
-		}
-	}
 }
 
 export {InitGameList};
