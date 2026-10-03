@@ -281,6 +281,9 @@ PrettyCards_plugin.events.on("connect getPlayersStats", function (data) {
 	}
 	for (var i=0; i < displayed_artifacts.length; i++) {
 		var artifact = artifactDisplay.GetArtifactById(displayed_artifacts[i].id);
+		if (!artifact) {
+			continue;
+		}
 		var className = "PrettyCards_Artifact_" + artifact.rarity;
 		if (artifact.soul) {
 			className = "PrettyCards_Artifact_Soul_" + artifact.soul;

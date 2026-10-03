@@ -362,7 +362,13 @@ class FancyDisplay {
 				var artifactId = Number($(this).attr("artifactId"));
 				var artifactCounter = Number($(this).next(".artifact-custom").html());
 				var isDisabled = $(this).hasClass("artifact-disabled");
-				datas.push({id: artifactId, counter: artifactCounter, disabled: isDisabled});
+				datas.push({
+					id: artifactId,
+					counter: artifactCounter,
+					disabled: isDisabled,
+					image: $(this).attr("image"),
+					legendary: $(this).attr("legendary") === "true",
+				});
 			});
 			FancyDisplay.ViewArtifactsInfo(datas);
 		}
@@ -386,6 +392,13 @@ class FancyDisplay {
 				var artifactCounter = artData.counter;
 				var isDisabled = artData.disabled;
 				var artifact = artifactDisplay.GetArtifactById(artifactId);
+				if (!artifact) {
+					if (!artData.image) {
+						console.warn("Unknown artifact", artifactId);
+						return;
+					}
+					artifact = {id: artifactId, image: artData.image, rarity: artData.legendary ? "LEGENDARY" : "COMMON"};
+				}
 				var rarityData = artifactDisplay.GetRarityDataFor(artifact);
 				//console.log("ARTIFACT_ID", artifactId, artifact, artifactDisplay);
 				/**@type {HTMLImageElement} */
@@ -443,6 +456,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		var artifact = artifactDisplay.GetArtifactById(id);
 		if (!artifact) {
 			oldArtifactInfo(id);
+			return;
 		}
 		FancyDisplay.ViewArtifactInfo.bind(this)(artifact);
 	};
@@ -451,6 +465,7 @@ ExecuteWhen("PrettyCards:onPageLoad", function() {
 		var artifact = artifactDisplay.GetArtifactById(id);
 		if (!artifact) {
 			oldShowArtifactDescBox(id);
+			return;
 		}
 		FancyDisplay.ViewArtifactInfo.bind(this)(artifact);
 	}
