@@ -114,19 +114,13 @@ class ArtifactDisplay {
 		if (this.serverArtifactsPromise && !force) {
 			return this.serverArtifactsPromise;
 		}
-		this.serverArtifactsPromise = fetch("/DecksConfig", {credentials: "same-origin", cache: "no-store"})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Unable to load artifacts: " + response.status);
-				}
-				return response.json();
-			})
-			.then((data) => {
-				var owned = new Set(JSON.parse(data.artifacts).map((artifact) => artifact.id));
-				this.serverArtifacts = JSON.parse(data.allArtifacts);
+		this.serverArtifactsPromise = this.fetchServerArtifacts(force)
+			.then(({all, owned}) => {
+				var ownedIds = new Set(owned.map((artifact) => artifact.id));
+				this.serverArtifacts = all;
 				this.buyableArtifactIds = [];
 				this.serverArtifacts.forEach((artifact) => {
-					if (!artifact.unavailable && !owned.has(artifact.id)) {
+					if (!artifact.unavailable && !ownedIds.has(artifact.id)) {
 						this.buyableArtifactIds[artifact.id] = artifact.cost;
 					}
 				});
@@ -138,6 +132,21 @@ class ArtifactDisplay {
 				throw err;
 			});
 		return this.serverArtifactsPromise;
+	}
+
+	fetchServerArtifacts(force) {
+		var user = window.underscript.user;
+		if (!force && user && user.getAllArtifacts && user.getArtifacts) {
+			return Promise.all([user.getAllArtifacts(), user.getArtifacts()]).then(([all, owned]) => ({all, owned}));
+		}
+		return fetch("/DecksConfig", {credentials: "same-origin", cache: "no-store"})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Unable to load artifacts: " + response.status);
+				}
+				return response.json();
+			})
+			.then((data) => ({all: JSON.parse(data.allArtifacts), owned: JSON.parse(data.artifacts)}));
 	}
 
 	GetPage(artifactId = -1) {
