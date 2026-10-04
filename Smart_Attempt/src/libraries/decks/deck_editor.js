@@ -7,17 +7,26 @@ class DeckEditor {
 	
 	static OptimalImportDeck(deck, cb) {
 		var posts_in_progress = 0;
-		
+		var finished = false;
+
+		var finish = function(status, data) {
+			if (finished) {
+				return;
+			}
+			finished = true;
+			cb(status, data);
+		}
+
 		var callback = function(data, status) {
 			if (status == "success") {
 				posts_in_progress--;
 				//console.log("Requests left: ", posts_in_progress, data);
 				if (posts_in_progress == 0) {
-					cb("success");
+					finish("success");
 				}
 			} else {
 				console.log("ERROR WHILE IMPORTING DECK!", data)
-				cb("error", data);
+				finish("error", data);
 			}
 		}
 		DeckEditor.RemoveEverything(deck.soul, function(data, status) {
@@ -33,8 +42,11 @@ class DeckEditor {
 					posts_in_progress++;
 					DeckEditor.AddArtifact(artifact, deck.soul, callback);
 				}
+				if (posts_in_progress == 0) {
+					finish("success");
+				}
 			} else {
-				cb("error");
+				finish("error", data);
 			}
 		})
 	} 
@@ -46,6 +58,10 @@ class DeckEditor {
 			return;
 		}*/
 		
+		var fail = function(xhr) {
+			cb("error", xhr);
+		}
+
 		$.get("/Decks", {}, function() {
 			$.get("/DecksConfig", {}, function() {
 				DeckEditor.OptimalImportDeck(deck, function(status, data) {
@@ -54,13 +70,23 @@ class DeckEditor {
 							setTimeout(function () {
 								cb("success");
 							}, 500);
-						})
+						}).fail(fail);
 					} else {
 						cb(status, data);
 					}
 				})
-			})
-		})
+			}).fail(fail);
+		}).fail(fail);
+	}
+
+	static SelectSoul(selector, soul) {
+		var select = $(selector);
+		var hasOption = select.find("option").filter(function() {return this.value === soul}).length > 0;
+		if (!hasOption) {
+			var label = window.$.i18n("soul-" + soul.toLowerCase());
+			select.append($("<option></option>").attr("value", soul).addClass(soul).text(label));
+		}
+		select.val(soul);
 	}
 	
 	static AddCard(card_id, shiny, soul, callback) {
@@ -81,6 +107,9 @@ class DeckEditor {
 				} else {
 					callback(data, "error");
 				}
+			},
+			error: function(xhr) {
+				callback(xhr, "error");
 			}
 		});
 		//console.log("Card Request Sent!", card_id, shiny, soul, callback);
@@ -103,6 +132,9 @@ class DeckEditor {
 				} else {
 					callback(data, "error");
 				}
+			},
+			error: function(xhr) {
+				callback(xhr, "error");
 			}
 		});
 		//console.log("Artifact Request Sent!", artifact_id, soul, callback);
@@ -124,10 +156,13 @@ class DeckEditor {
 				} else {
 					callback(data, "error");
 				}
+			},
+			error: function(xhr) {
+				callback(xhr, "error");
 			}
 		});
 	}
-	
+
 	static RemoveArtifacts(soul, callback) {
 		$.ajax({
             url: ajaxUrl,

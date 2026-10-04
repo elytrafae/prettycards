@@ -7,6 +7,7 @@ import {ExecuteWhen} from "/src/libraries/pre_load/event_ensure.js";
 import {SavedDeckSelector, dummy_skin, onu_skin} from "/src/libraries/decks/deck_selector.js";
 import {DeckEditor} from "/src/libraries/decks/deck_editor.js";
 import {utility} from "/src/libraries/utility.js";
+import {translationManager} from "../libraries/translation/translation_manager";
 
 import { loadCSS } from "../libraries/css_loader";
 import css from "../css/Play.css";
@@ -82,10 +83,13 @@ window.PrettyCards_StartJoiningQueue = function(id, game_mode) {
 		}
 		if (status == "success") {
 			//console.log("success");
-			$('#customDecks').val(selectedDeck.soul);
+			DeckEditor.SelectSoul('#customDecks', selectedDeck.soul);
 			gamemode_functions[game_mode](id);
 		} else {
-			//console.log("DeckEditor.ImportDeck error!", data);
+			PrettyCards_plugin.toast({
+				title: translationManager.getWithFallback("pc-play-importerror-title", "Unable to set up your deck"),
+				text: translationManager.getWithFallback("pc-play-importerror-text", "The server did not accept the deck. Please try again."),
+			});
 		}
 	})
 }
