@@ -173,19 +173,33 @@ function InitPlay() {
 		return;
 	}
 	
-	$("#phase1 > table").css("display", "none").after(`
+	const rowHTML = `
 		<div class="PrettyCards_PlayDeckRow">
 			<div class="PrettyCards_GamemodeDeck">
 				<div id="PrettyCards_DeckContainer"></div>
 			</div>
 			<div class="PrettyCards_PlayDeckInfo">
 				<div id="PrettyCards_DeckArtifacts"></div>
+					<div id="PrettyCards_RankedUnlock"></div>
 				<div id="PrettyCards_SeasonRewards"></div>
 			</div>
 		</div>
-	`);
+	`;
+	const oldTable = $("#phase1 > table").css("display", "none");
+	if (oldTable.length > 0) {
+		oldTable.first().after(rowHTML);
+	} else if ($("#phase1").length > 0) {
+		$("#phase1").prepend(rowHTML);
+	} else {
+		$(".mainContent").prepend(rowHTML);
+	}
 	$(".PrettyCards_PlayDeckRow").next("br").remove();
+	$("#PrettyCards_RankedUnlock").append($("#rankedUnlockLabel, #rankedUnlockBar"));
 	$("#PrettyCards_SeasonRewards").append($("#rewardsBtn"));
+	if ($("#PrettyCards_DeckContainer").length === 0) {
+		console.warn("PrettyCards: could not inject the Play page deck selector");
+		return;
+	}
 
 	$('.mainContent').append('<div id="deckSelectContainer" hidden></div>');
 	$(".playSoulArtifacts").css( // Stop. Resetting. The Visibility!
@@ -195,8 +209,12 @@ function InitPlay() {
 		}
 	);	
 	
-	$("#standard-mode")[0].onclick = function () {StartJoiningQueue("standard")};
-	$("#ranked-mode")[0].onclick = function () {StartJoiningQueue("ranked")};
+	$("#standard-mode").each(function () {
+		this.onclick = function () {StartJoiningQueue("standard")};
+	});
+	$("#ranked-mode").each(function () {
+		this.onclick = function () {StartJoiningQueue("ranked")};
+	});
 	$("#cpu-mode").each(function () {
 		this.onclick = function () {StartJoiningQueue("cpu")};
 	});

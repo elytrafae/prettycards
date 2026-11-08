@@ -50,6 +50,20 @@
 	text-align: right;
 }
 
+.PrettyCards_PlayDeckInfo #PrettyCards_RankedUnlock {
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+}
+
+.PrettyCards_PlayDeckInfo #PrettyCards_RankedUnlock:empty {
+	display: none;
+}
+
+.PrettyCards_PlayDeckInfo #PrettyCards_RankedUnlock progress {
+	width: 100%;
+}
+
 .PrettyCards_PlayDeckInfo #PrettyCards_SeasonRewards {
 	margin-top: 10px;
 	text-align: right;
