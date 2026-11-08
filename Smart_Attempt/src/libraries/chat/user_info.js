@@ -80,14 +80,49 @@ var friendship_show_setting = addSetting({
 	'hidden': true
 });
 
-function getRankedLeaderboard() {
-	window.$.get("Leaderboard?action=ranked", function(e) {
-		//console.log(JSON.parse(e.leaderboard));
-		leaderboard = JSON.parse(e.leaderboard);
-	});
+const LEADERBOARD_CACHE_KEY = "prettycards.rankedLeaderboard";
+const LEADERBOARD_CACHE_MS = 10 * 60 * 1000;
+var leaderboardPromise = null;
+
+function readCachedLeaderboard() {
+	try {
+		const cached = JSON.parse(window.sessionStorage.getItem(LEADERBOARD_CACHE_KEY));
+		if (cached && Array.isArray(cached.data) && Date.now() - cached.time < LEADERBOARD_CACHE_MS) {
+			return cached.data;
+		}
+	} catch (e) {}
+	return null;
 }
 
-ExecuteWhen("PrettyCards:onPageLoad", getRankedLeaderboard);
+function writeCachedLeaderboard(data) {
+	try {
+		window.sessionStorage.setItem(LEADERBOARD_CACHE_KEY, JSON.stringify({time: Date.now(), data}));
+	} catch (e) {}
+}
+
+function getRankedLeaderboard() {
+	if (leaderboardPromise) {
+		return leaderboardPromise;
+	}
+	const cached = readCachedLeaderboard();
+	if (cached) {
+		leaderboard = cached;
+		leaderboardPromise = Promise.resolve(cached);
+		return leaderboardPromise;
+	}
+	leaderboardPromise = new Promise((resolve) => {
+		window.$.get("Leaderboard?action=ranked", function(e) {
+			const parsed = typeof e?.leaderboard === "string" ? JSON.parse(e.leaderboard) : e?.leaderboard;
+			leaderboard = Array.isArray(parsed) ? parsed : [];
+			writeCachedLeaderboard(leaderboard);
+			resolve(leaderboard);
+		}).fail(function() {
+			leaderboardPromise = null;
+			resolve(leaderboard);
+		});
+	});
+	return leaderboardPromise;
+}
 
 function onPageLoaded() {
 	oldGetInfo = window.getInfo;
@@ -418,18 +453,16 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	/////////////
 	
 	// Column 2
-	column2.innerHTML += window.$.i18n('{{DIVISION:' + user.division + '}}');
+	if (user.division) {
+		column2.innerHTML += window.$.i18n('{{DIVISION:' + user.division + '}}');
+	}
 	var progress = ' &nbsp; <span style="font-size: 20px;" class="rainbowText">' + user.eloRanked + '</span>';
-    if (!utility.isDivisionWithoutBar(user.division)) {
+    if (user.division && !utility.isDivisionWithoutBar(user.division)) {
         progress = '  <progress max="' + window.divElo + '" value="' + (user.eloRanked - window.getMinEloDivision(user.division)) + '" class="' + utility.getBarClassFromArena(utility.getArenaFromDivision(user.division)) + '" style="width: 150px;"></progress> <span>(' + user.eloRanked + ')</span>';
     }
 	column2.innerHTML += progress;
 	
-	var rankNr = getRankedPosition(user);
-	var rank = "";
-	if (rankNr > -1) {
-		rank = "<div>" + window.$.i18n("pc-chat-ranked-rank") + ": " + getRankedPositionHTML(rankNr) + "</div>";
-	}
+	var rank = '<div class="PrettyCards_UserInfo_RankRow"></div>';
 	
 	//console.log("USER", user);
 	var wins = "<div>" + window.$.i18n("pc-chat-ranked-wins") + ": " + user.winsRanked + "</div>";
@@ -437,6 +470,13 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 	var winrate = "<div>" + window.$.i18n("pc-chat-ranked-winrate") + ": " + (Math.floor((user.winsRanked / (user.winsRanked + user.lossesRanked))*10000) / 100) + "%</div>";
 	var winstreak = "<div>" + window.$.i18n("pc-chat-ranked-winstreak") + ": " + user.winStreak + "</div>";
 	column2.innerHTML += rank + wins + losses + winrate + winstreak;
+	getRankedLeaderboard().then(function() {
+		const rankNr = getRankedPosition(user);
+		const rankRow = column2.querySelector(".PrettyCards_UserInfo_RankRow");
+		if (rankNr > -1 && rankRow) {
+			rankRow.innerHTML = window.$.i18n("pc-chat-ranked-rank") + ": " + getRankedPositionHTML(rankNr);
+		}
+	});
 	/////////////
 
 	// Another set of rows
@@ -515,7 +555,8 @@ PrettyCards_plugin.events.on("Chat:getInfo", function(data) {
 });
 
 var xpSort = function(a, b) {return b.xp - a.xp};
-var rankSort = function(a, b) {return a.rank - b.rank};
+const rankOf = (score) => Number.isFinite(score.rank) ? score.rank : Number.MAX_SAFE_INTEGER;
+var rankSort = function(a, b) {return rankOf(a) - rankOf(b)};
 function updateSortAndDisplay(scores, parent, $input) {
 	if (!$input.prop("checked")) {
 		sortAndDisplay(scores, parent, xpSort);
@@ -547,7 +588,9 @@ function appendFriendshipCard(score, container, topType = 1) {
 	if (topTxt) {
 		card.append('<div class="PrettyCards_FriendshipTop">' + topTxt + '</div>');
 	}
-	card.append(`<div class="PrettyCards_FriendshipRank"${score.rank <= 5 ? ' top' : ''} val="${score.rank}"></div>`);
+	if (Number.isFinite(score.rank)) {
+		card.append(`<div class="PrettyCards_FriendshipRank"${score.rank <= 5 ? ' top' : ''} val="${score.rank}"></div>`);
+	}
 	card.off("click");
 	return card;
 }
