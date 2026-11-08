@@ -50,6 +50,9 @@ function SetDeckSkin(card, card_skin) {
 }
 
 ExecuteWhen("PrettyCards:onPageLoad", function() {
+	if (window.underscript.onPage("Game") || window.underscript.onPage("Spectate")) {
+		return;
+	}
 	FetchCardCosmeticsData();
 });
 
